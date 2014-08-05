@@ -1,0 +1,31 @@
+package models.ad;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import play.db.ebean.Model;
+
+@Entity
+public class PrivateMessage extends Model {
+
+	@Id
+	public Long id;
+	
+	//@ManyToOne
+	//public User author
+	
+	//@ManyToOne
+	//public User recipent;
+	
+	@ManyToOne
+	public Ad ad;
+	
+	public String title;
+	
+	public String message;
+	
+	public Date sendDate = new Date();
+}
