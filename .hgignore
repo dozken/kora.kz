@@ -1,0 +1,23 @@
+
+syntax: regexp
+^target$
+syntax: regexp
+^.settings$
+syntax: regexp
+^project/project$
+syntax: regexp
+^project/target$
+syntax: regexp
+^\.classpath$
+syntax: regexp
+^\.classpath$
+syntax: regexp
+^\.gitignore$
+syntax: regexp
+^\.project$
+syntax: regexp
+^activator$
+syntax: regexp
+^activator-launch-1\.2\.2\.jar$
+syntax: regexp
+^activator\.bat$

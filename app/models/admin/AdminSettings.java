@@ -1,7 +1,9 @@
 package models.admin;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
+import models.Setting;
 import play.db.ebean.Model;
 
 @Entity
@@ -14,4 +16,13 @@ public class AdminSettings extends Model {
 	 * on/off goryachie
 	 * 
 	 */
+	
+	@Id
+	public Long id;
+	
+//	public User user;
+	
+	public String setting;
+	
+	public Boolean status;
 }
