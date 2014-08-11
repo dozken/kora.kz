@@ -1,5 +1,24 @@
-@(message : String)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@(subject: be.objectify.deadbolt.core.models.Subject)
 @main(""){
-    hello @message
-    
+    hello @subject.getIdentifier()
+<table border="1">
+    <tr>
+        <td>@@restrict(la(as("foo", "bar"))) {<br />
+        This content should be visible<br />
+        }</td>
+        <td>@restrict(la(as("foo", "bar"))) {      This content should be visible        }</td>
+    </tr>
+    <tr>
+        <td>
+        @@restrictOr(la(as("foo", "bar", "hurdy"))) { <br />
+        This content should NOT be visible<br />
+        }{cant see content}</td>
+        <td>@restrictOr(la(as("foo", "bar", "hurdy"))) {
+        This content should NOT be visible
+        }{cant see content}</td>
+    </tr>
+</table>   
 }

@@ -1,12 +1,14 @@
-package models.contactinfo;
+package models.contact;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
+@Entity
 public class ContactInfo extends Model {
 
 	@Id

@@ -1,4 +1,4 @@
-package models.contactinfo;
+package models.contact;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
