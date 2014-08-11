@@ -28,7 +28,7 @@ public class Ad extends Model{
 	@ManyToOne
 	public Quantity quantity;
 	
-	public Integer age;
+	public Date birthDate;
 	
 	@ManyToOne
 	public Price priceType;
@@ -45,7 +45,12 @@ public class Ad extends Model{
 	
 	public String status;
 	
-	public AdSetting adSettings;
+	public Integer views;
+	
+	public Integer shares;
+	
+//	TODO
+//	public AdSetting adSettings;
 	
 	public Date publishedDate = new Date();
 	

@@ -11,7 +11,10 @@ public class Price extends Model {
 	@Id
 	public Long id;
 	
-	public String name;
+	public String price;
 	
-	public Double price;
+	public String currency;
+	
+//	public Double price;
+	
 }
