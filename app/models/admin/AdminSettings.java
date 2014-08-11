@@ -3,7 +3,7 @@ package models.admin;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import models.Setting;
+
 import play.db.ebean.Model;
 
 @Entity

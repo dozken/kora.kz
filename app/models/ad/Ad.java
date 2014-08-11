@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import models.ad.contactinfo.ContactInfo;
+import models.contact.ContactInfo;
 import play.db.ebean.Model;
 
 @Entity

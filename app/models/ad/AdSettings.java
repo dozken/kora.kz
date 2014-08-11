@@ -7,11 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import models.Setting;
+
 import play.db.ebean.Model;
 
 @Entity
-public class AdSetting extends Model {
+public class AdSettings extends Model {
 
 	@Id
 	public Long id;
