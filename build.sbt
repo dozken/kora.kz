@@ -11,7 +11,11 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
-  "be.objectify" %% "deadbolt-java" % "2.3.0-RC1",
+  "be.objectify" %% "deadbolt-java" % "2.3.0-RC1",  
+  "org.webjars" %% "webjars-play" % "2.3.0",
+  "org.webjars" % "bootstrap" % "3.2.0",
+  "org.webjars" % "bootstrap-switch" % "3.0.2",
+  "org.webjars" % "bootstrap-datepicker" % "1.3.0-3",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
 

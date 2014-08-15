@@ -4,12 +4,64 @@
 
 <html>
     <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'> 
+		<link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))' >        
+        <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap3/bootstrap-switch.css"))'>        
+        @*<link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("datepicker.css"))'>*@
+        <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/datepicker3.css"))'>
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+
     </head>
     <body>
+	    @navbar()
         @content
+
+		@modalRegistration()
+		@modalLogin()
+	    @footer()
+		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))'></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap-switch.min.js"))'></script>        
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap-datepicker.js"))'></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/locales/bootstrap-datepicker.ru.js"))'></script>
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+
     </body>
+
+
+
+
+
+
+
+<script type="text/javascript">
+    
+$(document).ready(function(e){
+    
+        $( document ).on( 'click', '.bs-dropdown-to-select-group .dropdown-menu li', function( event ) {
+            var $target = $( event.currentTarget );
+            $target.closest('.bs-dropdown-to-select-group')
+                .find('[data-bind="bs-drp-sel-value"]').val($target.attr('data-value'))
+                .end()
+                .children('.dropdown-toggle').dropdown('toggle');
+            $target.closest('.bs-dropdown-to-select-group')
+                .find('[data-bind="bs-drp-sel-label"]').text($target.attr('data-value'));/*$target.text()*/ 
+            return false;
+        });
+
+});
+
+
+</script>
+
+
+
+
+
+
+
 </html>
