@@ -1,0 +1,36 @@
+
+@main("") {
+
+<div class="container">
+<div class="col-lg-3">
+	@profile.menuBar()
+</div>
+<div class="col-lg-9 menudiv">
+	@titleSettings()
+	@settings()
+</div>
+
+</div>
+
+}
+<script>
+        $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
+      state: true,
+      size: null,
+      animate: true,
+      disabled: false,
+      readonly: false,
+      indeterminate: false,
+      onColor: "success",
+      offColor: "danger",
+      onText: "Да",
+      offText: "Нет",
+      labelText: "&nbsp;",
+      baseClass: "bootstrap-switch",
+      wrapperClass: "wrapper",
+      radioAllOff: false,
+      onInit: function() {},
+      onSwitchChange: function() {}
+    };            
+$(".switcher").bootstrapSwitch();
+</script>
