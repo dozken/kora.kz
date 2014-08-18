@@ -23,5 +23,5 @@ public class UserSettings extends Model {
 	
 	public String setting;
 	
-	public Boolean status;
+	public String status;
 }

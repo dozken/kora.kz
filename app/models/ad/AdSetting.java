@@ -11,13 +11,13 @@ import javax.persistence.ManyToOne;
 import play.db.ebean.Model;
 
 @Entity
-public class AdSettings extends Model {
+public class AdSetting extends Model {
 
 	@Id
 	public Long id;
 	
 	@ManyToOne
-	public Ad ads;
+	public Ad ad;
 	/**
 	 * TODO
 	 * 1. only registered can comment
@@ -25,7 +25,7 @@ public class AdSettings extends Model {
 	 * 3. allocate ad(vydelit')
 	 */
 	
-	public String setting;
+	public String name;
 	
-	public Boolean status;
+	public String status;
 }
