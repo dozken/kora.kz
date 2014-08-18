@@ -32,28 +32,25 @@ public class Application extends Controller {
 	// return redirect(request().getHeader("referer"));
 	// }
 
-	public static Result signIn(){
-		
+	public static Result signIn() {
+
 		AuthorisedUser user = AuthorisedUser
 				.findByEmail("info@technovision.kz");
 		session("connected", user.email);
-		
 		flash("thank you");
-		
 		return redirect(request().getHeader("referer"));
 	}
 
-	public static Result signOut(){
+	public static Result signOut() {
 		session().clear();
-		
 		flash("thank you");
 		return redirect(routes.Application.index());
 	}
-	
-	public static Result signUp(){
+
+	public static Result signUp() {
 		return redirect(request().getHeader("referer"));
 	}
-	
+
 	public static Result index() {
 		return ok(index.render("Главная"));
 	}

@@ -31,4 +31,6 @@ public class PrivateMessage extends Model {
 	public String message;
 	
 	public Date sendDate = new Date();
+	
+	public String status = "unread";
 }
