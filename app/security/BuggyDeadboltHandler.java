@@ -39,7 +39,7 @@ public class BuggyDeadboltHandler extends AbstractDeadboltHandler
     public Subject getSubject(Http.Context context)
     {
         // in a real application, the user name would probably be in the session following a login process
-        return AuthorisedUser.findByUserName("steve");
+        return AuthorisedUser.findByEmail("steve");
     }
 
     public DynamicResourceHandler getDynamicResourceHandler(Http.Context context)

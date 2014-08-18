@@ -2,6 +2,7 @@ package models.ad;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -12,5 +13,8 @@ public class Breed extends Model {
 	public Long id;
 	
 	public String name;
-
+	
+	@OneToMany
+	public Ad ad;
+	
 }

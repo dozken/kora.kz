@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -12,6 +13,9 @@ public class Payment extends Model {
 
 	@Id
 	public Long id;
+	
+	@ManyToOne
+	public AuthorisedUser authorisedUser;
 	
 	public Date paymentDate = new Date();
 	
