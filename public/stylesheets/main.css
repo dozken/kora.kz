@@ -449,7 +449,6 @@ border-right: 1px solid #ccc;
 }
 .curs{
 	cursor: pointer;
-	font-size: 18px;
 }
 .bdau{
 	font-size: 16px;
@@ -489,10 +488,27 @@ select,.ssss{
 
 #demo{
 	display: none;
-	margin-top: 10px;
+background-color: #E0E0E0;
+padding-left: 15px;
+padding-top: 10px;
+
+padding-bottom: 10px;
+border-top: 1px solid #ccc;
+border-bottom-left-radius:6px;
+border-bottom-right-radius:6px;
+}
+#demo2{
+	background-color: #E0E0E0;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
 }
 #poi span{
 	border-bottom: 1px dotted #ccc;
+	background-color: #E0E0E0;
+	padding: 5px 19px 5px 19px;
+	
+border-bottom-left-radius:6px;
+border-bottom-right-radius:6px;
 }
 .tptp{
 	margin-top: 3px;
@@ -533,4 +549,60 @@ select,.ssss{
 .lab2{
 	vertical-align: text-top;
 	font-size: 15px;
+}
+.nobor{
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+.nobord{
+	border-radius: 0px;
+}
+.mg{
+	margin-top: 20px;
+}
+#foto2 li{
+	list-style-type: none;
+	margin-bottom: 10px;
+}
+.foto3 li{
+	list-style-type: none;
+	display: inline-block;
+	vertical-align: top;
+}
+.navbar-default{
+	background-color: seagreen;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+	color: #000;
+}
+.btr{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.ko li{
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 5px;
+}
+.ko2 li{
+	list-style-type: none;
+	line-height: 2;
+}
+.topka{
+	margin-top: 30px;
+}
+.bold{
+	font-weight: bolder;
+}
+.akwyl{
+	background-color: #f7f7f7;
+}
+.otvet{
+	color: crimson;
+}
+.topka10{
+	margin-top: 10px;
+}
+.padleft10{
+	padding-left: 10px;
 }
