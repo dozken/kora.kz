@@ -45,6 +45,8 @@ public class Ad extends Model{
 	@ManyToOne
 	public ContactInfo contactInfo;
 	
+	public String tags;
+	
 	public String status;
 	
 	public Integer views;
