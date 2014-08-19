@@ -4,23 +4,17 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /ad                           controllers.Application.createAd()
-
-GET     /adlist                           controllers.Application.adList()
-
-GET     /item                           controllers.Application.item()
-
-GET     /profile                           controllers.Application.profile()
-
-GET     /myMessages                           controllers.Application.myMessages()
-
-GET     /myMoney                           controllers.Application.myMoney()
-
-GET     /mySettings                           controllers.Application.mySettings()
-
-GET     /myProfile                           controllers.Application.myProfile()
-
-GET     /myProfileEdit                           controllers.Application.myProfileEdit()
+POST    /signIn                     controllers.Application.signIn()
+GET     /signOut                    controllers.Application.signOut()
+GET     /ad                         controllers.Application.item()
+GET     /ad/create                  controllers.Application.createAd()
+GET     /ad/search                  controllers.Application.adList()
+GET     /profile/ads                controllers.Application.profile()
+GET     /profile/messages           controllers.Application.myMessages()
+GET     /profile/payments           controllers.Application.myMoney()
+GET     /profile/settings           controllers.Application.mySettings()
+GET     /profile/info               controllers.Application.myProfile()
+GET     /profile/info/edit          controllers.Application.myProfileEdit()
 
 GET     /adminPage                           controllers.Application.adminPage()
 
@@ -46,4 +40,4 @@ GET     /feedback                           controllers.Application.feedback()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-GET     /webjars/*file                    controllers.WebJarAssets.at(file)
+GET     /webjars/*file              controllers.WebJarAssets.at(file)

@@ -2,6 +2,7 @@ package models.contact;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -12,4 +13,8 @@ public class Region extends Model {
 	public Long id;
 	
 	public String name;
+	
+	@OneToMany
+	public ContactInfo contactInfo;
+	
 }

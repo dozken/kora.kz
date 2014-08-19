@@ -10,49 +10,44 @@ import com.avaje.ebean.Ebean;
 import play.Application;
 import play.GlobalSettings;
 
-
 public class Global extends GlobalSettings {
 
 	@Override
-    public void onStart(Application application)
-    {
-        if (SecurityRole.find.findRowCount() == 0)
-        {
-            for (String name : Arrays.asList("foo", "bar", "hurdy", "gurdy"))
-            {
-                SecurityRole role = new SecurityRole();
-                role.name = name;
-                role.save();
-            }
-        }
+	public void onStart(Application application) {
+		if (SecurityRole.find.findRowCount() == 0) {
+			for (String name : Arrays.asList("admin", "moderator", "user")) {
+				SecurityRole role = new SecurityRole();
+				role.name = name;
+				role.save();
+			}
+		}
 
-        if (UserPermission.find.findRowCount() == 0)
-        {
-            UserPermission permission = new UserPermission();
-            permission.value = "printers.edit";
-            permission.save();
-        }
-        
-        if (AuthorisedUser.find.findRowCount() == 0)
-        {
-            AuthorisedUser user = new AuthorisedUser();
-            user.userName = "steve";
-            user.roles = new ArrayList<SecurityRole>();
-            user.roles.add(SecurityRole.findByName("foo"));
-            user.roles.add(SecurityRole.findByName("bar"));
-            user.permissions = new ArrayList<UserPermission>();
-            user.permissions.add(UserPermission.findByValue("printers.edit"));
+		if (UserPermission.find.findRowCount() == 0) {
+			// TODO
+			// add permissions
+			String permissions[] = { "ad.create" };
+			UserPermission permission = new UserPermission();
+			permission.value = "printers.edit";
+			permission.save();
+		}
 
-            user.save();
-            Ebean.saveManyToManyAssociations(user,
-                                             "roles");
-            Ebean.saveManyToManyAssociations(user,
-                                             "permissions");
-        }
-    }
-	
+		if (AuthorisedUser.find.findRowCount() == 0) {
+			AuthorisedUser user = new AuthorisedUser();
+			user.userName = "Technovision LTD";
+			user.email = "info@technovision.kz";
+			user.password = "19771977";
+			user.roles = new ArrayList<SecurityRole>();
+			user.roles.add(SecurityRole.findByName("admin"));
+			user.permissions = new ArrayList<UserPermission>();
+			user.permissions.add(UserPermission.findByValue("printers.edit"));
+
+			user.save();
+			Ebean.saveManyToManyAssociations(user, "roles");
+			Ebean.saveManyToManyAssociations(user, "permissions");
+		}
+	}
+
 	/**
-	 * TODO
-	 * tolko zaregestrirovanye mogut ostavlyat komenty
+	 * TODO tolko zaregestrirovanye mogut ostavlyat komenty
 	 */
 }
