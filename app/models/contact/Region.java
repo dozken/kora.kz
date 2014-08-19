@@ -14,7 +14,7 @@ public class Region extends Model {
 	
 	public String name;
 	
-	@OneToMany
+	@OneToMany(mappedBy="region")	
 	public ContactInfo contactInfo;
 	
 }
