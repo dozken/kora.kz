@@ -17,6 +17,17 @@ import views.html.myMoney.*;
 import views.html.mySettings.*;
 import views.html.myProfile.*;
 import views.html.myProfileEdit.*;
+import views.html.adminPage.*;
+import views.html.addFilter.*;
+import views.html.addReklam.*;
+import views.html.adminMessage.*;
+import views.html.adminProfile.*;
+import views.html.adminProfileEdit.*;
+import views.html.users.*;
+import views.html.about.*;
+import views.html.read.*;
+import views.html.adminRead.*;
+import views.html.feedback.*;
 
 public class Application extends Controller {
 
@@ -56,5 +67,38 @@ public class Application extends Controller {
      public static Result myProfileEdit() {
         return ok(myProfileEdit.render());
     }
+     public static Result adminPage() {
+        return ok(adminPage.render());
+    }
 
+     public static Result addFilter() {
+        return ok(addFilter.render());
+    }
+     public static Result addReklam() {
+        return ok(addReklam.render());
+    }
+     public static Result adminMessage() {
+        return ok(adminMessage.render());
+    }
+     public static Result adminProfile() {
+        return ok(adminProfile.render());
+    }
+     public static Result adminProfileEdit() {
+        return ok(adminProfileEdit.render());
+    }
+     public static Result users() {
+        return ok(users.render());
+    }
+     public static Result about() {
+        return ok(about.render());
+    }
+     public static Result read() {
+        return ok(read.render());
+    }
+     public static Result adminRead() {
+        return ok(adminRead.render());
+    }
+     public static Result feedback() {
+        return ok(feedback.render());
+    }
 }

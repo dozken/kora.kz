@@ -22,6 +22,28 @@ GET     /myProfile                           controllers.Application.myProfile()
 
 GET     /myProfileEdit                           controllers.Application.myProfileEdit()
 
+GET     /adminPage                           controllers.Application.adminPage()
+
+GET     /addFilter                           controllers.Application.addFilter()
+
+GET     /addReklam                           controllers.Application.addReklam()
+
+GET     /adminMessage                           controllers.Application.adminMessage()
+
+GET     /adminProfile                           controllers.Application.adminProfile()
+
+GET     /adminProfileEdit                           controllers.Application.adminProfileEdit()
+
+GET     /users                           controllers.Application.users()
+
+GET     /about                           controllers.Application.about()
+
+GET     /read                           controllers.Application.read()
+
+GET     /adminRead                           controllers.Application.adminRead()
+
+GET     /feedback                           controllers.Application.feedback()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /webjars/*file                    controllers.WebJarAssets.at(file)
