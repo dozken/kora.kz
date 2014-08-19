@@ -21,3 +21,6 @@ syntax: regexp
 ^activator-launch-1\.2\.2\.jar$
 syntax: regexp
 ^activator\.bat$
+
+syntax: regexp
+^conf/evolutions$
