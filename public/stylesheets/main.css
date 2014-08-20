@@ -635,3 +635,20 @@ writing-mode: tb-rl;
 	display: inline-block;
 	margin-right: 10px;
 }
+.fnt10{
+	font-size: 13px;
+	vertical-align: bottom;
+}
+.tabmrg{
+	margin-top: 30px;
+
+}
+.tabmrg tr td a{
+	color: #5b752c;
+}
+.warning{
+	width: 300px;
+}
+.ortaga{
+	text-align:center;
+}

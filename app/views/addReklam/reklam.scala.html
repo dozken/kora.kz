@@ -4,14 +4,17 @@
 
 <!-- Form Name -->
 <div class="form-group">
-  <div class="col-md-4">
+<div class="col-md-3">
+	<input type="text" class="form-control" id="inputEmail3" placeholder="Компания">
+</div>
+  <div class="col-md-3 nopaddingleft">
     <select id="selectbasic" name="selectbasic" class="form-control">
       <option value="1">Home Page</option>
       <option value="2">Right Sidebar</option>
     </select>
   </div>
 
-  <div class="col-md-2">
+  <div class="col-md-2 nopaddingleft ">
     <select id="selectbasic" name="selectbasic" class="form-control">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -22,45 +25,63 @@
       <option value="2">7</option>
     </select>
   </div>
-
-
-</div>
-<div class="form-group">
-
-  <div class="col-md-4">
+  <div class="col-md-4 nopaddingleft nopaddingright">
       <div class="fileUpload btn btn-default">
-    <span>Обзор</span>
+    <span class="glyphicon glyphicon-folder-open"></span>
     <input type="file" id="filebutton" class="upload" />
 </div>
+<span class="fnt10">jpg,png,flv(240x400)</span>
      <button id="singlebutton" name="singlebutton" class="btn btn-success">Добавить</button>
   </div>
 
 </div>
 
-
-
-
-<div class="form-group">
-  <div class="col-md-10">
-<ul id="foto2" class="nopaddingleft">
-	<li>
-	<ul class="foto3 nopaddingleft">
-	<li><img src="assets/images/home/reklama1.png"></li>
-	<li><button class="btn btn-danger">Left Sidebar <span class="glyphicon glyphicon-remove"></span></button></li>
-	</ul>
-	</li>
-		<li>
-	<ul class="foto3 nopaddingleft">
-	<li><img src="assets/images/home/reklama2.PNG"></li>
-	<li><button class="btn btn-danger">Home Page <span class="glyphicon glyphicon-remove"></span></button></li>
-	</ul>
-	</li>
-
-</ul>
-  </div>
-
-</div>
 </fieldset>
 </form>
+
+<table class="table table-hover tabmrg">
+	<thead>
+		<tr>
+			<td>Очередь</td>
+			<td>Компания</td>
+			<td>Место на стр</td>
+			<td>Показать рекламу</td>
+			<td>Длителность</td>
+			<td>Продлить</td>
+			<td>Удалить</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>Жаскайрат</td>
+			<td>Sidebar</td>
+			<td><a href="">Показать рекламу</a></td>
+			<td>1 месяц</td>
+			<td><a href="">Продлить</a></td>
+			<td><a href="">Удалить</a></td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Sulpak</td>
+			<td>HomePage</td>
+			<td><a href="">Показать рекламу</a></td>
+			<td>1 месяц</td>
+			<td><a href="">Продлить</a></td>
+			<td><a href="">Удалить</a></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Technovision</td>
+			<td>Sidebar</td>
+			<td><a href="">Показать рекламу</a></td>
+			<td>1 год</td>
+			<td><a href="">Продлить</a></td>
+			<td><a href="">Удалить</a></td>
+		</tr>
+	</tbody>
+</table>
+
+
 
 </div>
