@@ -617,3 +617,21 @@ border-bottom-right-radius:6px;
 -o-transform: rotate(90deg);
 writing-mode: tb-rl;
 }
+.readli li{
+	list-style-type: none;
+	display: inline-block;
+}
+.ko2 li img{
+	width: 100px;
+	border: 1px dotted #ccc;
+	padding: 10px;
+
+}
+.ko4 li{
+	list-style-type: none;
+}
+.ko5 li{
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 10px;
+}
