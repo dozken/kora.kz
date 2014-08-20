@@ -567,7 +567,7 @@ border-bottom-right-radius:6px;
 .foto3 li{
 	list-style-type: none;
 	display: inline-block;
-	vertical-align: top;
+	
 }
 .navbar-default{
 	background-color: seagreen;
@@ -605,4 +605,33 @@ border-bottom-right-radius:6px;
 }
 .padleft10{
 	padding-left: 10px;
+}
+.cv li a{
+	color: #5b752c;
+}
+
+.foto3 li button{
+
+-webkit-transform: rotate(90deg);
+-moz-transform: rotate(90deg);
+-o-transform: rotate(90deg);
+writing-mode: tb-rl;
+}
+.readli li{
+	list-style-type: none;
+	display: inline-block;
+}
+.ko2 li img{
+	width: 100px;
+	border: 1px dotted #ccc;
+	padding: 10px;
+
+}
+.ko4 li{
+	list-style-type: none;
+}
+.ko5 li{
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 10px;
 }
