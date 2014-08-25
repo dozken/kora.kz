@@ -1,0 +1,41 @@
+
+@main("") {
+
+<div class="container">
+	<div class="searchbarmargin">@_searchbar()</div>
+	@_filters()
+	<div class="col-lg-12 borderbottom">
+	<h3>Коровы Абердин-Ангус в Казахстане</h3>
+	<hr class="hrcolor">
+	<ul class="typelist">
+	<li><a href="">Сначала дешевые</a></li>
+	<li><a href="">Сначала дорогие</a></li>
+	<li><a href="">По свежести объявления</a></li>
+	</ul>
+	</div>
+		<div class="col-lg-9 pro3">
+	@for(i<-1 to 5){
+	
+<div class="col-lg-12 pro1">
+		
+		@_ad()
+		
+	</div>
+	
+	}</div>
+
+	<div class="col-lg-3 pro2">
+		@_advertisements()
+	</div>
+</div>
+}
+
+
+<script>
+$( "#poi" ).click(function() {
+  $( "#demo" ).toggle( "slow" );
+    $("#poi span").text(function(i, v){
+               return v === 'Обычный поиск' ? 'Расширенный поиск' : 'Обычный поиск'
+            })
+});
+</script>

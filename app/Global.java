@@ -4,11 +4,10 @@ import java.util.Arrays;
 import models.user.AuthorisedUser;
 import models.user.SecurityRole;
 import models.user.UserPermission;
-
-import com.avaje.ebean.Ebean;
-
 import play.Application;
 import play.GlobalSettings;
+
+import com.avaje.ebean.Ebean;
 
 public class Global extends GlobalSettings {
 

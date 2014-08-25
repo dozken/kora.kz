@@ -16,6 +16,11 @@ import play.db.ebean.Model;
 @Table(name="ads")
 public class Ad extends Model{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	public Long id;
 	

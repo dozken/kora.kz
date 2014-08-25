@@ -15,15 +15,14 @@
  */
 package security;
 
-import be.objectify.deadbolt.core.models.Subject;
-import be.objectify.deadbolt.java.AbstractDeadboltHandler;
-import be.objectify.deadbolt.java.DynamicResourceHandler;
 import models.user.AuthorisedUser;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html.accessFailed;
+import views.html._accessFailed;
+import be.objectify.deadbolt.core.models.Subject;
+import be.objectify.deadbolt.java.AbstractDeadboltHandler;
 
 /**
  * @author Steve Chaloner (steve@objectify.be)
@@ -43,10 +42,10 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler
         return AuthorisedUser.findByEmail(Controller.session("connected"));
     }
 
-    public DynamicResourceHandler getDynamicResourceHandler(Http.Context context)
-    {
-        return new MyDynamicResourceHandler();
-    }
+//    public DynamicResourceHandler getDynamicResourceHandler(Http.Context context)
+//    {
+//        return new MyDynamicResourceHandler();
+//    }
 
     @Override
     public F.Promise<Result> onAuthFailure(Http.Context context,
@@ -57,7 +56,7 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler
         {
             @Override
             public Result apply() throws Throwable {
-                return ok(accessFailed.render());
+                return ok(_accessFailed.render());
             }
         });
     }
