@@ -4,26 +4,31 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-POST    /signIn                     controllers.Application.signIn()
-GET     /signOut                    controllers.Application.signOut()
-#GET     /ad                         controllers.Application.item()
-#GET     /ad/create                  controllers.Application.createAd()
-#GET     /ad/search                  controllers.Application.adList()
-#GET     /profile/ads                controllers.Application.myAds()
-#GET     /profile/messages           controllers.Application.myMessages()
-#1
-#GET     /profile/messages/read      controllers.Application.read()
-#GET     /profile/payments           controllers.Application.myMoney()
-#GET     /profile/settings           controllers.Application.mySettings()
-#GET     /profile/info               controllers.Application.myProfile()
-#GET     /profile/info/edit          controllers.Application.myProfileEdit()
-#6
-#GET     /admin/ads                  controllers.Application.adminPage()
-#GET     /admin/filter               controllers.Application.addFilter()
-#GET     /admin/advetiments          controllers.Application.addReklam()
-#GET     /admin/users                controllers.Application.users()
 GET     /about                      controllers.Application.about()
 GET     /feedback                   controllers.Application.feedback()
+POST    /user/login                     controllers.Application.signIn()
+GET     /userlogout                    controllers.Application.signOut()
+#GET   /user/:id
+#GET   /user/register
+#GET   /user/:id/delete
+
+GET     /ad                         controllers.Ads.get()
+GET     /ad/create                  controllers.Ads.create()
+GET     /ad/search                  controllers.Ads.search()
+GET     /profile/ads                controllers.Manage.myAds()
+GET     /profile/messages           controllers.Manage.myMessages()
+#GET     /profile/messages/:/read          controllers.Application.read()
+#POST    /profile/messages/:id/delete      controllers.Application.delete()
+GET     /profile/payments           controllers.Manage.myPayments()
+GET     /profile/settings           controllers.Manage.mySettings()
+GET     /profile/info               controllers.Manage.myInfo()
+#GET     /profile/info/edit          controllers.Application.myProfileEdit()
+
+GET     /admin/ads                  controllers.Administer.ads()
+GET     /admin/filter               controllers.Administer.filters()
+GET     /admin/advetiments          controllers.Administer.advetiments()
+GET     /admin/users                controllers.Administer.users()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

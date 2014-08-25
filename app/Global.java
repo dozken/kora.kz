@@ -21,14 +21,14 @@ public class Global extends GlobalSettings {
 			}
 		}
 
-		if (UserPermission.find.findRowCount() == 0) {
-			// TODO
-			// add permissions
-			String permissions[] = { "ad.create" };
-			UserPermission permission = new UserPermission();
-			permission.value = "printers.edit";
-			permission.save();
-		}
+//		if (UserPermission.find.findRowCount() == 0) {
+//			// TODO
+//			// add permissions
+//			String permissions[] = { "ad.create" };
+//			UserPermission permission = new UserPermission();
+//			permission.value = "printers.edit";
+//			permission.save();
+//		}
 
 		if (AuthorisedUser.find.findRowCount() == 0) {
 			AuthorisedUser user = new AuthorisedUser();

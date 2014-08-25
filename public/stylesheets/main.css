@@ -33,7 +33,7 @@ font-family: 'Open Sans', sans-serif;
 .smright{float:right;}
 .aright{float:right;}
 .navback{
-background-image:url(../images/home/header_bg.PNG);
+background-image:url(../images/home/header_bg.png);
 background-repeat: repeat-x;
 }
 #navbar{margin-bottom: 60px;}
@@ -48,24 +48,24 @@ background-repeat: repeat-x;
    .reda{color:red;cursor: pointer;}
     .reda:hover{color:#c9302c;text-decoration: none;}
    .spgreen{color:green;}
-   .jylky a:hover{background-image:url(../images/home/horse_hover.PNG);}
-   .jylky a{background-image:url(../images/home/horse.PNG);width:  188px;
+   .jylky a:hover{background-image:url(../images/home/horse_hover.png);}
+   .jylky a{background-image:url(../images/home/horse.png);width:  188px;
    height: 128px;
    display: block;}
-   .tuye a:hover{background-image:url(../images/home/camel_hover.PNG);}
-   .tuye a{background-image:url(../images/home/camel.PNG);width:  188px;
+   .tuye a:hover{background-image:url(../images/home/camel_hover.png);}
+   .tuye a{background-image:url(../images/home/camel.png);width:  188px;
    height: 128px;
    display: block;}
-   .koi a:hover{background-image:url(../images/home/sheep_hover.PNG);}
-   .koi a{background-image:url(../images/home/sheep.PNG);width:  188px;
+   .koi a:hover{background-image:url(../images/home/sheep_hover.png);}
+   .koi a{background-image:url(../images/home/sheep.png);width:  188px;
    height: 128px;
    display: block;}
-   .siyr a:hover{background-image:url(../images/home/cow_hover.PNG);}
-   .siyr a{background-image:url(../images/home/cow.PNG);width:  188px;
+   .siyr a:hover{background-image:url(../images/home/cow_hover.png);}
+   .siyr a{background-image:url(../images/home/cow.png);width:  188px;
    height: 128px;
    display: block;}
-   .baska a:hover{background-image:url(../images/home/other_hover.PNG);}
-   .baska a{background-image:url(../images/home/other.PNG);width:  188px;
+   .baska a:hover{background-image:url(../images/home/other_hover.png);}
+   .baska a{background-image:url(../images/home/other.png);width:  188px;
    height: 128px;
    display: block;}
 .searchbarmargin{
@@ -476,7 +476,7 @@ border-right: 1px solid #ccc;
 }
 
 .modal-open .modal{
-	background-image: url(../images/pattern.PNG)
+	background-image: url(../images/pattern.png)
 }
 .modal-content{
 	background-color: rgba(255,255,255,0.9);
