@@ -15,38 +15,37 @@
  */
 package models.user;
 
-import be.objectify.deadbolt.core.models.Permission;
-import play.db.ebean.Model;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import play.db.ebean.Model;
+import be.objectify.deadbolt.core.models.Permission;
 
 /**
  * @author Steve Chaloner (steve@objectify.be)
  */
 @Entity
-public class UserPermission extends Model implements Permission
-{
-    @Id
-    public Long id;
+public class UserPermission extends Model implements Permission {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "permission_value")
-    public String value;
+	@Id
+	public Long id;
 
-    public static final Model.Finder<Long, UserPermission> find = new Model.Finder<Long, UserPermission>(Long.class,
-                                                                                                         UserPermission.class);
+	@Column(name = "permission_value")
+	public String value;
 
-    public String getValue()
-    {
-        return value;
-    }
+	public static final Model.Finder<Long, UserPermission> find = new Model.Finder<Long, UserPermission>(
+			Long.class, UserPermission.class);
 
-    public static UserPermission findByValue(String value)
-    {
-        return find.where()
-                   .eq("value",
-                       value)
-                   .findUnique();
-    }
+	public String getValue() {
+		return value;
+	}
+
+	public static UserPermission findByValue(String value) {
+		return find.where().eq("value", value).findUnique();
+	}
 }

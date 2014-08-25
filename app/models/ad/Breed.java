@@ -9,6 +9,11 @@ import play.db.ebean.Model;
 @Entity
 public class Breed extends Model {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	public Long id;
 	

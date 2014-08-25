@@ -18,12 +18,12 @@
 
     </head>
     <body>
-	    @navbar()
+	    @_navbar()
         @content
 
-		@modalRegistration()
-		@modalLogin()
-	    @footer()
+		@_modalRegistration()
+		@_modalLogin()
+	    @_footer()
 		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
 		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))'></script>
         <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap-switch.min.js"))'></script>        
