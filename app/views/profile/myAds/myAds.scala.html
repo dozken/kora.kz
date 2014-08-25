@@ -1,11 +1,19 @@
 
-@main("") {
+@main("Мои Объявления") {
 <div class="container">
   <div class="col-lg-3">
     @profile._menu()
   </div>
   <div class="col-lg-9 menudiv">
-    @_myAdsBar()
+  	@profile._title("МОИ ОБЪЯВЛЕНИЯ"){
+  	<div class="col-lg-4 tptp"><select class="form-control">
+	  <option>Все (8)</option>
+	  <option selected="selected">На сайте (2)</option>
+	  <option>На модерции (3)</option>
+	  <option>В архиве (3)</option>
+	</select>
+	</div>
+  	}	
 	@for(i<-1 to 3){
 	  @_myAd()
 	}
