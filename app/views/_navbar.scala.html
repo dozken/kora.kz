@@ -20,10 +20,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Поиск</a>
-            </li>
-            <li><a href="#">Объявление</a>
-            </li>            
+			<li data-value="ЛОШАДЬ"><a href="#">ЛОШАДЬ </a></li>
+			<li data-value="ВЕРБЛЮД"><a href="#">ВЕРБЛЮД </a></li>
+			<li data-value="КОРОВА"><a href="#">КОРОВА </a></li>
+			<li data-value="БАРАН"><a href="#">БАРАН </a></li>
+			<li data-value="ДРУГИЕ"><a href="#">ДРУГИЕ </a></li>            
           </ul>
         </li>
         }
@@ -31,7 +32,7 @@
       <ul class="nav navbar-nav navbar-right">
       	@subjectPresentOr() {
       	<li>
-          <a href="#" >
+          <a href="@routes.Manage.myInfo" >
             <span class="glyphicon glyphicon-user"></span> Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
           </a>
         </li>
@@ -51,7 +52,7 @@
         </li>
         }
         <li>
-          <a href="#">
+          <a href="@routes.Ads.create">
             <span class="glyphicon glyphicon-edit"></span> Подать объявление
           </a>
         </li>
