@@ -12,4 +12,8 @@ public class Settings extends Controller {
 	public static Result notification(Object object, Boolean state){
 		return TODO;
 	}
+	
+	public static Result autoExtend(){
+		return TODO;
+	}
 }
