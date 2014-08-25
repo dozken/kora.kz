@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.2.0",
   "org.webjars" % "bootstrap-switch" % "3.0.2",
   "org.webjars" % "bootstrap-datepicker" % "1.3.0-3",
+  "org.webjars" % "jquery-ui" % "1.11.1",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
 
