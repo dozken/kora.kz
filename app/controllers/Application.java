@@ -13,7 +13,9 @@ public class Application extends Controller {
 		response().setContentType("text/javascript");
 
 		return ok(Routes.javascriptRouter("myJsRoutes",
-				controllers.routes.javascript.Application.index()));
+				controllers.routes.javascript.Application.index(),
+				controllers.routes.javascript.User.register()
+				));
 	}
 
 	// public static Result changeLanguage(String language) {
@@ -51,4 +53,5 @@ public class Application extends Controller {
 	public static Result feedback() {
 		return ok(feedback.render());
 	}
+	
 }
