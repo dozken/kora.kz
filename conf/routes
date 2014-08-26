@@ -1,0 +1,62 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+GET     /about                      controllers.Application.about()
+GET     /feedback                   controllers.Application.feedback()
+POST    /user/login                 controllers.Application.signIn()
+GET     /user/logout                 controllers.Application.signOut()
+
+#GET     /user/:id                   controllers.User.get(id: Long)                     
+#POST    /user/register              controllers.User.register()
+#POST    /user/:id/delete            controllers.User.delete(id: Long)
+
+GET     /ad                         controllers.Ads.get()
+GET     /ad/create                  controllers.Ads.create()
+#GET     /ad/:id/edit                controllers.Ads.edit(id: Long)
+#POST    /ad/:id/update              controllers.Ads.update(id: Long)
+#POST    /ad/:id/extend              controllers.Ads.extend(id: Long)
+#POST    /ad/:id/highlight           controllers.Ads.highlight(id: Long)
+#POST    /ad/:id/autoextend          controllers.Ads.autoExtend(id: Long)
+#POST    /ad/:id/archive             controllers.Ads.archive(id: Long)
+#POST    /ad/:id/message             controllers.Message.send(id: Long)
+
+GET     /ad/search                  controllers.Ads.search()
+GET     /profile/ads                controllers.Manage.myAds()
+GET     /profile/messages           controllers.Manage.myMessages()
+#GET     /profile/messages/:id/read   controllers.Message.read(id: Long)
+#POST    /profile/messages/:id/delete controllers.Message.delete(id: Long)
+GET     /profile/payments           controllers.Manage.myPayments()
+GET     /profile/settings           controllers.Manage.mySettings()
+#POST     /profile/settings/password           controllers.Settings.changePassword()
+#POST     /profile/settings/notification       controllers.Settings.notification()
+
+GET     /profile/info               controllers.Manage.myInfo()
+GET     /profile/info/edit          controllers.Info.edit()
+#POST     /profile/info/edit          controllers.Info.update()
+
+GET     /admin/ads                  controllers.Administer.ads()
+GET     /admin/filter                         controllers.Administer.filters()
+GET     /admin/filter/breed/add               controllers.Filters.addBreed()
+POST    /admin/filter/breed/:id/update        controllers.Filters.updateBreed(id: Long)
+POST    /admin/filter/breed/:id/delete        controllers.Filters.deleteBreed(id: Long)
+GET     /admin/filter/region/add              controllers.Filters.addRegion()
+POST    /admin/filter/region/:id/update       controllers.Filters.updateRegion(id: Long)
+POST    /admin/filter/region/:id/delete       controllers.Filters.deleteRegion(id: Long)
+GET     /admin/filter/city/add                controllers.Filters.addCity()
+POST    /admin/filter/city/:id/update         controllers.Filters.updateCity(id: Long)
+POST    /admin/filter/city/:id/delete         controllers.Filters.deleteCity(id: Long)
+
+GET     /admin/advetiments              controllers.Administer.advetiments()
+GET     /admin/advetiment/add           controllers.Advertisements.add()
+GET     /admin/advetiment/:id/update    controllers.Advertisements.extend(id: Long)
+GET     /admin/advetiment/:id/delete    controllers.Advertisements.delete(id: Long)
+
+GET     /admin/users                controllers.Administer.users()
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
