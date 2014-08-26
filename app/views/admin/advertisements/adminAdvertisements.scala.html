@@ -1,0 +1,20 @@
+
+@main("Рекламы") {
+
+<div class="container">
+<div class="col-lg-3">@profile._menu()</div>
+<div class="col-lg-9 menudiv">
+  @profile._title("РЕКЛАМЫ"){ }  
+  @_advertisements()
+</div>
+
+</div>
+
+
+}
+<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))'></script>
+<script>
+$(document).ready(function(){
+	$("#sortable").sortable();
+});
+</script>
