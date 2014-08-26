@@ -9,10 +9,10 @@ import views.html.common.*;
 
 public class Application extends Controller {
 
-	public static Result javascriptRoutes() {
+	public static Result jsRoutes() {
 		response().setContentType("text/javascript");
 
-		return ok(Routes.javascriptRouter("myJsRoutes",
+		return ok(Routes.javascriptRouter("js",
 				controllers.routes.javascript.Application.index(),
 				controllers.routes.javascript.User.register()
 				));

@@ -10,7 +10,7 @@ POST    /user/login                 controllers.Application.signIn()
 GET     /user/logout                 controllers.Application.signOut()
 
 #GET     /user/:id                   controllers.User.get(id: Long)                     
-GET    /user/register              controllers.User.register()
+GET      /user/register              controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
 GET     /ad                         controllers.Ads.get()
@@ -57,7 +57,8 @@ GET     /admin/advetiment/:id/delete    controllers.Advertisements.delete(id: Lo
 GET     /admin/users                controllers.Administer.users()
 
 # Javascript routing
-GET    /assets/javascripts/routes      controllers.Application.javascriptRoutes()
+GET     /assets/javascripts/routes      controllers.Application.jsRoutes()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /webjars/*file              controllers.WebJarAssets.at(file)

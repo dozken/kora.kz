@@ -15,9 +15,9 @@ public class User extends Controller {
 	
 	public static Result register(){
 		
-		DynamicForm requestData = form().bindFromRequest();
+//		DynamicForm requestData = form().bindFromRequest();
 		
-		System.out.println(requestData);
+//		System.out.println(requestData);
 		return ok("baaa");
 		//return redirect(routes.Manage.myInfo());
 	}
