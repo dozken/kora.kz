@@ -2,6 +2,7 @@ package models.ad;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -32,6 +33,7 @@ public class PrivateMessage extends Model {
 	
 	public String title;
 	
+	@Column(columnDefinition = "TEXT")
 	public String message;
 	
 	public Date sendDate = new Date();

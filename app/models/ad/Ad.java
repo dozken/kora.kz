@@ -3,6 +3,7 @@ package models.ad;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -42,6 +43,7 @@ public class Ad extends Model{
 	
 	public String title;
 	
+	@Column(columnDefinition = "TEXT")
 	public String description;
 	
 	@OneToMany
