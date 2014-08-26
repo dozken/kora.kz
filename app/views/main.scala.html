@@ -39,7 +39,7 @@
 
 
 
-<script type="text/javascript" src="@routes.Application.jsRoutes"></script>
+<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script type="text/javascript">
     
 $(document).ready(function(e){
@@ -59,7 +59,7 @@ $(document).ready(function(e){
 
 $(document).on("click","#registrButton", function(e){
 	e.preventDefault();
-	js.controllers.User.register().ajax({
+	jsRoutes.controllers.User.register().ajax({
         success: function(data) {
             alert(data);
         },
