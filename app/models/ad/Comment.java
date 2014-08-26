@@ -2,6 +2,7 @@ package models.ad;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -26,6 +27,7 @@ public class Comment extends Model {
 	
 	public String email;
 	
+	@Column(columnDefinition = "TEXT")
 	public String text;
 	
 	public Date sendDate = new Date();
