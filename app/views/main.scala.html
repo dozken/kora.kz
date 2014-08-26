@@ -43,7 +43,9 @@
 <script type="text/javascript">
     
 $(document).ready(function(e){
-    
+
+    $("#registerErrorAlert" ).hide();
+
         $( document ).on( 'click', '.bs-dropdown-to-select-group .dropdown-menu li', function( event ) {
             var $target = $( event.currentTarget );
             $target.closest('.bs-dropdown-to-select-group')
@@ -59,9 +61,19 @@ $(document).ready(function(e){
 
 $(document).on("click","#registrButton", function(e){
 	e.preventDefault();
+	
 	jsRoutes.controllers.User.register().ajax({
+	data : $("#registerForm").serialize(),
         success: function(data) {
-            alert(data);
+            var res =""+ data;
+            if(res == "error"){
+                $("#registerErrorAlert" ).html("This email already registred");
+                $("#registerErrorAlert" ).show();
+            }else{
+
+                window.location.href = "@routes.Manage.myInfo()";
+                }
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);            

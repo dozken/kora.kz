@@ -10,7 +10,7 @@ POST    /user/login                 controllers.Application.signIn()
 GET     /user/logout                 controllers.Application.signOut()
 
 #GET     /user/:id                   controllers.User.get(id: Long)                     
-GET      /user/register              controllers.User.register()
+POST      /user/register              controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
 GET     /ad                         controllers.Ads.get()

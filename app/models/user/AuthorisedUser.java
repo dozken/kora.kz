@@ -16,9 +16,9 @@ import be.objectify.deadbolt.core.models.Subject;
 @Table(name = "users")
 public class AuthorisedUser extends Model implements Subject {
 
-	/**
-	 * 
-	 */
+    public static final Finder<Long, AuthorisedUser> find = new Finder<Long, AuthorisedUser>(
+            Long.class, AuthorisedUser.class);
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,8 +36,7 @@ public class AuthorisedUser extends Model implements Subject {
 	@ManyToMany
 	public List<UserPermission> permissions;
 
-	public static final Finder<Long, AuthorisedUser> find = new Finder<Long, AuthorisedUser>(
-			Long.class, AuthorisedUser.class);
+
 
 	@Override
 	public List<? extends Role> getRoles() {
