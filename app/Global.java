@@ -38,7 +38,7 @@ public class Global extends GlobalSettings {
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("admin"));
 			user.permissions = new ArrayList<UserPermission>();
-			user.permissions.add(UserPermission.findByValue("printers.edit"));
+			//user.permissions.add(UserPermission.findByValue("printers.edit"));
 
 			user.save();
 			Ebean.saveManyToManyAssociations(user, "roles");
