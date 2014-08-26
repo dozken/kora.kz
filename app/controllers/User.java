@@ -1,5 +1,8 @@
 package controllers;
 
+import static play.data.Form.form;
+import controllers.routes;
+import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.ads.*;
@@ -9,22 +12,14 @@ import views.html.admin.users.*;
 
 public class User extends Controller {
 	
-	public static Result ads(){
-		return ok(adminAds.render());
-	}
 	
 	public static Result register(){
 		
+		DynamicForm requestData = form().bindFromRequest();
 		
-		return ok(adminFilters.render());
-	}
-	
-	public static Result advetiments(){
-		return ok(adminAdvertisements.render());
-	}
-	
-	public static Result users(){
-		return ok(adminUsers.render());
+		System.out.println(requestData);
+		return ok("baaa");
+		//return redirect(routes.Manage.myInfo());
 	}
 	
 }
