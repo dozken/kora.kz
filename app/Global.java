@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import models.ad.Animal;
 import models.user.AuthorisedUser;
 import models.user.SecurityRole;
 import models.user.UserPermission;
@@ -18,6 +19,14 @@ public class Global extends GlobalSettings {
 				SecurityRole role = new SecurityRole();
 				role.name = name;
 				role.save();
+			}
+		}
+		
+		if (Animal.find.findRowCount() == 0) {
+			for (String name : Arrays.asList("ЛОШАДЬ", "ВЕРБЛЮД", "КОРОВА","БАРАН","ДРУГИЕ")) {
+				Animal animal = new Animal();
+				animal.name = name;
+				animal.save();
 			}
 		}
 
