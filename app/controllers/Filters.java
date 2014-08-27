@@ -22,6 +22,7 @@ public class Filters extends Controller {
 		}else{
 			Breed breed = breedForm.get();
 			breed.save();
+			
 			return ok(_breed.render(breed.animal));
 		}
 		

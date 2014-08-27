@@ -1,10 +1,6 @@
 @(animal: models.ad.Animal)
-@if(flash.get("error")!=null){
-<div class="alert alert-danger" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  @Html(flash.get("error"))
-</div>
-}
+
+@utils._flashAlert("error","danger")
 
 @for(breed <- animal.getBreeds){
 <div class="input-group imgmargin">
