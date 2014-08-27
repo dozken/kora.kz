@@ -1,0 +1,39 @@
+<form class="form-horizontal" action="">
+   <fieldset>
+      <!-- Form Name -->
+      <div class="form-group">
+         <div class="col-md-4">
+            <select name="animal" class="form-control">
+               <option selected disabled hidden> Выберите животное</option>
+               @for(animal<-models.ad.Animal.find.all){	
+               <option value="@animal.id">@animal.name</option>               
+               }
+            </select>
+         </div>
+      </div>
+      <div class="form-group">
+         <div class="col-lg-6">
+            <div class="input-group">
+               <input type="text" class="form-control" placeholder="Например: Абердин-Ангус"> 
+               <span class="input-group-btn">
+                 <button class="btn btn-success nobor" type="button">Добавить</button>
+               </span>
+            </div>
+         </div>
+      </div>
+   </fieldset>
+</form>
+<div class="col-lg-6">
+   <div class="input-group imgmargin">
+      <input type="text" class="form-control" value="Абердин-Ангус">
+      <span class="input-group-btn">
+      <button class="btn btn-default nobord" type="button">
+      <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      </span> <span class="input-group-btn">
+      <button class="btn btn-default nobor" type="button">
+      <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      </span>
+   </div>
+</div>
