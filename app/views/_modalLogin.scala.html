@@ -6,13 +6,13 @@
             <h4 class="modal-title" id="myModalLabel">Вход в личный кабинет</h4>
          </div>
          <div class="modal-body">
-            <form role="form" action="@routes.Application.signIn" method="POST">
+            <form role="form" id="loginForm" method="POST">
                <div class="form-group">
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Логин">
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Логин">
                     <span class="help-block"><i>адрес электронной почты</i></span>  
                </div>
                <div class="form-group">
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
                     <span class="help-block"><i>от личного кабинета</i> <span class="onjaka"><i><a href="" class="kizilast">Забыли пароль</a></i></span> </span> 
                </div>
                <div class="checkbox onjaka">
@@ -20,8 +20,9 @@
                   <input type="checkbox"> Запомнить меня
                   </label>
                </div>
-               <button type="submit" class="btn btn-success mybut">Войти</button>
+               <button type="submit" id="loginButton" class="btn btn-success mybut">Войти</button>
                <p class="pmm"><i>Еще нет кабинета? <a href="#" class="kizilast">Зарегистрируйтесь</a></i></p>
+                <div id="loginErrorAlert" class="alert alert-danger" role="alert"></div>
             </form>
          </div>
       </div>
