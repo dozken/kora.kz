@@ -1,0 +1,8 @@
+@(name: String, alertType: String)
+
+@if(flash.get(name)!=null){
+<div class="alert alert-@alertType" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  @Html(flash.get(name))
+</div>
+}

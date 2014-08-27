@@ -1,0 +1,15 @@
+@(animal: models.ad.Animal)
+
+@utils._flashAlert("error","danger")
+
+@for(breed <- animal.getBreeds){
+<div class="input-group imgmargin">
+  <input type="text" class="form-control" validation="not_null" breed="@breed.id" value="@breed.name" required>
+  <span class="input-group-btn">
+    <button class="btn btn-default nobord breed update" breed="@breed.id" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+  </span>
+  <span class="input-group-btn">
+    <button class="btn btn-default nobor  breed delete" breed="@breed.id" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+  </span>
+</div>
+}

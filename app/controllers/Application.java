@@ -1,7 +1,6 @@
 package controllers;
 
 import models.user.AuthorisedUser;
-import models.user.SecurityRole;
 import play.Routes;
 import play.data.DynamicForm;
 import play.mvc.Controller;
@@ -22,6 +21,10 @@ public class Application extends Controller {
 				controllers.routes.javascript.Application.index(),
 				controllers.routes.javascript.User.register(),
                 controllers.routes.javascript.Application.signIn()
+				controllers.routes.javascript.Filters.getBreeds(),
+				controllers.routes.javascript.Filters.addBreed(),
+				controllers.routes.javascript.Filters.updateBreed(),
+				controllers.routes.javascript.Filters.deleteBreed()
 				));
 	}
 
