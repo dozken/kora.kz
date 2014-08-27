@@ -14,6 +14,10 @@ public class Application extends Controller {
 
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
+				controllers.routes.javascript.Filters.getBreeds(),
+				controllers.routes.javascript.Filters.addBreed(),
+				controllers.routes.javascript.Filters.updateBreed(),
+				controllers.routes.javascript.Filters.deleteBreed(),
 				controllers.routes.javascript.User.register()
 				));
 	}

@@ -26,10 +26,10 @@ public class Ad extends Model{
 	public Long id;
 	
 	@ManyToOne
-	public Animal animalType;
+	public Animal animal;
 	
 	@ManyToOne
-	public Breed breedType;
+	public Breed breed;
 	
 	public String gender;
 	

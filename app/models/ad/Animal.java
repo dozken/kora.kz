@@ -1,5 +1,7 @@
 package models.ad;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -25,6 +27,12 @@ public class Animal extends Model {
 	public String name;
 	
 	@OneToMany
-	public Ad ad;
+	public List<Ad> ads;
 	
+	@OneToMany
+	public List<Breed> breeds;
+	
+	public List<Breed> getBreeds(){
+		return Breed.find.where().eq("animal", this).orderBy("name").findList();
+	}
 }
