@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import models.ad.Animal;
+import models.ad.Breed;
 import models.user.AuthorisedUser;
 import models.user.SecurityRole;
 import models.user.UserPermission;
@@ -29,7 +30,15 @@ public class Global extends GlobalSettings {
 				animal.save();
 			}
 		}
-
+		
+		if (Breed.find.findRowCount() == 0) {
+			for (String name : Arrays.asList("АХАЛТЕКЕ", "АРАБСКИЙ СКАКУН", "ИМПЕРАТОР")) {
+				Breed breed = new Breed();
+				breed.animal = Animal.find.where().eq("name", "ЛОШАДЬ").findUnique();
+				breed.name = name;
+				breed.save();
+			}
+		}
 //		if (UserPermission.find.findRowCount() == 0) {
 //			// TODO
 //			// add permissions

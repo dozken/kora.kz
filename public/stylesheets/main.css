@@ -1,6 +1,8 @@
+/*
 @import
 	url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600&subset=cyrillic-ext,latin)
 	;
+	*/
 
 html {
 	position: relative;
@@ -9,7 +11,7 @@ html {
 
 body {
 	/* Margin bottom by footer height */
-	font-family: 'Open Sans', sans-serif;
+	/*font-family: 'Open Sans', sans-serif;*/
 	margin-bottom: 60px;
 }
 
@@ -459,7 +461,7 @@ body {
 }
 
 .menudiv {
-	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
 .floatright {
