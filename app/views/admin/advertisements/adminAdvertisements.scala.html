@@ -1,20 +1,35 @@
 
 @main("Рекламы") {
-
+<style>
+	.order:hover{
+		color:#5b752c;
+	}
+</style>
 <div class="container">
-<div class="col-lg-3 menudiv">@profile._menu()</div>
-<div class="col-lg-9 ">
-  @profile._title("РЕКЛАМЫ"){ }  
-  @_advertisements()
+  <div class="col-lg-3 menudiv">@profile._menu()</div>
+  <div class="col-lg-9 ">
+    @profile._title("РЕКЛАМЫ"){ }  
+    @_advertisements()
+  </div>
 </div>
-
-</div>
-
-
 }
-<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))'></script>
 <script>
 $(document).ready(function(){
-	$("#sortable").sortable();
+	//$("#sortable").sortable();
+	//$(".myb").tooltip();
+});
+$(document).on("click",".up",function() {
+	$("tr").removeClass("info");
+    var row = $(this).closest('tr');
+    row.prev().insertAfter(row);
+    row.addClass("info");
+    setTimeout(function(){row.removeClass("info");}, 5000);
+});
+$(document).on("click",".down",function() {
+	$("tr").removeClass("info");
+    var row = $(this).closest('tr');
+    row.next().insertBefore(row);
+    row.addClass("info");
+    setTimeout(function(){row.removeClass("info");}, 5000);
 });
 </script>

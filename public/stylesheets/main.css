@@ -887,6 +887,9 @@ select, .ssss {
 }
 
 .fnt10 {
+	position: absolute;
+	top: 35px;
+	left: 5px;
 	font-size: 13px;
 	vertical-align: bottom;
 }
