@@ -24,3 +24,9 @@ syntax: regexp
 
 syntax: regexp
 ^conf/evolutions$
+syntax: regexp
+^\.idea$
+syntax: regexp
+^\.idea_modules$
+syntax: regexp
+^kora\.kz\.iml$
