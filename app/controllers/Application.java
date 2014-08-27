@@ -19,6 +19,7 @@ public class Application extends Controller {
 
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
+				controllers.routes.javascript.Application.signIn(),
 				controllers.routes.javascript.User.register(),
 				controllers.routes.javascript.Filters.getBreeds(),
 				controllers.routes.javascript.Filters.addBreed(),
@@ -26,8 +27,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.deleteBreed(),
 				controllers.routes.javascript.Filters.addRegion(),
 				controllers.routes.javascript.Filters.updateRegion(),
-				controllers.routes.javascript.Filters.deleteRegion()
-				));
+				controllers.routes.javascript.Filters.deleteRegion()));
 	}
 
 	// public static Result changeLanguage(String language) {
@@ -36,22 +36,18 @@ public class Application extends Controller {
 	// }
 
 	public static Result signIn() {
+		DynamicForm requestData = form().bindFromRequest();
+		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
+				.get("email"));
+		if (user != null && user.password.equals(requestData.get("password"))) {
+			session("connected", user.email);
+			flash("thank you");
+			return redirect(request().getHeader("referer"));
+		} else {
+			return ok("error");
 
-        DynamicForm requestData = form().bindFromRequest();
-
-        System.out.println(requestData);
-
-         AuthorisedUser user = AuthorisedUser.findByEmail(requestData.get("email"));
-        if(user!=null && user.password.equals(requestData.get("password"))) {
-            session("connected", user.email);
-            flash("thank you");
-            return redirect(request().getHeader("referer"));
-        }else
-        {
-            return ok("error");
-
-        }
-    }
+		}
+	}
 
 	public static Result signOut() {
 		session().clear();
@@ -74,5 +70,5 @@ public class Application extends Controller {
 	public static Result feedback() {
 		return ok(feedback.render());
 	}
-	
+
 }
