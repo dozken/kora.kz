@@ -1,7 +1,10 @@
 package models.ad;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
@@ -19,10 +22,13 @@ public class Breed extends Model {
 			Long.class, Breed.class);
 	@Id
 	public Long id;
+	
+	@ManyToOne
+	public Animal animal;
 
 	public String name;
 
 	@OneToMany
-	public Ad ad;
+	public List<Ad> ads;
 
 }
