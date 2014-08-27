@@ -44,11 +44,9 @@ GET     /admin/filter/breed/add               controllers.Filters.addBreed()
 GET     /admin/filter/breed/update            controllers.Filters.updateBreed(id: Long,name: String)
 POST    /admin/filter/breed/:id/delete        controllers.Filters.deleteBreed(id: Long)
 GET     /admin/filter/region/add              controllers.Filters.addRegion()
-POST    /admin/filter/region/:id/update       controllers.Filters.updateRegion(id: Long)
+GET     /admin/filter/region/update           controllers.Filters.updateRegion(id: Long,name: String)
 POST    /admin/filter/region/:id/delete       controllers.Filters.deleteRegion(id: Long)
-GET     /admin/filter/city/add                controllers.Filters.addCity()
-POST    /admin/filter/city/:id/update         controllers.Filters.updateCity(id: Long)
-POST    /admin/filter/city/:id/delete         controllers.Filters.deleteCity(id: Long)
+
 
 GET     /admin/advetiments              controllers.Administer.advetiments()
 GET     /admin/advetiment/add           controllers.Advertisements.add()

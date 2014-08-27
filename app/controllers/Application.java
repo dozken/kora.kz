@@ -18,6 +18,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.addBreed(),
 				controllers.routes.javascript.Filters.updateBreed(),
 				controllers.routes.javascript.Filters.deleteBreed(),
+				controllers.routes.javascript.Filters.addRegion(),
+				controllers.routes.javascript.Filters.updateRegion(),
+				controllers.routes.javascript.Filters.deleteRegion(),
 				controllers.routes.javascript.User.register()
 				));
 	}
