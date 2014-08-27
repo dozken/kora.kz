@@ -2,10 +2,15 @@ package controllers;
 
 import models.user.AuthorisedUser;
 import play.Routes;
+import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 import views.html.common.*;
+
+import java.util.ArrayList;
+
+import static play.data.Form.form;
 
 public class Application extends Controller {
 
@@ -14,11 +19,12 @@ public class Application extends Controller {
 
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
+				controllers.routes.javascript.User.register(),
+                controllers.routes.javascript.Application.signIn()
 				controllers.routes.javascript.Filters.getBreeds(),
 				controllers.routes.javascript.Filters.addBreed(),
 				controllers.routes.javascript.Filters.updateBreed(),
-				controllers.routes.javascript.Filters.deleteBreed(),
-				controllers.routes.javascript.User.register()
+				controllers.routes.javascript.Filters.deleteBreed()
 				));
 	}
 
@@ -29,12 +35,21 @@ public class Application extends Controller {
 
 	public static Result signIn() {
 
-		AuthorisedUser user = AuthorisedUser
-				.findByEmail("info@technovision.kz");
-		session("connected", user.email);
-		flash("thank you");
-		return redirect(request().getHeader("referer"));
-	}
+        DynamicForm requestData = form().bindFromRequest();
+
+        System.out.println(requestData);
+
+         AuthorisedUser user = AuthorisedUser.findByEmail(requestData.get("email"));
+        if(user!=null && user.password.equals(requestData.get("password"))) {
+            session("connected", user.email);
+            flash("thank you");
+            return redirect(request().getHeader("referer"));
+        }else
+        {
+            return ok("error");
+
+        }
+    }
 
 	public static Result signOut() {
 		session().clear();
