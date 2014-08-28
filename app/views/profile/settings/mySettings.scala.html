@@ -65,8 +65,11 @@ $(document).on("click",".change.pasword",function(e){
 	 });	
 });
 
-$(document).on("click",".change.newsletter",function(){
-
+$(document).on("switchChange.bootstrapSwitch", '.change.newsletter',function(event, state){
+	//console.log(this); // DOM element
+  //  console.log(event); // jQuery event
+	  console.log(state); // true | false
 });
+
 
 </script>
