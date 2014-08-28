@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 @Table(name="ads")

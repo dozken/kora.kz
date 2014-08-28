@@ -2,11 +2,11 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.profile.ads.*;
-import views.html.profile.messages.*;
-import views.html.profile.payments.*;
-import views.html.profile.settings.*;
-import views.html.profile.info.*;
+import views.html.profile.ads.myAds;
+import views.html.profile.info.myInfo;
+import views.html.profile.messages.myMessages;
+import views.html.profile.payments.myPayments;
+import views.html.profile.settings.mySettings;
 
 public class Manage extends Controller {
 	

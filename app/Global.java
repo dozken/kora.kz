@@ -12,7 +12,6 @@ import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Profile;
 import models.user.SecurityRole;
-import models.user.UserPermission;
 import play.Application;
 import play.GlobalSettings;
 
