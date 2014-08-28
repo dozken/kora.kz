@@ -1,19 +1,14 @@
 package controllers;
 
 import static play.data.Form.form;
-import controllers.routes;
+
+import java.util.ArrayList;
+
 import models.user.AuthorisedUser;
 import models.user.SecurityRole;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.admin.ads.*;
-import views.html.admin.filters.*;
-import views.html.admin.advertisements.*;
-import views.html.admin.users.*;
-
-import java.util.ArrayList;
 
 public class User extends Controller {
 

@@ -1,16 +1,13 @@
 package controllers;
 
+import static play.data.Form.form;
 import models.user.AuthorisedUser;
 import play.Routes;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
-
-import views.html.common.*;
-
-import java.util.ArrayList;
-
-import static play.data.Form.form;
+import views.html.common.about;
+import views.html.common.feedback;
 
 public class Application extends Controller {
 

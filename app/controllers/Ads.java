@@ -3,9 +3,9 @@ package controllers;
 import models.ad.Ad;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.ad.create.*;
-import views.html.ad.show.*;
-import views.html.ad.search.*;
+import views.html.ad.create.createAd;
+import views.html.ad.search.adSearch;
+import views.html.ad.show.showAd;
 
 
 public class Ads extends Controller {

@@ -1,14 +1,14 @@
 package controllers;
 
+import static play.data.Form.form;
 import models.ad.Animal;
 import models.ad.Breed;
 import models.contact.Region;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import static play.data.Form.*;
-import views.html.admin.filters.breed.*;
-import views.html.admin.filters.region.*;
+import views.html.admin.filters.breed._breed;
+import views.html.admin.filters.region._region;
 
 public class Filters extends Controller {
 

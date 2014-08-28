@@ -2,10 +2,10 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.admin.ads.*;
-import views.html.admin.filters.*;
-import views.html.admin.advertisements.*;
-import views.html.admin.users.*;
+import views.html.admin.ads.adminAds;
+import views.html.admin.advertisements.adminAdvertisements;
+import views.html.admin.filters.adminFilters;
+import views.html.admin.users.adminUsers;
 
 public class Administer extends Controller {
 	
