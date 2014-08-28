@@ -30,7 +30,7 @@ GET     /profile/messages           controllers.Manage.myMessages()
 #POST    /profile/messages/:id/delete controllers.Message.delete(id: Long)
 GET     /profile/payments           controllers.Manage.myPayments()
 GET     /profile/settings           controllers.Manage.mySettings()
-#POST     /profile/settings/password           controllers.Settings.changePassword()
+POST     /profile/settings/password           controllers.Settings.changePassword()
 #POST     /profile/settings/notification       controllers.Settings.notification()
 
 GET     /profile/info               controllers.Manage.myInfo()

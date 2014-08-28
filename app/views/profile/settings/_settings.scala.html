@@ -1,74 +1,17 @@
 <div class="col-lg-12 boto nopaddingleft">
 <ul class="nav nav-tabs motomoto cv" role="tablist">
-  <li class="active"><a href="#home" role="tab" data-toggle="tab">Изменить пароль</a></li>
-  <li><a href="#profile" role="tab" data-toggle="tab">Настройки рассылки</a></li>
+  <li class="active"><a href="#passwordTab" role="tab" data-toggle="tab">Изменить пароль</a></li>
+  <li><a href="#newsletterTab" role="tab" data-toggle="tab">Настройки рассылки</a></li>
 
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="home">
-  	<form class="form-horizontal">
-<fieldset>
-
-<!-- Form Name -->
-
-
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="passwordinput">Текущий пароль</label>
-  <div class="col-md-5">
-    <input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-md">
-    
+  <div class="tab-pane active" id="passwordTab">
+    @_passwordTab()
   </div>
-</div>
-
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="passwordinput">Новый пароль</label>
-  <div class="col-md-5">
-    <input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-md">
-    
-  </div>
-</div>
-
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="passwordinput">Повторите пароль</label>
-  <div class="col-md-5">
-    <input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-md">
-    
-  </div>
-</div>
-
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton"></label>
-  <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-success">Изменить пароль</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-  </div>
-  <div class="tab-pane" id="profile">
-  	<ul class="ras nopaddingleft">
-	<li><ul class="ras2">
-		<li class="ras3">Получать рассылку сайта и уведомления?</li>
-		<li><input type="checkbox" class="switcher" name="my-checkbox2" checked></li>
-		</ul>
-	</li>
-	<li><ul class="ras2">
-		<li class="ras3">Получать уведомления о новых сообщениях на почту?</li>
-		<li><input type="checkbox" class="switcher" name="my-checkbox3" checked></li>
-		</ul>
-	</li>
-	<li><ul class="ras2">
-		<li class="ras3">Получать уведомления о новых комментариях на почту?</li>
-		<li><input type="checkbox" class="switcher" name="my-checkbox4" checked></li></ul>
-	</li>
-</ul>
+  <div class="tab-pane" id="newsletterTab">
+  	@_newsletterTab()
   </div>
 </div>
 </div>

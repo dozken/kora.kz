@@ -16,7 +16,7 @@ public class Region extends Model {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Finder<Long, Region> find = new Finder<Long, Region>(
+	public static final Model.Finder<Long, Region> find = new Model.Finder<Long, Region>(
 			Long.class, Region.class);
 	
 	@Id

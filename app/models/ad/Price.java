@@ -16,7 +16,7 @@ public class Price extends Model {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Finder<Long, Price> find = new Finder<Long, Price>(
+	public static final Model.Finder<Long, Price> find = new Model.Finder<Long, Price>(
 			Long.class, Price.class);
 	
 	@Id

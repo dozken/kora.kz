@@ -18,7 +18,7 @@ import be.objectify.deadbolt.core.models.Subject;
 @Table(name = "users")
 public class AuthorisedUser extends Model implements Subject {
 
-    public static final Finder<Long, AuthorisedUser> find = new Finder<Long, AuthorisedUser>(
+    public static final Model.Finder<Long, AuthorisedUser> find = new Model.Finder<Long, AuthorisedUser>(
             Long.class, AuthorisedUser.class);
 
 	private static final long serialVersionUID = 1L;
@@ -64,5 +64,9 @@ public class AuthorisedUser extends Model implements Subject {
 	
 	public static List<AuthorisedUser> getUsers(){
 		return find.where().in("roles", SecurityRole.findByName("user")).findList();
+	}
+	
+	public static String md5(String password){
+		return password;
 	}
 }
