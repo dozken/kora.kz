@@ -22,8 +22,8 @@ public class Ad extends Model{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public static final Finder<Long, Ad> find = new Finder<Long, Ad>(
+
+	public static final Model.Finder<Long, Ad> find = new Model.Finder<Long, Ad>(
 			Long.class, Ad.class);
 
 	@Id

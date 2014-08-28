@@ -16,7 +16,7 @@ public class Animal extends Model {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final Finder<Long, Animal> find = new Finder<Long, Animal>(
+	public static final Model.Finder<Long, Animal> find = new Model.Finder<Long, Animal>(
 			Long.class, Animal.class);
 
 	@Id

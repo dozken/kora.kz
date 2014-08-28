@@ -24,7 +24,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.deleteBreed(),
 				controllers.routes.javascript.Filters.addRegion(),
 				controllers.routes.javascript.Filters.updateRegion(),
-				controllers.routes.javascript.Filters.deleteRegion()));
+				controllers.routes.javascript.Filters.deleteRegion(),
+				controllers.routes.javascript.Settings.changePassword()
+		));
 	}
 
 	// public static Result changeLanguage(String language) {
