@@ -1,13 +1,15 @@
-package models.contact;
+package models.ad;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import play.db.ebean.Model;
 
 @Entity
-public class City extends Model {
+public class Tag extends Model {
 
 	/**
 	 * 
@@ -19,7 +21,6 @@ public class City extends Model {
 	
 	public String name;
 	
-	@OneToMany
-	public ContactInfo contactInfo;
-	
+	@ManyToMany(mappedBy="tags")
+	public List<Ad> ads;
 }

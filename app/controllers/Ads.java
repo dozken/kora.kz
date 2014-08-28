@@ -1,5 +1,6 @@
 package controllers;
 
+import models.ad.Ad;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.ad.create.*;
@@ -9,8 +10,8 @@ import views.html.ad.search.*;
 
 public class Ads extends Controller {
 
-	public static Result get() {
-		return ok(showAd.render());
+	public static Result get(Long id) {
+		return ok(showAd.render(Ad.find.byId(id)));
 	}
 
 	public static Result create() {

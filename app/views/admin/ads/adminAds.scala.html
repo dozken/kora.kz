@@ -1,9 +1,11 @@
 @main("Все объявления") {
 <div class="container">
   <div class="col-lg-3 menudiv">@profile._menu()</div>
-	<div class="col-lg-9 ">
+	<div class="col-lg-9">
 	  @profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ }
+	  <div class="table-responsive">
 	  @_tableAds()
+	  </div>
   </div>
 </div>
 }
