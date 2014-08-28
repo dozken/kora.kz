@@ -1,5 +1,6 @@
 package models.contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,9 +23,6 @@ public class ContactInfo extends Model {
 	@ManyToOne
 	public Region region;
 	
-	@ManyToOne
-	public City city;
-	
 	public String company;
 	
 	public List<String> phone;
@@ -33,4 +31,19 @@ public class ContactInfo extends Model {
 	
 	public String pointOnMap;	
 	
+	
+	public ContactInfo (){
+		
+	}
+	
+	public ContactInfo (Region r, String c,String p, String e, String m){
+		region = r;
+		company = c;
+		phone = new ArrayList<String>();
+		phone.add(p);
+		email = e;
+		pointOnMap = m;
+		save();
+		
+	}
 }

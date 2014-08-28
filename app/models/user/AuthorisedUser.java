@@ -2,9 +2,11 @@ package models.user;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import play.db.ebean.Model;
@@ -29,6 +31,9 @@ public class AuthorisedUser extends Model implements Subject {
 	public String email;
 
 	public String password;
+	
+	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
+	public Profile profile;
 
 	@ManyToMany
 	public List<SecurityRole> roles;
@@ -55,5 +60,9 @@ public class AuthorisedUser extends Model implements Subject {
 
 	public static AuthorisedUser findByEmail(String email) {
 		return find.where().eq("email", email).findUnique();
+	}
+	
+	public static List<AuthorisedUser> getUsers(){
+		return find.where().in("roles", SecurityRole.findByName("user")).findList();
 	}
 }

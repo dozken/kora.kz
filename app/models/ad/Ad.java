@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @Table(name="ads")
@@ -21,6 +23,9 @@ public class Ad extends Model{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public static final Finder<Long, Ad> find = new Finder<Long, Ad>(
+			Long.class, Ad.class);
 
 	@Id
 	public Long id;
@@ -31,12 +36,12 @@ public class Ad extends Model{
 	@ManyToOne
 	public Breed breed;
 	
-	public String gender;
+	public String gender = "Другой";
 	
 	@ManyToOne
 	public Quantity quantity;
 	
-	public Date birthDate;
+	public Date birthDate = new Date();;
 	
 	@ManyToOne
 	public Price priceType;
@@ -52,7 +57,8 @@ public class Ad extends Model{
 	@ManyToOne
 	public ContactInfo contactInfo;
 	
-	public String tags;
+	@ManyToMany
+	public List<Tag> tags;
 	
 	public String status;
 	

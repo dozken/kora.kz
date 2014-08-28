@@ -11,33 +11,16 @@
 	</tr>
 </thead>
 <tbody>
+	@for((user,index)<-models.user.AuthorisedUser.getUsers.zipWithIndex){
 	<tr>
-		<td>1</td>
-		<td>Жаскайрат ТОО</td>
-		<td>микр 4</td>
-		<td>Алматы</td>
-		<td>87078884455</td>
-		<td>ddddd</td>
+		<td>@{index+1}</td>
+		<td>@user.userName</td>
+		<td>@user.profile.address</td>
+		<td>@user.profile.region.name</td>
+		<td>@user.profile.phone</td>
+		<td>@user.email</td>
 
 	</tr>
-	<tr>
-		<td>2</td>
-		<td>Жаскайрат ТОО</td>
-		<td>микр 4</td>
-		<td>Астана</td>
-		<td>87774125779</td>
-		<td>ddddd</td>
-
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>Жаскайрат ТОО</td>
-		<td>микр 4</td>
-		<td>Орал</td>
-		<td>87054448965</td>
-		<td>dddddd</td>
-
-	</tr>
-
+	}
 </tbody>
 </table>
