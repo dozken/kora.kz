@@ -11,7 +11,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navcolor">
       	
-      	@if(request.uri.contains("profile")){
+      	@if(request.uri.contains("profile")||request.uri.contains("admin")){
       	<li>
       		<a href="@routes.Application.index"><img src="@routes.Assets.at("images/home/white_small_logo.png")"/></a>
       	</li>
