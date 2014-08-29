@@ -2,7 +2,10 @@ package models.admin;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import models.Setting;
+import models.user.AuthorisedUser;
 import play.db.ebean.Model;
 
 @Entity
@@ -24,9 +27,12 @@ public class AdminSetting extends Model {
 	@Id
 	public Long id;
 	
-//	public User user;
+	@ManyToOne
+	public AuthorisedUser user;
 	
-	public String setting;
+	@ManyToOne
+	public Setting setting;
+
+	public String status;
 	
-	public Boolean status;
 }
