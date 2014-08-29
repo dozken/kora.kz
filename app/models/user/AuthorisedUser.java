@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,6 +42,8 @@ public class AuthorisedUser extends Model implements Subject {
 	@ManyToMany
 	public List<UserPermission> permissions;
 
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	public List<UserSetting> userSettings;
 
 
 	@Override
