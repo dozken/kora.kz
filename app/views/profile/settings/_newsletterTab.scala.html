@@ -1,17 +1,26 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
 <ul class="ras nopaddingleft">
+	@for(setting<-models.user.AuthorisedUser.findByEmail(session.get("connected")).userSettings){
 	<li>
 	    <ul class="ras2">
-		<li class="ras3">Получать рассылку сайта и уведомления?</li>
-		<li><input type="checkbox" class="switcher change newsletter" name="my-checkbox" checked></li>
+		<li class="ras3">@setting.setting.name</li>
+		<li><input type="checkbox" class="switcher change userSettings" setting="@setting.id" name="my-checkbox" @if(setting.status.equals("on")){checked}></li>
 		</ul>
 	</li>
-	<li><ul class="ras2">
-		<li class="ras3">Получать уведомления о новых сообщениях на почту?</li>
-		<li><input type="checkbox" class="switcher change newsletter" name="my-checkbox3" checked></li>
+	}
+	
+
+	@restrict(la(as("admin"))){
+	<hr>
+	@for(setting<-models.user.AuthorisedUser.findByEmail(session.get("connected")).adminSettings){
+	<li>
+	    <ul class="ras2">
+		<li class="ras3">@setting.setting.name</li>
+		<li><input type="checkbox" class="switcher change adminSettings" setting="@setting.id" name="my-checkbox" @if(setting.status.equals("on")){checked}></li>
 		</ul>
 	</li>
-	<li><ul class="ras2">
-		<li class="ras3">Получать уведомления о новых комментариях на почту?</li>
-		<li><input type="checkbox" class="switcher change newsletter" name="my-checkbox4" checked></li></ul>
-	</li>
+	}	
+	}
 </ul>

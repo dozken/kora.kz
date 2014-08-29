@@ -17,6 +17,7 @@ package models.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 import be.objectify.deadbolt.core.models.Role;
@@ -25,6 +26,7 @@ import be.objectify.deadbolt.core.models.Role;
  * @author Steve Chaloner (steve@objectify.be)
  */
 @Entity
+@Table(name="role")
 public class SecurityRole extends Model implements Role {
 	/**
 	 * 

@@ -46,9 +46,9 @@ public class Global extends GlobalSettings {
 
 			Map<Integer, String> adminSettings = new TreeMap<Integer, String>();
 			adminSettings.put(1, "Включить функцию \"Автопродение?\"");
-			adminSettings.put(1, "Включить функцию \"Выделить объявление?\"");
-			adminSettings.put(1, "Включить функцию \"Похожие объявления?\"");
-			adminSettings.put(1, "Включить функцию \"Горячие объявления?\"");
+			adminSettings.put(2, "Включить функцию \"Выделить объявление?\"");
+			adminSettings.put(3, "Включить функцию \"Похожие объявления?\"");
+			adminSettings.put(4, "Включить функцию \"Горячие объявления?\"");
 			for (Map.Entry<Integer, String> entry : adminSettings.entrySet()) {
 				Setting setting = new Setting();
 				setting.position = entry.getKey();
@@ -138,7 +138,7 @@ public class Global extends GlobalSettings {
 				userSettings.add(userSetting);
 			}
 			List<AdminSetting> adminSettings = new ArrayList<AdminSetting>();
-			for (Setting setting : Setting.findByCategory("user")) {
+			for (Setting setting : Setting.findByCategory("admin")) {
 				AdminSetting adminSetting = new AdminSetting();
 				adminSetting.user = user;
 				adminSetting.setting = setting;
@@ -146,6 +146,9 @@ public class Global extends GlobalSettings {
 				adminSettings.add(adminSetting);
 			}
 			user.userSettings = userSettings;
+			user.adminSettings = adminSettings;
+			
+			
 
 			Profile profile = new Profile();
 			profile.address = "Жас орда";
@@ -188,3 +191,4 @@ public class Global extends GlobalSettings {
 	 * TODO tolko zaregestrirovanye mogut ostavlyat komenty
 	 */
 }
+

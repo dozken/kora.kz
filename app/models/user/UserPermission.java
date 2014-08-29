@@ -26,6 +26,7 @@ import be.objectify.deadbolt.core.models.Permission;
  * @author Steve Chaloner (steve@objectify.be)
  */
 @Entity
+
 public class UserPermission extends Model implements Permission {
 	/**
 	 * 

@@ -65,10 +65,16 @@ $(document).on("click",".change.pasword",function(e){
 	 });	
 });
 
-$(document).on("switchChange.bootstrapSwitch", '.change.newsletter',function(event, state){
-	//console.log(this); // DOM element
-  //  console.log(event); // jQuery event
-	  console.log(state); // true | false
+$(document).on("switchChange.bootstrapSwitch", '.change.userSettings',function(event, state){
+	var id = $(this).attr("setting");
+	var status = (state) ? "on" : "off";
+	jsRoutes.controllers.Settings.changeUserSetting(id,status).ajax();
+});
+
+$(document).on("switchChange.bootstrapSwitch", '.change.adminSettings',function(event, state){
+	var id = $(this).attr("setting");
+	var status = (state) ? "on" : "off";
+	jsRoutes.controllers.Settings.changeAdminSetting(id,status).ajax();
 });
 
 

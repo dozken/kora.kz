@@ -25,7 +25,10 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.addRegion(),
 				controllers.routes.javascript.Filters.updateRegion(),
 				controllers.routes.javascript.Filters.deleteRegion(),
-				controllers.routes.javascript.Settings.changePassword()
+				controllers.routes.javascript.Settings.changePassword(),
+				controllers.routes.javascript.Settings.changeUserSetting(),
+				controllers.routes.javascript.Settings.changeAdminSetting()
+				
 		));
 	}
 

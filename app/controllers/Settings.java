@@ -1,16 +1,19 @@
 package controllers;
 
 import static play.data.Form.form;
+import models.admin.AdminSetting;
 import models.user.AuthorisedUser;
+import models.user.UserSetting;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.profile.settings._passwordTab;
+import views.html.profile.settings._newsletterTab;
 public class Settings extends Controller {
 
 	public static Result changePassword(){
 		DynamicForm requestData = form().bindFromRequest();
-		AuthorisedUser user = AuthorisedUser.find.byId(Long.parseLong(requestData.get("id")));		
+		AuthorisedUser user = models.user.AuthorisedUser.findByEmail(session("connected"));		
 		String currentPassoword = requestData.get("current");
 		String newPassoword = requestData.get("new");
 		String repeatPassoword = requestData.get("repeat");
@@ -31,6 +34,20 @@ public class Settings extends Controller {
 			flash("error","Проверьте правильность текущего пароля.");
 			return ok(_passwordTab.render());
 		}
+	}
+	
+	public static Result changeUserSetting(Long id, String status){
+		UserSetting userSetting = UserSetting.find.byId(id);
+		userSetting.status = status;
+		userSetting.update();
+		return ok(_newsletterTab.render());
+	}
+	
+	public static Result changeAdminSetting(Long id, String status){
+		AdminSetting adminSetting = AdminSetting.find.byId(id);
+		adminSetting.status = status;
+		adminSetting.update();
+		return ok(_newsletterTab.render());
 	}
 	
 	public static Result notification(Object object, Boolean state){

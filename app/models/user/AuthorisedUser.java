@@ -10,13 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import models.admin.AdminSetting;
 import play.db.ebean.Model;
 import be.objectify.deadbolt.core.models.Permission;
 import be.objectify.deadbolt.core.models.Role;
 import be.objectify.deadbolt.core.models.Subject;
 
 @Entity
-@Table(name = "users")
 public class AuthorisedUser extends Model implements Subject {
 
     public static final Model.Finder<Long, AuthorisedUser> find = new Model.Finder<Long, AuthorisedUser>(
@@ -44,6 +44,9 @@ public class AuthorisedUser extends Model implements Subject {
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	public List<UserSetting> userSettings;
+	
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	public List<AdminSetting> adminSettings;
 
 
 	@Override
