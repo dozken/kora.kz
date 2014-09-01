@@ -1,5 +1,19 @@
 <ul class="pro4">
-	<li><img src="@routes.Assets.at("images/home/reklama1.png")"/></li>
-	<li><img src="@routes.Assets.at("images/home/reklama2.png")"/></li>
+	@for(advert<-models.admin.Advertisement.find.where.eq("placeOnPage","rightsidebar1").orderBy("position").findList){
+	<li><img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400"></li>
 	
+	@if(advert.fileType.equals("application/vnd.adobe.flash.movie")){
+	<li><embed src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" /></li>}
+	@if(advert.fileType.equals("application/vnd.adobe.flash.movie")){
+	<li>
+	<video width="240" height="400" controls>
+  		<source src="@routes.Advertisements.renderAdvetisement(advert.id)" type="video/mp4">
+  		<source src="movie.ogg" type="video/ogg">
+		Your browser does not support the video tag.
+	</video>
+	</li>
+	}
+	}
+	
+	<li><img src="@routes.Assets.at("images/home/reklama2.png")"/></li>	
 </ul>

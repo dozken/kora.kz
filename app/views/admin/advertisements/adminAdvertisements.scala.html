@@ -1,9 +1,15 @@
 
 @main("Рекламы") {
 <style>
-	.order:hover{
-		color:#5b752c;
-	}
+.modal-dialog{
+	width: 300px;
+}
+[data-bb-handler="confirm"]	{
+	
+}
+.order:hover{
+	color:#5b752c;
+}
 </style>
 <div class="container">
   <div class="col-lg-3 menudiv">@profile._menu()</div>
@@ -13,23 +19,98 @@
   </div>
 </div>
 }
+
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
 <script>
-$(document).ready(function(){
-	//$("#sortable").sortable();
-	//$(".myb").tooltip();
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
 });
+
+$(document).ready(function(){
+	$('.advertisementFile').popover({html:true});
+	$('.advertisementFile').tooltip({title:"Показать",placement:'bottom'});
+	$('.extend').tooltip({title:"Продлить",placement:'bottom'});
+	$('.archive').tooltip({title:"Удалить",placement:'bottom'});
+});
+
+$(document).ajaxSuccess(function() {
+	$('.advertisementFile').popover({html:true});
+	$('.advertisementFile').tooltip({title:"Показать",placement:'bottom'});
+	$('.extend').tooltip({title:"Продлить",placement:'bottom'});
+	$('.archive').tooltip({title:"Удалить",placement:'bottom'});
+
+	setTimeout(function() {
+		$(".alert-dismissable").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove();
+		});
+	}, 1500);
+});
+
+
+$(document).on("click","#advertisementAdd",function(e){
+	e.preventDefault();
+	var formData = new FormData($("#advertisementForm")[0]);
+	jsRoutes.controllers.Advertisements.add().ajax({
+		data: formData,
+	    cache: false,
+	    contentType: false,
+	    processData: false,
+		success:function(data){
+			$("#advertisementTable").html(data);
+		}
+	});	
+});
+
+$(document).on("click",".archive",function(e){
+	e.preventDefault();
+	var advertisement = $(this).attr("advertisement");
+	bootbox.confirm("Вы уверены?", function(confirm) {
+		if(confirm)
+			jsRoutes.controllers.Advertisements.remove(advertisement).ajax({
+				success:function(data){
+					$("#advertisementTable").html(data);
+				}
+			});
+	});
+	$('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+
 $(document).on("click",".up",function() {
 	$("tr").removeClass("info");
     var row = $(this).closest('tr');
-    row.prev().insertAfter(row);
-    row.addClass("info");
-    setTimeout(function(){row.removeClass("info");}, 5000);
+    if(!row.is(':first-child')){
+        row.prev().insertAfter(row);
+        row.addClass("info");
+        setTimeout(function(){row.removeClass("info");}, 5000);
+        var advertisement = $(this).attr("advertisement");
+        jsRoutes.controllers.Advertisements.replace(advertisement,"up").ajax({
+        	success:function(data){
+				//$("#advertisementTable").html(data);
+			}
+        });
+    }
+    	
 });
 $(document).on("click",".down",function() {
 	$("tr").removeClass("info");
     var row = $(this).closest('tr');
-    row.next().insertBefore(row);
-    row.addClass("info");
-    setTimeout(function(){row.removeClass("info");}, 5000);
+    if(!row.is(':last-child')){
+    	row.next().insertBefore(row);
+    	row.addClass("info");
+    	setTimeout(function(){row.removeClass("info");}, 5000);
+    	var advertisement = $(this).attr("advertisement");
+        jsRoutes.controllers.Advertisements.replace(advertisement,"down").ajax({
+        	success:function(data){
+				//$("#advertisementTable").html(data);
+			}
+        });
+    }
 });
 </script>

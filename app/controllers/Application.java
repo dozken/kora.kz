@@ -1,6 +1,10 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import java.util.Arrays;
+
+import models.admin.Advertisement;
 import models.user.AuthorisedUser;
 import play.Routes;
 import play.data.DynamicForm;
@@ -27,10 +31,14 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.deleteRegion(),
 				controllers.routes.javascript.Settings.changePassword(),
 				controllers.routes.javascript.Settings.changeUserSetting(),
-				controllers.routes.javascript.Settings.changeAdminSetting()
+				controllers.routes.javascript.Settings.changeAdminSetting(),
+				controllers.routes.javascript.Advertisements.add(),
+				controllers.routes.javascript.Advertisements.remove(),
+				controllers.routes.javascript.Advertisements.replace()
 				
 		));
 	}
+	
 
 	// public static Result changeLanguage(String language) {
 	// Controller.changeLang(language);
