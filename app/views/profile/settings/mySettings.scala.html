@@ -1,0 +1,81 @@
+@main("Настройки") {
+<div class="container">
+  <div class="col-lg-3 menudiv">
+    @profile._menu()
+  </div>
+  <div class="col-lg-9 ">
+  	
+    @profile._title("НАСТРОЙКИ"){ }
+	@_settings()
+  </div>
+</div>
+}
+
+<script>
+$.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
+		  state: true,
+		  size: null,
+		  animate: true,
+		  disabled: false,
+		  readonly: false,
+		  indeterminate: false,
+		  onColor: "success",
+		  offColor: "danger",
+		  onText: "Да",
+		  offText: "Нет",
+		  labelText: "&nbsp;",
+		  baseClass: "bootstrap-switch",
+		  wrapperClass: "wrapper",
+		  radioAllOff: false,
+		  onInit: function() {},
+		  onSwitchChange: function() {}
+		};
+$(".switcher").bootstrapSwitch();
+
+$(document).ajaxSuccess(function() {
+	console.log( "Triggered ajaxSuccess handler." );
+
+	setTimeout(function() {
+		$(".alert-dismissable").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove();
+		});
+	}, 1500);
+});
+
+$(document).on("click",".change.pasword",function(e){
+	e.preventDefault();
+	var current = $("#current").val();
+	var newPassword = $("#new").val();
+	var repeatPassword = $("#repeat").val();
+	
+	if(newPassword!=repeatPassword){
+		
+		console.log("doesnot match")
+	}
+		
+	jsRoutes.controllers.Settings.changePassword().ajax({
+		
+		data: $("#passwordForm").serialize(),
+		success: function(data) {
+			$("#passwordTab").html(data);
+			$("#current").val(current);
+			$("#new").val(newPassword);
+			$("#repeat").val(repeatPassword);
+		},
+	 });	
+});
+
+$(document).on("switchChange.bootstrapSwitch", '.change.userSettings',function(event, state){
+	var id = $(this).attr("setting");
+	var status = (state) ? "on" : "off";
+	jsRoutes.controllers.Settings.changeUserSetting(id,status).ajax();
+});
+
+$(document).on("switchChange.bootstrapSwitch", '.change.adminSettings',function(event, state){
+	var id = $(this).attr("setting");
+	var status = (state) ? "on" : "off";
+	jsRoutes.controllers.Settings.changeAdminSetting(id,status).ajax();
+});
+
+
+</script>
