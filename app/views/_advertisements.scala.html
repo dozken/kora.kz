@@ -1,14 +1,67 @@
 <ul class="pro4">
+	<li>
+
+
+<div id="carousel-example-generic" class="carousel slide adslide" data-ride="carousel">
+  <!-- Indicators -->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="@routes.Assets.at("images/home/reklama1.png")">
+    </div>
+    <div class="item">
+      <img src="@routes.Assets.at("images/home/reklama2.png")">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a id="adslideleft" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a id="adslideright" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+
+
+</li>
+	<li>
+	<div id="carousel-example-generic2" class="carousel slide adslide" data-ride="carousel">
+  <!-- Indicators -->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="@routes.Assets.at("images/home/reklama2.png")">
+    </div>
+    <div class="item">
+      <img src="@routes.Assets.at("images/home/reklama1.png")">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a id="adslideleft" class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a id="adslideright" class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+	</li>
+
+
+
+
 	@for(advert<-models.admin.Advertisement.find.where.eq("placeOnPage","rightsidebar1").orderBy("position").findList){
 	<li><img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400"></li>
 	
-	@if(advert.fileType.equals("application/vnd.adobe.flash.movie")){
+	@if(advert.fileType.equals("aapplication/vnd.adobe.flash.movie")){
 	<li><embed src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" /></li>}
-	@if(advert.fileType.equals("application/vnd.adobe.flash.movie")){
+	@if(advert.fileType.equals("video/x-flv")){
 	<li>
 	<video width="240" height="400" controls>
-  		<source src="@routes.Advertisements.renderAdvetisement(advert.id)" type="video/mp4">
-  		<source src="movie.ogg" type="video/ogg">
+  		<source src="@routes.Advertisements.renderAdvetisement(advert.id)" type="video/mp4">  		
 		Your browser does not support the video tag.
 	</video>
 	</li>
