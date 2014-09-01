@@ -1067,9 +1067,12 @@ margin-left: 20px;
 height: 20px;
 width: 20px;
 }
-.carousel-control{left: 225px !important;top: 7px;
+.carousel-control{left: 195px !important;top: 8px;
 background: none !important;
 }
 .boto table{
 	font-style: italic;
+}
+.paddingleft30px{
+	padding-left: 45px;
 }
