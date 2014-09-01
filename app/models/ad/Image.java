@@ -2,10 +2,13 @@ package models.ad;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @Table(name="images")
@@ -15,6 +18,9 @@ public class Image extends Model {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public static final Finder<Long, Image> find = new Finder<Long, Image>(
+			Long.class, Image.class);
 
 	@ManyToOne
 	public Ad ad;
@@ -22,8 +28,12 @@ public class Image extends Model {
 	@Id
 	public Long id;
 	
-	public String image;
-	
+	@Constraints.Required
+	@Lob
+	public String content;
+
+	@Constraints.Required
+	public String contentType;
 	
 	
 	//TODO
