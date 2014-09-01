@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 @Table(name="images")
