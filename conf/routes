@@ -16,8 +16,6 @@ GET     /user/logout                 controllers.Application.signOut()
 POST      /user/register              controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
-POST    /imageUpload				controllers.Application.imageUpload()
-
 GET     /ad/create                  controllers.Ads.create()
 GET     /ad/search                  controllers.Ads.search()
 GET     /ad/:id                         controllers.Ads.get(id: Long)	
@@ -71,3 +69,4 @@ GET     /assets/javascripts/routes      controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
+
