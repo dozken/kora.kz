@@ -1,0 +1,230 @@
+<form class="form-horizontal" action="@routes.Ads.get">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Подать объявление</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic">Животное</label>
+  <div class="col-md-3">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">Корова</option>
+      <option value="2">Лошадь</option>
+    </select>
+  </div>  <div class="col-md-3">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">Ахалтеке</option>
+    </select>
+  </div>
+</div>
+
+
+<!-- Multiple Checkboxes (inline) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="checkboxes">Пол</label>
+  <div class="col-md-4">
+    <label class="checkbox-inline" for="checkboxes-0">
+      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      Самец
+    </label>
+    <label class="checkbox-inline" for="checkboxes-1">
+      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      Самка
+    </label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="radios">Количество</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="radios-0">
+      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+      Один
+    </label> 
+    <label class="radio-inline" for="radios-1">
+      <input type="radio" name="radios" id="radios-1" value="2">
+      Косяк
+    </label>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
+  <div class="col-md-2">
+    <select id="selectbasic1" name="selectbasic1" class="form-control">
+      <option value="2000">2000</option>
+      <option value="2001">2001</option>
+      <option value="2002">2002</option>
+      <option value="2003">2003</option>
+    </select>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="radios1">Цена</label>
+  <div class="col-md-4">
+
+  <div class="radio">
+    <label for="radios1-0">
+      <input type="radio" name="radios1" id="radios1-0" value="1" checked="checked">
+          
+
+
+            <div class="input-group below24 bias-input-group inpgr">
+
+              <input type="text" value="" class="form-control" name="custom_name">
+         
+              <div class="input-group-btn bs-dropdown-to-select-group">
+              <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
+                <span data-bind="bs-drp-sel-label">Тенге</span>
+                <input type="hidden" name="country_path" data-bind="bs-drp-sel-value" value="us">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
+              <!-- Loop -->
+
+                              <li data-value="ЛОШАДЬ"><a href="#">Рубль </a></li>
+                              <li data-value="ВЕРБЛЮД"><a href="#">Доллар </a></li>
+                                                                    <!-- END Loop -->
+                    </ul>
+              </div>
+
+
+            </div>
+    </label>
+
+	</div>
+
+  <div class="radio">
+    <label for="radios1-1">
+      <input type="radio" name="radios1" id="radios1-1" value="2">
+      На обмен
+    </label>
+	</div>
+  <div class="radio">
+    <label for="radios1-2">
+      <input type="radio" name="radios1" id="radios1-2" value="3">
+      Договорная цена
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput">Заголовок</label>  
+  <div class="col-md-6">
+  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+  <span class="help-block">Максимальная длина 70 символов.</span>  
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textarea">Описание</label>
+  <div class="col-md-6">                     
+    <textarea class="form-control" rows="6" id="textarea" name="textarea"></textarea>
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-2 control-label" for="filebutton">Фотографии</label>
+  <div class="col-md-4">
+    <div class="fileUpload btn btn-primary">
+    <span>Добавить Фотографии</span>
+    <input type="file" id="filebutton" class="upload" />
+</div>
+  </div>
+
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label"></label>
+  <div class="col-md-10">
+<ul id="foto">
+	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
+	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
+	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
+	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>	
+</ul>
+  </div>
+
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
+  <div class="col-md-3">
+    <select id="selectbasic2" name="selectbasic2" class="form-control">
+      <option value="1">Алматы</option>
+      <option value="2">Шиелі</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic3">Город</label>
+  <div class="col-md-3">
+    <select id="selectbasic3" name="selectbasic3" class="form-control">
+      <option value="1">Астана</option>
+      <option value="2">Кызылорда</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput1">Компания</label>  
+  <div class="col-md-6">
+  <input id="textinput1" name="textinput1" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput2">Телефон</label>  
+  <div class="col-md-3">
+  <input id="textinput2" name="textinput2" type="text" placeholder="87071234567" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
+  <div class="col-md-5">
+    <select id="selectbasic4" name="selectbasic4" class="form-control">
+      <option value="1">Только зарегистрированным пользователям</option>
+      <option value="2">Всем</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic5">Карта</label>
+    <div class="col-md-5">
+<a id="firmsonmap_biglink" href="http://maps.2gis.ru/#/?history=project/almaty/center/76.857494705499,43.226979900591/zoom/18/state/widget/id/9429940001569726/firms/9429940001569726">Перейти к большой карте</a>
+<script charset="utf-8" type="text/javascript" src="http://firmsonmap.api.2gis.ru/js/DGWidgetLoader.js"></script>
+<script charset="utf-8" type="text/javascript">new DGWidgetLoader({"borderColor":"#a3a3a3","width":"700","height":"400","wid":"19616ecba202f38abf048207f7037b23","pos":{"lon":"76.857494705499","lat":"43.226979900591","zoom":"18"},"opt":{"ref":"hidden","card":["name","contacts","schedule","payings"],"city":"almaty"},"org":[{"id":"9429940001569726"}]});</script>
+<noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-success">Подать объявление</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

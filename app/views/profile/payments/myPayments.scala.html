@@ -1,0 +1,29 @@
+@main("Личный счет") {
+
+<div class="container">
+	<div class="col-lg-3 menudiv">@profile._menu()</div>
+	<div class="col-lg-9">
+		@profile._title("ЛИЧНЫЙ СЧЕТ"){
+		<div class="col-lg-3">
+			<p class="lin">
+				<b>У вас на счете:</b> <span class="kipkizil">1500 ед.</span>
+			</p>
+		</div>
+		<div class="col-lg-3 onjak nopaddingright">
+			<a href="#" class="btn btn-default btn-success "><span
+				class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
+		</div>
+		} 
+		@_table()
+	</div>
+
+</div>
+
+}
+
+<script>
+	// nado bylo CSS selector pravelnoe pisat'
+	$('.input-daterange').datepicker({
+		language : "ru"
+	});
+</script>

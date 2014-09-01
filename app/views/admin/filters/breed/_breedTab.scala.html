@@ -1,0 +1,31 @@
+<form class="form-horizontal" id="breedForm" action="">
+   <fieldset>
+      <!-- Form Name -->
+      <div class="form-group">
+         <div class="col-md-4">
+            <select name="animal.id" class="form-control animal select">
+               <option selected disabled hidden> Выберите животное</option>
+               @for(animal<-models.ad.Animal.find.all){	
+               <option value="@animal.id">@animal.name</option>               
+               }
+            </select>
+         </div>
+      </div>
+      <div class="form-group" id="breeds" style="display:none">
+         <div class="col-lg-6">
+            <div class="input-group">
+               <input type="text" class="form-control" name="name" placeholder="Например: Абердин-Ангус" validation="not_null"> 
+               <span class="input-group-btn">
+                 <button class="btn btn-success nobor breed add" type="submit">Добавить</button> 
+               </span>
+                 
+            </div>
+         </div>
+      </div>
+   </fieldset>
+</form>
+
+
+<div class="col-lg-8" id="breedList">
+	
+</div>
