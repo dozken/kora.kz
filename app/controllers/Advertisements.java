@@ -7,12 +7,11 @@ import java.io.IOException;
 
 import models.admin.Advertisement;
 import play.data.DynamicForm;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import views.html.admin.advertisements.*;
+import views.html.admin.advertisements._advertisement;
 
 public class Advertisements extends Controller {
 
