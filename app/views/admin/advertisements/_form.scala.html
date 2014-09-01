@@ -1,26 +1,25 @@
-<form class="form-horizontal">
+<form class="form-inline" role="form">
   <fieldset>
     <!-- Form Name -->
     <div class="form-group">
-      <div class="col-md-3"><input class="form-control" id="inputEmail3" placeholder="Компания" type="text"></div>
-      <div class="col-md-3 nopaddingleft">
-        <select class="form-control" id="selectbasic" name="selectbasic">
-          <option selected disabled hidden> Место на сайте</option>
-          <option value="1">Home Page</option>
-          <option value="2">Right Sidebar</option>
+      <input class="form-control" type="text" name="company" placeholder="Компания" />
+    </div>
+    <div class="form-group">
+        <select class="form-control" name="placeOnPage">
+          <option selected disabled hidden>Место на сайте</option>
+          <option value="rightsidebar1">Правый верхний блок</option>
+          <option value="rightsidebar2">Правый нижний блок</option>
         </select>
-      </div>
-      
-      <div class="col-md-3 nopaddingleft nopaddingright">
-        <div class="fileUpload btn btn-default"><span class="glyphicon glyphicon-folder-open"></span> 
-          <input class="upload" id="filebutton" type="file" accept=".jpg,.png,.flv">
+    </div>
+    <div class="form-group">
+        <div class="fileUpload btn btn-default">
+          <span class="glyphicon glyphicon-folder-open"></span>
+          <input class="upload" type="file" name="embeddedObject" accept=".jpg,.png,.flv" />
         </div>
-        
-        <span class="fnt10">jpg,png,flv(240x400)</span>         
-      </div>
-      <div class="col-md-2 nopaddingleft nopaddingright">
-        <button class="btn btn-success" id="singlebutton" name="singlebutton">Добавить</button>
-      </div>
+        <span class="fnt10">*.jpg,*.png,*.flv (240x400)</span>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success" id="singlebutton" name="singlebutton">Добавить</button>
     </div>
   </fieldset>
 </form>

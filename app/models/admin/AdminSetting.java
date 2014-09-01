@@ -7,7 +7,6 @@ import javax.persistence.Table;
 
 import models.Setting;
 import models.user.AuthorisedUser;
-import models.user.UserSetting;
 import play.db.ebean.Model;
 
 @Entity

@@ -706,7 +706,7 @@ thead {
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
-select, .ssss {
+.ssss {
 	height: 31px !important;
 	padding: 3px 12px !important;
 }
@@ -886,10 +886,11 @@ select, .ssss {
 
 .fnt10 {
 	position: absolute;
-	top: 35px;
-	left: 5px;
+	//top: 35px;
+	//left: 5px;
 	font-size: 13px;
 	vertical-align: bottom;
+	font-style: italic;
 }
 
 .tabmrg {

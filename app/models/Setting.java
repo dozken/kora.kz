@@ -5,13 +5,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import models.ad.Animal;
 import models.admin.AdminSetting;
 import models.user.UserSetting;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name="settings")
 public class Setting extends Model {
 
 	/**

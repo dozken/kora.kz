@@ -15,7 +15,7 @@ import models.contact.ContactInfo;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="ad")
+@Table(name="ads")
 public class Ad extends Model{
 
 	/**
