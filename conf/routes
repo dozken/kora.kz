@@ -13,6 +13,8 @@ GET     /user/logout                 controllers.Application.signOut()
 POST      /user/register              controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
+POST    /imageUpload				controllers.Application.imageUpload()
+
 GET     /ad/create                  controllers.Ads.create()
 GET     /ad/search                  controllers.Ads.search()
 GET     /ad/:id                         controllers.Ads.get(id: Long)	
