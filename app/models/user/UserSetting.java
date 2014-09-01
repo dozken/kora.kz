@@ -6,7 +6,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import models.Setting;
-import models.ad.Ad;
 import play.db.ebean.Model;
 
 @Entity

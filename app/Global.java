@@ -3,7 +3,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import models.Setting;
@@ -70,6 +69,8 @@ public class Global extends GlobalSettings {
 			}
 
 		}
+		
+		
 		if (SecurityRole.find.findRowCount() == 0) {
 			for (String name : Arrays.asList("admin", "moderator", "user")) {
 				SecurityRole role = new SecurityRole();

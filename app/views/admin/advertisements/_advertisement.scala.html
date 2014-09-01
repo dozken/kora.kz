@@ -1,0 +1,24 @@
+@for(i <- 1 to 5){
+<tr>
+  <td>@i</td>
+  <td align="center"><span class="glyphicon glyphicon-collapse-up up order"></span> <span class="glyphicon glyphicon-collapse-down down order"></span></td>
+  <td>Жаскайрат @i</td>
+  <td>Sidebar</td>
+  <td><a href="">Показать рекламу</a></td>
+  <td>1 месяц</td>
+  <td><a href="#" class="btn btn-default btn-xs myb"><span class="glyphicon glyphicon-time"></span> Продлить</a></td>
+  <td><a href="#" class="btn btn-default btn-xs myb"><span class="glyphicon glyphicon-trash"></span> В Архив</a></td>
+</tr>
+}
+@for((advert,index)<-models.admin.Advertisement.find.all.zipWithIndex){
+<tr>
+  <td>@{index+1}</td>
+  <td align="center"><span class="glyphicon glyphicon-collapse-up up order"></span> <span class="glyphicon glyphicon-collapse-down down order"></span></td>
+  <td>@advert.company</td>
+  <td>@advert.placeOnPage</td>
+  <td><a href="">Показать рекламу</a></td>
+  <td>1 месяц</td>
+  <td><a href="#" class="btn btn-default btn-xs myb"><span class="glyphicon glyphicon-time"></span> Продлить</a></td>
+  <td><a href="#" class="btn btn-default btn-xs myb"><span class="glyphicon glyphicon-trash"></span> В Архив</a></td>
+</tr>
+}
