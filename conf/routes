@@ -4,10 +4,13 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+
 GET     /about                      controllers.Application.about()
+
 GET     /feedback                   controllers.Application.feedback()
 POST    /user/login                 controllers.Application.signIn()
 GET     /user/logout                 controllers.Application.signOut()
+
 
 #GET     /user/:id                   controllers.User.get(id: Long)                     
 POST      /user/register              controllers.User.register()
@@ -41,6 +44,7 @@ GET     /profile/info               controllers.Manage.myInfo()
 GET     /profile/info/edit          controllers.Info.edit()
 #POST     /profile/info/edit          controllers.Info.update()
 
+GET     /admin/                               controllers.Administer.ads()
 GET     /admin/ads                            controllers.Administer.ads()
 GET     /admin/filter                         controllers.Administer.filters()
 GET     /admin/filter/breed/                  controllers.Filters.getBreeds(id:Long)
@@ -51,11 +55,13 @@ GET     /admin/filter/region/add              controllers.Filters.addRegion()
 GET     /admin/filter/region/update           controllers.Filters.updateRegion(id: Long,name: String)
 POST    /admin/filter/region/:id/delete       controllers.Filters.deleteRegion(id: Long)
 
+GET     /admin/advetisements              controllers.Administer.advetiments()
+POST    /admin/advetisement/add           controllers.Advertisements.add()
+GET     /admin/advetisement/file/:id      controllers.Advertisements.renderAdvetisement(id: Long)
+GET     /admin/advetisement/:id/replace   controllers.Advertisements.replace(id: Long,direction: String)
+GET     /admin/advetisement/:id/update    controllers.Advertisements.extend(id: Long)
+GET     /admin/advetisement/:id/remove    controllers.Advertisements.remove(id: Long)
 
-GET     /admin/advetiments              controllers.Administer.advetiments()
-GET     /admin/advetiment/add           controllers.Advertisements.add()
-GET     /admin/advetiment/:id/update    controllers.Advertisements.extend(id: Long)
-GET     /admin/advetiment/:id/delete    controllers.Advertisements.delete(id: Long)
 
 GET     /admin/users                controllers.Administer.users()
 
