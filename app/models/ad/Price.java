@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="ad_prices")
 public class Price extends Model {
 
 	/**

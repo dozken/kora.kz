@@ -10,7 +10,6 @@ import models.user.AuthorisedUser;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="settings_admin")
 public class AdminSetting extends Model {
 
 	/**
