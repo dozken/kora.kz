@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="ad_comments")
 public class Comment extends Model {
 	
 	/**

@@ -9,7 +9,6 @@ import models.Setting;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="settings_user")
 public class UserSetting extends Model {
 
 	/**

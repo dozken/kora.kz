@@ -10,7 +10,6 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="images")
 public class Image extends Model {
 
 	/**
