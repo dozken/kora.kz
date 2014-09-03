@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="settings_ad")
 public class AdSetting extends Model {
 
 	/**
