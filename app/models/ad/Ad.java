@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
