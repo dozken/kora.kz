@@ -3,17 +3,17 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET      /                           controllers.Application.index()
 
-GET     /about                      controllers.Application.about()
+GET      /about                      controllers.Application.about()
+GET      /feedback                   controllers.Application.feedback()
 
-GET     /feedback                   controllers.Application.feedback()
-POST    /user/login                 controllers.Application.signIn()
-GET     /user/logout                 controllers.Application.signOut()
+POST     /user/login                 controllers.Application.signIn()
+GET      /user/logout                controllers.Application.signOut()
 
 
 #GET     /user/:id                   controllers.User.get(id: Long)                     
-POST      /user/register              controllers.User.register()
+POST     /user/register     	     controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
 GET     /ad/create                  controllers.Ads.create()
@@ -61,7 +61,9 @@ GET     /admin/advetisement/:id/update    controllers.Advertisements.extend(id: 
 GET     /admin/advetisement/:id/remove    controllers.Advertisements.remove(id: Long)
 
 
-GET     /admin/users                controllers.Administer.users()
+#GET     /admin/users                controllers.Administer.users()
+GET     /admin/moderators            controllers.Administer.moderators()
+
 
 # Javascript routing
 GET     /assets/javascripts/routes      controllers.Application.javascriptRoutes()

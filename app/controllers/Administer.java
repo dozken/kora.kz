@@ -6,6 +6,7 @@ import views.html.admin.ads.adminAds;
 import views.html.admin.advertisements.adminAdvertisements;
 import views.html.admin.filters.adminFilters;
 import views.html.admin.users.adminUsers;
+import views.html.admin.moderators.adminModerators;
 
 public class Administer extends Controller {
 	
@@ -25,4 +26,7 @@ public class Administer extends Controller {
 		return ok(adminUsers.render());
 	}
 	
+	public static Result moderators(){
+		return ok(adminModerators.render());
+	}
 }
