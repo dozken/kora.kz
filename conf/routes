@@ -2,6 +2,7 @@
 # Home page
 GET      /                           controllers.Application.index()
 
+GET      /websocket                    controllers.Application.socketHandler()
 GET      /about                      controllers.Application.about()
 GET      /feedback                   controllers.Application.feedback()
 
@@ -25,6 +26,7 @@ GET     /ad/:id                         controllers.Ads.get(id: Long)
 #POST    /ad/:id/autoextend          controllers.Ads.autoExtend(id: Long)
 #POST    /ad/:id/archive             controllers.Ads.archive(id: Long)
 #POST    /ad/:id/message             controllers.Message.send(id: Long)
+GET    /ad/:id/moderate             controllers.Administer.moderate(id: Long)
 
 
 GET     /profile/ads                controllers.Manage.myAds()
