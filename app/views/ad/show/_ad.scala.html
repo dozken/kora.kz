@@ -108,7 +108,9 @@
 		<li><a class="owib"><span class="glyphicon glyphicon-exclamation-sign"></span> Нашли ошибку в объявлении?</a></li></div>
 	</ul>
 </div>
-@subjectPresentOr(){
+@restrictOr(la(as("moderator"),as("admin"))){
+@* //TODO check ad status to "moderating"
+*@
 <div class="col-lg-12  formdown topka nopaddingleft">
 <button class="btn btn-success"  data-toggle="modal" data-target="#myModal44"><span class="icon-share"></span> Подтвердить</button>
 <button class="btn btn-danger"><span class="icon-warning"></span> Отклонить</button>

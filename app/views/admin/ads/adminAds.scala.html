@@ -9,3 +9,42 @@
   </div>
 </div>
 }
+
+<script>
+$(document).ready(function () {
+	adModerate!=null && moderate();
+});
+
+$(document).ajaxSuccess(function () {
+	adModerate!=null && moderate();	
+});
+
+function moderate(){
+    var tr = $(adModerate),
+    tds = tr.find('td'),
+    l = tds.length;
+	tds.fadeOut('fast', function(){ 
+	    if (! --l) tr.remove();                    
+	});   
+	
+	adModerate=null;
+	console.log("adModerate:"+adModerate);
+}
+
+/*
+$(document).on("click",".moderate",function(){
+	var adId = $(this).attr("ad");
+	
+	jsRoutes.controllers.Administer.moderate(adId).ajax({
+		success: function(data) {
+			console.log(data);
+			
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);            
+        }
+	});
+	
+});
+*/
+</script>

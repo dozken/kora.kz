@@ -6,10 +6,17 @@ import play.Routes;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.WebSocket;
 import views.html.common.about;
 import views.html.common.feedback;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class Application extends Controller {
+
+	public static WebSocket<JsonNode> socketHandler() {
+		return controllers.WS.socket;
+	}
 
 	public static Result javascriptRoutes() {
 		response().setContentType("text/javascript");
@@ -30,10 +37,11 @@ public class Application extends Controller {
 				controllers.routes.javascript.Settings.changeAdminSetting(),
 				controllers.routes.javascript.Advertisements.add(),
 				controllers.routes.javascript.Advertisements.remove(),
-				controllers.routes.javascript.Advertisements.replace()
-		));
+				controllers.routes.javascript.Advertisements.replace(),
+				controllers.routes.javascript.Administer.moderate(),
+				controllers.routes.javascript.Ads.get()
+				));
 	}
-	
 
 	// public static Result changeLanguage(String language) {
 	// Controller.changeLang(language);
