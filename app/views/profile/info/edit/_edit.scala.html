@@ -1,14 +1,16 @@
+@(user:models.user.AuthorisedUser)
+
 <div class="col-lg-12 boto">
-	<form class="form-horizontal">
+	<form id="profile_edit_form" class="form-horizontal">
 		<fieldset>
 
 
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput1">Компания</label>
 				<div class="col-md-6">
-					<input id="textinput1" name="textinput1" type="text"
+					<input id="company_name" name="company_name" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
-						class="form-control input-md">
+						class="form-control input-md" value="@user.userName">
 
 				</div>
 			</div>
@@ -18,7 +20,7 @@
 				<label class="col-md-2 control-label" for="filebutton">Фотографии</label>
 				<div class="col-md-4">
 					<div class="fileUpload btn btn-primary">
-						<span>Изменить Фото</span> <input type="file" id="filebutton"
+						<span>Изменить Фото</span> <input type="file" name="image_file" id="filebutton"
 							class="upload" />
 					</div>
 				</div>
@@ -28,7 +30,13 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label"></label>
 				<div class="col-md-10 ava">
-					<img src="assets/images/home/cow.png">
+					<div id="profile_image" name="image">
+                        @if(user.profile.image!=null){
+
+                            <img src="data:@user.profile.image.contentType;base64, @user.profile.image.content" style="height:180px;width:180px;">
+                        }
+
+					</div>
 				</div>
 
 			</div>
@@ -37,9 +45,9 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput1">Адрес</label>
 				<div class="col-md-6">
-					<input id="textinput1" name="textinput1" type="text"
+					<input id="address" name="address" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
-						class="form-control input-md">
+						class="form-control input-md" value="@user.profile.address">
 
 				</div>
 			</div>
@@ -47,9 +55,11 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="selectbasic2">Регион</label>
 				<div class="col-md-3">
-					<select id="selectbasic2" name="selectbasic2" class="form-control">
-						<option value="1">Алматы</option>
-						<option value="2">Шиелі</option>
+					<select id="region" name="region" class="form-control">
+                        @for(region<-models.contact.Region.find.all()) {
+                            <option value="@region.id" @if(user.profile.region == region){selected="selected"}>@region.name</option>
+                        }
+
 					</select>
 				</div>
 			</div>
@@ -61,10 +71,10 @@
 				<label class="col-md-2 control-label" for="radios">Пол</label>
 				<div class="col-md-4">
 					<label class="radio-inline" for="radios-0"> <input
-						type="radio" name="radios" id="radios-0" value="1"
-						checked="checked"> муж
+						type="radio" name="gender" value="male"
+						@if(user.profile.gender!=null && user.profile.gender.equals("male")){checked="checked"}> муж
 					</label> <label class="radio-inline" for="radios-1"> <input
-						type="radio" name="radios" id="radios-1" value="2"> жен
+						type="radio" name="gender"  value="female" @if(user.profile.gender!=null &&user.profile.gender.equals("female")){checked="checked"}> жен
 					</label>
 				</div>
 			</div>
@@ -74,8 +84,8 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textarea">Описание</label>
 				<div class="col-md-6">
-					<textarea class="form-control" rows="6" id="textarea"
-						name="textarea"></textarea>
+					<textarea class="form-control" rows="6" id="description"
+						name="description">@user.profile.description</textarea>
 				</div>
 			</div>
 
@@ -83,7 +93,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput2">Телефон</label>
 				<div class="col-md-3">
-					<input id="textinput2" name="textinput2" type="text"
+					<input id="phone" name="phone" type="text" value="@user.profile.phone"
 						placeholder="87071234567" class="form-control input-md">
 
 				</div>
@@ -92,8 +102,8 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput2">Вконтакте</label>
 				<div class="col-md-3">
-					<input id="textinput2" name="textinput2" type="text" placeholder=""
-						class="form-control input-md">
+					<input id="vk" name="vk" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"vk")">
 
 				</div>
 			</div>
@@ -101,24 +111,24 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput2">Facebook</label>
 				<div class="col-md-3">
-					<input id="textinput2" name="textinput2" type="text" placeholder=""
-						class="form-control input-md">
+					<input id="facebook" name="facebook" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"facebook")">
 
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput2">Skype</label>
 				<div class="col-md-3">
-					<input id="textinput2" name="textinput2" type="text" placeholder=""
-						class="form-control input-md">
+					<input id="skype" name="skype" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"skype")">
 
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="textinput2">Сайт</label>
 				<div class="col-md-3">
-					<input id="textinput2" name="textinput2" type="text"
-						placeholder="technovision.kz" class="form-control input-md">
+					<input id="website" name="website" type="text"
+						placeholder="technovision.kz" class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"website")">
 
 				</div>
 			</div>
@@ -127,36 +137,10 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="selectbasic5">Карта</label>
 				<div class="col-md-5">
-					<a id="firmsonmap_biglink"
-						href="http://maps.2gis.ru/#/?history=project/almaty/center/76.857494705499,43.226979900591/zoom/18/state/widget/id/9429940001569726/firms/9429940001569726">Перейти
-						к большой карте</a>
-					<script charset="utf-8" type="text/javascript"
-						src="http://firmsonmap.api.2gis.ru/js/DGWidgetLoader.js"></script>
-					<script charset="utf-8" type="text/javascript">
-						new DGWidgetLoader({
-							"borderColor" : "#a3a3a3",
-							"width" : "700",
-							"height" : "400",
-							"wid" : "19616ecba202f38abf048207f7037b23",
-							"pos" : {
-								"lon" : "76.857494705499",
-								"lat" : "43.226979900591",
-								"zoom" : "18"
-							},
-							"opt" : {
-								"ref" : "hidden",
-								"card" : [ "name", "contacts", "schedule",
-										"payings" ],
-								"city" : "almaty"
-							},
-							"org" : [ {
-								"id" : "9429940001569726"
-							} ]
-						});
-					</script>
-					<noscript style="color: #c00; font-size: 16px; font-weight: bold;">Виджет
-						карты использует JavaScript. Включите его в настройках вашего
-						браузера.</noscript>
+                    <div id="mouse_event_map"></div>
+                    <input type="hidden" value="" id="location" name="location">
+
+
 				</div>
 			</div>
 
@@ -166,7 +150,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="singlebutton"></label>
 				<div class="col-md-4">
-					<button id="singlebutton" name="singlebutton"
+					<button id="edit_profile_submit" name="singlebutton"
 						class="btn btn-success">Редактировать</button>
 				</div>
 			</div>

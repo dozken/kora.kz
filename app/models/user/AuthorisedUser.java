@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.Locations;
 import models.admin.AdminSetting;
 import play.db.ebean.Model;
 import be.objectify.deadbolt.core.models.Permission;
@@ -32,7 +33,7 @@ public class AuthorisedUser extends Model implements Subject {
 
 	public String password;
 	
-	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
 	public Profile profile;
 
 	@ManyToMany
@@ -43,10 +44,15 @@ public class AuthorisedUser extends Model implements Subject {
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	public List<UserSetting> userSettings;
-	
+
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+    public List<UserSocials> userSocials;
+
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	public List<AdminSetting> adminSettings;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    public  Locations locations;
 
 	@Override
 	public List<? extends Role> getRoles() {

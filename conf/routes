@@ -1,6 +1,3 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
 
 # Home page
 GET     /                           controllers.Application.index()
@@ -13,7 +10,7 @@ GET     /user/logout                 controllers.Application.signOut()
 POST      /user/register              controllers.User.register()
 #POST    /user/:id/delete            controllers.User.delete(id: Long)
 
-POST    /imageUpload				controllers.Application.imageUpload()
+
 
 GET     /ad/create                  controllers.Ads.create()
 GET     /ad/search                  controllers.Ads.search()
@@ -39,7 +36,7 @@ POST     /profile/settings/user       controllers.Settings.changeAdminSetting(id
 
 GET     /profile/info               controllers.Manage.myInfo()
 GET     /profile/info/edit          controllers.Info.edit()
-#POST     /profile/info/edit          controllers.Info.update()
+POST     /profile/info/edit/:id          controllers.Info.update(id:Long)
 
 GET     /admin/ads                            controllers.Administer.ads()
 GET     /admin/filter                         controllers.Administer.filters()

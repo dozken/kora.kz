@@ -69,74 +69,11 @@ public class Application extends Controller {
 		flash("thank you");
 		return redirect(routes.Application.index());
 	}
-	
-	 private static byte[] convertBack(BufferedImage img, String contentType){
-	        try{
-	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	            String tip = "jpg";
-	            if(contentType.equalsIgnoreCase("image/jpeg")||contentType.equalsIgnoreCase("image/jpg"))
-	                tip = "jpg";
-	            else if(contentType.equalsIgnoreCase("image/png"))
-	                tip = "png";
-	            ImageIO.write(img, tip, baos);
-	            baos.flush();
-	            byte[] bytes = baos.toByteArray();
-	            baos.close();
-	            return bytes;
-	        }catch(Exception e){
-	            e.printStackTrace();
-	            return null;
-	        }
-
-	    }
-	
-	public static Result imageUpload() {
-		
-		play.mvc.Http.MultipartFormData files = request().body().asMultipartFormData();
-		
-		 try{
-	            play.mvc.Http.MultipartFormData body = request().body().asMultipartFormData();
-	            FilePart picture = body.getFiles().get(0);
-
-	            DynamicForm form = Form.form().bindFromRequest();
-
-	            if (picture != null) {
-	            	
-	                 File file = picture.getFile();
-	                 Image icon = new Image();
-	                 byte[] ima = com.google.common.io.Files.toByteArray(file);
-	                 icon.contentType = picture.getContentType();
-	                 BufferedImage originalImage = convertFrom(ima);
-	                
-	                // icon.content = convertBack(originalImage, ima);
-	                 String encodedImage = Base64.encode(ima);
-	                 System.out.println(encodedImage);
-	                 icon.content = encodedImage;
-	                 icon.save();
-	              
-	              
-	                 return ok("");//renderImage(icon.id);
-	             } else {
-	            	System.out.println("picture null"); 
-	             }
-	            
-	            }catch (Exception e) {
-	            	System.out.println("catch");
-				}
-		return ok("baaaaa");
-	}
 
 	public static Result signUp() {
 		return redirect(request().getHeader("referer"));
 	}
-	 private static BufferedImage convertFrom(byte[] imageData) {
-	        ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
-	        try {
-	            return ImageIO.read(bais);
-	        } catch (IOException e) {
-	            throw new RuntimeException(e);
-	        }
-	    }
+
 	public static Result index() {
 		return ok(views.html.file_upload_test.render());
 	}

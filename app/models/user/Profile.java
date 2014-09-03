@@ -20,7 +20,7 @@ public class Profile extends Model {
 	@Id
 	public Long id;
 
-	@OneToOne
+	@OneToOne(mappedBy="profile")
 	public AuthorisedUser user;
 
 	@OneToOne

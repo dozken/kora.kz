@@ -30,6 +30,15 @@ public class Manage extends Controller {
 		return ok(myInfo.render());
 	}
 	
-	
+    public static Result saveProfile(){
+
+        return ok();
+    }
+
+
+    public static Result editProfile(){
+
+        return ok();
+    }
 
 }

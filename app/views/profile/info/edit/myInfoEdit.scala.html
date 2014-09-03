@@ -1,12 +1,147 @@
+@(user:models.user.AuthorisedUser)
+
  @main("Редактировать") {
 
 <div class="container">
 	<div class="col-lg-3 menudiv">@profile._menu()</div>
 	<div class="col-lg-9 ">
 	  @profile._title("РЕДАКТИРОВАТЬ"){ } 
-	  @_edit()
+	  @_edit(user)
 	</div>
 
 </div>
 
 }
+
+<script>
+var choose = document.getElementById('filebutton');
+FileAPI.event.on(choose, 'change', function (evt){
+var files = FileAPI.getFiles(evt); // Retrieve file list
+
+FileAPI.filterFiles(files, function (file, info/**Object*/){
+if( /^image/.test(file.type) ){
+return  info.width >= 320 && info.height >= 240;
+}
+return  false;
+}, function (files/**Array*/, rejected/**Array*/){
+if( files.length ){
+// Make preview 100x100
+FileAPI.each(files, function (file){
+
+FileAPI.Image(file).preview(180).get(function (err, img){
+$("#profile_image").html(img);
+});
+});
+
+}
+});
+});
+
+
+$(document ).on("click","#edit_profile_submit", function() {
+
+$( '#profile_edit_form' )
+.submit( function( e ) {
+$.ajax( {
+url: '@controllers.routes.Info.update(user.id)',
+type: 'POST',
+data: new FormData( this ),
+processData: false,
+contentType: false
+} );
+e.preventDefault();
+} );
+})
+</script>
+
+    <script type="text/javascript">
+    /**
+    * Mouse Events on Maps
+    */
+
+    $(document).ready(function(){
+    var myMap;
+    map = new GMaps({
+    div: '#mouse_event_map',
+    zoom: 14,
+    lat: "43.276978",
+    lng:  " 76.893096",
+    width: '700px',
+    height: '400px',
+    click: function(e) {
+    $("#location" ).val( e.latLng);
+    map.removeMarker(myMap);
+    console.log( e.latLng);
+    myMap =  map.addMarker({
+    position:e.latLng,
+    infoWindow: {
+    content: '<p>'+$("#company_name" ).val() + '</p>'
+    }
+    });
+    },
+
+
+    });
+
+        @if(user.locations!=null) {
+            myMap = map.addMarker ( {
+            lat: @user.locations.lat,
+            lng: @user.locations.lng,
+            infoWindow : {
+            content : '<p>' + $ ( "#company_name" ).val ( ) + '</p>'
+            }
+            } ) ;
+        }
+
+
+    $(document).on("change","#region",function(){
+    map = new GMaps({
+    div: '#mouse_event_map',
+    zoom: 14,
+    lat: 51.168186,
+    lng:  71.437161,
+    width: '700px',
+    height: '400px',
+    click: function(e) {
+    $("#location" ).val( e.latLng);
+    map.removeMarker(myMap);
+    myMap =  map.addMarker({
+    position:e.latLng,
+    title: 'Lima',
+
+    infoWindow: {
+    content: '<p>'+$("#company_name" ).val() + '</p>'
+    }
+    });
+    },
+    dragend: function(e) {
+
+    }
+
+    });
+
+    })
+
+
+//    Координаты некоторых городов Казахстана:
+//    Алматы (Широта: 43, Долгота: 77)
+//    Астана (Широта: 51, Долгота: 71)
+//    Актау (Широта: 43, Долгота: 51)
+//    Актобе (Широта:50, Долгота: 57)
+//    Атырау (Широта: 47, Долгота: 51)
+//    Балхаш (Широта: 46, Долгота: 75)
+//    Жамбыл(Широта: 42, Долгота: 71)
+//    Караганда (Широта: 49, Долгота: 73)
+//    Кокшетау (Широта: 53, Долгота: 69)
+//    Костанай (Широта: 53, Долгота: 63)
+//    Кызылорда (Широта: 44, Долгота: 65)
+//    Павлодар (Широта: 52, Долгота: 76)
+//    Петропавловск (Широта: 54, Долгота: 69)
+//    Семипалатинск (Широта: 50, Долгота: 80)
+//    Талдыкорган (Широта: 45, Долгота: 78)
+//    Уральск (Широта: 51, Долгота: 51)
+//    Усть-Каменогорск (Широта: 49, Долгота: 82)
+//    Шымкент (Широта: 43, Долгота: 69)
+
+    });
+    </script>

@@ -4,8 +4,7 @@ import static play.data.Form.form;
 
 import java.util.ArrayList;
 
-import models.user.AuthorisedUser;
-import models.user.SecurityRole;
+import models.user.*;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -21,11 +20,23 @@ public class User extends Controller {
 			AuthorisedUser user = userForm.get();
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("user"));
-			user.save();
+            Profile p = new Profile();
+            user.profile=p;
+
+            UserSocials socials = new UserSocials();
+            socials.socialNetwork = SocialNetwork.find.byId(1L);
+            socials.value="asik brat";
+
+            user.userSocials.add(socials);
+
+            user.save();
+
+
+            session("connected", user.email);
 			return ok("success");
 		} else {
 			return ok("error");
 		}
-		// return redirect(routes.Manage.myInfo());
+		
 	}
 }

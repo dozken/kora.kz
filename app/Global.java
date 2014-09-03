@@ -14,10 +14,7 @@ import models.ad.Quantity;
 import models.admin.AdminSetting;
 import models.contact.ContactInfo;
 import models.contact.Region;
-import models.user.AuthorisedUser;
-import models.user.Profile;
-import models.user.SecurityRole;
-import models.user.UserSetting;
+import models.user.*;
 import play.Application;
 import play.GlobalSettings;
 
@@ -78,6 +75,14 @@ public class Global extends GlobalSettings {
 				role.save();
 			}
 		}
+
+        if (SocialNetwork.find.findRowCount() == 0) {
+            for (String name : Arrays.asList("vk", "facebook", "skype","website")) {
+                SocialNetwork tmp = new SocialNetwork();
+                tmp.name = name;
+                tmp.save();
+            }
+        }
 
 		if (Animal.find.findRowCount() == 0) {
 			for (String name : Arrays.asList("ЛОШАДЬ", "ВЕРБЛЮД", "КОРОВА",
