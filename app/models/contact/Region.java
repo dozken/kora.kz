@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
@@ -23,6 +24,9 @@ public class Region extends Model {
 	public Long id;
 	
 	public String name;
+	
+	@OneToMany(mappedBy="region")
+	public List<Profile> profiles;
 	
 	@OneToMany(mappedBy="region")	
 	public List<ContactInfo> contactInfos;

@@ -2,6 +2,116 @@
 	url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600&subset=cyrillic-ext,latin)
 	;
 
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/fonts/icomoon.eot?-qh3y5j');
+	src:url('fonts/fonts/icomoon.eot?#iefix-qh3y5j') format('embedded-opentype'),
+		url('fonts/fonts/icomoon.woff?-qh3y5j') format('woff'),
+		url('fonts/fonts/icomoon.ttf?-qh3y5j') format('truetype'),
+		url('fonts/fonts/icomoon.svg?-qh3y5j#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+.icon-addAd:before {
+	content: "\e600";
+}
+.icon-cabinet:before {
+	content: "\e601";
+}
+.icon-comment:before {
+	content: "\e602";
+}
+.icon-date:before {
+	content: "\e603";
+}
+.icon-dateSmall:before {
+	content: "\e604";
+}
+.icon-delete:before {
+	content: "\e605";
+}
+.icon-edit:before {
+	content: "\e606";
+}
+.icon-eye:before {
+	content: "\e607";
+}
+.icon-go:before {
+	content: "\e608";
+}
+.icon-logoutNav:before {
+	content: "\e609";
+}
+.icon-logoutProfile:before {
+	content: "\e60a";
+}
+.icon-message:before {
+	content: "\e60b";
+}
+.icon-money:before {
+	content: "\e60c";
+}
+.icon-myAds:before {
+	content: "\e60d";
+}
+.icon-myMessages:before {
+	content: "\e60e";
+}
+.icon-myProfile:before {
+	content: "\e60f";
+}
+.icon-photo:before {
+	content: "\e610";
+}
+.icon-photoCount:before {
+	content: "\e611";
+}
+.icon-prosmotr:before {
+	content: "\e612";
+}
+.icon-search:before {
+	content: "\e613";
+	color: #8fb346;
+}
+.icon-settings:before {
+	content: "\e614";
+}
+.icon-share:before {
+	content: "\e615";
+}
+.icon-tel:before {
+	content: "\e616";
+}
+.icon-time:before {
+	content: "\e617";
+}
+.icon-vydelit:before {
+	content: "\e618";
+}
+.icon-warning:before {
+	content: "\e619";
+}
+
+
 html {
 	position: relative;
 	min-height: 100%;
@@ -122,12 +232,12 @@ body {
 }
 
 .reda {
-	color: red;
+	color: #8f2341;
 	cursor: pointer;
 }
 
 .reda:hover {
-	color: #c9302c;
+	color: #7b0e2d;
 	text-decoration: none;
 }
 
@@ -442,6 +552,7 @@ body {
 	list-style-type: none;
 	line-height: 2;
 	padding-left: 10px;
+	font-style: italic;
 }
 
 .profmenu li a {
@@ -691,6 +802,7 @@ thead {
 
 .myb {
 	background-color: #E0E0E0;
+
 }
 
 .myb:hover {
@@ -907,4 +1019,60 @@ thead {
 
 .ortaga {
 	text-align: center;
+}
+.btn.btn-danger {
+    color: #ffffff;
+    background-color: #5CB85C;
+    background-image: linear-gradient(to bottom, #8f2341, #7b0e2d);
+    border-color: #7b0e2d #7b0e2d #7b0e2d;
+}
+.btn.btn-danger:hover {
+    color: #ffffff;
+    background-color: #7b0e2d;
+    background-image: linear-gradient(to bottom, #7b0e2d, #7b0e2d);
+    border-color: #7b0e2d #7b0e2d #7b0e2d;
+}
+
+.btn.btn-success {
+    color: #ffffff;
+    background-color: #5CB85C;
+    background-image: linear-gradient(to bottom, #8fb346, #77953a);
+    border-color: #77953a #77953a #77953a;
+}
+.btn.btn-success:hover {
+    color: #ffffff;
+    background-color: #77953a;
+    background-image: linear-gradient(to bottom, #77953a, #77953a);
+    border-color: #77953a #77953a #77953a;
+}
+
+#adslideleft{
+position: absolute;
+width: 20px;
+height: 20px;
+
+}
+#adslideleft span{
+
+font-size: 20px;
+
+}
+#adslideright span{
+
+font-size: 20px;
+
+}
+#adslideright{position: absolute;
+margin-left: 20px;
+height: 20px;
+width: 20px;
+}
+.carousel-control{left: 195px !important;top: 8px;
+background: none !important;
+}
+.boto table{
+	font-style: italic;
+}
+.paddingleft30px{
+	padding-left: 45px;
 }

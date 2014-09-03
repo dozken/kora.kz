@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav navcolor">
       	
       	@if(request.uri.contains("profile")||request.uri.contains("admin")){
-      	<li>
+      	<li style="height: 50px;">
       		<a href="@routes.Application.index"><img src="@routes.Assets.at("images/home/white_small_logo.png")"/></a>
       	</li>
       	}else{
@@ -33,12 +33,12 @@
       	@subjectPresentOr() {
       	<li>
           <a href="@routes.Manage.myInfo" >
-            <span class="glyphicon glyphicon-user"></span> Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
+            <span class="icon-cabinet"></span> Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
           </a>
         </li>
         <li>
           <a href="@routes.Application.signOut">
-            <span class="glyphicon glyphicon-off"></span> Выйти
+            <span class="icon-logoutNav"></span> Выйти
           </a>
         </li>
       	}{
@@ -47,13 +47,13 @@
         </li>
         <li>
           <a href="#" data-toggle="modal" data-target="#myModal">
-            <span class="glyphicon glyphicon-user"></span> Личный кабинет
+            <span class="icon-cabinet"></span> Личный кабинет
           </a>
         </li>
         }
         <li>
           <a href="@routes.Ads.create">
-            <span class="glyphicon glyphicon-edit"></span> Подать объявление
+            <span class="icon-addAd"></span> Подать объявление
           </a>
         </li>
       </ul>

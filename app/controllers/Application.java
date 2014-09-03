@@ -1,29 +1,13 @@
 package controllers;
 
-import models.ad.Image;
+import static play.data.Form.form;
 import models.user.AuthorisedUser;
 import play.Routes;
-import play.api.mvc.MultipartFormData;
 import play.data.DynamicForm;
-import play.data.Form;
-import play.i18n.Messages;
 import play.mvc.Controller;
-import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import views.html.common.*;
-
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import com.ning.http.util.Base64;
-
-import static play.data.Form.form;
+import views.html.common.about;
+import views.html.common.feedback;
 
 public class Application extends Controller {
 
@@ -32,14 +16,24 @@ public class Application extends Controller {
 
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
+				controllers.routes.javascript.Application.signIn(),
 				controllers.routes.javascript.User.register(),
-                controllers.routes.javascript.Application.signIn(),
 				controllers.routes.javascript.Filters.getBreeds(),
 				controllers.routes.javascript.Filters.addBreed(),
 				controllers.routes.javascript.Filters.updateBreed(),
-				controllers.routes.javascript.Filters.deleteBreed()
-				));
+				controllers.routes.javascript.Filters.deleteBreed(),
+				controllers.routes.javascript.Filters.addRegion(),
+				controllers.routes.javascript.Filters.updateRegion(),
+				controllers.routes.javascript.Filters.deleteRegion(),
+				controllers.routes.javascript.Settings.changePassword(),
+				controllers.routes.javascript.Settings.changeUserSetting(),
+				controllers.routes.javascript.Settings.changeAdminSetting(),
+				controllers.routes.javascript.Advertisements.add(),
+				controllers.routes.javascript.Advertisements.remove(),
+				controllers.routes.javascript.Advertisements.replace()
+		));
 	}
+	
 
 	// public static Result changeLanguage(String language) {
 	// Controller.changeLang(language);
@@ -47,23 +41,19 @@ public class Application extends Controller {
 	// }
 
 	public static Result signIn() {
+		DynamicForm requestData = form().bindFromRequest();
+		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
+				.get("email"));
+		if (user != null && user.password.equals(requestData.get("password"))) {
+			session("connected", user.email);
+			flash("thank you");
+			return redirect(request().getHeader("referer"));
+		} else {
+			return ok("error");
 
-        DynamicForm requestData = form().bindFromRequest();
+		}
+	}
 
-        System.out.println(requestData);
-
-         AuthorisedUser user = AuthorisedUser.findByEmail(requestData.get("email"));
-        if(user!=null && user.password.equals(requestData.get("password"))) {
-            session("connected", user.email);
-            flash("thank you");
-            return redirect(request().getHeader("referer"));
-        }else
-        {
-            return ok("error");
-
-        }
-    }
-//
 	public static Result signOut() {
 		session().clear();
 		flash("thank you");
@@ -75,7 +65,7 @@ public class Application extends Controller {
 	}
 
 	public static Result index() {
-		return ok(views.html.file_upload_test.render());
+		return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {
@@ -85,5 +75,5 @@ public class Application extends Controller {
 	public static Result feedback() {
 		return ok(feedback.render());
 	}
-	
+
 }
