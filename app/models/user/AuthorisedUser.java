@@ -3,6 +3,7 @@ package models.user;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -28,6 +29,7 @@ public class AuthorisedUser extends Model implements Subject {
 
 	public String userName;
 
+	@Column(unique=true)
 	public String email;
 
 	public String password;
@@ -69,6 +71,10 @@ public class AuthorisedUser extends Model implements Subject {
 	
 	public static List<AuthorisedUser> getUsers(){
 		return find.where().in("roles", SecurityRole.findByName("user")).findList();
+	}
+	
+	public static List<AuthorisedUser> getModerators(){
+		return find.where().in("roles", SecurityRole.findByName("moderator")).findList();
 	}
 	
 	public static String md5(String password){

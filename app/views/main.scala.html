@@ -38,9 +38,12 @@
   		*@
     </body>
 
+
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script type="text/javascript">
-    
+
+
+
 $(document).ready(function(e){
 
     $("#registerErrorAlert" ).hide();
@@ -57,7 +60,7 @@ $(document).ready(function(e){
         });
 
 });
-
+@subjectNotPresent() {
 $(document).on("click","#registrButton", function(e){
 	e.preventDefault();
 	
@@ -66,7 +69,7 @@ $(document).on("click","#registrButton", function(e){
         success: function(data) {
             var res =""+ data;
             if(res == "error"){
-                $("#registerErrorAlert" ).html("This email already registred");
+                $("#registerErrorAlert" ).html("Эта почта уже используется!");
                 $("#registerErrorAlert" ).show();
             }else{
 
@@ -90,7 +93,7 @@ e.preventDefault();
         success: function(data) {
             var res =""+ data;
             if(res == "error"){
-                $("#loginErrorAlert").html("Incorrect email or password");
+                $("#loginErrorAlert").html("Неправильный логин или пароль");
                 $("#loginErrorAlert" ).show();
             }else{
 
@@ -105,6 +108,7 @@ e.preventDefault();
 
 
 })
-
+}   
 </script>
+ 
 </html>

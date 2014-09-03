@@ -15,17 +15,21 @@ public class User extends Controller {
 	public static Result register() {
 		Form<AuthorisedUser> userForm = form(AuthorisedUser.class).bindFromRequest();
 		if(userForm.hasErrors()){
+			flash("error","Ошибка при заполнении формы!");
 			return ok();
 		}
 		else if (AuthorisedUser.find.where().eq("email", userForm.get().email).findUnique() == null) {
 			AuthorisedUser user = userForm.get();
 			user.roles = new ArrayList<SecurityRole>();
-			user.roles.add(SecurityRole.findByName("user"));
+			if(AuthorisedUser.findByEmail(session("connected")).roles.contains(SecurityRole.findByName("admin")))
+				user.roles.add(SecurityRole.findByName("moderator"));
+			else
+				user.roles.add(SecurityRole.findByName("user"));
 			user.save();
 			return ok("success");
 		} else {
+			flash("error","Эта почта уже используется!, попробуйте другую.");
 			return ok("error");
 		}
-		// return redirect(routes.Manage.myInfo());
 	}
 }
