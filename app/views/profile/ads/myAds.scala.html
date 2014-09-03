@@ -1,0 +1,45 @@
+
+@main("Мои Объявления") {
+<div class="container">
+  <div class="col-lg-3 menudiv">
+    @profile._menu()
+  </div>
+  <div class="col-lg-9 ">
+  	@profile._title("МОИ ОБЪЯВЛЕНИЯ"){
+  	<div class="col-lg-4 tptp"><select class="form-control">
+	  <option>Все (8)</option>
+	  <option selected="selected">На сайте (2)</option>
+	  <option>На модерции (3)</option>
+	  <option>В архиве (3)</option>
+	</select>
+	</div>
+  	}	
+	@for(i<-1 to 3){
+	  @_ad()
+	}
+  </div>
+</div>
+}
+
+<script>
+$.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
+	    state: true,
+	    size: null,
+	    animate: true,
+	    disabled: false,
+	    readonly: false,
+	    indeterminate: false,
+	    onColor: "success",
+	    offColor: "danger",
+	    onText: "Вкл",
+	    offText: "Выкл",
+	    labelText: "&nbsp;",
+	    baseClass: "bootstrap-switch",
+	    wrapperClass: "wrapper",
+	    radioAllOff: false,
+	    onInit: function() {},
+	    onSwitchChange: function() {}
+};
+
+$(".switcher").bootstrapSwitch();
+</script>

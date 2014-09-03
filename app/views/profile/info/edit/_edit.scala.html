@@ -1,0 +1,161 @@
+@(user:models.user.AuthorisedUser)
+
+<div class="col-lg-12 boto">
+	<form id="profile_edit_form" class="form-horizontal">
+		<fieldset>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput1">Компания</label>
+				<div class="col-md-6">
+					<input id="company_name" name="company_name" type="text"
+						placeholder="Название компании (ТОО, ИП, АО)"
+						class="form-control input-md" value="@user.userName">
+
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="filebutton">Фотографии</label>
+				<div class="col-md-4">
+					<div class="fileUpload btn btn-primary">
+						<span>Изменить Фото</span> <input type="file" name="image_file" id="filebutton"
+							class="upload" />
+					</div>
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label"></label>
+				<div class="col-md-10 ava">
+					<div id="profile_image" name="image">
+                        @if(user.profile.image!=null){
+
+                            <img src="data:@user.profile.image.contentType;base64, @user.profile.image.content" style="height:180px;width:180px;">
+                        }
+
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput1">Адрес</label>
+				<div class="col-md-6">
+					<input id="address" name="address" type="text"
+						placeholder="Название компании (ТОО, ИП, АО)"
+						class="form-control input-md" value="@user.profile.address">
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="selectbasic2">Регион</label>
+				<div class="col-md-3">
+					<select id="region" name="region" class="form-control">
+                        @for(region<-models.contact.Region.find.all()) {
+                            <option value="@region.id" @if(user.profile.region == region){selected="selected"}>@region.name</option>
+                        }
+
+					</select>
+				</div>
+			</div>
+
+
+
+			<!-- Multiple Checkboxes (inline) -->
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="radios">Пол</label>
+				<div class="col-md-4">
+					<label class="radio-inline" for="radios-0"> <input
+						type="radio" name="gender" value="male"
+						@if(user.profile.gender!=null && user.profile.gender.equals("male")){checked="checked"}> муж
+					</label> <label class="radio-inline" for="radios-1"> <input
+						type="radio" name="gender"  value="female" @if(user.profile.gender!=null &&user.profile.gender.equals("female")){checked="checked"}> жен
+					</label>
+				</div>
+			</div>
+
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textarea">Описание</label>
+				<div class="col-md-6">
+					<textarea class="form-control" rows="6" id="description"
+						name="description">@user.profile.description</textarea>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput2">Телефон</label>
+				<div class="col-md-3">
+					<input id="phone" name="phone" type="text" value="@user.profile.phone"
+						placeholder="87071234567" class="form-control input-md">
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput2">Вконтакте</label>
+				<div class="col-md-3">
+					<input id="vk" name="vk" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"vk")">
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput2">Facebook</label>
+				<div class="col-md-3">
+					<input id="facebook" name="facebook" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"facebook")">
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput2">Skype</label>
+				<div class="col-md-3">
+					<input id="skype" name="skype" type="text" placeholder=""
+						class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"skype")">
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="textinput2">Сайт</label>
+				<div class="col-md-3">
+					<input id="website" name="website" type="text"
+						placeholder="technovision.kz" class="form-control input-md" value="@controllers.Info.getSocialByName(user.id,"website")">
+
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="selectbasic5">Карта</label>
+				<div class="col-md-5">
+                    <div id="mouse_event_map"></div>
+                    <input type="hidden" value="" id="location" name="location">
+
+
+				</div>
+			</div>
+
+
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="singlebutton"></label>
+				<div class="col-md-4">
+					<button id="edit_profile_submit" name="singlebutton"
+						class="btn btn-success">Редактировать</button>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+
+</div>
