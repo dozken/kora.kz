@@ -3,7 +3,6 @@ package models.ad;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
