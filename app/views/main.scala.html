@@ -46,7 +46,7 @@
 
 
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
-
+@restrict(la(as("moderator"),as("admin"))){
 <script>
 	var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
 	var sock = new WS("@routes.Application.socketHandler().webSocketURL(request)")
@@ -150,74 +150,73 @@
 	      audioElement.play();
 	  } 	
 </script>
-
+}
 <script type="text/javascript">
 
-$(document).ready(function(e){
+$(document).ready(function(e) {
 
-    $("#registerErrorAlert" ).hide();
-    $("#loginErrorAlert" ).hide();
-        $( document ).on( 'click', '.bs-dropdown-to-select-group .dropdown-menu li', function( event ) {
-            var $target = $( event.currentTarget );
-            $target.closest('.bs-dropdown-to-select-group')
-                .find('[data-bind="bs-drp-sel-value"]').val($target.attr('data-value'))
-                .end()
-                .children('.dropdown-toggle').dropdown('toggle');
-            $target.closest('.bs-dropdown-to-select-group')
-                .find('[data-bind="bs-drp-sel-label"]').text($target.attr('data-value'));/*$target.text()*/ 
-            return false;
-        });
+    $("#registerErrorAlert").hide();
+    $("#loginErrorAlert").hide();
+    $(document).on('click', '.bs-dropdown-to-select-group .dropdown-menu li', function(event) {
+        var $target = $(event.currentTarget);
+        $target.closest('.bs-dropdown-to-select-group')
+            .find('[data-bind="bs-drp-sel-value"]').val($target.attr('data-value'))
+            .end()
+            .children('.dropdown-toggle').dropdown('toggle');
+        $target.closest('.bs-dropdown-to-select-group')
+            .find('[data-bind="bs-drp-sel-label"]').text($target.attr('data-value')); /*$target.text()*/
+        return false;
+    });
 
 });
-@subjectNotPresent() {
-$(document).on("click","#registrButton", function(e){
-	e.preventDefault();
-	
-	jsRoutes.controllers.User.register().ajax({
-	data : $("#registerForm").serialize(),
+
+$(document).on("click", "#registrButton", function(e) {
+    e.preventDefault();
+
+    jsRoutes.controllers.User.register().ajax({
+        data: $("#registerForm").serialize(),
         success: function(data) {
-            var res =""+ data;
-            if(res == "error"){
-                $("#registerErrorAlert" ).html("Эта почта уже используется!");
-                $("#registerErrorAlert" ).show();
-            }else{
-
-                window.location.href = "@routes.Manage.myAds()";
-                }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);            
-        }
-    });
- 
-   
-})
-
-$(document).on("click","#loginButton", function(e){
-e.preventDefault();
-
-    jsRoutes.controllers.Application.signIn().ajax({
-    data : $("#loginForm").serialize(),
-        success: function(data) {
-            var res =""+ data;
-            if(res == "error"){
-                $("#loginErrorAlert").html("Неправильный логин или пароль");
-                $("#loginErrorAlert" ).show();
-            }else{
-
-                 window.location.href = "@routes.Manage.myInfo()";
+            var res = "" + data;
+            if (res == "error") {
+                $("#registerErrorAlert").html("Эта почта уже используется!");
+                $("#registerErrorAlert").show();
+            } else {
+            	@restrictOr(la(as("admin"))){
+            		window.location.href = "@routes.Administer.moderators()";
+            	}{
+                  	window.location.href = "@routes.Manage.myAds()";
+            	}
             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);
-    }
+        }
+    });
+
 });
 
+$(document).on("click", "#loginButton", function(e) {
+    e.preventDefault();
 
-})
-}
+    jsRoutes.controllers.Application.signIn().ajax({
+        data: $("#loginForm").serialize(),
+        success: function(data) {
+            var res = "" + data;
+            if (res == "error") {
+                $("#loginErrorAlert").html("Неправильный логин или пароль");
+                $("#loginErrorAlert").show();
+            } else {
+
+                window.location.href = "@routes.Manage.myInfo()";
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
 
 
 

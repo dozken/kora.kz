@@ -132,8 +132,8 @@ public class Global extends GlobalSettings {
 		if (AuthorisedUser.find.findRowCount() == 0) {
 			AuthorisedUser user = new AuthorisedUser();
 			user.userName = "Technovision LTD";
-			user.email = "info@technovision.kz";
-			user.password = "19771977";
+			user.email = "a@a.kz";
+			user.password = "a@a.kz";
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("admin"));
 			user.roles.add(SecurityRole.findByName("user"));
@@ -173,6 +173,7 @@ public class Global extends GlobalSettings {
 		}
 
 		if (Ad.find.findRowCount() == 0) {
+			for(int i=0;i<5;i++){
 			Ad ad = new Ad();
 			ad.animal = Animal.find.where().eq("name", "ЛОШАДЬ").findUnique();
 			ad.breed = Breed.find.where().eq("name", "АХАЛТЕКЕ").findUnique();
@@ -188,9 +189,11 @@ public class Global extends GlobalSettings {
 			price.price = "100000";
 			price.currency = "тг";
 			price.save();
+			ad.status = "pending";
 			ad.priceType = price;
 			// TODO tags
 			ad.save();
+			}
 
 		}
 	}
