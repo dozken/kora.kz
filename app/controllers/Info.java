@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+
 import models.Locations;
 import models.ad.Image;
 import models.contact.Region;
@@ -14,6 +15,8 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.profile.info.edit.myInfoEdit;
+
+import org.apache.commons.codec.binary.Base64;  
 
 import java.io.File;
 import java.util.List;
@@ -64,36 +67,40 @@ public class Info extends Controller {
             user.userSocials.add(fillSocilal("skype",requestData.get("skype")));
 
             user.profile.phone = requestData.get("phone");
-            if(user.locations != null){
+            if(requestData.get("location")!=null && !requestData.get("location").equals("")) {
+                System.out.println("1");
+                if (user.locations != null) {
+                    System.out.println("2");
+                    String[] loc = requestData.get("location").substring(1, requestData.get("location").length() - 1).split(",");
 
-                String[] loc = requestData.get("location").substring(1,requestData.get("location").length()-1).split(",");
+                    if (loc.length == 2) {
 
-                if(loc.length==2) {
+                        System.out.println("3");
 
+                        user.locations.lat = loc[0].trim();
+                        user.locations.lng = loc[1].trim();
 
-                    user.locations.lat = loc[0].trim();
-                    user.locations.lng = loc[1].trim();
+                    }
 
+                } else {
+                    System.out.println("4");
+                    String[] loc = requestData.get("location").substring(1, requestData.get("location").length() - 1).split(",");
+
+                    if (loc.length == 2) {
+                        System.out.println("5");
+                        Locations locations = new Locations();
+                        locations.lat = loc[0].trim();
+                        locations.lng = loc[1].trim();
+                        user.locations = locations;
+                    }
                 }
-
-            }else{
-
-                String[] loc = requestData.get("location").substring(1,requestData.get("location").length()-1).split(",");
-
-                 if(loc.length==2) {
-
-                     Locations locations = new Locations();
-                     locations.lat = loc[0].trim();
-                     locations.lng = loc[1].trim();
-                     user.locations = locations;
-                 }
             }
-
+            System.out.println("6");
             user.profile.address = requestData.get("address");
             user.profile.description = requestData.get("description");
             user.profile.gender = requestData.get("gender");
             user.userName = requestData.get("company_name");
-
+            System.out.println("7");
             user.update();
             return ok("success");//renderImage(icon.id);
         }catch (Exception e) {
@@ -138,4 +145,11 @@ public class Info extends Controller {
 
         return b;
     }
+    
+  
+    @SuppressWarnings("static-access")
+	public static String byteToBase64(byte[] data) {  
+    	  Base64 base64 = new Base64();  
+    	  return base64.encodeBase64String(data);  
+    	 }  
 }

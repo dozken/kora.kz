@@ -1,5 +1,6 @@
 package controllers;
 
+import models.user.AuthorisedUser;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.profile.ads.myAds;
@@ -27,7 +28,7 @@ public class Manage extends Controller {
 	}
 	
 	public static Result myInfo(){
-		return ok(myInfo.render());
+		return ok(myInfo.render(AuthorisedUser.findByEmail(session("connected"))));
 	}
 	
     public static Result saveProfile(){
