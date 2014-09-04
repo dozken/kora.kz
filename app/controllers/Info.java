@@ -3,7 +3,6 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
-import com.ning.http.util.Base64;
 import models.Locations;
 import models.ad.Image;
 import models.contact.Region;
@@ -50,8 +49,8 @@ public class Info extends Controller {
                     Image icon = new Image();
                     byte[] ima = com.google.common.io.Files.toByteArray(file);
                     icon.contentType = picture.getContentType();
-                    String encodedImage = Base64.encode(ima);
-                    icon.content = encodedImage;
+
+                    icon.content = ima;
                     icon.save();
                     user.profile.image = icon;
                 }
