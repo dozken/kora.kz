@@ -25,9 +25,8 @@ public class Image extends Model {
 	@Id
 	public Long id;
 	
-	@Constraints.Required
-	@Lob
-	public String content;
+
+	public byte[] content;
 
 	@Constraints.Required
 	public String contentType;

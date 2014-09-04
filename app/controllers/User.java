@@ -18,20 +18,12 @@ public class User extends Controller {
 			return ok();
 		}
 		else if (AuthorisedUser.find.where().eq("email", userForm.get().email).findUnique() == null) {
+			
+			System.out.println(userForm);
 			AuthorisedUser user = userForm.get();
 			user.roles = new ArrayList<SecurityRole>();
-			if(AuthorisedUser.findByEmail(session("connected")).roles.contains(SecurityRole.findByName("admin")))
-				user.roles.add(SecurityRole.findByName("moderator"));
-			else
-				user.roles.add(SecurityRole.findByName("user"));
             Profile p = new Profile();
             user.profile=p;
-
-            UserSocials socials = new UserSocials();
-            socials.socialNetwork = SocialNetwork.find.byId(1L);
-            socials.value="asik brat";
-
-            user.userSocials.add(socials);
 
             user.save();
 
@@ -41,7 +33,7 @@ public class User extends Controller {
 				user.roles.add(SecurityRole.findByName("moderator"));
 			else
 				user.roles.add(SecurityRole.findByName("user"));
-			user.save();
+			user.update();
 			return ok("success");
 		} else {
 			flash("error","Эта почта уже используется!, попробуйте другую.");
