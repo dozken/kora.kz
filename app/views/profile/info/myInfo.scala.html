@@ -1,4 +1,4 @@
-
+@(user:models.user.AuthorisedUser)
 @main("Мой профиль") {
 
 <div class="container">
@@ -7,9 +7,22 @@
 </div>
 <div class="col-lg-9 ">
 	@profile._title("МОЙ ПРОФИЛЬ"){ }	
-	@_show()
+	@_show(user)
 </div>
 
 </div>
 
 }
+<script>
+    url = GMaps.staticMapURL({
+    size: [610, 300],
+    zoom:14,
+    lat: @user.locations.lat,
+    lng: @user.locations.lng,
+    markers: [
+    {lat: @user.locations.lat, lng: @user.locations.lng},
+    ]
+    });
+
+    $('<img/>').attr('src', url).appendTo('#map');
+</script>
