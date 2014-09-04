@@ -33,7 +33,7 @@
 					<div id="profile_image" name="image">
                         @if(user.profile.image!=null){
 
-                            <img src="data:@user.profile.image.contentType;base64, @user.profile.image.content" style="height:180px;width:180px;">
+                            <img src="data:@user.profile.image.contentType;base64, @controllers.Info.byteToBase64(user.profile.image.content)" style="height:180px;width:180px;">
                         }
 
 					</div>
@@ -71,10 +71,10 @@
 				<label class="col-md-2 control-label" for="radios">Пол</label>
 				<div class="col-md-4">
 					<label class="radio-inline" for="radios-0"> <input
-						type="radio" name="gender" value="male"
-						@if(user.profile.gender!=null && user.profile.gender.equals("male")){checked="checked"}> муж
+						type="radio" name="gender" value="муж"
+						@if(user.profile.gender!=null && user.profile.gender.equals("муж")){checked="checked"}> муж
 					</label> <label class="radio-inline" for="radios-1"> <input
-						type="radio" name="gender"  value="female" @if(user.profile.gender!=null &&user.profile.gender.equals("female")){checked="checked"}> жен
+						type="radio" name="gender"  value="жен" @if(user.profile.gender!=null &&user.profile.gender.equals("жен")){checked="checked"}> жен
 					</label>
 				</div>
 			</div>
@@ -135,14 +135,15 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="selectbasic5">Карта</label>
-				<div class="col-md-5">
-                    <div id="mouse_event_map"></div>
-                    <input type="hidden" value="" id="location" name="location">
 
+                    <a map="yandex" class="mapSelect">Яндекс</a>
+                    <a map="google" class="mapSelect">Google</a>
 
-				</div>
+                <div id="mouse_event_map"></div>
+                <input type="hidden" value="" id="location" name="location">
+
 			</div>
+
 
 
 
