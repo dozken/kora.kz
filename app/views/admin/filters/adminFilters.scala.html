@@ -1,0 +1,147 @@
+
+@main("Фильтры") {
+
+<style>
+.modal-dialog{
+	width: 300px;
+}
+[data-bb-handler="confirm"]	{
+	
+}
+</style>
+
+<div class="container">
+<div class="col-lg-3 menudiv" >@profile._menu()</div>
+<div class="col-lg-9 ">
+  @profile._title("ФИЛЬТРЫ"){ }
+  @_filters()
+</div>
+
+</div>
+}
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+$(document).ajaxSuccess(function() {
+	console.log( "Triggered ajaxSuccess handler." );
+
+	setTimeout(function() {
+		$(".alert-dismissable").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove();
+		});
+	}, 1500);
+});
+	
+//breed crud
+$(document).on("change", ".animal.select", function(e) {
+    var val = $(this).val();
+    jsRoutes.controllers.Filters.getBreeds(val).ajax({
+        success: function(data) {
+            $("#breedList").hide();
+            $("#breedList").html(data);
+            $("#breedList").slideDown();
+            $("#breeds").slideDown();
+        },
+    });
+});
+$(document).on("click", ".breed.add", function(e) {
+    e.preventDefault();
+    jsRoutes.controllers.Filters.addBreed().ajax({
+        data: $("#breedForm").serialize(),
+        success: function(data) {
+            $("#breedList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+$(document).on("click", ".breed.update", function(e) {
+    e.preventDefault();
+    var val = $("input[breed=" + $(this).attr("breed") + "]").val();
+    var before = $("input[breed=" + $(this).attr("breed") + "]").attr("before");    
+    if(val!=before)
+    jsRoutes.controllers.Filters.updateBreed($(this).attr("breed"), val).ajax({
+        success: function(data) {
+            $("#breedList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+$(document).on("click", ".breed.delete", function(e) {
+    e.preventDefault();
+    var breed = $(this).attr("breed");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.Filters.deleteBreed(breed).ajax({
+            success: function(data) {
+              $("#breedList").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#breedList").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+
+//region crud
+$(document).on("click", ".region.add", function(e) {
+    e.preventDefault();
+    jsRoutes.controllers.Filters.addRegion().ajax({
+        data: $("#regionForm").serialize(),
+        success: function(data) {
+            $("#regionList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+$(document).on("click", ".region.update", function(e) {
+    e.preventDefault();
+    
+    var val = $("input[region=" + $(this).attr("region") + "]").val();
+    var before = $("input[region=" + $(this).attr("region") + "]").attr("before");    
+    if(val!=before)
+    jsRoutes.controllers.Filters.updateRegion($(this).attr("region"), val).ajax({
+        success: function(data) {
+            $("#regionList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+$(document).on("click", ".region.delete", function(e) {
+    e.preventDefault();
+    var region = $(this).attr("region");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.Filters.deleteRegion(region).ajax({
+            success: function(data) {
+              $("#regionList").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#regionList").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+</script>
