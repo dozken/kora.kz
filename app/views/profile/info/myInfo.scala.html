@@ -17,10 +17,13 @@
     url = GMaps.staticMapURL({
     size: [610, 300],
     zoom:14,
-    lat: @user.location.lat,
-    lng: @user.location.lng,
+    lat: @if(user.location!=null){@user.location.lat}else{"0"},
+    lng: @if(user.location!=null){@user.location.lng}else{"0"},
     markers: [
-    {lat: @user.location.lat, lng: @user.location.lng},
+    {
+    	lat: @if(user.location!=null){@user.location.lat}else{"0"}, 
+    	lng: @if(user.location!=null){@user.location.lng}else{"0"}
+    	},
     ]
     });
 
