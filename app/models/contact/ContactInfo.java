@@ -25,6 +25,9 @@ public class ContactInfo extends Model {
 	@ManyToOne
 	public Region region;
 	
+	@ManyToOne
+	public City city;
+	
 	public String company;
 	
 	public List<String> phone;

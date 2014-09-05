@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import models.ad.Image;
+import models.contact.City;
 import models.contact.Region;
 import play.db.ebean.Model;
 
@@ -30,6 +31,9 @@ public class Profile extends Model {
 
 	@ManyToOne
 	public Region region;
+	
+	@ManyToOne
+	public City city;
 
 	public String gender;
 
