@@ -1,0 +1,49 @@
+<br>
+@utils._flashAlert("error","danger")
+@utils._flashAlert("success","success")
+	<table class="table table-striped table-condensed table-responsive tabmrg" >
+		<thead>
+			<tr>
+				<td>No</td>
+				<td align="center">Очередь</td>
+				<td>Компания</td>
+				<td>Место на стр</td>
+				<td>Действия</td>
+				@*
+				<td>Реклама</td>
+				<td>Длителность</td>
+				<td>Продлить</td>
+				<td>Удалить</td>
+				*@
+			</tr>
+		</thead>
+		<tbody id="sortable">
+			
+		
+@for((advert,index)<-models.admin.Advertisement.find.where.orderBy("position").findList.zipWithIndex){
+<tr>
+  <td>@{index+1}</td>
+  <td align="center">
+    <span class="glyphicon glyphicon-collapse-up up order" advertisement="@advert.id"></span> 
+    <span class="glyphicon glyphicon-collapse-down down order" advertisement="@advert.id"></span></td>
+  <td>@advert.company</td>
+  <td>@advert.placeOnPage</td>
+  <td>
+    <a class="btn btn-default btn-xs myb advertisementFile" data-content='<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400">'>
+      <span class="glyphicon glyphicon-eye-open"></span>
+    </a>
+  @*
+  </td>
+  <td>
+  *@
+    <a class="btn btn-default btn-xs myb extend"><span class="glyphicon glyphicon-time "></span></a>
+  @*
+  </td>
+  <td>
+  *@
+    <a class="btn btn-default btn-xs myb archive" advertisement="@advert.id"><span class="glyphicon glyphicon-trash"></span></a>
+  </td>
+</tr>
+}
+</tbody>
+</table>

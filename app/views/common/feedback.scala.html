@@ -1,0 +1,47 @@
+ @main("Напишите нам") {
+
+<div class="container">
+	<div class="searchbarmargin">@_searchbar()</div>
+	<h2>Напишите нам</h2>
+
+
+	<p class="topka">Здесь вы можете оставить свой отзыв о проекте или
+		обратиться в службу поддержки. Мы прочитаем ваше письмо с 9:00 до
+		18:00 в рабочие дни и до 17:00 в выходные.</p>
+
+	<p>Также, в рабочее время, вы можете позвонить нам по
+		многоканальному телефону +7 (727) 331-11-86.</p>
+
+	<p>Будем благодарны за найденные ошибки и предложения о добавлении
+		категорий, которых вам не хватает. Спасибо!</p>
+	
+
+
+<form class="form-horizontal topka motomoto">
+  <div class="form-group">
+    <label class="col-sm-2 control-label leftalign" for="inputEmail3">Электронная почта</label>
+    <div class="col-sm-4">
+      <input class="form-control" id="inputEmail3" type="email"> <span class="help-block" style="font-style: italic">На этот адрес придет уведомление об ответе</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label leftalign" for="inputPassword3">Сообщение</label>
+    <div class="col-sm-4">
+      <textarea class="form-control" rows="6"></textarea>
+      <span class="help-block" style="font-style: italic">Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label leftalign" for="inputPassword3">Введите код</label>
+    <div class="col-sm-4">
+      <img class="imgmargin" src='@routes.Assets.at("images/captcha.png")'><input class="form-control" id="inputEmail3" type="text"> <span class="help-block" style="font-style: italic">Хотим убедиться, что вы его
+      не забудете</span>
+    </div>
+  </div>
+  <div class="form-group col-sm-offset-2 col-sm-4">
+    <button class="btn btn-success" type="submit">Отправить</button>
+  </div>
+</form>
+	
+</div>
+}

@@ -1,0 +1,26 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+<ul class="ras nopaddingleft">
+	@for(setting<-models.user.AuthorisedUser.findByEmail(session.get("connected")).userSettings){
+	<li>
+	    <ul class="ras2">
+		<li class="ras3">@setting.setting.name</li>
+		<li><input type="checkbox" class="switcher change userSettings" setting="@setting.id" name="my-checkbox" @if(setting.status.equals("on")){checked}></li>
+		</ul>
+	</li>
+	}
+	
+
+	@restrict(la(as("admin"))){
+	<hr>
+	@for(setting<-models.user.AuthorisedUser.findByEmail(session.get("connected")).adminSettings){
+	<li>
+	    <ul class="ras2">
+		<li class="ras3">@setting.setting.name</li>
+		<li><input type="checkbox" class="switcher change adminSettings" setting="@setting.id" name="my-checkbox" @if(setting.status.equals("on")){checked}></li>
+		</ul>
+	</li>
+	}	
+	}
+</ul>
