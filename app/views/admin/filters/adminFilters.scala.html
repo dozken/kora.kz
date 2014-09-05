@@ -42,8 +42,10 @@ $(document).ajaxSuccess(function() {
 		});
 	}, 1500);
 });
-	
-//breed crud
+
+
+
+//City crud
 $(document).on("change", ".animal.select", function(e) {
     var val = $(this).val();
     jsRoutes.controllers.Filters.getBreeds(val).ajax({
@@ -55,6 +57,7 @@ $(document).on("change", ".animal.select", function(e) {
         },
     });
 });
+
 $(document).on("click", ".breed.add", function(e) {
     e.preventDefault();
     jsRoutes.controllers.Filters.addBreed().ajax({
@@ -67,6 +70,7 @@ $(document).on("click", ".breed.add", function(e) {
         }
     });
 });
+
 $(document).on("click", ".breed.update", function(e) {
     e.preventDefault();
     var val = $("input[breed=" + $(this).attr("breed") + "]").val();
@@ -138,6 +142,66 @@ $(document).on("click", ".region.delete", function(e) {
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#regionList").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+
+
+///city crud
+$(document).on("change", ".region.select", function(e) {
+    var val = $(this).val();
+    jsRoutes.controllers.Filters.getCities(val).ajax({
+        success: function(data) {
+            $("#cityList").hide();
+            $("#cityList").html(data);
+            $("#cityList").slideDown();
+            $("#cities").slideDown();
+        },
+    });
+});
+
+
+$(document).on("click", ".city.add", function(e) {
+    e.preventDefault();
+    jsRoutes.controllers.Filters.addCity().ajax({
+        data: $("#cityForm").serialize(),
+        success: function(data) {
+            $("#cityList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+
+$(document).on("click", ".city.update", function(e) {
+    e.preventDefault();
+    var val = $("input[city=" + $(this).attr("city") + "]").val();
+    var before = $("input[city=" + $(this).attr("city") + "]").attr("before");    
+    if(val!=before)
+    jsRoutes.controllers.Filters.updateCity($(this).attr("city"), val).ajax({
+        success: function(data) {
+            $("#cityList").html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+$(document).on("click", ".city.delete", function(e) {
+    e.preventDefault();
+    var city = $(this).attr("city");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.Filters.deleteBreed(city).ajax({
+            success: function(data) {
+              $("#cityList").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#cityList").html(data);
               //console.log(jqXHR.responseText);
             }
         });

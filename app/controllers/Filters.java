@@ -3,15 +3,74 @@ package controllers;
 import static play.data.Form.form;
 import models.ad.Animal;
 import models.ad.Breed;
+import models.contact.City;
 import models.contact.Region;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.filters.breed._breed;
 import views.html.admin.filters.region._region;
+import views.html.admin.filters.city.*;
 
 public class Filters extends Controller {
 
+	public static Result getCities(Long id) {
+		return ok(_city.render(models.contact.Region.find.byId(id)));
+	}
+	
+	public static Result addCity() {
+		Form<City> cityForm = form(City.class).bindFromRequest();
+		flash().remove("error");
+		
+		if (cityForm.hasErrors()) {
+			flash("error", "Не могу сохранить!");
+			return badRequest();
+		}/*
+		if(City.find.where().eq("name", cityForm.get().name).findRowCount()>0){
+			flash("error", "Нельзя сохранить, город <strong>"+cityForm.get().name+"</strong> уже существует!");
+			return ok(_city.render(cityForm.get().region));
+		}*/
+		else {
+			System.out.println(cityForm);
+			City city = cityForm.get();
+			flash("success", "Город <strong>" + city.name + "</strong> добавлен!");
+			city.save();
+			return ok(_city.render(city.region));
+		}
+	}
+	
+	public static Result updateCity(Long id, String name) {
+		City city = City.find.byId(id);
+		if (City.find.where().eq("name", name).findRowCount() > 0 && !city.equals(City.find.where().eq("name", name).findUnique())) {
+			flash("error", "Нельзя обновить, город <strong>" + name + "</strong> уже существует!");
+			return ok(_city.render(city.region));
+		} else {
+			flash("success", "Город <strong>" + city.name + "</strong> изменен на <strong>" + name + "</strong>!");
+			city.name = name;
+			city.update();
+			return ok(_city.render(city.region));
+		}
+	}
+	
+	public static Result deleteCity(Long id) {
+		City city = City.find.byId(id);
+		Region region = city.region;
+		if (city.contactInfos != null && city.contactInfos.size() > 0) {
+			flash("error", "Нельзя удалить, <strong>" + city.contactInfos.size() + "</strong> контактов с городом <strong>" + city.name+ "</strong>!");
+			return ok(_city.render(region));
+		} else {
+			flash("success", "Город <strong>" + city.name + "</strong> удален!");
+			city.delete();
+			return ok(_city.render(region));
+		}
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * */
 	public static Result getBreeds(Long id) {
 		return ok(_breed.render(models.ad.Animal.find.byId(id)));
 	}
@@ -63,6 +122,10 @@ public class Filters extends Controller {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * */
 	public static Result addRegion() {
 		Form<Region> regionForm = form(Region.class).bindFromRequest();
 		flash().remove("error");

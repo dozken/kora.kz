@@ -4,34 +4,39 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import models.Location;
 import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
-public class Region extends Model {
+public class City extends Model {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Model.Finder<Long, Region> find = new Model.Finder<Long, Region>(
-			Long.class, Region.class);
-	
+	public static final Model.Finder<Long, City> find = new Model.Finder<Long, City>(
+			Long.class, City.class);
 	@Id
 	public Long id;
 	
+	@ManyToOne
+	public Region region;
+
 	public String name;
 	
-	@OneToMany(mappedBy="region")
+	@OneToOne
+	public Location location;
+	
+	@OneToMany(mappedBy="city")
 	public List<Profile> profiles;
 	
-	@OneToMany(mappedBy="region")	
+	@OneToMany(mappedBy="city")	
 	public List<ContactInfo> contactInfos;
-	
-	@OneToMany(mappedBy="region")	
-	public List<City> city;
-	
+
 }

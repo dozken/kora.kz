@@ -43,7 +43,7 @@ GET         /profile/info                          controllers.Manage.myInfo()
 GET         /profile/info/edit                     controllers.Info.edit()
 POST        /profile/info/edit/:id                 controllers.Info.update(id:Long)
 
-GET         /admin/                                controllers.Administer.ads()
+GET         /admin                                 controllers.Administer.ads()
 GET         /admin/ads                             controllers.Administer.ads()
 GET         /admin/filter                          controllers.Administer.filters()
 GET         /admin/filter/breed/                   controllers.Filters.getBreeds(id:Long)
@@ -53,6 +53,11 @@ POST        /admin/filter/breed/:id/delete         controllers.Filters.deleteBre
 GET         /admin/filter/region/add               controllers.Filters.addRegion()
 GET         /admin/filter/region/update            controllers.Filters.updateRegion(id: Long,name: String)
 POST        /admin/filter/region/:id/delete        controllers.Filters.deleteRegion(id: Long)
+GET         /admin/filter/city/                   controllers.Filters.getCities(id:Long)
+GET         /admin/filter/city/add                controllers.Filters.addCity()
+GET         /admin/filter/city/update             controllers.Filters.updateCity(id: Long,name: String)
+POST        /admin/filter/city/:id/delete         controllers.Filters.deleteCity(id: Long)
+
 
 GET         /admin/advetisements                   controllers.Administer.advetiments()
 POST        /admin/advetisement/add                controllers.Advertisements.add()
