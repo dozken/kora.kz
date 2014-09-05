@@ -1,8 +1,9 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlQuery;
-import com.avaje.ebean.SqlRow;
+import static play.data.Form.form;
+
+import java.io.File;
+import java.util.List;
 
 import models.Location;
 import models.ad.Image;
@@ -10,18 +11,18 @@ import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.SocialNetwork;
 import models.user.UserSocials;
+
+import org.apache.commons.codec.binary.Base64;
+
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.profile.info.edit.myInfoEdit;
 
-import org.apache.commons.codec.binary.Base64;  
-
-import java.io.File;
-import java.util.List;
-
-import static play.data.Form.form;
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 
 public class Info extends Controller {
 	

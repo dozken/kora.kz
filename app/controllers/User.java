@@ -4,12 +4,14 @@ import static play.data.Form.form;
 
 import java.util.ArrayList;
 
-import com.avaje.ebean.Ebean;
-
-import models.user.*;
+import models.user.AuthorisedUser;
+import models.user.Profile;
+import models.user.SecurityRole;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import com.avaje.ebean.Ebean;
 
 public class User extends Controller {
 

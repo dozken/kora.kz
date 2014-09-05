@@ -1,13 +1,9 @@
 package models.user;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
-
-import java.util.List;
 
 @Entity
 public class SocialNetwork extends Model {

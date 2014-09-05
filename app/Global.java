@@ -14,10 +14,13 @@ import models.ad.Quantity;
 import models.admin.AdminSetting;
 import models.contact.ContactInfo;
 import models.contact.Region;
-import models.user.*;
+import models.user.AuthorisedUser;
+import models.user.Profile;
+import models.user.SecurityRole;
+import models.user.SocialNetwork;
+import models.user.UserSetting;
 import play.Application;
 import play.GlobalSettings;
-import play.mvc.Controller;
 
 import com.avaje.ebean.Ebean;
 

@@ -1,14 +1,9 @@
 package models;
 
-import models.admin.AdminSetting;
-import models.user.UserSetting;
-import play.db.ebean.Model;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
+
+import play.db.ebean.Model;
 
 @Entity
 public class Location extends Model {
