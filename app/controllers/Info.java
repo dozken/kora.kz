@@ -4,7 +4,7 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
-import models.Locations;
+import models.Location;
 import models.ad.Image;
 import models.contact.Region;
 import models.user.AuthorisedUser;
@@ -69,7 +69,7 @@ public class Info extends Controller {
             user.profile.phone = requestData.get("phone");
             if(requestData.get("location")!=null && !requestData.get("location").equals("")) {
                 System.out.println("1");
-                if (user.locations != null) {
+                if (user.location != null) {
                     System.out.println("2");
                     String[] loc = requestData.get("location").substring(1, requestData.get("location").length() - 1).split(",");
 
@@ -77,8 +77,8 @@ public class Info extends Controller {
 
                         System.out.println("3");
 
-                        user.locations.lat = loc[0].trim();
-                        user.locations.lng = loc[1].trim();
+                        user.location.lat = loc[0].trim();
+                        user.location.lng = loc[1].trim();
 
                     }
 
@@ -88,10 +88,10 @@ public class Info extends Controller {
 
                     if (loc.length == 2) {
                         System.out.println("5");
-                        Locations locations = new Locations();
-                        locations.lat = loc[0].trim();
-                        locations.lng = loc[1].trim();
-                        user.locations = locations;
+                        Location location = new Location();
+                        location.lat = loc[0].trim();
+                        location.lng = loc[1].trim();
+                        user.location = location;
                     }
                 }
             }

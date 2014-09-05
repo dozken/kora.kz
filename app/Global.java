@@ -17,6 +17,7 @@ import models.contact.Region;
 import models.user.*;
 import play.Application;
 import play.GlobalSettings;
+import play.mvc.Controller;
 
 import com.avaje.ebean.Ebean;
 
@@ -24,7 +25,7 @@ public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application application) {
-
+		
 		if (Setting.find.findRowCount() == 0) {
 			Map<Integer, String> userSettings = new TreeMap<Integer, String>();
 			userSettings.put(1, "Получать рассылку сайта и уведомления?");
@@ -131,9 +132,9 @@ public class Global extends GlobalSettings {
 
 		if (AuthorisedUser.find.findRowCount() == 0) {
 			AuthorisedUser user = new AuthorisedUser();
-			user.userName = "Technovision LTD";
-			user.email = "a@a.kz";
-			user.password = "a@a.kz";
+			user.userName = "ТОО ҚОРА";
+			user.email = "admin@kora.kz";
+			user.password = "admin1234";
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("admin"));
 			user.roles.add(SecurityRole.findByName("user"));
@@ -166,6 +167,8 @@ public class Global extends GlobalSettings {
 			profile.region = Region.find.where().eq("name", "Алматы").findUnique();
 			profile.user = user;
 			user.profile = profile;
+			user.location.lat = "43.28507838269254";
+			user.location.lng = "76.89537048339844";
 			
 			user.save();
 			Ebean.saveManyToManyAssociations(user, "roles");
@@ -179,7 +182,7 @@ public class Global extends GlobalSettings {
 			ad.breed = Breed.find.where().eq("name", "АХАЛТЕКЕ").findUnique();
 			ad.birthDate = new Date();
 			ad.contactInfo = new ContactInfo(Region.find.where()
-					.eq("name", "Астана").findUnique(), "Technovisoin",
+					.eq("name", "Астана").findUnique(), "Марат қойшы",
 					"+77773332255", "email@mail.com", "map");
 			ad.title = "Заголовок";
 			ad.description = "Очень много текста. Ну очень много. Слишком много.";

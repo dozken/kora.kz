@@ -11,16 +11,15 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name="locations")
-public class Locations extends Model {
+public class Location extends Model {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Finder<Long, Locations> find = new Finder<Long, Locations>(
-			Long.class, Locations.class);
+	public static final Finder<Long, Location> find = new Finder<Long, Location>(
+			Long.class, Location.class);
 	
 	@Id
 	public Long id;

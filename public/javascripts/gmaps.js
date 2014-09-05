@@ -1320,14 +1320,14 @@ GMaps.prototype.removeRoutes = function() {
 
 GMaps.prototype.getElevations = function(options) {
   options = extend_object({
-    locations: [],
+    location: [],
     path : false,
     samples : 256
   }, options);
 
-  if (options.locations.length > 0) {
-    if (options.locations[0].length > 0) {
-      options.locations = array_flat(array_map([options.locations], arrayToLatLng,  false));
+  if (options.location.length > 0) {
+    if (options.location[0].length > 0) {
+      options.location = array_flat(array_map([options.location], arrayToLatLng,  false));
     }
   }
 
@@ -1349,7 +1349,7 @@ GMaps.prototype.getElevations = function(options) {
   //path request
   } else {
     var pathRequest = {
-      path : options.locations,
+      path : options.location,
       samples : options.samples
     };
 

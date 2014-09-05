@@ -48,7 +48,10 @@ url: '@controllers.routes.Info.update(user.id)',
 type: 'POST',
 data: new FormData( this ),
 processData: false,
-contentType: false
+contentType: false,
+success:function(data){
+	window.location.href = "@routes.Manage.myInfo()";
+}
 } );
 e.preventDefault();
 } );
@@ -60,13 +63,13 @@ $(document).on("click",".mapSelect",function(){
     var myPlacemark ;
 
     myMap = new ymaps.Map ( "mouse_event_map", {
-    @if(user.locations!=null) {center :[ @user.locations.lat, @user.locations.lng ],}else{center :[43.237887,  76.927437]}
+    @if(user.location!=null) {center :[ @user.location.lat, @user.location.lng ],}else{center :[43.237887,  76.927437]}
     zoom : 14,
     controls: ["zoomControl"]
     } ) ;
-    @if(user.locations!=null) {
+    @if(user.location!=null) {
 
-     myPlacemark = new ymaps.Placemark([@user.locations.lat, @user.locations.lng], { content: 'Москва!', balloonContent: 'Столица России' });
+     myPlacemark = new ymaps.Placemark([@user.location.lat, @user.location.lng], { content: 'Москва!', balloonContent: 'Столица России' });
      myMap.geoObjects.add(myPlacemark);
 }
 
@@ -117,10 +120,10 @@ $(document).on("click",".mapSelect",function(){
 
     });
 
-        @if(user.locations!=null) {
+        @if(user.location!=null) {
             myMap = map.addMarker ( {
-            lat: @user.locations.lat,
-            lng: @user.locations.lng,
+            lat: @user.location.lat,
+            lng: @user.location.lng,
             infoWindow : {
             content : '<p>' + $ ( "#company_name" ).val ( ) + '</p>'
             }
