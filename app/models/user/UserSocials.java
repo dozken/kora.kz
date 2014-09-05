@@ -1,14 +1,11 @@
 package models.user;
 
-import be.objectify.deadbolt.core.models.Permission;
-import be.objectify.deadbolt.core.models.Role;
-import be.objectify.deadbolt.core.models.Subject;
-import controllers.User;
-import models.admin.AdminSetting;
-import play.db.ebean.Model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-import java.util.List;
+import play.db.ebean.Model;
 
 @Entity
 @Table(name="socials_user")
