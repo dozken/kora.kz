@@ -14,6 +14,7 @@
 }
 
 <script>
+var myMap;
 var choose = document.getElementById('filebutton');
 FileAPI.event.on(choose, 'change', function (evt){
 var files = FileAPI.getFiles(evt); // Retrieve file list
@@ -52,15 +53,48 @@ contentType: false
 e.preventDefault();
 } );
 })
+$(document).on("click",".mapSelect",function(){
+
+    if($(this ).attr("map")=="yandex") {
+
+    var myPlacemark ;
+
+    myMap = new ymaps.Map ( "mouse_event_map", {
+    @if(user.locations!=null) {center :[ @user.locations.lat, @user.locations.lng ],}else{center :[43.237887,  76.927437]}
+    zoom : 14,
+    controls: ["zoomControl"]
+    } ) ;
+    @if(user.locations!=null) {
+
+     myPlacemark = new ymaps.Placemark([@user.locations.lat, @user.locations.lng], { content: 'Москва!', balloonContent: 'Столица России' });
+     myMap.geoObjects.add(myPlacemark);
+}
+
+    myMap.events.add ( 'click', function ( e ) {
+
+    myMap.geoObjects.remove ( myPlacemark ) ;
+
+    var coords = e.get ( 'coords' ) ;
+    myPlacemark = new ymaps.Placemark ( coords, { content : 'Москва!', balloonContent : 'Столица России' } ) ;
+    myMap.geoObjects.add ( myPlacemark ) ;
+    } )
+
+    }else{
+
+
+    }
+})
+
+
 </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     /**
     * Mouse Events on Maps
     */
 
     $(document).ready(function(){
-    var myMap;
+
     map = new GMaps({
     div: '#mouse_event_map',
     zoom: 14,
