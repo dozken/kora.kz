@@ -55,6 +55,7 @@ public class Application extends Controller {
 		if (user != null && user.password.equals(requestData.get("password"))) {
 			session("connected", user.email);
 			flash("thank you");
+			changeLang("ru");
 			return redirect(request().getHeader("referer"));
 		} else {
 			return ok("error");

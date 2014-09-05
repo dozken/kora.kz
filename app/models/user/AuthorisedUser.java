@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import models.Locations;
+import models.Location;
 import models.admin.AdminSetting;
 import play.db.ebean.Model;
 import be.objectify.deadbolt.core.models.Permission;
@@ -54,7 +54,7 @@ public class AuthorisedUser extends Model implements Subject {
 	public List<AdminSetting> adminSettings;
 
     @OneToOne(cascade=CascadeType.ALL)
-    public  Locations locations;
+    public  Location location;
 
 	@Override
 	public List<? extends Role> getRoles() {

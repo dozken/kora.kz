@@ -1,3 +1,5 @@
+
+
 @for((ad,index)<-models.ad.Ad.find.where.eq("status","pending").findList.zipWithIndex){
 
 <tr id="ad@ad.id">
@@ -10,7 +12,7 @@
 	<td>@ad.quantity.name</td>
 	<td>@{ad.birthDate.format("yyyy")}</td>
 	<td>@ad.priceType.price @ad.priceType.currency</td>
-	<td>@ad.status</td>
+	<td>@Messages(ad.status)</td>
 	@*
 	<td>@ad.views</td>
 	<td>@ad.shares</td>
