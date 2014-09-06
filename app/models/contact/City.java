@@ -2,6 +2,7 @@ package models.contact;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -30,7 +31,7 @@ public class City extends Model {
 
 	public String name;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	public Location location;
 	
 	@OneToMany(mappedBy="city")
