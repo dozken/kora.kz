@@ -55,7 +55,7 @@ GET         /admin/filter/region/update            controllers.Filters.updateReg
 POST        /admin/filter/region/:id/delete        controllers.Filters.deleteRegion(id: Long)
 GET         /admin/filter/city/                   controllers.Filters.getCities(id:Long)
 GET         /admin/filter/city/add                controllers.Filters.addCity()
-GET         /admin/filter/city/update             controllers.Filters.updateCity(id: Long,name: String)
+GET         /admin/filter/city/update             controllers.Filters.updateCity(id: Long,name: String, latlng:String)
 POST        /admin/filter/city/:id/delete         controllers.Filters.deleteCity(id: Long)
 
 

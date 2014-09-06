@@ -6,9 +6,9 @@
 @for((city,index) <- models.contact.City.find.where.eq("region",region).orderBy("name").findList.zipWithIndex){
 <div class="input-group imgmargin">
   <span class="input-group-addon">@{index+1}</span>
-  <input type="text" class="form-control" validation="not_null" city="@city.id" before="@city.name" value="@city.name" />
+  <input type="text" class="form-control" validation="not_null" city="@city.id" before="@city.name" latlng="@city.location.lat, @city.location.lng" value="@city.name" />
   <span class="input-group-btn">
-    <button class="btn btn-default nobord city map" city="@city.id" type="button" data-toggle="tooltip" data-placement="top" title="Изменить"><span class="glyphicon glyphicon-globe"></span></button>
+    <button class="btn btn-default nobord city map" city="@city.id" lat="@city.location.lat" lng="@city.location.lng" type="button" data-toggle="tooltip" data-placement="top" title="Изменить"><span class="glyphicon glyphicon-globe"></span></button>
   </span>
   <span class="input-group-btn">
     <button class="btn btn-default nobord city update" city="@city.id" type="button" data-toggle="tooltip" data-placement="top" title="Изменить"><span class="glyphicon glyphicon-ok"></span></button>

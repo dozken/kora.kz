@@ -41,6 +41,11 @@ $(document).ajaxSuccess(function() {
 			$(this).remove();
 		});
 	}, 1500);
+	$('.city.map').popover({
+    	html:true,
+    	placement:'right',
+    	title: $(this).val(),
+    	content:'<div id="globus" style="width:521px;height: 521px"></div>'});
 });
 
 
@@ -180,9 +185,10 @@ $(document).on("click", ".city.add", function(e) {
 $(document).on("click", ".city.update", function(e) {
     e.preventDefault();
     var val = $("input[city=" + $(this).attr("city") + "]").val();
-    var before = $("input[city=" + $(this).attr("city") + "]").attr("before");    
-    if(val!=before)
-    jsRoutes.controllers.Filters.updateCity($(this).attr("city"), val).ajax({
+    var before = $("input[city=" + $(this).attr("city") + "]").attr("before");   
+    var latlng = $("input[city=" + $(this).attr("city") + "]").attr("latlng");
+    //if(val!=before)
+    jsRoutes.controllers.Filters.updateCity($(this).attr("city"), val,latlng).ajax({
         success: function(data) {
             $("#cityList").html(data);
         },
@@ -196,7 +202,7 @@ $(document).on("click", ".city.delete", function(e) {
     var city = $(this).attr("city");    
     bootbox.confirm("Вы уверены?", function(confirm) {
     	if(confirm)
-        jsRoutes.controllers.Filters.deleteBreed(city).ajax({
+        jsRoutes.controllers.Filters.deleteCity(city).ajax({
             success: function(data) {
               $("#cityList").html(data);
             },
@@ -208,4 +214,98 @@ $(document).on("click", ".city.delete", function(e) {
     });
     $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
 });
+
+var myMap;
+$(document).on("click", ".mapSelect", function() {
+    if ($(this).attr("map") == "yandex") {
+    	ymaps.ready(init);
+    	
+    	var myPlacemark;
+
+    	function init() {
+    	    myMap = new ymaps.Map("mapDiv", {
+    	        center: [43.237887, 76.927437],
+    	        controls: ["zoomControl"],
+    	        zoom: 16
+    	    });
+    	    myPlacemark = new ymaps.Placemark([43.237887, 76.927437], {
+	            content: 'Алматы',
+	            balloonContent: 'Алматы'
+	        });
+    	    
+    	    myMap.geoObjects.add(myPlacemark);
+    	    myMap.events.add('click', function(e) {
+
+    	        myMap.geoObjects.remove(myPlacemark);
+
+    	        var coords = e.get('coords');
+    	        $("#location").val(coords);
+    	        myPlacemark = new ymaps.Placemark(coords, {
+    	            content: '<p>' + $("#city").val() + '</p>',
+    	            balloonContent: '<p>' + $("#city").val() + '</p>'
+    	        });
+    	        
+    	        myMap.geoObjects.add(myPlacemark);
+    	    });
+    	}
+    }
+    if ($(this).attr("map") == "google"){
+    	//gmap
+    	var myGmap = new GMaps({
+    	    div: '#mapDiv',
+    	    zoom: 14,
+    	    lat: "43.276978",
+    	    lng: "76.893096",
+    	    click: function(e) {
+    	        $("#location").val(e.latLng);
+    	        myGmap.removeMarker(myMap);
+    	        myMap = myGmap.addMarker({
+    	            position: e.latLng,
+    	            infoWindow: {
+    	                content: '<p>' + $("#city").val() + '</p>'
+    	            }
+    	        });
+    	    },
+    	});
+    }
+});
+
+
+
+$(document).on("click", ".city.map", function(e) {
+    e.preventDefault();
+    
+    //$(this).popover("show");
+    var city = $(this).attr("city");
+    var latVal = $(this).attr("lat");
+    var lngVal = $(this).attr("lng");
+    var that =  $("input[city=" + $(this).attr("city") + "]");
+    console.log(that)
+    console.log(latVal)
+    console.log(lngVal)
+    
+    var map;
+    var myGmap = new GMaps({
+	    div: '#globus',
+	    zoom: 14,
+	    lat: latVal,
+	    lng: lngVal,
+	    click: function(e) {
+	        $(that).attr("latlng",e.latLng);
+	        myGmap.removeMarker(map);
+	        map = myGmap.addMarker({
+	            position: e.latLng,
+	            infoWindow: {
+	                content: '<p>' + $(that).val() + '</p>'
+	            }
+	        });
+	        $(this).popover("hide");
+	    },
+	});
+});
+
+
+
+
+
 </script>

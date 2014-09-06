@@ -28,7 +28,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-
+.mapSelect{
+	cursor:pointer;
+}
 
 
 .icon-addAd:before {
