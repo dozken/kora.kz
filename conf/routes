@@ -15,9 +15,11 @@ POST        /user/forgotPassword                   controllers.User.resetPasswor
 GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
 POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
 
-GET         /ad/create                             controllers.Ads.create()
+GET         /ad/show                               controllers.Ads.show()
+POST        /ad/create                             controllers.Ads.create()
 GET         /ad/search                             controllers.Ads.search()
 GET         /ad/:id                                controllers.Ads.get(id: Long)
+GET         /ad/breed/:id                           controllers.Ads.getBreeds(id:Long)
 #GET     /ad/:id/edit                controllers.Ads.edit(id: Long)
 #POST    /ad/:id/update              controllers.Ads.update(id: Long)
 #POST    /ad/:id/extend              controllers.Ads.extend(id: Long)
@@ -67,7 +69,7 @@ GET         /admin/advetisement/:id/remove         controllers.Advertisements.re
 
 
 GET         /admin/users                           controllers.Administer.users()
-GET         /admin/moderators                           controllers.Administer.moderators()
+GET         /admin/moderators                      controllers.Administer.moderators()
 
 # Javascript routing
 GET         /assets/javascripts/routes             controllers.Application.javascriptRoutes()

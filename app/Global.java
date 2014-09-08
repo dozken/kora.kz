@@ -186,14 +186,13 @@ public class Global extends GlobalSettings {
 			Ad ad = new Ad();
 			ad.animal = Animal.find.where().eq("name", "ЛОШАДЬ").findUnique();
 			ad.breed = Breed.find.where().eq("name", "АХАЛТЕКЕ").findUnique();
-			ad.birthDate = new Date();
+			ad.birthDate = 2000;
 			ad.contactInfo = new ContactInfo(Region.find.where()
 					.eq("name", "Астана").findUnique(), "Марат қойшы",
 					"+77773332255", "email@mail.com", "map");
 			ad.title = "Заголовок";
 			ad.description = "Очень много текста. Ну очень много. Слишком много.";
-			ad.quantity = Quantity.find.where().eq("name", "Косяк")
-					.findUnique();
+			ad.quantity = "many";
 			Price price = new Price();
 			price.price = "100000";
 			price.currency = "тг";
