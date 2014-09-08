@@ -3,12 +3,7 @@ package models.ad;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
@@ -48,20 +43,20 @@ public class Ad extends Model{
 	@Column(columnDefinition = "TEXT")
 	public String description;
 	
-	@OneToMany
-	public List<Image> images;
+	@OneToMany(cascade= CascadeType.ALL)
+	public List<AdImage> images;
 	
-	@ManyToOne
+	@OneToOne(cascade= CascadeType.ALL)
 	public ContactInfo contactInfo;
 	
 	@ManyToMany
 	public List<Tag> tags;
 	
-	public String status;
+	public String status = "pending";
 	
-	public Integer views;
+	public Integer views = 0;
 	
-	public Integer shares;
+	public Integer shares = 0;
 	
 //	TODO
 //	public AdSetting adSettings;
