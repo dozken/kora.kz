@@ -4,7 +4,8 @@ import models.ad.Ad;
 import models.ad.Animal;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.ad.create.*;
+import views.html.ad.create._breed;
+import views.html.ad.create.createAd;
 import views.html.ad.search.adSearch;
 import views.html.ad.show.showAd;
 

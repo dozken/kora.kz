@@ -182,6 +182,7 @@ $(document).on("click", "#registrButton", function(e) {
 
     jsRoutes.controllers.User.register().ajax({
         data: $("#registerForm").serialize(),
+        type: 'POST',
         success: function(data) {
             var res = "" + data;
             if (res == "error") {
