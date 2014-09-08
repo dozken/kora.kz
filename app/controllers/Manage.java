@@ -1,6 +1,5 @@
 package controllers;
 
-import be.objectify.deadbolt.java.actions.SubjectPresent;
 import models.user.AuthorisedUser;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -9,6 +8,7 @@ import views.html.profile.info.myInfo;
 import views.html.profile.messages.myMessages;
 import views.html.profile.payments.myPayments;
 import views.html.profile.settings.mySettings;
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 
 @SubjectPresent
 public class Manage extends Controller {
