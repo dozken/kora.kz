@@ -1,0 +1,25 @@
+<form class="form-inline" role="form" id="advertisementForm" enctype="multipart/form-data" method="POST" >
+  <fieldset>
+    <!-- Form Name -->
+    <div class="form-group">
+      <input class="form-control" type="text" name="company" placeholder="Компания" />
+    </div>
+    <div class="form-group">
+        <select class="form-control" name="placeOnPage">
+          <option selected disabled hidden>Место на сайте</option>
+          <option value="Правый верхний блок">Правый верхний блок</option>
+          <option value="Правый нижний блок">Правый нижний блок</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="fileUpload btn btn-default">
+          <span class="glyphicon glyphicon-folder-open"></span>
+          <input class="upload" type="file" name="embeddedObject" accept=".jpg,.png,.flv" />
+        </div>
+        <span class="fnt10">*.jpg,*.png,*.gif,*.swf (240x400px)</span>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success" id="advertisementAdd" name="singlebutton">Добавить</button>
+    </div>
+  </fieldset>
+</form>
