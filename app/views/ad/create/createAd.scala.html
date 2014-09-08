@@ -28,7 +28,12 @@ clear: both;
 $("#images" ).sortable({
 placeholder: 'ui-state-highlight',
 connectWith: '.connectedList',
-dropOnEmpty: true
+dropOnEmpty: true,
+stop: function (event, ui) {
+var data = $ ( this ).sortable ( 'serialize' ) ;
+$("#image_order" ).val(data);
+    alert(data);
+}
 });
 
 var choose = document.getElementById('choose');
@@ -43,23 +48,20 @@ return  false;
 }, function (files/**Array*/, rejected/**Array*/){
 if( files.length<=5 ){
 // Make preview 100x100
-var i=0;
+var order="";
     FileAPI.each ( files, function ( file ) {
 
     FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
-        $("#images" ).append("<li id=sorted_element_"+i+" style=' display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>");
-        $("#sorted_element_"+i ).html(img);
-      i++;
-    } ) ;
-    } ) ;
-   $(document ).on("ready",function(){
+        var name = file.name.replace(".", "");
+        $("#images" ).append("<li id=item-"+ name+" style=' display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>");
+        $("#item-"+ name).html(img);
 
-       alert("sdf");
-   })
-    }else
-    {
-        alert("max picture 5");
-    }
+        order+="item[]="+name+"&";
+    $("#image_order" ).val(order);
+    } ) ;
+    } ) ;
+    }else{alert("max picture 5");}
+
 
 // Uploading Files
 //FileAPI.upload({
@@ -75,7 +77,7 @@ var i=0;
 });
 
 
-    $(document ).on("change","#animal_list",function(){
+    $(document ).on("change","#animal",function(){
 
     var id = Number($(this ).val());
 
@@ -86,5 +88,185 @@ var i=0;
 }
 });
     })
+
+$(document ).on("change","#region",function(){
+
+var id = Number($(this ).val());
+
+jsRoutes.controllers.Ads.getCities(id).ajax({
+success: function(data) {
+
+$("#city_list" ).html(data);
+
+}
+});
+})
+
+$(document).on("click", "#ad_form_submit", function() {
+$('#ad_form')
+.submit(function(e) {
+$.ajax({
+url: '@controllers.routes.Ads.create',
+type: 'POST',
+data: new FormData(this),
+processData: false,
+contentType: false,
+success: function(data) {
+//window.location.href = "@routes.Manage.myInfo()";
+}
+});
+e.preventDefault();
+});
+});
+
+var lat ="43.237887";
+var lng ="76.927437";
+var marker;
+var myPlacemark;
+var isMarker=false;
+var curMap="google";
+$(document ).on("change","#city",function(){
+lat = $('option:selected', this).attr('lat');
+lng = $('option:selected', this).attr('lng');
+isMarker=false;
+
+    if(curMap=="yandex"){
+        $("#mouse_event_map" ).html("");
+    myMap = new ymaps.Map ( "mouse_event_map", {
+    center :[lat,  lng],
+    zoom : 14,
+    controls: ["zoomControl"]
+    } ) ;
+
+    myMap.events.add ( 'click', function ( e ) {
+    lat = e.get ( 'coords' )[0];
+    lng = e.get ( 'coords' )[1];
+    isMarker = true ;
+
+    myMap.geoObjects.remove ( myPlacemark ) ;
+
+    var coords = e.get ( 'coords' ) ;
+
+    myPlacemark = new ymaps.Placemark ( coords) ;
+    myMap.geoObjects.add ( myPlacemark ) ;
+    } )
+    }else {
+    map = new GMaps ( {
+    div : '#mouse_event_map',
+    zoom : 14,
+    lat : lat,
+    lng : lng,
+    width : '700px',
+    height : '400px',
+    click : function ( e ) {
+    $ ( "#location" ).val ( e.latLng ) ;
+    lat = e.latLng.lat ( ) ;
+    lng = e.latLng.lng ( ) ;
+    isMarker = true ;
+    map.removeMarker ( marker ) ;
+    marker = map.addMarker ( {
+    position : e.latLng
+    } ) ;
+    }
+    } ) ;
+    }
+})
+
+
+$(document).on("click",".mapSelect",function(){
+
+if($(this ).attr("map")=="yandex") {
+curMap="yandex";
+
+
+myMap = new ymaps.Map ( "mouse_event_map", {
+center :[lat,  lng],
+zoom : 14,
+controls: ["zoomControl"]
+} ) ;
+
+myMap.events.add ( 'click', function ( e ) {
+
+   lat = e.get ( 'coords' )[0];
+   lng = e.get ( 'coords' )[1];
+isMarker = true ;
+myMap.geoObjects.remove ( myPlacemark ) ;
+
+var coords = e.get ( 'coords' ) ;
+myPlacemark = new ymaps.Placemark ( coords) ;
+myMap.geoObjects.add ( myPlacemark ) ;
+} )
+
+if(isMarker){
+myPlacemark = new ymaps.GeoObject({
+geometry: {
+type: "Point",
+coordinates: [lat, lng]
+}});
+myMap.geoObjects.add ( myPlacemark ) ;
+}
+
+}else{
+curMap="google";
+map = new GMaps({
+div: '#mouse_event_map',
+zoom: 14,
+lat: lat,
+lng:  lng,
+width: '700px',
+height: '400px',
+click: function(e) {
+$("#location" ).val( e.latLng);
+lat= e.latLng.lat();
+lng= e.latLng.lng();
+isMarker=true;
+map.removeMarker(marker);
+marker =  map.addMarker({
+position:e.latLng
+});
+}
+});
+if(isMarker){
+map.removeMarker(marker);
+marker=map.addMarker({
+lat: lat,
+lng: lng,
+});
+}
+}
+})
+
+
+</script>
+
+<script type="text/javascript">
+/**
+* Mouse Events on Maps
+*/
+
+$(document).ready(function(){
+
+map = new GMaps({
+div: '#mouse_event_map',
+zoom: 14,
+lat: lat,
+lng:  lng,
+width: '700px',
+height: '400px',
+click: function(e) {
+$("#location" ).val( e.latLng);
+lat= e.latLng.lat();
+lng= e.latLng.lng();
+isMarker=true;
+map.removeMarker(marker);
+marker =  map.addMarker({
+position:e.latLng
+});
+}
+
+});
+
+});
+
 
 </script>

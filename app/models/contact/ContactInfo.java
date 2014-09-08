@@ -3,11 +3,9 @@ package models.contact;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import models.Location;
 import play.db.ebean.Model;
 
 @Entity
@@ -30,11 +28,12 @@ public class ContactInfo extends Model {
 	
 	public String company;
 	
-	public List<String> phone;
+	public String phone;
 	
 	public String email;
-	
-	public String pointOnMap;	
+
+    @OneToOne(cascade=CascadeType.ALL)
+    public Location location;
 	
 	
 	public ContactInfo (){
@@ -44,10 +43,10 @@ public class ContactInfo extends Model {
 	public ContactInfo (Region r, String c,String p, String e, String m){
 		region = r;
 		company = c;
-		phone = new ArrayList<String>();
-		phone.add(p);
+		phone = "";
+
 		email = e;
-		pointOnMap = m;
+
 		save();
 		
 	}
