@@ -1,0 +1,9 @@
+@(animal:models.ad.Animal)
+
+<select id="breed" class="form-control">
+    @for(breed<-animal.getBreeds){
+
+        <option value="@breed.id">@breed.name</option>
+
+    }
+</select>
