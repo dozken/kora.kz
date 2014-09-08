@@ -11,8 +11,8 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.filters.breed._breed;
+import views.html.admin.filters.city._city;
 import views.html.admin.filters.region._region;
-import views.html.admin.filters.city.*;
 
 public class Filters extends Controller {
 

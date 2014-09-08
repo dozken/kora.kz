@@ -9,12 +9,11 @@ GET         /feedback                              controllers.Application.feedb
 POST        /user/login                            controllers.Application.signIn()
 GET         /user/logout                           controllers.Application.signOut()
 
-
-#GET     /user/:id                   controllers.User.get(id: Long)                     
 POST        /user/register                         controllers.User.register()
-#POST    /user/:id/delete            controllers.User.delete(id: Long)
-
-
+GET         /user/forgotPassword                   controllers.User.forgotPassword()
+POST        /user/forgotPassword                   controllers.User.resetPassword()
+GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
+POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
 
 GET         /ad/show                               controllers.Ads.show()
 POST        /ad/create                             controllers.Ads.create()

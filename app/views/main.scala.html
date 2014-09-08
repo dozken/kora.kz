@@ -18,6 +18,8 @@
         <link rel="stylesheet" media="screen" href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'>
         
         <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+        
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("MotionCAPTCHA/jquery.motionCaptcha.0.2.css")'>
 		<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -41,6 +43,8 @@
         <script src='@routes.Assets.at("javascripts/gmaps.js")' type="text/javascript"></script>
         <script src='@routes.Assets.at("javascripts/dist/FileAPI.min.js")' type="text/javascript"></script>
         <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  		
+  		<script src='@routes.Assets.at("MotionCAPTCHA/jquery.motionCaptcha.0.2.js")' type="text/javascript"></script>
   		
     </body>
 
@@ -167,6 +171,9 @@ $(document).ready(function(e) {
             .find('[data-bind="bs-drp-sel-label"]').text($target.attr('data-value')); /*$target.text()*/
         return false;
     });
+    
+        
+    //$('#myModal2').motioncaptcha();
 
 });
 
