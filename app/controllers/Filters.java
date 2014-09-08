@@ -1,8 +1,6 @@
 package controllers;
 
 import static play.data.Form.form;
-import be.objectify.deadbolt.java.actions.Group;
-import be.objectify.deadbolt.java.actions.Restrict;
 import models.Location;
 import models.ad.Animal;
 import models.ad.Breed;
@@ -15,6 +13,8 @@ import play.mvc.Result;
 import views.html.admin.filters.breed._breed;
 import views.html.admin.filters.city._city;
 import views.html.admin.filters.region._region;
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 
 @Restrict(@Group("admin"))
 public class Filters extends Controller {
