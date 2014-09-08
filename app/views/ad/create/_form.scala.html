@@ -1,6 +1,8 @@
+@import models.contact.Region
+
 @import models.ad.Animal
 
-<form class="form-horizontal" Method="post" action="@routes.Ads.create">
+<form id="ad_form" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -10,7 +12,8 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic">Животное</label>
   <div class="col-md-3">
-    <select id="animal_list" name="animal_type" class="form-control">
+    <select id="animal" name="animal" class="form-control">
+        <option selected disabled hidden> Выберите животное</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
       }
@@ -27,11 +30,11 @@
   <label class="col-md-2 control-label" for="checkboxes">Пол</label>
   <div class="col-md-4">
     <label class="checkbox-inline" for="checkboxes-0">
-      <input type="checkbox" name="animal_gender" id="checkboxes-0" value="1">
+      <input type="checkbox" name="animal_gender[]" id="checkboxes-0" value="1">
       Самец
     </label>
     <label class="checkbox-inline" for="checkboxes-1">
-      <input type="checkbox" name="animal_gender" id="checkboxes-1" value="2">
+      <input type="checkbox" name="animal_gender[]" id="checkboxes-1" value="2">
       Самка
     </label>
   </div>
@@ -41,11 +44,11 @@
   <label class="col-md-2 control-label" for="radios">Количество</label>
   <div class="col-md-4"> 
     <label class="radio-inline" for="radios-0">
-      <input type="radio" name="quantity" id="radios-0" value="1" checked="checked">
+      <input type="radio" name="quantity" id="radios-0" value="single" checked="checked">
       Один
     </label> 
     <label class="radio-inline" for="radios-1">
-      <input type="radio" name="quantity" id="radios-1" value="2">
+      <input type="radio" name="quantity" id="radios-1" value="many">
       Косяк
     </label>
   </div>
@@ -71,13 +74,13 @@
 
   <div class="radio">
     <label for="radios1-0">
-      <input type="radio" name="payment_type" id="payment_type" value="1" checked="checked">
+      <input type="radio" name="payment_type" id="payment_type" value="normal" checked="checked">
           
 
 
             <div class="input-group below24 bias-input-group inpgr">
 
-              <input type="text" value="" class="form-control" name="custom_name">
+              <input type="text" value="" class="form-control" name="money">
          
               <div class="input-group-btn bs-dropdown-to-select-group">
               <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
@@ -103,13 +106,13 @@
 
   <div class="radio">
     <label for="radios1-1">
-      <input type="radio" name="payment_type" id="radios1-1" value="2">
+      <input type="radio" name="payment_type" id="radios1-1" value="change">
       На обмен
     </label>
 	</div>
   <div class="radio">
     <label for="radios1-2">
-      <input type="radio" name="payment_type" id="radios1-2" value="3">
+      <input type="radio" name="payment_type" id="radios1-2" value="negotiable_price">
       Договорная цена
     </label>
 	</div>
@@ -120,7 +123,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput">Заголовок</label>  
   <div class="col-md-6">
-  <input id="textinput" name="ad_header" type="text" placeholder="" class="form-control input-md">
+  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
   <span class="help-block">Максимальная длина 70 символов.</span>  
   </div>
 </div>
@@ -146,7 +149,8 @@
   <div class="col-md-4">
     <div class="fileUpload btn myb">
     <span class="icon-photo"> Добавить Фотографии</span>
-    <input type="file" id="choose" class="upload" multiple />
+    <input type="file" id="choose" name="image_file" class="upload" multiple />
+    <input type="hidden" id="image_order" name="image_order">
 </div>
   </div>
 
@@ -169,8 +173,10 @@
   <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
   <div class="col-md-3">
     <select id="region" name="region" class="form-control">
-      <option value="1">Алматы</option>
-      <option value="2">Шиелі</option>
+        <option selected disabled hidden> Выберите регион</option>
+      @for(region<-Region.find.all()) {
+          <option value="@region.id">@region.name</option>
+      }
     </select>
   </div>
 </div>
@@ -178,11 +184,8 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic3">Город</label>
-  <div class="col-md-3">
-    <select id="city" name="city" class="form-control">
-      <option value="1">Астана</option>
-      <option value="2">Кызылорда</option>
-    </select>
+  <div id="city_list" class="col-md-3">
+
   </div>
 </div>
 
@@ -215,21 +218,21 @@
   </div>
 </div>
 
-<div class="form-group">
-  <label class="col-md-2 control-label" for="selectbasic5">Карта</label>
-    <div class="col-md-5">
-<a id="firmsonmap_biglink" href="http://maps.2gis.ru/#/?history=project/almaty/center/76.857494705499,43.226979900591/zoom/18/state/widget/id/9429940001569726/firms/9429940001569726">Перейти к большой карте</a>
-<script charset="utf-8" type="text/javascript" src="http://firmsonmap.api.2gis.ru/js/DGWidgetLoader.js"></script>
-<script charset="utf-8" type="text/javascript">new DGWidgetLoader({"borderColor":"#a3a3a3","width":"700","height":"400","wid":"19616ecba202f38abf048207f7037b23","pos":{"lon":"76.857494705499","lat":"43.226979900591","zoom":"18"},"opt":{"ref":"hidden","card":["name","contacts","schedule","payings"],"city":"almaty"},"org":[{"id":"9429940001569726"}]});</script>
-<noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
-  </div>
-</div>
+    <div class="form-group">
+
+        <a map="yandex" class="mapSelect">Яндекс</a>
+        <a map="google" class="mapSelect">Google</a>
+
+        <div id="mouse_event_map"></div>
+        <input type="hidden" value="" id="location" name="location">
+
+    </div>
 
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-success">Подать объявление</button>
+    <button id="ad_form_submit" name="singlebutton" class="btn btn-success">Подать объявление</button>
   </div>
 </div>
 

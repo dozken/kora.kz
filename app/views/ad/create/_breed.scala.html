@@ -1,6 +1,7 @@
 @(animal:models.ad.Animal)
 
-<select id="breed" class="form-control">
+<select id="breed" name="breed" class="form-control">
+    <option selected disabled hidden> Выберите тип</option>
     @for(breed<-animal.getBreeds){
 
         <option value="@breed.id">@breed.name</option>
