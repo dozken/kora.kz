@@ -12,7 +12,10 @@ import views.html.ad.show.showAd;
 public class Ads extends Controller {
 
 	public static Result get(Long id) {
-		return ok(showAd.render(Ad.find.byId(id)));
+		Ad ad = Ad.find.byId(id);
+		++ad.views;
+		ad.update();
+		return ok(showAd.render(ad));
 	}
 
 	public static Result create() {

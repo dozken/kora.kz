@@ -1,10 +1,11 @@
 
 # Home page
 GET         /                                      controllers.Application.index()
-
+GET     /captcha                    controllers.Application.captcha
 GET         /websocket                             controllers.Application.socketHandler()
 GET         /about                                 controllers.Application.about()
 GET         /feedback                              controllers.Application.feedback()
+POST        /feedback                              controllers.Application.sendFeedback()
 
 POST        /user/login                            controllers.Application.signIn()
 GET         /user/logout                           controllers.Application.signOut()
