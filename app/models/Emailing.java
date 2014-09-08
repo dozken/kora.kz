@@ -16,4 +16,17 @@ public class Emailing {
 		//sends both text and html
 		//mail.send( "text", "<html>html</html>");
 	}
+	
+	public static void send(String subject, String recipient,String body){
+		MailerAPI mail = play.Play.application().plugin(MailerPlugin.class).email();
+		mail.setSubject(subject);
+		mail.setRecipient(recipient);
+		mail.setFrom("Қора <noreply@kora.kz>");
+		//sends html
+		mail.sendHtml(body);
+		//sends text/text
+		//mail.send( "text" );
+		//sends both text and html
+		//mail.send( "text", "<html>html</html>");
+	}
 }

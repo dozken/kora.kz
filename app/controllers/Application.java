@@ -1,9 +1,20 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import javax.imageio.ImageIO;
+
+import models.Emailing;
 import models.user.AuthorisedUser;
+import play.Play;
 import play.Routes;
 import play.data.DynamicForm;
+import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.WebSocket;
@@ -11,11 +22,32 @@ import views.html.common.about;
 import views.html.common.feedback;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.*;
+
+import views.html.mailBody.*;
 
 public class Application extends Controller {
 
+	public static Result captcha() {
+		DefaultKaptcha captchaPro = new DefaultKaptcha();
+		captchaPro.setConfig(new Config(new Properties()));
+		String text = captchaPro.createText();
+		session(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, text);
+		// Logger.debug("Captcha:" + text);// U can put the text in cache.
+		BufferedImage img = captchaPro.createImage(text);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(img, "jpg", baos);
+			baos.flush();
+		} catch (IOException e) {
+			// Logger.debug(e.getMessage());
+		}
+		return ok(baos.toByteArray()).as("image/jpg");
+	}
+
 	public static WebSocket<JsonNode> socketHandler() {
-		return controllers.WS.socket;
+		return WS.socket;
 	}
 
 	public static Result javascriptRoutes() {
@@ -87,7 +119,31 @@ public class Application extends Controller {
 	}
 
 	public static Result feedback() {
+		// flash("email","");
+		// flash("text","");
 		return ok(feedback.render());
 	}
 
+	public static Result sendFeedback() {
+		DynamicForm requestData = form().bindFromRequest();
+		String kaptchaExpected = session(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		String kaptchaReceived = requestData.get("kaptcha");
+		String email = requestData.get("email");
+		String text = requestData.get("text");
+		if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
+
+			Emailing.send("Напишите нам", Play.application().configuration().getString("support.email"),
+					feedbackMessage.render(email, text).body());
+			flash("success", "Сообщение успешно отправлено.");
+			session().remove(
+					com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+			return redirect(request().getHeader("referer"));
+		} else {
+			flash("error", "Введите, пожалуйста, цифры с картинки.");
+			flash("email", email);
+			flash("text", text);
+			return ok(feedback.render());
+		}
+
+	}
 }
