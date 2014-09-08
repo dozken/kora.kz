@@ -33,7 +33,7 @@ public class User extends Controller {
 			user.roles = new ArrayList<SecurityRole>();
 			user.profile = new Profile();
 
-			if (AuthorisedUser.findByEmail(session("connected")).roles
+			if (session("connected")!=null&&AuthorisedUser.findByEmail(session("connected")).roles
 					.contains(SecurityRole.findByName("admin")))
 				user.roles.add(SecurityRole.findByName("moderator"));
 			else {
