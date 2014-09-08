@@ -1,6 +1,8 @@
 package controllers;
 
 import static play.data.Form.form;
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 import models.Location;
 import models.ad.Animal;
 import models.ad.Breed;
@@ -14,6 +16,7 @@ import views.html.admin.filters.breed._breed;
 import views.html.admin.filters.city._city;
 import views.html.admin.filters.region._region;
 
+@Restrict(@Group("admin"))
 public class Filters extends Controller {
 
 	public static Result getCities(Long id) {
@@ -26,15 +29,6 @@ public class Filters extends Controller {
 		city.name = requestData.get("name");
 		city.region = Region.find.ref(Long.parseLong(requestData
 				.get("region.id")));
-
-		// if (City.find.where().eq("name", city.name).findRowCount() > 0) {
-		// flash("error", "Нельзя сохранить, город <strong>"
-		// + cityForm.get().name + "</strong> уже существует!");
-		// return ok(_city.render(cityForm.get().region));
-		// }
-		//
-		// else {
-		//
 		String[] loc;
 		String coords = requestData.get("location");
 		if (requestData.get("location").startsWith("("))
@@ -56,29 +50,15 @@ public class Filters extends Controller {
 
 	public static Result updateCity(Long id, String name, String latlng) {
 		City city = City.find.byId(id);
-		/*
-		 * if (City.find.where().eq("name", name).findRowCount() > 0 &&
-		 * !city.equals(City.find.where().eq("name", name).findUnique())) {
-		 * flash("error", "Нельзя обновить, город <strong>" + name +
-		 * "</strong> уже существует!"); return ok(_city.render(city.region)); }
-		 * else {
-		 */
 		String[] loc;
 		String coords = latlng;
 		if (latlng.startsWith("("))
 			coords = latlng.substring(1, latlng.length() - 1);
 		loc = coords.split(",");
-		System.out
-				.println(">>>>" + city.location.lat + ":" + city.location.lng);
 		city.location.lat = loc[0].trim();
 		city.location.lng = loc[1].trim();
-		System.out
-				.println(">>>>" + city.location.lat + ":" + city.location.lng);
 		city.name = name;
 		city.update();
-		System.out
-				.println(">>>>" + city.location.lat + ":" + city.location.lng);
-
 		flash("success", "Город <strong>" + city.name
 				+ "</strong> изменен на <strong>" + name + "</strong>!");
 		return ok(_city.render(city.region));
@@ -101,12 +81,6 @@ public class Filters extends Controller {
 		}
 	}
 
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * */
 	public static Result getBreeds(Long id) {
 		return ok(_breed.render(models.ad.Animal.find.byId(id)));
 	}
@@ -228,11 +202,4 @@ public class Filters extends Controller {
 
 	}
 
-	/*
-	 * public static Result addCity(){ return TODO; }
-	 * 
-	 * public static Result updateCity(Long id){ return TODO; }
-	 * 
-	 * public static Result deleteCity(Long id){ // Breed return TODO; }
-	 */
 }

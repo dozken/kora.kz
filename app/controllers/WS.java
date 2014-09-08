@@ -11,17 +11,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class WS {
-	
+
 	public static ArrayList<WebSocket.Out<JsonNode>> channels = new ArrayList<WebSocket.Out<JsonNode>>();
 
 	public static WebSocket<JsonNode> socket = new WebSocket<JsonNode>() {
-		
+
 		// called when the websocket is established
 		public void onReady(WebSocket.In<JsonNode> in,
 				WebSocket.Out<JsonNode> out) {
-			
+
 			channels.add(out);
-			
+
 			// When the message come.
 			in.onMessage(new Callback<JsonNode>() {
 				public void invoke(JsonNode event) {
