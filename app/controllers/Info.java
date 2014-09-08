@@ -19,11 +19,13 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.profile.info.edit.myInfoEdit;
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
+@SubjectPresent
 public class Info extends Controller {
 
 	public static Result edit() {

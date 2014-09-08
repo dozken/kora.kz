@@ -5,6 +5,8 @@ import static play.data.Form.form;
 import java.io.File;
 import java.io.IOException;
 
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 import models.admin.Advertisement;
 import play.data.DynamicForm;
 import play.mvc.Controller;
@@ -20,6 +22,7 @@ public class Advertisements extends Controller {
 		return ok(advertisement.file).as(advertisement.fileType);
 	}
 
+	@Restrict(@Group("admin"))
 	public static Result add() {
 
 		MultipartFormData body = request().body().asMultipartFormData();
@@ -43,7 +46,8 @@ public class Advertisements extends Controller {
 
 			Advertisement.addPosition();
 			advertisement.save();
-			flash("success", "Реклама от <strong>" + advertisement.company+ "</strong> добавлена!");
+			flash("success", "Реклама от <strong>" + advertisement.company
+					+ "</strong> добавлена!");
 			return ok(_advertisement.render());
 		}
 		return ok(_advertisement.render());
@@ -54,21 +58,25 @@ public class Advertisements extends Controller {
 		return TODO;
 	}
 
+	@Restrict(@Group("admin"))
 	public static Result remove(Long id) {
 		Advertisement advertisement = Advertisement.find.byId(id);
 		Advertisement.removePosition(advertisement);
 		advertisement.delete();
-		flash("success", "Реклама от <strong>" + advertisement.company+ "</strong> удалена!");
+		flash("success", "Реклама от <strong>" + advertisement.company
+				+ "</strong> удалена!");
 		return ok(_advertisement.render());
 	}
-	
-	
-	public static Result replace(Long id, String direction){
+
+	@Restrict(@Group("admin"))
+	public static Result replace(Long id, String direction) {
 		Advertisement advertisement = Advertisement.find.byId(id);
-//		if(direction.equals("up"))
-//			flash("success", "Реклама от <strong>" + advertisement.company+ "</strong> перемещена в верх!");
-//		if(direction.equals("down"))
-//			flash("success", "Реклама от <strong>" + advertisement.company+ "</strong> перемещена в низ!");
+		// if(direction.equals("up"))
+		// flash("success", "Реклама от <strong>" + advertisement.company+
+		// "</strong> перемещена в верх!");
+		// if(direction.equals("down"))
+		// flash("success", "Реклама от <strong>" + advertisement.company+
+		// "</strong> перемещена в низ!");
 		Advertisement.rePosition(advertisement, direction);
 		return ok(_advertisement.render());
 	}

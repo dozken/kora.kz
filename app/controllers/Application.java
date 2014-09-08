@@ -43,9 +43,8 @@ public class Application extends Controller {
 				controllers.routes.javascript.Advertisements.remove(),
 				controllers.routes.javascript.Advertisements.replace(),
 				controllers.routes.javascript.Administer.moderate(),
-                controllers.routes.javascript.Ads.getBreeds(),
-				controllers.routes.javascript.Ads.get()
-				));
+				controllers.routes.javascript.Ads.getBreeds(),
+				controllers.routes.javascript.Ads.get()));
 	}
 
 	// public static Result changeLanguage(String language) {
