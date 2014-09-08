@@ -35,10 +35,10 @@ public class Ad extends Model{
 	
 	public String gender = "Другой";
 	
-	@ManyToOne
-	public Quantity quantity;
+
+	public String quantity;
 	
-	public Date birthDate = new Date();;
+	public Integer birthDate;
 	
 	@ManyToOne
 	public Price priceType;

@@ -24,7 +24,7 @@ public class Quantity extends Model {
 	
 	public String name;
 	
-	@OneToMany
+
 	public List<Ad> ads;
 	
 }
