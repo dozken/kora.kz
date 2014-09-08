@@ -1,4 +1,6 @@
-<form class="form-horizontal" action="@routes.Ads.create">
+@import models.ad.Animal
+
+<form class="form-horizontal" Method="post" action="@routes.Ads.create">
 <fieldset>
 
 <!-- Form Name -->
@@ -8,14 +10,14 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic">Животное</label>
   <div class="col-md-3">
-    <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Корова</option>
-      <option value="2">Лошадь</option>
+    <select id="animal_list" name="animal_type" class="form-control">
+      @for(animal <- Animal.find.all()) {
+          <option value="@animal.id">@animal.name</option>
+      }
     </select>
-  </div>  <div class="col-md-3">
-    <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Ахалтеке</option>
-    </select>
+  </div>
+    <div id="breed_list" class="col-md-3">
+
   </div>
 </div>
 
@@ -25,11 +27,11 @@
   <label class="col-md-2 control-label" for="checkboxes">Пол</label>
   <div class="col-md-4">
     <label class="checkbox-inline" for="checkboxes-0">
-      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      <input type="checkbox" name="animal_gender" id="checkboxes-0" value="1">
       Самец
     </label>
     <label class="checkbox-inline" for="checkboxes-1">
-      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      <input type="checkbox" name="animal_gender" id="checkboxes-1" value="2">
       Самка
     </label>
   </div>
@@ -39,11 +41,11 @@
   <label class="col-md-2 control-label" for="radios">Количество</label>
   <div class="col-md-4"> 
     <label class="radio-inline" for="radios-0">
-      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+      <input type="radio" name="quantity" id="radios-0" value="1" checked="checked">
       Один
     </label> 
     <label class="radio-inline" for="radios-1">
-      <input type="radio" name="radios" id="radios-1" value="2">
+      <input type="radio" name="quantity" id="radios-1" value="2">
       Косяк
     </label>
   </div>
@@ -53,7 +55,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
   <div class="col-md-2">
-    <select id="selectbasic1" name="selectbasic1" class="form-control">
+    <select id="selectbasic1" name="age" class="form-control">
       <option value="2000">2000</option>
       <option value="2001">2001</option>
       <option value="2002">2002</option>
@@ -69,7 +71,7 @@
 
   <div class="radio">
     <label for="radios1-0">
-      <input type="radio" name="radios1" id="radios1-0" value="1" checked="checked">
+      <input type="radio" name="payment_type" id="payment_type" value="1" checked="checked">
           
 
 
@@ -80,15 +82,15 @@
               <div class="input-group-btn bs-dropdown-to-select-group">
               <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
                 <span data-bind="bs-drp-sel-label">Тенге</span>
-                <input type="hidden" name="country_path" data-bind="bs-drp-sel-value" value="us">
+                <input type="hidden" name="currency" data-bind="bs-drp-sel-value" value="Тенге">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
               <!-- Loop -->
 
-                              <li data-value="ЛОШАДЬ"><a href="#">Рубль </a></li>
-                              <li data-value="ВЕРБЛЮД"><a href="#">Доллар </a></li>
+                              <li data-value="Тенге"><a href="#">Тенге </a></li>
+                              <li data-value="Доллар"><a href="#">Доллар </a></li>
                                                                     <!-- END Loop -->
                     </ul>
               </div>
@@ -101,13 +103,13 @@
 
   <div class="radio">
     <label for="radios1-1">
-      <input type="radio" name="radios1" id="radios1-1" value="2">
+      <input type="radio" name="payment_type" id="radios1-1" value="2">
       На обмен
     </label>
 	</div>
   <div class="radio">
     <label for="radios1-2">
-      <input type="radio" name="radios1" id="radios1-2" value="3">
+      <input type="radio" name="payment_type" id="radios1-2" value="3">
       Договорная цена
     </label>
 	</div>
@@ -118,7 +120,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput">Заголовок</label>  
   <div class="col-md-6">
-  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+  <input id="textinput" name="ad_header" type="text" placeholder="" class="form-control input-md">
   <span class="help-block">Максимальная длина 70 символов.</span>  
   </div>
 </div>
@@ -127,9 +129,16 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textarea">Описание</label>
   <div class="col-md-6">                     
-    <textarea class="form-control" rows="6" id="textarea" name="textarea"></textarea>
+    <textarea class="form-control" rows="6" id="textarea" name="description"></textarea>
   </div>
 </div>
+
+
+
+
+
+
+
 
 <!-- File Button --> 
 <div class="form-group">
@@ -137,7 +146,7 @@
   <div class="col-md-4">
     <div class="fileUpload btn myb">
     <span class="icon-photo"> Добавить Фотографии</span>
-    <input type="file" id="filebutton" class="upload" />
+    <input type="file" id="choose" class="upload" multiple />
 </div>
   </div>
 
@@ -146,12 +155,10 @@
 <div class="form-group">
   <label class="col-md-2 control-label"></label>
   <div class="col-md-10">
-<ul id="foto">
-	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
-	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
-	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>
-	<li><img src="@routes.Assets.at("images/home/cow.png")"/></li>	
+<ul id="images" class="connectedList ui-sortable">
+
 </ul>
+      <div class="clear"></div>
   </div>
 
 </div>
@@ -161,7 +168,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
   <div class="col-md-3">
-    <select id="selectbasic2" name="selectbasic2" class="form-control">
+    <select id="region" name="region" class="form-control">
       <option value="1">Алматы</option>
       <option value="2">Шиелі</option>
     </select>
@@ -172,7 +179,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic3">Город</label>
   <div class="col-md-3">
-    <select id="selectbasic3" name="selectbasic3" class="form-control">
+    <select id="city" name="city" class="form-control">
       <option value="1">Астана</option>
       <option value="2">Кызылорда</option>
     </select>
@@ -183,7 +190,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput1">Компания</label>  
   <div class="col-md-6">
-  <input id="textinput1" name="textinput1" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
+  <input id="textinput1" name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
     
   </div>
 </div>
@@ -192,7 +199,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput2">Телефон</label>  
   <div class="col-md-3">
-  <input id="textinput2" name="textinput2" type="text" placeholder="87071234567" class="form-control input-md">
+  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md">
     
   </div>
 </div>
@@ -201,7 +208,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
   <div class="col-md-5">
-    <select id="selectbasic4" name="selectbasic4" class="form-control">
+    <select id="selectbasic4" name="coment_display" class="form-control">
       <option value="1">Только зарегистрированным пользователям</option>
       <option value="2">Всем</option>
     </select>
