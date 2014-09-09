@@ -1,5 +1,6 @@
 package controllers;
 
+import models.ad.Ad;
 import models.user.AuthorisedUser;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -14,8 +15,10 @@ import be.objectify.deadbolt.java.actions.SubjectPresent;
 public class Manage extends Controller {
 
 	public static Result myAds() {
-		return ok(myAds.render());
+		return ok(myAds.render(Ad.find.all()));
 	}
+
+
 
 	public static Result myMessages() {
 		return ok(myMessages.render());

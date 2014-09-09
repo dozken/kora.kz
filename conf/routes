@@ -1,7 +1,7 @@
 
 # Home page
 GET         /                                      controllers.Application.index()
-GET     /captcha                    controllers.Application.captcha
+GET         /captcha                               controllers.Application.captcha
 GET         /websocket                             controllers.Application.socketHandler()
 GET         /about                                 controllers.Application.about()
 GET         /feedback                              controllers.Application.feedback()
@@ -17,7 +17,9 @@ GET         /user/restorePassword/:code            controllers.User.restorePassw
 POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
 
 GET         /ad/show                               controllers.Ads.show()
+GET         /ad/edit/:id                           controllers.Ads.edit(id: Long)
 POST        /ad/create                             controllers.Ads.create()
+POST        /ad/update/:id                            controllers.Ads.update(id:Long)
 GET         /ad/search                             controllers.Ads.search()
 GET         /ad/:id                                controllers.Ads.get(id: Long)
 GET         /ad/breed/:id                          controllers.Ads.getBreeds(id:Long)
