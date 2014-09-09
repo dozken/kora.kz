@@ -311,6 +311,11 @@ body {
 	overflow: hidden;
 }
 
+.highlighted {
+
+    background-color: #ffff00;
+}
+
 .fileUpload input.upload {
 	position: absolute;
 	top: 0;
