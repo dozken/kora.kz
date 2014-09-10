@@ -5,12 +5,9 @@ import static play.data.Form.form;
 import java.io.File;
 import java.util.List;
 
+import com.avaje.ebean.Ebean;
 import models.Location;
-import models.ad.Ad;
-import models.ad.AdImage;
-import models.ad.Animal;
-import models.ad.Breed;
-import models.ad.Price;
+import models.ad.*;
 import models.contact.City;
 import models.contact.ContactInfo;
 import models.contact.Region;
@@ -78,8 +75,18 @@ public class Ads extends Controller {
         }else{price.price = requestData.get("payment_type");}
         price.save();
         ad.priceType = price;
-        ad.save();
 
+        ad.save();
+        ad.tags.add(addTag(ad,ad.animal.name));
+        ad.tags.add(addTag(ad,ad.title));
+        ad.tags.add(addTag(ad,ad.birthDate.toString()));
+        ad.tags.add(addTag(ad,ad.breed.name));
+        ad.tags.add(addTag(ad,ad.gender));
+        ad.tags.add(addTag(ad,ad.quantity));
+        ad.tags.add(addTag(ad,ad.contactInfo.region.name));
+        ad.tags.add(addTag(ad,ad.contactInfo.city.name));
+        ad.update();
+        Ebean.saveManyToManyAssociations(ad, "tags");
         String[] order = requestData.get("image_names").split("&");
         for(int i=0;i<order.length;i++){
 
@@ -99,6 +106,11 @@ public class Ads extends Controller {
 		return ok();
 	}
 
+    public static Tag addTag(Ad ad, String s){
+        Tag tag = new Tag();
+        tag.name = s;
+        return tag;
+    }
     public static Result update(Long id) {
 
         DynamicForm requestData = form().bindFromRequest();
@@ -140,6 +152,20 @@ public class Ads extends Controller {
             ad.priceType.currency = requestData.get("currency");
             ad.priceType.price = requestData.get("money");
         }else{ad.priceType.price = requestData.get("payment_type");}
+
+        for(int i=0;i<ad.tags.size();i++){
+
+            ad.tags.get(i).delete();
+        }
+        ad.tags.add(addTag(ad,ad.animal.name));
+        ad.tags.add(addTag(ad,ad.title));
+        ad.tags.add(addTag(ad,ad.description));
+        ad.tags.add(addTag(ad,ad.birthDate.toString()));
+        ad.tags.add(addTag(ad,ad.breed.name));
+        ad.tags.add(addTag(ad,ad.gender));
+        ad.tags.add(addTag(ad,ad.quantity));
+        ad.tags.add(addTag(ad,ad.contactInfo.region.name));
+        ad.tags.add(addTag(ad,ad.contactInfo.city.name));
 
         ad.update();
         String[] order = requestData.get("image_names").split("&");

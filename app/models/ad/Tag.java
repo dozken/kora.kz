@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -20,7 +21,7 @@ public class Tag extends Model {
 	public Long id;
 	
 	public String name;
-	
-	@ManyToMany(mappedBy="tags")
-	public List<Ad> ads;
+
+    @ManyToOne
+	public List<Ad> ad;
 }
