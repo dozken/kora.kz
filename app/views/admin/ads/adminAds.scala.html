@@ -11,6 +11,7 @@
 }
 
 <script>
+
 $(document).ready(function () {
 	adModerate!=null && moderate();
 });
@@ -31,11 +32,11 @@ function moderate(){
 	console.log("adModerate:"+adModerate);
 }
 
-/*
 $(document).on("click",".moderate",function(){
 	var adId = $(this).attr("ad");
 	
 	jsRoutes.controllers.Administer.moderate(adId).ajax({
+		data: {status:"moderating"},
 		success: function(data) {
 			console.log(data);
 			
@@ -46,5 +47,4 @@ $(document).on("click",".moderate",function(){
 	});
 	
 });
-*/
 </script>
