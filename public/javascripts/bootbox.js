@@ -600,7 +600,7 @@
     if (options.size === "small") {
       innerDialog.addClass("modal-sm");
     }
-
+`
     if (options.title) {
       body.before(templates.header);
     }

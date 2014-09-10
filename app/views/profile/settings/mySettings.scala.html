@@ -1,4 +1,12 @@
 @main("Настройки") {
+<style>
+.modal-dialog{
+	/*width: 300px;*/
+}
+[data-bb-handler="confirm"]	{
+	
+}
+</style>
 <div class="container">
   <div class="col-lg-3 menudiv">
     @profile._menu()
@@ -11,7 +19,21 @@
 </div>
 }
 
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
 <script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+
 $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 		  state: true,
 		  size: null,
@@ -31,7 +53,10 @@ $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 		  onSwitchChange: function() {}
 		};
 $(".switcher").bootstrapSwitch();
-
+$(function () {
+	$('#settingsTab a[href="#siteSettingsTab"]').tab('show');
+});
+  
 $(document).ajaxSuccess(function() {
 	console.log( "Triggered ajaxSuccess handler." );
 
@@ -72,9 +97,33 @@ $(document).on("switchChange.bootstrapSwitch", '.change.userSettings',function(e
 });
 
 $(document).on("switchChange.bootstrapSwitch", '.change.adminSettings',function(event, state){
+	console.log(state)
 	var id = $(this).attr("setting");
 	var status = (state) ? "on" : "off";
-	jsRoutes.controllers.Settings.changeAdminSetting(id,status).ajax();
+	if(state){
+		$("input.bootbox-input.bootbox-input-text.form-control").val("super val");
+		bootbox.prompt({
+			title: "Цена",
+			size : "small",
+			buttons: {
+				confirm: {
+					label: "Сохранить"
+			    }
+			},
+			inputType : "number",
+			value : "super val",
+			callback: function(result) {                
+				if (result === null) {                                             
+					console.log("Prompt dismissed");                              
+				} else {
+					console.log("Hi "+result);
+					jsRoutes.controllers.Settings.changeAdminSetting(id,status).ajax();
+				}
+			}
+		});
+	}
+	
+	
 });
 
 
