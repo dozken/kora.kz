@@ -1,4 +1,4 @@
-
+@(ads:List[models.ad.Ad])
 @main("Мои Объявления") {
 <div class="container">
   <div class="col-lg-3 menudiv">
@@ -14,14 +14,37 @@
 	</select>
 	</div>
   	}	
-	@for(i<-1 to 3){
-	  @_ad()
+	@for(ad<-ads){
+	  @_ad(ad)
 	}
   </div>
 </div>
 }
 
 <script>
+
+    $(document ).on("click",".ad_highlight",function(){
+
+        var ad_id = $(this ).attr("ad");
+        $('div[ad="'+ad_id+'"]' ).addClass("highlighted");
+        $(this ).addClass("active");
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 	    state: true,
 	    size: null,
@@ -42,4 +65,7 @@ $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 };
 
 $(".switcher").bootstrapSwitch();
+
+
+
 </script>

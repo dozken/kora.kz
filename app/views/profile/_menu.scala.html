@@ -2,14 +2,17 @@
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 
 <ul class="proful nopaddingleft">
-<li>
-<img src="@routes.Assets.at("images/home/huge.jpg")" class="imgprofile">
-</li>
+    <li>    @if(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image!=null){
+        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @controllers.Info.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="height:100px;width:100px;">
+
+    }else{
+  <img src="@routes.Assets.at("images/home/huge.png")" style="height:100px;width:100px;" class="imgprofile">
+}</li>
 <li>
 <div class="popover-example"> <!-- NEW -->
   <div class="popover right" style="z-index:-1060;">
     <div class="arrow"></div>
-    <h3 class="popover-title">Rysdaulet</h3>
+    <h3 class="popover-title"> @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName</h3>
   </div>
 </div>
 </li>

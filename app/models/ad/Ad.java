@@ -72,4 +72,11 @@ public class Ad extends Model{
 	
 	@OneToMany
 	public List<Comment> comments;
+
+    public List<AdImage> sortByPosition(Long id){
+
+        return AdImage.find.where().eq("ad_id",id).order("position").findList();
+    }
+
 }
+
