@@ -35,7 +35,7 @@ public class Ad extends Model{
 	
 	public Integer birthDate;
 	
-	@ManyToOne
+	@ManyToOne(cascade= CascadeType.ALL)
 	public Price priceType;
 	
 	public String title;

@@ -64,7 +64,7 @@ $(document).on("click",".mapSelect",function(){
     var myPlacemark ;
 
     myMap = new ymaps.Map ( "mouse_event_map", {
-    @if(user.location!=null) {center :[ @user.location.lat, @user.location.lng ],}else{center :[43.237887,  76.927437]}
+    @if(user.location!=null) {center :[ @user.location.lat, @user.location.lng ],}else{center :[43.237887,  76.927437],}
     zoom : 14,
     controls: ["zoomControl"]
     } ) ;
