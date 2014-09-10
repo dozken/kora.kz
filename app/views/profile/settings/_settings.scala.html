@@ -1,7 +1,10 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
 <div class="col-lg-12 boto nopaddingleft">
-<ul class="nav nav-tabs motomoto cv" role="tablist">
-  <li class="active"><a href="#passwordTab" role="tab" data-toggle="tab">Изменить пароль</a></li>
+<ul class="nav nav-tabs motomoto cv" role="tablist" id="settingsTab">
+  <li><a href="#passwordTab" role="tab" data-toggle="tab"  @restrictOr(la(as("admin"))){ }{data-toggle="pill"}>Изменить пароль</a></li>
   <li><a href="#newsletterTab" role="tab" data-toggle="tab">Настройки рассылки</a></li>
+  <li><a href="#siteSettingsTab" role="tab" data-toggle="tab" @restrict(la(as("admin"))){data-toggle="pill"}>Настройки сайта</a></li>
 
 </ul>
 
@@ -12,6 +15,9 @@
   </div>
   <div class="tab-pane" id="newsletterTab">
   	@_newsletterTab()
+  </div>
+  <div class="tab-pane" id="siteSettingsTab">
+  	@_siteSettingsTab()
   </div>
 </div>
 </div>
