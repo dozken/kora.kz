@@ -1,0 +1,164 @@
+@(user:models.user.AuthorisedUser)
+
+ @main("Редактировать") {
+
+<div class="container">
+	<div class="col-lg-3 menudiv">@profile._menu()</div>
+	<div class="col-lg-9 ">
+	  @profile._title("РЕДАКТИРОВАТЬ"){ } 
+	  @_edit(user)
+	</div>
+
+</div>
+
+}
+
+<script>
+var myMap;
+var choose = document.getElementById('filebutton');
+FileAPI.event.on(choose, 'change', function(evt) {
+    var files = FileAPI.getFiles(evt); // Retrieve file list
+
+    FileAPI.filterFiles(files, function(file, info /**Object*/ ) {
+        if (/^image/.test(file.type)) {
+            return info.width >= 320 && info.height >= 240;
+        }
+        return false;
+    }, function(files /**Array*/ , rejected /**Array*/ ) {
+        if (files.length) {
+            // Make preview 100x100
+            FileAPI.each(files, function(file) {
+
+                FileAPI.Image(file).preview(180).get(function(err, img) {
+                    $("#profile_image").html(img);
+                });
+            });
+
+        }
+    });
+});
+
+
+$(document).on("click", "#edit_profile_submit", function() {
+
+    $('#profile_edit_form')
+        .submit(function(e) {
+            $.ajax({
+                url: '@controllers.routes.Info.update(user.id)',
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    window.location.href = "@routes.Manage.myInfo()";
+                }
+            });
+            e.preventDefault();
+        });
+});
+
+$(document).on("click",".mapSelect",function(){
+
+    if($(this ).attr("map")=="yandex") {
+
+    var myPlacemark ;
+
+    myMap = new ymaps.Map ( "mouse_event_map", {
+    @if(user.location!=null) {center :[ @user.location.lat, @user.location.lng ],}else{center :[43.237887,  76.927437]}
+    zoom : 14,
+    controls: ["zoomControl"]
+    } ) ;
+    @if(user.location!=null) {
+
+     myPlacemark = new ymaps.Placemark([@user.location.lat, @user.location.lng], { content: 'Москва!', balloonContent: 'Столица России' });
+     myMap.geoObjects.add(myPlacemark);
+	}
+
+    myMap.events.add ( 'click', function ( e ) {
+
+    myMap.geoObjects.remove ( myPlacemark ) ;
+
+    var coords = e.get ( 'coords' ) ;
+    myPlacemark = new ymaps.Placemark ( coords, { content : 'Москва!', balloonContent : 'Столица России' } ) ;
+    myMap.geoObjects.add ( myPlacemark ) ;
+    } )
+
+    }else{
+
+
+    }
+})
+
+
+</script>
+
+<script type="text/javascript">
+    /**
+    * Mouse Events on Maps
+    */
+
+    $(document).ready(function(){
+
+    map = new GMaps({
+    div: '#mouse_event_map',
+    zoom: 14,
+    lat: "43.276978",
+    lng:  " 76.893096",
+    width: '700px',
+    height: '400px',
+    click: function(e) {
+    $("#location" ).val( e.latLng);
+    map.removeMarker(myMap);
+    console.log( e.latLng);
+    myMap =  map.addMarker({
+    position:e.latLng,
+    infoWindow: {
+    content: '<p>'+$("#company_name" ).val() + '</p>'
+    }
+    });
+    },
+
+
+    });
+
+        @if(user.location!=null) {
+            myMap = map.addMarker ( {
+            lat: @user.location.lat,
+            lng: @user.location.lng,
+            infoWindow : {
+            content : '<p>' + $ ( "#company_name" ).val ( ) + '</p>'
+            }
+            } ) ;
+        }
+
+
+    $(document).on("change","#region",function(){
+    map = new GMaps({
+    div: '#mouse_event_map',
+    zoom: 14,
+    lat: 51.168186,
+    lng:  71.437161,
+    width: '700px',
+    height: '400px',
+    click: function(e) {
+    $("#location" ).val( e.latLng);
+    map.removeMarker(myMap);
+    myMap =  map.addMarker({
+    position:e.latLng,
+    title: 'Lima',
+
+    infoWindow: {
+    content: '<p>'+$("#company_name" ).val() + '</p>'
+    }
+    });
+    },
+    dragend: function(e) {
+
+    }
+
+    });
+
+    })
+
+    });
+    </script>
