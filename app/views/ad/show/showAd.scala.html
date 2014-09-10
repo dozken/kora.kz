@@ -1,6 +1,17 @@
 @(ad: models.ad.Ad)
 @main("Объявление") {
-
+<style>
+.b-share__text{
+color: black;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+padding: 0px;
+font-style: italic;
+}
+.b-share__handle{
+float: none; !important
+}
+</style>
 <div class="container">
 	<div class="searchbarmargin">@_searchbar()</div>
 @_breadcrumb()
@@ -9,7 +20,37 @@
 <div class="col-lg-3 pro2 paddingleft30px nopaddingright"><div class="rek">@_advertisements()</div></div>
 </div>
 }
-<script>	
+
+<script type="text/javascript" src="http://yandex.st/share/share.js" charset="utf-8"></script>
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+new Ya.share({
+    element: 'ya_share1',
+        elementStyle: {
+            'type': 'link',
+            'border': false,
+            quickServices : ['']
+        },
+        popupStyle: {
+            blocks: {
+                'Поделитесь с друзьями!': ['vkontakte','facebook','twitter','odnoklassniki','moimir','gplus'],
+                //'Поделись-ка по-другому!': ['lj', 'twitter', 'vkontakte']
+            },
+            //copyPasteField: true
+        },
+});
+
 
 $(document).ready(function(){
 	$('.carousel').carousel('cycle')
@@ -39,5 +80,45 @@ $(window).load(function() {
     var itemlength = $('#myCarousel .item').length;
     var triggerheight = Math.round(boxheight/itemlength+1);
 	$('#myCarousel .list-group-item').outerHeight(triggerheight);
+});
+
+$(document).on("click",".moderate.approve", function(){
+	
+	var adId = $(this).attr("ad");
+	bootbox.confirm({
+		message: "Вы уверены?",
+		size : "small",
+		callback: function(confirm) {                
+			if(confirm)
+				jsRoutes.controllers.Administer.moderate(adId).ajax({
+					data: {status:"active"},
+					success: function(data) {
+						console.log(data);
+						
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) {
+			            console.log(jqXHR.responseText);            
+			        }
+				});
+		}
+	});
+	
+});
+
+$(document).on("click",".moderate.deny",function(){
+	var adId = $(this).attr("ad");
+	bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+		jsRoutes.controllers.Administer.moderate(adId).ajax({
+			data: {status:"rejected"},
+			success: function(data) {
+				console.log(data);
+				
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR.responseText);            
+	        }
+		});
+	});
 });
 </script>

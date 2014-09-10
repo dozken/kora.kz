@@ -1,5 +1,6 @@
 package controllers;
 
+import static play.data.Form.form;
 import models.ad.Ad;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -41,9 +42,11 @@ public class Administer extends Controller {
 	@Restrict({ @Group("admin"), @Group("moderator") })
 	public static Result moderate(Long id) {
 		Ad ad = Ad.find.byId(id);
-		ObjectNode event = Json.newObject();
-		ad.status = "moderating";
+		
+		ad.status = form().bindFromRequest().get("status");
 		ad.update();
+		if(ad.status.equals("moderating")){
+		ObjectNode event = Json.newObject();
 		event.put("moderating", "active");
 		event.put("id", ad.id);
 		event.put("title", ad.title);
@@ -52,6 +55,7 @@ public class Administer extends Controller {
 				"moderatingBy",
 				models.user.AuthorisedUser.findByEmail(session("connected")).userName);
 		WS.send(event);
+		}
 		// return ok();
 		return redirect(routes.Ads.get(id));
 	}
