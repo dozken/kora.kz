@@ -36,21 +36,9 @@ context.drawImage(imageObj,0,0,imageObj.width, imageObj.height,0,0,that.width,th
 };
 imageObj.src = $(this ).attr("src");
 })
-//var context = canvas.getContext('2d');
-//var imageObj = new Image();
-//
-//imageObj.onload = function() {
-//context.drawImage(imageObj, 69, 50);
-//};
-//imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
 
 $("#images" ).sortable({
-placeholder: 'ui-state-highlight',
-stop: function (event, ui) {
-var data = $ ( this ).sortable ( 'serialize' ) ;
-$("#image_order" ).val(data);
-
-}
+placeholder: 'ui-state-highlight'
 });
 
 var choose = document.getElementById('choose');
@@ -65,8 +53,7 @@ return  info.width >= 320 && info.height >= 240;
 return  false;
 }, function (files/**Array*/, rejected/**Array*/){
 if( files.length+$("#images li" ).length<=5 ){
-// Make preview 100x100
-var order="";
+
     FileAPI.each ( files, function ( file ) {
 
     FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
@@ -82,17 +69,6 @@ var order="";
     } ) ;
     } ) ;
     }else{alert("max picture 5");}
-
-
-// Uploading Files
-//FileAPI.upload({
-//url: '',
-//files: { images: files },
-//progress: function (evt){ /* ... */ },
-//complete: function (err, xhr){ /* ... */
-//alert(xhr.responseText);
-//}
-//});
 
 });
 });
@@ -144,7 +120,7 @@ data: formData,
 processData: false,
 contentType: false,
 success: function(data) {
-//window.location.href = "@routes.Manage.myInfo()";
+window.location.href = "@routes.Manage.myAds()";
 }
 });
 e.preventDefault();
