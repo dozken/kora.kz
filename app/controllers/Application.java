@@ -14,18 +14,16 @@ import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
 import play.data.DynamicForm;
-import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.WebSocket;
 import views.html.common.about;
 import views.html.common.feedback;
+import views.html.mailBody.feedbackMessage;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.google.code.kaptcha.util.*;
-
-import views.html.mailBody.*;
+import com.google.code.kaptcha.util.Config;
 
 public class Application extends Controller {
 
@@ -75,10 +73,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Advertisements.remove(),
 				controllers.routes.javascript.Advertisements.replace(),
 				controllers.routes.javascript.Administer.moderate(),
-                controllers.routes.javascript.Ads.getBreeds(),
-                controllers.routes.javascript.Ads.getCities(),
-				controllers.routes.javascript.Ads.get()
-				));
+				controllers.routes.javascript.Ads.getBreeds(),
+				controllers.routes.javascript.Ads.getCities(),
+				controllers.routes.javascript.Ads.get()));
 	}
 
 	// public static Result changeLanguage(String language) {
@@ -132,7 +129,8 @@ public class Application extends Controller {
 		String text = requestData.get("text");
 		if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
 
-			Emailing.send("Напишите нам", Play.application().configuration().getString("support.email"),
+			Emailing.send("Напишите нам", Play.application().configuration()
+					.getString("support.email"),
 					feedbackMessage.render(email, text).body());
 			flash("success", "Сообщение успешно отправлено.");
 			session().remove(
