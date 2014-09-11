@@ -25,7 +25,13 @@ clear: both;
 }
 </style>
 <script>
-
+var imageMap = {};
+// add a item
+//map[key1] = value1;
+// or remove it
+//delete map[key1];
+// or determine whether a key exists
+//key1 in map;
 $("#images" ).sortable({
 placeholder: 'ui-state-highlight'
 });
@@ -43,6 +49,11 @@ return  false;
 if( files.length+$("#images li" ).length<=5 ){
 
 FileAPI.each ( files, function ( file ) {
+FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
+
+   imageMap[file.name] = img.toDataURL("image/png");
+
+})
 
 FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
 
@@ -57,6 +68,8 @@ alert(name + " exists");
 } ) ;
 } ) ;
 }else{alert("max picture 5");}
+
+
 
 });
 });
@@ -91,7 +104,9 @@ $('#ad_form').submit(function(e) {
 var formData = new FormData(this);
 var image_names="";
 $("#images li canvas" ).each(function(){
-formData.append($(this ).parent( ).attr("fileName"),this.toDataURL("image/png"));
+   var a = imageMap[$(this ).parent( ).attr("fileName")];
+    console.log(a);
+formData.append($(this ).parent( ).attr("fileName"),a);
 image_names+=$(this ).parent( ).attr("fileName")+"&";
 })
 formData.append("image_names",image_names);

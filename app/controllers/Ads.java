@@ -35,6 +35,7 @@ public class Ads extends Controller {
 	public static Result create() {
 
         DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
         Ad ad = new Ad();
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
         ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
@@ -210,9 +211,47 @@ public class Ads extends Controller {
     public static Result edit(Long id){ return ok(editAd.render(Ad.find.byId(id))); }
 	
 	public static Result search() {
-		return ok(adSearch.render());
+		return ok(adSearch.render(Ad.find.all()));
 	}
-	
+
+    public static Result sendPrivateMessage(Long ad_id, Long author_id)
+    {
+        DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
+
+        AuthorisedUser user = AuthorisedUser.find.where().eq("email",Ad.find.byId(ad_id).contactInfo.email).findUnique();
+        if(user!=null){
+            System.out.println("registred");
+            PrivateMessage message = new PrivateMessage();
+            message.ad = Ad.find.byId(ad_id);
+            message.author = AuthorisedUser.find.byId(author_id);
+            message.message = requestData.get("message");
+            message.recipent = user;
+            message.status="unread";
+            message.title = requestData.get("title");
+            message.save();
+        }else{
+            System.out.println("not registred");
+        }
+        return ok();
+    }
+
+    public static Result replayPrivateMessage(Long author_id,Long ad_id, Long recipent_id,String m)
+    {
+        DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
+
+        PrivateMessage message = new PrivateMessage();
+        message.ad = Ad.find.byId(ad_id);
+        message.author = AuthorisedUser.find.byId(author_id);
+        message.message = m;
+        message.recipent = AuthorisedUser.find.byId(recipent_id);;
+        message.status="unread";
+        message.title = "(re)"+Ad.find.byId(ad_id).title;
+        message.save();
+
+        return ok();
+    }
 
 	
 
