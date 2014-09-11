@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.Location;
+import models.ad.PrivateMessage;
 import models.admin.AdminSetting;
 import play.db.ebean.Model;
 import be.objectify.deadbolt.core.models.Permission;
@@ -82,6 +83,11 @@ public class AuthorisedUser extends Model implements Subject {
 	public static List<AuthorisedUser> getModerators(){
 		return find.where().in("roles", SecurityRole.findByName("moderator")).findList();
 	}
+
+    public static Integer getUnreadMessageCount(Long id){
+
+        return PrivateMessage.find.where().eq("recipent_id",id).eq("status","unread").findRowCount();
+    }
 	
 	public static String md5(String password){
 		return password;

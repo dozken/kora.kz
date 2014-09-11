@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
+import java.util.List;
+
 @Entity
 public class AdImage extends Model {
 
@@ -36,6 +38,12 @@ public class AdImage extends Model {
 	public static String getFirstPicture(Long id){
 
         return AdImage.find.where().eq("ad_id",id).eq("position",1).findUnique().content;
+
+    }
+
+    public static List<AdImage> getPictureByPosition(Long id){
+
+        return AdImage.find.where().eq("ad_id",id).order("position").findList();
 
     }
 
