@@ -1,0 +1,37 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+<ul class="proful nopaddingleft">
+    <li>    @if(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image!=null){
+        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @controllers.Info.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="height:100px;width:100px;">
+
+    }else{
+  <img src="@routes.Assets.at("images/home/huge.png")" style="height:100px;width:100px;" class="imgprofile">
+}</li>
+<li>
+<div class="popover-example"> <!-- NEW -->
+  <div class="popover right" style="z-index:-1060;">
+    <div class="arrow"></div>
+    <h3 class="popover-title"> @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName</h3>
+  </div>
+</div>
+</li>
+</ul>
+<ul class="profmenu nopaddingleft">
+	
+	<li><a href="@routes.Manage.myAds"><span class="icon-myAds"></span> Мои объявления</a></li>
+	<li><a href="@routes.Manage.myMessages"><span class="icon-myMessages"></span> Личные сообщения <span class="backjasyl">3</span></a></li>
+	<li><a href="@routes.Manage.myPayments"><span class="icon-money"></span> Личный счет</a></li>
+	<li><a href="@routes.Manage.myInfo"><span class="icon-myProfile"></span> Мой профиль</a></li>
+	<li><a href="@routes.Manage.mySettings"><span class="icon-settings"></span> Настройки</a></li>
+	<li class="nav-divider"></li>
+	@restrict(la(as("moderator"),as("admin"))){
+	<li><a href="@routes.Administer.ads"><span class="glyphicon glyphicon-list-alt"></span> Модерация объявлений</a></li>
+	}
+	@restrict(la(as("admin"))){
+	<li><a href="@routes.Administer.moderators"><span class="glyphicon glyphicon-align-left"></span> Модераторы</a></li>
+	<li><a href="@routes.Administer.filters"><span class="glyphicon glyphicon-plus"></span> Добавить фильтры</a></li>
+	<li><a href="@routes.Administer.advetiments"><span class="glyphicon glyphicon-plus"></span> Добавить рекламы</a></li>
+	}
+	<li><a href="@routes.Application.signOut"><span class="glyphicon glyphicon-off"></span> Выйти</a></li>
+</ul>

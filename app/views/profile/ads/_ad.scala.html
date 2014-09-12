@@ -1,0 +1,46 @@
+@(ad:models.ad.Ad)
+<div class="col-lg-12 nopaddingleft nopaddingright borbot highlight" ad="@ad.id">
+	<div class="col-lg-12 toptop">
+		<h4>@ad.animal.name @ad.breed.name</h4>
+	</div>
+	<div class="col-lg-2 mysuret">
+        @if(ad.images.size()>0){
+
+            <img src="data:@ad.images.get(0).contentType;base64, @controllers.Info.byteToBase64(ad.images.get(0).content)" style="height:130px;width:120px;">
+        }else{
+		<img src="http://placehold.it/85x92/dddddd/333333">
+        }
+	</div>
+	<div class="col-lg-10 nopaddingleft">
+		<div class="col-lg-3">
+			<ul class="adsul nopaddingleft">
+				<li>Цена: @ad.priceType.price @ad.priceType.currency</li>
+				<li>Регион: @ad.contactInfo.region.name</li>
+			</ul>
+		</div>
+		<div class="col-lg-6 nopaddingleft">
+			<ul class="adsul nopaddingleft">
+				<li>Добавлено: @ad.publishedDate.format("dd/MM/yyyy")</li>
+				<li class="jasyl">Будет продлено через @ad.expirationDate.format("dd/MM/yyyy")</li>
+				<li>Автопродление <input type="checkbox" class="switcher"
+					name="my-checkbox" checked></li>
+			</ul>
+		</div>
+		<div class="col-lg-3 nopaddingleft nopaddingright">
+			<ul class="adsul nopaddingleft">
+				<li><span class="icon-prosmotr"></span> @ad.views
+					просмотров</li>
+				<li><span class="icon-message"></span>
+					Сообщений @ad.messages.size()</li>
+				<li><span class="icon-comment"></span>
+					Комментариев @ad.comments.size()</li>
+			</ul>
+		</div>
+		<div class="col-lg-12 nopaddingright toptoptop">
+			<a  class="btn btn-default btn-sm myb ad_prolong" ad="@ad.id"><span class="icon-time"></span> Продлить (Бесплатно)</a>
+            <a class="btn btn-default btn-sm myb ad_highlight" ad="@ad.id"><span class="icon-vydelit"></span> Выделить объявление</a>
+            <a href="@routes.Ads.edit(ad.id)" class="btn btn-default btn-sm myb ad_edit" ad="@ad.id"><span class="icon-edit"></span> Редактировать</a>
+            <a class="btn btn-default btn-sm myb ad_archive" ad="@ad.id"><span class="icon-delete"></span> В Архив</a>
+		</div>
+	</div>
+</div>
