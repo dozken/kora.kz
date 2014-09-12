@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 
 import models.Location;
 import models.ad.Ad;
-
 import models.ad.PrivateMessage;
 import models.admin.AdminSetting;
 import play.db.ebean.Model;
