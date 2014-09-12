@@ -116,77 +116,44 @@
 <button class="btn btn-danger moderate deny" ad="@ad.id"><span class="icon-warning"></span> Отклонить</button>
 </div>
 }{
-<div class="col-lg-12  formdown topka akwyl">
-<h4>@ad.comments.size() комментария</h4>
-<hr>
-<ul class="ko2 nopaddingleft">
-<li><ul class="ko nopaddingleft">
-  <li class="bold">МАГЖАН</li>
-  <li>27 июн 2014 в 17:31</li>
-  <li><a href="">Ответить</a></li>
-  </ul>
-  </li>
-  <li>ноутбукке ауыстырамысын</li>
-</ul>
+    <div id="comment_body" class="col-lg-12  formdown topka akwyl">
 
-
-<ul class="ko2 nopaddingleft">
-<li><ul class="ko nopaddingleft">
-  <li class="bold">Ербол для <span class="otvet">МАГЖАН</span></li>
-  <li>27 июн 2014 в 17:41</li>
-  <li><a href="">Ответить</a></li>
-  </ul>
-  </li>
-  <li>Жок,рахмет!</li>
-</ul>
-
-
-<ul class="ko2 nopaddingleft">
-<li><ul class="ko nopaddingleft">
-  <li class="bold">Алмагул</li>
-  <li>27 июн 2014 в 19:22</li>
-  <li><a href="">Ответить</a></li>
-  </ul>
-  </li>
-  <li>Болары қанша?</li>
-</ul>
-
-</div>
-
+@_comment(ad.comments)
+        </div>
 <div class="col-lg-12 nopaddingleft formdown topka">
-<b class="bdau">Добавить комментарий</b>
+<b id="comment_head" class="bdau">Добавить комментарий</b>
 </div>
-<form class="form-horizontal" role="form">
+<form id="comment_form" class="form-horizontal">
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label leftalign">Ваше имя или ник</label>
+    <label for="inputEmail3"  class="col-sm-3 control-label leftalign">Ваше имя или ник</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" id="inputEmail3">
+      <input type="text" name="comment_author" class="form-control" id="inputEmail3">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label leftalign">Электронная почта</label>
     <div class="col-sm-9">
-      <input type="email" class="form-control" id="inputEmail3">
+      <input type="email" name="comment_email" class="form-control" id="inputEmail3">
       <span class="help-block"><i>На этот адрес придет уведомление об ответе</i></span>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label leftalign">Сообщение</label>
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Сообщение</label>
     <div class="col-sm-9">
-      <textarea class="form-control" rows="6"></textarea>
+      <textarea class="form-control" name="comment_message" rows="6"></textarea>
       <span class="help-block"><i>Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label leftalign">Введите код</label>
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Введите код</label>
     <div class="col-sm-9">
-      <img src='@routes.Application.captcha' class="imgmargin"><input type="text" class="form-control" id="inputEmail3">
+      <img src='@routes.Application.captcha' class="imgmargin"><input type="text" name="comment_capcha" class="form-control" id="inputEmail3">
       <span class="help-block"><i>Хотим убедиться, что вы его не забудете</i></span>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-success">Отправить</button>
+      <button type="submit" id="comment_ad" forWho="0" class="btn btn-success">Отправить</button>
      
     </div>
   </div>

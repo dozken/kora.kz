@@ -1,0 +1,15 @@
+@(comments:List[models.ad.Comment])
+<h4>@comments.size комментария</h4>
+<hr>
+
+@for(comment<-comments.reverse) {
+    <ul class="ko2 nopaddingleft">
+        <li><ul class="ko nopaddingleft">
+            <li class="bold">@comment.name @if(comment.coment!=null){для <span class="otvet">@comment.coment.name</span>}</li>
+            <li>@comment.sendDate</li>
+            <li><a comment="@comment.id" comment_type="answer" comment_author="@comment.name" class="comment_answer">Ответить</a></li>
+        </ul>
+        </li>
+        <li>@comment.text</li>
+    </ul>
+}

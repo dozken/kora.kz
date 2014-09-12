@@ -164,4 +164,40 @@ console.log(jqXHR.responseText);
 });
 })
 }
+
+$(document ).on("click",".comment_answer",function(){
+
+    if($(this ).attr("comment_type" ) == "answer") {
+        $ ( "#comment_ad" ).attr ( "forWho", $ ( this ).attr ( "comment" ) ) ;
+        $ ( "#comment_head" ).html ( "Ответить " + $ ( this ).attr ( "comment_author" ) + "у" ) ;
+    $(this ).html("Отменить");
+    $(this ).attr("comment_type","cancel");
+    $('.comment_answer').not(this).each(function(){
+           $(this ).hide();
+    });
+    }else{
+    $ ( "#comment_ad" ).attr ( "forWho", "0") ;
+    $ ( "#comment_head" ).html ( "Добавить комментарий" ) ;
+        $(this ).html("Ответить");
+        $(this ).attr("comment_type","answer");
+    $('.comment_answer').not(this).each(function(){
+    $(this ).show();
+    });
+    }
+
+})
+
+$(document ).on("click","#comment_ad",function(e){
+e.preventDefault();
+    var com_id = $(this ).attr("forWho");
+jsRoutes.controllers.Ads.comment(@ad.id,com_id).ajax({
+data: $("#comment_form").serialize(),
+success: function(data) {
+$("#comment_body" ).html(data);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
 </script>

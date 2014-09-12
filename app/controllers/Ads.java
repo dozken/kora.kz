@@ -22,8 +22,8 @@ import views.html.ad.create._city;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
 import views.html.ad.search.adSearch;
+import views.html.ad.show.*;
 
-import views.html.ad.show.showAd;
 
 public class Ads extends Controller {
 
@@ -370,6 +370,23 @@ public class Ads extends Controller {
             return false;
         }
 
+    }
+
+    public static Result comment(Long id,Long com_id){
+
+        DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
+        Comment comment = new Comment();
+        comment.ad = Ad.find.byId(id);
+        comment.email = requestData.get("comment_email");
+        comment.text = requestData.get("comment_message");
+        comment.name = requestData.get("comment_author");
+        if(com_id!=0){
+            comment.coment = Comment.find.byId(com_id);
+        }
+        comment.save();
+
+        return ok(_comment.render(Ad.find.byId(id).comments));
     }
 
 }

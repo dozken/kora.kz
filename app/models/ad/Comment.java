@@ -17,6 +17,8 @@ public class Comment extends Model {
 	 */
 	private static final long serialVersionUID = 1L;
 
+    public static final Model.Finder<Long, Comment> find = new Model.Finder<Long, Comment>(
+            Long.class, Comment.class);
 	@Id
 	public Long id;
 	
@@ -29,7 +31,10 @@ public class Comment extends Model {
 	
 	@Column(columnDefinition = "TEXT")
 	public String text;
-	
+
+    @ManyToOne
+    public Comment coment;
+
 	public Date sendDate = new Date();
 	
 	

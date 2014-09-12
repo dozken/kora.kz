@@ -79,6 +79,7 @@ public class Application extends Controller {
                 controllers.routes.javascript.Ads.sendPrivateMessage(),
                 controllers.routes.javascript.Ads.replayPrivateMessage(),
 				controllers.routes.javascript.Ads.get(),
+				controllers.routes.javascript.Ads.comment(),
                 controllers.routes.javascript.Ads.deleteMessages(),
                 controllers.routes.javascript.Ads.readAsMessages(),
 
