@@ -20,6 +20,12 @@ import models.user.AuthorisedUser;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.ad.create._breed;
+import views.html.ad.create._city;
+import views.html.ad.create.createAd;
+import views.html.ad.edit.editAd;
+import views.html.ad.search.adSearch;
+import views.html.ad.show.showAd;
 
 import com.avaje.ebean.Ebean;
 

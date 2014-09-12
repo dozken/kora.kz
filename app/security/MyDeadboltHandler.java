@@ -20,6 +20,7 @@ import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import views.html._accessFailed;
 import be.objectify.deadbolt.core.models.Subject;
 import be.objectify.deadbolt.java.AbstractDeadboltHandler;
 

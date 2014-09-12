@@ -5,6 +5,11 @@ import models.ad.Ad;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.admin.ads.adminAds;
+import views.html.admin.advertisements.adminAdvertisements;
+import views.html.admin.filters.adminFilters;
+import views.html.admin.moderators.adminModerators;
+import views.html.admin.users.adminUsers;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 

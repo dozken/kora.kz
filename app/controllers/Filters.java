@@ -10,6 +10,9 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.admin.filters.breed._breed;
+import views.html.admin.filters.city._city;
+import views.html.admin.filters.region._region;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 
