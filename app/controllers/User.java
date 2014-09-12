@@ -12,6 +12,9 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.common.forgotPassword;
+import views.html.common.restorePassword;
+import views.html.mailBody.recoverPassword;
 import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 
 import com.avaje.ebean.Ebean;
