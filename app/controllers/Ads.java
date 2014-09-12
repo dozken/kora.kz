@@ -2,20 +2,23 @@ package controllers;
 
 import static play.data.Form.form;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.avaje.ebean.Ebean;
 import models.Location;
-import models.ad.*;
+import models.ad.Ad;
+import models.ad.AdImage;
+import models.ad.Animal;
+import models.ad.Breed;
+import models.ad.Price;
+import models.ad.PrivateMessage;
+import models.ad.Tag;
 import models.contact.City;
 import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import play.data.DynamicForm;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Result;
 import views.html.ad.create._breed;
 import views.html.ad.create._city;
