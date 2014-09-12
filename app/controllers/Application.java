@@ -77,7 +77,16 @@ public class Application extends Controller {
 				controllers.routes.javascript.Administer.moderate(),
 				controllers.routes.javascript.Ads.getBreeds(),
 				controllers.routes.javascript.Ads.getCities(),
-				controllers.routes.javascript.Ads.get()));
+                controllers.routes.javascript.Ads.addFavorite(),
+                controllers.routes.javascript.Ads.sendPrivateMessage(),
+                controllers.routes.javascript.Ads.replayPrivateMessage(),
+				controllers.routes.javascript.Ads.get(),
+                controllers.routes.javascript.Ads.deleteMessages(),
+                controllers.routes.javascript.Ads.readAsMessages(),
+
+                controllers.routes.javascript.Manage.read(),
+                controllers.routes.javascript.Manage.getMessageType()
+                ));
 	}
 
 	// public static Result changeLanguage(String language) {
