@@ -4,7 +4,11 @@
 <ul class="aty">
 	<li><h4><b>@ad.animal.name ПОРОДЫ @ad.breed.name</b></h4></li>
 	<li><h4 class="cena">@ad.priceType.price @ad.priceType.currency</h4></li>
-	<a href="izbrannoe" style="text-decoration: none;"><span class="glyphicon glyphicon-star-empty"></span> В избранное</a>
+    @if(controllers.Ads.checkFavorite(ad.id)) {
+        <a id="favorite" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star"></span>
+            В избранном</a>
+    }else{<a id="favorite" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star-empty"></span>
+        В избранное</a>}
 </ul>
 <div class="col-lg-5 nopaddingleft">
 	<ul class="tiginen nopaddingleft">

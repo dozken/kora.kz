@@ -3,6 +3,7 @@ package controllers;
 import static play.data.Form.form;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
@@ -21,6 +22,7 @@ import views.html.ad.create._city;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
 import views.html.ad.search.adSearch;
+
 import views.html.ad.show.showAd;
 
 public class Ads extends Controller {
@@ -214,6 +216,30 @@ public class Ads extends Controller {
 		return ok(adSearch.render(Ad.find.all()));
 	}
 
+    public static Result favorite() {
+
+
+        if(session("connected")!=null){
+
+            return ok(adSearch.render(AuthorisedUser.findByEmail(session("connected")).favorites));
+
+        }else{
+
+            if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null));
+
+            System.out.println(request().cookie("userAdsKora").value());
+            String [] ads = request().cookie("userAdsKora").value().split("_");
+            List<Ad> list = new ArrayList<Ad>();
+            for(String ad : ads){
+                list.add(Ad.find.byId(Long.parseLong(ad)));
+
+            }
+            return ok(adSearch.render(list));
+        }
+
+
+    }
+
     public static Result sendPrivateMessage(Long ad_id, Long author_id)
     {
         DynamicForm requestData = form().bindFromRequest();
@@ -253,6 +279,48 @@ public class Ads extends Controller {
         return ok();
     }
 
-	
+	public static Result addFavorite(Long id){
+
+        if(session("connected")!=null) {
+            AuthorisedUser user = AuthorisedUser.findByEmail(session("connected"));
+
+            if (user.favorites == null) {
+                user.favorites = new ArrayList<Ad>();
+            }
+            user.favorites.add(Ad.find.byId(id));
+            user.update();
+        }else{
+            String ids="";
+            if(request().cookie("userAdsKora")!=null){ids=request().cookie("userAdsKora").value();}
+            ids+=id+"_";
+            response().discardCookie("userAdsKora");
+            response().setCookie("userAdsKora",ids,(86400*7));
+
+        }
+
+        return ok();
+    }
+
+    public static boolean checkFavorite(Long id){
+
+        if(session("connected")!=null){
+
+            AuthorisedUser user = AuthorisedUser.findByEmail(session("connected"));
+            if(user.favorites.contains(Ad.find.byId(id))){return true;}return false;
+        }else{
+
+            if( request().cookie("userAdsKora")==null) return false;
+
+            System.out.println(request().cookie("userAdsKora").value());
+            String [] ads = request().cookie("userAdsKora").value().split("_");
+
+            for(String ad : ads){
+                if(ad.equals(id.toString())) return true;
+
+            }
+            return false;
+        }
+
+    }
 
 }

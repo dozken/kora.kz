@@ -106,6 +106,20 @@ $(document).on("click",".moderate.approve", function(){
 	
 });
 
+$(document ).on("click","#favorite",function(){
+
+var id = $(this ).attr("ad");
+jsRoutes.controllers.Ads.addFavorite(id).ajax({
+success: function() {
+$("#favorite" ).html('<span class="glyphicon glyphicon-star"></span>В избранном')
+
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
 $(document).on("click",".moderate.deny",function(){
 	var adId = $(this).attr("ad");
 	bootbox.confirm("Вы уверены?", function(confirm) {
