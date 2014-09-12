@@ -42,7 +42,7 @@ public class Ad extends Model{
 	
 	public Integer birthDate;
 	
-	@ManyToOne
+	@ManyToOne(cascade= CascadeType.ALL)
 	public Price priceType;
 	
 	public String title;
@@ -55,8 +55,8 @@ public class Ad extends Model{
 	
 	@OneToOne(cascade= CascadeType.ALL)
 	public ContactInfo contactInfo;
-	
-	@ManyToMany
+
+    @OneToMany(cascade= CascadeType.ALL)
 	public List<Tag> tags;
 	
 	public String status = "pending";

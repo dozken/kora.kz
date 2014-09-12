@@ -20,7 +20,7 @@
 <ul class="profmenu nopaddingleft">
 	
 	<li><a href="@routes.Manage.myAds"><span class="icon-myAds"></span> Мои объявления</a></li>
-	<li><a href="@routes.Manage.myMessages"><span class="icon-myMessages"></span> Личные сообщения <span class="backjasyl">3</span></a></li>
+	<li><a href="@routes.Manage.myMessages"><span class="icon-myMessages"></span> Личные сообщения <span class="backjasyl">@models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)</span></a></li>
 	<li><a href="@routes.Manage.myPayments"><span class="icon-money"></span> Личный счет</a></li>
 	<li><a href="@routes.Manage.myInfo"><span class="icon-myProfile"></span> Мой профиль</a></li>
 	<li><a href="@routes.Manage.mySettings"><span class="icon-settings"></span> Настройки</a></li>

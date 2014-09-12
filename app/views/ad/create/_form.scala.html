@@ -1,6 +1,8 @@
-@import models.contact.Region
-
+@(user:models.user.AuthorisedUser)
 @import models.ad.Animal
+@import models.contact.Region
+@region_id = {@if(user!=null && user.profile.region!=null){@user.profile.region.id}else{-1}}
+@city_id = {@if(user!=null && user.profile.city!=null){@user.profile.city.id}else{-1}}
 
 <form id="ad_form" class="form-horizontal">
 <fieldset>
@@ -25,28 +27,31 @@
 </div>
 
 
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="checkboxes">Пол</label>
-  <div class="col-md-4">
-    <label class="checkbox-inline" for="checkboxes-0">
-      <input type="checkbox" name="animal_gender[]" id="checkboxes-0" value="1">
-      Самец
-    </label>
-    <label class="checkbox-inline" for="checkboxes-1">
-      <input type="checkbox" name="animal_gender[]" id="checkboxes-1" value="2">
-      Самка
-    </label>
-  </div>
-</div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="radios">Пол</label>
+        <div class="col-md-4">
+            <label class="radio-inline" for="radios-0">
+                <input type="radio" name="animal_gender" id="radios-0" value="male" checked="checked">
+                Самец
+            </label>
+            <label class="radio-inline" for="radios-1">
+                <input type="radio" name="animal_gender" id="radios-1" value="female">
+                Самка
+            </label>
+            <label class="radio-inline" for="radios-2">
+                <input type="radio" name="animal_gender" id="radios-2" value="both">
+                Оба
+            </label>
+        </div>
+    </div>
 
 <div class="form-group">
   <label class="col-md-2 control-label" for="radios">Количество</label>
-  <div class="col-md-4"> 
+  <div class="col-md-4">
     <label class="radio-inline" for="radios-0">
       <input type="radio" name="quantity" id="radios-0" value="single" checked="checked">
       Один
-    </label> 
+    </label>
     <label class="radio-inline" for="radios-1">
       <input type="radio" name="quantity" id="radios-1" value="many">
       Косяк
@@ -59,10 +64,9 @@
   <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
   <div class="col-md-2">
     <select id="selectbasic1" name="age" class="form-control">
-      <option value="2000">2000</option>
-      <option value="2001">2001</option>
-      <option value="2002">2002</option>
-      <option value="2003">2003</option>
+    @for(i<-2000 to 2050) {
+        <option value="@i">@i</option>
+    }
     </select>
   </div>
 </div>
@@ -75,13 +79,13 @@
   <div class="radio">
     <label for="radios1-0">
       <input type="radio" name="payment_type" id="payment_type" value="normal" checked="checked">
-          
+
 
 
             <div class="input-group below24 bias-input-group inpgr">
 
               <input type="text" value="" class="form-control" name="money">
-         
+
               <div class="input-group-btn bs-dropdown-to-select-group">
               <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
                 <span data-bind="bs-drp-sel-label">Тенге</span>
@@ -121,17 +125,17 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="textinput">Заголовок</label>  
+  <label class="col-md-2 control-label" for="textinput">Заголовок</label>
   <div class="col-md-6">
   <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
-  <span class="help-block">Максимальная длина 70 символов.</span>  
+  <span class="help-block">Максимальная длина 70 символов.</span>
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-2 control-label" for="textarea">Описание</label>
-  <div class="col-md-6">                     
+  <div class="col-md-6">
     <textarea class="form-control" rows="6" id="textarea" name="description"></textarea>
   </div>
 </div>
@@ -143,7 +147,7 @@
 
 
 
-<!-- File Button --> 
+<!-- File Button -->
 <div class="form-group">
   <label class="col-md-2 control-label" for="filebutton">Фотографии</label>
   <div class="col-md-4">
@@ -174,9 +178,9 @@
   <div class="col-md-3">
     <select id="region" name="region" class="form-control">
         <option selected disabled hidden> Выберите регион</option>
-      @for(region<-Region.find.all()) {
-          <option value="@region.id">@region.name</option>
-      }
+            @for(region <- Region.find.all()) {
+            <option value="@region.id" @if(region_id.toString().toLong==region.id){selected}>@region.name</option>
+        }
     </select>
   </div>
 </div>
@@ -185,25 +189,38 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic3">Город</label>
   <div id="city_list" class="col-md-3">
+      @if(user!=null && user.profile.city!=null) {
+          <select id="city" name="city" class="form-control">
+              <option selected disabled hidden> Выберите город</option>
+              @for(city <- user.profile.region.city) {
 
+                  <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(city_id.toString().toLong == city.id) {selected}>@city.name </option>}
+          </select>
+      }
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="textinput1">Компания</label>  
+  <label class="col-md-2 control-label" for="textinput1">Компания</label>
   <div class="col-md-6">
-  <input id="textinput1" name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
-    
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
+
   </div>
 </div>
 
 <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="ema">Email</label>
+        <div class="col-md-3">
+            <input id="ema"  name="email" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null){value="@user.email"}>
+        </div>
+    </div>
 <div class="form-group">
-  <label class="col-md-2 control-label" for="textinput2">Телефон</label>  
+  <label class="col-md-2 control-label" for="textinput2">Телефон</label>
   <div class="col-md-3">
-  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md">
-    
+  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"}>
+
   </div>
 </div>
 

@@ -17,6 +17,8 @@ public class PrivateMessage extends Model {
 	/**
 	 * 
 	 */
+    public static final Finder<Long, PrivateMessage> find = new Finder<Long, PrivateMessage>(
+            Long.class, PrivateMessage.class);
 	private static final long serialVersionUID = 1L;
 
 	@Id
