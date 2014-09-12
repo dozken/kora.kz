@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.Location;
+import models.ad.Ad;
+
 import models.ad.PrivateMessage;
 import models.admin.AdminSetting;
 import play.db.ebean.Model;
@@ -54,10 +56,14 @@ public class AuthorisedUser extends Model implements Subject {
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	public List<AdminSetting> adminSettings;
 
+
     @OneToOne(cascade=CascadeType.ALL)
     public  Location location;
 
-	@Override
+    @ManyToMany
+    public List<Ad> favorites;
+
+    @Override
 	public List<? extends Role> getRoles() {
 		return roles;
 	}
@@ -92,4 +98,6 @@ public class AuthorisedUser extends Model implements Subject {
 	public static String md5(String password){
 		return password;
 	}
+
+
 }
