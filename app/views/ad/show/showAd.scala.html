@@ -1,0 +1,167 @@
+@(ad: models.ad.Ad)
+@main("Объявление") {
+<style>
+.b-share__text{
+color: black;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+padding: 0px;
+font-style: italic;
+}
+.b-share__handle{
+float: none; !important
+}
+</style>
+<div class="container">
+	<div class="searchbarmargin">@_searchbar()</div>
+@_breadcrumb()
+@_modalMessage()
+<div class="col-lg-9 nopaddingleft nopaddingright">@_ad(ad)</div>
+<div class="col-lg-3 pro2 paddingleft30px nopaddingright"><div class="rek">@_advertisements()</div></div>
+</div>
+}
+
+<script type="text/javascript" src="http://yandex.st/share/share.js" charset="utf-8"></script>
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<script>
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+new Ya.share({
+    element: 'ya_share1',
+        elementStyle: {
+            'type': 'link',
+            'border': false,
+            quickServices : ['']
+        },
+        popupStyle: {
+            blocks: {
+                'Поделитесь с друзьями!': ['vkontakte','facebook','twitter','odnoklassniki','moimir','gplus'],
+                //'Поделись-ка по-другому!': ['lj', 'twitter', 'vkontakte']
+            },
+            //copyPasteField: true
+        },
+});
+
+
+$(document).ready(function(){
+	$('.carousel').carousel('cycle')
+	var clickEvent = false;
+	$('#myCarousel').carousel({
+		interval:   4000	
+	}).on('click', '.list-group li', function() {
+			clickEvent = true;
+			$('.list-group li').removeClass('active');
+			$(this).addClass('active');		
+	}).on('slid.bs.carousel', function(e) {
+		if(!clickEvent) {
+			var count = $('.list-group').children().length -1;
+			var current = $('.list-group li.active');
+			current.removeClass('active').next().addClass('active');
+			var id = parseInt(current.data('slide-to'));
+			if(count == id) {
+				$('.list-group li').first().addClass('active');	
+			}
+		}
+		clickEvent = false;
+	});
+})
+ 
+$(window).load(function() {
+    var boxheight = $('#myCarousel .carousel-inner').innerHeight();
+    var itemlength = $('#myCarousel .item').length;
+    var triggerheight = Math.round(boxheight/itemlength+1);
+	$('#myCarousel .list-group-item').outerHeight(triggerheight);
+});
+
+$(document).on("click",".moderate.approve", function(){
+	
+	var adId = $(this).attr("ad");
+	bootbox.confirm({
+		message: "Вы уверены?",
+		size : "small",
+		callback: function(confirm) {                
+			if(confirm)
+				jsRoutes.controllers.Administer.moderate(adId).ajax({
+					data: {status:"active"},
+					success: function(data) {
+						console.log(data);
+						
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) {
+			            console.log(jqXHR.responseText);            
+			        }
+				});
+		}
+	});
+	
+});
+
+$(document ).on("click","#favorite",function(){
+
+var id = $(this ).attr("ad");
+var type = $(this ).attr("type");
+jsRoutes.controllers.Ads.addFavorite(id,type).ajax({
+success: function() {
+    if(type=="add") {
+        $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star"></span>В избранном' );
+        $ ( "#favorite" ).attr ( 'type','remove' );
+    }else{
+    $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star-empty"></span>В избранное' );
+    $ ( "#favorite" ).attr ( 'type','add' );
+    }
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
+$(document).on("click",".moderate.deny",function(){
+	var adId = $(this).attr("ad");
+	bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+		jsRoutes.controllers.Administer.moderate(adId).ajax({
+			data: {status:"rejected"},
+			success: function(data) {
+				console.log(data);
+				
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR.responseText);            
+	        }
+		});
+	});
+});
+@if(session.get("connected")!=null){
+$(document ).on("click","#private_message_button",function(){
+
+jsRoutes.controllers.Ads.sendPrivateMessage(@ad.id,@models.user.AuthorisedUser.findByEmail(session.get("connected")).id).ajax({
+data: $("#private_message_form").serialize(),
+success: function(data) {
+var res = "" + data;
+if (res == "error") {
+$("#capchaErrorAlert").html("Неправильный логин или пароль");
+$("#loginErrorAlert").show();
+} else {
+
+$("#private_message_modal" ).hide();
+}
+
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+}
+</script>
