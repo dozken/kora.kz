@@ -13,10 +13,10 @@
 	<tbody>
         @for(m<-ms){
 		<tr>
-			<td><input type="checkbox"></td>
-			<td class="message" message="@m.id">@m.sendDate.format("dd.MM.yyyy")</td>
-			<td class="message" message="@m.id">@m.author.userName</td>
-			<td class="message" message="@m.id">@m.title</td>
+			<td><input type="checkbox" mess="@m.id"></td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.sendDate.format("dd.MM.yyyy")</td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.author.userName</td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.title</td>
 		</tr>
         }
 	</tbody>
@@ -26,7 +26,7 @@
 <select id="message_select" class="form-control">
   <option value="inbox">Все входящие</option>
   <option value="send">Все исходящие</option>
-  <option value="all">Все сообщения</option>
+
   </select>
 </div>
 <div class="col-lg-2">

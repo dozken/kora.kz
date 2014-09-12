@@ -231,6 +231,7 @@ public class Ads extends Controller {
             String [] ads = request().cookie("userAdsKora").value().split("_");
             List<Ad> list = new ArrayList<Ad>();
             for(String ad : ads){
+                if(!ad.equals("") && ad!=null)
                 list.add(Ad.find.byId(Long.parseLong(ad)));
 
             }
@@ -254,7 +255,7 @@ public class Ads extends Controller {
             message.message = requestData.get("message");
             message.recipent = user;
             message.status="unread";
-            message.title = requestData.get("title");
+            message.title = Ad.find.byId(ad_id).title;
             message.save();
         }else{
             System.out.println("not registred");
@@ -279,20 +280,68 @@ public class Ads extends Controller {
         return ok();
     }
 
-	public static Result addFavorite(Long id){
+    public static Result deleteMessages(String ids, String type){
+
+        for(String id:ids.split("_")){
+            if(!id.equals("") && id!=null){
+                PrivateMessage message = PrivateMessage.find.byId(Long.parseLong(id));
+
+                if(type.equals("send")){
+                    if(!message.status.equals("recipent-deleted")) {message.status="author-deleted"; message.update();}
+                    else message.delete();
+                }else{
+                    if(!message.status.equals("author-deleted")) {message.status="recipent-deleted"; message.update();}
+                    else message.delete();
+                }
+            }
+
+        }
+        AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+        if(type.equals("send")) return ok(views.html.profile.messages._message.render(PrivateMessage.find.where().eq("author_id", u.id).ne("status", "author-deleted").order("send_date desc").findList()));
+
+        return ok(views.html.profile.messages._message.render(PrivateMessage.find.where().eq("recipent_id", u.id).ne("status", "recipent-deleted").order("send_date desc").findList()));
+    }
+
+    public static Result readAsMessages(String ids){
+
+        for(String id:ids.split("_")) {
+            if (!id.equals("") && id != null) {
+                PrivateMessage message = PrivateMessage.find.byId(Long.parseLong(id));
+                message.status = "readed";
+                message.update();
+            }
+        }
+        AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+        return ok(views.html.profile.messages._message.render(PrivateMessage.find.where().eq("recipent_id", u.id).ne("status", "recipent-deleted").order("send_date desc").findList()));
+    }
+
+	public static Result addFavorite(Long id,String type){
 
         if(session("connected")!=null) {
             AuthorisedUser user = AuthorisedUser.findByEmail(session("connected"));
 
-            if (user.favorites == null) {
-                user.favorites = new ArrayList<Ad>();
+            if(type.equals("add")) {
+                if (user.favorites == null) {
+                    user.favorites = new ArrayList<Ad>();
+                }
+                user.favorites.add(Ad.find.byId(id));
+            }else{
+
+                user.favorites.remove(Ad.find.byId(id));
             }
-            user.favorites.add(Ad.find.byId(id));
             user.update();
         }else{
             String ids="";
             if(request().cookie("userAdsKora")!=null){ids=request().cookie("userAdsKora").value();}
-            ids+=id+"_";
+            if(type.equals("add")) {
+                ids += id + "_";
+            }else{
+                String b="";
+                for(String s:ids.split("_")){
+                    if(!s.equals(id.toString())){b+=s+"_";}
+                }
+                ids=b;
+            }
             response().discardCookie("userAdsKora");
             response().setCookie("userAdsKora",ids,(86400*7));
 

@@ -15,9 +15,11 @@
 		</ul>
 	</div>
 	<div class="col-lg-9 pro3 nopaddingright">
-		@for(ad<-ads){
-		  <div class="col-lg-12  pro1">@_ad(ad)</div>
-		}
+        @if(ads!=null) {
+            @for(ad <- ads) {
+                <div class="col-lg-12  pro1">@_ad(ad)</div>
+            }
+        }
 	</div>
 	<div class="col-lg-3 pro2 paddingleft30px nopaddingright"><div class="">@_advertisements()</div></div>
 </div>

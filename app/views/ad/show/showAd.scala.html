@@ -109,10 +109,16 @@ $(document).on("click",".moderate.approve", function(){
 $(document ).on("click","#favorite",function(){
 
 var id = $(this ).attr("ad");
-jsRoutes.controllers.Ads.addFavorite(id).ajax({
+var type = $(this ).attr("type");
+jsRoutes.controllers.Ads.addFavorite(id,type).ajax({
 success: function() {
-$("#favorite" ).html('<span class="glyphicon glyphicon-star"></span>В избранном')
-
+    if(type=="add") {
+        $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star"></span>В избранном' );
+        $ ( "#favorite" ).attr ( 'type','remove' );
+    }else{
+    $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star-empty"></span>В избранное' );
+    $ ( "#favorite" ).attr ( 'type','add' );
+    }
 },
 error: function(jqXHR, textStatus, errorThrown) {
 console.log(jqXHR.responseText);

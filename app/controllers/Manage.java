@@ -30,7 +30,7 @@ public class Manage extends Controller {
 
         AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
 
-        List<PrivateMessage> mes = PrivateMessage.find.where().eq("recipent_id",u.id).order("send_date desc").findList();
+        List<PrivateMessage> mes = PrivateMessage.find.where().eq("recipent_id",u.id).ne("status","recipent-deleted").order("send_date desc").findList();
 		return ok(myMessages.render(mes));
 	}
 
@@ -41,9 +41,9 @@ public class Manage extends Controller {
 
         if(s.equals("all")) return ok(_message.render(PrivateMessage.find.where().or(Expr.eq("recipent_id",u.id),Expr.eq("author_id",u.id)).order("send_date desc").findList()));
 
-        if(s.equals("send")) return ok(_message.render(PrivateMessage.find.where().eq("author_id",u.id).order("send_date desc").findList()));
+        if(s.equals("send")) return ok(_message.render(PrivateMessage.find.where().eq("author_id",u.id).ne("status","author-deleted").order("send_date desc").findList()));
 
-        return ok(_message.render(PrivateMessage.find.where().eq("recipent_id",u.id).order("send_date desc").findList()));
+        return ok(_message.render(PrivateMessage.find.where().eq("recipent_id",u.id).ne("status","recipent-deleted").order("send_date desc").findList()));
     }
     public static Result read(Long id){
 
