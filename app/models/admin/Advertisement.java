@@ -35,7 +35,11 @@ public class Advertisement extends Model {
 
 	public String status = "show";
 
-	public Date published = new Date();
+	public Date publishDate = new Date();
+	
+	public Date updateDate = new Date();
+	
+	public Date tillToDate;
 	
 	public static void addPosition(){
 		List<Advertisement> advertisements = find.all();
