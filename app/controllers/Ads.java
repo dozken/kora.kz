@@ -5,6 +5,8 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.avaje.ebean.Ebean;
+
 import models.Location;
 import models.ad.Ad;
 import models.ad.AdImage;
@@ -12,6 +14,7 @@ import models.ad.Animal;
 import models.ad.Breed;
 import models.ad.Price;
 import models.ad.PrivateMessage;
+import models.ad.Comment;
 import models.ad.Tag;
 import models.contact.City;
 import models.contact.ContactInfo;
