@@ -67,8 +67,8 @@ POST        /admin/filter/city/:id/delete          controllers.Filters.deleteCit
 GET         /admin/advetisements                   controllers.Administer.advetiments()
 POST        /admin/advetisement/add                controllers.Advertisements.add()
 GET         /admin/advetisement/file/:id           controllers.Advertisements.renderAdvetisement(id: Long)
+GET         /admin/advetisement/:id/expand         controllers.Advertisements.expand(id: Long)
 GET         /admin/advetisement/:id/replace        controllers.Advertisements.replace(id: Long,direction: String)
-GET         /admin/advetisement/:id/update         controllers.Advertisements.extend(id: Long)
 GET         /admin/advetisement/:id/remove         controllers.Advertisements.remove(id: Long)
 
 

@@ -10,6 +10,9 @@
 .order:hover{
 	color:#5b752c;
 }
+.bootbox-input-text{
+ z-index: 100000; !important;
+ }
 </style>
 <div class="container">
   <div class="col-lg-3 menudiv">@profile._menu()</div>
@@ -20,8 +23,21 @@
 </div>
 }
 
+<div style="display:none" id="extendDate">
+ <input type="text" name="extend" class="datepicker" />
+</div>
+
 <script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script>
+$('.input-daterange').datepicker({
+    format: "dd/mm/yyyy",
+    weekStart: 1,
+    language: "ru",
+    autoclose: true,
+    todayHighlight: true
+});
+
 bootbox.setDefaults({
 	  
 	  locale: "ru_delete",
@@ -52,7 +68,60 @@ $(document).ajaxSuccess(function() {
 		});
 	}, 1500);
 });
+$(document).on("click",".updateEndDate",function(e){
+	e.preventDefault();
+	$('.extend').popover("hide");	
+	var advert = $(this).attr("advert");
+	var tillTo = $(this).closest("div.input-group").find("input").val() 
+	jsRoutes.controllers.Advertisements.expand(advert).ajax({
+		data: {tillToDate:tillTo},
+		success:function(data){
+			$("#advertisementTable").html(data);
+		}
+	});
+});
 
+
+$(document).on("click",".extend",function(e){
+	e.preventDefault();
+	var tillTo = $(this).attr("tillToDate");
+	var advert = $(this).attr("advert");
+	var tmp = $.fn.popover.Constructor.prototype.show;
+	$.fn.popover.Constructor.prototype.show = function () {
+	  tmp.call(this);
+	  if (this.options.callback) {
+	    this.options.callback();
+	  }
+	}
+
+	$(".extend").popover({ 
+		placement: 'right',
+		content:
+			'<div class="input-group">'+ 
+			'<input class="form-control tillTo" style="width: 100px;" type="text" name="tillToDate" />'+
+			'<span class="input-group-btn">'+
+			'<button class="btn btn-default nobord updateEndDate" advert="'+advert+'"><span class="glyphicon glyphicon-ok"></span></button>'+
+			'</span>'+
+			'</div>'
+		,
+		html: true, 
+		callback: function() { 
+			$('.tillTo').datepicker({
+			    format: "dd/mm/yyyy",
+			    weekStart: 1,
+			    language: "ru",
+			    autoclose: true,
+			    //todayHighlight: true,
+			   
+			});
+			$('.tillTo').datepicker("update",tillTo);
+		} 
+	}).click(function (e) {
+		e.preventDefault();
+	});
+	//$(".extend").popover("toggle");
+	
+});
 
 $(document).on("click","#advertisementAdd",function(e){
 	e.preventDefault();

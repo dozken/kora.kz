@@ -1,3 +1,5 @@
+@import org.joda.time.format._
+@import org.joda.time._
 <br>
 @utils._flashAlert("error","danger")
 @utils._flashAlert("success","success")
@@ -8,6 +10,7 @@
 				<td align="center">Очередь</td>
 				<td>Компания</td>
 				<td>Место на стр</td>
+				<td>Дней осталось</td>
 				<td>Действия</td>
 				@*
 				<td>Реклама</td>
@@ -28,19 +31,13 @@
     <span class="glyphicon glyphicon-collapse-down down order" advertisement="@advert.id"></span></td>
   <td>@advert.company</td>
   <td>@advert.placeOnPage</td>
+  <td>@org.joda.time.Days.daysBetween( new DateTime(), new DateTime(advert.tillToDate)).getDays
+  </td>
   <td>
     <a class="btn btn-default btn-xs myb advertisementFile" data-content='<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400">'>
       <span class="glyphicon glyphicon-eye-open"></span>
     </a>
-  @*
-  </td>
-  <td>
-  *@
-    <a class="btn btn-default btn-xs myb extend"><span class="glyphicon glyphicon-time "></span></a>
-  @*
-  </td>
-  <td>
-  *@
+    <a class="btn btn-default btn-xs myb extend" advert="@advert.id" tillToDate="@DateTimeFormat.forPattern("dd/MM/yyyy").print( new DateTime(advert.tillToDate))"><span class="glyphicon glyphicon-time "></span></a>
     <a class="btn btn-default btn-xs myb archive" advertisement="@advert.id"><span class="glyphicon glyphicon-trash"></span></a>
   </td>
 </tr>

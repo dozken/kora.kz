@@ -69,7 +69,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Settings.changePassword(),
 				controllers.routes.javascript.Settings.changeUserSetting(),
 				controllers.routes.javascript.Settings.changeAdminSetting(),
+				controllers.routes.javascript.Advertisements.expand(),
 				controllers.routes.javascript.Advertisements.add(),
+				
 				controllers.routes.javascript.Advertisements.remove(),
 				controllers.routes.javascript.Advertisements.replace(),
 				controllers.routes.javascript.Administer.moderate(),
