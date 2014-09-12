@@ -1,0 +1,22 @@
+@(m:models.ad.PrivateMessage)
+<div class="col-lg-12 nopaddingleft boto">
+<ul class="ko2 padleft10">
+    <button id="back" class="btn btn-default">nazad</button>
+    @if(m.author.profile.image!=null){
+<li><img src="data:@m.author.profile.image.contentType;base64, @controllers.Info.byteToBase64(m.author.profile.image.content)" style="height:100px;width:100px;"></li>
+    }</ul>
+<ul class="ko4 padleft10">
+<li><h4>@m.author.userName</h4></li>
+<li><ul class="ko5 nopaddingleft"><li class="bold">Эл-почта:</li><li>@m.author.email</li></ul></li>
+<li><ul class="ko5 nopaddingleft"><li class="bold">Телефон:</li><li>@m.author.profile.phone</li></ul></li>
+<li><ul class="ko5 nopaddingleft"><li class="bold">Адрес:</li><li>@m.author.profile.region.name, @m.author.profile.address</li></ul></li>
+
+</ul>
+<ul class="ko2 padleft10">
+<li>@m.sendDate.format("dd.MM.yyyy")</li>
+<li>@m.message</li>
+</ul>
+<b>ответить <span class="glyphicon glyphicon-share-alt topka10"></span></b>
+<textarea id="replay" class="form-control " rows="5"></textarea>
+<button id="replay_message" recipent="@m.author.id" author="@m.recipent.id" ad="@m.ad.id" class="btn btn-primary topka10">Отправить</button>
+</div>

@@ -1,0 +1,31 @@
+@(user:models.user.AuthorisedUser)
+@main("Мой профиль") {
+
+<div class="container">
+<div class="col-lg-3 menudiv">
+	@profile._menu()
+</div>
+<div class="col-lg-9 ">
+	@profile._title("МОЙ ПРОФИЛЬ"){ }	
+	@_show(user)
+</div>
+
+</div>
+
+}
+<script>
+    url = GMaps.staticMapURL({
+    size: [610, 300],
+    zoom:14,
+    lat: @if(user.location!=null){@user.location.lat}else{"0"},
+    lng: @if(user.location!=null){@user.location.lng}else{"0"},
+    markers: [
+    {
+    	lat: @if(user.location!=null){@user.location.lat}else{"0"}, 
+    	lng: @if(user.location!=null){@user.location.lng}else{"0"}
+    	},
+    ]
+    });
+
+    $('<img/>').attr('src', url).appendTo('#map');
+</script>
