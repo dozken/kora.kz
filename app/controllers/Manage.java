@@ -1,21 +1,15 @@
 package controllers;
 
-import com.avaje.ebean.Expr;
+import java.util.List;
+
 import models.ad.Ad;
 import models.ad.PrivateMessage;
 import models.user.AuthorisedUser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.profile.ads.myAds;
-import views.html.profile.info.myInfo;
-import views.html.profile.messages.myMessages;
-import views.html.profile.messages._read;
-import views.html.profile.messages._message;
-import views.html.profile.payments.myPayments;
-import views.html.profile.settings.mySettings;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 
-import java.util.List;
+import com.avaje.ebean.Expr;
 
 @SubjectPresent
 public class Manage extends Controller {

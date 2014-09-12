@@ -1,14 +1,13 @@
 package models.ad;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import play.data.validation.Constraints;
 import play.db.ebean.Model;
-
-import java.util.List;
 
 @Entity
 public class AdImage extends Model {

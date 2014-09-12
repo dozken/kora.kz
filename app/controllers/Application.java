@@ -17,9 +17,6 @@ import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.WebSocket;
-import views.html.common.about;
-import views.html.common.feedback;
-import views.html.mailBody.feedbackMessage;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.code.kaptcha.impl.DefaultKaptcha;

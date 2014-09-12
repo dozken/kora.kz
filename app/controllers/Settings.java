@@ -7,8 +7,6 @@ import models.user.UserSetting;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.profile.settings._newsletterTab;
-import views.html.profile.settings._passwordTab;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
