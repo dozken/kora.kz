@@ -1,5 +1,6 @@
 @(user:models.user.AuthorisedUser)
-
+    @lat = {@if(user.location!=null){@user.location.lat} else{43.237887}}
+    @lng = {@if(user.location!=null){@user.location.lng}else{76.927437}}
  @main("Редактировать") {
 
 <div class="container">
@@ -39,6 +40,19 @@ FileAPI.event.on(choose, 'change', function(evt) {
 });
 
 
+$(document ).on("change","#region",function(){
+
+var id = Number($(this ).val());
+
+jsRoutes.controllers.Ads.getCities(id).ajax({
+success: function(data) {
+
+$("#city_list" ).html(data);
+
+}
+});
+})
+
 $(document).on("click", "#edit_profile_submit", function() {
 
     $('#profile_edit_form')
@@ -56,109 +70,160 @@ $(document).on("click", "#edit_profile_submit", function() {
             e.preventDefault();
         });
 });
+var lat ="@lat";
+var lng ="@lng";
+var marker;
+var myPlacemark;
+var isMarker=false;
+var curMap="google";
+$(document ).on("change","#city",function(){
+lat = $('option:selected', this).attr('lat');
+lng = $('option:selected', this).attr('lng');
+isMarker=false;
+
+if(curMap=="yandex"){
+$("#mouse_event_map" ).html("");
+myMap = new ymaps.Map ( "mouse_event_map", {
+center :[lat,  lng],
+zoom : 14,
+controls: ["zoomControl"]
+} ) ;
+
+myMap.events.add ( 'click', function ( e ) {
+lat = e.get ( 'coords' )[0];
+lng = e.get ( 'coords' )[1];
+isMarker = true ;
+
+myMap.geoObjects.remove ( myPlacemark ) ;
+
+var coords = e.get ( 'coords' ) ;
+
+myPlacemark = new ymaps.Placemark ( coords) ;
+myMap.geoObjects.add ( myPlacemark ) ;
+} )
+}else {
+map = new GMaps ( {
+div : '#mouse_event_map',
+zoom : 14,
+lat : lat,
+lng : lng,
+width : '700px',
+height : '400px',
+click : function ( e ) {
+$ ( "#location" ).val ( e.latLng ) ;
+lat = e.latLng.lat ( ) ;
+lng = e.latLng.lng ( ) ;
+isMarker = true ;
+map.removeMarker ( marker ) ;
+marker = map.addMarker ( {
+position : e.latLng
+} ) ;
+}
+} ) ;
+}
+})
+
 
 $(document).on("click",".mapSelect",function(){
 
-    if($(this ).attr("map")=="yandex") {
-
-    var myPlacemark ;
-
-    myMap = new ymaps.Map ( "mouse_event_map", {
-    @if(user.location!=null) {center :[ @user.location.lat, @user.location.lng ],}else{center :[43.237887,  76.927437],}
-    zoom : 14,
-    controls: ["zoomControl"]
-    } ) ;
-    @if(user.location!=null) {
-
-     myPlacemark = new ymaps.Placemark([@user.location.lat, @user.location.lng], { content: 'Москва!', balloonContent: 'Столица России' });
-     myMap.geoObjects.add(myPlacemark);
-	}
-
-    myMap.events.add ( 'click', function ( e ) {
-
-    myMap.geoObjects.remove ( myPlacemark ) ;
-
-    var coords = e.get ( 'coords' ) ;
-    myPlacemark = new ymaps.Placemark ( coords, { content : 'Москва!', balloonContent : 'Столица России' } ) ;
-    myMap.geoObjects.add ( myPlacemark ) ;
-    } )
-
-    }else{
+if($(this ).attr("map")=="yandex") {
+curMap="yandex";
 
 
-    }
+myMap = new ymaps.Map ( "mouse_event_map", {
+center :[lat,  lng],
+zoom : 14,
+controls: ["zoomControl"]
+} ) ;
+
+myMap.events.add ( 'click', function ( e ) {
+
+lat = e.get ( 'coords' )[0];
+lng = e.get ( 'coords' )[1];
+isMarker = true ;
+myMap.geoObjects.remove ( myPlacemark ) ;
+
+var coords = e.get ( 'coords' ) ;
+myPlacemark = new ymaps.Placemark ( coords) ;
+myMap.geoObjects.add ( myPlacemark ) ;
+} )
+
+if(isMarker){
+myPlacemark = new ymaps.GeoObject({
+geometry: {
+type: "Point",
+coordinates: [lat, lng]
+}});
+myMap.geoObjects.add ( myPlacemark ) ;
+}
+
+}else{
+curMap="google";
+map = new GMaps({
+div: '#mouse_event_map',
+zoom: 14,
+lat: lat,
+lng:  lng,
+width: '700px',
+height: '400px',
+click: function(e) {
+$("#location" ).val( e.latLng);
+lat= e.latLng.lat();
+lng= e.latLng.lng();
+isMarker=true;
+map.removeMarker(marker);
+marker =  map.addMarker({
+position:e.latLng
+});
+}
+});
+if(isMarker){
+map.removeMarker(marker);
+marker=map.addMarker({
+lat: lat,
+lng: lng,
+});
+}
+}
 })
 
 
 </script>
 
 <script type="text/javascript">
-    /**
-    * Mouse Events on Maps
-    */
+/**
+* Mouse Events on Maps
+*/
 
-    $(document).ready(function(){
+$(document).ready(function(){
 
-    map = new GMaps({
-    div: '#mouse_event_map',
-    zoom: 14,
-    lat: "43.276978",
-    lng:  " 76.893096",
-    width: '700px',
-    height: '400px',
-    click: function(e) {
-    $("#location" ).val( e.latLng);
-    map.removeMarker(myMap);
-    console.log( e.latLng);
-    myMap =  map.addMarker({
-    position:e.latLng,
-    infoWindow: {
-    content: '<p>'+$("#company_name" ).val() + '</p>'
+map = new GMaps({
+div: '#mouse_event_map',
+zoom: 14,
+lat: lat,
+lng:  lng,
+width: '700px',
+height: '400px',
+click: function(e) {
+$("#location" ).val( e.latLng);
+lat= e.latLng.lat();
+lng= e.latLng.lng();
+isMarker=true;
+map.removeMarker(marker);
+marker =  map.addMarker({
+position:e.latLng
+});
+}
+
+});
+    @if(user.location!=null) {
+        map.addMarker ( {
+        lat : lat,
+        lng : lng
+        } ) ;
+        isMarker=true;
     }
-    });
-    },
+});
 
 
-    });
-
-        @if(user.location!=null) {
-            myMap = map.addMarker ( {
-            lat: @user.location.lat,
-            lng: @user.location.lng,
-            infoWindow : {
-            content : '<p>' + $ ( "#company_name" ).val ( ) + '</p>'
-            }
-            } ) ;
-        }
-
-
-    $(document).on("change","#region",function(){
-    map = new GMaps({
-    div: '#mouse_event_map',
-    zoom: 14,
-    lat: 51.168186,
-    lng:  71.437161,
-    width: '700px',
-    height: '400px',
-    click: function(e) {
-    $("#location" ).val( e.latLng);
-    map.removeMarker(myMap);
-    myMap =  map.addMarker({
-    position:e.latLng,
-    title: 'Lima',
-
-    infoWindow: {
-    content: '<p>'+$("#company_name" ).val() + '</p>'
-    }
-    });
-    },
-    dragend: function(e) {
-
-    }
-
-    });
-
-    })
-
-    });
-    </script>
+</script>

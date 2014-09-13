@@ -7,6 +7,7 @@ import java.util.List;
 
 import models.Location;
 import models.ad.Image;
+import models.contact.City;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.SocialNetwork;
@@ -58,6 +59,7 @@ public class Info extends Controller {
 			}
 			user.profile.region = Region.find.byId(Long.parseLong(requestData
 					.get("region")));
+            user.profile.city = City.find.byId(Long.parseLong(requestData.get("city")));
 			user.userSocials.add(fillSocilal("vk", requestData.get("vk")));
 			user.userSocials.add(fillSocilal("facebook",
 					requestData.get("facebook")));
