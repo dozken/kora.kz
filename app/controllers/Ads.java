@@ -103,9 +103,9 @@ public class Ads extends Controller {
         ad.save();
         
         ad.tags.add(addTag(ad,ad.animal.name));
+        ad.tags.add(addTag(ad,ad.breed.name));
         ad.tags.add(addTag(ad,ad.title));
         ad.tags.add(addTag(ad,ad.birthDate.toString()));
-        ad.tags.add(addTag(ad,ad.breed.name));
         ad.tags.add(addTag(ad,ad.gender));
         ad.tags.add(addTag(ad,ad.quantity));
         ad.tags.add(addTag(ad,ad.contactInfo.region.name));
