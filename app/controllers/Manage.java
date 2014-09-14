@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import models.ad.Ad;
@@ -27,7 +30,8 @@ import com.avaje.ebean.SqlRow;
 public class Manage extends Controller {
 
 	public static Result myAds() {
-		return ok(myAds.render(Ad.find.where().ne("status", "archived").order("publishedDate desc").findList()));
+		return ok(myAds.render(Ad.find.where().eq("status", "active").eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
+		
 	}
 
 
@@ -63,7 +67,7 @@ public class Manage extends Controller {
 	public static Result myPayments() {
 		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
 		
-		return ok(myPayments.render(u.payments));
+		 return ok(myPayments.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
 	}
 
 	public static Result addMoney(String type, Double money) {
@@ -74,7 +78,7 @@ public class Manage extends Controller {
 		p.paymentType = type;
 		u.payments.add(p);
 		u.update();
-		return ok(_table.render(u.payments));
+		 return ok(_table.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
 		
 	}
 	
@@ -85,9 +89,11 @@ public class Manage extends Controller {
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();
 		if (list.size() > 0) {
+			System.out.println(list.get(0).values().toString());
+			if(list.get(0).values().toString().equals("[null]")){return "0.0";}
 			return myTrim(list.get(0).values().toString());
 		}
-		return "";
+		return "0.0";
 	}
 
 	public static String myTrim(String a) {
@@ -99,7 +105,28 @@ public class Manage extends Controller {
 		return b;
 	}
 
-	
+	public static Result paymentReport(String filter,String start,String end)
+	{
+		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+		if(start!=null && !start.equals("") && end!=null && !end.equals("")){
+		try {
+			Date s = new SimpleDateFormat("dd/MM/yyyy").parse(start);
+			Date e = new SimpleDateFormat("dd/MM/yyyy").parse(end);
+			System.out.println(s);
+			if(filter.equals("all")) return ok(_table.render(Payment.find.where().eq("user", u).between("paymentDate", s, e).order("paymentDate desc").findList()));
+			if(filter.equals("add")) return ok(_table.render(Payment.find.where().eq("user", u).eq("paymentType", "add").between("paymentDate", s, e).order("paymentDate desc").findList()));
+			return ok(_table.render(Payment.find.where().eq("user", u).eq("paymentType", "substract").between("paymentDate", s, e).order("paymentDate desc").findList()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}else{
+		if(filter.equals("all")) return ok(_table.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
+		if(filter.equals("add")) return ok(_table.render(Payment.find.where().eq("user", u).eq("paymentType", "add").order("paymentDate desc").findList()));
+		return ok(_table.render(Payment.find.where().eq("user", u).eq("paymentType", "substract").order("paymentDate desc").findList()));
+	}
+		return ok();
+}
 	
 	public static Result mySettings() {
 		return ok(mySettings.render());

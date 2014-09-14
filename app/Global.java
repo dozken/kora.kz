@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import models.Location;
 import models.Setting;
 import models.ad.Ad;
+import models.ad.AdSetting;
 import models.ad.Animal;
 import models.ad.Breed;
 import models.ad.Price;
@@ -199,8 +200,15 @@ public class Global extends GlobalSettings {
 			price.save();
 			ad.status = "pending";
 			ad.priceType = price;
+			
+			
 			// TODO tags
 			ad.save();
+			AdSetting set = new AdSetting();
+			set.ad = ad;
+			set.name="autoprelong";
+			set.status="off";
+			set.save();
 			}
 
 		}
