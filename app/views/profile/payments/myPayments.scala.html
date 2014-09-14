@@ -1,20 +1,11 @@
+@(payments:List [models.user.Payment])
 @main("Личный счет") {
 
 <div class="container">
 	<div class="col-lg-3 menudiv">@profile._menu()</div>
 	<div class="col-lg-9">
-		@profile._title("ЛИЧНЫЙ СЧЕТ"){
-		<div class="col-lg-3">
-			<p class="lin">
-				<b>У вас на счете:</b> <span class="kipkizil">1500 ед.</span>
-			</p>
-		</div>
-		<div class="col-lg-3 onjak nopaddingright">
-			<a href="#" class="btn btn-default btn-success "><span
-				class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
-		</div>
-		} 
-		@_table()
+		
+		<div id="payment_body">@_table(payments)</div>
 	</div>
 
 </div>
@@ -26,4 +17,19 @@
 	$('.input-daterange').datepicker({
 		language : "ru"
 	});
+	
+	$(document).on("click","#add_money",function(){
+		var money = $("#money").val();
+		jsRoutes.controllers.Manage.addMoney("add", money).ajax({
+success: function(data) {
+  $("#payment_body").html(data);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+		
+	} );
+	
+	
 </script>

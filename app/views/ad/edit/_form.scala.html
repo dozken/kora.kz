@@ -238,8 +238,8 @@
   <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
   <div class="col-md-5">
     <select id="selectbasic4" name="coment_display" class="form-control">
-      <option value="1">Только зарегистрированным пользователям</option>
-      <option value="2">Всем</option>
+      <option value="registred">Только зарегистрированным пользователям</option>
+      <option value="all" @if(models.ad.Ad.settingByName(ad,"comment").status=="all"){selected}>Всем</option>
     </select>
   </div>
 </div>

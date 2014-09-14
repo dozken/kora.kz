@@ -80,16 +80,21 @@ public class Application extends Controller {
                 controllers.routes.javascript.Ads.addFavorite(),
                 controllers.routes.javascript.Ads.sendPrivateMessage(),
                 controllers.routes.javascript.Ads.replayPrivateMessage(),
+				controllers.routes.javascript.Ads.preLong(),
+				controllers.routes.javascript.Ads.highlight(),
+				controllers.routes.javascript.Ads.autoPreLong(),
+				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.get(),
 				controllers.routes.javascript.Ads.comment(),
                 controllers.routes.javascript.Ads.deleteMessages(),
                 controllers.routes.javascript.Ads.readAsMessages(),
 
                 controllers.routes.javascript.Manage.read(),
+                controllers.routes.javascript.Manage.addMoney(),
                 controllers.routes.javascript.Manage.getMessageType()
                 ));
 	}
-
+	
 	// public static Result changeLanguage(String language) {
 	// Controller.changeLang(language);
 	// return redirect(request().getHeader("referer"));

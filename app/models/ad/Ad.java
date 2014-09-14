@@ -57,6 +57,9 @@ public class Ad extends Model{
 
     @OneToMany(cascade= CascadeType.ALL)
 	public List<Tag> tags;
+    
+    @OneToMany(cascade= CascadeType.ALL)
+   	public List<AdSetting> settings;
 	
 	public String status = "pending";
 	
@@ -84,5 +87,9 @@ public class Ad extends Model{
         return AdImage.find.where().eq("ad_id",id).order("position").findList();
     }
 
+    public static AdSetting settingByName(Ad ad,String name){
+    	
+    	return AdSetting.find.where().eq("name" , name).eq("ad", ad).findUnique();
+    }
 }
 

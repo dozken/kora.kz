@@ -58,14 +58,15 @@ public class Global extends GlobalSettings {
 			}
 
 			Map<Integer, String> adSettings = new TreeMap<Integer, String>();
-			adSettings.put(1, "Комментарии");
-			adSettings.put(2, "Автопродление");
-			adSettings.put(3, "Выделить объявление");
+			
+			adSettings.put(1, "prelong");
+			adSettings.put(2, "highlight");
 			for (Map.Entry<Integer, String> entry : adSettings.entrySet()) {
 				Setting setting = new Setting();
 				setting.position = entry.getKey();
 				setting.category = "ad";
 				setting.name = entry.getValue();
+				setting.price=500.0;
 				setting.save();
 			}
 

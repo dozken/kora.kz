@@ -8,8 +8,10 @@ import java.util.List;
 import com.avaje.ebean.Ebean;
 
 import models.Location;
+import models.Setting;
 import models.ad.Ad;
 import models.ad.AdImage;
+import models.ad.AdSetting;
 import models.ad.Animal;
 import models.ad.Breed;
 import models.ad.Price;
@@ -20,6 +22,7 @@ import models.contact.City;
 import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
+import models.user.Payment;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -29,6 +32,7 @@ import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
 import views.html.ad.search.adSearch;
 import views.html.ad.show.*;
+import views.html.profile.ads.myAds;
 
 
 public class Ads extends Controller {
@@ -84,8 +88,18 @@ public class Ads extends Controller {
         }else{price.price = requestData.get("payment_type");}
         price.save();
         ad.priceType = price;
-
+        AdSetting ad_set = new AdSetting();
+        ad_set.name = "comment";
+        ad_set.status=requestData.get("coment_display");
+        
+        AdSetting ad_set2 = new AdSetting();
+        ad_set2.name = "autoprelong";
+        ad_set2.status="off";
+        if(ad.settings==null){ad.settings = new ArrayList<AdSetting>();}
+        ad.settings.add(ad_set);
+        ad.settings.add(ad_set2);
         ad.save();
+        
         ad.tags.add(addTag(ad,ad.animal.name));
         ad.tags.add(addTag(ad,ad.title));
         ad.tags.add(addTag(ad,ad.birthDate.toString()));
@@ -115,6 +129,70 @@ public class Ads extends Controller {
 		return ok();
 	}
 
+	public static Result preLong(Long id)
+	{
+		Double myAmount = Double.parseDouble(Manage.getSum());
+		Double cost = Setting.find.where().eq("name", "prelong").findUnique().price;
+		if(myAmount>=cost){
+		Ad ad = Ad.find.byId(id);
+		AdSetting set = new AdSetting();
+		set.name = "prelong";
+		ad.settings.add(set);
+		ad.update();
+		Payment p = new Payment();
+		p.paymentType = "substract"; 
+		p.amount = (-1)*cost;
+		 AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+		 u.payments.add(p);
+		 u.update();
+		 return ok("fine");
+		}
+		return ok("notEnough");
+		
+	}
+	
+	public static Result highlight(Long id)
+	{
+		
+		Double myAmount = Double.parseDouble(Manage.getSum());
+		Double cost = Setting.find.where().eq("name", "highlight").findUnique().price;
+		if(myAmount>=cost){
+		Ad ad = Ad.find.byId(id);
+		AdSetting set = new AdSetting();
+		set.name = "highlight";
+		ad.settings.add(set);
+		ad.update();
+		Payment p = new Payment();
+		p.paymentType = "substract"; 
+		p.amount = (-1)*cost;
+		 AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+		 u.payments.add(p);
+		 u.update();
+		 return ok("fine");
+		}
+		return ok("notEnough");
+		
+	}
+	
+	public static Result archive(Long id)
+	{
+		Ad ad = Ad.find.byId(id);
+		ad.status="archived";
+		ad.update();
+		return ok(myAds.render(Ad.find.where().ne("status", "archived").order("publishedDate desc").findList()));
+		
+	}//
+	
+	public static Result autoPreLong(Long id)
+	{
+		AdSetting set = AdSetting.find.where().eq("name" , "autoprelong").eq("ad.id", id).findUnique();
+		
+		set.status="on";
+		set.update();
+		return ok();
+		
+	}
+	
     public static Tag addTag(Ad ad, String s){
         Tag tag = new Tag();
         tag.name = s;
@@ -155,6 +233,10 @@ public class Ads extends Controller {
         ad.gender = requestData.get("animal_gender");
         ad.title = requestData.get("title");
 
+        AdSetting set = AdSetting.find.where().eq("name" , "comment" ).eq("ad" , ad).findUnique();
+        set.status = requestData.get("coment_display");
+        set.update();
+        
         ad.priceType.currency = "";
         if(requestData.get("payment_type").equals("normal")){
 
