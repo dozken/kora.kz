@@ -1,5 +1,8 @@
 package models.ad;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -90,6 +93,19 @@ public class Ad extends Model{
     public static AdSetting settingByName(Ad ad,String name){
     	
     	return AdSetting.find.where().eq("name" , name).eq("ad", ad).findUnique();
+    }
+    
+    public static String dateDifference(Date d)
+    {
+    	
+    	LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    	
+    	LocalDate today = LocalDate.now();
+    	
+    	 
+    	Period p = Period.between(today, date);
+    	return p.getDays() + " дней";
+    	
     }
 }
 

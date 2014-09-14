@@ -88,8 +88,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.comment(),
                 controllers.routes.javascript.Ads.deleteMessages(),
                 controllers.routes.javascript.Ads.readAsMessages(),
-
+                controllers.routes.javascript.Ads.filterAds(),
                 controllers.routes.javascript.Manage.read(),
+                controllers.routes.javascript.Manage.paymentReport(),
                 controllers.routes.javascript.Manage.addMoney(),
                 controllers.routes.javascript.Manage.getMessageType()
                 ));

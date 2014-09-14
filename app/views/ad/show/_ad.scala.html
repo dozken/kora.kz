@@ -115,12 +115,14 @@
 <button class="btn btn-success moderate approve" ad="@ad.id"><span class="icon-share"></span> Подтвердить</button>
 <button class="btn btn-danger moderate deny" ad="@ad.id"><span class="icon-warning"></span> Отклонить</button>
 </div>
-}{
+}{<a></a>}
+
     <div id="comment_body" class="col-lg-12  formdown topka akwyl">
 
 @_comment(ad.comments)
         </div>
-<div class="col-lg-12 nopaddingleft formdown topka">
+@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
+	<div class="col-lg-12 nopaddingleft formdown topka">
 <b id="comment_head" class="bdau">Добавить комментарий</b>
 </div>
 <form id="comment_form" class="form-horizontal">
@@ -163,10 +165,10 @@
      
     </div>
   </div>
+}   
+    
+
 </form>
-
-
-}
 
 
 

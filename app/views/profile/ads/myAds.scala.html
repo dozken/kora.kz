@@ -6,22 +6,32 @@
   </div>
   <div class="col-lg-9 ">
   	@profile._title("МОИ ОБЪЯВЛЕНИЯ"){
-  	<div class="col-lg-4 tptp"><select class="form-control">
-	  <option>Все (8)</option>
-	  <option selected="selected">На сайте (2)</option>
-	  <option>На модерции (3)</option>
-	  <option>В архиве (3)</option>
+  	<div class="col-lg-4 tptp"><select id="ad_filter" class="form-control">
+	  
+	  <option selected="selected" value="active">На сайте</option>
+	  <option value="pending">В ожидании</option>
+	  <option value="moderating">На модерции</option>
+	  <option value="archived">В архиве</option>
 	</select>
 	</div>
   	}	
-	@for(ad<-ads){
-	  @_ad(ad)
-	}
+	
+	 <div id="ad_list"> @_ad(ads)</div>
   </div>
 </div>
 }
 
 <script>
+
+$(document).on("change","#ad_filter",function(){
+var str = $(this).val();
+	jsRoutes.controllers.Ads.filterAds(str).ajax({
+		success: function(data) {
+			$("#ad_list").html(data);
+			$(".switcher").bootstrapSwitch();
+		}
+		})
+})
 
     $(document ).on("click",".ad_highlight",function(){
 
@@ -70,7 +80,7 @@
      })
 
 $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
-	    state: true,
+	    state: false,
 	    size: null,
 	    animate: true,
 	    disabled: false,
@@ -85,9 +95,17 @@ $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 	    wrapperClass: "wrapper",
 	    radioAllOff: false,
 	    onInit: function() {},
-	    onSwitchChange: function() {}
+	    onSwitchChange: function(e,data) 
+	    {
+	    	var ad_id = $(this).attr("ad");
+	    	var str = (data)?"on":"off";
+	    	
+	    	jsRoutes.controllers.Ads.autoPreLong(ad_id,str).ajax();
+	    }
 };
 
 $(".switcher").bootstrapSwitch();
+
+ 
 
 </script>

@@ -5,6 +5,8 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import com.avaje.ebean.Ebean;
 
 import models.Location;
@@ -124,11 +126,16 @@ public class Ads extends Controller {
             }
         }
 
-        //saveImages(ad,body.getFiles(),requestData.get("image_order"));
+        
 
 		return ok();
 	}
 
+	public static Result filterAds(String str){
+		 
+		return ok(views.html.profile.ads._ad.render(Ad.find.where().eq("status", str).eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
+	}
+	
 	public static Result preLong(Long id)
 	{
 		Double myAmount = Double.parseDouble(Manage.getSum());
@@ -179,15 +186,15 @@ public class Ads extends Controller {
 		Ad ad = Ad.find.byId(id);
 		ad.status="archived";
 		ad.update();
-		return ok(myAds.render(Ad.find.where().ne("status", "archived").order("publishedDate desc").findList()));
+		return ok(myAds.render(Ad.find.where().eq("status", "active").eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
 		
 	}//
 	
-	public static Result autoPreLong(Long id)
+	public static Result autoPreLong(Long id,String str)
 	{
 		AdSetting set = AdSetting.find.where().eq("name" , "autoprelong").eq("ad.id", id).findUnique();
 		
-		set.status="on";
+		set.status=str;
 		set.update();
 		return ok();
 		
