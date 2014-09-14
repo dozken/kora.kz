@@ -14,13 +14,15 @@ public class Payment extends Model {
 	/**
 	 * 
 	 */
+	public static final Model.Finder<Long, Payment> find = new Model.Finder<Long, Payment>(
+            Long.class, Payment.class);
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	public Long id;
 	
 	@ManyToOne
-	public AuthorisedUser authorisedUser;
+	public AuthorisedUser user;
 	
 	public Date paymentDate = new Date();
 	

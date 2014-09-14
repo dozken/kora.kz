@@ -62,6 +62,9 @@ public class AuthorisedUser extends Model implements Subject {
     @ManyToMany
     public List<Ad> favorites;
 
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+    public List<Payment> payments;
+    
     @Override
 	public List<? extends Role> getRoles() {
 		return roles;

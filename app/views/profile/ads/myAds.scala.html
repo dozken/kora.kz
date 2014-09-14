@@ -25,25 +25,49 @@
 
     $(document ).on("click",".ad_highlight",function(){
 
+
         var ad_id = $(this ).attr("ad");
-        $('div[ad="'+ad_id+'"]' ).addClass("highlighted");
-        $(this ).addClass("active");
+        var that = this;
+         if(window.confirm("Are you sure?")==true){
+        jsRoutes.controllers.Ads.highlight(ad_id).ajax({
+		success: function(data) {
+		if(data=="fine"){
+		$('div[ad="'+ad_id+'"]' ).addClass("highlighted");
+        $(that ).addClass("active");
+        $(that).prop("disabled",true);
+        $(that).html('<span class="icon-vydelit"></span> Выделено');
+        }else{alert("not enough money");}
+		}
+		});
+		}
+        
     })
+    
+    $(document ).on("click",".ad_prelong",function(){
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        var ad_id = $(this ).attr("ad");
+        var that = this;
+        if(window.confirm("Are you sure?")==true){
+        jsRoutes.controllers.Ads.preLong(ad_id).ajax({
+		success: function(data) {
+		if(data=="fine"){
+        	$(that).prop("disabled",true);
+        	$(that).html('<span class="icon-time"></span> Продлино');
+        }else{alert("not enough money");}
+		}
+		});
+		}
+        
+    })
+    
+     $(document ).on("click",".ad_archive",function(){
+     
+     if(window.confirm("Are you sure?")==false){
+     return false;
+     }
+     
+     })
 
 $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 	    state: true,
@@ -65,7 +89,5 @@ $.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
 };
 
 $(".switcher").bootstrapSwitch();
-
-
 
 </script>

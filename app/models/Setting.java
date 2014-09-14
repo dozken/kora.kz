@@ -36,6 +36,8 @@ public class Setting extends Model {
 	@OneToMany
 	public List<AdminSetting> adminSettings;
 	
+	public Double price;
+	
 	public static List<Setting> findByCategory(String category){
 		return find.where().eq("category", category).orderBy("position").findList();		
 	}
