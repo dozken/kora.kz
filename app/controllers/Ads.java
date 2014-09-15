@@ -343,17 +343,25 @@ public class Ads extends Controller {
 
         AuthorisedUser user = AuthorisedUser.find.where().eq("email",Ad.find.byId(ad_id).contactInfo.email).findUnique();
         if(user!=null){
-            System.out.println("registred");
-            PrivateMessage message = new PrivateMessage();
-            message.ad = Ad.find.byId(ad_id);
-            message.author = AuthorisedUser.find.byId(author_id);
-            message.message = requestData.get("message");
-            message.recipent = user;
-            message.status="unread";
-            message.title = Ad.find.byId(ad_id).title;
-            message.save();
+            String kaptchaExpected = session(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+            String kaptchaReceived = requestData.get("kaptcha");
+
+            if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
+                System.out.println("registred");
+                PrivateMessage message = new PrivateMessage();
+                message.ad = Ad.find.byId(ad_id);
+                message.author = AuthorisedUser.find.byId(author_id);
+                message.message = requestData.get("message");
+                message.recipent = user;
+                message.status = "unread";
+                message.title = Ad.find.byId(ad_id).title;
+                message.save();
+            }else{
+                System.out.println("capcha error");
+                return ok("error");
+            }
         }else{
-            System.out.println("not registred");
+            System.out.println("not registred, You must send email for this person");
         }
         return ok();
     }
@@ -470,18 +478,27 @@ public class Ads extends Controller {
     public static Result comment(Long id,Long com_id){
 
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
-        Comment comment = new Comment();
-        comment.ad = Ad.find.byId(id);
-        comment.email = requestData.get("comment_email");
-        comment.text = requestData.get("comment_message");
-        comment.name = requestData.get("comment_author");
-        if(com_id!=0){
-            comment.coment = Comment.find.byId(com_id);
-        }
-        comment.save();
 
-        return ok(_comment.render(Ad.find.byId(id).comments));
+
+        String kaptchaExpected = session(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        String kaptchaReceived = requestData.get("kaptcha");
+        System.out.println(kaptchaExpected + "   " +kaptchaReceived);
+        if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
+
+            Comment comment = new Comment();
+            comment.ad = Ad.find.byId(id);
+            comment.email = requestData.get("comment_email");
+            comment.text = requestData.get("comment_message");
+            comment.name = requestData.get("comment_author");
+            if (com_id != 0) {
+                comment.coment = Comment.find.byId(com_id);
+            }
+            comment.save();
+
+            return ok(_comment.render(Ad.find.byId(id).comments));
+        }else{
+            return ok("kapcha_error");
+        }
     }
 
 }

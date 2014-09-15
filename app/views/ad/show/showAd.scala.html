@@ -143,18 +143,18 @@ $(document).on("click",".moderate.deny",function(){
 	});
 });
 @if(session.get("connected")!=null){
-$(document ).on("click","#private_message_button",function(){
-
+$(document ).on("click","#private_message_button",function(e){
+e.preventDefault();
 jsRoutes.controllers.Ads.sendPrivateMessage(@ad.id,@models.user.AuthorisedUser.findByEmail(session.get("connected")).id).ajax({
 data: $("#private_message_form").serialize(),
 success: function(data) {
 var res = "" + data;
 if (res == "error") {
-$("#capchaErrorAlert").html("Неправильный логин или пароль");
-$("#loginErrorAlert").show();
+$("#capchaErrorAlert").html("Введите, пожалуйста, цифры с картинки.");
+return false;
 } else {
 
-$("#private_message_modal" ).hide();
+$("#private_message_modal" ).modal("hide");
 }
 
 },
@@ -189,15 +189,20 @@ $(document ).on("click",".comment_answer",function(){
 
 $(document ).on("click","#comment_ad",function(e){
 e.preventDefault();
-    var com_id = $(this ).attr("forWho");
-jsRoutes.controllers.Ads.comment(@ad.id,com_id).ajax({
-data: $("#comment_form").serialize(),
-success: function(data) {
-$("#comment_body" ).html(data);
+if(validation()) {
+var com_id = $ ( this ).attr ( "forWho" ) ;
+jsRoutes.controllers.Ads.comment ( @ad.id, com_id ).ajax ( {
+data : $ ( "#comment_form" ).serialize ( ),
+success : function ( data ) {
+var res = "" + data ;
+if ( res != "kapcha_error" ) { $ ( "#comment_body" ).html ( data ) ; $ ( "#kapcha_Error" ).html ( "" ) ; }
+else { $ ( "#kapcha_Error" ).html ( "Введите, пожалуйста, цифры с картинки." ) ; }
 },
-error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
 }
-});
+} ) ;
+}
+else{alert("validation failed");}
 })
 </script>
