@@ -173,52 +173,55 @@ $(document).ready(function(e) {
 });
 
 $(document).on("click", "#registrButton", function(e) {
-    e.preventDefault();
+e.preventDefault();
+if(register_validation()) {
+jsRoutes.controllers.User.register ( ).ajax ( {
+data : $ ( "#registerForm" ).serialize ( ),
+type : 'POST',
+success : function ( data ) {
+var res = "" + data ;
+if ( res == "error" ) {
+$ ( "#registerErrorAlert" ).html ( "Эта почта уже используется!" ) ;
+$ ( "#registerErrorAlert" ).show ( ) ;
 
-    jsRoutes.controllers.User.register().ajax({
-        data: $("#registerForm").serialize(),
-        type: 'POST',
-        success: function(data) {
-            var res = "" + data;
-            if (res == "error") {
-                $("#registerErrorAlert").html("Эта почта уже используется!");
-                $("#registerErrorAlert").show();
-            } else {
-            	@restrictOr(la(as("admin"))){
-            		window.location.href = "@routes.Administer.moderators()";
-            	}{
-                  	window.location.href = "@routes.Manage.myAds()";
-            	}
-            }
+} else {
+    @restrictOr(la(as("admin"))) {
+        window.location.href = " @routes.Administer.moderators() ";
+    } {
+        window.location.href = " @routes.Manage.myAds() ";
+    }
+}
 
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
-        }
-    });
+},
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
+}
+} ) ;
+}else{alert("validation failed");}
 
 });
 
 $(document).on("click", "#loginButton", function(e) {
     e.preventDefault();
+if(login_validation()) {
+jsRoutes.controllers.Application.signIn ( ).ajax ( {
+data : $ ( "#loginForm" ).serialize ( ),
+success : function ( data ) {
+var res = "" + data ;
+if ( res == "error" ) {
+$ ( "#loginErrorAlert" ).html ( "Неправильный логин или пароль" ) ;
+$ ( "#loginErrorAlert" ).show ( ) ;
+} else {
 
-    jsRoutes.controllers.Application.signIn().ajax({
-        data: $("#loginForm").serialize(),
-        success: function(data) {
-            var res = "" + data;
-            if (res == "error") {
-                $("#loginErrorAlert").html("Неправильный логин или пароль");
-                $("#loginErrorAlert").show();
-            } else {
+window.location.href = " @routes.Manage.myInfo() ";
+}
 
-                window.location.href = "@routes.Manage.myInfo()";
-            }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
-        }
-    });
+},
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
+}
+} ) ;
+}else{alert("validation failed");}
 });
 
 
