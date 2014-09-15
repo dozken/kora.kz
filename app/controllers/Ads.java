@@ -3,6 +3,7 @@ package controllers;
 import static play.data.Form.form;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -138,19 +139,19 @@ public class Ads extends Controller {
 	
 	public static Result preLong(Long id)
 	{
-		Double myAmount = Double.parseDouble(Manage.getSum());
+        AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+		Double myAmount = u.profile.myMonney;
 		Double cost = Setting.find.where().eq("name", "prelong").findUnique().price;
 		if(myAmount>=cost){
 		Ad ad = Ad.find.byId(id);
-		AdSetting set = new AdSetting();
-		set.name = "prelong";
-		ad.settings.add(set);
-		ad.update();
+		ad.expirationDate = new Date(new Date().getTime()+1000 * 60 * 60 * 24 * 7);
+            ad.update();
 		Payment p = new Payment();
 		p.paymentType = "substract"; 
 		p.amount = (-1)*cost;
-		 AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+
 		 u.payments.add(p);
+         u.profile.myMonney-=cost;
 		 u.update();
 		 return ok("fine");
 		}
@@ -160,8 +161,8 @@ public class Ads extends Controller {
 	
 	public static Result highlight(Long id)
 	{
-		
-		Double myAmount = Double.parseDouble(Manage.getSum());
+        AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+		Double myAmount = u.profile.myMonney;
 		Double cost = Setting.find.where().eq("name", "highlight").findUnique().price;
 		if(myAmount>=cost){
 		Ad ad = Ad.find.byId(id);
@@ -172,9 +173,10 @@ public class Ads extends Controller {
 		Payment p = new Payment();
 		p.paymentType = "substract"; 
 		p.amount = (-1)*cost;
-		 AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+
 		 u.payments.add(p);
-		 u.update();
+		u.profile.myMonney-=cost;
+		  u.update();
 		 return ok("fine");
 		}
 		return ok("notEnough");

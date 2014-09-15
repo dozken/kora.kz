@@ -101,5 +101,7 @@ public class AuthorisedUser extends Model implements Subject {
 		return password;
 	}
 
-
+    public static Double getMyMoney(String email){
+        return AuthorisedUser.findByEmail(email).profile.myMonney;
+    }
 }

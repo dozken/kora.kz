@@ -77,33 +77,12 @@ public class Manage extends Controller {
 		p.amount = money;
 		p.paymentType = type;
 		u.payments.add(p);
+        u.profile.myMonney+=money;
 		u.update();
 		 return ok(_table.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
 		
 	}
-	
-	public static String getSum(){
-		
-		String sql = "SELECT SUM(amount) FROM payment where user_id="+ AuthorisedUser.findByEmail(session("connected")).id.toString();
-				
-		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-		List<SqlRow> list = sqlQuery.findList();
-		if (list.size() > 0) {
-			System.out.println(list.get(0).values().toString());
-			if(list.get(0).values().toString().equals("[null]")){return "0.0";}
-			return myTrim(list.get(0).values().toString());
-		}
-		return "0.0";
-	}
 
-	public static String myTrim(String a) {
-		String b = "";
-		for (int i = 1; i < a.length() - 1; i++) {
-			b += a.charAt(i);
-
-		}
-		return b;
-	}
 
 	public static Result paymentReport(String filter,String start,String end)
 	{
