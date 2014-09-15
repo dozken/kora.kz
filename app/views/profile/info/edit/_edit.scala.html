@@ -10,7 +10,7 @@
 				<div class="col-md-6">
 					<input id="company_name" name="company_name" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
-						class="form-control input-md" value="@user.userName">
+						class="form-control input-md" value="@user.userName" validation="not_null">
 
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 				<div class="col-md-6">
 					<input id="address" name="address" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
-						class="form-control input-md" value="@user.profile.address">
+						class="form-control input-md" value="@user.profile.address" validation="not_null">
 
 				</div>
 			</div>
@@ -55,7 +55,8 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="selectbasic2">Регион</label>
 				<div class="col-md-3">
-					<select id="region" name="region" class="form-control">
+					<select id="region" name="region" class="form-control" validation="not_null">
+                        <option selected disabled hidden> Выберите регион</option>
                         @for(region<-models.contact.Region.find.all()) {
                             <option value="@region.id" @if(user.profile.region == region){selected="selected"}>@region.name</option>
                         }
@@ -69,7 +70,7 @@
                 <label class="col-md-2 control-label" for="selectbasic3">Город</label>
                 <div id="city_list" class="col-md-3">
                 @if(user.profile.city!=null) {
-                    <select id="city" name="city" class="form-control">
+                    <select id="city" name="city" class="form-control" validation="not_null">
                         <option selected disabled hidden> Выберите город</option>
                         @for(city <- user.profile.region.city) {
 
@@ -87,7 +88,7 @@
 				<div class="col-md-4">
 					<label class="radio-inline" for="radios-0"> <input
 						type="radio" name="gender" value="муж"
-						@if(user.profile.gender!=null && user.profile.gender.equals("муж")){checked="checked"}> муж
+						checked="checked"> муж
 					</label> <label class="radio-inline" for="radios-1"> <input
 						type="radio" name="gender"  value="жен" @if(user.profile.gender!=null &&user.profile.gender.equals("жен")){checked="checked"}> жен
 					</label>
@@ -106,9 +107,9 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2">Телефон</label>
+				<label class="col-md-2 control-label" for="textinput2" >Телефон</label>
 				<div class="col-md-3">
-					<input id="phone" name="phone" type="text" value="@user.profile.phone"
+					<input id="phone" validation="number" name="phone" type="text" value="@user.profile.phone"
 						placeholder="87071234567" class="form-control input-md">
 
 				</div>

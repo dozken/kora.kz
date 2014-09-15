@@ -1,8 +1,6 @@
 package models.ad;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
+
 import java.util.Date;
 import java.util.List;
 
@@ -98,14 +96,14 @@ public class Ad extends Model{
     public static String dateDifference(Date d)
     {
     	
-    	LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    	
-    	LocalDate today = LocalDate.now();
-    	
-    	 
-    	Period p = Period.between(today, date);
-    	return p.getDays() + " дней";
-    	
+//    	LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//
+//    	LocalDate today = LocalDate.now();
+//
+//
+//    	Period p = Period.between(today, date);
+//    	return p.getDays() + " дней";
+    	return "needto implemented";
     }
 }
 
