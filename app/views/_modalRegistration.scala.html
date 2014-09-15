@@ -10,25 +10,25 @@
             <form id="registerForm" class="form-horizontal" role="form" action="#">
                <div class="form-group">
                   <div class="col-sm-12">
-                     <input type="text" name="userName" class="form-control"  placeholder="Ваше имя или название компании">
+                     <input type="text" name="userName" class="form-control"  placeholder="Ваше имя или название компании" Regvalidation="not_null">
                      <span class="help-block"><i>Этим именем будут подписываться ваши комментарии</i></span> 
                   </div>
                </div>
                <div class="form-group">
                   <div class="col-sm-12">
-                     <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Ваша электронная почта">
+                     <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Ваша электронная почта" Regvalidation="mail">
                      <span class="help-block"><i>Никому, кроме вас, не показывается</i></span> 
                   </div>
                </div>
                <div class="form-group">
                   <div class="col-sm-12">
-                     <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Пароль">
+                     <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Пароль" Regvalidation="not_null">
                      <span class="help-block"><i>Хороший пароль состоит минимум из 6 латинских букв и цифр без пробелов</i></span> 
                   </div>
                </div>
                <div class="form-group">
                   <div class="col-sm-12">
-                     <input type="password" name="confirmPassword" class="form-control" id="inputPassword3" placeholder="Пароль еще раз">
+                     <input type="password" name="confirmPassword" class="form-control" id="inputPassword3" placeholder="Пароль еще раз" Regvalidation="not_null">
                      <span class="help-block"><i>Хотим убедиться, что вы его не забудете</i></span> 
                   </div>
                </div>
@@ -36,7 +36,7 @@
                   <div class="col-sm-12 ortada">
                      <div class="checkbox">
                         <label>
-                        <input type="checkbox" name="agreement"> Я согласен с правилами сайта
+                        <input type="checkbox" name="agreement">Я согласен с правилами сайта
                         </label>
                      </div>
                   </div>
