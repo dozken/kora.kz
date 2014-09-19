@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import models.Location;
+import models.ad.Ad;
 import play.db.ebean.Model;
 
 @Entity
@@ -21,6 +22,9 @@ public class ContactInfo extends Model {
 
 	@Id
 	public Long id;
+	
+	@OneToOne(mappedBy="contactInfo")
+	public Ad ad;
 	
 	@ManyToOne
 	public Region region;
