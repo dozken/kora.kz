@@ -206,13 +206,13 @@
     <div class="form-group">
         <label class="col-md-2 control-label" for="ema">Email</label>
         <div class="col-md-3">
-            <input id="ema"  name="email" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
+            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput2">Телефон</label>
   <div class="col-md-3">
-  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="number">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 
   </div>
 </div>
