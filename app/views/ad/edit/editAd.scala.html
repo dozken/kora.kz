@@ -26,6 +26,18 @@ clear: both;
 </style>
 <script>
 
+
+$(document ).on("change","[name='payment_type']",function(){
+
+if($(this ).val()=="normal"){
+
+$("#money_input" ).attr("validation","number");
+}else{
+
+$("#money_input" ).attr("validation","");
+}
+})
+
 $("#images li canvas" ).each(function(){
 var that=this;
 var context=this.getContext('2d');
@@ -102,29 +114,30 @@ $("#city_list" ).html(data);
 });
 })
 
-$(document).on("click", "#ad_form_submit", function() {
+$(document).on("click", "#ad_form_submit", function(e) {
 
-
-$('#ad_form').submit(function(e) {
-var formData = new FormData(this);
-var image_names="";
-$("#images li canvas" ).each(function(){
-formData.append($(this ).parent( ).attr("fileName"),this.toDataURL("image/png"));
-    image_names+=$(this ).parent( ).attr("fileName")+"&";
-})
-formData.append("image_names",image_names);
-$.ajax({
-url: '@controllers.routes.Ads.update(ad.id)',
-type: 'POST',
-data: formData,
-processData: false,
-contentType: false,
-success: function(data) {
-window.location.href = "@routes.Manage.myAds()";
+if(validation()) {
+$ ( '#ad_form' ).submit ( function ( e ) {
+var formData = new FormData ( this ) ;
+var image_names = "" ;
+$ ( "#images li canvas" ).each ( function ( ) {
+formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), this.toDataURL ( "image/png" ) ) ;
+image_names += $ ( this ).parent ( ).attr ( "fileName" ) + "&" ;
+} )
+formData.append ( "image_names", image_names ) ;
+$.ajax ( {
+url : ' @controllers.routes.Ads.update(ad.id) ',
+type : 'POST',
+data : formData,
+processData : false,
+contentType : false,
+success : function ( data ) {
+window.location.href = " @routes.Manage.myAds() ";
 }
-});
-e.preventDefault();
-});
+} ) ;
+e.preventDefault ( ) ;
+} ) ;
+}else{e.preventDefault();alert("validation error");}
 });
 
 var marker;

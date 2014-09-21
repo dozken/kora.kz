@@ -14,7 +14,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic">Животное</label>
   <div class="col-md-3">
-    <select id="animal" name="animal" class="form-control">
+    <select id="animal" name="animal" class="form-control" validation="not_null">
         <option selected disabled hidden> Выберите животное</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
@@ -84,12 +84,12 @@
 
             <div class="input-group below24 bias-input-group inpgr">
 
-              <input type="text" value="" class="form-control" name="money">
+              <input type="text" id="money_input" value="" class="form-control" name="money" validation="number">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
               <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
                 <span data-bind="bs-drp-sel-label">Тенге</span>
-                <input type="hidden" name="currency" data-bind="bs-drp-sel-value" value="Тенге">
+                <input  type="hidden" name="currency" data-bind="bs-drp-sel-value" value="Тенге" >
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
@@ -127,7 +127,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput">Заголовок</label>
   <div class="col-md-6">
-  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
+  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md" validation="not_null">
   <span class="help-block">Максимальная длина 70 символов.</span>
   </div>
 </div>
@@ -139,13 +139,6 @@
     <textarea class="form-control" rows="6" id="textarea" name="description"></textarea>
   </div>
 </div>
-
-
-
-
-
-
-
 
 <!-- File Button -->
 <div class="form-group">
@@ -176,7 +169,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
   <div class="col-md-3">
-    <select id="region" name="region" class="form-control">
+    <select id="region" name="region" class="form-control" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
             @for(region <- Region.find.all()) {
             <option value="@region.id" @if(region_id.toString().toLong==region.id){selected}>@region.name</option>
@@ -204,7 +197,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput1">Компания</label>
   <div class="col-md-6">
-  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md">
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md" validation="not_null">
 
   </div>
 </div>
@@ -213,13 +206,13 @@
     <div class="form-group">
         <label class="col-md-2 control-label" for="ema">Email</label>
         <div class="col-md-3">
-            <input id="ema"  name="email" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null){value="@user.email"}>
+            <input id="ema"  name="email" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
 <div class="form-group">
   <label class="col-md-2 control-label" for="textinput2">Телефон</label>
   <div class="col-md-3">
-  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"}>
+  <input id="textinput2" name="phone" type="text" placeholder="87071234567" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="number">
 
   </div>
 </div>
@@ -235,15 +228,16 @@
   </div>
 </div>
 
-    <div class="form-group">
-
-        <a map="yandex" class="mapSelect">Яндекс</a>
-        <a map="google" class="mapSelect">Google</a>
-
+<div class="form-group">
+	<div class="col-md-5" style="margin-left: 45px;">
+        <span class="input-group-btn">
+        	<a map="yandex" class="mapSelect btn btn-default btn-sm "><b>Яндекс</b></a>
+        	<a map="google" class="mapSelect btn btn-default btn-sm active"><b>Google</b></a>
+        </span>
         <div id="mouse_event_map"></div>
         <input type="hidden" value="" id="location" name="location">
-
-    </div>
+	</div>
+</div>
 
 <!-- Button -->
 <div class="form-group">

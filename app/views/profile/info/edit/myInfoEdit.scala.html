@@ -53,23 +53,26 @@ $("#city_list" ).html(data);
 });
 })
 
-$(document).on("click", "#edit_profile_submit", function() {
+$(document).on("click", "#edit_profile_submit", function(e) {
 
-    $('#profile_edit_form')
-        .submit(function(e) {
-            $.ajax({
-                url: '@controllers.routes.Info.update(user.id)',
-                type: 'POST',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    window.location.href = "@routes.Manage.myInfo()";
-                }
-            });
-            e.preventDefault();
-        });
+if(validation()) {
+$ ( '#profile_edit_form' ).submit ( function ( e ) {
+$.ajax ( {
+url : ' @controllers.routes.Info.update(user.id) ',
+type : 'POST',
+data : new FormData ( this ),
+processData : false,
+contentType : false,
+success : function ( data ) {
+window.location.href = " @routes.Manage.myInfo() ";
+}
+} ) ;
+e.preventDefault();
+} ) ;
+}else{e.preventDefault();alert("validation error");}
 });
+
+
 var lat ="@lat";
 var lng ="@lng";
 var marker;

@@ -1,6 +1,6 @@
 @(region:models.contact.Region)
 
-<select id="city"  name="city" class="form-control">
+<select id="city"  name="city" class="form-control" validation="not_null">
     <option selected disabled hidden> Выберите город</option>
     @for(city<-region.city){
 

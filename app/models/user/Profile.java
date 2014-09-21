@@ -41,6 +41,7 @@ public class Profile extends Model {
 
 	public String phone;
 
+    public Double myMonney=0.0;
 	// @ManyToMany
 	// public SocialNetwork sn;
 
