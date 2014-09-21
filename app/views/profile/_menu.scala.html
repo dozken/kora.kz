@@ -3,7 +3,7 @@
 
 <ul class="proful nopaddingleft">
     <li>    @if(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image!=null){
-        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @controllers.Info.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="height:100px;width:100px;">
+        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @models.ad.Image.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="height:100px;width:100px;">
 
     }else{
   <img src="@routes.Assets.at("images/home/huge.png")" style="height:100px;width:100px;" class="imgprofile">

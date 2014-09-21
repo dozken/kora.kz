@@ -14,6 +14,7 @@ public class Tag extends Model {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,5 +23,10 @@ public class Tag extends Model {
 	public String name;
 
     @ManyToOne
-	public List<Ad> ad;
+	public Ad ad;
+    
+public Tag(String tag){
+		
+	name = tag;
+	}
 }

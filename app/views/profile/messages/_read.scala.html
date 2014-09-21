@@ -3,7 +3,7 @@
 <ul class="ko2 padleft10">
     <button id="back" class="btn btn-default">nazad</button>
     @if(m.author.profile.image!=null){
-<li><img src="data:@m.author.profile.image.contentType;base64, @controllers.Info.byteToBase64(m.author.profile.image.content)" style="height:100px;width:100px;"></li>
+<li><img src="data:@m.author.profile.image.contentType;base64, @models.ad.Image.byteToBase64(m.author.profile.image.content)" style="height:100px;width:100px;"></li>
     }</ul>
 <ul class="ko4 padleft10">
 <li><h4>@m.author.userName</h4></li>
