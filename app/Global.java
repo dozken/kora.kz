@@ -11,7 +11,6 @@ import models.ad.AdSetting;
 import models.ad.Animal;
 import models.ad.Breed;
 import models.ad.Price;
-import models.ad.Quantity;
 import models.admin.AdminSetting;
 import models.contact.ContactInfo;
 import models.contact.Region;
@@ -118,13 +117,7 @@ public class Global extends GlobalSettings {
 			}
 		}
 
-		if (Quantity.find.findRowCount() == 0) {
-			for (String name : Arrays.asList("Один", "Косяк")) {
-				Quantity quantity = new Quantity();
-				quantity.name = name;
-				quantity.save();
-			}
-		}
+		
 
 		if (Price.find.findRowCount() == 0) {
 			for (String name : Arrays.asList("На обмен", "Договорная цена")) {
@@ -168,7 +161,7 @@ public class Global extends GlobalSettings {
 			profile.address = "Жас орда";
 			profile.description = "Очень клевый";
 			profile.gender = "Муржской";
-			profile.phone = "+77077539587";
+			profile.phone = "77077539587";
 			profile.region = Region.find.where().eq("name", "Алматы").findUnique();
 			profile.user = user;
 			user.profile = profile;

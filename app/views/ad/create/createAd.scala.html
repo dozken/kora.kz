@@ -24,6 +24,12 @@ margin-bottom: 10px;
 clear: both;
 }
 </style>
+
+<script>
+	$("#tel1").mask("+7(999) 999-9999");
+
+</script>
+
 <script>
 
    //alert( $("[name='payment_type']" ).val());
@@ -132,7 +138,9 @@ data: formData,
 processData: false,
 contentType: false,
 success: function(data) {
+@if(session.get("connected")!=null){
 window.location.href = "@routes.Manage.myAds()";
+}else{window.location.href = "@routes.Application.index()";}
 }
 });
 e.preventDefault();
