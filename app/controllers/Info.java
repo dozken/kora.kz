@@ -60,13 +60,13 @@ public class Info extends Controller {
 			user.profile.region = Region.find.byId(Long.parseLong(requestData
 					.get("region")));
             user.profile.city = City.find.byId(Long.parseLong(requestData.get("city")));
-			user.userSocials.add(fillSocilal("vk", requestData.get("vk")));
-			user.userSocials.add(fillSocilal("facebook",
+			user.userSocials.add(UserSocials.fillSocilal("vk", requestData.get("vk")));
+			user.userSocials.add(UserSocials.fillSocilal("facebook",
 					requestData.get("facebook")));
-			user.userSocials.add(fillSocilal("website",
+			user.userSocials.add(UserSocials.fillSocilal("website",
 					requestData.get("website")));
 			user.userSocials
-					.add(fillSocilal("skype", requestData.get("skype")));
+					.add(UserSocials.fillSocilal("skype", requestData.get("skype")));
 			user.profile.phone = requestData.get("phone");
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {
@@ -108,40 +108,5 @@ public class Info extends Controller {
 		return ok("baaaaa");
 	}
 
-	public static UserSocials fillSocilal(String name, String value) {
-		UserSocials socials = new UserSocials();
-		socials.socialNetwork = SocialNetwork.find.where().eq("name", name)
-				.findUnique();
-		socials.value = value;
-		return socials;
-
-	}
-
-	public static String getSocialByName(Long id, String name) {
-		String sql = "select value from socials_user where user_id="
-				+ id.toString()
-				+ " and social_network_id in (select id from social_network where name='"
-				+ name + "')";
-		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-		List<SqlRow> list = sqlQuery.findList();
-		if (list.size() > 0) {
-			return myTrim(list.get(0).values().toString());
-		}
-		return "";
-	}
-
-	public static String myTrim(String a) {
-		String b = "";
-		for (int i = 1; i < a.length() - 1; i++) {
-			b += a.charAt(i);
-
-		}
-		return b;
-	}
-
-	@SuppressWarnings("static-access")
-	public static String byteToBase64(byte[] data) {
-		Base64 base64 = new Base64();
-		return base64.encodeBase64String(data);
-	}
+	
 }

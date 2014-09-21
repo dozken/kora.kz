@@ -103,14 +103,14 @@ public class Ads extends Controller {
         ad.settings.add(ad_set2);
         ad.save();
         
-        ad.tags.add(addTag(ad,ad.animal.name));
-        ad.tags.add(addTag(ad,ad.breed.name));
-        ad.tags.add(addTag(ad,ad.title));
-        ad.tags.add(addTag(ad,ad.birthDate.toString()));
-        ad.tags.add(addTag(ad,ad.gender));
-        ad.tags.add(addTag(ad,ad.quantity));
-        ad.tags.add(addTag(ad,ad.contactInfo.region.name));
-        ad.tags.add(addTag(ad,ad.contactInfo.city.name));
+        ad.tags.add(new Tag(ad.animal.name));
+        ad.tags.add(new Tag(ad.breed.name));
+        ad.tags.add(new Tag(ad.title));
+        ad.tags.add(new Tag(ad.birthDate.toString()));
+        ad.tags.add(new Tag(ad.gender));
+        ad.tags.add(new Tag(ad.quantity));
+        ad.tags.add(new Tag(ad.contactInfo.region.name));
+        ad.tags.add(new Tag(ad.contactInfo.city.name));
         ad.update();
         Ebean.saveManyToManyAssociations(ad, "tags");
         String[] order = requestData.get("image_names").split("&");
@@ -202,11 +202,7 @@ public class Ads extends Controller {
 		
 	}
 	
-    public static Tag addTag(Ad ad, String s){
-        Tag tag = new Tag();
-        tag.name = s;
-        return tag;
-    }
+  
     public static Result update(Long id) {
 
         DynamicForm requestData = form().bindFromRequest();
@@ -257,15 +253,14 @@ public class Ads extends Controller {
 
             ad.tags.get(i).delete();
         }
-        ad.tags.add(addTag(ad,ad.animal.name));
-        ad.tags.add(addTag(ad,ad.title));
-        ad.tags.add(addTag(ad,ad.description));
-        ad.tags.add(addTag(ad,ad.birthDate.toString()));
-        ad.tags.add(addTag(ad,ad.breed.name));
-        ad.tags.add(addTag(ad,ad.gender));
-        ad.tags.add(addTag(ad,ad.quantity));
-        ad.tags.add(addTag(ad,ad.contactInfo.region.name));
-        ad.tags.add(addTag(ad,ad.contactInfo.city.name));
+        ad.tags.add(new Tag(ad.animal.name));
+        ad.tags.add(new Tag(ad.breed.name));
+        ad.tags.add(new Tag(ad.title));
+        ad.tags.add(new Tag(ad.birthDate.toString()));
+        ad.tags.add(new Tag(ad.gender));
+        ad.tags.add(new Tag(ad.quantity));
+        ad.tags.add(new Tag(ad.contactInfo.region.name));
+        ad.tags.add(new Tag(ad.contactInfo.city.name));
 
         ad.update();
         String[] order = requestData.get("image_names").split("&");
