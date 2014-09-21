@@ -181,7 +181,7 @@ public class Global extends GlobalSettings {
 			Ebean.saveManyToManyAssociations(user, "roles");
 			Ebean.saveManyToManyAssociations(user, "permissions");
 		}
-
+/*
 		if (Ad.find.findRowCount() == 0) {
 			for(int i=0;i<5;i++){
 			Ad ad = new Ad();
@@ -212,7 +212,9 @@ public class Global extends GlobalSettings {
 			}
 
 		}
+		*/
 	}
+	
 
 	/**
 	 * TODO tolko zaregestrirovanye mogut ostavlyat komenty

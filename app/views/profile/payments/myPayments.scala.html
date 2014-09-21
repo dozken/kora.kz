@@ -10,7 +10,7 @@
 		@profile._title("ЛИЧНЫЙ СЧЕТ"){
 		<div class="col-lg-3">
 			<p class="lin">
-				<b>У вас на счете:</b> <span class="kipkizil">@controllers.Manage.getSum</span>
+				<b>У вас на счете:</b> <span class="kipkizil">@models.user.AuthorisedUser.getMyMoney(session.get("connected"))</span>
 			</p>
 		</div>
 		<div class="col-lg-3 onjak nopaddingright">
