@@ -48,19 +48,17 @@ $("#gender" ).val($(this ).val());
 
 })
 
-$(document).on("change",".price_type",function(){
-$('.price_type').not(this).each(function() {
-    $(this ).attr("checked",false);
-})
-})
+
 
 $(document ).on("click","#search_filter",function(e){
 e.preventDefault();
-
+$("#search_results" ).html('<img src="@routes.Assets.at("images/home/loading.gif")">');
+$(this ).attr("disabled",true);
 jsRoutes.controllers.Ads.searchAd().ajax({
 data : $ ( "#search_form" ).serialize ( ),
 success: function(data) {
 $("#search_results" ).html(data);
+$("#search_filter" ).attr("disabled",false);
 }
 });
 })
