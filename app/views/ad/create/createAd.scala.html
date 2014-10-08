@@ -61,16 +61,22 @@ var files = FileAPI.getFiles(evt); // Retrieve file list
 
 FileAPI.filterFiles(files, function (file, info/**Object*/){
 if( /^image/.test(file.type) ){
-return  info.width >= 320 && info.height >= 240;
-}
+
+    if(info.width >= 320 && info.height >= 240) return true; else{alert("size kishi");}
+
+}else{
+    alert("foto emes");
 return  false;
+}
+
 }, function (files/**Array*/, rejected/**Array*/){
 if( files.length+$("#images li" ).length<=5 ){
 
 FileAPI.each ( files, function ( file ) {
 FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
 
-   imageMap[file.name] = img.toDataURL("image/png");
+   imageMap[file.name] = img.toDataURL("image/jpeg");
+    alert(imageMap[file.name]);
 
 })
 
@@ -126,7 +132,7 @@ var formData = new FormData(this);
 var image_names="";
 $("#images li canvas" ).each(function(){
    var a = imageMap[$(this ).parent( ).attr("fileName")];
-    console.log(a);
+
 formData.append($(this ).parent( ).attr("fileName"),a);
 image_names+=$(this ).parent( ).attr("fileName")+"&";
 })

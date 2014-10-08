@@ -168,7 +168,7 @@
 @for(img<-ad.sortByPosition(ad.id)){
 
    <li id="item-@img.name.replace(".","")" fileName="@img.name" style=' position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'>
-
+        <input type="hidden" value="@img.content">
        <canvas src="@img.content" width = "100" height="100"></canvas>
        <input type="button" class="delete" value="X" style="position:absolute;top:0;right:0;" />
    </li>

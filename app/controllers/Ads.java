@@ -311,6 +311,27 @@ public class Ads extends Controller {
 		return ok(adSearch.render(Ad.find.all(),Animal.find.byId(2L)));
 	}
 
+    public static Result quick_search(){
+
+        DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
+        List<Ad> l;
+        if(requestData.get("animal").equals("all")) {
+            l = Ad.find.where().in("tags.name", requestData.get("str")).findList();
+        }
+
+        else{
+            l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();
+        }
+        if(l.size()>0) {
+            return ok(adSearch.render(l, l.get(0).animal));
+        }
+
+         return ok(adSearch.render(l, Animal.find.byId(2L)));
+
+
+    }
+
     public static Result searchByType(Long id) {
         return ok(adSearch.render(Ad.find.where().eq("animal",Animal.find.byId(id)).findList(),Animal.find.byId(id)));
     }
@@ -578,17 +599,26 @@ public class Ads extends Controller {
         }else if(prices.size()!=0){costEnd = 0.0;}
 
 
+        List<Ad> l;
+        if(!requestData.get("searchText").equals("")) {
+             l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
+                    .in("breed", breeds).in("gender", genders).in("quantity", quantity).in("tags.name",requestData.get("searchText"))
+                    .between("birthDate", startYear, endYear)
+                    .or(
+                            Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
+                    ).findList();
+        }else{
+            l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
+                    .in("breed", breeds).in("gender", genders).in("quantity", quantity)
+                    .between("birthDate", startYear, endYear)
+                    .or(
+                            Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
+                    ).findList();
 
-
-        List<Ad> l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
-                .in("breed", breeds).in("gender", genders).in("quantity", quantity)
-                .between("birthDate", startYear, endYear)
-                .or(
-                        Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
-                ).findList();
-
+        }
 //List<Ad> l = Ad.find.where().in("images",1L).findList();
         return ok(_ad_list.render(l,pic,map));
     }
+
 
 }
