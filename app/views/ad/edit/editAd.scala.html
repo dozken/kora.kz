@@ -121,7 +121,7 @@ $ ( '#ad_form' ).submit ( function ( e ) {
 var formData = new FormData ( this ) ;
 var image_names = "" ;
 $ ( "#images li canvas" ).each ( function ( ) {
-formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), this.toDataURL ( "image/png" ) ) ;
+formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), this.toDataURL ( "image/jpeg" ) ) ;
 image_names += $ ( this ).parent ( ).attr ( "fileName" ) + "&" ;
 } )
 formData.append ( "image_names", image_names ) ;
