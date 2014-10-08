@@ -1,0 +1,6 @@
+@(ads:List[models.ad.Ad])
+@if(ads!=null) {
+    @for(ad <- ads) {
+        <div class="col-lg-12  pro1 @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }">@_ad(ad)</div>
+    }
+}

@@ -1,11 +1,13 @@
+@(animal:models.ad.Animal)
 <div class="col-lg-12 nopaddingleft">
-<form class="form-inline">
+<form id="search_form" class="form-inline">
+    <input type="hidden" name="animal" value="@animal.id">
 <div id="demo2">
  <div class="form-group frmg">
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
   <div>
-    <select id="selectbasic1" name="selectbasic1" class="form-control">
+    <select id="region" name="region" class="form-control">
       <option value="all">Во всех регионах</option>
       @for(region <-models.contact.Region.find.all()) {
           <option value="@region.id">@region.name</option>
@@ -18,10 +20,12 @@
  <div class="form-group frmg">
   <div class="frmbck">
   <label class="control-label" for="selectbasic1">Порода:</label>
-  <div id="breed">
-    <select id="breed" name="selectbasic1" class="form-control">
-      <option value="2000">Абердин-Ангус</option>
-      <option value="2001">Абердин-Ангус</option>
+  <div id="breed_div">
+    <select id="breed" name="breed" class="form-control">
+        <option value="all">Во всех регионах</option>
+        @for(breed <-animal.getBreeds) {
+            <option value="@breed.id">@breed.name</option>
+        }
     </select>
   </div>
 </div>
@@ -30,17 +34,15 @@
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Возраст:</label>
   <div>
-    <select id="selectbasic1" name="selectbasic1" class="form-control">
-      <option value="2000">2000</option>
-      <option value="2001">2001</option>
-      <option value="2002">2002</option>
-      <option value="2003">2003</option>
+    <select id="ageStart" name="ageStart" class="form-control">
+      @for(i<-2000 to 2050) {
+          <option value="@i">@i</option>
+      }
     </select>
-        <select id="selectbasic1" name="selectbasic1" class="form-control">
-      <option value="2000">2000</option>
-      <option value="2001">2001</option>
-      <option value="2002">2002</option>
-      <option value="2003">2003</option>
+        <select id="ageEnd" name="ageEnd" class="form-control">
+        @for(i<-2000 to 2050) {
+            <option value="@i">@i</option>
+        }
     </select>
   </div>
 </div>
@@ -50,9 +52,9 @@
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Цена:</label>
   <div>
-     <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
-      <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md inputsmall ssss">
-          <select id="selectbasic1" name="selectbasic1" class="form-control">
+     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
+      <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
+          <select id="currency" name="currency" class="form-control">
       <option value="tg">Тг</option>
       <option value="dol">$</option>
     </select>
@@ -63,7 +65,7 @@
    <div class="frmbck2">
   <label class="control-label" for="selectbasic1"></label>
 
-        <button type="submit" class="btn btn-primary btn"><span class="btr">Поиск</span></button>
+        <button id="search_filter" class="btn btn-primary btn"><span class="btr">Поиск</span></button>
 </div>
 </div>
 </div>
@@ -72,15 +74,16 @@
 <div id="demo"> 
 <div class="form-group">
   <div class="col-md-8 nopaddingleft">
+      <input type="hidden" id="gender" name="gender">
   <div class="checkbox">
     <label for="checkboxes-0">
-      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      <input type="checkbox"  id="checkboxes-0"  class="gender_check" value="male">
       Самец
     </label>
 	</div>
   <div class="checkbox">
     <label for="checkboxes-1">
-      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      <input type="checkbox"  class="gender_check" id="checkboxes-1" value="female">
       Самка
     </label>
 	</div>
@@ -90,13 +93,13 @@
   <div class="col-md-8 nopaddingleft">
   <div class="radio">
     <label for="radios-0">
-      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+      <input type="radio" name="quantity" value="single">
       Один
     </label>
 	</div>
   <div class="radio">
     <label for="radios-1">
-      <input type="radio" name="radios" id="radios-1" value="2">
+      <input type="radio" name="quantity" value="many">
       Косяк
     </label>
 	</div>
@@ -106,13 +109,13 @@
   <div class="col-md-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-0">
-      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      <input type="checkbox" name="picture" id="checkboxes-0" value="1">
       Только с фото
     </label>
 	</div>
   <div class="checkbox">
     <label for="checkboxes-1">
-      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      <input type="checkbox" name="map" id="checkboxes-1" value="1">
       Отмеченные на карте
     </label>
 	</div>
@@ -122,13 +125,13 @@
   <div class="col-md-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-0">
-      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      <input type="checkbox" class="price_type" name="change" id="checkboxes-0" value="1">
       На обмен
     </label>
 	</div>
   <div class="checkbox">
     <label for="checkboxes-1">
-      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+      <input type="checkbox" class="price_type" name="negotiable_price" id="checkboxes-1" value="1">
       Договорная цена
     </label>
 	</div>
@@ -138,7 +141,7 @@
 <div class="form-group">
   <div class="col-md-12 nopaddingleft">
 
-     <input id="textinput" name="textinput" type="text" placeholder="Поиск по тексту" class="form-control input-md">
+     <input id="textinput" name="searchText" type="text" placeholder="Поиск по тексту" class="form-control input-md">
   </div>  
 </div>
 </div>

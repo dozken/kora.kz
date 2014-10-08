@@ -33,7 +33,7 @@ import views.html.ad.create._breed;
 import views.html.ad.create._city;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
-import views.html.ad.search.adSearch;
+import views.html.ad.search.*;
 import views.html.ad.show.*;
 import views.html.profile.ads.myAds;
 
@@ -98,7 +98,9 @@ public class Ads extends Controller {
         AdSetting ad_set2 = new AdSetting();
         ad_set2.name = "autoprelong";
         ad_set2.status="off";
-        if(ad.settings==null){ad.settings = new ArrayList<AdSetting>();}
+        if(ad.settings==null){
+            ad.settings = new ArrayList<AdSetting>();
+        }
         ad.settings.add(ad_set);
         ad.settings.add(ad_set2);
         ad.save();
@@ -305,19 +307,23 @@ public class Ads extends Controller {
     public static Result edit(Long id){ return ok(editAd.render(Ad.find.byId(id))); }
 	
 	public static Result search() {
-		return ok(adSearch.render(Ad.find.all()));
+		return ok(adSearch.render(Ad.find.all(),Animal.find.byId(2L)));
 	}
+
+    public static Result searchByType(Long id) {
+        return ok(adSearch.render(Ad.find.where().eq("animal",Animal.find.byId(id)).findList(),Animal.find.byId(id)));
+    }
 
     public static Result favorite() {
 
 
         if(session("connected")!=null){
 
-            return ok(adSearch.render(AuthorisedUser.findByEmail(session("connected")).favorites));
+            return ok(adSearch.render(AuthorisedUser.findByEmail(session("connected")).favorites,null));
 
         }else{
 
-            if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null));
+            if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null,null));
 
             System.out.println(request().cookie("userAdsKora").value());
             String [] ads = request().cookie("userAdsKora").value().split("_");
@@ -327,11 +333,13 @@ public class Ads extends Controller {
                 list.add(Ad.find.byId(Long.parseLong(ad)));
 
             }
-            return ok(adSearch.render(list));
+            return ok(adSearch.render(list,null));
         }
 
 
     }
+
+
 
     public static Result sendPrivateMessage(Long ad_id, Long author_id)
     {
@@ -496,6 +504,56 @@ public class Ads extends Controller {
         }else{
             return ok("kapcha_error");
         }
+    }
+
+    public static Result searchAd(){
+
+        DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
+
+        Long animal_id = Long.parseLong(requestData.get("animal"));
+        List<Region> regions=Region.find.all();
+        List<Breed> breeds=Breed.find.all();
+        Integer costStart=0;
+        Integer costEnd=99999999;
+
+        Integer startYear = 0;
+        Integer endYear = 20000;
+        String[] genders={"male","female","both"};
+        String[] quantity={"single","many"};
+
+        String currency = requestData.get("currency");
+
+        if(!requestData.get("region").equals("all")) {
+            regions = new ArrayList<Region>();
+
+             regions.add(Region.find.byId(Long.parseLong(requestData.get("region"))));
+        }
+        if(!requestData.get("breed").equals("all")) {
+            breeds = new ArrayList<Breed>();
+            breeds.add(Breed.find.byId(Long.parseLong(requestData.get("breed"))));
+        }
+        if(!requestData.get("gender").equals("")) {
+            genders = new String[1];
+            genders[0]=requestData.get("gender");
+        }
+        if(requestData.get("quantity")!=null) {
+            quantity = new String[1];
+            quantity[0]=requestData.get("quantity");
+        }
+
+        if(!requestData.get("ageStart").equals("")) {
+            startYear = Integer.parseInt(requestData.get("ageStart"));
+        }
+
+        if(!requestData.get("ageEnd").equals("")) {
+            endYear = Integer.parseInt(requestData.get("ageEnd"));
+        }
+
+
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.byId(animal_id)).in("contactInfo.region", regions).in("breed",breeds).in("gender",genders).in("quantity",quantity).between("birthDate",startYear,endYear).between("priceType.price",costStart,costEnd).findList();
+
+        return ok(_ad_list.render(l));
     }
 
 }
