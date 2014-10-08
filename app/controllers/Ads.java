@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.avaje.ebean.Ebean;
 
+import com.avaje.ebean.Expr;
 import models.Location;
 import models.Setting;
 import models.ad.Ad;
@@ -87,8 +88,8 @@ public class Ads extends Controller {
         if(requestData.get("payment_type").equals("normal")){
 
             price.currency = requestData.get("currency");
-            price.price = requestData.get("money");
-        }else{price.price = requestData.get("payment_type");}
+            price.price = Double.parseDouble(requestData.get("money"));
+        }else if(requestData.get("payment_type").equals("change")){price.price = -2.0;}else{price.price = -1.0;}
         price.save();
         ad.priceType = price;
         AdSetting ad_set = new AdSetting();
@@ -248,8 +249,8 @@ public class Ads extends Controller {
         if(requestData.get("payment_type").equals("normal")){
 
             ad.priceType.currency = requestData.get("currency");
-            ad.priceType.price = requestData.get("money");
-        }else{ad.priceType.price = requestData.get("payment_type");}
+            ad.priceType.price = Double.parseDouble(requestData.get("money"));
+        }else if(requestData.get("payment_type").equals("change")){ad.priceType.price = -2.0;}else{ad.priceType.price = -1.0;}
 
         for(int i=0;i<ad.tags.size();i++){
 
@@ -514,10 +515,13 @@ public class Ads extends Controller {
         Long animal_id = Long.parseLong(requestData.get("animal"));
         List<Region> regions=Region.find.all();
         List<Breed> breeds=Breed.find.all();
-        Integer costStart=0;
-        Integer costEnd=99999999;
+        Double costStart=0.0;
+        Double costEnd=99999999.9;
 
+        List<Double> prices = new ArrayList<Double>();
         Integer startYear = 0;
+        Integer pic = -1;
+        String map = "not need";
         Integer endYear = 20000;
         String[] genders={"male","female","both"};
         String[] quantity={"single","many"};
@@ -550,10 +554,41 @@ public class Ads extends Controller {
             endYear = Integer.parseInt(requestData.get("ageEnd"));
         }
 
+        if(requestData.get("change")!=null){
+            prices.add(-2.0);
+        }
 
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.byId(animal_id)).in("contactInfo.region", regions).in("breed",breeds).in("gender",genders).in("quantity",quantity).between("birthDate",startYear,endYear).between("priceType.price",costStart,costEnd).findList();
+        if(requestData.get("negotiable_price")!=null){
+            prices.add(-1.0);
+        }
 
-        return ok(_ad_list.render(l));
+        if(requestData.get("map")!=null){
+            map =null;
+        }
+        if(requestData.get("picture")!=null){
+            pic =0;
+        }
+
+        if(!requestData.get("costStart").equals("")) {
+            costStart = Double.parseDouble(requestData.get("costStart"));
+        }
+
+        if(!requestData.get("costEnd").equals("")) {
+            costEnd = Double.parseDouble(requestData.get("costEnd"));
+        }else if(prices.size()!=0){costEnd = 0.0;}
+
+
+
+
+        List<Ad> l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
+                .in("breed", breeds).in("gender", genders).in("quantity", quantity)
+                .between("birthDate", startYear, endYear)
+                .or(
+                        Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
+                ).findList();
+
+//List<Ad> l = Ad.find.where().in("images",1L).findList();
+        return ok(_ad_list.render(l,pic,map));
     }
 
 }

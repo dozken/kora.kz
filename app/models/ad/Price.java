@@ -22,7 +22,7 @@ public class Price extends Model {
 	@Id
 	public Long id;
 	
-	public String price = "";
+	public Double price = 0.0;
 	
 	public String currency = "";
 	

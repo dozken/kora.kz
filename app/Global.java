@@ -120,7 +120,7 @@ public class Global extends GlobalSettings {
 		
 
 		if (Price.find.findRowCount() == 0) {
-			for (String name : Arrays.asList("На обмен", "Договорная цена")) {
+			for (Double name : Arrays.asList(-2.0, -1.0)) {
 				Price price = new Price();
 				price.price = name;
 				price.save();
