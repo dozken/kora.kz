@@ -1,7 +1,6 @@
+@(anim:models.ad.Animal)
 <div class="col-lg-12 marginbottom bigmenu">
-<a href="#" class="search_type btn btn-lg btn-success">ЛОШАДЬ</a>
-<a href="#" class="search_type btn btn-lg btn-default">ВЕРБЛЮД</a>
-<a href="#" class="search_type btn btn-lg btn-default">КОРОВА</a>
-<a href="#" class="search_type btn btn-lg btn-default">ОВЦЫ/КОЗЫ</a>
-<a href="#" class="search_type btn btn-lg btn-default">ДРУГИЕ</a>
+    @for(animal<-models.ad.Animal.find.all()) {
+        <a href="@routes.Ads.searchByType(animal.id)" class="btn btn-lg @if(animal==anim){ btn-success}else{btn-default}">@animal.name</a>
+    }
 </div>
