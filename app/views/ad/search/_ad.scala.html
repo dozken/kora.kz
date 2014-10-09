@@ -6,15 +6,15 @@
 </div>
 <div class="col-lg-8">
     <ul class="obya">
-        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.animal.name @ad.breed.name породы</b></a> <span class="baga">@ad.priceType.price @ad.priceType.currency</span></li>
+        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.animal.name @ad.breed.name породы</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @ad.priceType.currency</span></li>
         <li>@ad.description</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
         <li>Тел: @ad.contactInfo.phone</li>
     </ul>
     <ul class="pros">
         <li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
-        <li><span class="icon-comment"></span> Комментариев нет</li>
-        <li><span class="icon-date"></span> @ad.publishedDate.format("dd MM")</li>
+        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){Комментариев нет} else{ @ad.comments.size() комментариев}</li>
+        <li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li>
     </ul>
 </div>
 

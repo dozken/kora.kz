@@ -6,7 +6,7 @@
     <ul class="ko2 nopaddingleft">
         <li><ul class="ko nopaddingleft">
             <li class="bold">@comment.name @if(comment.coment!=null){для <span class="otvet">@comment.coment.name</span>}</li>
-            <li>@comment.sendDate</li>
+            <li>@comment.sendDate.format("dd/MM/yyyy")</li>
             <li><a comment="@comment.id" comment_type="answer" comment_author="@comment.name" class="comment_answer">Ответить</a></li>
         </ul>
         </li>

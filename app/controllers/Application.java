@@ -129,7 +129,7 @@ public class Application extends Controller {
 	}
 
 	public static Result index() {
-		return ok(views.html.common.index.render());
+	return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {

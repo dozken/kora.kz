@@ -42,9 +42,13 @@ if ($('.gender_check:checked').length != 1) {
 
    $("#gender" ).val("");
 }
-   else{
-$("#gender" ).val($(this ).val());
+   else {
+        if ( this.checked ) {
+        $ ( "#gender" ).val ( $ ( this ).val ( ) ) ;
+        }else{ $ ( "#gender" ).val ( $ ( this ).attr ("notVal") ) ;}
+
 }
+
 
 })
 
