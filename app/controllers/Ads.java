@@ -136,7 +136,10 @@ public class Ads extends Controller {
 	}
 
 	public static Result filterAds(String str){
-		 
+
+        if(str.equals("all")){
+            return ok(views.html.profile.ads._ad.render(Ad.find.where().eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
+        }
 		return ok(views.html.profile.ads._ad.render(Ad.find.where().eq("status", str).eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
 	}
 	
@@ -505,11 +508,9 @@ public class Ads extends Controller {
     public static Result comment(Long id,Long com_id){
 
         DynamicForm requestData = form().bindFromRequest();
-
-
         String kaptchaExpected = session(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         String kaptchaReceived = requestData.get("kaptcha");
-        System.out.println(kaptchaExpected + "   " +kaptchaReceived);
+
         if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
 
             Comment comment = new Comment();

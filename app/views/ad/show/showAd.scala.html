@@ -187,7 +187,9 @@ $(document ).on("click",".comment_answer",function(){
 
 })
 
+$("#error_fields" ).hide();
 $(document ).on("click","#comment_ad",function(e){
+$("#error_fields" ).hide();
 e.preventDefault();
 if(validation()) {
 var com_id = $ ( this ).attr ( "forWho" ) ;
@@ -195,14 +197,31 @@ jsRoutes.controllers.Ads.comment ( @ad.id, com_id ).ajax ( {
 data : $ ( "#comment_form" ).serialize ( ),
 success : function ( data ) {
 var res = "" + data ;
-if ( res != "kapcha_error" ) { $ ( "#comment_body" ).html ( data ) ; $ ( "#kapcha_Error" ).html ( "" ) ; }
-else { $ ( "#kapcha_Error" ).html ( "Введите, пожалуйста, цифры с картинки." ) ; }
+if ( res != "kapcha_error" ) {
+    $ ( "#comment_body" ).html ( data ) ;
+    $ ( "#kapcha_Error" ).addClass("alert alert-success");
+    $ ( "#kapcha_Error" ).removeClass("kipkizil");
+$ ( "#kapcha_Error" ).show();
+    $ ( "#kapcha_Error" ).html ( "successfully sended" ).fadeOut( 4000 );
+}
+else {
+$ ( "#kapcha_Error" ).addClass("kipkizil");
+$ ( "#kapcha_Error" ).removeClass("alert alert-success");
+$ ( "#kapcha_Error" ).html ( "Введите, пожалуйста, цифры с картинки." );
+
+$ ( "#kapcha_Error" ).show();
+}
 },
 error : function ( jqXHR, textStatus, errorThrown ) {
 console.log ( jqXHR.responseText ) ;
 }
 } ) ;
 }
-else{alert("validation failed");}
+else{e.preventDefault();
+$("#error_fields" ).html("");
+$("#error_fields" ).append("Некоторые поля заполнены неправильно");
+
+$("#error_fields" ).show();
+}
 })
 </script>

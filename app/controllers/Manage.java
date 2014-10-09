@@ -30,7 +30,7 @@ import com.avaje.ebean.SqlRow;
 public class Manage extends Controller {
 
 	public static Result myAds() {
-		return ok(myAds.render(Ad.find.where().eq("status", "active").eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
+		return ok(myAds.render(Ad.find.where().eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
 		
 	}
 

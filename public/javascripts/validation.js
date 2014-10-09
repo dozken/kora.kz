@@ -5,12 +5,14 @@ function validation(){
 	$("input[validation]").each(function(){
 
 	$(this).removeAttr("style");
+    $(this).removeClass("validation_error_fields");
     var type = $(this).attr("validation");
     if(type=="name"){
     	var a=$(this).val();
     	if(!a.match(/^[a-zA-Z]+$/)){
     		r=false;
     		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
     	}
     }
      if(type=="number"){
@@ -18,14 +20,24 @@ function validation(){
     	if(!a.match(/^\d+$/)){
     		r=false;
     		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
     	}
     }
-    
+        if(type=="double"){
+            var a=$(this).val();
+            if(!a.match(/^[0-9]+(\.[0-9]+)?$/)){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+
     if(type=="not_null"){
      	var a=$(this).val();
     	if(a==null || a==""){
     		r=false;
     		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
     	}
     }
     
@@ -35,6 +47,7 @@ function validation(){
     	if(!a.match(re)){
     		r=false;
     		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
 
     	}
     }
@@ -43,12 +56,14 @@ function validation(){
     $("select[validation]").each(function(){
 
         $(this).removeAttr("style");
+        $(this).removeClass("validation_error_fields");
         var type = $(this).attr("validation");
         if(type=="name"){
             var a=$(this).val();
             if(!a.match(/^[a-zA-Z]+$/)){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
             }
         }
         if(type=="number"){
@@ -56,6 +71,7 @@ function validation(){
             if(!a.match(/^\d+$/)){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
             }
         }
 
@@ -64,6 +80,7 @@ function validation(){
             if(a==null || a==""){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
             }
         }
 
@@ -73,7 +90,7 @@ function validation(){
             if(!a.match(re)){
                 r=false;
                 $(this).attr("style","border-color:red");
-
+                $(this).addClass("validation_error_fields");
             }
         }
     });
@@ -90,6 +107,7 @@ function register_validation(){
 
 
         $(this).removeAttr("style");
+        $(this).removeClass("validation_error_fields");
         var type = $(this).attr("Regvalidation");
 
         if(type=="not_null"){
@@ -97,6 +115,7 @@ function register_validation(){
             if(a==null || a==""){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $("#registerErrorAlert" ).html("Некоторые поля заполнены неправильно");
             }
         }
 
@@ -106,6 +125,7 @@ function register_validation(){
             if(!a.match(re)){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $("#registerErrorAlert" ).html("Некоторые поля заполнены неправильно");
 
             }
         }
@@ -117,12 +137,14 @@ function register_validation(){
 
     if($('[name="password"]').val() != $('[name="confirmPassword"]').val()){
 
-        alert("Paswords not same!!!");
+        $("#registerErrorAlert" ).html("Пароли не совпадают");
+        $(this).addClass("validation_error_fields");
         return false;
     }
 
     if (!$('[name="agreement"]').is(':checked')){
-        alert("please check agreement to register");
+        $("#registerErrorAlert" ).html("Чтобы зарегистрироваться, вам нужно согласиться с условиями использования.");
+        $(this).addClass("validation_error_fields");
         r=false;
     }
 
@@ -137,6 +159,7 @@ function login_validation(){
 
 
         $(this).removeAttr("style");
+        $(this).removeClass("validation_error_fields");
         var type = $(this).attr("Logvalidation");
 
         if(type=="not_null"){
@@ -144,6 +167,7 @@ function login_validation(){
             if(a==null || a==""){
                 r=false;
                 $(this).attr("style","border-color:red");
+                $("#loginErrorAlert" ).html("Некоторые поля заполнены неправильно");
             }
         }
 
@@ -153,7 +177,7 @@ function login_validation(){
             if(!a.match(re)){
                 r=false;
                 $(this).attr("style","border-color:red");
-
+                $("#loginErrorAlert" ).html("Некоторые поля заполнены неправильно");
             }
         }
     });

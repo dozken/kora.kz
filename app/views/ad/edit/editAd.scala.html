@@ -6,6 +6,7 @@
 	<div class="searchbarmargin">@_searchbar()</div>
 	@_form(ad)
 </div>
+
 }
 <script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))' type="text/javascript"></script>
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
@@ -26,7 +27,7 @@ clear: both;
 </style>
 <script>
 $("#tel1").mask("+7(999) 999-9999");
-
+var imageMap = {};
 $(document ).on("change","[name='payment_type']",function(){
 
 if($(this ).val()=="normal"){
@@ -68,12 +69,20 @@ if( files.length+$("#images li" ).length<=5 ){
 
     FileAPI.each ( files, function ( file ) {
 
+    FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
+
+    imageMap[file.name] = img.toDataURL("image/jpeg");
+
+
+    })
+
     FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
 
         var name = file.name.replace(".", "");
     if($('[id=item-'+ name+']').length==0) {
     $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
     $ ( "#item-" + name ).html ( img ) ;
+    $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name]+'">' ) ;
     $ ( "#item-" + name ).append ( '<input type="button" class="delete" value="X" style="position:absolute;top:0;right:0;" />' ) ;
     }else{
         alert(name + " exists");
@@ -84,7 +93,7 @@ if( files.length+$("#images li" ).length<=5 ){
 
 });
 });
-
+$("#error_fields" ).hide();
 $ (document ).on("click",".delete",function(){
 
 $(this).parent().remove();
@@ -120,8 +129,8 @@ if(validation()) {
 $ ( '#ad_form' ).submit ( function ( e ) {
 var formData = new FormData ( this ) ;
 var image_names = "" ;
-$ ( "#images li canvas" ).each ( function ( ) {
-formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), this.toDataURL ( "image/jpeg" ) ) ;
+$ ( "#images li input[type=hidden]" ).each ( function ( ) {
+formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), $(this).val() ) ;
 image_names += $ ( this ).parent ( ).attr ( "fileName" ) + "&" ;
 } )
 formData.append ( "image_names", image_names ) ;
@@ -137,7 +146,15 @@ window.location.href = " @routes.Manage.myAds() ";
 } ) ;
 e.preventDefault ( ) ;
 } ) ;
-}else{e.preventDefault();alert("validation error");}
+}else{
+e.preventDefault();
+$("#error_fields" ).html("");
+$("#error_fields" ).append("Некоторые поля заполнены неправильно");
+
+$("#error_fields" ).show();
+window.scrollTo(0, 0);
+
+}
 });
 
 var marker;

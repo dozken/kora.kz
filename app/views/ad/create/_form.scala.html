@@ -11,6 +11,7 @@
 <legend>Подать объявление</legend>
 
 <!-- Select Basic -->
+    <div id="error_fields" class="alert alert-danger" role="alert"></div>
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic">Животное</label>
   <div class="col-md-3">
@@ -84,7 +85,7 @@
 
             <div class="input-group below24 bias-input-group inpgr">
 
-              <input type="text" id="money_input" value="" class="form-control" name="money" validation="number">
+              <input type="text" id="money_input" value="" class="form-control" name="money" validation="double">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
               <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
@@ -96,8 +97,8 @@
               <ul class="dropdown-menu" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
               <!-- Loop -->
 
-                              <li data-value="Тенге"><a href="#">Тенге </a></li>
-                              <li data-value="Доллар"><a href="#">Доллар </a></li>
+                              <li data-value="тг"><a href="#">тг </a></li>
+                              <li data-value="$"><a href="#">$ </a></li>
                                                                     <!-- END Loop -->
                     </ul>
               </div>

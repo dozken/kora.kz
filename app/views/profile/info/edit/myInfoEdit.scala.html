@@ -54,7 +54,7 @@ $("#city_list" ).html(data);
 }
 });
 })
-
+$("#error_fields" ).hide();
 $(document).on("click", "#edit_profile_submit", function(e) {
 
 if(validation()) {
@@ -71,7 +71,12 @@ window.location.href = " @routes.Manage.myInfo() ";
 } ) ;
 e.preventDefault();
 } ) ;
-}else{e.preventDefault();alert("validation error");}
+}else{e.preventDefault();
+$("#error_fields" ).html("");
+$("#error_fields" ).append("Некоторые поля заполнены неправильно");
+
+$("#error_fields" ).show();
+window.scrollTo(0, 0);}
 });
 
 
