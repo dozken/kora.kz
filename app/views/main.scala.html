@@ -176,6 +176,7 @@ $(document).on("click", "#registrButton", function(e) {
 e.preventDefault();
 
 if(register_validation()) {
+    $("#registrButton" ).prop("disabled",true);
 jsRoutes.controllers.User.register ( ).ajax ( {
 data : $ ( "#registerForm" ).serialize ( ),
 type : 'POST',
@@ -184,13 +185,16 @@ var res = "" + data ;
 if ( res == "error" ) {
 $ ( "#registerErrorAlert" ).html ( "Эта почта уже используется!" ) ;
 $ ( "#registerErrorAlert" ).show ( ) ;
+$("#registrButton" ).prop("disabled",false);
 
 } else {
+jsRoutes.controllers.Application.emailing ("register","" ).ajax ()
     @restrictOr(la(as("admin"))) {
         window.location.href = " @routes.Administer.moderators() ";
     } {
         window.location.href = " @routes.Manage.myAds() ";
     }
+
 }
 
 },

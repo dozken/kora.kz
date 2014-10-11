@@ -11,6 +11,7 @@ import java.util.List;
 import com.avaje.ebean.Ebean;
 
 import com.avaje.ebean.Expr;
+import models.Emailing;
 import models.Location;
 import models.Setting;
 import models.ad.Ad;
@@ -31,6 +32,7 @@ import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.ad.create._breed;
+import views.html.mailBody.*;
 import views.html.ad.create._city;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
@@ -51,7 +53,7 @@ public class Ads extends Controller {
 	public static Result create() {
 
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
+
         Ad ad = new Ad();
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
         ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
@@ -213,7 +215,7 @@ public class Ads extends Controller {
 
         DynamicForm requestData = form().bindFromRequest();
 
-        System.out.println(requestData.get("age") + "  " + requestData.get("payment_type"));
+
         Ad ad = Ad.find.byId(id);
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
         ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
@@ -317,7 +319,7 @@ public class Ads extends Controller {
     public static Result quick_search(){
 
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
+
         List<Ad> l;
         if(requestData.get("animal").equals("all")) {
             l = Ad.find.where().in("tags.name", requestData.get("str")).findList();
@@ -350,7 +352,7 @@ public class Ads extends Controller {
 
             if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null,null));
 
-            System.out.println(request().cookie("userAdsKora").value());
+
             String [] ads = request().cookie("userAdsKora").value().split("_");
             List<Ad> list = new ArrayList<Ad>();
             for(String ad : ads){
@@ -369,7 +371,7 @@ public class Ads extends Controller {
     public static Result sendPrivateMessage(Long ad_id, Long author_id)
     {
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
+
 
         AuthorisedUser user = AuthorisedUser.find.where().eq("email",Ad.find.byId(ad_id).contactInfo.email).findUnique();
         if(user!=null){
@@ -377,7 +379,7 @@ public class Ads extends Controller {
             String kaptchaReceived = requestData.get("kaptcha");
 
             if (kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
-                System.out.println("registred");
+
                 PrivateMessage message = new PrivateMessage();
                 message.ad = Ad.find.byId(ad_id);
                 message.author = AuthorisedUser.find.byId(author_id);
@@ -387,11 +389,15 @@ public class Ads extends Controller {
                 message.title = Ad.find.byId(ad_id).title;
                 message.save();
             }else{
-                System.out.println("capcha error");
+
                 return ok("error");
             }
         }else{
-            System.out.println("not registred, You must send email for this person");
+
+            Emailing.send("Қора.kz",
+                    new String[]{" <" + Ad.find.byId(ad_id).contactInfo.email + ">"},
+                    private_message.render(user, "not_registred").body());
+            return ok("not_registred");
         }
         return ok();
     }
@@ -399,7 +405,7 @@ public class Ads extends Controller {
     public static Result replayPrivateMessage(Long author_id,Long ad_id, Long recipent_id,String m)
     {
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
+
 
         PrivateMessage message = new PrivateMessage();
         message.ad = Ad.find.byId(ad_id);
@@ -532,7 +538,7 @@ public class Ads extends Controller {
     public static Result searchAd(){
 
         DynamicForm requestData = form().bindFromRequest();
-        System.out.println(requestData);
+        
 
         Long animal_id = Long.parseLong(requestData.get("animal"));
         List<Region> regions=Region.find.all();

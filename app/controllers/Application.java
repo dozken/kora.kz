@@ -10,6 +10,7 @@ import java.util.Properties;
 import javax.imageio.ImageIO;
 
 import models.Emailing;
+import models.ad.Ad;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
@@ -19,7 +20,7 @@ import play.mvc.Result;
 import play.mvc.WebSocket;
 import views.html.common.about;
 import views.html.common.feedback;
-import views.html.mailBody.feedbackMessage;
+import views.html.mailBody.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -93,6 +94,7 @@ public class Application extends Controller {
                 controllers.routes.javascript.Manage.read(),
                 controllers.routes.javascript.Manage.paymentReport(),
                 controllers.routes.javascript.Manage.addMoney(),
+                controllers.routes.javascript.Application.emailing(),
                 controllers.routes.javascript.Manage.getMessageType()
                 ));
 	}
@@ -163,4 +165,35 @@ public class Application extends Controller {
 		}
 
 	}
+
+    public static Result emailing(String type,String email) {
+        System.out.println("keldi emailingka");
+        if(type.equals("ad_created")){
+
+            Emailing.send("Қора.kz",
+                    new String[]{"" + " <" + email+ ">"},
+                    ad_successfully.render().body());
+
+        }else if(type.equals("register")) {
+            AuthorisedUser user = AuthorisedUser.findByEmail(session("connected"));
+            Emailing.send("Қора.kz",
+                    new String[]{user.userName + " <" + user.email + ">"},
+                    registred_successfully.render(user).body());
+        }else if(type.equals("replay_message")) {
+            AuthorisedUser user = AuthorisedUser.find.byId(Long.parseLong(email));
+            Emailing.send("Қора.kz",
+                    new String[]{user.userName + " <" + user.email + ">"},
+                    private_message.render(user,"replay").body());
+        }else if(type.equals("private")) {
+            Ad ad = Ad.find.byId(Long.parseLong(email));
+
+            AuthorisedUser user = AuthorisedUser.findByEmail(ad.contactInfo.email);
+            Emailing.send("Қора.kz",
+                    new String[]{user.userName + " <" + user.email + ">"},
+                    private_message.render(user,"registred").body());
+        }
+
+
+        return ok();
+    }
 }

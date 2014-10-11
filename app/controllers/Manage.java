@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import models.Emailing;
 import models.ad.Ad;
 import models.ad.PrivateMessage;
 import models.user.AuthorisedUser;
@@ -20,7 +21,7 @@ import views.html.profile.payments._table;
 import views.html.profile.payments.myPayments;
 import views.html.profile.settings.mySettings;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
-
+import views.html.mailBody.*;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.SqlQuery;
@@ -125,7 +126,6 @@ public class Manage extends Controller {
 
 		return ok();
 	}
-
 
 
 }
