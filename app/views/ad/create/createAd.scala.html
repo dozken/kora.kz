@@ -26,6 +26,8 @@ clear: both;
 </style>
 
 <script>
+$("#error_fields" ).hide();
+$("#success_message" ).hide();
 	$("#tel1").mask("+7(999) 999-9999");
 
 </script>
@@ -124,7 +126,7 @@ $("#city_list" ).html(data);
 });
 })
 
-   $("#error_fields" ).hide();
+
 $(document).on("click", "#ad_form_submit", function(e) {
 if(validation()) {
 $('#ad_form').submit(function(e) {
@@ -144,9 +146,15 @@ data: formData,
 processData: false,
 contentType: false,
 success: function(data) {
-@if(session.get("connected")!=null){
-window.location.href = "@routes.Manage.myAds()";
-}else{window.location.href = "@routes.Application.index()";}
+jsRoutes.controllers.Application.emailing ("ad_created",$("#ema" ).val() ).ajax ()
+$("#success_message" ).html("successfully added, check your mail to additional informations!!!");
+$("#success_message" ).fadeIn(200);
+setTimeout(function() {
+    @if(session.get("connected")!=null){
+        window.location.href = "@routes.Manage.myAds()";
+    }else{window.location.href = "@routes.Application.index()";}
+}, 2500);
+
 }
 });
 e.preventDefault();

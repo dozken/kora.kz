@@ -14,7 +14,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.common.forgotPassword;
 import views.html.common.restorePassword;
-import views.html.mailBody.recoverPassword;
+import views.html.mailBody.*;
 import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 
 import com.avaje.ebean.Ebean;
@@ -45,6 +45,9 @@ public class User extends Controller {
 			}
 			user.save();
 			Ebean.saveManyToManyAssociations(user, "roles");
+
+
+
 			return ok("success");
 		} else {
 			flash("error", "Эта почта уже используется!, попробуйте другую.");

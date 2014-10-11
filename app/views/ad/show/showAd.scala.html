@@ -153,8 +153,10 @@ if (res == "error") {
 $("#capchaErrorAlert").html("Введите, пожалуйста, цифры с картинки.");
 return false;
 } else {
-
 $("#private_message_modal" ).modal("hide");
+    if (res != "not_registred") {
+        jsRoutes.controllers.Application.emailing ( "private", "@ad.id" ).ajax ( )
+    }
 }
 
 },

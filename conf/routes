@@ -57,6 +57,8 @@ POST        /profile/settings/password             controllers.Settings.changePa
 POST        /profile/settings/admin                controllers.Settings.changeUserSetting(id: Long,status: String)
 POST        /profile/settings/user                 controllers.Settings.changeAdminSetting(id: Long,status: String)
 
+POST        /manage/emailing                       controllers.Application.emailing(type: String,email:String)
+
 GET         /profile/info                          controllers.Manage.myInfo()
 GET         /profile/info/edit                     controllers.Info.edit()
 POST        /profile/info/edit/:id                 controllers.Info.update(id:Long)

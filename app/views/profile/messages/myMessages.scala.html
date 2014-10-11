@@ -112,6 +112,7 @@ var ad = $(this ).attr("ad");
 var mm = $("#replay").val();
 jsRoutes.controllers.Ads.replayPrivateMessage(author,ad,recipent,mm).ajax({
 success: function(data) {
+jsRoutes.controllers.Application.emailing ("replay_message", recipent).ajax ()
 window.location.href="@routes.Manage.myMessages()"
 },
 error: function(jqXHR, textStatus, errorThrown) {
