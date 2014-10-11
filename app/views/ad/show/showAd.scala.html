@@ -226,4 +226,18 @@ $("#error_fields" ).append("Некоторые поля заполнены не�
 $("#error_fields" ).show();
 }
 })
+    @if(ad.contactInfo.location.lat!=null) {
+        url = GMaps.staticMapURL ( {
+        size :[ 610, 300 ],
+        zoom : 14,
+        lat : @ad.contactInfo.location.lat,
+        lng : @ad.contactInfo.location.lng,
+        markers :[ {
+        lat :@ad.contactInfo.location.lat,
+        lng :@ad.contactInfo.location.lng
+        }]
+        }) ;
+
+        $ ( '<img/>' ).attr ( 'src', url ).appendTo ( '#map' ) ;
+    }
 </script>
