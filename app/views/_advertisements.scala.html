@@ -1,0 +1,59 @@
+<ul class="pro4">
+  <li>
+    <div id="carousel-example-generic" class="carousel slide adslide" data-ride="carousel">
+      <!-- Indicators -->
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">        
+  	    @for(advert<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").orderBy("position").findList){	
+        <div class="item @if(advert.position==0){active}">
+          @advert.fileType match {
+				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
+			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => { <object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object> }
+			    case default => { @advert.fileType еще не поддеживается}			    
+	      }          
+        </div>
+        }
+      </div>
+      <!-- Controls -->
+      <a id="adslideleft" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a id="adslideright" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </li>
+  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").findRowCount>0){
+  <li>
+    <div id="carousel-example-generic2" class="carousel slide adslide" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+  	    @for(advert<-models.admin.Advertisement.find.where.eq("placeOnPage","rightsidebar2").orderBy("position").findList){	
+        <div class="item">
+          @advert.fileType match {
+				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
+			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => { <object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object> }
+			    case default => { @advert.fileType еще не поддеживается}			    
+	      }          
+        </div>
+        }
+      </div>
+      <!-- Controls -->
+      <a id="adslideleft" class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a id="adslideright" class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </li>
+  }
+</ul>

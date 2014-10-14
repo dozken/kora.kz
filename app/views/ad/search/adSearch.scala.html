@@ -1,0 +1,70 @@
+@(ads:List[models.ad.Ad],animal:models.ad.Animal)
+
+@main("Поиск") {
+
+<div class="container">
+	<div class="searchbarmargin">@_searchbar()</div>
+	@main_filters(animal)
+	<div id="search_by_animal">@_filters(animal)</div>
+	<div class="col-lg-12 borderbottom">
+		<h3>Коровы Абердин-Ангус в Казахстане</h3>
+		<hr class="hrcolor">
+		<ul class="typelist">
+			<li><a href="">Сначала дешевые</a></li>
+			<li><a href="">Сначала дорогие</a></li>
+			<li><a href="">По свежести объявления</a></li>
+		</ul>
+	</div>
+	<div id="search_results" class="col-lg-9 pro3 nopaddingright">
+        @if(ads!=null) {
+            @for(ad <- ads) {
+                <div class="col-lg-12  pro1 @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }">@_ad(ad)</div>
+            }
+        }
+	</div>
+	<div class="col-lg-3 pro2 paddingleft30px nopaddingright"><div class="">@_advertisements()</div></div>
+</div>
+}
+    <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<script>
+$("#poi").click(function() {
+  $("#demo").slideToggle("slow");
+  $("#poi span").text(function(i, v) {
+	return v === 'Обычный поиск' ? 'Расширенный поиск' : 'Обычный поиск'
+  })
+});
+
+$(document).on("change",".gender_check",function(){
+
+
+if ($('.gender_check:checked').length != 1) {
+
+
+   $("#gender" ).val("");
+}
+   else {
+        if ( this.checked ) {
+        $ ( "#gender" ).val ( $ ( this ).val ( ) ) ;
+        }else{ $ ( "#gender" ).val ( $ ( this ).attr ("notVal") ) ;}
+
+}
+
+
+})
+
+
+
+$(document ).on("click","#search_filter",function(e){
+e.preventDefault();
+$("#search_results" ).html('<img src="@routes.Assets.at("images/home/loading.gif")">');
+$(this ).attr("disabled",true);
+jsRoutes.controllers.Ads.searchAd().ajax({
+data : $ ( "#search_form" ).serialize ( ),
+success: function(data) {
+$("#search_results" ).html(data);
+$("#search_filter" ).attr("disabled",false);
+}
+});
+})
+
+</script>
