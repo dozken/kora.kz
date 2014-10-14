@@ -22,6 +22,7 @@ import views.html.profile.payments.myPayments;
 import views.html.profile.settings.mySettings;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import views.html.mailBody.*;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.SqlQuery;

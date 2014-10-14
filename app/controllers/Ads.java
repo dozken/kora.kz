@@ -8,9 +8,11 @@ import java.util.List;
 
 
 
-import com.avaje.ebean.Ebean;
 
+
+import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
+
 import models.Emailing;
 import models.Location;
 import models.Setting;
