@@ -2,6 +2,7 @@ package controllers;
 
 import static play.data.Form.form;
 import models.ad.Ad;
+import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -42,8 +43,8 @@ public class Administer extends Controller {
 	@Restrict({ @Group("admin"), @Group("moderator") })
 	public static Result moderate(Long id) {
 		Ad ad = Ad.find.byId(id);
-		
-		ad.status = "moderating";
+		DynamicForm requestData = form().bindFromRequest();
+		ad.status = requestData.get("status");
 		ad.update();
 		if(ad.status.equals("moderating")){
 		ObjectNode event = Json.newObject();
