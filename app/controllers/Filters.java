@@ -57,10 +57,11 @@ public class Filters extends Controller {
 		loc = coords.split(",");
 		city.location.lat = loc[0].trim();
 		city.location.lng = loc[1].trim();
-		city.name = name;
-		city.update();
+		
 		flash("success", "Город <strong>" + city.name
 				+ "</strong> изменен на <strong>" + name + "</strong>!");
+		city.name = name;
+		city.update();
 		return ok(_city.render(city.region));
 		// }
 	}
