@@ -1,0 +1,243 @@
+@(ad: models.ad.Ad)
+@main("Объявление") {
+<style>
+.b-share__text{
+color: black;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+padding: 0px;
+font-style: italic;
+}
+.b-share__handle{
+float: none; !important
+}
+</style>
+<div class="container">
+	<div class="searchbarmargin">@_searchbar()</div>
+@_breadcrumb()
+@_modalMessage()
+<div class="col-lg-9 nopaddingleft nopaddingright">@_ad(ad)</div>
+<div class="col-lg-3 pro2 paddingleft30px nopaddingright"><div class="rek">@_advertisements()</div></div>
+</div>
+}
+
+<script type="text/javascript" src="http://yandex.st/share/share.js" charset="utf-8"></script>
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<script>
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+new Ya.share({
+    element: 'ya_share1',
+        elementStyle: {
+            'type': 'link',
+            'border': false,
+            quickServices : ['']
+        },
+        popupStyle: {
+            blocks: {
+                'Поделитесь с друзьями!': ['vkontakte','facebook','twitter','odnoklassniki','moimir','gplus'],
+                //'Поделись-ка по-другому!': ['lj', 'twitter', 'vkontakte']
+            },
+            //copyPasteField: true
+        },
+});
+
+
+$(document).ready(function(){
+	$('.carousel').carousel('cycle')
+	var clickEvent = false;
+	$('#myCarousel').carousel({
+		interval:   4000	
+	}).on('click', '.list-group li', function() {
+			clickEvent = true;
+			$('.list-group li').removeClass('active');
+			$(this).addClass('active');		
+	}).on('slid.bs.carousel', function(e) {
+		if(!clickEvent) {
+			var count = $('.list-group').children().length -1;
+			var current = $('.list-group li.active');
+			current.removeClass('active').next().addClass('active');
+			var id = parseInt(current.data('slide-to'));
+			if(count == id) {
+				$('.list-group li').first().addClass('active');	
+			}
+		}
+		clickEvent = false;
+	});
+})
+ 
+$(window).load(function() {
+    var boxheight = $('#myCarousel .carousel-inner').innerHeight();
+    var itemlength = $('#myCarousel .item').length;
+    var triggerheight = Math.round(boxheight/itemlength+1);
+	$('#myCarousel .list-group-item').outerHeight(triggerheight);
+});
+
+$(document).on("click",".moderate.approve", function(){
+	
+	var adId = $(this).attr("ad");
+	bootbox.confirm({
+		message: "Вы уверены?",
+		size : "small",
+		callback: function(confirm) {                
+			if(confirm)
+				jsRoutes.controllers.Administer.moderate(adId).ajax({
+					data: {status:"active"},
+					success: function(data) {
+						console.log(data);
+						
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) {
+			            console.log(jqXHR.responseText);            
+			        }
+				});
+		}
+	});
+	
+});
+
+$(document ).on("click","#favorite",function(){
+
+var id = $(this ).attr("ad");
+var type = $(this ).attr("type");
+jsRoutes.controllers.Ads.addFavorite(id,type).ajax({
+success: function() {
+    if(type=="add") {
+        $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star"></span>В избранном' );
+        $ ( "#favorite" ).attr ( 'type','remove' );
+    }else{
+    $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star-empty"></span>В избранное' );
+    $ ( "#favorite" ).attr ( 'type','add' );
+    }
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
+$(document).on("click",".moderate.deny",function(){
+	var adId = $(this).attr("ad");
+	bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+		jsRoutes.controllers.Administer.moderate(adId).ajax({
+			data: {status:"rejected"},
+			success: function(data) {
+				console.log(data);
+				
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR.responseText);            
+	        }
+		});
+	});
+});
+@if(session.get("connected")!=null){
+$(document ).on("click","#private_message_button",function(e){
+e.preventDefault();
+jsRoutes.controllers.Ads.sendPrivateMessage(@ad.id,@models.user.AuthorisedUser.findByEmail(session.get("connected")).id).ajax({
+data: $("#private_message_form").serialize(),
+success: function(data) {
+var res = "" + data;
+if (res == "error") {
+$("#capchaErrorAlert").html("Введите, пожалуйста, цифры с картинки.");
+return false;
+} else {
+$("#private_message_modal" ).modal("hide");
+    if (res != "not_registred") {
+        jsRoutes.controllers.Application.emailing ( "private", "@ad.id" ).ajax ( )
+    }
+}
+
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+}
+
+$(document ).on("click",".comment_answer",function(){
+
+    if($(this ).attr("comment_type" ) == "answer") {
+        $ ( "#comment_ad" ).attr ( "forWho", $ ( this ).attr ( "comment" ) ) ;
+        $ ( "#comment_head" ).html ( "Ответить " + $ ( this ).attr ( "comment_author" ) + "у" ) ;
+    $(this ).html("Отменить");
+    $(this ).attr("comment_type","cancel");
+    $('.comment_answer').not(this).each(function(){
+           $(this ).hide();
+    });
+    }else{
+    $ ( "#comment_ad" ).attr ( "forWho", "0") ;
+    $ ( "#comment_head" ).html ( "Добавить комментарий" ) ;
+        $(this ).html("Ответить");
+        $(this ).attr("comment_type","answer");
+    $('.comment_answer').not(this).each(function(){
+    $(this ).show();
+    });
+    }
+
+})
+
+$("#error_fields" ).hide();
+$(document ).on("click","#comment_ad",function(e){
+$("#error_fields" ).hide();
+e.preventDefault();
+if(validation()) {
+var com_id = $ ( this ).attr ( "forWho" ) ;
+jsRoutes.controllers.Ads.comment ( @ad.id, com_id ).ajax ( {
+data : $ ( "#comment_form" ).serialize ( ),
+success : function ( data ) {
+var res = "" + data ;
+if ( res != "kapcha_error" ) {
+    $ ( "#comment_body" ).html ( data ) ;
+    $ ( "#kapcha_Error" ).addClass("alert alert-success");
+    $ ( "#kapcha_Error" ).removeClass("kipkizil");
+$ ( "#kapcha_Error" ).show();
+    $ ( "#kapcha_Error" ).html ( "successfully sended" ).fadeOut( 4000 );
+}
+else {
+$ ( "#kapcha_Error" ).addClass("kipkizil");
+$ ( "#kapcha_Error" ).removeClass("alert alert-success");
+$ ( "#kapcha_Error" ).html ( "Введите, пожалуйста, цифры с картинки." );
+
+$ ( "#kapcha_Error" ).show();
+}
+},
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
+}
+} ) ;
+}
+else{e.preventDefault();
+$("#error_fields" ).html("");
+$("#error_fields" ).append("Некоторые поля заполнены неправильно");
+
+$("#error_fields" ).show();
+}
+})
+    @if(ad.contactInfo.location.lat!=null) {
+        url = GMaps.staticMapURL ( {
+        size :[ 610, 300 ],
+        zoom : 14,
+        lat : @ad.contactInfo.location.lat,
+        lng : @ad.contactInfo.location.lng,
+        markers :[ {
+        lat :@ad.contactInfo.location.lat,
+        lng :@ad.contactInfo.location.lng
+        }]
+        }) ;
+
+        $ ( '<img/>' ).attr ( 'src', url ).appendTo ( '#map' ) ;
+    }
+</script>

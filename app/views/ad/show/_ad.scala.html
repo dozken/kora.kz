@@ -1,0 +1,183 @@
+@(ad: models.ad.Ad)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+<ul class="aty">
+	<li><h4><b>@ad.animal.name ПОРОДЫ @ad.breed.name</b></h4></li>
+	<li><h4 class="cena">@Messages(ad.priceType.price.toString) @ad.priceType.currency</h4></li>
+    @if(controllers.Ads.checkFavorite(ad.id)) {
+        <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star"></span>
+            В избранном</a>
+    }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star-empty"></span>
+        В избранное</a>}
+</ul>
+<div class="col-lg-5 nopaddingleft">
+	<ul class="tiginen nopaddingleft">
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Регион</li>
+				<li>@ad.contactInfo.region.name</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Порода</li>
+				<li>@ad.breed.name</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Возраст</li>
+				<li>@ad.birthDate</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Пол</li>
+				<li>@ad.gender</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Количество</li>
+				<li>@ad.quantity</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Продавец</li>
+				<li>@ad.contactInfo.company</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Контакты</li>
+				<li><ul id="ss" class="nopaddingleft"><li>@ad.contactInfo.phone</li></ul></li>
+			</ul>
+		</li>
+	</ul>
+    @subjectPresent() {
+        <a href="#" class="btn btn-default btn-success" data-toggle="modal" data-target="#private_message_modal"><span class="icon-message"></span>
+            Отправить сообщение продавцу</a>
+    }
+</div>
+
+<div class="col-lg-7 nopaddingleft nopaddingright">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+
+       @for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex){
+        <div class="item @if(index==0){active}">
+          <img src="@img.content" style="width: 380px;heigh:390px">
+
+        </div><!-- End Item -->
+          }
+
+
+                
+      </div><!-- End Carousel Inner -->
+ 
+ 
+    <ul class="list-group mylistgroup">
+    @for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex) {
+        <li data-target="#myCarousel" data-slide-to="@index" class="list-group-item"><img src="@img.content" style="width: 85px;height: 85px;"/></li>
+    }
+    </ul>
+ 
+      <!-- Controls -->
+
+ 
+    </div>
+</div>
+
+<div class="col-lg-12 ppp nopaddingleft">
+<b class="bdau">Краткое Описание</b>
+	<p>@ad.description</p>
+</div>
+<div class="col-lg-12 nopaddingleft nopaddingright">
+	<ul class="pros pros2">
+		<div class="col-lg-6 nopaddingleft"><li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
+		<li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li></div>
+		<div class="col-lg-6 texal nopaddingright">
+		  <li>
+		  	<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
+		    @*<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
+		    *@		     
+		  </li>
+		<li><a class="owib"><span class="glyphicon glyphicon-exclamation-sign"></span> Нашли ошибку в объявлении?</a></li></div>
+	</ul>
+</div>
+@restrictOr(la(as("moderator"),as("admin"))){
+@* //TODO check ad status to "moderating"
+*@
+<div class="col-lg-12  formdown topka nopaddingleft">
+<button class="btn btn-success moderate approve" ad="@ad.id"><span class="icon-share"></span> Подтвердить</button>
+<button class="btn btn-danger moderate deny" ad="@ad.id"><span class="icon-warning"></span> Отклонить</button>
+</div>
+}{<a></a>}
+
+    <div id="map"></div>
+
+    <div id="comment_body" class="col-lg-12  formdown topka akwyl">
+
+@_comment(ad.comments)
+        </div>
+@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
+	<div class="col-lg-12 nopaddingleft formdown topka">
+<b id="comment_head" class="bdau">Добавить комментарий</b>
+        <div id="error_fields" class="alert alert-danger" role="alert"></div>
+</div>
+<form id="comment_form" class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3"  class="col-sm-3 control-label leftalign" >Ваше имя или ник</label>
+    <div class="col-sm-9">
+      <input type="text" name="comment_author" class="form-control" id="inputEmail3" validation="not_null" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).userName" readonly="readonly" }>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-3 control-label leftalign">Электронная почта</label>
+    <div class="col-sm-9">
+      <input type="email" name="comment_email" class="form-control" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
+      <span class="help-block"><i>На этот адрес придет уведомление об ответе</i></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Сообщение</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" name="comment_message" rows="6"></textarea>
+      <span class="help-block"><i>Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Введите код</label>
+    <div class="col-sm-9">
+      <img src='@routes.Application.captcha' class="imgmargin"><input type="text" name="kaptcha" class="form-control" id="inputEmail3">
+      <span class="help-block"><i>Хотим убедиться, что вы его не забудете</i></span>
+    </div>
+  </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div id="kapcha_Error" class="kipkizil"></div>
+
+        </div>
+    </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" id="comment_ad" forWho="0" class="btn btn-success">Отправить</button>
+     
+    </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <i>Оставляя коментарий вы соглашаетесь с нашими <a href="#">правилами общения</a></i>
+     
+    </div>
+  </div>
+}   
+    
+
+</form>
+
+
+
