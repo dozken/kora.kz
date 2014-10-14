@@ -323,18 +323,49 @@ public class Ads extends Controller {
         List<Ad> l;
         if(requestData.get("animal").equals("all")) {
             l = Ad.find.where().in("tags.name", requestData.get("str")).findList();
+            return ok(adSearch.render(l, Animal.find.byId(1L)));
         }
 
         else{
             l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();
+            Animal animal = Animal.find.where().eq("name",requestData.get("animal")).findUnique();
+            return ok(adSearch.render(l, animal));
         }
-        if(l.size()>0) {
-            return ok(adSearch.render(l, l.get(0).animal));
-        }
-
-         return ok(adSearch.render(l, Animal.find.byId(2L)));
 
 
+
+
+    }
+
+
+    public static Result horse() {
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ЛОШАДЬ").findUnique()).findList();
+        Animal animal = Animal.find.where().eq("name","ЛОШАДЬ").findUnique();
+        return ok(adSearch.render(l, animal));
+    }
+
+    public static Result camel() {
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ВЕРБЛЮД").findUnique()).findList();
+        Animal animal = Animal.find.where().eq("name","ВЕРБЛЮД").findUnique();
+        return ok(adSearch.render(l, animal));
+    }
+
+    public static Result cow() {
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","КОРОВА").findUnique()).findList();
+        Animal animal = Animal.find.where().eq("name","КОРОВА").findUnique();
+        return ok(adSearch.render(l, animal));
+    }
+
+    public static Result cam() {
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","БАРАН").findUnique()).findList();
+        Animal animal = Animal.find.where().eq("name","БАРАН").findUnique();
+        return ok(adSearch.render(l, animal));
+    }
+
+    public static Result other() {
+        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ДРУГИЕ").findUnique()).findList();
+        Animal animal = Animal.find.where().eq("name","ДРУГИЕ").findUnique();
+        return ok(adSearch.render(l, animal));
     }
 
     public static Result searchByType(Long id) {
@@ -346,11 +377,11 @@ public class Ads extends Controller {
 
         if(session("connected")!=null){
 
-            return ok(adSearch.render(AuthorisedUser.findByEmail(session("connected")).favorites,null));
+            return ok(adSearch.render(AuthorisedUser.findByEmail(session("connected")).favorites,Animal.find.byId(1L)));
 
         }else{
 
-            if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null,null));
+            if( request().cookie("userAdsKora")==null)  return ok(adSearch.render(null,Animal.find.byId(1L)));
 
 
             String [] ads = request().cookie("userAdsKora").value().split("_");
@@ -360,7 +391,7 @@ public class Ads extends Controller {
                 list.add(Ad.find.byId(Long.parseLong(ad)));
 
             }
-            return ok(adSearch.render(list,null));
+            return ok(adSearch.render(list,Animal.find.byId(1L)));
         }
 
 
