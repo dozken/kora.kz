@@ -80,7 +80,7 @@ public class Manage extends Controller {
 		u.payments.add(p);
         u.profile.myMonney+=money;
 		u.update();
-		 return ok(_table.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
+		return ok(_table.render(Payment.find.where().eq("user", u).order("paymentDate desc").findList()));
 		
 	}
 
