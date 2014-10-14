@@ -50,7 +50,8 @@ GET         /profile/message/type/:s               controllers.Manage.getMessage
 #POST    /profile/messages/:id/delete controllers.Message.delete(id: Long)
 
 GET         /profile/payments                      controllers.Manage.myPayments()
-GET         /payments/qiwi                         controllers.Manage.addMoney(type:String,money:Double)
+GET         /payments/qiwi                         controllers.Payments.qiwi
+GET         /payments/addMoney                     controllers.Manage.addMoney(type:String,money:Double)
 POST        /profile/payment/filter/:filter        controllers.Manage.paymentReport(filter:String,start:String,end:String)
 GET         /profile/settings                      controllers.Manage.mySettings()
 POST        /profile/settings/password             controllers.Settings.changePassword()

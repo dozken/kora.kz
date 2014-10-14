@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
@@ -73,6 +74,7 @@ public class Ad extends Model{
 	
 	public Date publishedDate = new Date();
 	
+	@Version
 	public Date updatedDate = new Date();	
 	
 	public Date expirationDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 7));
