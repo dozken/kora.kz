@@ -183,14 +183,14 @@ public class Application extends Controller {
             AuthorisedUser user = AuthorisedUser.find.byId(Long.parseLong(email));
             Emailing.send("Қора.kz",
                     new String[]{user.userName + " <" + user.email + ">"},
-                    private_message.render(user,"replay").body());
+                    private_message.render("","replay").body());
         }else if(type.equals("private")) {
             Ad ad = Ad.find.byId(Long.parseLong(email));
 
             AuthorisedUser user = AuthorisedUser.findByEmail(ad.contactInfo.email);
             Emailing.send("Қора.kz",
                     new String[]{user.userName + " <" + user.email + ">"},
-                    private_message.render(user,"registred").body());
+                    private_message.render("","registred").body());
         }
 
 

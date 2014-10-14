@@ -1,4 +1,4 @@
-@(user : models.user.AuthorisedUser,messge_type:String)
+@(message_text:String, messge_type:String)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
@@ -19,19 +19,20 @@
 		        <tr>
 		          <td style="padding-left: 40px;">
                       @if(messge_type=="replay") {
-                          <p>Na vashe soobshenie otveteli</p>
-                          <p>vy mojete uvidet soobshenie kora.kz!!!</p>
+                          <p>На ваше сообщение ответили</p>
+                          <p>Вы можете увидеть сообщение в личном кабинете в kora.kz!!!</p>
                           <p></p>
                       }
                       @if(messge_type=="registred"){
-                          <p>vam otpravili lichnoe soobshenie</p>
-                          <p>vy mojete uvidet soobshenie v kora.kz!!!</p>
+                          <p>Вам отправили личное сообщение</p>
+                          <p>Вы можете увидеть сообщение в личном кабинете в <a href="http://95.57.119.96:9000/profile/messages">kora.kz/profile/messages</a></p>
                           <p></p>
                       }
                       @if(messge_type=="not_registred"){
-                          <p>vam otpravili lichnoe soobshenie</p>
-                          <p>vy ne zaregistrirovaniy!!!</p>
-                          <p></p>
+                          <p>Вам отправили личное сообщение</p>
+                          <p> @message_text.split("::")(0);</p>
+                          <p> @message_text.split("::")(1);</p>
+                          <p> @message_text.split("::")(2);</p>
                       }
 		          </td>
 		        </tr>

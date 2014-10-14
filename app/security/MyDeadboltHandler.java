@@ -56,7 +56,7 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler
         {
             @Override
             public Result apply() throws Throwable {
-                return ok(_accessFailed.render());
+                return ok(views.html.common.index.render());
             }
         });
     }
