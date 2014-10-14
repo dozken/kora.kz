@@ -1,11 +1,12 @@
 package controllers;
 
 import static play.data.Form.form;
+import models.payment.Qiwi;
 import play.data.DynamicForm;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.xml.payment.qiwi;
+import views.xml.payment.*;
 
 public class Payments extends Controller {
 
@@ -23,6 +24,27 @@ public class Payments extends Controller {
 	@BodyParser.Of(play.mvc.BodyParser.Xml.class)
 	public static Result qiwi() {
 		DynamicForm requestData = form().bindFromRequest();
+		if(requestData==null){
+			return badRequest("");
+		} else {
+			if(requestData.get("command").equals("check")){
+				Integer txn_id = Integer.parseInt(requestData.get("txn_id"));
+				String account = requestData.get("account");
+				
+				Integer result = Qiwi.check();
+				return ok(check.render(txn_id,result,""));
+			} else if(requestData.get("command").equals("pay")){
+				Integer txn_id = Integer.parseInt(requestData.get("txn_id"));
+				Integer txn_date = Integer.parseInt(requestData.get("txn_date"));
+				String account = requestData.get("account");
+				Double sum = Double.parseDouble(requestData.get("sum"));
+				Integer result = Qiwi.pay();
+				//@(osmp_txn_id :Integer, prv_txn :Integer, sum :Double, result :Integer, comment:String)
+				Integer prv_txn = 0;
+				return ok(pay.render(txn_id,prv_txn,sum,result,""));
+			}
+			
+		}
 		/*
 		Document dom = request().body().asXml();
 		if (dom == null) {
@@ -37,6 +59,6 @@ public class Payments extends Controller {
 			}
 		}
 		*/
-		return ok(qiwi.render(requestData));
+		return ok("");
 	}
 }
