@@ -427,9 +427,13 @@ public class Ads extends Controller {
             }
         }else{
 
+            String message = "Заголовок: "+ Ad.find.byId(ad_id).title+"::";
+            message+=requestData.get("message")+"::";
+
+            message+="от "+AuthorisedUser.find.byId(author_id).userName + " <" + AuthorisedUser.find.byId(author_id).email+">";
             Emailing.send("Қора.kz",
                     new String[]{" <" + Ad.find.byId(ad_id).contactInfo.email + ">"},
-                    private_message.render(user, "not_registred").body());
+                    private_message.render(message, "not_registred").body());
             return ok("not_registred");
         }
         return ok();
