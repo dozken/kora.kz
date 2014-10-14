@@ -43,7 +43,7 @@ public class Administer extends Controller {
 	public static Result moderate(Long id) {
 		Ad ad = Ad.find.byId(id);
 		
-		ad.status = form().bindFromRequest().get("status");
+		ad.status = "moderating";
 		ad.update();
 		if(ad.status.equals("moderating")){
 		ObjectNode event = Json.newObject();

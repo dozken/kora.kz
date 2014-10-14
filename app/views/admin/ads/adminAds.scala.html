@@ -35,8 +35,7 @@ function moderate(){
 $(document).on("click",".moderate",function(){
 	var adId = $(this).attr("ad");
 	
-	jsRoutes.controllers.Administer.moderate(adId).ajax({
-		data: {status:"moderating"},
+	jsRoutes.controllers.Administer.moderate(adId).ajax({		
 		success: function(data) {
 			console.log(data);
 			
