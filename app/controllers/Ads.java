@@ -314,9 +314,9 @@ public class Ads extends Controller {
 
     public static Result edit(Long id){ return ok(editAd.render(Ad.find.byId(id))); }
 	
-	public static Result search() {
-		return ok(adSearch.render(Ad.find.all(),Animal.find.byId(2L)));
-	}
+	//public static Result search() {
+	//	return ok(adSearch.render(Ad.find.all(),Animal.find.byId(2L)));
+	//}
 
     public static Result quick_search(){
 
@@ -325,15 +325,15 @@ public class Ads extends Controller {
         List<Ad> l;
         if(requestData.get("animal").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
             if(requestData.get("str").equals("") ||requestData.get("str")== null ){
-                l = Ad.find.all();
-            }else {l = Ad.find.where().in("tags.name", requestData.get("str")).findList();}
+                l = Ad.find.where().eq("status", "active").findList();
+            }else {l = Ad.find.where().eq("status", "active").in("tags.name", requestData.get("str")).findList();}
             return ok(adSearch.render(l, Animal.find.byId(1L)));
         }
 
         else{
             if(requestData.get("str").equals("") ||requestData.get("str")== null ){
-                l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).findList();
-            }else { l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();}
+                l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).findList();
+            }else { l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();}
 
             Animal animal = Animal.find.where().eq("name",requestData.get("animal")).findUnique();
             return ok(adSearch.render(l, animal));
@@ -346,37 +346,37 @@ public class Ads extends Controller {
 
 
     public static Result horse() {
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ЛОШАДЬ").findUnique()).findList();
+        List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","ЛОШАДЬ").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","ЛОШАДЬ").findUnique();
         return ok(adSearch.render(l, animal));
     }
 
     public static Result camel() {
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ВЕРБЛЮД").findUnique()).findList();
+        List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","ВЕРБЛЮД").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","ВЕРБЛЮД").findUnique();
         return ok(adSearch.render(l, animal));
     }
 
     public static Result cow() {
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","КОРОВА").findUnique()).findList();
+        List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","КОРОВА").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","КОРОВА").findUnique();
         return ok(adSearch.render(l, animal));
     }
 
     public static Result cam() {
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","БАРАН").findUnique()).findList();
+        List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","БАРАН").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","БАРАН").findUnique();
         return ok(adSearch.render(l, animal));
     }
 
     public static Result other() {
-        List<Ad> l = Ad.find.where().eq("animal",Animal.find.where().eq("name","ДРУГИЕ").findUnique()).findList();
+        List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","ДРУГИЕ").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","ДРУГИЕ").findUnique();
         return ok(adSearch.render(l, animal));
     }
 
     public static Result searchByType(Long id) {
-        return ok(adSearch.render(Ad.find.where().eq("animal",Animal.find.byId(id)).findList(),Animal.find.byId(id)));
+        return ok(adSearch.render(Ad.find.where().eq("status", "active").eq("animal",Animal.find.byId(id)).findList(),Animal.find.byId(id)));
     }
 
     public static Result favorite() {
@@ -650,14 +650,14 @@ public class Ads extends Controller {
 
         List<Ad> l;
         if(!requestData.get("searchText").equals("")) {
-             l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
+             l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
                     .in("breed", breeds).in("gender", genders).in("quantity", quantity).in("tags.name",requestData.get("searchText"))
                     .between("birthDate", startYear, endYear)
                     .or(
                             Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
                     ).findList();
         }else{
-            l = Ad.find.where().eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
+            l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
                     .in("breed", breeds).in("gender", genders).in("quantity", quantity)
                     .between("birthDate", startYear, endYear)
                     .or(
