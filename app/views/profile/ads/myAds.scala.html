@@ -38,7 +38,7 @@ var str = $(this).val();
 
         var ad_id = $(this ).attr("ad");
         var that = this;
-         if(window.confirm("Are you sure?")==true){
+         if(window.confirm("Данная операция стоит @models.Setting.find.where.eq("name","highlight").findUnique().price тг. Продолжить?")==true){
         jsRoutes.controllers.Ads.highlight(ad_id).ajax({
 		success: function(data) {
 		if(data=="fine"){
@@ -46,7 +46,7 @@ var str = $(this).val();
         $(that ).addClass("active");
         $(that).prop("disabled",true);
         $(that).html('<span class="icon-vydelit"></span> Выделено');
-        }else{alert("not enough money");}
+        }else{alert("Недостаточно средств на счете");}
 		}
 		});
 		}
@@ -58,13 +58,13 @@ var str = $(this).val();
 
         var ad_id = $(this ).attr("ad");
         var that = this;
-        if(window.confirm("Are you sure?")==true){
+        if(window.confirm("Данная операция стоит @models.Setting.find.where.eq("name","prelong").findUnique().price тг. Продолжить?")==true){
         jsRoutes.controllers.Ads.preLong(ad_id).ajax({
 		success: function(data) {
 		if(data=="fine"){
         	$(that).prop("disabled",true);
         	$(that).html('<span class="icon-time"></span> Продлино');
-        }else{alert("not enough money");}
+        }else{alert("Недостаточно средств на счете");}
 		}
 		});
 		}
@@ -73,7 +73,7 @@ var str = $(this).val();
     
      $(document ).on("click",".ad_archive",function(){
      
-     if(window.confirm("Are you sure?")==false){
+     if(window.confirm("Вы уверены?")==false){
      return false;
      }
      
