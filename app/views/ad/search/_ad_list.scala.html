@@ -1,0 +1,8 @@
+@(ads:List[models.ad.Ad], picture:Int,map:String)
+@if(ads!=null) {
+    @for(ad <- ads) {
+        @if(ad.images.size()!=picture && ad.contactInfo.location.lat!=map) {
+            <div class="col-lg-12  pro1 @if(models.ad.Ad.settingByName(ad, "highlight") != null) {highlighted }">@_ad(ad)</div>
+        }
+    }
+}
