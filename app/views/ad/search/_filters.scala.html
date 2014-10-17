@@ -1,7 +1,7 @@
 @(animal:models.ad.Animal)
 <div class="col-lg-12 nopaddingleft">
 <form id="search_form" class="form-inline">
-    <input type="hidden" name="animal" value="@animal.id">
+    <input id="animal" type="hidden" name="animal" value="@animal.id" showName="@animal.name">
 <div id="demo2">
  <div class="form-group frmg">
  <div class="frmbck frmbck3">

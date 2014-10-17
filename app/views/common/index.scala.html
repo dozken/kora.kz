@@ -1,3 +1,4 @@
+@import com.github.nscala_time.time.Imports._
 @main("Главная") {
 
 
@@ -21,7 +22,7 @@
 					объявление</a>
 			</p>
 			<p class="jum">
-				<b>Всего на сайте 55887 объявлений, из них 578 объявлений подано
+				<b>Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",DateTime.now.hour(0).minute(0).second(0) ).findRowCount() объявлений подано
 					сегодня</b>
 			</p>
 			<p class="jum2">
