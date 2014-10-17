@@ -150,13 +150,13 @@ processData: false,
 contentType: false,
 success: function(data) {
 jsRoutes.controllers.Application.emailing ("ad_created",$("#ema" ).val() ).ajax ()
-$("#success_message" ).html("successfully added, check your mail to additional informations!!!");
+$("#success_message" ).html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
 $("#success_message" ).fadeIn(200);
 setTimeout(function() {
     @if(session.get("connected")!=null){
         window.location.href = "@routes.Manage.myAds()";
     }else{window.location.href = "@routes.Application.index()";}
-}, 2500);
+}, 3500);
 
 }
 });
