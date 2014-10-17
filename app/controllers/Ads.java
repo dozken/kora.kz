@@ -323,13 +323,18 @@ public class Ads extends Controller {
         DynamicForm requestData = form().bindFromRequest();
 
         List<Ad> l;
-        if(requestData.get("animal").equals("all")) {
-            l = Ad.find.where().in("tags.name", requestData.get("str")).findList();
+        if(requestData.get("animal").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
+            if(requestData.get("str").equals("") ||requestData.get("str")== null ){
+                l = Ad.find.all();
+            }else {l = Ad.find.where().in("tags.name", requestData.get("str")).findList();}
             return ok(adSearch.render(l, Animal.find.byId(1L)));
         }
 
         else{
-            l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();
+            if(requestData.get("str").equals("") ||requestData.get("str")== null ){
+                l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).findList();
+            }else { l = Ad.find.where().eq("animal",Animal.find.where().eq("name",requestData.get("animal")).findUnique()).in("tags.name", requestData.get("str")).findList();}
+
             Animal animal = Animal.find.where().eq("name",requestData.get("animal")).findUnique();
             return ok(adSearch.render(l, animal));
         }
