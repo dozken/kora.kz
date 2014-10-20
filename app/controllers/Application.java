@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import models.Emailing;
 import models.ad.Ad;
+import models.ad.Comment;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
@@ -167,7 +168,7 @@ public class Application extends Controller {
 	}
 
     public static Result emailing(String type,String email) {
-        System.out.println(email);
+
         if(type.equals("ad_created")){
 
             Emailing.send("Қора.kz",
@@ -192,8 +193,21 @@ public class Application extends Controller {
             Emailing.send("Қора.kz",
                     new String[]{user.userName + " <" + user.email + ">"},
                     private_message.render("","registred").body());
-        }
+        }else if(type.equals("comment")) {
+            Ad ad = Ad.find.byId(Long.parseLong(email));
 
+
+            Emailing.send("Қора.kz",
+                    new String[]{ad.contactInfo.company + " <" + ad.contactInfo.email + ">"},
+                    comment_users_ad.render(ad.contactInfo.company,ad,"comment").body());
+        }else if(type.equals("replayComment")) {
+            Comment comment = Comment.find.byId(Long.parseLong(email));
+            System.out.println(comment.email);
+
+            Emailing.send("Қора.kz",
+                    new String[]{comment.name+ " <" + comment.email + ">"},
+                    comment_users_ad.render(comment.name,comment.ad,"replayComment").body());
+        }
 
         return ok();
     }
