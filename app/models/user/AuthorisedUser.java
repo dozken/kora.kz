@@ -36,6 +36,8 @@ public class AuthorisedUser extends Model implements Subject {
 	public String email;
 
 	public String password;
+
+    public String status="waiting";
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	public Profile profile;

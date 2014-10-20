@@ -16,13 +16,16 @@ POST        /user/forgotPassword                   controllers.User.resetPasswor
 GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
 POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
 
+GET         /user/confirmRegistration/:code        controllers.User.confirmRegistration(code :String)
+
+GET         /user/confirmPage                      controllers.User.confirmPage()
 
 #navbar search
-GET         /ad/nav_search-horse                controllers.Ads.horse()
-GET         /ad/nav_search-camel                controllers.Ads.camel()
-GET         /ad/nav_search-cow                controllers.Ads.cow()
-GET         /ad/nav_search-cam                controllers.Ads.cam()
-GET         /ad/nav_search-other                controllers.Ads.other()
+GET         /ad/nav_search-horse                   controllers.Ads.horse()
+GET         /ad/nav_search-camel                   controllers.Ads.camel()
+GET         /ad/nav_search-cow                     controllers.Ads.cow()
+GET         /ad/nav_search-cam                     controllers.Ads.cam()
+GET         /ad/nav_search-other                   controllers.Ads.other()
 
 
 GET         /ad/show                               controllers.Ads.show()

@@ -14,6 +14,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.common.forgotPassword;
 import views.html.common.restorePassword;
+import views.html.common.registerConfirm;
 import views.html.mailBody.*;
 import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 
@@ -41,20 +42,22 @@ public class User extends Controller {
 				user.roles.add(SecurityRole.findByName("moderator"));
 			else {
 				user.roles.add(SecurityRole.findByName("user"));
-				session("connected", user.email);
+				//session("connected", user.email);
 			}
 			user.save();
 			Ebean.saveManyToManyAssociations(user, "roles");
 
-
-
-			return ok("success");
+			return ok(user.email);
 		} else {
 			flash("error", "Эта почта уже используется!, попробуйте другую.");
 			return ok("error");
 		}
 
 	}
+
+    public static Result confirmPage(){
+        return ok(registerConfirm.render());
+    }
 
 	public static Result forgotPassword() {
 		return ok(forgotPassword.render());
@@ -82,6 +85,19 @@ public class User extends Controller {
 	public static Result restorePassword(String code) {
 		return ok(restorePassword.render(code));
 	}
+
+
+    public static Result confirmRegistration(String code){
+
+
+        AuthorisedUser user = AuthorisedUser.findByEmail(play.libs.Crypto
+                .decryptAES(code));
+
+        user.status = "active";
+        user.update();
+        session("connected", user.email);
+        return redirect(routes.Manage.myInfo());
+    }
 
 	public static Result changePassword(String code) {
 		AuthorisedUser user = AuthorisedUser.findByEmail(play.libs.Crypto

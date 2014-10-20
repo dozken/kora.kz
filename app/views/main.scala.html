@@ -186,11 +186,11 @@ $ ( "#registerErrorAlert" ).show ( ) ;
 $("#registrButton" ).prop("disabled",false);
 
 } else {
-jsRoutes.controllers.Application.emailing ("register","" ).ajax ()
+jsRoutes.controllers.Application.emailing ("register",res ).ajax ()
     @restrictOr(la(as("admin"))) {
         window.location.href = " @routes.Administer.moderators() ";
     } {
-        window.location.href = " @routes.Manage.myAds() ";
+        window.location.href = " @routes.User.confirmPage() ";
     }
 
 }

@@ -18,7 +18,10 @@
 		
 		        <tr>
 		          <td style="padding-left: 40px;">
-		            <p>Здравствуйте, @user.userName</p>		
+		            <p>Здравствуйте, @user.userName</p>
+                      <p><a class="btn btn-primary" href="@routes.User.confirmRegistration(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
+                      @routes.User.confirmRegistration(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())
+                      </a></p>
 		            <p>Вы успешно зарегистрировались на сайте kora.kz!!!, теперь вы сможете управлять ваши объявления в личном кабинете</p>
 		            <p>Спасибо за регистрацию на нашем сайте</p>
 		          </td>
