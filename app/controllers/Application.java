@@ -167,7 +167,7 @@ public class Application extends Controller {
 	}
 
     public static Result emailing(String type,String email) {
-        System.out.println("keldi emailingka");
+        System.out.println(email);
         if(type.equals("ad_created")){
 
             Emailing.send("Қора.kz",
@@ -175,7 +175,8 @@ public class Application extends Controller {
                     ad_successfully.render().body());
 
         }else if(type.equals("register")) {
-            AuthorisedUser user = AuthorisedUser.findByEmail(session("connected"));
+            AuthorisedUser user = AuthorisedUser.findByEmail(email);
+
             Emailing.send("Қора.kz",
                     new String[]{user.userName + " <" + user.email + ">"},
                     registred_successfully.render(user).body());
