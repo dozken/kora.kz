@@ -568,6 +568,7 @@ public class Ads extends Controller {
             comment.name = requestData.get("comment_author");
             if (com_id != 0) {
                 comment.coment = Comment.find.byId(com_id);
+
             }
             comment.save();
 

@@ -207,7 +207,13 @@ if ( res != "kapcha_error" ) {
     $ ( "#kapcha_Error" ).removeClass("kipkizil");
 $ ( "#kapcha_Error" ).show();
     $ ( "#kapcha_Error" ).html ( "successfully sended" ).fadeOut( 4000 );
-}
+    if(com_id=="0"){
+
+    jsRoutes.controllers.Application.emailing ( "comment", @ad.id ).ajax ( )
+    }else {
+     jsRoutes.controllers.Application.emailing ( "replayComment", com_id ).ajax ( )
+    }
+   }
 else {
 $ ( "#kapcha_Error" ).addClass("kipkizil");
 $ ( "#kapcha_Error" ).removeClass("alert alert-success");

@@ -1,4 +1,4 @@
-@(user : models.user.AuthorisedUser)
+@(name : String, ad:models.ad.Ad, str:String)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
@@ -18,10 +18,14 @@
 		
 		        <tr>
 		          <td style="padding-left: 40px;">
-		            <p>Здравствуйте, @user.userName</p>		
-		            <p>Для смены пароля, пожалуйста, перейдите по ссылке ниже и следуйте инструкциям:</p>
-		            <p><a class="btn btn-primary" href="@routes.User.restorePassword(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
-		            	@routes.User.restorePassword(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())
+		            <p>Здравствуйте, @name</p>
+                      @if(str=="comment"){
+		            <p>vashe obyavlenii prokomentirovali, vy mojete uvidi po ssilke</p>
+                      }else{
+                          <p>na vash comment otvetili, vy mojete uvidi po ssilke</p>
+                      }
+		            <p><a class="btn btn-primary" href="@routes.Ads.get(ad.id).absoluteURL(request())">
+                            @routes.Ads.get(ad.id).absoluteURL(request())
 						</a>
 					</p>
 		          </td>
