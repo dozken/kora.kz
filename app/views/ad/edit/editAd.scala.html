@@ -74,18 +74,21 @@ if( files.length+$("#images li" ).length<=5 ){
 
     FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
 
-    imageMap[file.name] = img.toDataURL("image/jpeg");
+    var imgName = file.name.replace(/ /g, '');
+    imageMap[imgName] = img.toDataURL("image/jpeg");
+
 
 
     })
 
     FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
 
-        var name = file.name.replace(".", "");
+        var name = file.name.replace(/\./g, '');
+        name=name.replace(/ /g, '');
     if($('[id=item-'+ name+']').length==0) {
-    $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
+    $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
     $ ( "#item-" + name ).html ( img ) ;
-    $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name]+'">' ) ;
+    $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name.replace(/ /g, '')]+'">' ) ;
     $ ( "#item-" + name ).append ( '<input type="button" class="delete" value="X" style="position:absolute;top:0;right:0;" />' ) ;
     }else{
         alert(name + " exists");
