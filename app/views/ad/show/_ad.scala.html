@@ -126,7 +126,7 @@
 @if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
 	<div class="col-lg-12 nopaddingleft formdown topka">
 <b id="comment_head" class="bdau">Добавить комментарий</b>
-        <div id="error_fields" class="alert alert-danger"  role="alert"></div>
+        <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
 </div>
 <form id="comment_form" class="form-horizontal">
   <div class="form-group">
