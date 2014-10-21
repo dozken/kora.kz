@@ -80,9 +80,13 @@ var files = FileAPI.getFiles(evt); // Retrieve file list
 
 FileAPI.filterFiles(files, function (file, info/**Object*/){
 if( /^image/.test(file.type) ){
-return  info.width >= 320 && info.height >= 240;
-}
+
+if(info.width >= 320 && info.height >= 240) return true; else{alert("Размер фото слишком маленький");}
+
+}else{
+alert("Можно загрузить только фото");
 return  false;
+}
 }, function (files/**Array*/, rejected/**Array*/){
 if( files.length+$("#images li" ).length<=5 ){
 
@@ -107,11 +111,11 @@ if( files.length+$("#images li" ).length<=5 ){
     $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name.replace(/ /g, '')]+'">' ) ;
     $ ( "#item-" + name ).append ( '<input type="button" class="delete" value="X" style="position:absolute;top:0;right:0;" />' ) ;
     }else{
-        alert(name + " exists");
+        alert(name + " уже есть");
     }
     } ) ;
     } ) ;
-    }else{alert("max picture 5");}
+    }else{alert("Максимальное количество фото 5");}
 
 });
 });

@@ -20,9 +20,9 @@
 		          <td style="padding-left: 40px;">
 		            <p>Здравствуйте, @name</p>
                       @if(str=="comment"){
-		            <p>vashe obyavlenii prokomentirovali, vy mojete uvidi po ssilke</p>
+		            <p>Ваше объявление прокомментировали, для просмотра пройдите по ссылке </p>
                       }else{
-                          <p>na vash comment otvetili, vy mojete uvidi po ssilke</p>
+                          <p>На Ваш комментарий ответили, для просмотра пройдите по ссылке</p>
                       }
 		            <p><a class="btn btn-primary" href="@routes.Ads.get(ad.id).absoluteURL(request())">
                             @routes.Ads.get(ad.id).absoluteURL(request())
