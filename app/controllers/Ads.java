@@ -55,10 +55,13 @@ public class Ads extends Controller {
 	public static Result create() {
 
         DynamicForm requestData = form().bindFromRequest();
+        System.out.println(requestData);
 
         Ad ad = new Ad();
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
-        ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
+        if(ad.animal.id!=5) {
+            ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
+        }
         ad.birthDate = Integer.parseInt(requestData.get("age"));
 
         ContactInfo contactInfo = new ContactInfo();
@@ -111,7 +114,9 @@ public class Ads extends Controller {
         ad.save();
         
         ad.tags.add(new Tag(ad.animal.name));
-        ad.tags.add(new Tag(ad.breed.name));
+        if(ad.animal.id!=5){
+            ad.tags.add(new Tag(ad.breed.name));
+        }
         ad.tags.add(new Tag(ad.title));
         ad.tags.add(new Tag(ad.birthDate.toString()));
         ad.tags.add(new Tag(ad.gender));
@@ -220,7 +225,9 @@ public class Ads extends Controller {
 
         Ad ad = Ad.find.byId(id);
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
-        ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
+        if(ad.animal.id!=5) {
+            ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
+        }
         ad.birthDate = Integer.parseInt(requestData.get("age"));
 
 
@@ -264,7 +271,9 @@ public class Ads extends Controller {
             ad.tags.get(i).delete();
         }
         ad.tags.add(new Tag(ad.animal.name));
-        ad.tags.add(new Tag(ad.breed.name));
+        if(ad.animal.id!=5) {
+            ad.tags.add(new Tag(ad.breed.name));
+        }
         ad.tags.add(new Tag(ad.title));
         ad.tags.add(new Tag(ad.birthDate.toString()));
         ad.tags.add(new Tag(ad.gender));

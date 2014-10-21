@@ -29,6 +29,22 @@ clear: both;
 }
 </style>
 <script>
+
+    @if(ad.contactInfo.location.lat!=null){
+
+        var lat ="@ad.contactInfo.location.lat";
+        var lng ="@ad.contactInfo.location.lng";
+    }else {
+        var lat = "43.237887" ;
+        var lng = "76.927437" ;
+    }
+
+    @if(ad.animal.id==5){
+        $("#quanHide" ).hide();
+        $("#genderHide" ).hide();
+        $("#ageHide" ).hide();
+    }
+
 $("#tel1").mask("+7(999) 999-9999");
 var imageMap = {};
 $(document ).on("change","[name='payment_type']",function(){
@@ -109,12 +125,28 @@ $(this).parent().remove();
 
     var id = Number($(this ).val());
 
+    if(id == 5){
+    $("#breed_list" ).hide();
+    $("#quanHide" ).hide();
+    $("#genderHide" ).hide();
+    $("#ageHide" ).hide();
+    $('#breed_list').children('select').each(function () {
+
+    $(this ).attr("validation","");
+
+    });
+    }else {
+    $("#breed_list" ).show();
+    $("#quanHide" ).show();
+    $("#genderHide" ).show();
+    $("#ageHide" ).show();
     jsRoutes.controllers.Ads.getBreeds(id).ajax({
     success: function(data) {
 
     $("#breed_list" ).html(data);
 }
 });
+    }
     })
 
 $(document ).on("change","#region",function(){
@@ -164,14 +196,7 @@ window.scrollTo(0, 0);
 }
 });
 
-    @if(ad.contactInfo.location!=null){
 
-        var lat ="@ad.contactInfo.location.lat";
-        var lng ="@ad.contactInfo.location.lng";
-    }else {
-        var lat = "43.237887" ;
-        var lng = "76.927437" ;
-    }
 
 var marker;
 var myPlacemark;
@@ -317,7 +342,7 @@ position:e.latLng
 }
 
 });
-@if(ad.contactInfo.location!=null){
+@if(ad.contactInfo.location.lat!=null){
 marker=map.addMarker({
 lat: @ad.contactInfo.location.lat,
 lng: @ad.contactInfo.location.lng,

@@ -2,7 +2,7 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
-	<li><h4><b>@ad.animal.name ПОРОДЫ @ad.breed.name</b></h4></li>
+	<li><h4><b>@ad.animal.name @if(ad.animal.id!=5){@ad.breed.name}</b></h4></li>
 	<li><h4 class="cena">@Messages(ad.priceType.price.toString) @ad.priceType.currency</h4></li>
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star"></span>
@@ -18,7 +18,8 @@
 				<li>@ad.contactInfo.region.name</li>
 			</ul>
 		</li>
-		<li>
+        @if(ad.animal.id!=5){
+        <li>
 			<ul class="koldenen">
 				<li class="birinwi">Порода</li>
 				<li>@ad.breed.name</li>
@@ -41,7 +42,7 @@
 				<li class="birinwi">Количество</li>
 				<li>@ad.quantity</li>
 			</ul>
-		</li>
+		</li>}
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Продавец</li>

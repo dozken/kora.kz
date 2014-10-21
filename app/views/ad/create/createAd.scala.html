@@ -115,13 +115,28 @@ alert(name + " exists");
     $(document ).on("change","#animal",function(){
 
     var id = Number($(this ).val());
+    if(id == 5){
+        $("#breed_list" ).hide();
+    $("#quanHide" ).hide();
+    $("#genderHide" ).hide();
+    $("#ageHide" ).hide();
+    $('#breed_list').children('select').each(function () {
 
-    jsRoutes.controllers.Ads.getBreeds(id).ajax({
-    success: function(data) {
+    $(this ).attr("validation","");
 
-    $("#breed_list" ).html(data);
-}
-});
+    });
+    }else {
+    $("#breed_list" ).show();
+    $("#quanHide" ).show();
+    $("#genderHide" ).show();
+    $("#ageHide" ).show();
+    jsRoutes.controllers.Ads.getBreeds ( id ).ajax ( {
+    success : function ( data ) {
+
+    $ ( "#breed_list" ).html ( data ) ;
+    }
+    } ) ;
+    }
     })
 
 $(document ).on("change","#region",function(){
