@@ -7,7 +7,7 @@
 	<td>@ad.contactInfo.region.name</td>
 	<td>@ad.contactInfo.company</td>
 	<td>@ad.animal.name</td>
-	<td>@ad.breed.name</td>
+    @if(ad.animal.id!=5){<td>@ad.breed.name</td>}
 	@*<td>@ad.gender</td>*@
 	<td>@ad.quantity</td>
 	<td>@ad.birthDate</td>
