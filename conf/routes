@@ -6,6 +6,8 @@ GET         /websocket                             controllers.Application.socke
 GET         /about                                 controllers.Application.about()
 GET         /feedback                              controllers.Application.feedback()
 POST        /feedback                              controllers.Application.sendFeedback()
+POST        /currency                              controllers.Application.currency(str:String,rate:Double)
+
 
 POST        /user/login                            controllers.Application.signIn()
 GET         /user/logout                           controllers.Application.signOut()

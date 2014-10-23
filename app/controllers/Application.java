@@ -60,6 +60,7 @@ public class Application extends Controller {
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
 				controllers.routes.javascript.Application.signIn(),
+                controllers.routes.javascript.Application.currency(),
 				controllers.routes.javascript.User.register(),
 				controllers.routes.javascript.Filters.getBreeds(),
 				controllers.routes.javascript.Filters.addBreed(),
@@ -215,5 +216,14 @@ public class Application extends Controller {
         }
 
         return ok();
+    }
+
+    public static Result currency(String str,Double rate){
+
+        System.out.println(rate.toString() + " "+ str);
+
+        session(str,rate.toString());
+        return ok();
+
     }
 }

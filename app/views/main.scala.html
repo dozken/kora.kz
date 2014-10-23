@@ -156,19 +156,25 @@
 }
 <script type="text/javascript">
 
-function httpGet(theUrl)
-{
-var xmlHttp = null;
+@if(session.get("USDtoKZT")==null) {
 
-xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", theUrl, false );
-xmlHttp.send( null );
-alert(xmlHttp.responseText);
-return xmlHttp.responseText;
+    $.getJSON ( "http://rate-exchange.appspot.com/currency?from=USD&to=KZT&callback=?", function ( result ) {
+
+    console.log ( result.rate ) ;
+    jsRoutes.controllers.Application.currency ( "USDtoKZT", result.rate ).ajax ( ) ;
+    })
+
 }
 
-    httpGet("http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=01/04/2011&date_req2=27/04/2011&VAL_NM_RQ=R01235");
+    @if(session.get("KZTtoUSD")==null) {
 
+        $.getJSON ( "http://rate-exchange.appspot.com/currency?from=KZT&to=USD&callback=?", function ( result ) {
+
+        console.log ( result.rate ) ;
+        jsRoutes.controllers.Application.currency ( "KZTtoUSD", result.rate ).ajax ( ) ;
+        })
+
+    }
 $(document).ready(function(e) {
 
 
