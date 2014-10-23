@@ -590,13 +590,19 @@ public class Ads extends Controller {
     public static Result searchAd(){
 
         DynamicForm requestData = form().bindFromRequest();
-        
 
+        String currency=requestData.get("currency");
         Long animal_id = Long.parseLong(requestData.get("animal"));
         List<Region> regions=Region.find.all();
         List<Breed> breeds=Breed.find.all();
-        Double costStart=0.0;
-        Double costEnd=99999999.9;
+
+        Double costStartTg=0.0;
+        Double costEndTg=99999999.9;
+
+        Double costStartD=0.0;
+        Double costEndD=99999999.9;
+
+
 
         List<Double> prices = new ArrayList<Double>();
         Integer startYear = 0;
@@ -606,7 +612,6 @@ public class Ads extends Controller {
         String[] genders={"male","female","both"};
         String[] quantity={"single","many"};
 
-        String currency = requestData.get("currency");
 
         if(!requestData.get("region").equals("all")) {
             regions = new ArrayList<Region>();
@@ -649,32 +654,62 @@ public class Ads extends Controller {
             pic =0;
         }
 
-        if(!requestData.get("costStart").equals("")) {
-            costStart = Double.parseDouble(requestData.get("costStart"));
+
+        if(currency.equals("dol")){
+
+            if(!requestData.get("costStart").equals("")) {
+                costStartD = Double.parseDouble(requestData.get("costStart"));
+                costStartTg = Double.parseDouble(session("USDtoKZT")) * costStartD;
+
+            }
+            if(!requestData.get("costEnd").equals("")) {
+                costEndD = Double.parseDouble(requestData.get("costEnd"));
+                costEndTg = Double.parseDouble(session("USDtoKZT")) * costEndD;
+            }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
+        }else{
+
+            if(!requestData.get("costStart").equals("")) {
+                costStartTg = Double.parseDouble(requestData.get("costStart"));
+                costStartD = Double.parseDouble(session("KZTtoUSD")) * costStartTg;
+
+            }
+            if(!requestData.get("costEnd").equals("")) {
+                costEndTg = Double.parseDouble(requestData.get("costEnd"));
+                costEndD = Double.parseDouble(session("KZTtoUSD")) * costEndTg;
+            }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
+
         }
 
-        if(!requestData.get("costEnd").equals("")) {
-            costEnd = Double.parseDouble(requestData.get("costEnd"));
-        }else if(prices.size()!=0){costEnd = 0.0;}
 
-
+        System.out.println("tg => "+costStartTg.toString()+" - " + costEndTg.toString());
+        System.out.println("$ => "+costStartD.toString()+" - " + costEndD.toString());
         List<Ad> l;
         if(!requestData.get("searchText").equals("")) {
              l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
                     .in("breed", breeds).in("gender", genders).in("quantity", quantity).in("tags.name",requestData.get("searchText"))
                     .between("birthDate", startYear, endYear)
                     .or(
-                            Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
-                    ).findList();
+                            Expr.in("priceType.price", prices), Expr.between("priceType.price", 0.0, 999999999.9)
+                    ).or(
+
+                             Expr.and(Expr.between("priceType.price", costStartD, costEndD), Expr.eq("priceType.currency", "$")),
+                             Expr.and(Expr.between("priceType.price", costStartTg, costEndTg), Expr.eq("priceType.currency", "Тенге"))
+                     ).findList();
         }else{
             l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
                     .in("breed", breeds).in("gender", genders).in("quantity", quantity)
                     .between("birthDate", startYear, endYear)
                     .or(
-                            Expr.in("priceType.price", prices), Expr.between("priceType.price", costStart, costEnd)
+                            Expr.in("priceType.price", prices), Expr.between("priceType.price",  0.0, 999999999.9)
+                    ).or(
+
+                            Expr.and(Expr.between("priceType.price", costStartD, costEndD), Expr.eq("priceType.currency", "$")),
+                            Expr.and(Expr.between("priceType.price", costStartTg, costEndTg), Expr.eq("priceType.currency", "Тенге"))
                     ).findList();
 
         }
+
+
 //List<Ad> l = Ad.find.where().in("images",1L).findList();
         return ok(_ad_list.render(l,pic,map));
     }
