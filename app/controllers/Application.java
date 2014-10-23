@@ -3,8 +3,12 @@ package controllers;
 import static play.data.Form.form;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -109,7 +113,7 @@ public class Application extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
 				.get("email"));
-		if (user != null && user.password.equals(requestData.get("password"))) {
+		if (user != null && user.password.equals(requestData.get("password")) && user.status.equals("active")) {
 			session("connected", user.email);
 			flash("thank you");
 			changeLang("ru");
@@ -131,8 +135,9 @@ public class Application extends Controller {
 		return redirect(request().getHeader("referer"));
 	}
 
-	public static Result index() {
-	return ok(views.html.common.index.render());
+	public static Result index() throws IOException {
+
+	    return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {

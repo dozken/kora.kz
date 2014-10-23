@@ -25,6 +25,7 @@
         <![endif]-->
     </head>
     <body>
+
 	    @_navbar()
         @content
 
@@ -49,6 +50,7 @@
 
 @restrict(la(as("moderator"),as("admin"))){
 <script>
+
 	var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
 	var sock = new WS("@routes.Application.socketHandler().webSocketURL(request)")
 	var adModerate = null;
@@ -154,7 +156,22 @@
 }
 <script type="text/javascript">
 
+function httpGet(theUrl)
+{
+var xmlHttp = null;
+
+xmlHttp = new XMLHttpRequest();
+xmlHttp.open( "GET", theUrl, false );
+xmlHttp.send( null );
+alert(xmlHttp.responseText);
+return xmlHttp.responseText;
+}
+
+    httpGet("http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=01/04/2011&date_req2=27/04/2011&VAL_NM_RQ=R01235");
+
 $(document).ready(function(e) {
+
+
 
     $("#registerErrorAlert").hide();
     $("#loginErrorAlert").hide();
