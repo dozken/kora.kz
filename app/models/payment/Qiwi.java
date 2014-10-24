@@ -20,7 +20,7 @@ public class Qiwi {
 	
 	public Double sum;
 
-	public static Integer check() {
+	public static Integer check(Integer txn_id, String account) {
 		// TODO Auto-generated method stub
 		if(true)
 			return 0;
@@ -28,7 +28,7 @@ public class Qiwi {
 			return 1;
 	}
 
-	public static Integer pay() {
+	public static Integer pay(Integer txn_id, String account)  {
 		// TODO Auto-generated method stub
 		if(true)
 			return 0;

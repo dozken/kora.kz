@@ -31,14 +31,14 @@ public class Payments extends Controller {
 				Integer txn_id = Integer.parseInt(requestData.get("txn_id"));
 				String account = requestData.get("account");
 				
-				Integer result = Qiwi.check();
+				Integer result = Qiwi.check(txn_id,account);
 				return ok(check.render(txn_id,result,""));
 			} else if(requestData.get("command").equals("pay")){
 				Integer txn_id = Integer.parseInt(requestData.get("txn_id"));
 				Integer txn_date = Integer.parseInt(requestData.get("txn_date"));
 				String account = requestData.get("account");
 				Double sum = Double.parseDouble(requestData.get("sum"));
-				Integer result = Qiwi.pay();
+				Integer result = Qiwi.pay(txn_id,account);
 				//@(osmp_txn_id :Integer, prv_txn :Integer, sum :Double, result :Integer, comment:String)
 				Integer prv_txn = 0;
 				return ok(pay.render(txn_id,prv_txn,sum,result,""));
