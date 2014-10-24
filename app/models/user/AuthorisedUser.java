@@ -65,7 +65,7 @@ public class AuthorisedUser extends Model implements Subject {
     public List<Ad> favorites;
 
     @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-    public List<Payment> payments;
+    public List<Payment> payments = new java.util.ArrayList<Payment>();
     
     @Override
 	public List<? extends Role> getRoles() {

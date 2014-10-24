@@ -23,6 +23,12 @@ public class Payments extends Controller {
 	 */
 	@BodyParser.Of(play.mvc.BodyParser.Xml.class)
 	public static Result qiwi() {
+		//TODO
+		//92.46.53.228
+		//test 212.154.215.82
+		//CHECK FOR QIWI IP
+		String remote = request().remoteAddress();
+		System.out.println("IP:"+remote);
 		DynamicForm requestData = form().bindFromRequest();
 		if(requestData==null){
 			return badRequest("");
@@ -35,12 +41,13 @@ public class Payments extends Controller {
 				return ok(check.render(txn_id,result,""));
 			} else if(requestData.get("command").equals("pay")){
 				Integer txn_id = Integer.parseInt(requestData.get("txn_id"));
-				Integer txn_date = Integer.parseInt(requestData.get("txn_date"));
+				String txn_date = requestData.get("txn_date");
 				String account = requestData.get("account");
 				Double sum = Double.parseDouble(requestData.get("sum"));
-				Integer result = Qiwi.pay(txn_id,account);
+				Integer prv_txn = Qiwi.pay(txn_id,txn_date,account,sum);
 				//@(osmp_txn_id :Integer, prv_txn :Integer, sum :Double, result :Integer, comment:String)
-				Integer prv_txn = 0;
+				System.out.println("ashato "+prv_txn + "--"+(prv_txn==1 ? 1 : 0));
+				Integer result = prv_txn==-1 ? 1 : 0;
 				return ok(pay.render(txn_id,prv_txn,sum,result,""));
 			}
 			
