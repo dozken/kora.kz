@@ -219,10 +219,12 @@ public class Application extends Controller {
     }
 
     public static Result currency(String str,Double rate){
+        
+        if(rate!=null){
+            session(str,rate.toString());
+        }
 
-        System.out.println(rate.toString() + " "+ str);
 
-        session(str,rate.toString());
         return ok();
 
     }
