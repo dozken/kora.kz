@@ -654,28 +654,30 @@ public class Ads extends Controller {
             pic =0;
         }
 
+        Double usdK = session("USDtoKZT")!=null ? Double.parseDouble(session("USDtoKZT")) : 180.0;
+        Double kztU = session("KZTtoUSD")!=null ? Double.parseDouble(session("KZTtoUSD")) : 0.0055244;
 
         if(currency.equals("dol")){
 
             if(!requestData.get("costStart").equals("")) {
                 costStartD = Double.parseDouble(requestData.get("costStart"));
-                costStartTg = Double.parseDouble(session("USDtoKZT")) * costStartD;
+                costStartTg = usdK * costStartD;
 
             }
             if(!requestData.get("costEnd").equals("")) {
                 costEndD = Double.parseDouble(requestData.get("costEnd"));
-                costEndTg = Double.parseDouble(session("USDtoKZT")) * costEndD;
+                costEndTg = usdK * costEndD;
             }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
         }else{
 
             if(!requestData.get("costStart").equals("")) {
                 costStartTg = Double.parseDouble(requestData.get("costStart"));
-                costStartD = Double.parseDouble(session("KZTtoUSD")) * costStartTg;
+                costStartD = kztU * costStartTg;
 
             }
             if(!requestData.get("costEnd").equals("")) {
                 costEndTg = Double.parseDouble(requestData.get("costEnd"));
-                costEndD = Double.parseDouble(session("KZTtoUSD")) * costEndTg;
+                costEndD = kztU * costEndTg;
             }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
 
         }
