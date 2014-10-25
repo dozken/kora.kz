@@ -673,7 +673,6 @@ public class Ads extends Controller {
             if(!requestData.get("costStart").equals("")) {
                 costStartTg = Double.parseDouble(requestData.get("costStart"));
                 costStartD = kztU * costStartTg;
-
             }
             if(!requestData.get("costEnd").equals("")) {
                 costEndTg = Double.parseDouble(requestData.get("costEnd"));
