@@ -5,10 +5,10 @@
 @city_id = {@if(user!=null && user.profile.city!=null){@user.profile.city.id}else{-1}}
 
 <form id="ad_form" class="form-horizontal">
-<fieldset>
+<fieldset class="PFBSPLI-13">
 
 <!-- Form Name -->
-<legend>Подать объявление</legend>
+<legend class="PFBSPRB-17">Подать объявление</legend>
 
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
@@ -146,7 +146,7 @@
   <label class="col-md-2 control-label" for="filebutton">Фотографии</label>
   <div class="col-md-4">
     <div class="fileUpload btn myb">
-    <span class="icon-photo"> Добавить Фотографии</span>
+    <span class="icon-photo"> <span class="PFBSPLI-13">Добавить Фотографии</span></>
     <input type="file" id="choose" name="image_file" class="upload btn" data-toggle="tooltip" data-placement="right" title="Tooltip on right" multiple/>
     <input type="hidden" id="image_order" name="image_order">
 </div>

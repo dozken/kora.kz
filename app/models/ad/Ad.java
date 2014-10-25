@@ -1,6 +1,7 @@
 package models.ad;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,10 +59,10 @@ public class Ad extends Model{
 	public ContactInfo contactInfo;
 
     @OneToMany(cascade= CascadeType.ALL)
-	public List<Tag> tags;
+	public List<Tag> tags = new ArrayList<Tag>();
     
     @OneToMany(cascade= CascadeType.ALL)
-   	public List<AdSetting> settings;
+   	public List<AdSetting> settings = new ArrayList<AdSetting>();
 	
 	public String status = "pending";
 	
@@ -80,10 +81,10 @@ public class Ad extends Model{
 	public Date expirationDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 7));
 	
 	@OneToMany
-	public List<PrivateMessage> messages;
+	public List<PrivateMessage> messages = new ArrayList<PrivateMessage>();
 	
 	@OneToMany
-	public List<Comment> comments;
+	public List<Comment> comments  = new ArrayList<Comment>();
 
     public List<AdImage> sortByPosition(Long id){
 
