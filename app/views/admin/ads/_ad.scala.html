@@ -1,0 +1,29 @@
+
+
+@for((ad,index)<-models.ad.Ad.find.where.or(com.avaje.ebean.Expr.eq("status","pending"), com.avaje.ebean.Expr.eq("status","moderating")).findList.zipWithIndex){
+
+<tr id="ad@ad.id">
+	<td>@{index+1}</td>
+	<td>@ad.contactInfo.region.name</td>
+	<td>@ad.contactInfo.company</td>
+	<td>@ad.animal.name</td>
+    @if(ad.animal.id!=5){<td>@ad.breed.name</td>}
+	@*<td>@ad.gender</td>*@
+	<td>@ad.quantity</td>
+	<td>@ad.birthDate</td>
+	<td>@Messages(ad.priceType.price.toString) @ad.priceType.currency</td>
+	<td>@Messages(ad.status)</td>
+	@*
+	<td>@ad.views</td>
+	<td>@ad.shares</td>
+	<td>@ad.publishedDate</td>
+	<td>@ad.updatedDate</td>
+	<td>@ad.expirationDate</td>
+	*@
+	<td class="ortaga">
+	@*@if(ad.status.equals("pending")){*@
+	<a href="@routes.Administer.moderate(ad.id)" class="btn btn-success btn-xs moderate" ad="@ad.id"><span class="glyphicon glyphicon-pencil"></span></a>
+	@*}else{В процессе}*@
+	</td>
+</tr>
+}
