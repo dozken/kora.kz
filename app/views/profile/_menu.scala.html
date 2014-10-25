@@ -12,26 +12,26 @@
 <div class="popover-example"> <!-- NEW -->
   <div class="popover right" style="z-index:-1060;">
     <div class="arrow"></div>
-    <h3 class="popover-title"> @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName</h3>
+    <h3 class="popover-title PFBSPLI-13"> @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName</h3>
   </div>
 </div>
 </li>
 </ul>
 <ul class="profmenu nopaddingleft">
 	
-	<li><a href="@routes.Manage.myAds"><span class="icon-myAds"></span> Мои объявления</a></li>
-	<li><a href="@routes.Manage.myMessages"><span class="icon-myMessages"></span> Личные сообщения <span class="backjasyl">@models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)</span></a></li>
-	<li><a href="@routes.Manage.myPayments"><span class="icon-money"></span> Личный счет</a></li>
-	<li><a href="@routes.Manage.myInfo"><span class="icon-myProfile"></span> Мой профиль</a></li>
-	<li><a href="@routes.Manage.mySettings"><span class="icon-settings"></span> Настройки</a></li>
+	<li><a href="@routes.Manage.myAds" class="PFBSPLI-13"><span class="icon-myAds"></span> Мои объявления</a></li>
+	<li><a href="@routes.Manage.myMessages" class="PFBSPLI-13"><span class="icon-myMessages"></span> Личные сообщения <span class="backjasyl">@models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)</span></a></li>
+	<li><a href="@routes.Manage.myPayments" class="PFBSPLI-13"><span class="icon-money"></span> Личный счет</a></li>
+	<li><a href="@routes.Manage.myInfo" class="PFBSPLI-13"><span class="icon-myProfile"></span> Мой профиль</a></li>
+	<li><a href="@routes.Manage.mySettings" class="PFBSPLI-13"><span class="icon-settings"></span> Настройки</a></li>
 	<li class="nav-divider"></li>
 	@restrict(la(as("moderator"),as("admin"))){
-	<li><a href="@routes.Administer.ads"><span class="glyphicon glyphicon-list-alt"></span> Модерация объявлений</a></li>
+	<li><a href="@routes.Administer.ads" class="PFBSPLI-13"><span class="glyphicon glyphicon-list-alt"></span> Модерация объявлений</a></li>
 	}
 	@restrict(la(as("admin"))){
-	<li><a href="@routes.Administer.moderators"><span class="glyphicon glyphicon-align-left"></span> Модераторы</a></li>
-	<li><a href="@routes.Administer.filters"><span class="glyphicon glyphicon-plus"></span> Добавить фильтры</a></li>
-	<li><a href="@routes.Administer.advetiments"><span class="glyphicon glyphicon-plus"></span> Добавить рекламы</a></li>
+	<li><a href="@routes.Administer.moderators" class="PFBSPLI-13"><span class="glyphicon glyphicon-align-left"></span> Модераторы</a></li>
+	<li><a href="@routes.Administer.filters" class="PFBSPLI-13"><span class="glyphicon glyphicon-plus"></span> Добавить фильтры</a></li>
+	<li><a href="@routes.Administer.advetiments" class="PFBSPLI-13"><span class="glyphicon glyphicon-plus"></span> Добавить рекламы</a></li>
 	}
-	<li><a href="@routes.Application.signOut"><span class="glyphicon glyphicon-off"></span> Выйти</a></li>
+	<li><a href="@routes.Application.signOut" class="PFBSPLI-13"><span class="glyphicon glyphicon-off"></span> Выйти</a></li>
 </ul>
