@@ -33,7 +33,7 @@ public class Qiwi extends Model {
 	public static final Model.Finder<Long, Qiwi> find = new Model.Finder<Long, Qiwi>(
 			Long.class, Qiwi.class);
 
-	public static Integer check(Integer txn_id, String account) {
+	public static Integer check(String remoteIP, Integer txn_id, String account) {
 		// TODO Auto-generated method stub
 
 		if (Qiwi.find.where().eq("txn_id", txn_id).findRowCount() == 0
@@ -43,12 +43,12 @@ public class Qiwi extends Model {
 			return 1;
 	}
 
-	public static Integer pay(Integer txn_id, String txn_date, String account,
+	public static Integer pay(String remoteIP,Integer txn_id, String txn_date, String account,
 			Double sum) {
 		// TODO Auto-generated method stub
 		if (Qiwi.find.where().eq("txn_id", txn_id).findRowCount() == 0
 				&& Profile.find.where().eq("phone", account).findRowCount() == 1) {
-
+			
 			Qiwi qiwi = new Qiwi();
 			qiwi.txn_id = txn_id;
 			qiwi.txn_date = txn_date;

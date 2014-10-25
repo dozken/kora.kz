@@ -34,39 +34,32 @@ public class Payments extends Controller {
 					Integer txn_id = Integer
 							.parseInt(requestData.get("txn_id"));
 					String account = requestData.get("account");
-
-					Integer result = Qiwi.check(txn_id, account);
-					return ok(check.render(txn_id, result, ""));
+					if (remoteIP.equals("212.154.215.82")) {
+						return ok(check.render(txn_id, 0, ""));
+					} else {
+						Integer result = Qiwi.check(remoteIP, txn_id, account);
+						return ok(check.render(txn_id, result, ""));
+					}
 				} else if (requestData.get("command").equals("pay")) {
+
 					Integer txn_id = Integer
 							.parseInt(requestData.get("txn_id"));
 					String txn_date = requestData.get("txn_date");
 					String account = requestData.get("account");
 					Double sum = Double.parseDouble(requestData.get("sum"));
-					Integer prv_txn = Qiwi.pay(txn_id, txn_date, account, sum);
-					// @(osmp_txn_id :Integer, prv_txn :Integer, sum :Double,
-					// result :Integer, comment:String)
-					System.out.println("ashato " + prv_txn + "--"
-							+ (prv_txn == 1 ? 1 : 0));
-					Integer result = prv_txn == -1 ? 1 : 0;
-					return ok(pay.render(txn_id, prv_txn, sum, result, ""));
+					if (remoteIP.equals("212.154.215.82")) {
+						return ok(pay.render(txn_id,
+								(int) (Math.random() * 101), sum, 0, ""));
+					} else {
+						Integer prv_txn = Qiwi.pay(remoteIP, txn_id, txn_date,
+								account, sum);
+						Integer result = prv_txn == -1 ? 1 : 0;
+					}
 				}
-
 			}
-
 		} else {
-
-						/*
-			 * Document dom = request().body().asXml(); if (dom == null) {
-			 * return badRequest("Expecting Xml data"); } else { String name =
-			 * XPath.selectText("//name", dom); if (name == null) { return
-			 * badRequest
-			 * ("<message \"status\"=\"KO\">Missing parameter [name]</message>"
-			 * ); } else { return ok("<message \"status\"=\"OK\">Hello " + name
-			 * + "</message>"); } }
-			 */
 			return ok(views.html.notFoundPage.render(""));
-			 
+
 		}
 		return ok(views.html.notFoundPage.render(""));
 	}
