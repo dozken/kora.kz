@@ -14,27 +14,98 @@
 	font-style: normal;
 }
 
-/**
-	fonts
-**/
+/**PFBeauSansPro**/
 @font-face {
-    font-family: Sosa-regular;
-    src: url('fonts/Sosa-regular/sosa.ttf');
+    font-family: PFBSPR;
+    src: url('fonts/PFBeauSansPro/PFBEAUSANSPRO-REGULAR_0.otf');
 }
-
 @font-face {
-    font-family: DINNextW1G;
+	font-family: PFBSPLI;
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-LightItalic_0.otf');
+}
+@font-face {
+	font-family: PFBSPRB;
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Bbook_0.otf');
+}
+@font-face {
+	font-family: PFBSPRBI;
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-BoldItalic_0.otf');
+}
+@font-face {
+	font-family: PFBSPRI;
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Italic_0.otf');
+}
+/**DINNextW1GRegular**/
+@font-face {
+    font-family: DINNW1GR;
     src: url('fonts/DINNextW1G/DINNextW1G-Regular.otf');
 }
 
 @font-face {
-    font-family: PFBeauSansPro;
-    src: url('fonts/PFBeauSansPro/PFBeauSansPro-Bbook_0.otf');
+    font-family: DINNW1GI;
+    src: url('fonts/DINNextW1G/DINNextW1G-Italic.otf');
 }
 
-.supoerFont {
-	font-family: Sosa-regular;
+@font-face {
+    font-family: DINNW1GL;
+    src: url('fonts/DINNextW1G/DINNextW1G-Light.otf');
 }
+/**PFBSP Regular**/
+.PFBSPR12{
+	font-family: PFBSPR;
+	font-size:13pt;
+}
+.PFBSPR13{
+	font-family: PFBSPR;
+	font-size:12pt;
+}
+.PFBSPR17{
+	font-family: PFBSPR;
+	font-size:12pt;
+}
+/**PFBSP Light Italic **/
+.PFBSPLI11{
+	font-family: PFBSPLI;
+	font-size:11pt;	
+}
+.PFBSPLI13{
+	font-family: PFBSPLI;
+	font-size:13pt;	
+}
+.PFBSPLI15{
+	font-family: PFBSPLI;
+	font-size:15pt;	
+}
+/**PFBSP Italic**/
+.PFBSPI13{
+	font-family: PFBSPI;
+	font-size:13pt;	
+}
+/**PFBSP Book**/
+.PFBSPRB13{
+	font-family: PFBSPRB;
+	font-size:13pt;	
+}
+.PFBSPRB17{
+	font-family: PFBSPRB;
+	font-size:17pt;	
+}
+/**DINNW1G Regular**/
+.DINNW1GR18{
+	font-family: DINNW1GR;
+	font-size:18pt;	
+}
+.DINNW1GR14{
+	font-family: DINNW1GR;
+	font-size:14pt;	
+}
+/**DINNW1G Light**/
+.DINNW1GL14{
+	font-family: DINNW1GL;
+	font-size:14pt;	
+}
+
+
 /*
 div {
     font-family: Sosa-regular;

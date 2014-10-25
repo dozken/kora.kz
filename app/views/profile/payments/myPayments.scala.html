@@ -13,11 +13,13 @@
 				<b>У вас на счете:</b> <span class="kipkizil">@models.user.AuthorisedUser.getMyMoney(session.get("connected"))</span>
 			</p>
 		</div>
+		@*
 		<div class="col-lg-3 onjak nopaddingright">
-		<input type="number" id="money" >
+		<input type="number" id="money" >		
 			<a id="add_money"  class="btn btn-default btn-success "><span
 				class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
 		</div>
+		*@
 		}
 		
 		<div id="payment_body">@_table(payments)</div>
