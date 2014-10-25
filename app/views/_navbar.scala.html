@@ -18,48 +18,48 @@
       	}else{
       	
         <li class="dropdown">
-          <a href="asik" class="dropdown-toggle" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
+          <a href="asik" class="dropdown-toggle PFBSPR-13" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-			<li data-value="ЛОШАДЬ"><a href="@routes.Ads.horse">ЛОШАДЬ </a></li>
-			<li data-value="ВЕРБЛЮД"><a href="@routes.Ads.camel">ВЕРБЛЮД </a></li>
-			<li data-value="КОРОВА"><a href="@routes.Ads.cow">КОРОВА </a></li>
-			<li data-value="БАРАН"><a href="@routes.Ads.cam">БАРАН </a></li>
-			<li data-value="ДРУГИЕ"><a href="@routes.Ads.other">ДРУГИЕ </a></li>
+			<li data-value="ЛОШАДЬ"><a href="@routes.Ads.horse" class="PFBSPR-13">ЛОШАДЬ </a></li>
+			<li data-value="ВЕРБЛЮД"><a href="@routes.Ads.camel" class="PFBSPR-13" >ВЕРБЛЮД </a></li>
+			<li data-value="КОРОВА"><a href="@routes.Ads.cow" class="PFBSPR-13">КОРОВА </a></li>
+			<li data-value="БАРАН"><a href="@routes.Ads.cam" class="PFBSPR-13">БАРАН </a></li>
+			<li data-value="ДРУГИЕ"><a href="@routes.Ads.other" class="PFBSPR-13">ДРУГИЕ </a></li>
           </ul>
         </li>
         }
       </ul>
         <ul class="nav navbar-nav">
             <li>
-                <a href="@routes.Ads.favorite" >
-                    <span class="glyphicon glyphicon-star"></span>Избранное
+                <a href="@routes.Ads.favorite" class="PFBSPR-13">
+                    <span class="glyphicon glyphicon-star"></span> Избранное
                 </a>
             </li>
         </ul>
       <ul class="nav navbar-nav navbar-right">
       	@subjectPresentOr() {
       	<li>
-          <a href="@routes.Manage.myInfo" >
+          <a href="@routes.Manage.myInfo" class="PFBSPI-13">
             <span class="icon-cabinet"></span> Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
           </a>
         </li>
         <li>
-          <a href="@routes.Application.signOut">
+          <a href="@routes.Application.signOut" class="PFBSPR-13">
             <span class="icon-logoutNav"></span> Выйти
           </a>
         </li>
       	}{
         <li>
-          <a href="#" data-toggle="modal" data-target="#myModal2">Регистрация</a>
+          <a href="#" data-toggle="modal" data-target="#myModal2" class="PFBSPR-13">Регистрация</a>
         </li>
         <li>
-          <a href="#" data-toggle="modal" data-target="#myModal">
+          <a href="#" data-toggle="modal" data-target="#myModal" class="PFBSPR-13">
             <span class="icon-cabinet"></span> Личный кабинет
           </a>
         </li>
         }
         <li>
-          <a href="@routes.Ads.show">
+          <a href="@routes.Ads.show" class="PFBSPR-13">
             <span class="icon-addAd"></span> Подать объявление
           </a>
         </li>
