@@ -51,58 +51,59 @@
     src: url('fonts/DINNextW1G/DINNextW1G-Light.otf');
 }
 /**PFBSP Regular**/
-.PFBSPR12{
+.PFBSPR-12{
 	font-family: PFBSPR;
-	font-size:13pt;
+	font-size:12px;
 }
-.PFBSPR13{
+.PFBSPR-13{
 	font-family: PFBSPR;
-	font-size:12pt;
+	font-size:13px;
 }
-.PFBSPR17{
+
+.PFBSPR-17{
 	font-family: PFBSPR;
-	font-size:12pt;
+	font-size:17px;
 }
 /**PFBSP Light Italic **/
-.PFBSPLI11{
+.PFBSPLI-11{
 	font-family: PFBSPLI;
-	font-size:11pt;	
+	font-size:11px;
 }
-.PFBSPLI13{
+.PFBSPLI-13{
 	font-family: PFBSPLI;
-	font-size:13pt;	
+	font-size:13px;
 }
-.PFBSPLI15{
+.PFBSPLI-15{
 	font-family: PFBSPLI;
-	font-size:15pt;	
+	font-size:15px;
 }
 /**PFBSP Italic**/
-.PFBSPI13{
+.PFBSPI-13{
 	font-family: PFBSPI;
-	font-size:13pt;	
+	font-size:13px;
 }
 /**PFBSP Book**/
-.PFBSPRB13{
+.PFBSPRB-13{
 	font-family: PFBSPRB;
-	font-size:13pt;	
+	font-size:13px;
 }
-.PFBSPRB17{
+.PFBSPRB-17{
 	font-family: PFBSPRB;
-	font-size:17pt;	
+	font-size:17px;
 }
 /**DINNW1G Regular**/
-.DINNW1GR18{
+.DINNW1GR-18{
 	font-family: DINNW1GR;
-	font-size:18pt;	
+	font-size:18px;
 }
-.DINNW1GR14{
+.DINNW1GR-14{
 	font-family: DINNW1GR;
-	font-size:14pt;	
+	font-size:14px;
 }
 /**DINNW1G Light**/
-.DINNW1GL14{
+.DINNW1GL-14{
 	font-family: DINNW1GL;
-	font-size:14pt;	
+	font-size:14px;
 }
 
 

@@ -15,49 +15,49 @@
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Регион</li>
-				<li>@ad.contactInfo.region.name</li>
+				<li class="PFBSPLI-13">@ad.contactInfo.region.name</li>
 			</ul>
 		</li>
         @if(ad.animal.id!=5){
         <li>
 			<ul class="koldenen">
 				<li class="birinwi">Порода</li>
-				<li>@ad.breed.name</li>
+				<li class="PFBSPLI-13">@ad.breed.name</li>
 			</ul>
 		</li>
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Возраст</li>
-				<li>@ad.birthDate</li>
+				<li class="PFBSPLI-13">@ad.birthDate</li>
 			</ul>
 		</li>
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Пол</li>
-				<li>@ad.gender</li>
+				<li class="PFBSPLI-13">@ad.gender</li>
 			</ul>
 		</li>
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Количество</li>
-				<li>@ad.quantity</li>
+				<li class="PFBSPLI-13">@ad.quantity</li>
 			</ul>
 		</li>}
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Продавец</li>
-				<li>@ad.contactInfo.company</li>
+				<li class="PFBSPLI-13">@ad.contactInfo.company</li>
 			</ul>
 		</li>
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Контакты</li>
-				<li><ul id="ss" class="nopaddingleft"><li>@ad.contactInfo.phone</li></ul></li>
+				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@ad.contactInfo.phone</li></ul></li>
 			</ul>
 		</li>
 	</ul>
     @subjectPresent() {
-        <a href="#" class="btn btn-default btn-success" data-toggle="modal" data-target="#private_message_modal"><span class="icon-message"></span>
+        <a href="#" class="btn btn-default btn-success PFBSPI-13" data-toggle="modal" data-target="#private_message_modal"><span class="icon-message"></span>
             Отправить сообщение продавцу</a>
     }
 </div>
@@ -94,19 +94,19 @@
 
 <div class="col-lg-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p>@ad.description</p>
+	<p class="PFBSPLI-13">@ad.description</p>
 </div>
 <div class="col-lg-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
-		<div class="col-lg-6 nopaddingleft"><li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
-		<li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li></div>
+		<div class="col-lg-6 nopaddingleft"><li class="PFBSPLI-13"><span class="icon-prosmotr"></span> @ad.views просмотров</li>
+		<li class="PFBSPLI-13"><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li></div>
 		<div class="col-lg-6 texal nopaddingright">
 		  <li>
 		  	<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
 		    @*<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
 		    *@		     
 		  </li>
-		<li><a class="owib"><span class="glyphicon glyphicon-exclamation-sign"></span> Нашли ошибку в объявлении?</a></li></div>
+		<li class="PFBSPLI-13"><a class="owib"><span class="glyphicon glyphicon-exclamation-sign"></span> Нашли ошибку в объявлении?</a></li></div>
 	</ul>
 </div>
 @restrictOr(la(as("moderator"),as("admin"))){
@@ -126,35 +126,35 @@
         </div>
 @if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
 	<div class="col-lg-12 nopaddingleft formdown topka">
-<b id="comment_head" class="bdau">Добавить комментарий</b>
+<b id="comment_head" class="bdau PFBSPI-13">Добавить комментарий</b>
         <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
 </div>
 <form id="comment_form" class="form-horizontal">
   <div class="form-group">
-    <label for="inputEmail3"  class="col-sm-3 control-label leftalign" >Ваше имя или ник</label>
+    <label for="inputEmail3"  class="col-sm-3 control-label leftalign PFBSPI-13" >Ваше имя или ник</label>
     <div class="col-sm-9">
       <input type="text" name="comment_author" class="form-control" id="inputEmail3" validation="not_null" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).userName" readonly="readonly" }>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label leftalign">Электронная почта</label>
+    <label for="inputEmail3" class="col-sm-3 control-label leftalign PFBSPI-13">Электронная почта</label>
     <div class="col-sm-9">
-      <input type="email" name="comment_email" class="form-control" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
+      <input type="email" name="comment_email" class="form-control PFBSPI-13" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
       <span class="help-block"><i>На этот адрес придет уведомление об ответе</i></span>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Сообщение</label>
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Сообщение</label>
     <div class="col-sm-9">
       <textarea class="form-control" name="comment_message" rows="6"></textarea>
-      <span class="help-block"><i>Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
+      <span class="help-block"><i class="PFBSPLI-11">Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3"  class="col-sm-3 control-label leftalign">Введите код</label>
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Введите код</label>
     <div class="col-sm-9">
       <img src='@routes.Application.captcha' class="imgmargin"><input type="text" name="kaptcha" class="form-control" id="inputEmail3">
-      <span class="help-block"><i>Хотим убедиться, что вы его не забудете</i></span>
+      <span class="help-block PFBSPLI-11"><i>Хотим убедиться, что вы его не забудете</i></span>
     </div>
   </div>
     <div class="form-group">
@@ -164,13 +164,13 @@
         </div>
     </div>
   <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
+    <div class="col-sm-offset-3 col-sm-9 PFBSPI-13">
       <button type="submit" id="comment_ad" forWho="0" class="btn btn-success">Отправить</button>
      
     </div>
   </div>
     <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
+    <div class="col-sm-offset-3 col-sm-9 PFBSPLI-11">
       <i>Оставляя коментарий вы соглашаетесь с нашими <a href="#">правилами общения</a></i>
      
     </div>

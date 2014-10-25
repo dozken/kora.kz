@@ -9,7 +9,7 @@
 		
 		@profile._title("ЛИЧНЫЙ СЧЕТ"){
 		<div class="col-lg-3">
-			<p class="lin">
+			<p class="lin PFBSPR-13">
 				<b>У вас на счете:</b> <span class="kipkizil">@models.user.AuthorisedUser.getMyMoney(session.get("connected"))</span>
 			</p>
 		</div>
@@ -24,7 +24,7 @@
 		
 		<div id="payment_body">@_table(payments)</div>
 		<div class="col-lg-3 nopaddingleft">
-<select id="payment_select" class="form-control">
+<select id="payment_select" class="form-control PFBSPLI-13">
   <option value="all">Все операции</option>
   <option value="add">Пополнение</option>
   <option value="spend">Потрачено</option>
@@ -38,7 +38,7 @@
 </div>
 </div>
 
-<div class="col-lg-2 nopaddingleft">
+<div class="col-lg-2 nopaddingleft PFBSPLI-13" >
 <button id="payment_filter" class="btn btn-default fltright">Показать</button>
 </div>
 @*

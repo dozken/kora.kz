@@ -219,7 +219,7 @@ public class Application extends Controller {
     }
 
     public static Result currency(String str,Double rate){
-        
+
         if(rate!=null){
             session(str,rate.toString());
         }
