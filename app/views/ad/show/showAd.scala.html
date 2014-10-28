@@ -96,6 +96,8 @@ $(document).on("click",".moderate.approve", function(){
 				jsRoutes.controllers.Administer.moderate(adId).ajax({
 					data: {status:"active"},
 					success: function(data) {
+						alert("Подтверждено");
+						window.location.href =  "http://@request.host/admin";
 						console.log(data);
 						
 			        },
@@ -135,6 +137,8 @@ $(document).on("click",".moderate.deny",function(){
 		jsRoutes.controllers.Administer.moderate(adId).ajax({
 			data: {status:"rejected"},
 			success: function(data) {
+				alert("Отклонено");
+				window.location.href =  "http://@request.host/admin";
 				console.log(data);
 				
 	        },

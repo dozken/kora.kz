@@ -56,12 +56,12 @@ public class Ads extends Controller {
 
         DynamicForm requestData = form().bindFromRequest();
         System.out.println(requestData);
-
+        
         Ad ad = new Ad();
         ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
         ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
         ad.birthDate = Integer.parseInt(requestData.get("age"));
-
+        System.out.println(1);
         ContactInfo contactInfo = new ContactInfo();
         contactInfo.city = City.find.byId(Long.parseLong(requestData.get("city")));
         contactInfo.region = Region.find.byId(Long.parseLong(requestData.get("region")));
@@ -82,13 +82,13 @@ public class Ads extends Controller {
         }
 
         contactInfo.location = location;
-
+        System.out.println(2);
         ad.contactInfo = contactInfo;
         ad.description = requestData.get("description");
         ad.quantity = requestData.get("quantity");
         ad.title = requestData.get("title");
         ad.gender = requestData.get("animal_gender");
-
+        System.out.println(3);
         Price price=new Price();
         if(requestData.get("payment_type").equals("normal")){
 
@@ -97,6 +97,8 @@ public class Ads extends Controller {
         }else if(requestData.get("payment_type").equals("change")){price.price = -2.0;}else{price.price = -1.0;}
         price.save();
         ad.priceType = price;
+        System.out.println(4);
+        
         AdSetting ad_set = new AdSetting();
         ad_set.name = "comment";
         ad_set.status=requestData.get("coment_display");
@@ -110,7 +112,11 @@ public class Ads extends Controller {
         ad.settings.add(ad_set);
         ad.settings.add(ad_set2);
         ad.save();
+        System.out.println(5);
         
+        if(ad.settings==null){
+            ad.tags = new ArrayList<Tag>();
+        }
         ad.tags.add(new Tag(ad.animal.name));
         ad.tags.add(new Tag(ad.breed.name));
         ad.tags.add(new Tag(ad.title));
@@ -120,8 +126,12 @@ public class Ads extends Controller {
         ad.tags.add(new Tag(ad.contactInfo.region.name));
         ad.tags.add(new Tag(ad.contactInfo.city.name));
         ad.update();
+        
+        System.out.println(6);
         Ebean.saveManyToManyAssociations(ad, "tags");
+        System.out.println(66);
         String[] order = requestData.get("image_names").split("&");
+        System.out.println(666);
         for(int i=0;i<order.length;i++){
 
             if(!order[i].equals("") && order[i]!=null){
@@ -134,7 +144,7 @@ public class Ads extends Controller {
                 img.save();
             }
         }
-
+        System.out.println(7);
         
 
 		return ok();

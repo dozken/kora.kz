@@ -38,6 +38,7 @@ $(document).on("click",".moderate",function(){
 	jsRoutes.controllers.Administer.moderate(adId).ajax({		
 		data: {status:"moderating"},
 		success: function(data) {
+			window.location.href =  "http://@request.host/ad/show/"+adId;
 			console.log(data);
 			
         },

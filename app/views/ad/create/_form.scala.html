@@ -173,7 +173,7 @@
     <select id="region" name="region" class="form-control" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
             @for(region <- Region.find.all()) {
-            <option value="@region.id" @if(region_id.toString().toLong==region.id){selected}>@region.name</option>
+            <option value="@region.id" @*if(region_id.toString().toLong==region.id){selected} *@>@region.name</option>
         }
     </select>
   </div>
@@ -188,7 +188,7 @@
               <option selected disabled hidden> Выберите город</option>
               @for(city <- user.profile.region.city) {
 
-                  <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(city_id.toString().toLong == city.id) {selected}>@city.name </option>}
+                  <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @*if(city_id.toString().toLong == city.id) {selected}*@>@city.name </option>}
           </select>
       }
   </div>
@@ -245,7 +245,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="ad_form_submit" name="singlebutton" class="btn btn-success">Подать объявление</button>
+    <button id="ad_form_submit" class="btn btn-success">Подать объявление</button>
   </div>
 
 </div>
