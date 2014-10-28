@@ -46,7 +46,7 @@ public class Administer extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 		ad.status = requestData.get("status");
 		ad.update();
-		if(ad.status.equals("moderating")){
+		if(requestData.get("status").equals("moderating")){
 		ObjectNode event = Json.newObject();
 		event.put("moderating", "active");
 		event.put("id", ad.id);
