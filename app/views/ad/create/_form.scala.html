@@ -13,10 +13,10 @@
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
 <div class="form-group">
-  <label class="col-md-2 control-label" for="selectbasic">Животное</label>
+  <label class="col-md-2 control-label" for="selectbasic">Раздел</label>
   <div class="col-md-3">
     <select id="animal" name="animal" class="form-control" validation="not_null">
-        <option selected disabled hidden> Выберите животное</option>
+        <option selected disabled hidden> Выберите раздел</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
       }
