@@ -25,6 +25,7 @@ import play.mvc.Result;
 import play.mvc.WebSocket;
 import views.html.common.about;
 import views.html.common.feedback;
+import views.html.common.rules;
 import views.html.mailBody.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -143,6 +144,10 @@ public class Application extends Controller {
 
 	public static Result about() {
 		return ok(about.render());
+	}
+	
+	public static Result rules() {
+		return ok(rules.render());
 	}
 
 	public static Result feedback() {
