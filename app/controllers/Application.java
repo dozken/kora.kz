@@ -61,7 +61,7 @@ public class Application extends Controller {
 		return ok(Routes.javascriptRouter("jsRoutes",
 				controllers.routes.javascript.Application.index(),
 				controllers.routes.javascript.Application.signIn(),
-                controllers.routes.javascript.Application.currency(),
+				controllers.routes.javascript.Application.currency(),
 				controllers.routes.javascript.User.register(),
 				controllers.routes.javascript.Filters.getBreeds(),
 				controllers.routes.javascript.Filters.addBreed(),
@@ -79,33 +79,32 @@ public class Application extends Controller {
 				controllers.routes.javascript.Settings.changeAdminSetting(),
 				controllers.routes.javascript.Advertisements.expand(),
 				controllers.routes.javascript.Advertisements.add(),
-				
+
 				controllers.routes.javascript.Advertisements.remove(),
 				controllers.routes.javascript.Advertisements.replace(),
 				controllers.routes.javascript.Administer.moderate(),
 				controllers.routes.javascript.Ads.getBreeds(),
 				controllers.routes.javascript.Ads.getCities(),
-                controllers.routes.javascript.Ads.addFavorite(),
-                controllers.routes.javascript.Ads.sendPrivateMessage(),
-                controllers.routes.javascript.Ads.replayPrivateMessage(),
+				controllers.routes.javascript.Ads.addFavorite(),
+				controllers.routes.javascript.Ads.sendPrivateMessage(),
+				controllers.routes.javascript.Ads.replayPrivateMessage(),
 				controllers.routes.javascript.Ads.preLong(),
 				controllers.routes.javascript.Ads.highlight(),
 				controllers.routes.javascript.Ads.autoPreLong(),
-                controllers.routes.javascript.Ads.searchAd(),
+				controllers.routes.javascript.Ads.searchAd(),
 				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.get(),
 				controllers.routes.javascript.Ads.comment(),
-                controllers.routes.javascript.Ads.deleteMessages(),
-                controllers.routes.javascript.Ads.readAsMessages(),
-                controllers.routes.javascript.Ads.filterAds(),
-                controllers.routes.javascript.Manage.read(),
-                controllers.routes.javascript.Manage.paymentReport(),
-                controllers.routes.javascript.Manage.addMoney(),
-                controllers.routes.javascript.Application.emailing(),
-                controllers.routes.javascript.Manage.getMessageType()
-                ));
+				controllers.routes.javascript.Ads.deleteMessages(),
+				controllers.routes.javascript.Ads.readAsMessages(),
+				controllers.routes.javascript.Ads.filterAds(),
+				controllers.routes.javascript.Manage.read(),
+				controllers.routes.javascript.Manage.paymentReport(),
+				controllers.routes.javascript.Manage.addMoney(),
+				controllers.routes.javascript.Application.emailing(),
+				controllers.routes.javascript.Manage.getMessageType()));
 	}
-	
+
 	// public static Result changeLanguage(String language) {
 	// Controller.changeLang(language);
 	// return redirect(request().getHeader("referer"));
@@ -115,7 +114,8 @@ public class Application extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
 				.get("email"));
-		if (user != null && user.password.equals(requestData.get("password")) && user.status.equals("active")) {
+		if (user != null && user.password.equals(requestData.get("password"))
+				&& user.status.equals("active")) {
 			session("connected", user.email);
 			flash("thank you");
 			changeLang("ru");
@@ -139,13 +139,13 @@ public class Application extends Controller {
 
 	public static Result index() throws IOException {
 
-	    return ok(views.html.common.index.render());
+		return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {
 		return ok(about.render());
 	}
-	
+
 	public static Result rules() {
 		return ok(rules.render());
 	}
@@ -178,59 +178,60 @@ public class Application extends Controller {
 
 	}
 
-    public static Result emailing(String type,String email) {
+	public static Result emailing(String type, String email) {
 
-        if(type.equals("ad_created")){
+		if (type.equals("ad_created")) {
 
-            Emailing.send("Қора.kz",
-                    new String[]{"" + " <" + email+ ">"},
-                    ad_successfully.render().body());
+			Emailing.send("Объявление принято", new String[] { "" + " <"
+					+ email + ">" }, ad_successfully.render().body());
 
-        }else if(type.equals("register")) {
-            AuthorisedUser user = AuthorisedUser.findByEmail(email);
+		} else if (type.equals("register")) {
+			AuthorisedUser user = AuthorisedUser.findByEmail(email);
 
-            Emailing.send("Қора.kz",
-                    new String[]{user.userName + " <" + user.email + ">"},
-                    registred_successfully.render(user).body());
-        }else if(type.equals("replay_message")) {
-            AuthorisedUser user = AuthorisedUser.find.byId(Long.parseLong(email));
-            Emailing.send("Қора.kz",
-                    new String[]{user.userName + " <" + user.email + ">"},
-                    private_message.render("","replay").body());
-        }else if(type.equals("private")) {
-            Ad ad = Ad.find.byId(Long.parseLong(email));
+			Emailing.send("Қора.kz", new String[] { user.userName + " <"
+					+ user.email + ">" }, registred_successfully.render(user)
+					.body());
+		} else if (type.equals("replay_message")) {
+			AuthorisedUser user = AuthorisedUser.find.byId(Long
+					.parseLong(email));
+			Emailing.send("Қора.kz", new String[] { user.userName + " <"
+					+ user.email + ">" }, private_message.render("", "replay")
+					.body());
+		} else if (type.equals("private")) {
+			Ad ad = Ad.find.byId(Long.parseLong(email));
 
-            AuthorisedUser user = AuthorisedUser.findByEmail(ad.contactInfo.email);
-            Emailing.send("Қора.kz",
-                    new String[]{user.userName + " <" + user.email + ">"},
-                    private_message.render("","registred").body());
-        }else if(type.equals("comment")) {
-            Ad ad = Ad.find.byId(Long.parseLong(email));
+			AuthorisedUser user = AuthorisedUser
+					.findByEmail(ad.contactInfo.email);
+			Emailing.send("Қора.kz", new String[] { user.userName + " <"
+					+ user.email + ">" },
+					private_message.render("", "registred").body());
+		} else if (type.equals("comment")) {
+			Ad ad = Ad.find.byId(Long.parseLong(email));
 
+			Emailing.send("Қора.kz", new String[] { ad.contactInfo.company
+					+ " <" + ad.contactInfo.email + ">" }, comment_users_ad
+					.render(ad.contactInfo.company, ad, "comment").body());
+		} else if (type.equals("replayComment")) {
+			Comment comment = Comment.find.byId(Long.parseLong(email));
+			System.out.println(comment.email);
 
-            Emailing.send("Қора.kz",
-                    new String[]{ad.contactInfo.company + " <" + ad.contactInfo.email + ">"},
-                    comment_users_ad.render(ad.contactInfo.company,ad,"comment").body());
-        }else if(type.equals("replayComment")) {
-            Comment comment = Comment.find.byId(Long.parseLong(email));
-            System.out.println(comment.email);
+			Emailing.send(
+					"Қора.kz",
+					new String[] { comment.name + " <" + comment.email + ">" },
+					comment_users_ad.render(comment.name, comment.ad,
+							"replayComment").body());
+		}
 
-            Emailing.send("Қора.kz",
-                    new String[]{comment.name+ " <" + comment.email + ">"},
-                    comment_users_ad.render(comment.name,comment.ad,"replayComment").body());
-        }
+		return ok();
+	}
 
-        return ok();
-    }
+	public static Result currency(String str, Double rate) {
 
-    public static Result currency(String str,Double rate){
+		if (rate != null) {
+			session(str, rate.toString());
+		}
 
-        if(rate!=null){
-            session(str,rate.toString());
-        }
+		return ok();
 
-
-        return ok();
-
-    }
+	}
 }

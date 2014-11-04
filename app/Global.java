@@ -139,6 +139,7 @@ public class Global extends GlobalSettings {
 			user.userName = "ТОО ҚОРА";
 			user.email = "admin@kora.kz";
 			user.password = "admin1234";
+			user.status = "active";
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("admin"));
 			user.roles.add(SecurityRole.findByName("user"));
