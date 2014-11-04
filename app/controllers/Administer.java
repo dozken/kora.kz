@@ -1,6 +1,7 @@
 package controllers;
 
 import static play.data.Form.form;
+import models.Emailing;
 import models.ad.Ad;
 import play.data.DynamicForm;
 import play.libs.Json;
@@ -11,6 +12,8 @@ import views.html.admin.advertisements.adminAdvertisements;
 import views.html.admin.filters.adminFilters;
 import views.html.admin.moderators.adminModerators;
 import views.html.admin.users.adminUsers;
+import views.html.mailBody.recoverPassword;
+import views.html.mailBody.adModerate;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 
@@ -46,16 +49,24 @@ public class Administer extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 		ad.status = requestData.get("status");
 		ad.update();
-		if(requestData.get("status").equals("moderating")){
-		ObjectNode event = Json.newObject();
-		event.put("moderating", "active");
-		event.put("id", ad.id);
-		event.put("title", ad.title);
-		event.put("company", ad.contactInfo.company);
-		event.put(
-				"moderatingBy",
-				models.user.AuthorisedUser.findByEmail(session("connected")).userName);
-		WS.send(event);
+
+		/**
+		 * moderating active rejected
+		 */
+		if(ad.status.equals("active")||ad.status.equals("rejected"))
+		Emailing.send("Қора.kz: Ваше объявление",
+				new String[] { ad.contactInfo.company + " <"
+						+ ad.contactInfo.email + ">" },
+				adModerate.render(ad).body());
+		if (requestData.get("status").equals("moderating")) {
+			ObjectNode event = Json.newObject();
+			event.put("moderating", "active");
+			event.put("id", ad.id);
+			event.put("title", ad.title);
+			event.put("company", ad.contactInfo.company);
+			event.put("moderatingBy", models.user.AuthorisedUser
+					.findByEmail(session("connected")).userName);
+			WS.send(event);
 		}
 		// return ok();
 		return redirect(routes.Ads.get(id));
