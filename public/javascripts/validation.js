@@ -99,6 +99,108 @@ function validation(){
 	return r;
 }
 
+
+function validation(inputclass){
+	var r=true;
+	
+	
+	$("input[validation]."+inputclass).each(function(){
+
+	$(this).removeAttr("style");
+    $(this).removeClass("validation_error_fields");
+    var type = $(this).attr("validation");
+    if(type=="name"){
+    	var a=$(this).val();
+    	if(!a.match(/^[a-zA-Z]+$/)){
+    		r=false;
+    		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
+    	}
+    }
+     if(type=="number"){
+     	var a=$(this).val();
+    	if(!a.match(/^\d+$/)){
+    		r=false;
+    		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
+    	}
+    }
+        if(type=="double"){
+            var a=$(this).val();
+            if(!a.match(/^[0-9]+(\.[0-9]+)?$/)){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+
+    if(type=="not_null"){
+     	var a=$(this).val();
+    	if(a==null || a==""){
+    		r=false;
+    		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
+    	}
+    }
+    
+    if(type=="mail"){
+    	var a=$(this).val();
+    	 var re = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    	if(!a.match(re)){
+    		r=false;
+    		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
+
+    	}
+    }
+});
+
+    $("select[validation]."+inputclass).each(function(){
+
+        $(this).removeAttr("style");
+        $(this).removeClass("validation_error_fields");
+        var type = $(this).attr("validation");
+        if(type=="name"){
+            var a=$(this).val();
+            if(!a.match(/^[a-zA-Z]+$/)){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+        if(type=="number"){
+            var a=$(this).val();
+            if(!a.match(/^\d+$/)){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+
+        if(type=="not_null"){
+            var a=$(this).val();
+            if(a==null || a==""){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+
+        if(type=="mail"){
+            var a=$(this).val();
+            var re = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            if(!a.match(re)){
+                r=false;
+                $(this).attr("style","border-color:red");
+                $(this).addClass("validation_error_fields");
+            }
+        }
+    });
+
+
+	return r;
+}
+
 function register_validation(){
     var r=true;
 

@@ -30,9 +30,11 @@ clear: both;
 
 <script>
 $("#next").click(function(){
+	if(validation("next")) {
 	
 	$("#ad_info").slideUp();
 	$("#contact_info").slideDown();
+	}
 });
 
 $("#back").click(function(){
