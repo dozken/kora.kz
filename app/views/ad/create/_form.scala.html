@@ -7,6 +7,7 @@
 <form id="ad_form" class="form-horizontal">
 <fieldset class="PFBSPLI-13">
 
+<div id="ad_info">
 <!-- Form Name -->
 <legend class="PFBSPRB-17">Подать объявление</legend>
 
@@ -65,7 +66,7 @@
   <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
   <div class="col-md-2">
     <select id="selectbasic1" name="age" class="form-control">
-    @for(i<-2000 to 2050) {
+    @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
     }
     </select>
@@ -165,6 +166,22 @@
 
 </div>
 
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+	<a id="next" class="btn btn-success" style="padding-left: 15%;padding-right: 15%;">Дальше</a>
+  </div>
+
+</div>
+
+</div>
+<div id="navigation">
+
+
+
+</div>
+<div id="contact_info" style="display:none">
+<legend class="PFBSPRB-17">Контактная информация</legend>
 
 <!-- Select Basic -->
 <div class="form-group">
@@ -178,6 +195,7 @@
     </select>
   </div>
 </div>
+
 
 <!-- Select Basic -->
 <div class="form-group">
@@ -218,6 +236,7 @@
   </div>
 </div>
 
+
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
@@ -245,10 +264,13 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="ad_form_submit" class="btn btn-success">Подать объявление</button>
+  	<button id="ad_form_submit" class="btn btn-success">Подать объявление</button>
+  	<a id="back" class="btn btn-default">Назад</a>
+    
   </div>
 
 </div>
 
+</div>
 </fieldset>
 </form>

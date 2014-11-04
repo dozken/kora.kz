@@ -29,6 +29,17 @@ clear: both;
 </style>
 
 <script>
+$("#next").click(function(){
+	
+	$("#ad_info").slideUp();
+	$("#contact_info").slideDown();
+});
+
+$("#back").click(function(){
+	$("#contact_info").slideUp();
+	$("#ad_info").slideDown();
+});
+
 $("#error_fields" ).hide();
 $("#error_fields" ).css( "visibility","none" );
 $("#success_message" ).hide();
