@@ -103,6 +103,16 @@ function validation(){
 function validation(inputclass){
 	var r=true;
 	
+	$("textarea[validation]."+inputclass).each(function(){
+		if(type=="not_null"){
+	     	var a=$(this).val();
+	    	if(a==null || a==""){
+	    		r=false;
+	    		$(this).attr("style","border-color:red");
+	            $(this).addClass("validation_error_fields");
+	    	}
+	    }
+	});
 	
 	$("input[validation]."+inputclass).each(function(){
 
