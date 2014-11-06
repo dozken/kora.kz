@@ -103,7 +103,12 @@ function validation(){
 function validation(inputclass){
 	var r=true;
 	
+		var r=true;
+	
 	$("textarea[validation]."+inputclass).each(function(){
+		$(this).removeAttr("style");
+    $(this).removeClass("validation_error_fields");
+    var type = $(this).attr("validation");
 		if(type=="not_null"){
 	     	var a=$(this).val();
 	    	if(a==null || a==""){
