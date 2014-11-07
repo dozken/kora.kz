@@ -120,37 +120,39 @@ alert(name + " уже есть");
 });
 });
 
-   $ (document ).on("click",".delete",function(){
+   $(document).on("click", ".delete", function() {
 
-   $(this).parent().remove();
-   })
+    $(this).parent().remove();
+})
 
-    $(document ).on("change","#animal",function(){
+$(document).on("change", "#animal", function() {
 
-    var id = Number($(this ).val());
-    if(id == 5){
-        $("#breed_list" ).hide();
-    $("#quanHide" ).hide();
-    $("#genderHide" ).hide();
-    $("#ageHide" ).hide();
-    $('#breed_list').children('select').each(function () {
+    var id = Number($(this).val());
+    if (id == 5) {
+        //$("#breed_list" ).hide();
+        $("#quanHide").hide();
+        $("#genderHide").hide();
+        $("#ageHide").hide();
+        /*
+        $('#breed_list').children('select').each(function () {
 
-    $(this ).attr("validation","");
+        $(this ).attr("validation","");
 
-    });
-    }else {
-    $("#breed_list" ).show();
-    $("#quanHide" ).show();
-    $("#genderHide" ).show();
-    $("#ageHide" ).show();
-    jsRoutes.controllers.Ads.getBreeds ( id ).ajax ( {
-    success : function ( data ) {
-
-    $ ( "#breed_list" ).html ( data ) ;
+        });
+        */
+    } else {
+        //$("#breed_list" ).show();
+        $("#quanHide").show();
+        $("#genderHide").show();
+        $("#ageHide").show();        
     }
-    } ) ;
-    }
-    })
+    jsRoutes.controllers.Ads.getBreeds(id).ajax({
+            success: function(data) {
+
+                $("#breed_list").html(data);
+            }
+        });
+})
 
 $(document ).on("change","#region",function(){
 
