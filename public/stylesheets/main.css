@@ -17,38 +17,38 @@
 /**PFBeauSansPro**/
 @font-face {
     font-family: PFBSPR;
-    src: url('fonts/PFBeauSansPro/PFBEAUSANSPRO-REGULAR_0.otf');
+    src: url('fonts/PFBeauSansPro/PFBEAUSANSPRO-REGULAR_0.otf')  format("opentype");
 }
 @font-face {
 	font-family: PFBSPLI;
-	src: url('fonts/PFBeauSansPro/PFBeauSansPro-LightItalic_0.otf');
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-LightItalic_0.otf') format("opentype");
 }
 @font-face {
 	font-family: PFBSPRB;
-	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Bbook_0.otf');
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Bbook_0.otf') format("opentype");
 }
 @font-face {
 	font-family: PFBSPRBI;
-	src: url('fonts/PFBeauSansPro/PFBeauSansPro-BoldItalic_0.otf');
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-BoldItalic_0.otf') format("opentype");
 }
 @font-face {
 	font-family: PFBSPRI;
-	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Italic_0.otf');
+	src: url('fonts/PFBeauSansPro/PFBeauSansPro-Italic_0.otf') format("opentype");
 }
 /**DINNextW1GRegular**/
 @font-face {
     font-family: DINNW1GR;
-    src: url('fonts/DINNextW1G/DINNextW1G-Regular.otf');
+    src: url('fonts/DINNextW1G/DINNextW1G-Regular.otf') format("opentype");
 }
 
 @font-face {
     font-family: DINNW1GI;
-    src: url('fonts/DINNextW1G/DINNextW1G-Italic.otf');
+    src: url('fonts/DINNextW1G/DINNextW1G-Italic.otf') format("opentype");
 }
 
 @font-face {
     font-family: DINNW1GL;
-    src: url('fonts/DINNextW1G/DINNextW1G-Light.otf');
+    src: url('fonts/DINNextW1G/DINNextW1G-Light.otf') format("opentype");
 }
 /**PFBSP Regular**/
 .PFBSPR-12{
