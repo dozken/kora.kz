@@ -1,4 +1,5 @@
 <ul class="pro4">
+  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").findRowCount>0){
   <li>
     <div id="carousel-example-generic" class="carousel slide adslide" data-ride="carousel">
       <!-- Indicators -->
@@ -27,6 +28,7 @@
       </a>
     </div>
   </li>
+  }
   @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").findRowCount>0){
   <li>
     <div id="carousel-example-generic2" class="carousel slide adslide" data-ride="carousel">

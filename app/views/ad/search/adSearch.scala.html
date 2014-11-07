@@ -100,7 +100,7 @@ if ($('.gender_check:checked').length != 1) {
 
 $(document ).on("click","#search_filter",function(e){
 e.preventDefault();
-$("#search_results" ).html('<img src="@routes.Assets.at("images/home/loading.gif")">');
+$("#search_results" ).html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
 $(this ).attr("disabled",true);
 jsRoutes.controllers.Ads.searchAd().ajax({
 data : $ ( "#search_form" ).serialize ( ),
