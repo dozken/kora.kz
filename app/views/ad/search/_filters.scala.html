@@ -19,10 +19,10 @@
 </div>
  <div class="form-group frmg">
   <div class="frmbck">
-  <label class="control-label" for="selectbasic1">Порода:</label>
+  <label class="control-label" for="selectbasic1">Категория:</label>
   <div id="breed_div">
     <select id="breed" name="breed" class="form-control">
-        <option value="all">Во всех регионах</option>
+        <option value="all">Все категории</option>
         @for(breed <-animal.getBreeds) {
             <option value="@breed.id">@breed.name</option>
         }
