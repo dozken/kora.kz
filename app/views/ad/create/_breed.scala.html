@@ -1,0 +1,10 @@
+@(animal:models.ad.Animal)
+
+<select id="breed" name="breed" class="form-control next" validation="not_null">
+    <option selected disabled hidden> Выберите тип</option>
+    @for(breed<-animal.getBreeds){
+
+        <option value="@breed.id">@breed.name</option>
+
+    }
+</select>

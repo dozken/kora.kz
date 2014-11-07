@@ -1,0 +1,95 @@
+@(user:models.user.AuthorisedUser)
+<div class="col-lg-12 boto PFBSPLI-13">
+
+<ul class="lab4 nopaddingleft">
+  <li>
+    <ul class="lab3">
+      <li class="lab">Компания</li>
+      <li class="lab2">@user.userName</li>
+    </ul>
+  </li>
+  @*
+  <li>
+    <ul class="lab3">
+      <li class="lab">Фотографии</li>
+      <li class="lab2"><img src="@routes.Assets.at("images/home/cow.png")"></li>
+    </ul>
+  </li>
+  *@
+  <li>
+    <ul class="lab3">
+      <li class="lab">Адрес</li>
+      <li class="lab2">@user.profile.address</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Регион</li>
+      <li class="lab2">@if(user.profile.region!=null){@user.profile.region.name}</li>
+    </ul>
+  </li>
+    <li>
+        <ul class="lab3">
+            <li class="lab">Город</li>
+            <li class="lab2">@if(user.profile.city!=null){@user.profile.city.name}</li>
+        </ul>
+    </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Пол</li>
+      <li class="lab2">@user.profile.gender</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Описание</li>
+      <li class="lab2">@user.profile.description</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Телефон</li>
+      <li class="lab2">@user.profile.phone</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Вконтакте</li>
+      <li class="lab2">@models.user.UserSocials.getSocialByName(user.id,"vk")"</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Facebook</li>
+      <li class="lab2">@models.user.UserSocials.getSocialByName(user.id,"facebook")"</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Skype</li>
+      <li class="lab2">@models.user.UserSocials.getSocialByName(user.id,"skype")"</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Сайт</li>
+      <li class="lab2">@models.user.UserSocials.getSocialByName(user.id,"website")"</li>
+    </ul>
+  </li>
+  <li>
+    <ul class="lab3">
+      <li class="lab">Карта</li>
+      <li class="lab2"><div id="map"></div></li>
+    </ul>
+  </li>
+  <li>
+  <ul><li><a href="@routes.Info.edit" class="btn btn-default btn-success">Редактировать</a></li>
+  </ul></li>
+</ul>
+
+
+
+
+    
+
+</div>

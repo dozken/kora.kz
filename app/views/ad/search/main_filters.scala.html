@@ -1,0 +1,6 @@
+@(anim:models.ad.Animal)
+<div class="col-lg-12 marginbottom bigmenu DINNW1GR-14">
+    @for(animal<-models.ad.Animal.find.all()) {
+        <a href="@routes.Ads.searchByType(animal.id)" class="btn btn-lg @if(animal==anim){ btn-success}else{btn-default}">@animal.name</a>
+    }
+</div>

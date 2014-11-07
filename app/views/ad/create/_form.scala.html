@@ -1,0 +1,276 @@
+@(user:models.user.AuthorisedUser)
+@import models.ad.Animal
+@import models.contact.Region
+@region_id = {@if(user!=null && user.profile.region!=null){@user.profile.region.id}else{-1}}
+@city_id = {@if(user!=null && user.profile.city!=null){@user.profile.city.id}else{-1}}
+
+<form id="ad_form" class="form-horizontal">
+<fieldset class="PFBSPLI-13">
+
+<div id="ad_info">
+<!-- Form Name -->
+<legend class="PFBSPRB-17">Подать объявление</legend>
+
+<!-- Select Basic -->
+    <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic">Раздел</label>
+  <div class="col-md-3">
+    <select id="animal" name="animal" class="form-control next" validation="not_null">
+        <option selected disabled hidden> Выберите раздел</option>
+      @for(animal <- Animal.find.all()) {
+          <option value="@animal.id">@animal.name</option>
+      }
+    </select>
+  </div>
+    <div id="breed_list" class="col-md-3">
+
+  </div>
+</div>
+
+
+    <div id="genderHide" class="form-group">
+        <label class="col-md-2 control-label" for="radios">Пол</label>
+        <div class="col-md-4">
+            <label class="radio-inline" for="radios-0">
+                <input type="radio" name="animal_gender" id="radios-0" value="male" checked="checked">
+                Самец
+            </label>
+            <label class="radio-inline" for="radios-1">
+                <input type="radio" name="animal_gender" id="radios-1" value="female">
+                Самка
+            </label>
+            <label class="radio-inline" for="radios-2">
+                <input type="radio" name="animal_gender" id="radios-2" value="both">
+                Оба
+            </label>
+        </div>
+    </div>
+
+<div id="quanHide" class="form-group">
+  <label class="col-md-2 control-label" for="radios">Количество</label>
+  <div class="col-md-4">
+    <label class="radio-inline" for="radios-0">
+      <input type="radio" name="quantity" id="radios-0" value="single" checked="checked">
+      Один
+    </label>
+    <label class="radio-inline" for="radios-1">
+      <input type="radio" name="quantity" id="radios-1" value="many">
+      Косяк
+    </label>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div id="ageHide" class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
+  <div class="col-md-2">
+    <select id="selectbasic1" name="age" class="form-control">
+    @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
+        <option value="@i">@i</option>
+    }
+    </select>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="radios1">Цена</label>
+  <div class="col-md-4">
+
+  <div class="radio">
+    <label for="radios1-0">
+      <input type="radio" name="payment_type" id="payment_type" value="normal" checked="checked">
+
+
+
+            <div class="input-group below24 bias-input-group inpgr">
+
+              <input type="text" id="money_input" value="" class="form-control next" name="money" validation="double">
+
+              <div class="input-group-btn bs-dropdown-to-select-group">
+              <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
+                <span data-bind="bs-drp-sel-label">Тенге</span>
+                <input  type="hidden" name="currency" data-bind="bs-drp-sel-value" value="Тенге" >
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
+              <!-- Loop -->
+
+                              <li data-value="тг"><a href="#">тг </a></li>
+                              <li data-value="$"><a href="#">$ </a></li>
+                                                                    <!-- END Loop -->
+                    </ul>
+              </div>
+
+
+            </div>
+    </label>
+
+	</div>
+
+  <div class="radio">
+    <label for="radios1-1">
+      <input type="radio" name="payment_type" id="radios1-1" value="change">
+      На обмен
+    </label>
+	</div>
+  <div class="radio">
+    <label for="radios1-2">
+      <input type="radio" name="payment_type" id="radios1-2" value="negotiable_price">
+      Договорная цена
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput">Заголовок</label>
+  <div class="col-md-6">
+  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md next" validation="not_null">
+  <span class="help-block">Максимальная длина 70 символов.</span>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textarea">Описание</label>
+  <div class="col-md-6">
+    <textarea class="form-control next" validation="not_null" rows="6" id="textarea" name="description"></textarea>
+  </div>
+</div>
+
+<!-- File Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="filebutton">Фотографии</label>
+  <div class="col-md-4">
+    <div class="fileUpload btn myb">
+    <span class="icon-photo"> <span class="PFBSPLI-13">Добавить Фотографии</span></>
+    <input type="file" id="choose" name="image_file" class="upload btn" data-toggle="tooltip" data-placement="right" title="Tooltip on right" multiple/>
+    <input type="hidden" id="image_order" name="image_order">
+</div>
+  </div>
+
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label"></label>
+  <div class="col-md-10">
+<ul id="images" class="connectedList ui-sortable">
+
+</ul>
+      <div class="clear"></div>
+  </div>
+
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+	<a id="next" class="btn btn-success" style="padding-left: 15%;padding-right: 15%;">Дальше</a>
+  </div>
+
+</div>
+
+</div>
+<div id="navigation">
+
+
+
+</div>
+<div id="contact_info" style="display:none">
+<legend class="PFBSPRB-17">Контактная информация</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
+  <div class="col-md-3">
+    <select id="region" name="region" class="form-control" validation="not_null">
+        <option selected disabled hidden> Выберите регион</option>
+            @for(region <- Region.find.all()) {
+            <option value="@region.id" @*if(region_id.toString().toLong==region.id){selected} *@>@region.name</option>
+        }
+    </select>
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic3">Город</label>
+  <div id="city_list" class="col-md-3">
+      @if(user!=null && user.profile.city!=null) {
+          <select id="city" name="city" class="form-control">
+              <option selected disabled hidden> Выберите город</option>
+              @for(city <- user.profile.region.city) {
+
+                  <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @*if(city_id.toString().toLong == city.id) {selected}*@>@city.name </option>}
+          </select>
+      }
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput1">Компания</label>
+  <div class="col-md-6">
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md" validation="not_null">
+
+  </div>
+</div>
+
+<!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="ema">Email</label>
+        <div class="col-md-3">
+            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
+        </div>
+    </div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="textinput2">Телефон</label>
+  <div class="col-md-3">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
+
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
+  <div class="col-md-5">
+    <select id="selectbasic4" name="coment_display" class="form-control">
+      <option value="registred">Только зарегистрированным пользователям</option>
+      <option value="all">Всем</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+	<div class="col-md-5" style="margin-left: 45px;">
+        <span class="input-group-btn">
+        	<a map="yandex" class="mapSelect btn btn-default btn-sm "><b>Яндекс</b></a>
+        	<a map="google" class="mapSelect btn btn-default btn-sm active"><b>Google</b></a>
+        </span>
+        <div id="mouse_event_map"></div>
+        <input type="hidden" value="" id="location" name="location">
+	</div>
+</div>
+
+<!-- Button -->
+    <div id="success_message" class="alert alert-success" style="visibility: hidden" role="alert"></div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+  	<button id="ad_form_submit" class="btn btn-success">Подать объявление</button>
+  	<a id="back" class="btn btn-default">Назад</a>
+    
+  </div>
+
+</div>
+
+</div>
+</fieldset>
+</form>

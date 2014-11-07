@@ -1,0 +1,40 @@
+@import com.github.nscala_time.time.Imports._
+@main("Главная") {
+
+
+<div class="container">
+	@_searchbar()
+	<div class="row">
+		<div class="col-lg-12">
+			<ul id="menuler">
+				<li class="jylky"><a href="@routes.Ads.searchByType(1)"></a></li>
+				<li class="tuye"><a href="@routes.Ads.searchByType(2)"></a></li>
+				<li class="siyr"><a href="@routes.Ads.searchByType(3)"></a></li>
+				<li class="koi"><a href="@routes.Ads.searchByType(4)"></a></li>
+				<li class="baska"><a href="@routes.Ads.searchByType(5)"></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<p class="jum">
+				<a class="btn btn-lg btn-danger PFBSPLI-13" href="#" role="button">Подать
+					объявление</a>
+			</p>
+			<p class="jum PFBSPR-13">
+				Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",DateTime.now.hour(0).minute(0).second(0) ).findRowCount() объявлений подано
+					сегодня
+			</p>
+			<p class="jum2 PFBSPR-13">
+				Покупка и продажа сельскохозяйственных животных. Покупай, продай или
+				обменяй сельхоз животных на <a href="@routes.Application.index"
+					class="reda">Қора.kz</a>
+			</p>
+			<p class="jum2 PFBSPR-13">
+				На сайте <a href="@routes.Application.index" class="reda">www.kora.kz</a>
+				легко и быстро можно купить или продать сельхоз животных.
+			</p>
+		</div>
+	</div>
+</div>
+}
