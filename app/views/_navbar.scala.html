@@ -29,6 +29,7 @@
         </li>
         }
       </ul>
+      @if(request().cookie("userAdsKora")!=null){
         <ul class="nav navbar-nav">
             <li>
                 <a href="@routes.Ads.favorite" class="PFBSPR-13">
@@ -36,6 +37,7 @@
                 </a>
             </li>
         </ul>
+        }
       <ul class="nav navbar-nav navbar-right">
       	@subjectPresentOr() {
       	<li>
