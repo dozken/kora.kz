@@ -13,7 +13,32 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+.korakz{
+	padding:0px;
+}
+.borderdotted{
+	border-top: dotted;
+	border-width: 1px;
+	width: 1000px;
+}
+.vsenavbar{
+	margin-left:50px;
+}
+.vsenavbarright{
+	margin-right:52px;
+}
+.logotip{
+	padding-left:91px;
+}
+.searching{
+	width:91%;
+}
+.obevleniebutton{
+	padding-top: 10px;
+  	padding-left: 30px;
+	padding-right: 30px;
+	margin-left: 10px;
+}
 /**PFBeauSansPro**/
 @font-face {
     font-family: PFBSPR;
@@ -53,7 +78,7 @@
 /**PFBSP Regular**/
 .PFBSPR-12{
 	font-family: PFBSPR;
-	font-size:12px;
+	font-size:11px;
 }
 .PFBSPR-13{
 	font-family: PFBSPR;
@@ -315,11 +340,11 @@ body {
 #menuler li {
 	list-style-type: none;
 	display: inline-block;
-	margin: 18px;
+	margin: 5px;
 }
 
 #menuler {
-	padding-left: 3px;
+	padding-left: 70px;
 	margin-top: 40px;
 }
 
@@ -327,13 +352,12 @@ body {
 	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 40px;
-	font-size: 16px;
+	
 }
 
 .jum2 {
 	text-align: center;
 	margin-top: 10px;
-	font-size: 16px;
 }
 
 .reda {
