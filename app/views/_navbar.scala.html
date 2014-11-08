@@ -18,8 +18,8 @@
       	}else{
       	
         <li class="dropdown">
-          <a href="asik" class="dropdown-toggle PFBSPR-13" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <a href="asik" class="dropdown-toggle PFBSPR-13 vsenavbar" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
+          <ul class="dropdown-menu vsenavbar" role="menu">
 			<li data-value="ЛОШАДЬ"><a href="@routes.Ads.horse" class="PFBSPR-13">ЛОШАДЬ </a></li>
 			<li data-value="ВЕРБЛЮД"><a href="@routes.Ads.camel" class="PFBSPR-13" >ВЕРБЛЮД </a></li>
 			<li data-value="КОРОВА"><a href="@routes.Ads.cow" class="PFBSPR-13">КОРОВА </a></li>
@@ -38,7 +38,7 @@
             </li>
         </ul>
         }
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right ">
       	@subjectPresentOr() {
       	<li>
           <a href="@routes.Manage.myInfo" class="PFBSPI-13">
@@ -61,7 +61,7 @@
         </li>
         }
         <li>
-          <a href="@routes.Ads.show" class="PFBSPR-13">
+          <a href="@routes.Ads.show" class="PFBSPR-13 vsenavbarright">
             <span class="icon-addAd"></span> Подать объявление
           </a>
         </li>
