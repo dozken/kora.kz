@@ -13,6 +13,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
+.сontain{
+	padding-left: 87px;
+	padding-right: 26px;
+}
 .filterpadding{
 	margin-left:32px;	
 }
@@ -31,8 +35,6 @@
 .borderdotted{
 	border-top: dotted;
 	border-width: 1px;
-	width: 1000px;
-	padding-right:70px;
 }
 .vsenavbar{
 	margin-left:50px;
@@ -41,7 +43,7 @@
 	margin-right:5px;
 }
 .logotip{
-	padding-left:91px;
+	
 }
 .searching{
 	width:98%;
@@ -54,9 +56,9 @@
 }
 .obevleniebutton{
 	padding-top: 10px;
-  	padding-left: 30px;
-	padding-right: 30px;
-	margin-left: 10px;
+  	padding-left: 33px;
+	padding-right: 33px;
+	margin-right: 21px;
 }
 /**PFBeauSansPro**/
 @font-face {
@@ -360,11 +362,11 @@ body {
 #menuler li {
 	list-style-type: none;
 	display: inline-block;
-	margin: 12px;
+	margin-right: 20px;
 }
 
 #menuler {
-	padding-left: 61px;
+	padding-left: 0px;
 	margin-top: 40px;
 }
 
@@ -494,7 +496,7 @@ body {
 
 .marginbottom {
 	margin-bottom: 20px;
-	padding-left: 70px;
+	padding-left: 0px;
 }
 
 .acenter {
@@ -551,7 +553,7 @@ body {
 	padding-top: 10px;
 	border-radius: 5px;
 	padding-left: 0px;
-	margin-left:70px;
+	margin-left:0px;
 }
 
 .pro2 {
@@ -559,7 +561,7 @@ body {
 }
 
 .borderbottom {
-	padding-left: 70px;
+	
 }
 
 .pro3 {
@@ -894,7 +896,7 @@ thead {
 }
 
 .frmg {
-	margin-right: 0px;
+	margin-right: -10px;
 }
 
 .typelist li a:hover {
@@ -1235,5 +1237,6 @@ background: none !important;
 	font-style: italic;
 }
 .paddingleft30px{
-	padding-left: 45px;
+	padding-left: 10px;
+	margin-left: -7px;
 }
