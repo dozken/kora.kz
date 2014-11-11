@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap-datepicker" % "1.3.0-3",
   "org.webjars" % "bootstrapvalidator" % "0.5.0",  
   "org.webjars" % "jquery-ui" % "1.11.1",
+  "org.webjars" % "font-awesome" % "4.2.0",
   "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.0",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
