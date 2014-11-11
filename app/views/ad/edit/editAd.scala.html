@@ -1,7 +1,7 @@
 @(ad:models.ad.Ad)
 
 @main("Подать объявление") {
-
+<link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.min.css"))'>
 <div class="container">
 	<div class="searchbarmargin">@_searchbar()</div>
 	@_form(ad)
@@ -109,7 +109,9 @@ if( files.length+$("#images li" ).length<=5 ){
     $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
     $ ( "#item-" + name ).html ( img ) ;
     $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name.replace(/ /g, '')]+'">' ) ;
-    $ ( "#item-" + name ).append ( '<input type="button" class="delete" value="X" style="position:absolute;top:0;right:0;" />' ) ;
+    $ ( "#item-" + name ).append ( '<button class="delete" style="position:absolute;top:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;"> <i class="fa fa-times"></i></button>' ) ;
+	$ ( "#item-" + name ).append ( '<button class="delete" style="position:absolute;bottom:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;background-color: white;"> <i class="fa fa-check" style="color: #77953a;"></i></button>' ) ;
+
     }else{
         alert(name + " уже есть");
     }
