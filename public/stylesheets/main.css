@@ -403,60 +403,64 @@ body {
 	color: green;
 }
 
-.jylky a:hover {
+a.back_image{
+	z-index: -1;
+	position: absolute;	
+	top: 40px;
+	width: 188px;
+	height: 128px;
+}
+
+a.front_image {
+	width: 188px;
+	height: 128px;
+	display: block;
+}
+
+.jylky a.back_image {
 	background-image: url(../images/home/hover_horse.png);
 }
 
-.jylky a {
+.jylky a.front_image {
 	background-image: url(../images/home/horse.png);
-	width: 188px;
-	height: 128px;
-	display: block;
 }
-
-.tuye a:hover {
+.tuye a.back_image  {
 	background-image: url(../images/home/hover_camel.png);
 }
-
-.tuye a {
-	background-image: url(../images/home/camel.png);
-	width: 188px;
-	height: 128px;
-	display: block;
+.tuye a.front_image {
+	background-image: url(../images/home/camel.png);	
 }
-
-.koi a:hover {
+.koi a.back_image  {
 	background-image: url(../images/home/hover_sheep.png);
 }
 
-.koi a {
-	background-image: url(../images/home/sheep.png);
-	width: 188px;
-	height: 128px;
-	display: block;
+.koi a.front_image {
+	background-image: url(../images/home/sheep.png);	
 }
 
-.siyr a:hover {
+.siyr a.back_image  {
 	background-image: url(../images/home/hover_cow.png);
 }
 
-.siyr a {
+.siyr a.front_image {
 	background-image: url(../images/home/cow.png);
-	width: 188px;
-	height: 128px;
-	display: block;
 }
 
-.baska a:hover {
+.baska a.back_image  {
 	background-image: url(../images/home/hover_other.png);
 }
 
-.baska a {
+.baska a.front_image {
 	background-image: url(../images/home/other.png);
-	width: 188px;
-	height: 128px;
-	display: block;
 }
+
+a.front_image:hover{
+	background:transparent;
+}
+
+/***
+hovers in index
+***/
 
 .searchbarmargin {
 	margin-bottom: 30px;
