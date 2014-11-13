@@ -1,0 +1,43 @@
+
+<div class="modal fade" id="private_message_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Отправить сообщение</h4>
+         </div>
+         <div class="modal-body">
+<form id="private_message_form" class="form-horizontal">
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-3 control-label leftalign">Сообщение</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" name="message" rows="6" placeholder="Введите ваше сообщение"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-3 control-label leftalign">Введите код</label>
+    <div class="col-sm-9">
+      <img src='@routes.Application.captcha' class="imgmargin"><input type="text" class="form-control" name="kaptcha" id="inputEmail3">
+    </div>
+      <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+      <div id="capchaErrorAlert" class="kipkizil"></div>
+              </div></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" id="private_message_button" class="btn btn-success">Отправить</button>
+     
+    </div>
+  </div>
+</form>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+@_confirm()

@@ -1,0 +1,46 @@
+
+@main("Модераторы") {
+
+<div class="container">
+<div class="col-lg-3 menudiv">@profile._menu()</div>
+<div class="col-lg-9 ">
+  @profile._title("ВСЕ МОДЕРАТОРЫ"){
+  <div class="col-lg-3 onjak nopaddingright PFBSPLI-13">
+	<a href="#" class="btn btn-default btn-success" data-toggle="modal" data-target="#myModal2">
+	  <span class="glyphicon glyphicon-plus"></span> Добавить
+	</a>
+  </div> 
+  }
+  @_moderators()
+</div>
+
+</div>
+
+<div id="moderModal">
+@_modalRegistration()
+</div>
+}
+
+
+<script>
+$(document).on("click","#registrButton", function(e){
+	e.preventDefault();
+	jsRoutes.controllers.User.register().ajax({
+		data : $("#registerForm").serialize(),
+        success: function(data) {
+        	//$("#moderModal").html(data);
+        	console.log("ok");
+            var res =""+ data;
+            if(res == "error"){
+                $("#registerErrorAlert" ).html("Эта почта уже используется!");
+                $("#registerErrorAlert" ).show();
+            }else{
+            	window.location.href = "@routes.Administer.moderators()";
+			}
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);            
+        }
+    });
+});
+</script>
