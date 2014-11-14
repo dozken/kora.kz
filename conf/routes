@@ -7,6 +7,9 @@ GET         /about                                 controllers.Application.about
 GET         /rules                                 controllers.Application.rules()
 GET         /feedback                              controllers.Application.feedback()
 POST        /feedback                              controllers.Application.sendFeedback()
+GET         /sitemap                               controllers.Application.sitemap()
+
+
 POST        /currency                              controllers.Application.currency(str:String,rate:Double)
 
 
