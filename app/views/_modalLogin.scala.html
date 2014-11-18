@@ -1,0 +1,30 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+   <div class="modal-dialog modal11">
+      <div class="modal-content">
+         <div class="modal-header tobesi">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Вход в личный кабинет</h4>
+         </div>
+         <div class="modal-body">
+            <form role="form" id="loginForm" method="POST">
+               <div class="form-group">
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Логин" Logvalidation="mail">
+                    <span class="help-block"><i>адрес электронной почты</i></span>  
+               </div>
+               <div class="form-group">
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль" Logvalidation="not_null">
+                    <span class="help-block"><i>от личного кабинета</i> <span class="onjaka"><i><a href="@routes.User.forgotPassword" class="kizilast">Забыли пароль</a></i></span> </span> 
+               </div>
+               <div class="checkbox onjaka">
+                  <label>
+                  <input type="checkbox"> Запомнить меня
+                  </label>
+               </div>
+               <button type="submit" id="loginButton" class="btn btn-success mybut">Войти</button>
+               <p class="pmm"><i>Еще нет кабинета? <a href="#" target="_blank" class="kizilast">Зарегистрируйтесь</a></i></p>
+                <div id="loginErrorAlert" class="alert alert-danger" role="alert"></div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
