@@ -17,6 +17,18 @@
 	padding-left: 87px;
 	padding-right: 26px;
 }
+.fontsize{
+	font-size: 13px;
+}
+.alar{
+	color: #8f2341;
+}
+.alar a.hover{
+	color: white;
+}
+.nomargin{
+	margin-bottom: -4px;
+}
 .footerborder{
 	border-top: dotted;
 	border-width: 1px;
@@ -740,8 +752,12 @@ hovers in index
 }
 
 .profmenu li:hover {
-	background-color: #5b752c;
+	background: -webkit-linear-gradient(#90b346, #76953a); /* For Safari 5.1 to 6.0 */
+  	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	color: #fff;
+	box-shadow: 0 2px 0px 0px #576d2b;
 }
 
 .menudiv {
@@ -782,13 +798,18 @@ hovers in index
 }
 
 .backjasyl {
-	background-color: #5b752c;
+	background: -webkit-linear-gradient(#90b346, #76953a); /* For Safari 5.1 to 6.0 */
+  	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+	box-shadow: 0 2px 0px 0px #576d2b;
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	border-radius: 3px;
-	color: #fff;
+	
 }
 
 thead {
@@ -809,7 +830,7 @@ thead {
 }
 
 .kipkizil {
-	color: red;
+	color: #8f2341;
 }
 
 .inp {
@@ -844,10 +865,18 @@ thead {
 
 .modal11 {
 	width: 330px;
+	margin-top: 80px;
+	margin-right: auto;
+	margin-bottom: 80px;
+	margin-left: auto;
 }
 
 .modal22 {
-	width: 800px;
+	width: 750px;
+	margin-top: 80px;
+	margin-right: auto;
+	margin-bottom: 80px;
+	margin-left: auto;
 }
 
 .pmm {
@@ -883,6 +912,7 @@ thead {
 
 .btn-success {
 	background-color: #5b752c;
+	box-shadow: 0 2px 0px 0px #576d2b;
 	border-color: transparent;
 }
 
@@ -1056,7 +1086,7 @@ thead {
 
 .lab4 li {
 	list-style-type: none;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .lab {

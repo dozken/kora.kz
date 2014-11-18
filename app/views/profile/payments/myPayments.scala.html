@@ -8,18 +8,22 @@
 	<div class="col-lg-9">
 		
 		@profile._title("ЛИЧНЫЙ СЧЕТ"){
-		<div class="col-lg-3">
+		<div + class="col-lg-3">
 			<p class="lin PFBSPR-13">
 				<b>У вас на счете:</b> <span class="kipkizil">@models.user.AuthorisedUser.getMyMoney(session.get("connected"))</span>
+				
+
 			</p>
+
 		</div>
-		@*
+		
 		<div class="col-lg-3 onjak nopaddingright">
-		<input type="number" id="money" >		
-			<a id="add_money"  class="btn btn-default btn-success "><span
-				class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
+		
+		<!-- <input type="number" id="money" >	 -->
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	
+			<a id="add_money"  class="btn btn-default btn-success "><span class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
 		</div>
-		*@
+		
 		}
 		
 		<div id="payment_body">@_table(payments)</div>
@@ -41,11 +45,10 @@
 		<div class="col-lg-2 nopaddingleft PFBSPLI-13" >
 		<button id="payment_filter" class="btn btn-default fltright">Показать</button>
 		</div>
-@*
+
 <div class="col-lg-2 nopaddingleft">
 <button class="btn btn-default">Очистить</button>
-</div>*@
-
+</div>
 	</div>
 
 </div>
