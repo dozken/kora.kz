@@ -77,8 +77,8 @@
 }
 /**PFBeauSansPro**/
 @font-face {
-    font-family: PFBSPR;
-    src: url('fonts/PFBeauSansPro/PFBEAUSANSPRO-REGULAR_0.otf')  format("opentype");
+	font-family: PFBSPR;
+	src: url('fonts/PFBeauSansPro/PFBEAUSANSPRO-LIGHT_0.otf')  format("opentype");
 }
 @font-face {
 	font-family: PFBSPLI;
@@ -429,6 +429,10 @@ a.front_image {
 	width: 188px;
 	height: 128px;
 	display: block;
+	opacity: 1;
+	transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
 }
 
 .jylky a.back_image {
@@ -469,7 +473,8 @@ a.front_image {
 }
 
 a.front_image:hover{
-	background:transparent;
+	//background:transparent;
+	opacity: 0;
 }
 
 /***
