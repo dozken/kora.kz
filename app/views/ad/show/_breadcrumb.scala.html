@@ -5,8 +5,8 @@
 		class="agreen">Корова</a><span> >> </span><a href="#" class="ablack">Абердин-Ангус</a>
 </div>
 *@
-<ol class="breadcrumb">
-  <li class="PFBSPLI-13"><a href="@routes.Application.index">Главная</a></li>
-  <li class="PFBSPLI-13"><a href="@routes.Ads.searchByType(ad.animal.id)">@ad.animal.name</a></li>
-    @if(ad.animal.id!=5){<li class="active class="PFBSPLI-13"">@ad.breed.name</li>}
+<ol class="breadcrumb dbpath">
+  <li class="PFBSPLI-13"><a href="@routes.Application.index" style="color:#90b346">Главная</a></li>
+  <li class="PFBSPLI-13"><a href="@routes.Ads.searchByType(ad.animal.id)" style="color:#90b346">@ad.animal.name</a></li>
+    @if(ad.animal.id!=5){<li class="active class="PFBSPLI-13"" style="color:#000">@ad.breed.name</li>}
 </ol>
