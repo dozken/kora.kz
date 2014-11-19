@@ -3,7 +3,7 @@
       <!-- Form Name -->
       <div class="form-group">
          <div class="col-md-6">
-            <select name="region.id" class="form-control region select">
+            <select name="region.id" class="form-control region select selectdesign">
                <option selected disabled hidden> Выберите регион</option>
                @for(region<-models.contact.Region.find.where.orderBy("name").findList){	
                <option value="@region.id">@region.name</option>               

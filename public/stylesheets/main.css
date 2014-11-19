@@ -13,9 +13,44 @@
 	font-weight: normal;
 	font-style: normal;
 }
+.newesuret{
+	color:white;
+	position: fixed;
+	padding-left: 35px;
+	padding-top: 12px;
+	background: url(../images/home/newesuret.png) no-repeat right;
+}
+.newesuret span{
+	color: white;
+	font-family: Tahoma;
+	font-size: 17px;
+	padding-right: 9px;
+}
+.buttongray {
+    color: #ffffff; 
+    background-color: #545454;
+    background-image: linear-gradient(to bottom, #6d6d6d, #545454);
+    box-shadow: 0 2px 0px 0px #545454; 
+}
+.buttongray:hover {
+    color: #ffffff;
+    background-color: #545454;
+    background-image: linear-gradient(to top, #6d6d6d, #545454);
+    box-shadow: 0 2px 0px 0px #545454;
+}
+.dbpath li{
+	color: #576d2b;
+}
 .сontain{
 	padding-left: 87px;
 	padding-right: 26px;
+}
+.sd{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	overflow: hidden;
+	background: url(../images/home/arrow.png) no-repeat right #fff;
 }
 .selectdesign {
 	-webkit-appearance: none;
@@ -630,7 +665,11 @@ hovers in index
 }
 
 .cena {
-	
+	color:white;
+	position: fixed  ;
+	padding-left: 35px;
+	padding-top: 33px;
+	background: url(../images/home/arrow.png) right;
 }
 
 .aty li {
@@ -700,7 +739,7 @@ hovers in index
 
 .mylistgroup li {
 	padding: 0px !important;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .rek {

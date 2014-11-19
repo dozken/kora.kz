@@ -3,7 +3,7 @@
       <!-- Form Name -->
       <div class="form-group">
          <div class="col-md-4">
-            <select name="animal.id" class="form-control animal select">
+            <select name="animal.id" class="form-control animal select selectdesign">
                <option selected disabled hidden> Выберите раздел</option>
                @for(animal<-models.ad.Animal.find.all){	
                <option value="@animal.id">@animal.name</option>               

@@ -1,5 +1,7 @@
 @(ad: models.ad.Ad)
+
 <div class="col-lg-4 suret">
+    <div class="newesuret"><span>5</span></div>
     @if(ad.images.size()>0){
         <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width:230px;height:157px">
     }else{<img src="@routes.Assets.at("images/home/cow.png")">}
