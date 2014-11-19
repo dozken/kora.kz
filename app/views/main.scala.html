@@ -29,8 +29,7 @@
 	    @_navbar()
         @content
 
-		@_modalRegistration()
-		@_modalLogin()
+		
 	    @_footer()
 	  
 		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))' type="text/javascript"></script>
@@ -44,12 +43,18 @@
   		<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
         <script src='@routes.Assets.at("javascripts/validation.js")' type="text/javascript"></script>
   		<script src='@routes.Assets.at("javascripts/maskedinput.js")' type="text/javascript"></script>
+  		
+  		@_modalRegistration()
+		@_modalLogin()
     </body>
 
 
 
 @restrict(la(as("moderator"),as("admin"))){
 <script>
+	function registrate(){
+	console.log("click");		
+	}
 
 	var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
 	var sock = new WS("@routes.Application.socketHandler().webSocketURL(request)")
@@ -57,7 +62,7 @@
 	$(document).ready(function () {
 		socketing()
 	});
-
+	
 	$(document).ajaxSuccess(function () {
 		socketing()
 	});
@@ -156,25 +161,7 @@
 }
 <script type="text/javascript">
 
-@if(session.get("USDtoKZT")==null) {
 
-    $.getJSON ( "http://rate-exchange.appspot.com/currency?from=USD&to=KZT&callback=?", function ( result ) {
-
-    console.log ( result.rate ) ;
-    jsRoutes.controllers.Application.currency ( "USDtoKZT", result.rate ).ajax ( ) ;
-    })
-
-}
-
-    @if(session.get("KZTtoUSD")==null) {
-
-        $.getJSON ( "http://rate-exchange.appspot.com/currency?from=KZT&to=USD&callback=?", function ( result ) {
-
-        console.log ( result.rate ) ;
-        jsRoutes.controllers.Application.currency ( "KZTtoUSD", result.rate ).ajax ( ) ;
-        })
-
-    }
 $(document).ready(function(e) {
 
 
@@ -251,5 +238,26 @@ console.log ( jqXHR.responseText ) ;
 } ) ;
 }else{$ ( "#loginErrorAlert" ).show ( ) ;}
 });
+/*
+@if(session.get("USDtoKZT")==null) {
+
+    $.getJSON ( "http://rate-exchange.appspot.com/currency?from=USD&to=KZT&callback=?", function ( result ) {
+
+    console.log ( result.rate ) ;
+    jsRoutes.controllers.Application.currency ( "USDtoKZT", result.rate ).ajax ( ) ;
+    })
+
+}
+
+    @if(session.get("KZTtoUSD")==null) {
+
+        $.getJSON ( "http://rate-exchange.appspot.com/currency?from=KZT&to=USD&callback=?", function ( result ) {
+
+        console.log ( result.rate ) ;
+        jsRoutes.controllers.Application.currency ( "KZTtoUSD", result.rate ).ajax ( ) ;
+        })
+
+    }
+    */
 </script>
 </html>
