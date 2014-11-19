@@ -21,17 +21,17 @@
 	-webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-float:left;
-overflow: hidden;
-background: url(../images/home/arrow.png) no-repeat right ;
+	float:left;
+	overflow: hidden;
+	background: url(../images/home/arrow.png) no-repeat right ;
 }
 
 .selectdesign select {
 	-webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-background: transparent;
--webkit-appearance: none;
+	background: transparent;
+	-webkit-appearance: none;
 }
 
 .fontsize{
