@@ -3,12 +3,15 @@
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
 	<li><h4><b>@ad.animal.name @if(ad.animal.id!=5){@ad.breed.name}</b></h4></li>
-	<li><div class="cena"></div><h4>@Messages(ad.priceType.price.toString) @ad.priceType.currency</h4></li>
+	<li><div class="cena"></div><h4 style="color:white;font-size:17px">@Messages(ad.priceType.price.toString) @ad.priceType.currency</h4></li>
+  <li>
+      
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star"></span>
             В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;"><span class="glyphicon glyphicon-star-empty"></span>
         В избранное</a>}
+  </li>
 </ul>
 <div class="col-lg-5 nopaddingleft">
 	<ul class="tiginen nopaddingleft">
@@ -102,11 +105,11 @@
 		<li class="PFBSPLI-13"><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li></div>
 		<div class="col-lg-6 texal nopaddingright">
 		  <li>
-		  	<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
+		  	<span class="fa fa-users"></span> <span id="ya_share1"></span>
 		    @*<span class="glyphicon glyphicon-share-alt"></span> <span id="ya_share1"></span>
 		    *@		     
 		  </li>
-		<li class="PFBSPLI-13"><a class="owib"><span class="glyphicon glyphicon-exclamation-sign"></span> Нашли ошибку в объявлении?</a></li></div>
+		<li class="PFBSPLI-13"><a class="owib"><span class="fa fa-exclamation-triangle"></span> Нашли ошибку в объявлении?</a></li></div>
 	</ul>
 </div>
 @restrictOr(la(as("moderator"),as("admin"))){
