@@ -17,7 +17,7 @@
 	color:white;
 	position: fixed;
 	padding-left: 35px;
-	padding-top: 12px;
+	padding-top: 3px;
 	background: url(../images/home/newesuret.png) no-repeat right;
 }
 .newesuret span{
@@ -40,6 +40,11 @@
 }
 .dbpath li{
 	color: #576d2b;
+}
+.dbpath > li + li:before {
+    color: #000;
+    content: ">>";
+    padding: 3 3px;
 }
 .сontain{
 	padding-left: 87px;
@@ -666,16 +671,21 @@ hovers in index
 
 .cena {
 	color:white;
-	position: fixed  ;
-	padding-left: 35px;
-	padding-top: 33px;
-	background: url(../images/home/arrow.png) right;
+	position: absolute ;
+
+width: 20%;
+margin-left: -19px;
+padding-top: 35px;
+
+	
+	z-index: -1;
+	background: url(../images/home/cena.png) no-repeat center;
 }
 
 .aty li {
 	list-style-type: none;
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 50px;
 }
 
 .aty {
