@@ -3,7 +3,16 @@
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
 	<li><h4><b>@ad.animal.name @if(ad.animal.id!=5){@ad.breed.name}</b></h4></li>
-	<li><div class="cena"></div><h4 style="color:white;font-size:17px">@Messages(ad.priceType.price.toString) @ad.priceType.currency</h4></li>
+	<li>
+  <h4>
+
+  <div class="liniya cenaRight"></div> 
+  <div class="liniya cenaCenter"><span style="padding-left:10px;padding-right:10px;line-height: 28px;color:white;">@Messages(ad.priceType.price.toString) @ad.priceType.currency</span></div> 
+  <div class="liniya cenaLeft"></div> 
+ 
+    
+  </h4>
+  </li>
   <li>
       
     @if(controllers.Ads.checkFavorite(ad.id)) {
