@@ -14,9 +14,14 @@
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger" style="visibility: hidden;" role="alert"></div>
 <div class="form-group" >
-  <label class="col-md-2 textalign" for="selectbasic">Раздел</label>
-  <div class="col-md-3" id="ad-razdel">
+  <label class="col-md-2 control-label" for="selectbasic">Раздел</label>
+<<<<<<< local
+  <div class="col-md-3">
     <select id="animal" name="animal" class="form-control next selectdesign" validation="not_null" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+=======
+  <div class="col-md-3" id="ad-razdel">
+    <select id="animal" name="animal" class="form-control next selectdesign" validation="not_null">
+>>>>>>> other
         <option selected disabled hidden> Выберите раздел</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
@@ -30,7 +35,7 @@
 
 
     <div id="genderHide" class="form-group">
-        <label class="col-md-2 textalign" for="radios">Пол</label>
+        <label class="col-md-2 control-label" for="radios">Пол</label>
         <div class="col-md-4">
             <label class="radio-inline" for="radios-0">
                 <input type="radio" name="animal_gender" id="radios-0" value="male" checked="checked">
@@ -48,7 +53,7 @@
     </div>
 
 <div id="quanHide" class="form-group">
-  <label class="col-md-2 textalign" for="radios">Количество</label>
+  <label class="col-md-2 control-label" for="radios">Количество</label>
   <div class="col-md-4">
     <label class="radio-inline" for="radios-0">
       <input type="radio" name="quantity" id="radios-0" value="single" checked="checked">
@@ -63,7 +68,7 @@
 
 <!-- Select Basic -->
 <div id="ageHide" class="form-group">
-  <label class="col-md-2 textalign" for="selectbasic1">Возраст</label>
+  <label class="col-md-2 control-label" for="selectbasic1">Возраст</label>
   <div class="col-md-2">
     <select id="selectbasic1" name="age" class="form-control selectdesign">
     @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
@@ -75,7 +80,7 @@
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="radios1">Цена</label>
+  <label class="col-md-2 control-label" for="radios1">Цена</label>
   <div class="col-md-4">
 
   <div class="radio">
@@ -127,7 +132,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="textinput">Заголовок</label>
+  <label class="col-md-2 control-label" for="textinput">Заголовок</label>
   <div class="col-md-6">
   <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md next" validation="not_null">
   <span class="help-block">Максимальная длина 70 символов.</span>
@@ -136,7 +141,7 @@
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="textarea">Описание</label>
+  <label class="col-md-2 control-label" for="textarea">Описание</label>
   <div class="col-md-6">
     <textarea class="form-control next" validation="not_null" rows="6" id="textarea" name="description"></textarea>
   </div>
@@ -144,7 +149,7 @@
 
 <!-- File Button -->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="filebutton">Фотографии</label>
+  <label class="col-md-2 control-label" for="filebutton">Фотографии</label>
   <div class="col-md-4">
     <div class="fileUpload btn myb">
     <span class="icon-photo"> <span class="PFBSPLI-13">Добавить Фотографии</span></>
@@ -156,7 +161,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-md-2 textalign"></label>
+  <label class="col-md-2 control-label"></label>
   <div class="col-md-10">
 <ul id="images" class="connectedList ui-sortable">
 
@@ -167,7 +172,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-md-2 textalign" for="singlebutton"></label>
+  <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-4">
 	<a id="next" class="btn btn-success" style="padding-left: 15%;padding-right: 15%;">Дальше</a>
   </div>
@@ -180,12 +185,12 @@
 
 
 </div>
-<div id="contact_info" style="display:none;">
+<div id="contact_info" style="display:none; padding-left:70px;">
 <legend class="PFBSPRB-17">Контактная информация</legend>
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="selectbasic2">Регион</label>
+  <label class="col-md-2 control-label" for="selectbasic2">Регион</label>
   <div class="col-md-3">
     <select id="region" name="region" class="form-control selectdesign" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
@@ -212,7 +217,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="textinput1">Компания</label>
+  <label class="col-md-2 control-label" for="textinput1">Компания</label>
   <div class="col-md-6">
   <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md" validation="not_null">
 
@@ -221,13 +226,13 @@
 
 <!-- Text input-->
     <div class="form-group">
-        <label class="col-md-2 textalign" for="ema">Email</label>
+        <label class="col-md-2 control-label" for="ema">Email</label>
         <div class="col-md-3">
             <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
 <div class="form-group">
-  <label class="col-md-2 textalign" for="textinput2">Телефон</label>
+  <label class="col-md-2 control-label" for="textinput2">Телефон</label>
   <div class="col-md-3">
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 
@@ -237,7 +242,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2 textalign" for="selectbasic4">Комментарии</label>
+  <label class="col-md-2 control-label" for="selectbasic4">Комментарии</label>
   <div class="col-md-5">
     <select id="selectbasic4" name="coment_display" class="form-control selectdesign">
       <option value="registred">Только зарегистрированным пользователям</option>
@@ -247,15 +252,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-md-2 textalign" for="selectbasic4"></label>
-  <div class="col-md-5" style="position: absolute;padding-left: 320px;padding-top: 32px;">
-    <span>Укажите ваше расположение на карте</span>
-    <a href="technovision" class="kizilast">Удалить метку</a>
-  </div>
-</div>
-
-<div class="form-group">
-	<div class="col-md-5" style="margin-left: 169px;">
+	<div class="col-md-5" style="margin-left: 45px;">
         <span class="input-group-btn">
         	<a map="yandex" class="mapSelect btn btn-default btn-sm "><b>Яндекс</b></a>
         	<a map="google" class="mapSelect btn btn-default btn-sm active"><b>Google</b></a>
@@ -264,16 +261,11 @@
         <input type="hidden" value="" id="location" name="location">
 	</div>
 </div>
-<div class="form-group">
-  <label class="col-md-2 textalign" for="selectbasic4"></label>
-  <div class="col-md-5" style="width: 60%">
-    <span>Размещая объявления на сайте, вы соглашаетесь с <a href="@routes.Application.rules" target="_blank" class="kizilast">этими правилами</a></span>
-  </div>
-</div>
+
 <!-- Button -->
     <div id="success_message" class="alert alert-success" style="visibility: hidden" role="alert"></div>
 <div class="form-group">
-  <label class="col-md-2 textalign" for="singlebutton"></label>
+  <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-4">
   	<button id="ad_form_submit" class="btn btn-success">Подать объявление</button>
   	<a id="back" class="btn btn-default">Назад</a>

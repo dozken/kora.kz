@@ -1,285 +1,483 @@
-2014-11-24 12:52:34,956 - [INFO] - from play in pool-4-thread-4 
+2014-11-24 15:08:50,718 - [INFO] - from play in pool-4-thread-6 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-11-24 12:52:45,534 - [INFO] - from play in play-internal-execution-context-1 
+2014-11-24 15:09:37,503 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 12:52:46,458 - [INFO] - from play in play-internal-execution-context-1 
+2014-11-24 15:09:38,794 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-11-24 13:27:42,018 - [INFO] - from play in play-internal-execution-context-5 
+2014-11-24 15:22:16,119 - [INFO] - from play in play-internal-execution-context-44 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:27:42,244 - [INFO] - from play in play-internal-execution-context-5 
+2014-11-24 15:22:16,321 - [INFO] - from play in play-internal-execution-context-44 
 Application started (Dev)
 
-2014-11-24 13:31:24,105 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:23:19,766 - [INFO] - from play in play-internal-execution-context-46 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:31:24,320 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:23:20,015 - [INFO] - from play in play-internal-execution-context-46 
 Application started (Dev)
 
-2014-11-24 13:31:36,182 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:23:20,037 - [ERROR] - from play in play-akka.actor.default-dispatcher-84 
+Cannot invoke the action, eventually got an error: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]
+
+2014-11-24 15:23:20,073 - [ERROR] - from application in play-akka.actor.default-dispatcher-84 
+
+
+! @6kab5fb8l - Internal server error, for (GET) [/ad/show/101] ->
+
+play.api.Application$$anon$1: Execution exception[[OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlHandler.checkRowCount(DmlHandler.java:95) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.UpdateHandler.execute(UpdateHandler.java:81) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.update(DmlBeanPersister.java:66) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeUpdateBean(DefaultPersistExecute.java:82) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:452) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:478) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:361) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.forceUpdate(DefaultPersister.java:172) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1651) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1640) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1617) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebean.Ebean.update(Ebean.java:496) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at play.db.ebean.Model.update(Model.java:137) ~[play-java-ebean_2.11-2.3.6.jar:2.3.6]
+	at controllers.Ads.get(Ads.java:51) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$37$$anonfun$apply$37.apply(routes_routing.scala:949) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$37$$anonfun$apply$37.apply(routes_routing.scala:949) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+
+2014-11-24 15:23:44,983 - [INFO] - from play in play-internal-execution-context-46 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:31:36,383 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:23:45,160 - [INFO] - from play in play-internal-execution-context-46 
 Application started (Dev)
 
-2014-11-24 13:31:49,823 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:25:24,388 - [INFO] - from play in play-internal-execution-context-46 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:31:50,020 - [INFO] - from play in play-internal-execution-context-16 
+2014-11-24 15:25:24,572 - [INFO] - from play in play-internal-execution-context-46 
 Application started (Dev)
 
-2014-11-24 13:32:31,182 - [INFO] - from play in play-internal-execution-context-22 
+2014-11-24 15:25:24,590 - [ERROR] - from play in play-akka.actor.default-dispatcher-94 
+Cannot invoke the action, eventually got an error: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]
+
+2014-11-24 15:25:24,594 - [ERROR] - from application in play-akka.actor.default-dispatcher-94 
+
+
+! @6kab5mdei - Internal server error, for (GET) [/ad/show/101] ->
+
+play.api.Application$$anon$1: Execution exception[[OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update ad set views=?, updated_date=? where id=? and updated_date=?] bind[null]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlHandler.checkRowCount(DmlHandler.java:95) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.UpdateHandler.execute(UpdateHandler.java:81) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.update(DmlBeanPersister.java:66) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeUpdateBean(DefaultPersistExecute.java:82) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:452) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:478) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:361) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.forceUpdate(DefaultPersister.java:172) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1651) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1640) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.update(DefaultServer.java:1617) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebean.Ebean.update(Ebean.java:496) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at play.db.ebean.Model.update(Model.java:137) ~[play-java-ebean_2.11-2.3.6.jar:2.3.6]
+	at controllers.Ads.get(Ads.java:51) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$37$$anonfun$apply$37.apply(routes_routing.scala:949) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$37$$anonfun$apply$37.apply(routes_routing.scala:949) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+
+2014-11-24 15:28:04,949 - [INFO] - from play in play-internal-execution-context-58 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:32:31,386 - [INFO] - from play in play-internal-execution-context-22 
+2014-11-24 15:28:05,127 - [INFO] - from play in play-internal-execution-context-58 
 Application started (Dev)
 
-2014-11-24 13:33:21,709 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:48:34,230 - [INFO] - from play in play-internal-execution-context-85 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:33:21,902 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:48:34,404 - [INFO] - from play in play-internal-execution-context-85 
 Application started (Dev)
 
-2014-11-24 13:33:27,897 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:49:13,022 - [INFO] - from play in play-internal-execution-context-96 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:33:28,087 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:49:13,194 - [INFO] - from play in play-internal-execution-context-96 
 Application started (Dev)
 
-2014-11-24 13:34:58,212 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:49:21,957 - [INFO] - from play in play-internal-execution-context-98 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:34:58,405 - [INFO] - from play in play-internal-execution-context-26 
+2014-11-24 15:49:22,129 - [INFO] - from play in play-internal-execution-context-98 
 Application started (Dev)
 
-2014-11-24 13:42:12,945 - [INFO] - from play in play-internal-execution-context-48 
+2014-11-24 15:49:30,840 - [INFO] - from play in play-internal-execution-context-98 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:42:13,217 - [INFO] - from play in play-internal-execution-context-48 
+2014-11-24 15:49:31,015 - [INFO] - from play in play-internal-execution-context-98 
 Application started (Dev)
 
-2014-11-24 13:42:48,282 - [INFO] - from play in play-internal-execution-context-52 
+2014-11-24 15:49:53,009 - [INFO] - from play in play-internal-execution-context-101 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:42:48,472 - [INFO] - from play in play-internal-execution-context-52 
+2014-11-24 15:49:53,194 - [INFO] - from play in play-internal-execution-context-101 
 Application started (Dev)
 
-2014-11-24 13:43:31,490 - [INFO] - from play in play-internal-execution-context-55 
+2014-11-24 15:57:17,603 - [INFO] - from play in play-internal-execution-context-114 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:43:31,671 - [INFO] - from play in play-internal-execution-context-55 
+2014-11-24 15:57:17,769 - [INFO] - from play in play-internal-execution-context-114 
 Application started (Dev)
 
-2014-11-24 13:43:53,456 - [INFO] - from play in play-internal-execution-context-55 
+2014-11-24 15:57:30,136 - [INFO] - from play in play-internal-execution-context-121 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:43:53,651 - [INFO] - from play in play-internal-execution-context-55 
+2014-11-24 15:57:30,300 - [INFO] - from play in play-internal-execution-context-121 
 Application started (Dev)
 
-2014-11-24 13:44:25,116 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:57:40,205 - [INFO] - from play in play-internal-execution-context-125 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:44:25,295 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:57:40,370 - [INFO] - from play in play-internal-execution-context-125 
 Application started (Dev)
 
-2014-11-24 13:45:58,969 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:57:54,943 - [INFO] - from play in play-internal-execution-context-127 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:45:59,149 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:57:55,105 - [INFO] - from play in play-internal-execution-context-127 
 Application started (Dev)
 
-2014-11-24 13:48:08,913 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:58:21,319 - [INFO] - from play in play-internal-execution-context-129 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:48:09,094 - [INFO] - from play in play-internal-execution-context-61 
+2014-11-24 15:58:21,485 - [INFO] - from play in play-internal-execution-context-129 
 Application started (Dev)
 
-2014-11-24 13:49:32,972 - [INFO] - from play in play-internal-execution-context-67 
+2014-11-24 16:02:58,046 - [INFO] - from play in play-internal-execution-context-135 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:49:33,156 - [INFO] - from play in play-internal-execution-context-67 
+2014-11-24 16:02:58,209 - [INFO] - from play in play-internal-execution-context-135 
 Application started (Dev)
 
-2014-11-24 13:50:13,134 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:05:27,989 - [INFO] - from play in play-internal-execution-context-142 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:50:13,313 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:05:28,151 - [INFO] - from play in play-internal-execution-context-142 
 Application started (Dev)
 
-2014-11-24 13:50:34,086 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:24,819 - [INFO] - from play in play-internal-execution-context-142 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:50:34,258 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:24,981 - [INFO] - from play in play-internal-execution-context-142 
 Application started (Dev)
 
-2014-11-24 13:53:15,165 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:33,875 - [INFO] - from play in play-internal-execution-context-142 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:53:15,343 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:34,038 - [INFO] - from play in play-internal-execution-context-142 
 Application started (Dev)
 
-2014-11-24 13:54:07,045 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:44,481 - [INFO] - from play in play-internal-execution-context-149 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:54:07,222 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:06:44,644 - [INFO] - from play in play-internal-execution-context-149 
 Application started (Dev)
 
-2014-11-24 13:54:30,901 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:07:43,277 - [INFO] - from play in play-internal-execution-context-142 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:54:31,076 - [INFO] - from play in play-internal-execution-context-72 
+2014-11-24 16:07:43,436 - [INFO] - from play in play-internal-execution-context-142 
 Application started (Dev)
 
-2014-11-24 13:56:22,249 - [INFO] - from play in play-internal-execution-context-84 
+2014-11-24 16:14:34,249 - [INFO] - from play in play-internal-execution-context-151 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:56:22,425 - [INFO] - from play in play-internal-execution-context-84 
+2014-11-24 16:14:34,407 - [INFO] - from play in play-internal-execution-context-151 
 Application started (Dev)
 
-2014-11-24 13:59:28,803 - [INFO] - from play in play-internal-execution-context-96 
+2014-11-24 16:18:04,793 - [INFO] - from play in play-internal-execution-context-160 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 13:59:28,990 - [INFO] - from play in play-internal-execution-context-96 
+2014-11-24 16:18:04,963 - [INFO] - from play in play-internal-execution-context-160 
 Application started (Dev)
 
-2014-11-24 14:06:11,023 - [INFO] - from play in play-internal-execution-context-99 
+2014-11-24 16:18:30,962 - [INFO] - from play in play-internal-execution-context-166 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:06:11,199 - [INFO] - from play in play-internal-execution-context-99 
+2014-11-24 16:18:31,120 - [INFO] - from play in play-internal-execution-context-166 
 Application started (Dev)
 
-2014-11-24 14:06:21,206 - [INFO] - from play in play-internal-execution-context-104 
+2014-11-24 16:19:07,262 - [INFO] - from play in play-internal-execution-context-170 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:06:21,381 - [INFO] - from play in play-internal-execution-context-104 
+2014-11-24 16:19:07,421 - [INFO] - from play in play-internal-execution-context-170 
 Application started (Dev)
 
-2014-11-24 14:07:48,564 - [INFO] - from play in play-internal-execution-context-108 
+2014-11-24 16:20:10,151 - [INFO] - from play in play-internal-execution-context-173 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:07:48,739 - [INFO] - from play in play-internal-execution-context-108 
+2014-11-24 16:20:10,309 - [INFO] - from play in play-internal-execution-context-173 
 Application started (Dev)
 
-2014-11-24 14:08:03,685 - [INFO] - from play in play-internal-execution-context-110 
+2014-11-24 16:20:36,783 - [INFO] - from play in play-internal-execution-context-173 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:08:03,858 - [INFO] - from play in play-internal-execution-context-110 
+2014-11-24 16:20:36,943 - [INFO] - from play in play-internal-execution-context-173 
 Application started (Dev)
 
-2014-11-24 14:08:38,712 - [INFO] - from play in play-internal-execution-context-110 
+2014-11-24 16:20:55,039 - [INFO] - from play in play-internal-execution-context-173 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:08:38,899 - [INFO] - from play in play-internal-execution-context-110 
+2014-11-24 16:20:55,196 - [INFO] - from play in play-internal-execution-context-173 
 Application started (Dev)
 
-2014-11-24 14:08:58,075 - [INFO] - from play in play-internal-execution-context-115 
+2014-11-24 16:21:22,135 - [ERROR] - from play in play-akka.actor.default-dispatcher-339 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
+
+2014-11-24 16:21:22,138 - [ERROR] - from application in play-akka.actor.default-dispatcher-339 
+
+
+! @6kabd5e90 - Internal server error, for (POST) [/ad/create] ->
+
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:66) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:877) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:877) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+
+2014-11-24 16:21:37,151 - [INFO] - from play in play-internal-execution-context-173 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:08:58,254 - [INFO] - from play in play-internal-execution-context-115 
+2014-11-24 16:21:37,313 - [INFO] - from play in play-internal-execution-context-173 
 Application started (Dev)
 
-2014-11-24 14:09:04,326 - [INFO] - from play in play-internal-execution-context-119 
+2014-11-24 16:23:04,276 - [INFO] - from play in play-internal-execution-context-183 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:09:04,502 - [INFO] - from play in play-internal-execution-context-119 
+2014-11-24 16:23:04,441 - [INFO] - from play in play-internal-execution-context-183 
 Application started (Dev)
 
-2014-11-24 14:09:26,244 - [INFO] - from play in play-internal-execution-context-118 
+2014-11-24 16:25:23,064 - [INFO] - from play in play-internal-execution-context-183 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:09:26,419 - [INFO] - from play in play-internal-execution-context-118 
+2014-11-24 16:25:23,220 - [INFO] - from play in play-internal-execution-context-183 
 Application started (Dev)
 
-2014-11-24 14:09:40,972 - [INFO] - from play in play-internal-execution-context-118 
+2014-11-24 16:26:35,722 - [INFO] - from play in play-internal-execution-context-183 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:09:41,146 - [INFO] - from play in play-internal-execution-context-118 
+2014-11-24 16:26:35,883 - [INFO] - from play in play-internal-execution-context-183 
 Application started (Dev)
 
-2014-11-24 14:10:16,295 - [INFO] - from play in play-internal-execution-context-125 
+2014-11-24 16:29:15,667 - [INFO] - from play in play-internal-execution-context-194 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:10:16,472 - [INFO] - from play in play-internal-execution-context-125 
+2014-11-24 16:29:15,830 - [INFO] - from play in play-internal-execution-context-194 
 Application started (Dev)
 
-2014-11-24 14:10:35,928 - [INFO] - from play in play-internal-execution-context-129 
+2014-11-24 16:31:56,345 - [INFO] - from play in play-internal-execution-context-202 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:10:36,102 - [INFO] - from play in play-internal-execution-context-129 
+2014-11-24 16:31:56,501 - [INFO] - from play in play-internal-execution-context-202 
 Application started (Dev)
 
-2014-11-24 14:14:19,121 - [INFO] - from play in play-internal-execution-context-133 
+2014-11-24 16:32:21,026 - [INFO] - from play in play-internal-execution-context-202 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:14:19,300 - [INFO] - from play in play-internal-execution-context-133 
+2014-11-24 16:32:21,197 - [INFO] - from play in play-internal-execution-context-202 
 Application started (Dev)
 
-2014-11-24 14:25:53,293 - [INFO] - from play in play-internal-execution-context-133 
+2014-11-24 16:33:58,993 - [INFO] - from play in play-internal-execution-context-207 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:25:53,468 - [INFO] - from play in play-internal-execution-context-133 
+2014-11-24 16:33:59,148 - [INFO] - from play in play-internal-execution-context-207 
 Application started (Dev)
 
-2014-11-24 14:26:30,718 - [INFO] - from play in play-internal-execution-context-144 
+2014-11-24 16:34:17,763 - [INFO] - from play in play-internal-execution-context-207 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:26:30,895 - [INFO] - from play in play-internal-execution-context-144 
+2014-11-24 16:34:17,918 - [INFO] - from play in play-internal-execution-context-207 
 Application started (Dev)
 
-2014-11-24 14:26:48,802 - [INFO] - from play in play-internal-execution-context-147 
+2014-11-24 16:36:43,139 - [INFO] - from play in play-internal-execution-context-207 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:26:48,980 - [INFO] - from play in play-internal-execution-context-147 
+2014-11-24 16:36:43,297 - [INFO] - from play in play-internal-execution-context-207 
 Application started (Dev)
 
-2014-11-24 14:31:05,743 - [INFO] - from play in play-internal-execution-context-151 
+2014-11-24 16:37:47,356 - [INFO] - from play in play-internal-execution-context-212 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:31:05,934 - [INFO] - from play in play-internal-execution-context-151 
+2014-11-24 16:37:47,516 - [INFO] - from play in play-internal-execution-context-212 
 Application started (Dev)
 
-2014-11-24 14:31:21,280 - [INFO] - from play in play-internal-execution-context-158 
+2014-11-24 16:38:22,026 - [INFO] - from play in play-internal-execution-context-214 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-11-24 14:31:21,450 - [INFO] - from play in play-internal-execution-context-158 
-Application started (Dev)
-
-2014-11-24 14:32:01,086 - [INFO] - from play in play-internal-execution-context-160 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 14:32:01,259 - [INFO] - from play in play-internal-execution-context-160 
-Application started (Dev)
-
-2014-11-24 14:32:19,399 - [INFO] - from play in play-internal-execution-context-163 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 14:32:19,572 - [INFO] - from play in play-internal-execution-context-163 
-Application started (Dev)
-
-2014-11-24 14:33:17,160 - [INFO] - from play in play-internal-execution-context-165 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 14:33:17,333 - [INFO] - from play in play-internal-execution-context-165 
-Application started (Dev)
-
-2014-11-24 14:35:09,452 - [INFO] - from play in play-internal-execution-context-170 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 14:35:09,637 - [INFO] - from play in play-internal-execution-context-170 
-Application started (Dev)
-
-2014-11-24 15:00:24,016 - [INFO] - from play in play-internal-execution-context-170 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 15:00:24,190 - [INFO] - from play in play-internal-execution-context-170 
-Application started (Dev)
-
-2014-11-24 15:00:38,634 - [INFO] - from play in play-internal-execution-context-173 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-11-24 15:00:38,808 - [INFO] - from play in play-internal-execution-context-173 
+2014-11-24 16:38:22,181 - [INFO] - from play in play-internal-execution-context-214 
 Application started (Dev)
 
