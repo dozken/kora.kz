@@ -415,11 +415,50 @@ public class Ads extends Controller {
             }
             return ok(adSearch.render(list,Animal.find.byId(1L)));
         }
-
-
     }
 
+    
+    public static Result favoriteSize() {
+    	if(session("connected")!=null){
 
+            return ok(""+AuthorisedUser.findByEmail(session("connected")).favorites.size());
+
+        }else{
+
+            if( request().cookie("userAdsKora")==null)  return ok("");
+
+
+            String [] ads = request().cookie("userAdsKora").value().split("_");
+            List<Ad> list = new ArrayList<Ad>();
+            for(String ad : ads){
+                if(!ad.equals("") && ad!=null)
+                list.add(Ad.find.byId(Long.parseLong(ad)));
+
+            }
+            return ok(""+list.size());
+        }
+    }
+    
+    public static int favoriteSizeInt() {
+    	if(session("connected")!=null){
+
+            return AuthorisedUser.findByEmail(session("connected")).favorites.size();
+
+        }else{
+
+            if( request().cookie("userAdsKora")==null)  return 0;
+
+
+            String [] ads = request().cookie("userAdsKora").value().split("_");
+            List<Ad> list = new ArrayList<Ad>();
+            for(String ad : ads){
+                if(!ad.equals("") && ad!=null)
+                list.add(Ad.find.byId(Long.parseLong(ad)));
+
+            }
+            return list.size();
+        }
+    }
 
     public static Result sendPrivateMessage(Long ad_id, Long author_id)
     {

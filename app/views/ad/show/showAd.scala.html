@@ -117,12 +117,20 @@ var type = $(this ).attr("type");
 jsRoutes.controllers.Ads.addFavorite(id,type).ajax({
 success: function() {
     if(type=="add") {
-        $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star"></span>В избранном' );
-        $ ( "#favorite" ).attr ( 'type','remove' );
+        $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star"></span>В избранном' );$ ( "#favorite" ).attr ( 'type','remove' );
     }else{
-    $ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star-empty"></span>В избранное' );
-    $ ( "#favorite" ).attr ( 'type','add' );
+    	$ ( "#favorite" ).html ( '<span class="glyphicon glyphicon-star-empty"></span>В избранное' );    
+    	$ ( "#favorite" ).attr ( 'type','add' );
     }
+    jsRoutes.controllers.Ads.favoriteSize().ajax({
+        	success: function(data) {
+        		data *=1; 
+        		if(data>0)
+        		$ ( "#sumfavorites" ).html ( 'Выбрано '+data+' объявления' );
+        		else
+        		$ ( "#sumfavorites" ).html ("");
+        	}
+    });
 },
 error: function(jqXHR, textStatus, errorThrown) {
 console.log(jqXHR.responseText);
