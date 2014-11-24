@@ -1,0 +1,104 @@
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal22">
+      <div class="modal-content">
+         <div class="modal-header tobesi">
+            <button type="button" class="close" data-dismiss="modal"><p class="fa fa-times"></p></button>
+            <h4 class="modal-title" id="myModalLabel">Регистрация</h4>
+         </div>
+         <div class="modal-body">
+            <p class="motomoto">Займет меньше минуты и даст новые возможности и позволит управлять вашими объявлениями на сайте.</p>
+            <form id="registerForm" class="form-horizontal" role="form" action="#">
+            
+            <table border=0 style="font-family:Tahoma;">
+              <tr>
+                 <td valign="top" style="padding-top:7px; font-weight:bold; width: 260px; ">Ваше имя или название компании</td>
+                 <td colspan="2">
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12">
+                        <input type="text" name="userName" class="form-control"  placeholder="" Regvalidation="not_null">
+                        <span class="help-block fontsize"><i>Этим именем будут подписываться ваши комментарии</i></span> 
+                     </div>
+                     </div>   
+                 </td>
+              </tr>
+              <tr>
+                 <td valign="top" style="padding-top:7px;"><span style="font-weight:bold;">Ваша электронная почта</span> 
+                 <span class="help-block fontsize"><i>Служит логином при входе</i></span> </td>
+                 <td colspan="2">
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12">
+                        <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="" Regvalidation="mail">
+                        <span class="help-block fontsize"><i>Никому, кроме вас, не показывается</i></span> 
+                     </div>
+                     </div>
+                 </td>
+              </tr>
+              <tr>
+                 <td valign="top" style="padding-top:7px;"><span style="font-weight:bold;">Пароль</span>
+                  <span class="help-block fontsize"><i>Для входа в личный кабинет</i></span></td>
+                 <td colspan="2">
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12">
+                        <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="" Regvalidation="not_null">
+                        <span class="help-block fontsize"><i>Хороший пароль состоит минимум из 6 латинских букв и цифр без пробелов</i></span> 
+                     </div>
+                     </div>
+                 </td colspan="2">
+              </tr>
+              <tr>
+                 <td valign="top" style="padding-top:7px;font-weight:bold;">Пароль еще раз</td>
+                 <td colspan="2">
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12">
+                     <input type="password" name="confirmPassword" class="form-control" id="inputPassword3" placeholder="" Regvalidation="not_null">
+                     <span class="help-block fontsize"><i>Хотим убедиться, что вы его не забудете</i></span> 
+                     </div>
+               </div>
+                 </td>
+              </tr>
+              <tr style="height: 50px;">
+              <td>
+                 
+              </td>
+                 <td style="margin-top: 5px;">
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12 ortada">
+                     @*
+                       <div id="mc">
+                     <p>Please draw the shape in the box to submit the form:</p>
+                     <canvas id="mc-canvas"></canvas>
+                     </div>
+                     <input type="hidden" id="fairly-unique-id" value="submitform.php" />
+                     <input type="submit" disabled="disabled" value="Submit Form" />
+                     *@
+                     <button type="submit" id=registrButton class="btn btn-success">Зарегистрироваться</button>
+                     </div>
+                     </div>
+                  </td>
+                 <td>
+                     <div class="form-group nomargin">
+                     <div class="col-sm-12 ortada">
+                     <div class="checkbox">
+                        <label>
+                        <input type="checkbox" name="agreement">Я согласен с <a href="@routes.Application.rules" class="kizilast">правилами сайта</a>
+                        </label>
+                     </div>
+                     </div>
+                     </div>
+                     
+                  </td>
+              </tr>
+              <td colspan="3">
+                 <div id="registerErrorAlert" class="alert alert-danger" role="alert"></div>
+               <div id="flash">
+               @utils._flashAlert("error","danger")
+               </div>
+              </td>
+           </table>
+                
+               
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
