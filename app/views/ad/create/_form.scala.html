@@ -16,7 +16,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="selectbasic">Раздел</label>
   <div class="col-md-3">
-    <select id="animal" name="animal" class="form-control next selectdesign" validation="not_null">
+    <select id="animal" name="animal" class="form-control next selectdesign" validation="not_null" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
         <option selected disabled hidden> Выберите раздел</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
@@ -194,12 +194,6 @@
         }
     </select>
   </div>
-</div>
-
-
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="selectbasic3">Город</label>
   <div id="city_list" class="col-md-3">
       @if(user!=null && user.profile.city!=null) {
           <select id="city" name="city" class="form-control">
@@ -211,6 +205,10 @@
       }
   </div>
 </div>
+
+
+<!-- Select Basic -->
+
 
 <!-- Text input-->
 <div class="form-group">
