@@ -26,17 +26,17 @@
 .newesuret{
 	color:white;
 	position: absolute;
-	padding-left: 50px;
-	padding-top: 30px;
+	padding-left: 47px;
+	padding-top: 26px;
 	z-index: 1;
 	background: url(../images/home/newesuret.png) no-repeat right;
+	background-size: 22px;
 }
 .newesuret1{
-	color:white;
 	position: absolute;
 	padding-left: 32px;
 	padding-top: 0px;
-	font-size: 17px;
+	font-size: 14px;
 	color: white;
 	z-index: 2;
 }
@@ -47,6 +47,7 @@
 	padding-right: 9px;
 }
 .buttongray {
+	padding: 1px 12px;
     color: #ffffff; 
     background-color: #545454;
     background-image: linear-gradient(to bottom, #6d6d6d, #545454);
@@ -80,6 +81,9 @@
     appearance: none;
 	overflow: hidden;
 	background: url(../images/home/arrow.png) no-repeat right #fff;
+	background-size: 20px;
+	height: 26px;
+	padding-top: 0px;
 }
 .selectdesign {
 	-webkit-appearance: none;
@@ -211,25 +215,29 @@
 }
 
 .PFBSPR-17{
-	font-family: PFBSPR;
+	font-family: Tahoma;
 	font-size:17px;
 }
 /**PFBSP Light Italic **/
 .PFBSPLI-11{
-	font-family: PFBSPLI;
+	font-family: Tahoma;
+	font-style: italic;
 	font-size:11px;
 }
 .PFBSPLI-13{
-	font-family: PFBSPLI;
+	font-style: italic;
+	font-family: Tahoma;
 	font-size:13px;
 }
 .PFBSPLI-15{
-	font-family: PFBSPLI;
+	font-style: italic;
+	font-family: Tahoma;
 	font-size:15px;
 }
 /**PFBSP Italic**/
 .PFBSPI-13{
-	font-family: PFBSPI;
+	font-style: italic;
+	font-family: Tahoma;
 	font-size:13px;
 }
 /**PFBSP Book**/
@@ -245,16 +253,16 @@
 }
 /**DINNW1G Regular**/
 .DINNW1GR-18{
-	font-family: DINNW1GR;
+	font-family: Tahoma;
 	font-size:18px;
 }
 .DINNW1GR-14{
-	font-family: DINNW1GR;
+	font-family: Tahoma;
 	font-size:14px;
 }
 /**DINNW1G Light**/
 .DINNW1GL-14{
-	font-family: DINNW1GL;
+	font-family: Tahoma;
 	font-size:14px;
 }
 
@@ -1041,7 +1049,7 @@ thead {
 }
 
 .frmg {
-	margin-right: -10px;
+	margin-right: -15px;
 }
 
 .typelist li a:hover {
@@ -1126,8 +1134,7 @@ thead {
 }
 
 .ssss {
-	height: 31px !important;
-	padding: 16px 12px !important;
+	height: 26px;
 }
 
 #demo {
