@@ -6,7 +6,10 @@
     @if(ad.images.size()>0){
     <div class="newesuret1"><span>@ad.images.size</span></div>
     <div class="newesuret"></div>
-        <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width:230px;height:157px">
+    <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
+        <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;"> 
+    </div>
+        
     }else{<img src="@routes.Assets.at("images/home/cow.png")">}
 </div>
 <div class="col-lg-8">
