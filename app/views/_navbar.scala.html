@@ -34,6 +34,10 @@
       	<li>
           <a href="@routes.Manage.myInfo" class="PFBSPI-13">
             <span class="icon-cabinet"></span> Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
+            @if(models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)>0){
+            <span style="padding-left: 10px;">@models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)</span>
+            <i class="fa fa-envelope-o" style="font-size: 17px;"></i>
+            }
           </a>
         </li>
         <li>
