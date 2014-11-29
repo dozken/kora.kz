@@ -193,7 +193,7 @@ data: formData,
 processData: false,
 contentType: false,
 success: function(data) {
-jsRoutes.controllers.Application.emailing ("ad_created",$("#ema" ).val() ).ajax ()
+
 $("#success_message" ).html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
 $("#success_message" ).fadeIn(200);
 setTimeout(function() {
@@ -201,6 +201,7 @@ setTimeout(function() {
         window.location.href = "@routes.Manage.myAds()";
     }else{window.location.href = "@routes.Application.index()";}
 }, 3500);
+jsRoutes.controllers.Application.emailing ("ad_created",$("#ema" ).val() ).ajax ()
 
 }
 });

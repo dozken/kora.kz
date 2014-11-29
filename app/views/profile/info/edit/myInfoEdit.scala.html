@@ -69,7 +69,12 @@ data : new FormData ( this ),
 processData : false,
 contentType : false,
 success : function ( data ) {
-window.location.href = " @routes.Manage.myInfo() ";
+    if(data=="phone_exists"){
+    $("#error_fields" ).html("");
+    $("#error_fields" ).append("Номер уже зарегистрирован");
+
+    }else{window.location.href = " @routes.Manage.myInfo() ";}
+
 }
 } ) ;
 e.preventDefault();
