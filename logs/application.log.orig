@@ -1,0 +1,309 @@
+<<<<<<< local
+2014-11-24 12:52:34,956 - [INFO] - from play in pool-4-thread-4 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-11-24 12:52:45,534 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 12:52:46,458 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-11-24 13:27:42,018 - [INFO] - from play in play-internal-execution-context-5 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:27:42,244 - [INFO] - from play in play-internal-execution-context-5 
+Application started (Dev)
+
+2014-11-24 13:31:24,105 - [INFO] - from play in play-internal-execution-context-16 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:31:24,320 - [INFO] - from play in play-internal-execution-context-16 
+Application started (Dev)
+
+2014-11-24 13:31:36,182 - [INFO] - from play in play-internal-execution-context-16 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:31:36,383 - [INFO] - from play in play-internal-execution-context-16 
+Application started (Dev)
+
+2014-11-24 13:31:49,823 - [INFO] - from play in play-internal-execution-context-16 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:31:50,020 - [INFO] - from play in play-internal-execution-context-16 
+Application started (Dev)
+
+2014-11-24 13:32:31,182 - [INFO] - from play in play-internal-execution-context-22 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:32:31,386 - [INFO] - from play in play-internal-execution-context-22 
+Application started (Dev)
+
+2014-11-24 13:33:21,709 - [INFO] - from play in play-internal-execution-context-26 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:33:21,902 - [INFO] - from play in play-internal-execution-context-26 
+Application started (Dev)
+
+2014-11-24 13:33:27,897 - [INFO] - from play in play-internal-execution-context-26 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:33:28,087 - [INFO] - from play in play-internal-execution-context-26 
+Application started (Dev)
+
+2014-11-24 13:34:58,212 - [INFO] - from play in play-internal-execution-context-26 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:34:58,405 - [INFO] - from play in play-internal-execution-context-26 
+Application started (Dev)
+
+2014-11-24 13:42:12,945 - [INFO] - from play in play-internal-execution-context-48 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:42:13,217 - [INFO] - from play in play-internal-execution-context-48 
+Application started (Dev)
+
+2014-11-24 13:42:48,282 - [INFO] - from play in play-internal-execution-context-52 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:42:48,472 - [INFO] - from play in play-internal-execution-context-52 
+Application started (Dev)
+
+2014-11-24 13:43:31,490 - [INFO] - from play in play-internal-execution-context-55 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:43:31,671 - [INFO] - from play in play-internal-execution-context-55 
+Application started (Dev)
+
+2014-11-24 13:43:53,456 - [INFO] - from play in play-internal-execution-context-55 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:43:53,651 - [INFO] - from play in play-internal-execution-context-55 
+Application started (Dev)
+
+2014-11-24 13:44:25,116 - [INFO] - from play in play-internal-execution-context-61 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:44:25,295 - [INFO] - from play in play-internal-execution-context-61 
+Application started (Dev)
+
+2014-11-24 13:45:58,969 - [INFO] - from play in play-internal-execution-context-61 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:45:59,149 - [INFO] - from play in play-internal-execution-context-61 
+Application started (Dev)
+
+2014-11-24 13:48:08,913 - [INFO] - from play in play-internal-execution-context-61 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:48:09,094 - [INFO] - from play in play-internal-execution-context-61 
+Application started (Dev)
+
+2014-11-24 13:49:32,972 - [INFO] - from play in play-internal-execution-context-67 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:49:33,156 - [INFO] - from play in play-internal-execution-context-67 
+Application started (Dev)
+
+2014-11-24 13:50:13,134 - [INFO] - from play in play-internal-execution-context-72 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:50:13,313 - [INFO] - from play in play-internal-execution-context-72 
+Application started (Dev)
+
+2014-11-24 13:50:34,086 - [INFO] - from play in play-internal-execution-context-72 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:50:34,258 - [INFO] - from play in play-internal-execution-context-72 
+Application started (Dev)
+
+2014-11-24 13:53:15,165 - [INFO] - from play in play-internal-execution-context-72 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:53:15,343 - [INFO] - from play in play-internal-execution-context-72 
+Application started (Dev)
+
+2014-11-24 13:54:07,045 - [INFO] - from play in play-internal-execution-context-72 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:54:07,222 - [INFO] - from play in play-internal-execution-context-72 
+Application started (Dev)
+
+2014-11-24 13:54:30,901 - [INFO] - from play in play-internal-execution-context-72 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:54:31,076 - [INFO] - from play in play-internal-execution-context-72 
+Application started (Dev)
+
+2014-11-24 13:56:22,249 - [INFO] - from play in play-internal-execution-context-84 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:56:22,425 - [INFO] - from play in play-internal-execution-context-84 
+Application started (Dev)
+
+2014-11-24 13:59:28,803 - [INFO] - from play in play-internal-execution-context-96 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 13:59:28,990 - [INFO] - from play in play-internal-execution-context-96 
+Application started (Dev)
+
+2014-11-24 14:06:11,023 - [INFO] - from play in play-internal-execution-context-99 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:06:11,199 - [INFO] - from play in play-internal-execution-context-99 
+Application started (Dev)
+
+2014-11-24 14:06:21,206 - [INFO] - from play in play-internal-execution-context-104 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:06:21,381 - [INFO] - from play in play-internal-execution-context-104 
+Application started (Dev)
+
+2014-11-24 14:07:48,564 - [INFO] - from play in play-internal-execution-context-108 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:07:48,739 - [INFO] - from play in play-internal-execution-context-108 
+Application started (Dev)
+
+2014-11-24 14:08:03,685 - [INFO] - from play in play-internal-execution-context-110 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:08:03,858 - [INFO] - from play in play-internal-execution-context-110 
+Application started (Dev)
+
+2014-11-24 14:08:38,712 - [INFO] - from play in play-internal-execution-context-110 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:08:38,899 - [INFO] - from play in play-internal-execution-context-110 
+Application started (Dev)
+
+2014-11-24 14:08:58,075 - [INFO] - from play in play-internal-execution-context-115 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:08:58,254 - [INFO] - from play in play-internal-execution-context-115 
+Application started (Dev)
+
+2014-11-24 14:09:04,326 - [INFO] - from play in play-internal-execution-context-119 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:09:04,502 - [INFO] - from play in play-internal-execution-context-119 
+Application started (Dev)
+
+2014-11-24 14:09:26,244 - [INFO] - from play in play-internal-execution-context-118 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:09:26,419 - [INFO] - from play in play-internal-execution-context-118 
+Application started (Dev)
+
+2014-11-24 14:09:40,972 - [INFO] - from play in play-internal-execution-context-118 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:09:41,146 - [INFO] - from play in play-internal-execution-context-118 
+Application started (Dev)
+
+2014-11-24 14:10:16,295 - [INFO] - from play in play-internal-execution-context-125 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:10:16,472 - [INFO] - from play in play-internal-execution-context-125 
+Application started (Dev)
+
+2014-11-24 14:10:35,928 - [INFO] - from play in play-internal-execution-context-129 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:10:36,102 - [INFO] - from play in play-internal-execution-context-129 
+Application started (Dev)
+
+2014-11-24 14:14:19,121 - [INFO] - from play in play-internal-execution-context-133 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:14:19,300 - [INFO] - from play in play-internal-execution-context-133 
+Application started (Dev)
+
+2014-11-24 14:25:53,293 - [INFO] - from play in play-internal-execution-context-133 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:25:53,468 - [INFO] - from play in play-internal-execution-context-133 
+Application started (Dev)
+
+2014-11-24 14:26:30,718 - [INFO] - from play in play-internal-execution-context-144 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:26:30,895 - [INFO] - from play in play-internal-execution-context-144 
+Application started (Dev)
+
+2014-11-24 14:26:48,802 - [INFO] - from play in play-internal-execution-context-147 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:26:48,980 - [INFO] - from play in play-internal-execution-context-147 
+Application started (Dev)
+
+2014-11-24 14:31:05,743 - [INFO] - from play in play-internal-execution-context-151 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:31:05,934 - [INFO] - from play in play-internal-execution-context-151 
+Application started (Dev)
+
+2014-11-24 14:31:21,280 - [INFO] - from play in play-internal-execution-context-158 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:31:21,450 - [INFO] - from play in play-internal-execution-context-158 
+Application started (Dev)
+
+2014-11-24 14:32:01,086 - [INFO] - from play in play-internal-execution-context-160 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:32:01,259 - [INFO] - from play in play-internal-execution-context-160 
+Application started (Dev)
+
+2014-11-24 14:32:19,399 - [INFO] - from play in play-internal-execution-context-163 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:32:19,572 - [INFO] - from play in play-internal-execution-context-163 
+Application started (Dev)
+
+2014-11-24 14:33:17,160 - [INFO] - from play in play-internal-execution-context-165 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:33:17,333 - [INFO] - from play in play-internal-execution-context-165 
+Application started (Dev)
+
+2014-11-24 14:35:09,452 - [INFO] - from play in play-internal-execution-context-170 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:35:09,637 - [INFO] - from play in play-internal-execution-context-170 
+Application started (Dev)
+
+2014-11-24 15:00:24,016 - [INFO] - from play in play-internal-execution-context-170 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 15:00:24,190 - [INFO] - from play in play-internal-execution-context-170 
+Application started (Dev)
+
+2014-11-24 15:00:38,634 - [INFO] - from play in play-internal-execution-context-173 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 15:00:38,808 - [INFO] - from play in play-internal-execution-context-173 
+Application started (Dev)
+
+=======
+2014-11-24 14:19:17,090 - [INFO] - from play in pool-4-thread-3 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-11-24 14:20:30,456 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:20:31,165 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-11-24 14:24:34,232 - [INFO] - from play in play-internal-execution-context-4 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:24:34,377 - [INFO] - from play in play-internal-execution-context-4 
+Application started (Dev)
+
+2014-11-24 14:26:08,376 - [INFO] - from play in play-internal-execution-context-6 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-11-24 14:26:08,478 - [INFO] - from play in play-internal-execution-context-6 
+Application started (Dev)
+
+>>>>>>> other

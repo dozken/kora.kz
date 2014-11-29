@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-lg-4 logotip">
+		<a href="@routes.Application.index"> <img src="@routes.Assets.at("images/home/logo.png")" />
+		</a>
+	</div>
+	<div class="col-lg-8">
+		<div class="form-group topmg">
+            <form method="get" action="@routes.Ads.quick_search">
+			<div class="input-group below24 bias-input-group searching">
+				<input id="quick_search_text" type="text" value="" class="form-control PFBSPLI-13 shadowss"
+					name="str"
+					placeholder="Быстрый поиск / Например: Коровы породы Абердин-Ангус">
+				<div class="input-group-btn bs-dropdown-to-select-group PFBSPR-12">
+					<button type="button"
+						class="noradius btn btn-default dropdown-toggle as-is bs-dropdown-to-select"
+						data-toggle="dropdown" tabindex="-1">
+						<span data-bind="bs-drp-sel-label"> ВО ВСЕХ РАЗДЕЛАХ</span> <input
+							type="hidden" name="animal" data-bind="bs-drp-sel-value"
+							value="ВО ВСЕХ РАЗДЕЛАХ"> <span class="caret"></span> <span
+							class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu"
+						style="max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden;">
+						<!-- Loop -->
+                        <li data-value="ВО ВСЕХ РАЗДЕЛАХ"><a href="#" class="PFBSPR-12">ВО ВСЕХ РАЗДЕЛАХ </a></li>
+                        @for(animal<-models.ad.Animal.find.all()) {
+                            <li data-value="@animal.name"><a href="#" class="PFBSPR-12">@animal.name </a></li>
+                        }
+						<!-- END Loop -->
+					</ul>
+				</div>
+				<span class="input-group-btn">
+					<button type="submit" style="box-shadow: inset 0 1px 1px 1px rgba(0,0,0,.1);border-left: dotted;border-width: 1px;	border-radius: 1px 8px 8px 1px;" class="btn btn-default">
+						<span class="icon-search buttton"></span>
+						</button>
+				</span>
+			</div>
+                </form>
+		</div>
+	</div>
+</div>
