@@ -69,7 +69,7 @@ public class Info extends Controller {
 			user.userSocials
 					.add(UserSocials.fillSocilal("skype", requestData.get("skype")));
 
-            user.profile.phone = ContactInfo.phoneCheck(requestData.get("phone"));
+            user.profile.phone = ContactInfo.phoneCheck(user,requestData.get("phone"));
 
             if(user.profile.phone.equals("exists")) return ok("phone_exists");
 

@@ -13,6 +13,8 @@ import java.util.List;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 import models.Emailing;
 import models.Location;
 import models.Setting;
@@ -640,77 +642,35 @@ public class Ads extends Controller {
         }
     }
 
-    public static Result searchAd(){
+    public static Result searchAd( Integer page, String sort){
 
         DynamicForm requestData = form().bindFromRequest();
-
-        String currency=requestData.get("currency");
+        System.out.println("page : "+page + " sort : "+sort);
         Long animal_id = Long.parseLong(requestData.get("animal"));
-        List<Region> regions=Region.find.all();
-        List<Breed> breeds=Breed.find.all();
-
         Double costStartTg=0.0;
         Double costEndTg=99999999.9;
-
         Double costStartD=0.0;
         Double costEndD=99999999.9;
+        String b="", loc = "", r="", tag = "", gender="", quantity="",pic = "";
+        int endYear = 20000, startYear = 0, f = -1, l = -1;
 
+        if(!requestData.get("breed").equals("all")) b="inner join breed b on a.breed_id=b.id and b.id="+requestData.get("breed");
+        if(!requestData.get("region").equals("all")) r="inner join region r on r.id = c.region_id and r.id=" + requestData.get("region");
+        if(!requestData.get("searchText").equals("")) tag="inner join tag t on a.id=t.ad_id and t.name='"+ requestData.get("searchText") + "'";
+        if(!requestData.get("gender").equals("")) gender="and a.gender='"+ requestData.get("gender") + "'";
+        if(requestData.get("quantity")!=null) quantity = " and a.quantity ='"+ requestData.get("quantity") + "'";
+        if(!requestData.get("ageStart").equals("")) startYear = Integer.parseInt(requestData.get("ageStart"));
+        if(!requestData.get("ageEnd").equals("")) endYear = Integer.parseInt(requestData.get("ageEnd"));
+        if(requestData.get("map")!=null) loc ="and c.location_id is not null";
+        if(requestData.get("picture")!=null) pic ="and a.id in (select ad_id from ad_image)";
+        if(requestData.get("change")!=null)f = -2;
+        if(requestData.get("negotiable_price")!=null) l=0;
 
-
-        List<Double> prices = new ArrayList<Double>();
-        Integer startYear = 0;
-        Integer pic = -1;
-        String map = "not need";
-        Integer endYear = 20000;
-        String[] genders={"male","female","both"};
-        String[] quantity={"single","many"};
-
-
-        if(!requestData.get("region").equals("all")) {
-            regions = new ArrayList<Region>();
-
-             regions.add(Region.find.byId(Long.parseLong(requestData.get("region"))));
-        }
-        if(!requestData.get("breed").equals("all")) {
-            breeds = new ArrayList<Breed>();
-            breeds.add(Breed.find.byId(Long.parseLong(requestData.get("breed"))));
-        }
-        if(!requestData.get("gender").equals("")) {
-            genders = new String[1];
-            genders[0]=requestData.get("gender");
-        }
-        if(requestData.get("quantity")!=null) {
-            quantity = new String[1];
-            quantity[0]=requestData.get("quantity");
-        }
-
-        if(!requestData.get("ageStart").equals("")) {
-            startYear = Integer.parseInt(requestData.get("ageStart"));
-        }
-
-        if(!requestData.get("ageEnd").equals("")) {
-            endYear = Integer.parseInt(requestData.get("ageEnd"));
-        }
-
-        if(requestData.get("change")!=null){
-            prices.add(-2.0);
-        }
-
-        if(requestData.get("negotiable_price")!=null){
-            prices.add(-1.0);
-        }
-
-        if(requestData.get("map")!=null){
-            map =null;
-        }
-        if(requestData.get("picture")!=null){
-            pic =0;
-        }
 
         Double usdK = session("USDtoKZT")!=null ? Double.parseDouble(session("USDtoKZT")) : 180.0;
         Double kztU = session("KZTtoUSD")!=null ? Double.parseDouble(session("KZTtoUSD")) : 0.0055244;
 
-        if(currency.equals("dol")){
+        if(requestData.get("currency").equals("dol")){
 
             if(!requestData.get("costStart").equals("")) {
                 costStartD = Double.parseDouble(requestData.get("costStart"));
@@ -720,7 +680,7 @@ public class Ads extends Controller {
             if(!requestData.get("costEnd").equals("")) {
                 costEndD = Double.parseDouble(requestData.get("costEnd"));
                 costEndTg = usdK * costEndD;
-            }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
+            }
         }else{
 
             if(!requestData.get("costStart").equals("")) {
@@ -730,43 +690,55 @@ public class Ads extends Controller {
             if(!requestData.get("costEnd").equals("")) {
                 costEndTg = Double.parseDouble(requestData.get("costEnd"));
                 costEndD = kztU * costEndTg;
-            }else if(prices.size()!=0){costEndD = 0.0; costEndTg=0.0;}
-
+            }
         }
 
+        if(sort.equals("price")){
 
-        System.out.println("tg => "+costStartTg.toString()+" - " + costEndTg.toString());
-        System.out.println("$ => "+costStartD.toString()+" - " + costEndD.toString());
-        List<Ad> l;
-        if(!requestData.get("searchText").equals("")) {
-             l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
-                    .in("breed", breeds).in("gender", genders).in("quantity", quantity).in("tags.name",requestData.get("searchText"))
-                    .between("birthDate", startYear, endYear)
-                    .or(
-                            Expr.in("priceType.price", prices), Expr.between("priceType.price", 0.0, 999999999.9)
-                    ).or(
-
-                             Expr.and(Expr.between("priceType.price", costStartD, costEndD), Expr.eq("priceType.currency", "$")),
-                             Expr.and(Expr.between("priceType.price", costStartTg, costEndTg), Expr.eq("priceType.currency", "Тенге"))
-                     ).findList();
-        }else{
-            l = Ad.find.where().eq("status", "active").eq("animal", Animal.find.byId(animal_id)).in("contactInfo.region", regions)
-                    .in("breed", breeds).in("gender", genders).in("quantity", quantity)
-                    .between("birthDate", startYear, endYear)
-                    .or(
-                            Expr.in("priceType.price", prices), Expr.between("priceType.price",  0.0, 999999999.9)
-                    ).or(
-
-                            Expr.and(Expr.between("priceType.price", costStartD, costEndD), Expr.eq("priceType.currency", "$")),
-                            Expr.and(Expr.between("priceType.price", costStartTg, costEndTg), Expr.eq("priceType.currency", "Тенге"))
-                    ).findList();
-
+            sort = "p.price * CASE WHEN p.currency='$' THEN "+usdK+" ELSE 1 END";
+        }else if(sort.equals("price_desc")){
+            sort = "p.price * CASE WHEN p.currency='$' THEN "+usdK+" ELSE 1 END desc";
         }
 
+        String a = "SELECT a.id from ad a \n" +
+                "inner join animal ani on a.animal_id=ani.id and ani.id="+animal_id +
+                 b+
+                "inner join contact c on a.contact_info_id = c.id " + loc +
+                 r+ "\n" +tag+
+                "inner join price p on p.id=a.price_type_id and ((p.price>="+f+" and p.price<"+l+") or  ((p.price>="+costStartD+" and p.currency='$' and p.price<="+costEndD+") or  (p.price>="+costStartTg+" and p.currency='Тенге' and p.price<="+costEndTg+"))) " +
+                "where a.status='active' "+ gender + quantity+ " and (a.birth_date between "+ startYear+ " and "+endYear+") " + pic +
+                "order by "+sort+ " \n" +
+                "limit 30 offset "+(page*30);
 
-//List<Ad> l = Ad.find.where().in("images",1L).findList();
-        return ok(_ad_list.render(l,pic,map));
+        String a2 = "SELECT count(*) from ad a \n" +
+                "inner join animal ani on a.animal_id=ani.id and ani.id="+animal_id +
+                b+
+                "inner join contact c on a.contact_info_id = c.id " + loc +
+                r+ "\n" +tag+
+                "inner join price p on p.id=a.price_type_id and ((p.price>="+f+" and p.price<"+l+") or  ((p.price>="+costStartD+" and p.currency='$' and p.price<="+costEndD+") or  (p.price>="+costStartTg+" and p.currency='Тенге' and p.price<="+costEndTg+"))) " +
+                "where a.status='active' "+ gender + quantity+ " and (a.birth_date between "+ startYear+ " and "+endYear+") " + pic;
+
+        SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
+
+        SqlQuery sqlQuery3 = Ebean.createSqlQuery(a2);
+
+        System.out.println(costStartD + " - " + costEndD);
+
+        List<SqlRow> list2 = sqlQuery2.findList();
+        List<SqlRow> list3 = sqlQuery3.findList();
+
+        List<Ad> ads = new ArrayList<Ad>();
+
+        for(int i=0;i<list2.size();i++){
+            long id = list2.get(i).getLong("id");
+            ads.add(Ad.find.byId(id));
+        }
+
+        Ad tmp = new Ad();
+        tmp.id=0L;
+        tmp.quantity=list3.get(0).getInteger("count").toString();
+        ads.add(tmp);
+        return ok(_ad_list.render(ads));
     }
-
 
 }
