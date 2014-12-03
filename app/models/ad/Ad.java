@@ -14,7 +14,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 import models.contact.ContactInfo;
+
 import play.db.ebean.Model;
+
 
 @Entity
 public class Ad extends Model {
@@ -98,15 +100,12 @@ public class Ad extends Model {
 	}
 
 	public static String dateDifference(Date d) {
-		//TODO
-		// LocalDate date =
-		// d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		//
-		// LocalDate today = LocalDate.now();
-		//
-		//
-		// Period p = Period.between(today, date);
-		// return p.getDays() + " дней";
-		return "needto implemented";
+
+		Date today = new Date();
+        long res = d.getTime()-today.getTime();
+        Long days = res/(24*60*60*1000) +1;
+        if(days==1) return days.toString() + " день";
+        if(days<=0) return "update expirity day or archive it method";
+        return days.toString() + " дней";
 	}
 }

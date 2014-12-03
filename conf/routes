@@ -27,6 +27,7 @@ GET         /user/confirmRegistration/:code        controllers.User.confirmRegis
 GET         /user/confirmPage                      controllers.User.confirmPage()
 
 #navbar search
+GET         /ad/nav_search-all                   controllers.Ads.allAd()
 GET         /ad/nav_search-horse                   controllers.Ads.horse()
 GET         /ad/nav_search-camel                   controllers.Ads.camel()
 GET         /ad/nav_search-cow                     controllers.Ads.cow()

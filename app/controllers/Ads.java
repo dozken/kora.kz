@@ -65,7 +65,7 @@ public class Ads extends Controller {
         ContactInfo contactInfo = new ContactInfo();
         contactInfo.city = City.find.byId(Long.parseLong(requestData.get("city")));
         contactInfo.region = Region.find.byId(Long.parseLong(requestData.get("region")));
-        contactInfo.phone = requestData.get("phone");
+        contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone"));
         contactInfo.company = requestData.get("company_name");
         contactInfo.email = requestData.get("email");
 
@@ -209,7 +209,7 @@ public class Ads extends Controller {
 		Ad ad = Ad.find.byId(id);
 		ad.status="archived";
 		ad.update();
-		return ok(myAds.render(Ad.find.where().eq("status", "active").eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
+		return ok(myAds.render(Ad.find.where().eq("contactInfo.email", session("connected")).order("publishedDate desc").findList()));
 		
 	}//
 	
@@ -239,7 +239,7 @@ public class Ads extends Controller {
 
         ad.contactInfo.city = City.find.byId(Long.parseLong(requestData.get("city")));
         ad.contactInfo.region = Region.find.byId(Long.parseLong(requestData.get("region")));
-        ad.contactInfo.phone = requestData.get("phone");
+        ad.contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone"));
         ad.contactInfo.company = requestData.get("company_name");
         ad.contactInfo.email = requestData.get("email");
 
@@ -286,6 +286,8 @@ public class Ads extends Controller {
         ad.tags.add(new Tag(ad.quantity));
         ad.tags.add(new Tag(ad.contactInfo.region.name));
         ad.tags.add(new Tag(ad.contactInfo.city.name));
+
+        ad.status="pending";
 
         ad.update();
         String[] order = requestData.get("image_names").split("&");
@@ -360,6 +362,12 @@ public class Ads extends Controller {
     }
 
 
+
+    public static Result allAd() {
+        List<Ad> l = Ad.find.where().eq("status", "active").findList();
+        Animal animal = Animal.find.where().eq("name","ЛОШАДЬ").findUnique();
+        return ok(adSearch.render(l, animal));
+    }
     public static Result horse() {
         List<Ad> l = Ad.find.where().eq("status", "active").eq("animal",Animal.find.where().eq("name","ЛОШАДЬ").findUnique()).findList();
         Animal animal = Animal.find.where().eq("name","ЛОШАДЬ").findUnique();
