@@ -1,0 +1,67 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+<div id="navbar" class="navbar navbar-default navbar-top navback" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>  <span class="icon-bar"></span>  <span class="icon-bar"></span>  <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navcolor">
+      	
+      	@if(request.uri.contains("profile")||request.uri.contains("admin")){
+      	<li style="height: 50px;">
+      		<a href="@routes.Application.index"><img style="padding-left: 40px;" src="@routes.Assets.at("images/home/white_small_logo.png")"/></a>
+      	</li>
+      	}else{
+      	
+        <li class="dropdown">
+          <a href="asik" class="dropdown-toggle PFBSPR-13 vsenavbar" data-toggle="dropdown">Все объявления <span class="caret"></span></a>
+          <ul class="dropdown-menu vsenavbar" role="menu">
+			<li data-value="ЛОШАДЬ"><a href="@routes.Ads.horse" class="PFBSPR-14">ЛОШАДЬ </a></li>
+			<li data-value="ВЕРБЛЮД"><a href="@routes.Ads.camel" class="PFBSPR-14" >ВЕРБЛЮД </a></li>
+			<li data-value="КОРОВА"><a href="@routes.Ads.cow" class="PFBSPR-14">КОРОВА </a></li>
+			<li data-value="БАРАН"><a href="@routes.Ads.cam" class="PFBSPR-14">БАРАН </a></li>
+			<li data-value="ДРУГИЕ"><a href="@routes.Ads.other" class="PFBSPR-14">ДРУГИЕ </a></li>
+          </ul>
+        </li>
+        }
+      </ul>      
+      <ul class="nav navbar-nav navbar-right ">
+      	@subjectPresentOr() {
+      	<li>
+          <a href="@routes.Manage.myInfo" class="PFBSPI-13">
+            <span class="icon-cabinet"></span>Привет, @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName
+            @if(models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)>0){
+            <span style="padding-left: 10px;">@models.user.AuthorisedUser.getUnreadMessageCount(models.user.AuthorisedUser.findByEmail(session().get("connected")).id)</span>
+            <i class="fa fa-envelope-o" style="font-size: 17px;"></i>
+            }
+          </a>
+        </li>
+        <li>
+          <a href="@routes.Application.signOut" class="PFBSPR-13">
+            <span class="icon-logoutNav"></span> Выйти
+          </a>
+        </li>
+      	}{
+        <li>
+          <a href="#" data-toggle="modal" data-target="#myModal2" class="PFBSPR-13">Регистрация</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="modal" data-target="#myModal" class="PFBSPR-13">
+            <span class="icon-cabinet"></span> Личный кабинет
+          </a>
+        </li>
+        }
+        <li>
+          <a href="@routes.Ads.show" class="PFBSPR-13 vsenavbarright">
+            <span class="icon-addAd"></span> Подать объявление
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>

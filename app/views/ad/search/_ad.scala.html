@@ -1,0 +1,28 @@
+@(ad: models.ad.Ad)
+
+<div class="col-lg-4 suret">
+
+    
+    @if(ad.images.size()>0){
+    <div class="newesuret1"><span>@ad.images.size</span></div>
+    <div class="newesuret"></div>
+    <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
+        <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;"> 
+    </div>
+        
+    }else{<img src="@routes.Assets.at("images/home/cow.png")">}
+</div>
+<div class="col-lg-8">
+    <ul class="obya">
+        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.animal.name @if(ad.animal.id!=5){ @ad.breed.name}</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @ad.priceType.currency</span></li>
+        <li>@ad.description</li>
+        <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
+        <li>Тел: @ad.contactInfo.phone</li>
+    </ul>
+    <ul class="pros">
+        <li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
+        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){Комментариев нет} else{ @ad.comments.size() комментариев}</li>
+        <li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li>
+    </ul>
+</div>
+
