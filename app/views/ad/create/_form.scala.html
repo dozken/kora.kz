@@ -13,10 +13,10 @@
 
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger" style="visibility: hidden;" role="alert"></div>
-<div class="form-group" >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите раздел которая наиболее подходят вашему объявлению">
   <label class="col-md-2 textalign" for="selectbasic">Раздел</label>
   <div class="col-md-3" id="ad-razdel">
-    <select id="animal" name="animal" class="form-control next selectdesign" validation="not_null" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+    <select id="animal" name="animal" class="form-control next selectdesign " validation="not_null" >
         <option selected disabled hidden> Выберите раздел</option>
       @for(animal <- Animal.find.all()) {
           <option value="@animal.id">@animal.name</option>
@@ -29,7 +29,7 @@
 </div>
 
 
-    <div id="genderHide" class="form-group">
+    <div id="genderHide" class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Пол которая наиболее подходят вашему объявлению">
         <label class="col-md-2 textalign" for="radios">Пол</label>
         <div class="col-md-4">
             <label class="radio-inline" for="radios-0">
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-<div id="quanHide" class="form-group">
+<div id="quanHide" class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Количество которая наиболее подходят вашему объявлению">
   <label class="col-md-2 textalign" for="radios">Количество</label>
   <div class="col-md-4">
     <label class="radio-inline" for="radios-0">
@@ -62,7 +62,7 @@
 </div>
 
 <!-- Select Basic -->
-<div id="ageHide" class="form-group">
+<div id="ageHide" class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Возраст которая наиболее подходят вашему объявлению">
   <label class="col-md-2 textalign" for="selectbasic1">Возраст</label>
   <div class="col-md-2">
     <select id="selectbasic1" name="age" class="form-control selectdesign">
@@ -74,7 +74,7 @@
 </div>
 
 <!-- Multiple Radios -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Цену которая наиболее подходят вашему объявлению">
   <label class="col-md-2 textalign" for="radios1">Цена</label>
   <div class="col-md-4">
 
@@ -89,19 +89,21 @@
               <input type="text" id="money_input" value="" class="form-control next" name="money" validation="double">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
-              <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
+              
+                <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1">
                 <span data-bind="bs-drp-sel-label">Тенге</span>
                 <input  type="hidden" name="currency" data-bind="bs-drp-sel-value" value="Тенге" >
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
-              <!-- Loop -->
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                
+                <ul class="dropdown-menu tenge" role="menu" style=" max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden; ">
+                <!-- Loop -->
+                              <li data-value="Тенге"><a href="#">a</a></li>
+                              <li data-value="Доллар"><a href="#">$ </a></li>
+                <!-- END Loop -->
+                </ul>
 
-                              <li data-value="тг"><a href="#">тг </a></li>
-                              <li data-value="$"><a href="#">$ </a></li>
-                                                                    <!-- END Loop -->
-                    </ul>
               </div>
 
 
@@ -126,7 +128,7 @@
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Заголовок должен отражать суть объявления и быть уникален.">
   <label class="col-md-2 textalign" for="textinput">Заголовок</label>
   <div class="col-md-6">
   <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md next" validation="not_null">
@@ -135,7 +137,7 @@
 </div>
 
 <!-- Textarea -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="В описании расскажите подробнее о своем товаре или услуге. Это увеличит количество просмотров!">
   <label class="col-md-2 textalign" for="textarea">Описание</label>
   <div class="col-md-6">
     <textarea class="form-control next" validation="not_null" rows="6" id="textarea" name="description"></textarea>
@@ -143,7 +145,9 @@
 </div>
 
 <!-- File Button -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Можно добавить несколько фотографий сразу.
+Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px.
+Можно изменить порядок фото, перетаскивая их." >
   <label class="col-md-2 textalign" for="filebutton">Фотографии</label>
   <div class="col-md-4">
     <div class="fileUpload btn myb">
@@ -183,7 +187,7 @@
 <legend class="PFBSPRB-17">Контактная информация</legend>
 
 <!-- Select Basic -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите свой регион и город из списка.">
   <label class="col-md-2 textalign" for="selectbasic2">Регион</label>
   <div class="col-md-3">
     <select id="region" name="region" class="form-control selectdesign" validation="not_null">
@@ -210,7 +214,7 @@
 
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Название компаний или Ваше имя.">
   <label class="col-md-2 textalign" for="textinput1">Компания</label>
   <div class="col-md-6">
   <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md" validation="not_null">
@@ -219,13 +223,13 @@
 </div>
 
 <!-- Text input-->
-    <div class="form-group">
+    <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
         <label class="col-md-2 textalign" for="ema">Email</label>
         <div class="col-md-3">
             <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящий номер телефона.">
   <label class="col-md-2 textalign" for="textinput2">Телефон</label>
   <div class="col-md-3">
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
@@ -235,7 +239,7 @@
 
 
 <!-- Select Basic -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Разрешить комментарий или нет.">
   <label class="col-md-2 textalign" for="selectbasic4">Комментарии</label>
   <div class="col-md-5">
     <select id="selectbasic4" name="coment_display" class="form-control selectdesign">

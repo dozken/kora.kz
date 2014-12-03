@@ -23,6 +23,38 @@
 	font-weight: normal;
 	font-style: normal;
 }
+.pohojii{
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px; 
+}
+.pohojii_list_text{
+		width:140px; 
+        height:35px;  
+        text-align: center;
+        font-family: Tahoma;
+        font-weight: bold;
+        font-size: 13px;
+        margin-top: 5px;
+        border-radius: 5px;
+}
+.pohojii_list_price{ 
+	position: absolute;
+	background: rgba(0,0,0,0.6) ;
+	color: white;
+	padding-left: 9px;
+	padding-right: 9px;
+	margin-right: 58px;
+	margin-top: 96px;
+	border-radius: 0px 5px 5px 0px;
+}
+.pohojii_list{
+		width:140px; 
+        height:140px; 
+        background:gray; 
+       	margin-top: 5px;
+       	border-radius: 5px;
+}
 .newesuret{
 	color:white;
 	position: absolute;
@@ -92,6 +124,9 @@
 	float:left;
 	overflow: hidden;
 	background: url(../images/home/arrow.png) no-repeat right ;
+	background-size: 20px;
+	height: 26px;
+	padding-top: 0px;
 }
 
 .selectdesign select {
@@ -629,7 +664,7 @@ hovers in index
 .typelist li {
 	list-style-type: none;
 	display: inline-block;
-	border-bottom: 1px dotted #ccc;
+	border-bottom: 1px dotted #3c3c3c;
 	margin-right: 10px;
 }
 
@@ -637,10 +672,11 @@ hovers in index
 	padding-left: 0px;
 }
 .typelist a{
+	color: #3c3c3c;
 	cursor: pointer;
 }
 .typelist a:active{
-	color: red;
+	color: #90b346;
 }
 .hrcolor {
 	border-top: 1px solid #ccc;
