@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import models.Location;
 import models.ad.Ad;
+import models.user.AuthorisedUser;
+import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
@@ -59,20 +61,25 @@ public class ContactInfo extends Model {
 		
 	}
 
-    public static String phoneCheck(String phone){
+    public static String phoneCheck(AuthorisedUser user, String phone){
 
         phone = phone.replaceAll("[-+ )(]","");
 
-        int row = ContactInfo.find.where().eq("phone",phone).findRowCount();
+        if(user.profile.phone!=null && user.profile.phone.equals(phone)){
+            System.out.println("ten emes");
+            return phone;
+        }else {
+            int row = Profile.find.where().eq("phone", phone).findRowCount();
 
-        if(row>0){
-
-            return "exists";
+            if (row > 0) {
+                System.out.println("kuip ketti");
+                return "exists";
+            }
         }
-
         return phone;
     }
-    public static String phoneCorrect(String phone){
+    public static String phoneCorrect( String phone){
+
 
         return phone.replaceAll("[-+ )(]","");
     }

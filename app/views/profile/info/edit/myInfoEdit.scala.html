@@ -58,9 +58,12 @@ $("#city_list" ).html(data);
 })
 $("#error_fields" ).hide();
 $("#error_fields" ).css( "visibility","none" );
+
 $(document).on("click", "#edit_profile_submit", function(e) {
 
 if(validation()) {
+
+
 $ ( '#profile_edit_form' ).submit ( function ( e ) {
 $.ajax ( {
 url : ' @controllers.routes.Info.update(user.id) ',
@@ -72,7 +75,8 @@ success : function ( data ) {
     if(data=="phone_exists"){
     $("#error_fields" ).html("");
     $("#error_fields" ).append("Номер уже зарегистрирован");
-
+    $("#error_fields" ).show();
+    window.scrollTo(0, 0);
     }else{window.location.href = " @routes.Manage.myInfo() ";}
 
 }
@@ -243,5 +247,36 @@ position:e.latLng
     }
 });
 
+function validation(){
+var r=true;
+
+$("input[validation]").each(function(){
+
+$(this).removeAttr("style");
+$(this).removeClass("validation_error_fields");
+var type = $(this).attr("validation");
+
+if(type=="not_null"){
+var a=$(this).val();
+if(a==null || a==""){
+r=false;
+$(this).attr("style","border-color:red");
+$(this).addClass("validation_error_fields");
+}
+}
+
+if(type=="number"){
+var a=$(this).val();
+if(!a.match(/^\d+$/)){
+r=false;
+$(this).attr("style","border-color:red");
+$(this).addClass("validation_error_fields");
+}
+}
+})
+return r;
+
+
+}
 
 </script>
