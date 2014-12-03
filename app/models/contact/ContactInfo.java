@@ -18,6 +18,8 @@ public class ContactInfo extends Model {
 	/**
 	 * 
 	 */
+    public static final Model.Finder<Long, ContactInfo> find = new Model.Finder<Long, ContactInfo>(
+            Long.class, ContactInfo.class);
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -56,4 +58,22 @@ public class ContactInfo extends Model {
 		save();
 		
 	}
+
+    public static String phoneCheck(String phone){
+
+        phone = phone.replaceAll("[-+ )(]","");
+
+        int row = ContactInfo.find.where().eq("phone",phone).findRowCount();
+
+        if(row>0){
+
+            return "exists";
+        }
+
+        return phone;
+    }
+    public static String phoneCorrect(String phone){
+
+        return phone.replaceAll("[-+ )(]","");
+    }
 }

@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import models.Emailing;
 import models.ad.Ad;
 import models.ad.Comment;
+import models.contact.ContactInfo;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
@@ -141,7 +142,7 @@ public class Application extends Controller {
 
 	public static Result index() throws IOException {
 
-		return ok(views.html.common.index.render());
+        return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {

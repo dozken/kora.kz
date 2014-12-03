@@ -8,6 +8,7 @@ import java.util.List;
 import models.Location;
 import models.ad.Image;
 import models.contact.City;
+import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.SocialNetwork;
@@ -67,7 +68,11 @@ public class Info extends Controller {
 					requestData.get("website")));
 			user.userSocials
 					.add(UserSocials.fillSocilal("skype", requestData.get("skype")));
-			user.profile.phone = requestData.get("phone");
+
+            user.profile.phone = ContactInfo.phoneCheck(requestData.get("phone"));
+
+            if(user.profile.phone.equals("exists")) return ok("phone_exists");
+
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {
 				System.out.println("1");
