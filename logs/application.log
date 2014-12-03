@@ -1,369 +1,813 @@
-2014-12-03 14:02:04,366 - [INFO] - from play in pool-4-thread-6 
+2014-12-03 14:05:19,786 - [INFO] - from play in pool-15-thread-3 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-12-03 14:05:34,993 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-03 14:08:50,471 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6kco7b77n - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[error: incompatible types: int cannot be converted to List<Ad>]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:235) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:230) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:230) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:90) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:122) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-03 14:08:51,130 - [WARN] - from play in New I/O worker #1 
+No application found at invoker init
+
+2014-12-03 14:08:58,787 - [ERROR] - from application in New I/O worker #7 
+
+
+! @6kco7bjhk - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[error: incompatible types: int cannot be converted to List<Ad>]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:235) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:230) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:230) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:90) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:122) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-03 14:09:12,279 - [ERROR] - from application in New I/O worker #8 
+
+
+! @6kco7cdgi - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[error: incompatible types: int cannot be converted to List<Ad>]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:235) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:230) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:230) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:90) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:122) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-03 14:29:31,833 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:05:36,837 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-03 14:29:35,048 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-12-03 14:10:10,770 - [INFO] - from play in play-internal-execution-context-2 
+2014-12-03 14:30:43,349 - [ERROR] - from play in play-akka.actor.default-dispatcher-10 
+Cannot invoke the action, eventually got an error: java.lang.NullPointerException
+
+2014-12-03 14:30:43,503 - [ERROR] - from application in play-akka.actor.default-dispatcher-10 
+
+
+! @6kcoa7pim - Internal server error, for (GET) [/ad/nav_search-all] ->
+
+play.api.Application$$anon$1: Execution exception[[NullPointerException: null]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at models.ad.AdImage.getFirstPicture(AdImage.java:39) ~[na:na]
+	at views.html.ad.search._ad$.apply(_ad.template.scala:38) ~[na:na]
+	at views.html.ad.search.adSearch$$anonfun$apply$1.apply(adSearch.template.scala:52) ~[na:na]
+	at views.html.ad.search.adSearch$$anonfun$apply$1.apply(adSearch.template.scala:51) ~[na:na]
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:245) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:245) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.Iterator$class.foreach(Iterator.scala:743) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1177) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.IterableLike$class.foreach(IterableLike.scala:72) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:54) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:245) ~[scala-library-2.11.2.jar:na]
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104) ~[scala-library-2.11.2.jar:na]
+	at views.html.ad.search.adSearch$.apply(adSearch.template.scala:51) ~[na:na]
+	at views.html.ad.search.adSearch$.render(adSearch.template.scala:136) ~[na:na]
+	at views.html.ad.search.adSearch.render(adSearch.template.scala) ~[na:na]
+	at controllers.Ads.allAd(Ads.java:371) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$19$$anonfun$apply$19.apply(routes_routing.scala:812) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$19$$anonfun$apply$19.apply(routes_routing.scala:812) ~[na:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+
+2014-12-03 14:33:45,359 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:10:11,441 - [INFO] - from play in play-internal-execution-context-2 
+2014-12-03 14:33:45,459 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-12-03 14:10:36,636 - [INFO] - from play in play-internal-execution-context-11 
+2014-12-03 15:03:45,960 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:10:36,858 - [INFO] - from play in play-internal-execution-context-11 
+2014-12-03 15:03:46,059 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-12-03 14:10:59,609 - [INFO] - from play in play-internal-execution-context-11 
+2014-12-03 15:06:22,288 - [INFO] - from play in play-internal-execution-context-2 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:10:59,833 - [INFO] - from play in play-internal-execution-context-11 
+2014-12-03 15:06:22,383 - [INFO] - from play in play-internal-execution-context-2 
 Application started (Dev)
 
-2014-12-03 14:11:29,747 - [INFO] - from play in play-internal-execution-context-13 
+2014-12-03 15:08:34,801 - [INFO] - from play in play-internal-execution-context-2 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:11:29,966 - [INFO] - from play in play-internal-execution-context-13 
+2014-12-03 15:08:34,893 - [INFO] - from play in play-internal-execution-context-2 
 Application started (Dev)
 
-2014-12-03 14:11:43,100 - [INFO] - from play in play-internal-execution-context-16 
+2014-12-03 15:10:41,349 - [INFO] - from play in play-internal-execution-context-2 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:11:43,319 - [INFO] - from play in play-internal-execution-context-16 
+2014-12-03 15:10:41,446 - [INFO] - from play in play-internal-execution-context-2 
 Application started (Dev)
 
-2014-12-03 14:12:12,544 - [INFO] - from play in play-internal-execution-context-19 
+2014-12-03 15:13:07,812 - [INFO] - from play in play-internal-execution-context-2 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:12:12,762 - [INFO] - from play in play-internal-execution-context-19 
+2014-12-03 15:13:07,894 - [INFO] - from play in play-internal-execution-context-2 
 Application started (Dev)
 
-2014-12-03 14:19:50,311 - [INFO] - from play in play-internal-execution-context-23 
+2014-12-03 15:13:13,549 - [ERROR] - from play in play-akka.actor.default-dispatcher-68 
+Cannot invoke the action, eventually got an error: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+
+
+2014-12-03 15:13:13,552 - [ERROR] - from application in play-akka.actor.default-dispatcher-68 
+
+
+! @6kcofn200 - Internal server error, for (POST) [/ad/filter_search?page=0&sort=publishedDate%20desc] ->
+
+play.api.Application$$anon$1: Execution exception[[PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:195) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.RelationalQueryRequest.findList(RelationalQueryRequest.java:83) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.findList(DefaultServer.java:1552) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.querydefn.DefaultRelationalQuery.findList(DefaultRelationalQuery.java:77) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at controllers.Ads.searchAd(Ads.java:709) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: column "publisheddate" does not exist
+  Position: 414
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1836) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:512) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:273) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at com.jolbox.bonecp.PreparedStatementHandle.executeQuery(PreparedStatementHandle.java:174) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:105) ~[avaje-ebeanorm-3.3.4.jar:na]
+	... 43 common frames omitted
+
+2014-12-03 15:13:41,478 - [ERROR] - from play in play-akka.actor.default-dispatcher-67 
+Cannot invoke the action, eventually got an error: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+
+
+2014-12-03 15:13:41,481 - [ERROR] - from application in play-akka.actor.default-dispatcher-67 
+
+
+! @6kcofoh85 - Internal server error, for (POST) [/ad/filter_search?page=0&sort=publishedDate%20desc] ->
+
+play.api.Application$$anon$1: Execution exception[[PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column "publisheddate" does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by publishedDate desc 
+limit 30 offset 0
+
+
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:195) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.RelationalQueryRequest.findList(RelationalQueryRequest.java:83) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.findList(DefaultServer.java:1552) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.querydefn.DefaultRelationalQuery.findList(DefaultRelationalQuery.java:77) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at controllers.Ads.searchAd(Ads.java:709) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: column "publisheddate" does not exist
+  Position: 414
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1836) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:512) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:273) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at com.jolbox.bonecp.PreparedStatementHandle.executeQuery(PreparedStatementHandle.java:174) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:105) ~[avaje-ebeanorm-3.3.4.jar:na]
+	... 43 common frames omitted
+
+2014-12-03 15:14:02,986 - [INFO] - from play in play-internal-execution-context-3 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:19:50,523 - [INFO] - from play in play-internal-execution-context-23 
+2014-12-03 15:14:03,088 - [INFO] - from play in play-internal-execution-context-3 
 Application started (Dev)
 
-2014-12-03 14:21:16,168 - [INFO] - from play in play-internal-execution-context-27 
+2014-12-03 15:14:04,382 - [ERROR] - from play in play-akka.actor.default-dispatcher-77 
+Cannot invoke the action, eventually got an error: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column a.publisheddate does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by a.publishedDate desc 
+limit 30 offset 0
+
+
+
+2014-12-03 15:14:04,385 - [ERROR] - from application in play-akka.actor.default-dispatcher-77 
+
+
+! @6kcofpp53 - Internal server error, for (POST) [/ad/filter_search?page=0&sort=publishedDate%20desc] ->
+
+play.api.Application$$anon$1: Execution exception[[PersistenceException: Query threw SQLException:ERROR: column a.publisheddate does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by a.publishedDate desc 
+limit 30 offset 0
+
+]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.PersistenceException: Query threw SQLException:ERROR: column a.publisheddate does not exist
+  Position: 414 Query was:
+SELECT a.id from ad a 
+inner join animal ani on a.animal_id=ani.id and ani.id=1inner join contact c on a.contact_info_id = c.id 
+inner join price p on p.id=a.price_type_id and ((p.price>=-1 and p.price<-1) or  ((p.price>=0.0 and p.currency='$' and p.price<=9.99999999E7) or  (p.price>=0.0 and p.currency='Тенге' and p.price<=9.99999999E7))) where a.status='active'  and (a.birth_date between 0 and 2050) order by a.publishedDate desc 
+limit 30 offset 0
+
+
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:195) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.RelationalQueryRequest.findList(RelationalQueryRequest.java:83) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.findList(DefaultServer.java:1552) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.querydefn.DefaultRelationalQuery.findList(DefaultRelationalQuery.java:77) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at controllers.Ads.searchAd(Ads.java:709) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[na:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	... 6 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: column a.publisheddate does not exist
+  Position: 414
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1836) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:512) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:273) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at com.jolbox.bonecp.PreparedStatementHandle.executeQuery(PreparedStatementHandle.java:174) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.avaje.ebeaninternal.server.query.DefaultRelationalQueryEngine.findMany(DefaultRelationalQueryEngine.java:105) ~[avaje-ebeanorm-3.3.4.jar:na]
+	... 43 common frames omitted
+
+2014-12-03 15:15:08,531 - [INFO] - from play in play-internal-execution-context-3 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:21:16,378 - [INFO] - from play in play-internal-execution-context-27 
+2014-12-03 15:15:08,610 - [INFO] - from play in play-internal-execution-context-3 
 Application started (Dev)
 
-2014-12-03 14:24:09,184 - [INFO] - from play in play-internal-execution-context-27 
+2014-12-03 15:21:21,105 - [INFO] - from play in play-internal-execution-context-3 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:24:09,395 - [INFO] - from play in play-internal-execution-context-27 
+2014-12-03 15:21:21,180 - [INFO] - from play in play-internal-execution-context-3 
 Application started (Dev)
 
-2014-12-03 14:24:41,453 - [INFO] - from play in play-internal-execution-context-34 
+2014-12-03 15:21:47,051 - [INFO] - from play in play-internal-execution-context-3 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:24:41,659 - [INFO] - from play in play-internal-execution-context-34 
+2014-12-03 15:21:47,124 - [INFO] - from play in play-internal-execution-context-3 
 Application started (Dev)
 
-2014-12-03 14:25:16,671 - [INFO] - from play in play-internal-execution-context-34 
+2014-12-03 15:27:04,993 - [INFO] - from play in play-internal-execution-context-3 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:25:16,869 - [INFO] - from play in play-internal-execution-context-34 
+2014-12-03 15:27:05,081 - [INFO] - from play in play-internal-execution-context-3 
 Application started (Dev)
 
-2014-12-03 14:25:25,547 - [INFO] - from play in play-internal-execution-context-40 
+2014-12-03 16:52:16,284 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:25:25,752 - [INFO] - from play in play-internal-execution-context-40 
+2014-12-03 16:52:16,530 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:25:43,026 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 16:59:26,715 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:25:43,226 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 16:59:26,794 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:25:52,076 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 17:00:06,489 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:25:52,272 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 17:00:06,564 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:26:09,829 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 17:00:44,050 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:26:10,030 - [INFO] - from play in play-internal-execution-context-39 
+2014-12-03 17:00:44,124 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:26:19,526 - [INFO] - from play in play-internal-execution-context-46 
+2014-12-03 17:04:10,700 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:26:19,727 - [INFO] - from play in play-internal-execution-context-46 
+2014-12-03 17:04:10,784 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:27:00,327 - [INFO] - from play in play-internal-execution-context-46 
+2014-12-03 17:04:52,440 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:27:00,524 - [INFO] - from play in play-internal-execution-context-46 
+2014-12-03 17:04:52,520 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:27:46,602 - [INFO] - from play in play-internal-execution-context-49 
+2014-12-03 17:05:33,800 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:27:46,801 - [INFO] - from play in play-internal-execution-context-49 
+2014-12-03 17:05:33,880 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:28:16,713 - [INFO] - from play in play-internal-execution-context-49 
+2014-12-03 17:06:21,890 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:28:16,907 - [INFO] - from play in play-internal-execution-context-49 
+2014-12-03 17:06:21,963 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:29:25,322 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:12:12,430 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:29:25,518 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:12:12,512 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:30:09,460 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:13:23,172 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:30:09,654 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:13:23,245 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:30:20,502 - [INFO] - from play in play-internal-execution-context-59 
+2014-12-03 17:20:19,691 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:30:20,697 - [INFO] - from play in play-internal-execution-context-59 
+2014-12-03 17:20:19,776 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:30:48,415 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:21:14,068 - [INFO] - from play in play-internal-execution-context-5 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:30:48,612 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:21:14,154 - [INFO] - from play in play-internal-execution-context-5 
 Application started (Dev)
 
-2014-12-03 14:30:52,141 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:23:46,806 - [INFO] - from play in play-internal-execution-context-6 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:30:52,333 - [INFO] - from play in play-internal-execution-context-54 
+2014-12-03 17:23:46,875 - [INFO] - from play in play-internal-execution-context-6 
 Application started (Dev)
 
-2014-12-03 14:31:05,562 - [INFO] - from play in play-internal-execution-context-64 
+2014-12-03 17:26:20,922 - [INFO] - from play in play-internal-execution-context-6 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:31:05,754 - [INFO] - from play in play-internal-execution-context-64 
+2014-12-03 17:26:20,995 - [INFO] - from play in play-internal-execution-context-6 
 Application started (Dev)
 
-2014-12-03 14:32:27,694 - [INFO] - from play in play-internal-execution-context-65 
+2014-12-03 17:27:40,604 - [INFO] - from play in play-internal-execution-context-6 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:32:27,926 - [INFO] - from play in play-internal-execution-context-65 
+2014-12-03 17:27:40,673 - [INFO] - from play in play-internal-execution-context-6 
 Application started (Dev)
 
-2014-12-03 14:32:42,012 - [INFO] - from play in play-internal-execution-context-72 
+2014-12-03 17:29:34,718 - [INFO] - from play in play-internal-execution-context-6 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:32:42,217 - [INFO] - from play in play-internal-execution-context-72 
+2014-12-03 17:29:34,789 - [INFO] - from play in play-internal-execution-context-6 
 Application started (Dev)
 
-2014-12-03 14:34:57,097 - [INFO] - from play in play-internal-execution-context-65 
+2014-12-03 17:30:17,238 - [INFO] - from play in play-internal-execution-context-7 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:34:57,292 - [INFO] - from play in play-internal-execution-context-65 
+2014-12-03 17:30:17,306 - [INFO] - from play in play-internal-execution-context-7 
 Application started (Dev)
 
-2014-12-03 14:36:36,107 - [INFO] - from play in play-internal-execution-context-76 
+2014-12-03 17:30:57,447 - [INFO] - from play in play-internal-execution-context-7 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:36:36,301 - [INFO] - from play in play-internal-execution-context-76 
+2014-12-03 17:30:57,531 - [INFO] - from play in play-internal-execution-context-7 
 Application started (Dev)
 
-2014-12-03 14:40:44,389 - [INFO] - from play in play-internal-execution-context-76 
+2014-12-03 17:31:24,754 - [INFO] - from play in play-internal-execution-context-8 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:40:44,592 - [INFO] - from play in play-internal-execution-context-76 
+2014-12-03 17:31:24,838 - [INFO] - from play in play-internal-execution-context-8 
 Application started (Dev)
 
-2014-12-03 14:45:05,861 - [INFO] - from play in play-internal-execution-context-95 
+2014-12-03 17:32:52,722 - [INFO] - from play in play-internal-execution-context-8 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:45:06,058 - [INFO] - from play in play-internal-execution-context-95 
+2014-12-03 17:32:52,792 - [INFO] - from play in play-internal-execution-context-8 
 Application started (Dev)
 
-2014-12-03 14:52:49,984 - [INFO] - from play in play-internal-execution-context-128 
+2014-12-03 17:38:49,379 - [INFO] - from play in play-internal-execution-context-8 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:52:50,182 - [INFO] - from play in play-internal-execution-context-128 
+2014-12-03 17:38:49,456 - [INFO] - from play in play-internal-execution-context-8 
 Application started (Dev)
 
-2014-12-03 14:53:17,825 - [INFO] - from play in play-internal-execution-context-128 
+2014-12-03 17:39:30,725 - [INFO] - from play in play-internal-execution-context-8 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 14:53:18,020 - [INFO] - from play in play-internal-execution-context-128 
+2014-12-03 17:39:30,796 - [INFO] - from play in play-internal-execution-context-8 
 Application started (Dev)
 
-2014-12-03 15:01:45,645 - [INFO] - from play in play-internal-execution-context-154 
+2014-12-03 17:44:20,204 - [INFO] - from play in play-internal-execution-context-10 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:01:45,864 - [INFO] - from play in play-internal-execution-context-154 
+2014-12-03 17:44:20,275 - [INFO] - from play in play-internal-execution-context-10 
 Application started (Dev)
 
-2014-12-03 15:04:01,552 - [INFO] - from play in play-internal-execution-context-159 
+2014-12-03 17:49:57,597 - [INFO] - from play in play-internal-execution-context-10 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:04:01,742 - [INFO] - from play in play-internal-execution-context-159 
+2014-12-03 17:49:57,681 - [INFO] - from play in play-internal-execution-context-10 
 Application started (Dev)
 
-2014-12-03 15:06:09,413 - [INFO] - from play in play-internal-execution-context-164 
+2014-12-03 17:50:13,703 - [INFO] - from play in play-internal-execution-context-10 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:06:09,630 - [INFO] - from play in play-internal-execution-context-164 
+2014-12-03 17:50:13,776 - [INFO] - from play in play-internal-execution-context-10 
 Application started (Dev)
 
-2014-12-03 15:07:10,237 - [INFO] - from play in play-internal-execution-context-179 
+2014-12-03 17:50:22,877 - [INFO] - from play in play-internal-execution-context-10 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:07:10,428 - [INFO] - from play in play-internal-execution-context-179 
+2014-12-03 17:50:22,950 - [INFO] - from play in play-internal-execution-context-10 
 Application started (Dev)
 
-2014-12-03 15:07:31,733 - [INFO] - from play in play-internal-execution-context-181 
+2014-12-03 17:52:13,141 - [INFO] - from play in play-internal-execution-context-10 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:07:32,117 - [INFO] - from play in play-internal-execution-context-181 
+2014-12-03 17:52:13,206 - [INFO] - from play in play-internal-execution-context-10 
 Application started (Dev)
 
-2014-12-03 15:09:14,512 - [INFO] - from play in play-internal-execution-context-184 
-database [default] connected at jdbc:postgresql://localhost/kora
+2014-12-03 17:53:05,810 - [ERROR] - from play in play-internal-execution-context-12 
+Cannot invoke the action, eventually got an error: javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[ERROR: duplicate key value violates unique constraint "pk_ad_image"\n   Detail: Key (id)=(1) already exists.]
 
-2014-12-03 15:09:14,702 - [INFO] - from play in play-internal-execution-context-184 
-Application started (Dev)
+2014-12-03 17:53:05,815 - [ERROR] - from application in play-internal-execution-context-12 
 
-2014-12-03 15:18:33,773 - [INFO] - from play in play-internal-execution-context-205 
-database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-03 15:18:33,970 - [INFO] - from play in play-internal-execution-context-205 
-Application started (Dev)
+! @6kcpamlj4 - Internal server error, for (POST) [/ad/create] ->
 
-2014-12-03 15:18:41,811 - [INFO] - from play in play-internal-execution-context-211 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:18:42,061 - [INFO] - from play in play-internal-execution-context-211 
-Application started (Dev)
-
-2014-12-03 15:18:47,982 - [INFO] - from play in play-internal-execution-context-212 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:18:48,214 - [INFO] - from play in play-internal-execution-context-212 
-Application started (Dev)
-
-2014-12-03 15:18:55,365 - [INFO] - from play in play-internal-execution-context-214 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:18:55,554 - [INFO] - from play in play-internal-execution-context-214 
-Application started (Dev)
-
-2014-12-03 15:19:51,038 - [INFO] - from play in play-internal-execution-context-214 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:19:51,234 - [INFO] - from play in play-internal-execution-context-214 
-Application started (Dev)
-
-2014-12-03 15:20:42,925 - [INFO] - from play in play-internal-execution-context-219 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:20:43,114 - [INFO] - from play in play-internal-execution-context-219 
-Application started (Dev)
-
-2014-12-03 15:20:59,283 - [INFO] - from play in play-internal-execution-context-219 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:20:59,471 - [INFO] - from play in play-internal-execution-context-219 
-Application started (Dev)
-
-2014-12-03 15:21:27,952 - [INFO] - from play in play-internal-execution-context-219 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:21:28,143 - [INFO] - from play in play-internal-execution-context-219 
-Application started (Dev)
-
-2014-12-03 15:21:37,692 - [INFO] - from play in play-internal-execution-context-219 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:21:37,897 - [INFO] - from play in play-internal-execution-context-219 
-Application started (Dev)
-
-2014-12-03 15:22:47,297 - [INFO] - from play in play-internal-execution-context-227 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:22:47,495 - [INFO] - from play in play-internal-execution-context-227 
-Application started (Dev)
-
-2014-12-03 15:23:12,493 - [INFO] - from play in play-internal-execution-context-234 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:23:12,690 - [INFO] - from play in play-internal-execution-context-234 
-Application started (Dev)
-
-2014-12-03 15:23:29,628 - [INFO] - from play in play-internal-execution-context-236 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:23:29,851 - [INFO] - from play in play-internal-execution-context-236 
-Application started (Dev)
-
-2014-12-03 15:24:06,890 - [INFO] - from play in play-internal-execution-context-236 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:24:07,085 - [INFO] - from play in play-internal-execution-context-236 
-Application started (Dev)
-
-2014-12-03 15:24:40,555 - [INFO] - from play in play-internal-execution-context-236 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:24:40,742 - [INFO] - from play in play-internal-execution-context-236 
-Application started (Dev)
-
-2014-12-03 15:24:58,447 - [INFO] - from play in play-internal-execution-context-236 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 15:24:58,652 - [INFO] - from play in play-internal-execution-context-236 
-Application started (Dev)
-
-2014-12-03 16:23:48,562 - [INFO] - from play in play-internal-execution-context-266 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:23:48,820 - [INFO] - from play in play-internal-execution-context-266 
-Application started (Dev)
-
-2014-12-03 16:24:09,334 - [INFO] - from play in play-internal-execution-context-266 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:24:09,523 - [INFO] - from play in play-internal-execution-context-266 
-Application started (Dev)
-
-2014-12-03 16:27:00,797 - [INFO] - from play in play-internal-execution-context-270 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:27:01,016 - [INFO] - from play in play-internal-execution-context-270 
-Application started (Dev)
-
-2014-12-03 16:27:45,865 - [INFO] - from play in play-internal-execution-context-270 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:27:46,099 - [INFO] - from play in play-internal-execution-context-270 
-Application started (Dev)
-
-2014-12-03 16:28:53,015 - [INFO] - from play in play-internal-execution-context-272 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:28:53,212 - [INFO] - from play in play-internal-execution-context-272 
-Application started (Dev)
-
-2014-12-03 16:31:42,960 - [INFO] - from play in play-internal-execution-context-272 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-03 16:31:43,184 - [INFO] - from play in play-internal-execution-context-272 
-Application started (Dev)
+play.api.Application$$anon$1: Execution exception[[PersistenceException: ERROR executing DML bindLog[] error[ERROR: duplicate key value violates unique constraint "pk_ad_image"\n   Detail: Key (id)=(1) already exists.]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
+Caused by: javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[ERROR: duplicate key value violates unique constraint "pk_ad_image"\n   Detail: Key (id)=(1) already exists.]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:97) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.insert(DmlBeanPersister.java:57) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeInsertBean(DefaultPersistExecute.java:66) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:448) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:478) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.insert(DefaultPersister.java:331) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:306) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:276) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:244) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebean.Ebean.save(Ebean.java:453) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at play.db.ebean.Model.save(Model.java:95) ~[play-java-ebean_2.11-2.3.6.jar:2.3.6]
+	at controllers.Ads.create(Ads.java:146) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "pk_ad_image"
+  Detail: Key (id)=(1) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2103) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1836) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:512) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeUpdate(AbstractJdbc2Statement.java:334) ~[postgresql-9.1-901-1.jdbc4.jar:na]
+	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:205) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.avaje.ebeaninternal.server.type.DataBind.executeUpdate(DataBind.java:55) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.InsertHandler.execute(InsertHandler.java:134) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-3.3.4.jar:na]
+	... 52 common frames omitted
 

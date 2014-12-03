@@ -1,7 +1,6 @@
 function validation(){
 	var r=true;
-	
-	alert("qsd");
+
 	$("input[validation]").each(function(){
 
 	$(this).removeAttr("style");

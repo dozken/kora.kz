@@ -95,7 +95,7 @@ return  false;
 if( files.length+$("#images li" ).length<=5 ){
 
 FileAPI.each ( files, function ( file ) {
-FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
+FileAPI.Image ( file ).preview( 400 ).get ( function ( err, img ) {
 
    var imgName = file.name.replace(/ /g, '');
    imageMap[imgName] = img.toDataURL("image/jpeg");
