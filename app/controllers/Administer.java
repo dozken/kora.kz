@@ -12,7 +12,6 @@ import views.html.admin.advertisements.adminAdvertisements;
 import views.html.admin.filters.adminFilters;
 import views.html.admin.moderators.adminModerators;
 import views.html.admin.users.adminUsers;
-import views.html.mailBody.recoverPassword;
 import views.html.mailBody.adModerate;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
@@ -53,11 +52,11 @@ public class Administer extends Controller {
 		/**
 		 * moderating active rejected
 		 */
-		if(ad.status.equals("active")||ad.status.equals("rejected"))
-		Emailing.send("Қора.kz: Ваше объявление",
-				new String[] { ad.contactInfo.company + " <"
-						+ ad.contactInfo.email + ">" },
-				adModerate.render(ad).body());
+		if (ad.status.equals("active") || ad.status.equals("rejected"))
+			Emailing.send("Қора.kz: Ваше объявление",
+					new String[] { ad.contactInfo.company + " <"
+							+ ad.contactInfo.email + ">" },
+					adModerate.render(ad).body());
 		if (requestData.get("status").equals("moderating")) {
 			ObjectNode event = Json.newObject();
 			event.put("moderating", "active");

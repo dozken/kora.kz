@@ -3,12 +3,8 @@ package controllers;
 import static play.data.Form.form;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -16,7 +12,6 @@ import javax.imageio.ImageIO;
 import models.Emailing;
 import models.ad.Ad;
 import models.ad.Comment;
-import models.contact.ContactInfo;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
@@ -28,7 +23,11 @@ import views.html.common.about;
 import views.html.common.feedback;
 import views.html.common.rules;
 import views.html.common.sitemap;
-import views.html.mailBody.*;
+import views.html.mailBody.ad_successfully;
+import views.html.mailBody.comment_users_ad;
+import views.html.mailBody.feedbackMessage;
+import views.html.mailBody.private_message;
+import views.html.mailBody.registred_successfully;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -100,7 +99,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.deleteMessages(),
 				controllers.routes.javascript.Ads.readAsMessages(),
 				controllers.routes.javascript.Ads.filterAds(),
-				controllers.routes.javascript.Ads.favoriteSize(),				
+				controllers.routes.javascript.Ads.favoriteSize(),
 				controllers.routes.javascript.Manage.read(),
 				controllers.routes.javascript.Manage.paymentReport(),
 				controllers.routes.javascript.Manage.addMoney(),
@@ -142,13 +141,13 @@ public class Application extends Controller {
 
 	public static Result index() throws IOException {
 
-        return ok(views.html.common.index.render());
+		return ok(views.html.common.index.render());
 	}
 
 	public static Result about() {
 		return ok(about.render());
 	}
-	
+
 	public static Result sitemap() {
 		return ok(sitemap.render());
 	}

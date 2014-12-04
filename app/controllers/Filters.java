@@ -57,7 +57,7 @@ public class Filters extends Controller {
 		loc = coords.split(",");
 		city.location.lat = loc[0].trim();
 		city.location.lng = loc[1].trim();
-		
+
 		flash("success", "Город <strong>" + city.name
 				+ "</strong> изменен на <strong>" + name + "</strong>!");
 		city.name = name;
@@ -202,6 +202,5 @@ public class Filters extends Controller {
 		}
 
 	}
-
 
 }

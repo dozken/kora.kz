@@ -25,19 +25,19 @@ public class City extends Model {
 			Long.class, City.class);
 	@Id
 	public Long id;
-	
+
 	@ManyToOne
 	public Region region;
 
 	public String name;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	public Location location;
-	
-	@OneToMany(mappedBy="city")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	public Location location = new Location();
+
+	@OneToMany(mappedBy = "city")
 	public List<Profile> profiles;
-	
-	@OneToMany(mappedBy="city")	
+
+	@OneToMany(mappedBy = "city")
 	public List<ContactInfo> contactInfos;
 
 }

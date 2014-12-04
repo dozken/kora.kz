@@ -28,7 +28,7 @@ public class Advertisement extends Model {
 
 	public String placeOnPage;
 
-	//@Lob
+	// @Lob
 	public byte[] file;
 
 	public String fileType;
@@ -36,42 +36,44 @@ public class Advertisement extends Model {
 	public String status = "show";
 
 	public Date publishDate = new Date();
-	
+
 	public Date updateDate = new Date();
-	
+
 	public Date tillToDate;
-	
-	public static void addPosition(){
+
+	public static void addPosition() {
 		List<Advertisement> advertisements = find.all();
-		for(Advertisement temp : advertisements){
+		for (Advertisement temp : advertisements) {
 			++temp.position;
 			temp.update();
 		}
 	}
-	
-	public static void removePosition(Advertisement advertisement){
-		List<Advertisement> advertisements = find.where().gt("position", advertisement.position).findList();
-		for(Advertisement temp : advertisements){
+
+	public static void removePosition(Advertisement advertisement) {
+		List<Advertisement> advertisements = find.where()
+				.gt("position", advertisement.position).findList();
+		for (Advertisement temp : advertisements) {
 			--temp.position;
 			temp.update();
 		}
 	}
-	
-	public static void rePosition(Advertisement advertisement,String direction){
-		if(direction.equals("up")){
+
+	public static void rePosition(Advertisement advertisement, String direction) {
+		if (direction.equals("up")) {
 			--advertisement.position;
-			Advertisement temp = find.where().eq("position", advertisement.position).findUnique();
+			Advertisement temp = find.where()
+					.eq("position", advertisement.position).findUnique();
 			++temp.position;
 			temp.update();
 			advertisement.update();
-		}else
-		if(direction.equals("down")){
+		} else if (direction.equals("down")) {
 			++advertisement.position;
-			Advertisement temp = find.where().eq("position", advertisement.position).findUnique();
+			Advertisement temp = find.where()
+					.eq("position", advertisement.position).findUnique();
 			--temp.position;
 			temp.update();
 			advertisement.update();
 		}
 	}
-	
+
 }

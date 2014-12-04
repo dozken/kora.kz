@@ -22,8 +22,8 @@ import be.objectify.deadbolt.core.models.Subject;
 @Entity
 public class AuthorisedUser extends Model implements Subject {
 
-    public static final Model.Finder<Long, AuthorisedUser> find = new Model.Finder<Long, AuthorisedUser>(
-            Long.class, AuthorisedUser.class);
+	public static final Model.Finder<Long, AuthorisedUser> find = new Model.Finder<Long, AuthorisedUser>(
+			Long.class, AuthorisedUser.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,14 +32,14 @@ public class AuthorisedUser extends Model implements Subject {
 
 	public String userName;
 
-	@Column(unique=true)
+	@Column(unique = true)
 	public String email;
 
 	public String password;
 
-    public String status="waiting";
-	
-	@OneToOne(cascade=CascadeType.ALL)
+	public String status = "waiting";
+
+	@OneToOne(cascade = CascadeType.ALL)
 	public Profile profile;
 
 	@ManyToMany
@@ -48,26 +48,25 @@ public class AuthorisedUser extends Model implements Subject {
 	@ManyToMany
 	public List<UserPermission> permissions;
 
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	public List<UserSetting> userSettings;
 
-    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-    public List<UserSocials> userSocials;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	public List<UserSocials> userSocials;
 
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	public List<AdminSetting> adminSettings;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	public Location location;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    public  Location location;
+	@ManyToMany
+	public List<Ad> favorites;
 
-    @ManyToMany
-    public List<Ad> favorites;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	public List<Payment> payments = new java.util.ArrayList<Payment>();
 
-    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-    public List<Payment> payments = new java.util.ArrayList<Payment>();
-    
-    @Override
+	@Override
 	public List<? extends Role> getRoles() {
 		return roles;
 	}
@@ -85,27 +84,29 @@ public class AuthorisedUser extends Model implements Subject {
 	public static AuthorisedUser findByEmail(String email) {
 		return find.where().eq("email", email).findUnique();
 	}
-	
-	public static List<AuthorisedUser> getUsers(){
-		return find.where().in("roles", SecurityRole.findByName("user")).findList();
-	}
-	
-	public static List<AuthorisedUser> getModerators(){
-		return find.where().in("roles", SecurityRole.findByName("moderator")).findList();
+
+	public static List<AuthorisedUser> getUsers() {
+		return find.where().in("roles", SecurityRole.findByName("user"))
+				.findList();
 	}
 
-    public static Integer getUnreadMessageCount(Long id){
+	public static List<AuthorisedUser> getModerators() {
+		return find.where().in("roles", SecurityRole.findByName("moderator"))
+				.findList();
+	}
 
-        return PrivateMessage.find.where().eq("recipent_id",id).eq("status","unread").findRowCount();
-    }
-	
-	public static String md5(String password){
+	public static Integer getUnreadMessageCount(Long id) {
+
+		return PrivateMessage.find.where().eq("recipent_id", id)
+				.eq("status", "unread").findRowCount();
+	}
+
+	public static String md5(String password) {
 		return password;
 	}
 
-    public static Double getMyMoney(String email){
-        return AuthorisedUser.findByEmail(email).profile.myMonney;
-    }
-    
-    
+	public static Double getMyMoney(String email) {
+		return AuthorisedUser.findByEmail(email).profile.myMonney;
+	}
+
 }

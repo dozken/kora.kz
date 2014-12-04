@@ -1,3 +1,27 @@
-2014-12-04 16:01:54,099 - [INFO] - from play in pool-4-thread-2 
+2014-12-04 16:26:54,232 - [INFO] - from play in pool-4-thread-3 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-12-04 16:27:17,254 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:27:17,877 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-04 16:30:22,743 - [INFO] - from play in play-internal-execution-context-9 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:30:22,913 - [INFO] - from play in play-internal-execution-context-9 
+Application started (Dev)
+
+2014-12-04 16:32:24,524 - [INFO] - from play in play-internal-execution-context-18 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:32:24,616 - [INFO] - from play in play-internal-execution-context-18 
+Application started (Dev)
+
+2014-12-04 16:33:33,918 - [INFO] - from play in play-internal-execution-context-21 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:33:34,007 - [INFO] - from play in play-internal-execution-context-21 
+Application started (Dev)
 
