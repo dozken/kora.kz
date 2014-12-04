@@ -1,27 +1,69 @@
-<<<<<<< local
-2014-12-04 15:06:13,390 - [INFO] - from play in pool-4-thread-1 
+2014-12-04 16:50:54,106 - [INFO] - from play in pool-4-thread-2 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-12-04 15:08:42,155 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-04 16:50:57,593 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 15:08:49,690 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-04 16:50:59,197 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6kd69kfgb - Internal server error, for (GET) [/] ->
+
+play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution![An SQL script need to be run on your database.]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1$$anonfun$apply$1.apply$mcV$sp(Evolutions.scala:510) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.evolutions.EvolutionsPlugin.withLock(Evolutions.scala:531) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:485) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:483) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:381) ~[scala-library-2.11.2.jar:na]
+	at play.api.db.evolutions.EvolutionsPlugin.onStart(Evolutions.scala:483) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:381) ~[scala-library-2.11.2.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.2.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-04 16:52:40,314 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:52:40,996 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-12-04 15:11:55,716 - [ERROR] - from play in play-akka.actor.default-dispatcher-3 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
+2014-12-04 16:56:38,601 - [ERROR] - from play in play-internal-execution-context-20 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
 
-2014-12-04 15:11:55,743 - [ERROR] - from application in play-akka.actor.default-dispatcher-3 
-=======
-2014-12-04 16:26:54,232 - [INFO] - from play in pool-4-thread-3 
-Listening for HTTP on /0:0:0:0:0:0:0:0:9000
->>>>>>> other
+2014-12-04 16:56:38,607 - [ERROR] - from play in play-internal-execution-context-23 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
 
-<<<<<<< local
+2014-12-04 16:56:38,608 - [ERROR] - from play in play-internal-execution-context-24 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
 
-! @6kd5mkbdg - Internal server error, for (POST) [/ad/filter_search?page=0&sort=a.published_date%20desc] ->
+2014-12-04 16:56:38,608 - [ERROR] - from play in play-internal-execution-context-21 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
 
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "as"]]
+2014-12-04 16:56:38,622 - [ERROR] - from application in play-internal-execution-context-23 
+
+
+! @6kd6adnj9 - Internal server error, for (POST) [/ad/create] ->
+
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
 	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
@@ -37,28 +79,28 @@ play.api.Application$$anon$1: Execution exception[[NumberFormatException: For in
 	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "as"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:681) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:64) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
 	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
@@ -80,19 +122,18 @@ Caused by: java.lang.NumberFormatException: For input string: "as"
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
 
-2014-12-04 15:12:00,732 - [ERROR] - from play in play-akka.actor.default-dispatcher-9 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
-
-2014-12-04 15:12:00,735 - [ERROR] - from application in play-akka.actor.default-dispatcher-9 
+2014-12-04 16:56:38,623 - [ERROR] - from application in play-internal-execution-context-20 
 
 
-! @6kd5mkio8 - Internal server error, for (POST) [/ad/filter_search?page=0&sort=price] ->
+! @6kd6adnj9 - Internal server error, for (POST) [/ad/create] ->
 
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "as"]]
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
 	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
@@ -108,28 +149,28 @@ play.api.Application$$anon$1: Execution exception[[NumberFormatException: For in
 	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "as"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:681) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:64) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
 	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
@@ -151,19 +192,18 @@ Caused by: java.lang.NumberFormatException: For input string: "as"
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
 
-2014-12-04 15:12:01,353 - [ERROR] - from play in play-akka.actor.default-dispatcher-3 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
-
-2014-12-04 15:12:01,356 - [ERROR] - from application in play-akka.actor.default-dispatcher-3 
+2014-12-04 16:56:38,623 - [ERROR] - from application in play-internal-execution-context-21 
 
 
-! @6kd5mkjm5 - Internal server error, for (POST) [/ad/filter_search?page=0&sort=price_desc] ->
+! @6kd6adnj9 - Internal server error, for (POST) [/ad/create] ->
 
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "as"]]
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
 	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
@@ -179,28 +219,28 @@ play.api.Application$$anon$1: Execution exception[[NumberFormatException: For in
 	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "as"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:681) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:64) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
 	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
@@ -222,19 +262,18 @@ Caused by: java.lang.NumberFormatException: For input string: "as"
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
 
-2014-12-04 15:12:01,881 - [ERROR] - from play in play-akka.actor.default-dispatcher-9 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
-
-2014-12-04 15:12:01,884 - [ERROR] - from application in play-akka.actor.default-dispatcher-9 
+2014-12-04 16:56:38,628 - [ERROR] - from application in play-internal-execution-context-24 
 
 
-! @6kd5mkkgc - Internal server error, for (POST) [/ad/filter_search?page=0&sort=a.published_date%20desc] ->
+! @6kd6adnj9 - Internal server error, for (POST) [/ad/create] ->
 
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "as"]]
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
 	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
@@ -250,28 +289,28 @@ play.api.Application$$anon$1: Execution exception[[NumberFormatException: For in
 	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "as"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:681) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:64) ~[classes/:2.3.0]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[classes/:na]
 	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
@@ -293,19 +332,169 @@ Caused by: java.lang.NumberFormatException: For input string: "as"
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
 
-2014-12-04 15:12:02,737 - [ERROR] - from play in play-akka.actor.default-dispatcher-3 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
+2014-12-04 16:56:38,655 - [ERROR] - from play in New I/O worker #1 
+Exception caught in RequestBodyHandler
+java.nio.channels.ClosedChannelException: null
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.cleanUpWriteBuffer(AbstractNioWorker.java:433) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.writeFromUserCode(AbstractNioWorker.java:128) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.handleAcceptedSocket(NioServerSocketPipelineSink.java:99) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.eventSunk(NioServerSocketPipelineSink.java:36) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:779) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.Channels.write(Channels.java:725) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.doEncode(OneToOneEncoder.java:71) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.handleDownstream(OneToOneEncoder.java:59) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at com.typesafe.netty.http.pipelining.HttpPipeliningHandler.handleDownstream(HttpPipeliningHandler.java:88) ~[netty-http-pipelining-1.1.2.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at play.core.server.netty.NettyResultStreamer$.sendDownstream(NettyResultStreamer.scala:196) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:115) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
 
-2014-12-04 15:12:02,740 - [ERROR] - from application in play-akka.actor.default-dispatcher-3 
+2014-12-04 16:56:38,658 - [ERROR] - from play in New I/O worker #6 
+Exception caught in RequestBodyHandler
+java.nio.channels.ClosedChannelException: null
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.cleanUpWriteBuffer(AbstractNioWorker.java:433) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.writeFromUserCode(AbstractNioWorker.java:128) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.handleAcceptedSocket(NioServerSocketPipelineSink.java:99) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.eventSunk(NioServerSocketPipelineSink.java:36) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:779) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.Channels.write(Channels.java:725) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.doEncode(OneToOneEncoder.java:71) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.handleDownstream(OneToOneEncoder.java:59) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at com.typesafe.netty.http.pipelining.HttpPipeliningHandler.handleDownstream(HttpPipeliningHandler.java:88) ~[netty-http-pipelining-1.1.2.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at play.core.server.netty.NettyResultStreamer$.sendDownstream(NettyResultStreamer.scala:196) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:115) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-04 16:56:38,656 - [ERROR] - from play in play-internal-execution-context-20 
+Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: null
+
+2014-12-04 16:56:38,656 - [ERROR] - from play in New I/O worker #3 
+Exception caught in RequestBodyHandler
+java.nio.channels.ClosedChannelException: null
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.cleanUpWriteBuffer(AbstractNioWorker.java:433) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.writeFromUserCode(AbstractNioWorker.java:128) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.handleAcceptedSocket(NioServerSocketPipelineSink.java:99) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.eventSunk(NioServerSocketPipelineSink.java:36) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:779) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.Channels.write(Channels.java:725) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.doEncode(OneToOneEncoder.java:71) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.handleDownstream(OneToOneEncoder.java:59) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at com.typesafe.netty.http.pipelining.HttpPipeliningHandler.handleDownstream(HttpPipeliningHandler.java:88) ~[netty-http-pipelining-1.1.2.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at play.core.server.netty.NettyResultStreamer$.sendDownstream(NettyResultStreamer.scala:196) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:115) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-04 16:56:38,655 - [ERROR] - from play in New I/O worker #4 
+Exception caught in RequestBodyHandler
+java.nio.channels.ClosedChannelException: null
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.cleanUpWriteBuffer(AbstractNioWorker.java:433) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.writeFromUserCode(AbstractNioWorker.java:128) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.handleAcceptedSocket(NioServerSocketPipelineSink.java:99) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.eventSunk(NioServerSocketPipelineSink.java:36) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:779) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.Channels.write(Channels.java:725) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.doEncode(OneToOneEncoder.java:71) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.handleDownstream(OneToOneEncoder.java:59) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at com.typesafe.netty.http.pipelining.HttpPipeliningHandler.handleDownstream(HttpPipeliningHandler.java:88) ~[netty-http-pipelining-1.1.2.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at play.core.server.netty.NettyResultStreamer$.sendDownstream(NettyResultStreamer.scala:196) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:115) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-04 16:56:38,665 - [ERROR] - from application in play-internal-execution-context-20 
 
 
-! @6kd5mklna - Internal server error, for (POST) [/ad/filter_search?page=0&sort=a.published_date%20desc] ->
+! @6kd6adnl3 - Internal server error, for (POST) [/ad/create] ->
 
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "as"]]
+play.api.Application$$anon$1: Execution exception[[NumberFormatException: null]]
 	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
@@ -321,28 +510,28 @@ play.api.Application$$anon$1: Execution exception[[NumberFormatException: For in
 	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "as"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:681) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
+Caused by: java.lang.NumberFormatException: null
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at java.lang.Long.parseLong(Unknown Source) ~[na:1.8.0_25]
+	at controllers.Ads.create(Ads.java:64) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$29$$anonfun$apply$29.apply(routes_routing.scala:892) ~[na:na]
 	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
@@ -364,187 +553,130 @@ Caused by: java.lang.NumberFormatException: For input string: "as"
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
 	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
+	... 4 common frames omitted
 
-2014-12-04 15:26:54,241 - [INFO] - from play in play-internal-execution-context-2 
+2014-12-04 16:56:38,669 - [ERROR] - from play in New I/O worker #7 
+Exception caught in RequestBodyHandler
+java.nio.channels.ClosedChannelException: null
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.cleanUpWriteBuffer(AbstractNioWorker.java:433) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.AbstractNioWorker.writeFromUserCode(AbstractNioWorker.java:128) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.handleAcceptedSocket(NioServerSocketPipelineSink.java:99) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.socket.nio.NioServerSocketPipelineSink.eventSunk(NioServerSocketPipelineSink.java:36) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:779) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.Channels.write(Channels.java:725) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.doEncode(OneToOneEncoder.java:71) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.handler.codec.oneone.OneToOneEncoder.handleDownstream(OneToOneEncoder.java:59) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at com.typesafe.netty.http.pipelining.HttpPipeliningHandler.handleDownstream(HttpPipeliningHandler.java:88) ~[netty-http-pipelining-1.1.2.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591) ~[netty-3.9.3.Final.jar:na]
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784) ~[netty-3.9.3.Final.jar:na]
+	at play.core.server.netty.NettyResultStreamer$.sendDownstream(NettyResultStreamer.scala:196) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.netty.NettyResultStreamer$$anonfun$bufferingIteratee$1.apply(NettyResultStreamer.scala:115) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$13.apply(Iteratee.scala:495) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-04 17:02:40,626 - [INFO] - from play in play-internal-execution-context-34 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 15:26:54,527 - [INFO] - from play in play-internal-execution-context-2 
+2014-12-04 17:02:40,883 - [INFO] - from play in play-internal-execution-context-34 
 Application started (Dev)
 
-2014-12-04 15:27:25,041 - [INFO] - from play in play-internal-execution-context-12 
+2014-12-04 17:03:22,309 - [INFO] - from play in play-internal-execution-context-40 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 15:27:25,251 - [INFO] - from play in play-internal-execution-context-12 
+2014-12-04 17:03:22,563 - [INFO] - from play in play-internal-execution-context-40 
 Application started (Dev)
 
-2014-12-04 16:10:22,395 - [ERROR] - from play in play-akka.actor.default-dispatcher-69 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "a222333"
-
-2014-12-04 16:10:23,181 - [ERROR] - from play in play-akka.actor.default-dispatcher-72 
-Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "a222333"
-
-2014-12-04 16:10:24,829 - [ERROR] - from application in play-akka.actor.default-dispatcher-72 
-
-
-! @6kd64c20c - Internal server error, for (POST) [/ad/filter_search?page=0&sort=a.published_date%20desc] ->
-
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "a222333"]]
-	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "a222333"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:676) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
-	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
-	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
-
-2014-12-04 16:10:24,829 - [ERROR] - from application in play-akka.actor.default-dispatcher-69 
-
-
-! @6kd64c20c - Internal server error, for (POST) [/ad/filter_search?page=1&sort=a.published_date%20desc] ->
-
-play.api.Application$$anon$1: Execution exception[[NumberFormatException: For input string: "a222333"]]
-	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.6.jar:2.3.6]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.2.jar:na]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.2.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.2.jar:na]
-Caused by: java.lang.NumberFormatException: For input string: "a222333"
-	at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source) ~[na:1.8.0_25]
-	at sun.misc.FloatingDecimal.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at java.lang.Double.parseDouble(Unknown Source) ~[na:1.8.0_25]
-	at controllers.Ads.searchAd(Ads.java:676) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$28$$anonfun$apply$28.apply(routes_routing.scala:884) ~[classes/:na]
-	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.2.jar:na]
-	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.2.jar:na]
-	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
-	at scala.Option.map(Option.scala:145) [scala-library-2.11.2.jar:na]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.6.jar:2.3.6]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.2.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
-	... 6 common frames omitted
-
-=======
-2014-12-04 16:27:17,254 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-04 17:11:07,623 - [INFO] - from play in play-internal-execution-context-58 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 16:27:17,877 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-04 17:11:07,845 - [INFO] - from play in play-internal-execution-context-58 
 Application started (Dev)
 
-2014-12-04 16:30:22,743 - [INFO] - from play in play-internal-execution-context-9 
+2014-12-04 17:11:44,147 - [INFO] - from play in play-internal-execution-context-66 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 16:30:22,913 - [INFO] - from play in play-internal-execution-context-9 
+2014-12-04 17:11:44,375 - [INFO] - from play in play-internal-execution-context-66 
 Application started (Dev)
 
-2014-12-04 16:32:24,524 - [INFO] - from play in play-internal-execution-context-18 
+2014-12-04 17:12:01,570 - [INFO] - from play in play-internal-execution-context-69 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 16:32:24,616 - [INFO] - from play in play-internal-execution-context-18 
+2014-12-04 17:12:01,781 - [INFO] - from play in play-internal-execution-context-69 
 Application started (Dev)
 
-2014-12-04 16:33:33,918 - [INFO] - from play in play-internal-execution-context-21 
+2014-12-04 17:12:28,304 - [INFO] - from play in play-internal-execution-context-69 
 database [default] connected at jdbc:postgresql://localhost/kora
 
-2014-12-04 16:33:34,007 - [INFO] - from play in play-internal-execution-context-21 
+2014-12-04 17:12:28,524 - [INFO] - from play in play-internal-execution-context-69 
 Application started (Dev)
 
->>>>>>> other
+2014-12-04 17:15:10,740 - [INFO] - from play in play-internal-execution-context-69 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:15:10,966 - [INFO] - from play in play-internal-execution-context-69 
+Application started (Dev)
+
+2014-12-04 17:15:42,728 - [INFO] - from play in play-internal-execution-context-69 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:15:42,945 - [INFO] - from play in play-internal-execution-context-69 
+Application started (Dev)
+
+2014-12-04 17:16:12,527 - [INFO] - from play in play-internal-execution-context-80 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:16:12,739 - [INFO] - from play in play-internal-execution-context-80 
+Application started (Dev)
+
+2014-12-04 17:18:57,101 - [INFO] - from play in play-internal-execution-context-82 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:18:57,308 - [INFO] - from play in play-internal-execution-context-82 
+Application started (Dev)
+
+2014-12-04 17:23:35,018 - [INFO] - from play in play-internal-execution-context-99 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:23:35,229 - [INFO] - from play in play-internal-execution-context-99 
+Application started (Dev)
+
+2014-12-04 17:24:50,180 - [INFO] - from play in play-internal-execution-context-104 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:24:50,384 - [INFO] - from play in play-internal-execution-context-104 
+Application started (Dev)
+
+2014-12-04 17:25:11,278 - [INFO] - from play in play-internal-execution-context-106 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:25:11,477 - [INFO] - from play in play-internal-execution-context-106 
+Application started (Dev)
+
+2014-12-04 17:26:15,410 - [INFO] - from play in play-internal-execution-context-109 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 17:26:15,620 - [INFO] - from play in play-internal-execution-context-109 
+Application started (Dev)
+
