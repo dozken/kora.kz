@@ -20,25 +20,26 @@ public class Setting extends Model {
 
 	public static final Model.Finder<Long, Setting> find = new Model.Finder<Long, Setting>(
 			Long.class, Setting.class);
-	
+
 	@Id
 	public Long id;
-	
+
 	public Integer position;
-	
+
 	public String name;
-	
+
 	public String category;
-	
+
 	@OneToMany
 	public List<UserSetting> userSettings;
-	
+
 	@OneToMany
 	public List<AdminSetting> adminSettings;
-	
+
 	public Double price;
-	
-	public static List<Setting> findByCategory(String category){
-		return find.where().eq("category", category).orderBy("position").findList();		
+
+	public static List<Setting> findByCategory(String category) {
+		return find.where().eq("category", category).orderBy("position")
+				.findList();
 	}
 }

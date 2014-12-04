@@ -1,3 +1,4 @@
+<<<<<<< local
 2014-12-04 15:06:13,390 - [INFO] - from play in pool-4-thread-1 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
@@ -11,7 +12,12 @@ Application started (Dev)
 Cannot invoke the action, eventually got an error: java.lang.NumberFormatException: For input string: "as"
 
 2014-12-04 15:11:55,743 - [ERROR] - from application in play-akka.actor.default-dispatcher-3 
+=======
+2014-12-04 16:26:54,232 - [INFO] - from play in pool-4-thread-3 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+>>>>>>> other
 
+<<<<<<< local
 
 ! @6kd5mkbdg - Internal server error, for (POST) [/ad/filter_search?page=0&sort=a.published_date%20desc] ->
 
@@ -516,3 +522,29 @@ Caused by: java.lang.NumberFormatException: For input string: "a222333"
 	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.2.jar:na]
 	... 6 common frames omitted
 
+=======
+2014-12-04 16:27:17,254 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:27:17,877 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-04 16:30:22,743 - [INFO] - from play in play-internal-execution-context-9 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:30:22,913 - [INFO] - from play in play-internal-execution-context-9 
+Application started (Dev)
+
+2014-12-04 16:32:24,524 - [INFO] - from play in play-internal-execution-context-18 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:32:24,616 - [INFO] - from play in play-internal-execution-context-18 
+Application started (Dev)
+
+2014-12-04 16:33:33,918 - [INFO] - from play in play-internal-execution-context-21 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-04 16:33:34,007 - [INFO] - from play in play-internal-execution-context-21 
+Application started (Dev)
+
+>>>>>>> other

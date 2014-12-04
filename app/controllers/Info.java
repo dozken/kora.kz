@@ -3,7 +3,6 @@ package controllers;
 import static play.data.Form.form;
 
 import java.io.File;
-import java.util.List;
 
 import models.Location;
 import models.ad.Image;
@@ -11,21 +10,13 @@ import models.contact.City;
 import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
-import models.user.SocialNetwork;
 import models.user.UserSocials;
-
-import org.apache.commons.codec.binary.Base64;
-
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.profile.info.edit.myInfoEdit;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
-
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlQuery;
-import com.avaje.ebean.SqlRow;
 
 @SubjectPresent
 public class Info extends Controller {
@@ -60,18 +51,22 @@ public class Info extends Controller {
 			}
 			user.profile.region = Region.find.byId(Long.parseLong(requestData
 					.get("region")));
-            user.profile.city = City.find.byId(Long.parseLong(requestData.get("city")));
-			user.userSocials.add(UserSocials.fillSocilal("vk", requestData.get("vk")));
+			user.profile.city = City.find.byId(Long.parseLong(requestData
+					.get("city")));
+			user.userSocials.add(UserSocials.fillSocilal("vk",
+					requestData.get("vk")));
 			user.userSocials.add(UserSocials.fillSocilal("facebook",
 					requestData.get("facebook")));
 			user.userSocials.add(UserSocials.fillSocilal("website",
 					requestData.get("website")));
-			user.userSocials
-					.add(UserSocials.fillSocilal("skype", requestData.get("skype")));
+			user.userSocials.add(UserSocials.fillSocilal("skype",
+					requestData.get("skype")));
 
-            user.profile.phone = ContactInfo.phoneCheck(user,requestData.get("phone"));
+			user.profile.phone = ContactInfo.phoneCheck(user,
+					requestData.get("phone"));
 
-            if(user.profile.phone.equals("exists")) return ok("phone_exists");
+			if (user.profile.phone.equals("exists"))
+				return ok("phone_exists");
 
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {
@@ -113,5 +108,4 @@ public class Info extends Controller {
 		return ok("baaaaa");
 	}
 
-	
 }

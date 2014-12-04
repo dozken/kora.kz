@@ -71,7 +71,7 @@
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Контакты</li>
-				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@ad.contactInfo.phone</li></ul></li>
+				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@utils._phone(ad.contactInfo.phone)</li></ul></li>
 			</ul>
 		</li>
 	</ul>
@@ -210,19 +210,23 @@
 <br>
   <div class="contain" style="width: 134%;">
     <h4>
-      Похожие объявления из категории "Лошади Ахалтеке" в Атырау
+      Похожие объявления из категории "@ad.animal.name @ad.breed.name" в @ad.contactInfo.city.name
     </h4>
     <div class="footerborder"></div>
     
+    @for(likeAd <-models.ad.Ad.like(ad)){
     <div class="pohojii">
       
-      <div class="pohojii_list_text">Ахалтеке,2012<br>12 000$</div>
+      <div class="pohojii_list_text">@likeAd.breed.name, @likeAd.birthDate<br>@likeAd.priceType.price @likeAd.priceType.currency</div>
       <div class="pohojii_list">
-          <div class="pohojii_list_price">12 000$</div>
-          <img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/horse1.png")"/>
+          <div class="pohojii_list_price">@Math.round(likeAd.priceType.price) @likeAd.priceType.currency</div>
+          @if(likeAd.images.size()>0){
+          <img style="height:140px;width:140px;" src="@models.ad.AdImage.getFirstPicture(likeAd.id)"/>
+          }else{<img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/cow.png")">}
       </div>
 
     </div>
+    }
 
 </div>  
 

@@ -11,7 +11,7 @@ import play.db.ebean.Model;
 
 @Entity
 public class Qiwi extends Model {
-	
+
 	/**
 	 * 
 	 */
@@ -23,13 +23,13 @@ public class Qiwi extends Model {
 
 	@Column(unique = true, nullable = true)
 	public Integer prv_txn;
-	
+
 	public String account;
-	
+
 	public Double sum;
-	
+
 	public String comment;
-	
+
 	public static final Model.Finder<Long, Qiwi> find = new Model.Finder<Long, Qiwi>(
 			Long.class, Qiwi.class);
 
@@ -43,32 +43,33 @@ public class Qiwi extends Model {
 			return 1;
 	}
 
-	public static Integer pay(String remoteIP,Integer txn_id, String txn_date, String account,
-			Double sum) {
+	public static Integer pay(String remoteIP, Integer txn_id, String txn_date,
+			String account, Double sum) {
 		// TODO Auto-generated method stub
 		if (Qiwi.find.where().eq("txn_id", txn_id).findRowCount() == 0
 				&& Profile.find.where().eq("phone", account).findRowCount() == 1) {
-			
+
 			Qiwi qiwi = new Qiwi();
 			qiwi.txn_id = txn_id;
 			qiwi.txn_date = txn_date;
-			qiwi.prv_txn = Qiwi.find.findRowCount()+1;
+			qiwi.prv_txn = Qiwi.find.findRowCount() + 1;
 			qiwi.account = account;
 			qiwi.sum = sum;
 			qiwi.save();
-			
-			AuthorisedUser u = Profile.find.where().eq("phone", account).findUnique().user;
-			if(u==null)
+
+			AuthorisedUser u = Profile.find.where().eq("phone", account)
+					.findUnique().user;
+			if (u == null)
 				System.out.println("tarakan");
 			else
-				System.out.println("tarkan:"+u.email);
+				System.out.println("tarkan:" + u.email);
 			Payment p = new Payment();
 			p.amount = sum;
-			p.paymentType = "add";			
+			p.paymentType = "add";
 			u.payments.add(p);
-	        u.profile.myMonney+=p.amount;
+			u.profile.myMonney += p.amount;
 			u.update();
-			
+
 			return qiwi.prv_txn;
 		} else
 			return -1;
