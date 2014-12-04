@@ -71,7 +71,7 @@
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Контакты</li>
-				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@ad.contactInfo.phone</li></ul></li>
+				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@utils._phone(ad.contactInfo.phone)</li></ul></li>
 			</ul>
 		</li>
 	</ul>
@@ -214,6 +214,7 @@
     </h4>
     <div class="footerborder"></div>
     
+    @for(i <- 1 to 7){
     <div class="pohojii">
       
       <div class="pohojii_list_text">Ахалтеке,2012<br>12 000$</div>
@@ -223,6 +224,7 @@
       </div>
 
     </div>
+    }
 
 </div>  
 
