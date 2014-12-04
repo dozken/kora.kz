@@ -14,7 +14,7 @@
 </div>
 <div class="col-lg-8">
     <ul class="obya">
-        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.animal.name @if(ad.animal.id!=5){ @ad.breed.name}</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @ad.priceType.currency</span></li>
+        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.animal.name @if(ad.animal.id!=5){ @ad.breed.name}</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
         <li class="PFBSPLI-13">@if(ad.description.length>100){ @ad.description.take(200)... }else{ @ad.description}</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
         <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
