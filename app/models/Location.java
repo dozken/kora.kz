@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name="locations")
+@Table(name = "locations")
 public class Location extends Model {
 
 	/**
@@ -17,14 +17,12 @@ public class Location extends Model {
 
 	public static final Finder<Long, Location> find = new Finder<Long, Location>(
 			Long.class, Location.class);
-	
+
 	@Id
 	public Long id;
-	
-	public String lat;
 
-    public String lng;
+	public String lat = "43";
 
-
+	public String lng = "76";
 
 }

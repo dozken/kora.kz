@@ -18,17 +18,17 @@ public class Price extends Model {
 
 	public static final Model.Finder<Long, Price> find = new Model.Finder<Long, Price>(
 			Long.class, Price.class);
-	
+
 	@Id
 	public Long id;
-	
+
 	public Double price = 0.0;
-	
+
 	public String currency = "";
-	
+
 	@OneToMany
 	public List<Ad> ads;
-	
-//	public Double price;
-	
+
+	// public Double price;
+
 }

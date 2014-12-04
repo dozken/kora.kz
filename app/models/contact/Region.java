@@ -19,19 +19,19 @@ public class Region extends Model {
 
 	public static final Model.Finder<Long, Region> find = new Model.Finder<Long, Region>(
 			Long.class, Region.class);
-	
+
 	@Id
 	public Long id;
-	
+
 	public String name;
-	
-	@OneToMany(mappedBy="region")
+
+	@OneToMany(mappedBy = "region")
 	public List<Profile> profiles;
-	
-	@OneToMany(mappedBy="region")	
+
+	@OneToMany(mappedBy = "region")
 	public List<ContactInfo> contactInfos;
-	
-	@OneToMany(mappedBy="region")	
+
+	@OneToMany(mappedBy = "region")
 	public List<City> city;
-	
+
 }

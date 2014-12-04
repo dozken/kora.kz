@@ -8,8 +8,8 @@ import play.db.ebean.Model;
 @Entity
 public class SocialNetwork extends Model {
 
-    public static final Model.Finder<Long, SocialNetwork> find = new Model.Finder<Long, SocialNetwork>(
-            Long.class, SocialNetwork.class);
+	public static final Model.Finder<Long, SocialNetwork> find = new Model.Finder<Long, SocialNetwork>(
+			Long.class, SocialNetwork.class);
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class SocialNetwork extends Model {
 
 	@Id
 	public Long id;
-	
+
 	public String name;
 
 }

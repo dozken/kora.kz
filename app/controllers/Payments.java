@@ -6,7 +6,8 @@ import play.data.DynamicForm;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.xml.payment.*;
+import views.xml.payment.check;
+import views.xml.payment.pay;
 
 public class Payments extends Controller {
 

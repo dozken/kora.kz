@@ -26,7 +26,7 @@ import be.objectify.deadbolt.core.models.Role;
  * @author Steve Chaloner (steve@objectify.be)
  */
 @Entity
-@Table(name="role")
+@Table(name = "role")
 public class SecurityRole extends Model implements Role {
 	/**
 	 * 
