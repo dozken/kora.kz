@@ -20,44 +20,40 @@ import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html._accessFailed;
 import be.objectify.deadbolt.core.models.Subject;
 import be.objectify.deadbolt.java.AbstractDeadboltHandler;
 
 /**
  * @author Steve Chaloner (steve@objectify.be)
  */
-public class MyDeadboltHandler extends AbstractDeadboltHandler
-{
-    public F.Promise<Result> beforeAuthCheck(Http.Context context)
-    {
-        // returning null means that everything is OK.  Return a real result if you want a redirect to a login page or
-        // somewhere else
-        return F.Promise.pure(null);
-    }
+public class MyDeadboltHandler extends AbstractDeadboltHandler {
+	public F.Promise<Result> beforeAuthCheck(Http.Context context) {
+		// returning null means that everything is OK. Return a real result if
+		// you want a redirect to a login page or
+		// somewhere else
+		return F.Promise.pure(null);
+	}
 
-    public Subject getSubject(Http.Context context)
-    {
-        // in a real application, the user name would probably be in the session following a login process
-        return AuthorisedUser.findByEmail(Controller.session("connected"));
-    }
+	public Subject getSubject(Http.Context context) {
+		// in a real application, the user name would probably be in the session
+		// following a login process
+		return AuthorisedUser.findByEmail(Controller.session("connected"));
+	}
 
-//    public DynamicResourceHandler getDynamicResourceHandler(Http.Context context)
-//    {
-//        return new MyDynamicResourceHandler();
-//    }
+	// public DynamicResourceHandler getDynamicResourceHandler(Http.Context
+	// context)
+	// {
+	// return new MyDynamicResourceHandler();
+	// }
 
-    @Override
-    public F.Promise<Result> onAuthFailure(Http.Context context,
-                                                 String content)
-    {
-        // you can return any result from here - forbidden, etc
-        return F.Promise.promise(new F.Function0<Result>()
-        {
-            @Override
-            public Result apply() throws Throwable {
-                return ok(views.html.common.index.render());
-            }
-        });
-    }
+	@Override
+	public F.Promise<Result> onAuthFailure(Http.Context context, String content) {
+		// you can return any result from here - forbidden, etc
+		return F.Promise.promise(new F.Function0<Result>() {
+			@Override
+			public Result apply() throws Throwable {
+				return ok(views.html.common.index.render());
+			}
+		});
+	}
 }

@@ -1,7 +1,5 @@
 package models.ad;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,19 +12,19 @@ public class Tag extends Model {
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	public Long id;
-	
+
 	public String name;
 
-    @ManyToOne
+	@ManyToOne
 	public Ad ad;
-    
-public Tag(String tag){
-		
-	name = tag;
+
+	public Tag(String tag) {
+
+		name = tag;
 	}
 }

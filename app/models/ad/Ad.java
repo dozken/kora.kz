@@ -14,9 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 import models.contact.ContactInfo;
-
 import play.db.ebean.Model;
-
 
 @Entity
 public class Ad extends Model {
@@ -102,10 +100,18 @@ public class Ad extends Model {
 	public static String dateDifference(Date d) {
 
 		Date today = new Date();
-        long res = d.getTime()-today.getTime();
-        Long days = res/(24*60*60*1000) +1;
-        if(days==1) return days.toString() + " день";
-        if(days<=0) return "update expirity day or archive it method";
-        return days.toString() + " дней";
+		long res = d.getTime() - today.getTime();
+		Long days = res / (24 * 60 * 60 * 1000) + 1;
+		if (days == 1)
+			return days.toString() + " день";
+		if (days <= 0)
+			return "update expirity day or archive it method";
+		return days.toString() + " дней";
+	}
+
+	public static List<Ad> like(Ad ad) {
+		return find.where().eq("breed", ad.breed)
+				.eq("contactInfo.city", ad.contactInfo.city).setMaxRows(7)
+				.findList();
 	}
 }

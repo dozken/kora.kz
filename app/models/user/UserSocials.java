@@ -7,33 +7,33 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import play.db.ebean.Model;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
-import play.db.ebean.Model;
-
 @Entity
-@Table(name="socials_user")
+@Table(name = "socials_user")
 public class UserSocials extends Model {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public static final Model.Finder<Long, UserSocials> find = new Model.Finder<Long, UserSocials>(
-            Long.class, UserSocials.class);
+	public static final Model.Finder<Long, UserSocials> find = new Model.Finder<Long, UserSocials>(
+			Long.class, UserSocials.class);
 
-    @Id
-    public Long id;
+	@Id
+	public Long id;
 
 	@ManyToOne
 	public AuthorisedUser user;
 
-   @ManyToOne
-   public SocialNetwork socialNetwork;
+	@ManyToOne
+	public SocialNetwork socialNetwork;
 
-    public String value;
-    
-    public static UserSocials fillSocilal(String name, String value) {
+	public String value;
+
+	public static UserSocials fillSocilal(String name, String value) {
 		UserSocials socials = new UserSocials();
 		socials.socialNetwork = SocialNetwork.find.where().eq("name", name)
 				.findUnique();
@@ -65,5 +65,3 @@ public class UserSocials extends Model {
 	}
 
 }
-
-
