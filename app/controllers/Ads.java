@@ -46,7 +46,9 @@ public class Ads extends Controller {
 	public static Result get(Long id) {
 		Ad ad = Ad.find.byId(id);
 		++ad.views;
-		ad.update();
+		try{
+		ad.save();
+		}catch(Exception e){}
 		return ok(showAd.render(ad));
 	}
 
@@ -93,11 +95,11 @@ public class Ads extends Controller {
 		if (requestData.get("payment_type").equals("normal")) {
 
 			price.currency = requestData.get("currency");
-			price.price = Double.parseDouble(requestData.get("money"));
+			price.price = Integer.parseInt(requestData.get("money"));
 		} else if (requestData.get("payment_type").equals("change")) {
-			price.price = -2.0;
+			price.price = -2;
 		} else {
-			price.price = -1.0;
+			price.price = -1;
 		}
 		price.save();
 		ad.priceType = price;
@@ -279,11 +281,11 @@ public class Ads extends Controller {
 		if (requestData.get("payment_type").equals("normal")) {
 
 			ad.priceType.currency = requestData.get("currency");
-			ad.priceType.price = Double.parseDouble(requestData.get("money"));
+			ad.priceType.price = Integer.parseInt(requestData.get("money"));
 		} else if (requestData.get("payment_type").equals("change")) {
-			ad.priceType.price = -2.0;
+			ad.priceType.price = -2;
 		} else {
-			ad.priceType.price = -1.0;
+			ad.priceType.price = -1;
 		}
 
 		for (int i = 0; i < ad.tags.size(); i++) {
