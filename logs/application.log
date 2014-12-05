@@ -6421,3 +6421,342 @@ Caused by: java.lang.NumberFormatException: null
 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.4.jar:na]
 	... 4 common frames omitted
 
+2014-12-05 16:36:08,469 - [ERROR] - from application in New I/O worker #6 
+
+
+! @6kddenigk - Internal server error, for (GET) [/ad/show/10] ->
+
+play.PlayExceptions$CompilationException: Compilation error[not found: value img]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:235) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:230) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:230) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:90) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:122) ~[play_2.11-2.3.7.jar:2.3.7]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.7.jar:2.3.7]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-05 16:38:27,872 - [ERROR] - from application in New I/O worker #6 
+
+
+! @6kddf5gmb - Internal server error, for (GET) [/ad/show/10] ->
+
+play.PlayExceptions$CompilationException: Compilation error[not found: value img]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:235) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:230) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:230) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:90) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.2.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:90) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:122) ~[play_2.11-2.3.7.jar:2.3.7]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.7.jar:2.3.7]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.2.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.2.jar:na]
+
+2014-12-05 16:39:06,974 - [INFO] - from play in play-internal-execution-context-90 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:39:07,187 - [INFO] - from play in play-internal-execution-context-90 
+Application started (Dev)
+
+2014-12-05 16:55:25,762 - [INFO] - from play in play-internal-execution-context-111 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:55:26,052 - [INFO] - from play in play-internal-execution-context-111 
+Application started (Dev)
+
+2014-12-05 16:56:10,269 - [INFO] - from play in play-internal-execution-context-124 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:56:10,513 - [INFO] - from play in play-internal-execution-context-124 
+Application started (Dev)
+
+2014-12-05 16:57:39,245 - [INFO] - from play in play-internal-execution-context-130 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:57:39,461 - [INFO] - from play in play-internal-execution-context-130 
+Application started (Dev)
+
+2014-12-05 16:57:49,743 - [INFO] - from play in play-internal-execution-context-134 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:57:49,992 - [INFO] - from play in play-internal-execution-context-134 
+Application started (Dev)
+
+2014-12-05 16:58:30,642 - [INFO] - from play in play-internal-execution-context-134 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:58:30,841 - [INFO] - from play in play-internal-execution-context-134 
+Application started (Dev)
+
+2014-12-05 16:58:46,682 - [INFO] - from play in play-internal-execution-context-137 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 16:58:46,954 - [INFO] - from play in play-internal-execution-context-137 
+Application started (Dev)
+
+2014-12-05 17:00:49,645 - [INFO] - from play in play-internal-execution-context-136 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:00:49,846 - [INFO] - from play in play-internal-execution-context-136 
+Application started (Dev)
+
+2014-12-05 17:01:46,093 - [INFO] - from play in play-internal-execution-context-139 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:01:46,322 - [INFO] - from play in play-internal-execution-context-139 
+Application started (Dev)
+
+2014-12-05 17:02:21,589 - [INFO] - from play in play-internal-execution-context-143 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:02:21,788 - [INFO] - from play in play-internal-execution-context-143 
+Application started (Dev)
+
+2014-12-05 17:02:35,665 - [INFO] - from play in play-internal-execution-context-148 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:02:35,910 - [INFO] - from play in play-internal-execution-context-148 
+Application started (Dev)
+
+2014-12-05 17:04:30,242 - [INFO] - from play in play-internal-execution-context-143 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:04:30,809 - [INFO] - from play in play-internal-execution-context-143 
+Application started (Dev)
+
+2014-12-05 17:04:48,899 - [INFO] - from play in play-internal-execution-context-143 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:04:49,144 - [INFO] - from play in play-internal-execution-context-143 
+Application started (Dev)
+
+2014-12-05 17:06:38,099 - [INFO] - from play in play-internal-execution-context-156 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:06:38,295 - [INFO] - from play in play-internal-execution-context-156 
+Application started (Dev)
+
+2014-12-05 17:07:04,928 - [INFO] - from play in play-internal-execution-context-159 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:07:05,130 - [INFO] - from play in play-internal-execution-context-159 
+Application started (Dev)
+
+2014-12-05 17:07:21,374 - [INFO] - from play in play-internal-execution-context-159 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:07:21,607 - [INFO] - from play in play-internal-execution-context-159 
+Application started (Dev)
+
+2014-12-05 17:08:53,841 - [INFO] - from play in play-internal-execution-context-174 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:08:54,036 - [INFO] - from play in play-internal-execution-context-174 
+Application started (Dev)
+
+2014-12-05 17:16:01,050 - [INFO] - from play in play-internal-execution-context-195 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:16:01,270 - [INFO] - from play in play-internal-execution-context-195 
+Application started (Dev)
+
+2014-12-05 17:17:05,842 - [INFO] - from play in play-internal-execution-context-200 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:17:06,053 - [INFO] - from play in play-internal-execution-context-200 
+Application started (Dev)
+
+2014-12-05 17:17:35,675 - [INFO] - from play in play-internal-execution-context-203 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:17:35,870 - [INFO] - from play in play-internal-execution-context-203 
+Application started (Dev)
+
+2014-12-05 17:25:59,190 - [INFO] - from play in play-internal-execution-context-213 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:25:59,395 - [INFO] - from play in play-internal-execution-context-213 
+Application started (Dev)
+
+2014-12-05 17:28:11,411 - [INFO] - from play in play-internal-execution-context-218 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:28:11,703 - [INFO] - from play in play-internal-execution-context-218 
+Application started (Dev)
+
+2014-12-05 17:30:42,925 - [INFO] - from play in play-internal-execution-context-235 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:30:43,148 - [INFO] - from play in play-internal-execution-context-235 
+Application started (Dev)
+
+2014-12-05 17:32:09,879 - [INFO] - from play in play-internal-execution-context-238 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:32:10,070 - [INFO] - from play in play-internal-execution-context-238 
+Application started (Dev)
+
+2014-12-05 17:32:21,632 - [WARN] - from play in play-akka.actor.default-dispatcher-434 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:32:28,864 - [WARN] - from play in play-akka.actor.default-dispatcher-428 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:32:32,044 - [WARN] - from play in play-akka.actor.default-dispatcher-428 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:33:14,084 - [INFO] - from play in play-internal-execution-context-242 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:33:14,334 - [INFO] - from play in play-internal-execution-context-242 
+Application started (Dev)
+
+2014-12-05 17:35:39,063 - [INFO] - from play in play-internal-execution-context-242 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:35:39,276 - [INFO] - from play in play-internal-execution-context-242 
+Application started (Dev)
+
+2014-12-05 17:36:55,675 - [INFO] - from play in play-internal-execution-context-250 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:36:55,871 - [INFO] - from play in play-internal-execution-context-250 
+Application started (Dev)
+
+2014-12-05 17:38:01,940 - [INFO] - from play in play-internal-execution-context-250 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:38:02,130 - [INFO] - from play in play-internal-execution-context-250 
+Application started (Dev)
+
+2014-12-05 17:38:17,105 - [INFO] - from play in play-internal-execution-context-255 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:38:17,315 - [INFO] - from play in play-internal-execution-context-255 
+Application started (Dev)
+
+2014-12-05 17:39:05,160 - [INFO] - from play in play-internal-execution-context-258 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:39:05,389 - [INFO] - from play in play-internal-execution-context-258 
+Application started (Dev)
+
+2014-12-05 17:40:22,075 - [INFO] - from play in play-internal-execution-context-261 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:40:22,418 - [INFO] - from play in play-internal-execution-context-261 
+Application started (Dev)
+
+2014-12-05 17:40:56,587 - [INFO] - from play in play-internal-execution-context-265 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:40:56,822 - [INFO] - from play in play-internal-execution-context-265 
+Application started (Dev)
+
+2014-12-05 17:41:33,891 - [INFO] - from play in play-internal-execution-context-265 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:41:34,150 - [INFO] - from play in play-internal-execution-context-265 
+Application started (Dev)
+
+2014-12-05 17:42:12,519 - [INFO] - from play in play-internal-execution-context-265 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:42:12,713 - [INFO] - from play in play-internal-execution-context-265 
+Application started (Dev)
+
+2014-12-05 17:42:24,539 - [WARN] - from play in play-akka.actor.default-dispatcher-496 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:42:28,562 - [WARN] - from play in play-akka.actor.default-dispatcher-496 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:42:34,663 - [WARN] - from play in play-akka.actor.default-dispatcher-473 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:42:38,601 - [WARN] - from play in play-akka.actor.default-dispatcher-473 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:42:44,205 - [WARN] - from play in play-akka.actor.default-dispatcher-473 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:42:47,071 - [WARN] - from play in play-akka.actor.default-dispatcher-473 
+You are using status code '200' with flashing, which should only be used with a redirect status!
+
+2014-12-05 17:43:20,758 - [INFO] - from play in play-internal-execution-context-278 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:43:20,989 - [INFO] - from play in play-internal-execution-context-278 
+Application started (Dev)
+
+2014-12-05 17:43:49,967 - [INFO] - from play in play-internal-execution-context-278 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:43:50,222 - [INFO] - from play in play-internal-execution-context-278 
+Application started (Dev)
+
+2014-12-05 17:45:30,196 - [INFO] - from play in play-internal-execution-context-288 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:45:30,417 - [INFO] - from play in play-internal-execution-context-288 
+Application started (Dev)
+
+2014-12-05 17:45:55,436 - [INFO] - from play in play-internal-execution-context-288 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:45:55,625 - [INFO] - from play in play-internal-execution-context-288 
+Application started (Dev)
+
+2014-12-05 17:46:02,889 - [INFO] - from play in play-internal-execution-context-297 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:46:03,132 - [INFO] - from play in play-internal-execution-context-297 
+Application started (Dev)
+
+2014-12-05 17:47:39,937 - [INFO] - from play in play-internal-execution-context-288 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:47:40,142 - [INFO] - from play in play-internal-execution-context-288 
+Application started (Dev)
+
+2014-12-05 17:48:33,957 - [INFO] - from play in play-internal-execution-context-298 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:48:34,143 - [INFO] - from play in play-internal-execution-context-298 
+Application started (Dev)
+
+2014-12-05 17:48:49,362 - [INFO] - from play in play-internal-execution-context-301 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:48:49,548 - [INFO] - from play in play-internal-execution-context-301 
+Application started (Dev)
+
+2014-12-05 17:49:05,338 - [INFO] - from play in play-internal-execution-context-301 
+database [default] connected at jdbc:postgresql://localhost/kora
+
+2014-12-05 17:49:05,523 - [INFO] - from play in play-internal-execution-context-301 
+Application started (Dev)
+

@@ -53,10 +53,10 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" >
 				<label class="col-md-2 control-label" for="selectbasic2">Регион</label>
-				<div class="col-md-3">
-					<select id="region" name="region" class="form-control" validation="not_null">
+				<div class="col-md-3" style="padding-right: 0px;">
+					<select id="region" name="region" class="form-control sd" validation="not_null">
                         <option selected disabled hidden> Выберите регион</option>
                         @for(region<-models.contact.Region.find.all()) {
                             <option value="@region.id" @if(user.profile.region == region){selected="selected"}>@region.name</option>
@@ -87,11 +87,11 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="radios">Пол</label>
 				<div class="col-md-4">
-					<label class="radio-inline" for="radios-0"> <input
-						type="radio" name="gender" value="муж"
-						checked="checked"> муж
-					</label> <label class="radio-inline" for="radios-1"> <input
-						type="radio" name="gender"  value="жен" @if(user.profile.gender!=null &&user.profile.gender.equals("жен")){checked="checked"}> жен
+					<label class="radio-inline" for="mradios-0"> 
+					<input type="radio" name="gender" value="муж" checked="checked" id="mradios-0">муж
+					</label> 
+					<label class="radio-inline" for="mradios-1"> 
+					<input type="radio" name="gender" id="mradios-1" value="жен" @if(user.profile.gender!=null &&user.profile.gender.equals("жен")){checked="checked"}> жен
 					</label>
 				</div>
 			</div>
