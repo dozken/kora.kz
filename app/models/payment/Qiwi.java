@@ -59,10 +59,6 @@ public class Qiwi extends Model {
 
 			AuthorisedUser u = Profile.find.where().eq("phone", account)
 					.findUnique().user;
-			if (u == null)
-				System.out.println("tarakan");
-			else
-				System.out.println("tarkan:" + u.email);
 			Payment p = new Payment();
 			p.amount = sum;
 			p.paymentType = "add";
