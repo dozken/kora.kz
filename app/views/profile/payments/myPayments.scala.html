@@ -21,14 +21,15 @@
 		
 		<!-- <input type="number" id="money" >	 -->
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	
-			<a id="add_money"  class="btn btn-default btn-success "><span class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
+			<a id="add_money"  class="btn btn-default btn-success " style="padding-top: 2px;padding-bottom: 2px;margin-top: 2px;">
+			<span class="glyphicon glyphicon-plus"></span> Пополнить счет</a>
 		</div>
 		
 		}
 		
 		<div id="payment_body">@_table(payments)</div>
 		<div class="col-lg-3 nopaddingleft">
-		<select id="payment_select" class="form-control PFBSPLI-13 selectdesign">
+		<select id="payment_select" class="form-control PFBSPLI-13 selectdesign" style="padding-top: 3px;">
 		  <option value="all">Все операции</option>
 		  <option value="add">Пополнение</option>
 		  <option value="spend">Потрачено</option>
@@ -36,18 +37,18 @@
 		</div>
 		<div class="col-lg-5 nopaddingleft">
 		<div class="input-daterange input-group" id="datepicker">
-		    <input type="text" class="input-md form-control" id="start" />
-		    <span class="input-group-addon">по</span>
-		    <input type="text" class="input-md form-control" id="end" />
+		    <input type="text" class="input-md form-control ssss" id="start" />
+		    <span class="input-group-addon" style="padding-top: 0px;">по</span>
+		    <input type="text" class="input-md form-control ssss" id="end" />
 		</div>
 		</div>
 
 		<div class="col-lg-2 nopaddingleft PFBSPLI-13" >
-		<button id="payment_filter" class="btn btn-default fltright">Показать</button>
+		<button id="payment_filter" class="btn btn-default fltright" style="padding-top: 2px;padding-bottom: 2px;">Показать</button>
 		</div>
 
 <div class="col-lg-2 nopaddingleft">
-<button class="btn btn-default">Очистить</button>
+<button class="btn btn-default" style="padding-top: 2px;padding-bottom: 2px;">Очистить</button>
 </div>
 	</div>
 
