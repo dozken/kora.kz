@@ -219,7 +219,6 @@ public class Application extends Controller {
 					.render(ad.contactInfo.company, ad, "comment").body());
 		} else if (type.equals("replayComment")) {
 			Comment comment = Comment.find.byId(Long.parseLong(email));
-			System.out.println(comment.email);
 
 			Emailing.send(
 					"Қора.kz",

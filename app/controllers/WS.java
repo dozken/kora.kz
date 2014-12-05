@@ -25,7 +25,6 @@ public class WS {
 			// When the message come.
 			in.onMessage(new Callback<JsonNode>() {
 				public void invoke(JsonNode event) {
-					System.out.println(event);
 				}
 			});
 

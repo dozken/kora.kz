@@ -70,9 +70,7 @@ public class Info extends Controller {
 
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {
-				System.out.println("1");
 				if (user.location != null) {
-					System.out.println("2");
 					String[] loc = requestData
 							.get("location")
 							.substring(1,
@@ -103,7 +101,7 @@ public class Info extends Controller {
 			user.update();
 			return ok("success");// renderImage(icon.id);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return ok("baaaaa");
 	}
