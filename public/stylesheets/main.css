@@ -233,71 +233,67 @@
 }
 /**PFBSP Regular**/
 .PFBSPR-12{
-	font-family: Tahoma;
+	
 	font-size:11px;
 }
 .PFBSPR-13{
-	font-family: Tahoma;
+	
 	font-size:13px;
 }
 .PFBSPR-14{
-	font-family: Tahoma;
+	
 	font-size:14px;
 }
 .PFBSPR-15{
-	font-family: Tahoma;
+	
 	font-size:15px;
 }
 
 .PFBSPR-17{
-	font-family: Tahoma;
+	
 	font-size:17px;
 }
 /**PFBSP Light Italic **/
 .PFBSPLI-11{
-	font-family: Tahoma;
-	/*font-style: italic;
-	*/font-size:11px;
+	
+	font-style: italic;font-size:11px;
 }
 .PFBSPLI-13{
-	/*font-style: italic;
-	*/font-family: Tahoma;
+	font-style: italic;
 	font-size:13px;
 }
 .PFBSPLI-15{
-	/*font-style: italic;
-	*/font-family: Tahoma;
+	font-style: italic;
 	font-size:15px;
 }
 /**PFBSP Italic**/
 .PFBSPI-13{
-	/*font-style: italic;
-	*/font-family: Tahoma;
+	font-style: italic;
 	font-size:13px;
 }
 /**PFBSP Book**/
 .PFBSPRB-13{
-	font-family: Tahoma;
+	
 	text-shadow: 0px 0px 0px;
 	font-size:13px;
 }
 .PFBSPRB-17{
-	font-family: Tahoma;
+	
 	text-shadow: 0px 0px 0px;
 	font-size:17px;
 }
 /**DINNW1G Regular**/
 .DINNW1GR-18{
-	font-family: Tahoma;
+	
 	font-size:18px;
 }
 .DINNW1GR-14{
-	font-family: Tahoma;
+	
 	font-size:14px;
 }
 /**DINNW1G Light**/
 .DINNW1GL-14{
-	font-family: Tahoma;
+	
 	font-size:14px;
 }
 

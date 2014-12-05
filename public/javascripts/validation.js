@@ -143,7 +143,7 @@ function validation(inputclass){
             var a=$(this).val();
             if(!a.match(/^[0-9]+(\.[0-9]+)?$/)){
                 r=false;
-                $(this).attr("style","border-color:red");
+                $(this).attr("style","height:26px;border-color:red;");
                 $(this).addClass("validation_error_fields");
             }
         }
