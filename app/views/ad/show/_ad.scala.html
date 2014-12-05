@@ -202,7 +202,7 @@
     </h4>
     <div class="footerborder"></div>
     
-    @for(likeAd <-models.ad.Ad.like(ad)){
+    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad))){
     <div class="pohojii">
       
       <div class="pohojii_list_text">@likeAd.breed.name, @likeAd.birthDate<br>@Messages(likeAd.priceType.price.toString) @likeAd.priceType.currency</div>
