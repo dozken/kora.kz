@@ -1,3 +1,4 @@
+import static play.mvc.Results.internalServerError;
 import static play.mvc.Results.notFound;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import models.user.SocialNetwork;
 import models.user.UserSetting;
 import play.Application;
 import play.GlobalSettings;
+import play.Logger;
 import play.libs.F.Promise;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
@@ -205,5 +207,11 @@ public class Global extends GlobalSettings {
 	public Promise<Result> onHandlerNotFound(RequestHeader request) {
 		return Promise.<Result> pure(notFound(views.html.notFoundPage
 				.render(request.uri())));
+	}
+
+	public Promise<Result> onError(RequestHeader request, Throwable t) {
+		Logger.error("Exception with onError", t);
+		return Promise.<Result> pure(internalServerError(views.html.errorPage
+				.render(t)));
 	}
 }

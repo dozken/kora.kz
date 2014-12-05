@@ -108,9 +108,7 @@ public class User extends Controller {
 					"Ошибка при подтверждения пароля, попробуйте еще раз.");
 			return ok(restorePassword.render(code));
 		} else {
-			System.out.println(user.password + " -- " + newPassoword);
 			user.password = newPassoword;
-
 			user.update();
 			flash("success",
 					"Пароль успешно изменен! Хотите <a href='#' data-toggle='modal' data-target='#myModal'>войти</a>? ");

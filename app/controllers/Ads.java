@@ -55,15 +55,12 @@ public class Ads extends Controller {
 	}
 
 	public static Result create() {
-
 		DynamicForm requestData = form().bindFromRequest();
-		System.out.println(requestData);
 
 		Ad ad = new Ad();
 		ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
 		ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
-		System.out.println(1);
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
 				.get("city")));
@@ -86,13 +83,11 @@ public class Ads extends Controller {
 		}
 
 		contactInfo.location = location;
-		System.out.println(2);
 		ad.contactInfo = contactInfo;
 		ad.description = requestData.get("description");
 		ad.quantity = requestData.get("quantity");
 		ad.title = requestData.get("title");
 		ad.gender = requestData.get("animal_gender");
-		System.out.println(3);
 		Price price = new Price();
 		if (requestData.get("payment_type").equals("normal")) {
 
@@ -105,7 +100,6 @@ public class Ads extends Controller {
 		}
 		price.save();
 		ad.priceType = price;
-		System.out.println(4);
 
 		AdSetting ad_set = new AdSetting();
 		ad_set.name = "comment";
@@ -120,7 +114,6 @@ public class Ads extends Controller {
 		ad.settings.add(ad_set);
 		ad.settings.add(ad_set2);
 		ad.save();
-		System.out.println(5);
 
 		if (ad.settings == null) {
 			ad.tags = new ArrayList<Tag>();
@@ -135,11 +128,8 @@ public class Ads extends Controller {
 		ad.tags.add(new Tag(ad.contactInfo.city.name));
 		ad.update();
 
-		System.out.println(6);
 		Ebean.saveManyToManyAssociations(ad, "tags");
-		System.out.println(66);
 		String[] order = requestData.get("image_names").split("&");
-		System.out.println(666);
 		for (int i = 0; i < order.length; i++) {
 
 			if (!order[i].equals("") && order[i] != null) {
@@ -152,8 +142,6 @@ public class Ads extends Controller {
 				img.save();
 			}
 		}
-		System.out.println(7);
-
 		return ok();
 	}
 
@@ -700,7 +688,6 @@ public class Ads extends Controller {
 			if (request().cookie("userAdsKora") == null)
 				return false;
 
-			System.out.println(request().cookie("userAdsKora").value());
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 
 			for (String ad : ads) {
@@ -739,9 +726,7 @@ public class Ads extends Controller {
 	}
 
 	public static Result searchAd(Integer page, String sort) {
-
 		DynamicForm requestData = form().bindFromRequest();
-		System.out.println("page : " + page + " sort : " + sort);
 		Long animal_id = Long.parseLong(requestData.get("animal"));
 		Double costStartTg = 0.0;
 		Double costEndTg = 99999999.9;
@@ -884,8 +869,6 @@ public class Ads extends Controller {
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
 
 		SqlQuery sqlQuery3 = Ebean.createSqlQuery(a2);
-
-		System.out.println(costStartD + " - " + costEndD);
 
 		List<SqlRow> list2 = sqlQuery2.findList();
 		List<SqlRow> list3 = sqlQuery3.findList();

@@ -50,7 +50,6 @@ public class Advertisements extends Controller {
 		advertisement.company = advertisementForm.get("company");
 		advertisement.placeOnPage = advertisementForm.get("placeOnPage");
 		try {
-			System.out.println(advertisementForm.get("tillTo"));
 			advertisement.publishDate = new SimpleDateFormat("dd/MM/yyyy")
 					.parse(advertisementForm.get("publishDate"));
 			advertisement.tillToDate = new SimpleDateFormat("dd/MM/yyyy")

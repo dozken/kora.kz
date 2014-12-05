@@ -44,9 +44,7 @@ public class Manage extends Controller {
 	}
 
 	public static Result getMessageType(String s) {
-
 		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
-		System.out.println(s);
 
 		if (s.equals("all"))
 			return ok(_message.render(PrivateMessage.find
@@ -66,11 +64,9 @@ public class Manage extends Controller {
 	}
 
 	public static Result read(Long id) {
-
 		PrivateMessage message = PrivateMessage.find.byId(id);
 		message.status = "readed";
 		message.update();
-		System.out.println("sdf");
 		return ok(_read.render(message));
 	}
 
@@ -102,7 +98,6 @@ public class Manage extends Controller {
 			try {
 				Date s = new SimpleDateFormat("dd/MM/yyyy").parse(start);
 				Date e = new SimpleDateFormat("dd/MM/yyyy").parse(end);
-				System.out.println(s);
 				if (filter.equals("all"))
 					return ok(_table.render(Payment.find.where().eq("user", u)
 							.between("paymentDate", s, e)

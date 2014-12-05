@@ -65,13 +65,11 @@ public class ContactInfo extends Model {
 		phone = phone.replaceAll("[-+ )(]", "");
 
 		if (user.profile.phone != null && user.profile.phone.equals(phone)) {
-			System.out.println("ten emes");
 			return phone;
 		} else {
 			int row = Profile.find.where().eq("phone", phone).findRowCount();
 
 			if (row > 0) {
-				System.out.println("kuip ketti");
 				return "exists";
 			}
 		}
