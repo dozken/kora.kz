@@ -21,8 +21,8 @@ public class Location extends Model {
 	@Id
 	public Long id;
 
-	public String lat = "43";
+	public String lat;
 
-	public String lng = "76";
+	public String lng;
 
 }

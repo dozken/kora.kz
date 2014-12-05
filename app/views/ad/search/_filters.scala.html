@@ -36,9 +36,9 @@
   <div>
     <select id="ageStart" name="ageStart" class="form-control sd" style="width: 80px;">
         <option value="0"></option>
-      @for(i<-2000 to 2050) {
-          <option value="@i">@i</option>
-      }
+	    @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
+        <option value="@i">@i</option>
+    	}
     </select>
         <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
             <option value="2050"></option>

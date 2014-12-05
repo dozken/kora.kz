@@ -5,17 +5,9 @@
   <li>
     <ul class="lab3">
       <li class="lab">Компания</li>
-      <li class="lab2">@user.userName</li>
+      <li class="lab2">@if(user.userName==null){arsen emae}else{@user.userName}</li>
     </ul>
   </li>
-  @*
-  <li>
-    <ul class="lab3">
-      <li class="lab">Фотографии</li>
-      <li class="lab2"><img src="@routes.Assets.at("images/home/cow.png")"></li>
-    </ul>
-  </li>
-  *@
   <li>
     <ul class="lab3">
       <li class="lab">Адрес</li>

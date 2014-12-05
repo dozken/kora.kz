@@ -55,6 +55,8 @@ public class Payments extends Controller {
 						Integer prv_txn = Qiwi.pay(remoteIP, txn_id, txn_date,
 								account, sum);
 						Integer result = prv_txn == -1 ? 1 : 0;
+
+						return ok(check.render(txn_id, result, ""));
 					}
 				}
 			}
