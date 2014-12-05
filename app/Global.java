@@ -132,7 +132,7 @@ public class Global extends GlobalSettings {
 		}
 
 		if (Price.find.findRowCount() == 0) {
-			for (Double name : Arrays.asList(-2.0, -1.0)) {
+			for (Integer name : Arrays.asList(-2, -1)) {
 				Price price = new Price();
 				price.price = name;
 				price.save();
