@@ -116,6 +116,10 @@
 	background-size: 20px;
 	height: 26px;
 	padding-top: 0px;
+	z-index: 1;
+}
+.sd option{
+	z-index: -1;
 }
 .selectdesign {
 	-webkit-appearance: none;
