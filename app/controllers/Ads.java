@@ -46,9 +46,11 @@ public class Ads extends Controller {
 	public static Result get(Long id) {
 		Ad ad = Ad.find.byId(id);
 		++ad.views;
-		try{
-		ad.save();
-		}catch(Exception e){}
+		try {
+			ad.update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return ok(showAd.render(ad));
 	}
 
@@ -577,14 +579,12 @@ public class Ads extends Controller {
 
 	public static Result replayPrivateMessage(Long author_id, Long ad_id,
 			Long recipent_id, String m) {
-		DynamicForm requestData = form().bindFromRequest();
 
 		PrivateMessage message = new PrivateMessage();
 		message.ad = Ad.find.byId(ad_id);
 		message.author = AuthorisedUser.find.byId(author_id);
 		message.message = m;
 		message.recipent = AuthorisedUser.find.byId(recipent_id);
-		;
 		message.status = "unread";
 		message.title = "(re)" + Ad.find.byId(ad_id).title;
 		message.save();

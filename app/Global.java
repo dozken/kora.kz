@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import models.Location;
 import models.Setting;
 import models.ad.Animal;
 import models.ad.Breed;
@@ -177,10 +176,6 @@ public class Global extends GlobalSettings {
 					.findUnique();
 			profile.user = user;
 			user.profile = profile;
-			Location location = new Location();
-			location.lat = "43.28507838269254";
-			location.lng = "76.89537048339844";
-			user.location = location;
 
 			user.save();
 			Ebean.saveManyToManyAssociations(user, "roles");
