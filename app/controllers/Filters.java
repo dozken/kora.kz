@@ -94,12 +94,13 @@ public class Filters extends Controller {
 			flash("error", "Не могу сохранить!");
 			return badRequest();
 		}
+		/*
 		if (Breed.find.where().eq("name", breedForm.get().name).findRowCount() > 0) {
 			flash("error",
 					"Нельзя сохранить, порода <strong>" + breedForm.get().name
 							+ "</strong> уже существует!");
 			return ok(_breed.render(breedForm.get().animal));
-		} else {
+		}*/ else {
 			Breed breed = breedForm.get();
 
 			flash("success", "Порода <strong>" + breed.name
