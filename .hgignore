@@ -30,3 +30,7 @@ syntax: regexp
 ^\.idea_modules$
 syntax: regexp
 ^kora\.kz\.iml$
+syntax: regexp
+^logs$
+syntax: regexp
+\.log$
