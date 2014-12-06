@@ -766,7 +766,7 @@ public class Ads extends Controller {
 		Double kztU = session("KZTtoUSD") != null ? Double
 				.parseDouble(session("KZTtoUSD")) : 0.0055244;
 
-		if (requestData.get("currency").equals("dol")) {
+		if (requestData.get("currency").equals("USD")) {
 
 			if (!requestData.get("costStart").equals("")) {
 				costStartD = Double.parseDouble(requestData.get("costStart"));
@@ -791,36 +791,36 @@ public class Ads extends Controller {
 
 		if (sort.equals("price")) {
 
-			sort = "p.price * CASE WHEN p.currency='$' THEN " + usdK
+			sort = "p.price * CASE WHEN p.currency='USD' THEN " + usdK
 					+ " ELSE 1 END";
 		} else if (sort.equals("price_desc")) {
-			sort = "p.price * CASE WHEN p.currency='$' THEN " + usdK
+			sort = "p.price * CASE WHEN p.currency='USD' THEN " + usdK
 					+ " ELSE 1 END desc";
 		}
 
 		String a = "SELECT a.id from ad a \n"
-				+ "inner join animal ani on a.animal_id=ani.id and ani.id="
+				+ " inner join animal ani on a.animal_id=ani.id and ani.id="
 				+ animal_id
 				+ b
-				+ "inner join contact c on a.contact_info_id = c.id "
+				+ " inner join contact c on a.contact_info_id = c.id "
 				+ loc
 				+ r
 				+ "\n"
 				+ tag
-				+ "inner join price p on p.id=a.price_type_id and ((p.price>="
+				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
 				+ f
 				+ " and p.price<"
 				+ l
 				+ ") or  ((p.price>="
 				+ costStartD
-				+ " and p.currency='$' and p.price<="
+				+ " and p.currency='USD' and p.price<="
 				+ costEndD
 				+ ") or  (p.price>="
 				+ costStartTg
-				+ " and p.currency='Тенге' and p.price<="
+				+ " and p.currency='KZT' and p.price<="
 				+ costEndTg
 				+ "))) "
-				+ "where a.status='active' "
+				+ " where a.status='active' "
 				+ gender
 				+ quantity
 				+ " and (a.birth_date between "
@@ -829,35 +829,34 @@ public class Ads extends Controller {
 				+ endYear
 				+ ") "
 				+ pic
-				+ "order by "
+				+ " order by "
 				+ sort
 				+ " \n"
-				+ "limit 30 offset "
-				+ (page * 30);
+				+ " limit 30 offset " + (page * 30);
 
 		String a2 = "SELECT count(*) from ad a \n"
-				+ "inner join animal ani on a.animal_id=ani.id and ani.id="
+				+ " inner join animal ani on a.animal_id=ani.id and ani.id="
 				+ animal_id
 				+ b
-				+ "inner join contact c on a.contact_info_id = c.id "
+				+ " inner join contact c on a.contact_info_id = c.id "
 				+ loc
 				+ r
 				+ "\n"
 				+ tag
-				+ "inner join price p on p.id=a.price_type_id and ((p.price>="
+				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
 				+ f
 				+ " and p.price<"
 				+ l
 				+ ") or  ((p.price>="
 				+ costStartD
-				+ " and p.currency='$' and p.price<="
+				+ " and p.currency='USD' and p.price<="
 				+ costEndD
 				+ ") or  (p.price>="
 				+ costStartTg
-				+ " and p.currency='Тенге' and p.price<="
+				+ " and p.currency='KZT' and p.price<="
 				+ costEndTg
 				+ "))) "
-				+ "where a.status='active' "
+				+ " where a.status='active' "
 				+ gender
 				+ quantity
 				+ " and (a.birth_date between "
@@ -865,6 +864,10 @@ public class Ads extends Controller {
 				+ " and "
 				+ endYear
 				+ ") " + pic;
+
+		System.out.println(a);
+		System.out.println();
+		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
 
