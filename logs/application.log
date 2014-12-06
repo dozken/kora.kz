@@ -1,9 +1,0 @@
-2014-12-06 09:05:51,930 - [INFO] - from play in pool-4-thread-4 
-Listening for HTTP on /0:0:0:0:0:0:0:0:9000
-
-2014-12-06 09:54:04,349 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:postgresql://localhost/kora
-
-2014-12-06 09:54:05,864 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
