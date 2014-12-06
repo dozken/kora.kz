@@ -86,7 +86,7 @@
 
             <div class="input-group below24 bias-input-group inpgr">
 
-              <input type="text" id="money_input" value="" class="form-control next" name="money" validation="double" style="height: 26px;">
+              <input type="text" id="money_input" value="" class="form-control next ssss" name="money" validation="double" style="height: 26px;">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
              
@@ -122,7 +122,7 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Заголовок должен отражать суть объявления и быть уникален.">
   <label class="col-md-2 textalign" for="textinput">Заголовок</label>
   <div class="col-md-6">
-  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md next" validation="not_null">
+  <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md next ssss" validation="not_null">
   <span class="help-block">Максимальная длина 70 символов.</span>
   </div>
 </div>
@@ -190,7 +190,7 @@
   </div>
   <div id="city_list" class="col-md-3">
       @if(user!=null && user.profile.city!=null) {
-          <select id="city" name="city" class="form-control">
+          <select id="city" name="city" class="form-control sd">
               <option selected disabled hidden> Выберите город</option>
               @for(city <- user.profile.region.city) {
 
@@ -208,7 +208,7 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Название компаний или Ваше имя.">
   <label class="col-md-2 textalign" for="textinput1">Компания</label>
   <div class="col-md-6">
-  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md" validation="not_null">
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md ssss" validation="not_null">
 
   </div>
 </div>
@@ -217,13 +217,13 @@
     <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
         <label class="col-md-2 textalign" for="ema">Email</label>
         <div class="col-md-3">
-            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md" @if(user!=null){value="@user.email"} validation="mail">
+            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящий номер телефона.">
   <label class="col-md-2 textalign" for="textinput2">Телефон</label>
   <div class="col-md-3">
-  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 
   </div>
 </div>
@@ -247,7 +247,6 @@
     <a href="technovision" class="kizilast">Удалить метку</a>
   </div>
 </div>
-
 <div class="form-group">
 	<div class="col-md-5" style="margin-left: 169px;">
         <span class="input-group-btn">
