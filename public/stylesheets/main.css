@@ -6,6 +6,9 @@
     font-family: TENGE;
     src: url('fonts/tenge.otf') format("opentype");
 }
+.txtupp{
+	text-transform: uppercase;
+}
 .textalign{
 	text-align: left;
 	padding-top: 7px;
@@ -32,7 +35,6 @@
 		width:140px; 
         height:35px;  
         text-align: center;
-        font-family: Tahoma;
         font-weight: bold;
         font-size: 13px;
         margin-top: 5px;
@@ -74,7 +76,6 @@
 }
 .ns{
 	color: white;
-	font-family: Tahoma;
 	font-size: 17px;
 	padding-right: 9px;
 }
@@ -110,13 +111,18 @@
 .sd{
 	-webkit-appearance: none;
     -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
     appearance: none;
 	overflow: hidden;
 	background: url(../images/home/arrow.png) no-repeat right #fff;
 	background-size: 20px;
 	height: 26px;
-	padding-top: 0px;
+	padding-top: 1px;
 	z-index: 1;
+}
+.sd select::-ms-expand {
+    display: none;
 }
 .sd option{
 	z-index: -1;
@@ -124,6 +130,8 @@
 .selectdesign {
 	-webkit-appearance: none;
     -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
     appearance: none;
 	float:left;
 	overflow: hidden;
@@ -140,7 +148,9 @@
 	background: transparent;
 	-webkit-appearance: none;
 }
-
+.selectdesign select::-ms-expand {
+    display: none;
+}
 .fontsize{
 	font-size: 13px;
 }
@@ -751,12 +761,12 @@ hovers in index
 	background: url(../images/home/centerSale.png);
 }
 .cenaRight{
-	width:13px; 
+	width:12px; 
     height:30px;
 	background: url(../images/home/rightSale.png) no-repeat center;
 }
 .cenaLeft{
-	width:12px; 
+	width:11px; 
     height:30px;
 	background: url(../images/home/leftSale.png) no-repeat center;
 }
