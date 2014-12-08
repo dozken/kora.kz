@@ -391,7 +391,7 @@ public class Ads extends Controller {
 
 	public static Result allAd() {
 		List<Ad> l = Ad.find.where().eq("status", "active").findList();
-		Animal animal = Animal.find.where().eq("name", "ЛОШАДЬ").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Лошадь").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -400,9 +400,9 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "ЛОШАДЬ").findUnique())
+						Animal.find.where().eq("name", "Лошадь").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "ЛОШАДЬ").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Лошадь").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -411,9 +411,9 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "ВЕРБЛЮД").findUnique())
+						Animal.find.where().eq("name", "Верблюд").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "ВЕРБЛЮД").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Верблюд").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -422,9 +422,9 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "КОРОВА").findUnique())
+						Animal.find.where().eq("name", "Корова").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "КОРОВА").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Корова").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -433,9 +433,9 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "БАРАН").findUnique())
+						Animal.find.where().eq("name", "Овцы/Козы").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "БАРАН").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Овцы/Козы").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -444,9 +444,9 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "ДРУГИЕ").findUnique())
+						Animal.find.where().eq("name", "Другие").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "ДРУГИЕ").findUnique();
+		Animal animal = Animal.find.where().eq("name", "Другие").findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
