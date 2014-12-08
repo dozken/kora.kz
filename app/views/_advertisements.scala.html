@@ -14,7 +14,7 @@
 			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
 			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
   			    case "application/vnd.adobe.flash.movie" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
-			    case default => {@advert.fileType еще не поддеживается}			    
+			    case default => {-@advert.fileType- еще не поддеживается}			    
 	      }          
         </div>
         }
@@ -42,7 +42,8 @@
 			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
 			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
 			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
-  			    case "application/vnd.adobe.flash.movie" => { <object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object> }
+			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
 			    case default => { @advert.fileType еще не поддеживается}			    
 	      }          
         </div>
