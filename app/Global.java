@@ -209,9 +209,9 @@ public class Global extends GlobalSettings {
 				.render(request.uri())));
 	}
 
-	public Promise<Result> onError(RequestHeader request, Throwable t) {
-		Logger.error("Exception with onError", t);
-		return Promise.<Result> pure(internalServerError(views.html.errorPage
-				.render(t)));
-	}
+//	public Promise<Result> onError(RequestHeader request, Throwable t) {
+//		Logger.error("Exception with onError", t);
+//		return Promise.<Result> pure(internalServerError(views.html.errorPage
+//				.render(t)));
+//	}
 }

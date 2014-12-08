@@ -184,7 +184,7 @@
     <select id="region" name="region" class="form-control selectdesign" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
         @for(region <- Region.find.all()) {
-        <option value="@region.id" @if(region.equals(user.profile.region)){selected}>@region.name</option>
+        <option value="@region.id" @if(user!=null&&region.equals(user.profile.region)){selected}>@region.name</option>
         }
     </select>
   </div>
@@ -193,7 +193,7 @@
           <select id="city" name="city" class="form-control sd">
               <option selected disabled hidden> Выберите город</option>
               @for(city <- user.profile.region.city) {
-              <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(city.equals(user.profile.city)){selected}>@city.name </option>}
+              <option @if(city.location != null) {lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>@city.name </option>}
           </select>
       }
   </div>
