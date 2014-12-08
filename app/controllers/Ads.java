@@ -139,7 +139,10 @@ public class Ads extends Controller {
 				img.name = order[i];
 				img.position = i + 1;
 				img.content = requestData.get(order[i]);
+				new Thread() {
+					public void run() {
 				img.save();
+					}}.start();
 			}
 		}
 		return ok();
