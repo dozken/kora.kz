@@ -1,5 +1,7 @@
 package models;
 
+import views.html.mailBody.adModerate;
+
 import com.typesafe.plugin.MailerAPI;
 import com.typesafe.plugin.MailerPlugin;
 
@@ -12,7 +14,11 @@ public class Emailing {
 		mail.setRecipient(recipients);
 		mail.setFrom("Қора <noreply@kora.kz>");
 		// sends html
-		mail.sendHtml(body);
+		new Thread() {
+			public void run() {
+				mail.sendHtml(body);
+			}
+		}.start();
 		// sends text/text
 		// mail.send( "text" );
 		// sends both text and html
@@ -26,7 +32,12 @@ public class Emailing {
 		mail.setRecipient(recipient);
 		mail.setFrom("Қора <noreply@kora.kz>");
 		// sends html
-		mail.sendHtml(body);
+		new Thread() {
+			public void run() {
+				mail.sendHtml(body);
+			}
+		}.start();
+		
 		// sends text/text
 		// mail.send( "text" );
 		// sends both text and html

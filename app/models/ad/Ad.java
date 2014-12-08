@@ -114,4 +114,11 @@ public class Ad extends Model {
 				.eq("contactInfo.city", ad.contactInfo.city).setMaxRows(7)
 				.findList();
 	}
+	
+	public static List<Ad> findToModerate(){
+		List<Ad> ads = find.where().or(com.avaje.ebean.Expr.eq("status","pending"), com.avaje.ebean.Expr.eq("status","moderating")).findList();
+		System.out.println(ads.size());
+		return find.where().or(com.avaje.ebean.Expr.eq("status","pending"), com.avaje.ebean.Expr.eq("status","moderating")).findList();
+		
+	}
 }
