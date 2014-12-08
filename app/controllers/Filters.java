@@ -112,19 +112,19 @@ public class Filters extends Controller {
 
 	public static Result updateBreed(Long id, String name) {
 		Breed breed = Breed.find.byId(id);
-		if (Breed.find.where().eq("name", name).findRowCount() > 0
-				&& !breed.equals(Breed.find.where().eq("name", name)
-						.findUnique())) {
-			flash("error", "Нельзя обновить, порода <strong>" + name
-					+ "</strong> уже существует!");
-			return ok(_breed.render(breed.animal));
-		} else {
+//		if (Breed.find.where().eq("name", name).findRowCount() > 0
+//				&& !breed.equals(Breed.find.where().eq("name", name)
+//						.findUnique())) {
+//			flash("error", "Нельзя обновить, порода <strong>" + name
+//					+ "</strong> уже существует!");
+//			return ok(_breed.render(breed.animal));
+//		} else {
 			flash("success", "Порода <strong>" + breed.name
 					+ "</strong> измененa на <strong>" + name + "</strong>!");
 			breed.name = name;
 			breed.update();
 			return ok(_breed.render(breed.animal));
-		}
+//		}
 	}
 
 	public static Result deleteBreed(Long id) {
@@ -154,12 +154,12 @@ public class Filters extends Controller {
 			flash("error", "Не могу сохранить!");
 			return ok(_region.render());
 		}
-		if (Region.find.where().eq("name", regionForm.get().name)
-				.findRowCount() > 0) {
-			flash("error",
-					"Нельзя сохранить, регион <strong>" + regionForm.get().name
-							+ "</strong> уже существует!");
-			return ok(_region.render());
+//		if (Region.find.where().eq("name", regionForm.get().name)
+//				.findRowCount() > 0) {
+//			flash("error",
+//					"Нельзя сохранить, регион <strong>" + regionForm.get().name
+//							+ "</strong> уже существует!");
+//			return ok(_region.render());
 		} else {
 			Region region = regionForm.get();
 			flash("success", "Регион <strong>" + region.name
@@ -171,20 +171,20 @@ public class Filters extends Controller {
 
 	public static Result updateRegion(Long id, String name) {
 		Region region = Region.find.byId(id);
-		if (Region.find.where().eq("name", name).findRowCount() > 0
-				&& !region.equals(Region.find.where().eq("name", name)
-						.findUnique())) {
-			flash("error",
-					"Не могу обновить, уже есть регион с именем <strong>"
-							+ name + "</strong>!");
-			return ok(_region.render());
-		} else {
+//		if (Region.find.where().eq("name", name).findRowCount() > 0
+//				&& !region.equals(Region.find.where().eq("name", name)
+//						.findUnique())) {
+//			flash("error",
+//					"Не могу обновить, уже есть регион с именем <strong>"
+//							+ name + "</strong>!");
+//			return ok(_region.render());
+//		} else {
 			flash("success", "Регион <strong>" + region.name
 					+ "</strong> изменен на <strong>" + name + "</strong>!");
 			region.name = name;
 			region.update();
 			return ok(_region.render());
-		}
+//		}
 	}
 
 	public static Result deleteRegion(Long id) {
