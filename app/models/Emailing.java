@@ -1,7 +1,5 @@
 package models;
 
-import views.html.mailBody.adModerate;
-
 import com.typesafe.plugin.MailerAPI;
 import com.typesafe.plugin.MailerPlugin;
 
@@ -37,7 +35,7 @@ public class Emailing {
 				mail.sendHtml(body);
 			}
 		}.start();
-		
+
 		// sends text/text
 		// mail.send( "text" );
 		// sends both text and html
