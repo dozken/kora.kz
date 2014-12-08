@@ -1,7 +1,4 @@
-
-
-@for((ad,index)<-models.ad.Ad.find.where.or(com.avaje.ebean.Expr.eq("status","pending"), com.avaje.ebean.Expr.eq("status","moderating")).findList.zipWithIndex){
-
+@for((ad,index)<-models.ad.Ad.findToModerate.zipWithIndex){
 <tr id="ad@ad.id">
 	<td>@{index+1}</td>
 	<td>@ad.contactInfo.region.name</td>
