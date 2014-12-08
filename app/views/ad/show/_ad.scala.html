@@ -208,20 +208,17 @@
     </h4>
     <div class="footerborder"></div>
     
-    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad))){
+    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad)&&likeAd.status.equals("active"))){
     <div class="pohojii">
-      
-      <div class="pohojii_list_text">@likeAd.breed.name, @likeAd.birthDate<br>@Messages(likeAd.priceType.price.toString) @likeAd.priceType.currency</div>
+      <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>
       <div class="pohojii_list">
           <div class="pohojii_list_price">@Messages(likeAd.priceType.price.toString) @likeAd.priceType.currency</div>
           @if(likeAd.images.size()>0){
           <img style="height:140px;width:140px;" src="@models.ad.AdImage.getFirstPicture(likeAd.id)"/>
           }else{<img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/cow.png")">}
       </div>
-
     </div>
     }
-
 </div>  
 
 </form>

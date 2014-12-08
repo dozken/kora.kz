@@ -153,7 +153,7 @@ public class Filters extends Controller {
 		if (regionForm.hasErrors()) {
 			flash("error", "Не могу сохранить!");
 			return ok(_region.render());
-		}
+//		}
 //		if (Region.find.where().eq("name", regionForm.get().name)
 //				.findRowCount() > 0) {
 //			flash("error",
