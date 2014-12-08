@@ -95,7 +95,9 @@ $(document).on("click",".moderate.approve", function(){
 		message: "Вы уверены?",
 		size : "small",
 		callback: function(confirm) {                
-			if(confirm)
+			if(confirm){
+				$(".moderate").attr("disabled",true);		
+				$(".moderate.approve").html("Отправляет уведомление...");
 				jsRoutes.controllers.Administer.moderate(adId).ajax({
 					data: {status:"active"},
 					success: function(data) {
@@ -108,9 +110,32 @@ $(document).on("click",".moderate.approve", function(){
 			            console.log(jqXHR.responseText);            
 			        }
 				});
+			}
 		}
 	});
 	
+});
+
+$(document).on("click",".moderate.deny",function(){
+	var adId = $(this).attr("ad");
+	bootbox.confirm("Вы уверены?", function(confirm) {
+		if(confirm){
+			$(".moderate").attr("disabled",true);
+			$(".moderate.deny").html("Отправляет уведомление...");
+		jsRoutes.controllers.Administer.moderate(adId).ajax({
+			data: {status:"rejected"},
+			success: function(data) {
+				alert("Отклонено");
+				window.location.href =  "http://@request.host/admin";
+				console.log(data);
+				
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR.responseText);            
+	        }
+		});
+		}
+	});
 });
 
 $(document ).on("click","#favorite",function(){
@@ -141,24 +166,7 @@ console.log(jqXHR.responseText);
 });
 })
 
-$(document).on("click",".moderate.deny",function(){
-	var adId = $(this).attr("ad");
-	bootbox.confirm("Вы уверены?", function(confirm) {
-    	if(confirm)
-		jsRoutes.controllers.Administer.moderate(adId).ajax({
-			data: {status:"rejected"},
-			success: function(data) {
-				alert("Отклонено");
-				window.location.href =  "http://@request.host/admin";
-				console.log(data);
-				
-	        },
-	        error: function(jqXHR, textStatus, errorThrown) {
-	            console.log(jqXHR.responseText);            
-	        }
-		});
-	});
-});
+
 @if(session.get("connected")!=null){
 $(document ).on("click","#private_message_button",function(e){
 e.preventDefault();

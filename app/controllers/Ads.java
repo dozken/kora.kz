@@ -55,6 +55,8 @@ public class Ads extends Controller {
 	}
 
 	public static Result create() {
+		long startTime = System.currentTimeMillis();
+
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = new Ad();
@@ -130,6 +132,8 @@ public class Ads extends Controller {
 
 		Ebean.saveManyToManyAssociations(ad, "tags");
 		String[] order = requestData.get("image_names").split("&");
+		long image = System.currentTimeMillis() - startTime;
+		System.out.println("image:"+image);
 		for (int i = 0; i < order.length; i++) {
 
 			if (!order[i].equals("") && order[i] != null) {
@@ -145,6 +149,9 @@ public class Ads extends Controller {
 					}}.start();
 			}
 		}
+		// ... do something ...
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("estimatedTime:"+estimatedTime);
 		return ok();
 	}
 
