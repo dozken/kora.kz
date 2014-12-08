@@ -433,9 +433,10 @@ public class Ads extends Controller {
 				.where()
 				.eq("status", "active")
 				.eq("animal",
-						Animal.find.where().eq("name", "Овцы/Козы").findUnique())
-				.findList();
-		Animal animal = Animal.find.where().eq("name", "Овцы/Козы").findUnique();
+						Animal.find.where().eq("name", "Овцы/Козы")
+								.findUnique()).findList();
+		Animal animal = Animal.find.where().eq("name", "Овцы/Козы")
+				.findUnique();
 		return ok(adSearch.render(l, animal));
 	}
 
