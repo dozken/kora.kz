@@ -370,8 +370,8 @@ public class Ads extends Controller {
 						.in("tags.name", requestData.get("str")).findList();
 			}
 			Animal animal = new Animal();
-			animal.id=0L;
-			animal.name="all";
+			animal.id = 0L;
+			animal.name = "all";
 			return ok(adSearch.render(l, animal));
 		}
 
@@ -405,10 +405,10 @@ public class Ads extends Controller {
 
 	public static Result allAd() {
 		List<Ad> l = Ad.find.where().eq("status", "active").findList();
-		
+
 		Animal animal = new Animal();
 		animal.id = 0L;
-		animal.name = "all_animal"; 
+		animal.name = "all_animal";
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -745,7 +745,7 @@ public class Ads extends Controller {
 
 	public static Result searchAd(Integer page, String sort) {
 		DynamicForm requestData = form().bindFromRequest();
-		String anim = ""; 
+		String anim = "";
 		Double costStartTg = 0.0;
 		Double costEndTg = 99999999.9;
 		Double costStartD = 0.0;
@@ -753,10 +753,10 @@ public class Ads extends Controller {
 		String b = "", loc = "", r = "", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
-		if(!requestData.get("animal").equals("0"))
+		if (!requestData.get("animal").equals("0"))
 			anim = "inner join animal ani on a.animal_id=ani.id and ani.id="
-					+requestData.get("animal");
-		
+					+ requestData.get("animal");
+
 		if (!requestData.get("breed").equals("all"))
 			b = "inner join breed b on a.breed_id=b.id and b.id="
 					+ requestData.get("breed");
@@ -820,74 +820,31 @@ public class Ads extends Controller {
 					+ " ELSE 1 END desc";
 		}
 
-		String a = "SELECT a.id from ad a \n"
-				+ " "
-				+ anim
-				+ b
-				+ " inner join contact c on a.contact_info_id = c.id "
-				+ loc
-				+ r
-				+ "\n"
-				+ tag
+		String a = "SELECT a.id from ad a \n" + " " + anim + b
+				+ " inner join contact c on a.contact_info_id = c.id " + loc
+				+ r + "\n" + tag
 				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
-				+ f
-				+ " and p.price<"
-				+ l
-				+ ") or  ((p.price>="
-				+ costStartD
-				+ " and p.currency='USD' and p.price<="
-				+ costEndD
-				+ ") or  (p.price>="
-				+ costStartTg
-				+ " and p.currency='KZT' and p.price<="
-				+ costEndTg
-				+ "))) "
-				+ " where a.status='active' "
-				+ gender
-				+ quantity
-				+ " and (a.birth_date between "
-				+ startYear
-				+ " and "
-				+ endYear
-				+ ") "
-				+ pic
-				+ " order by "
-				+ sort
-				+ " \n"
+				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+				+ " and p.currency='USD' and p.price<=" + costEndD
+				+ ") or  (p.price>=" + costStartTg
+				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+				+ " where a.status='active' " + gender + quantity
+				+ " and (a.birth_date between " + startYear + " and " + endYear
+				+ ") " + pic + " order by " + sort + " \n"
 				+ " limit 30 offset " + (page * 30);
 
-		String a2 = "SELECT count(*) from ad a \n"
-				+ " "
-				+ anim
-				+ b
-				+ " inner join contact c on a.contact_info_id = c.id "
-				+ loc
-				+ r
-				+ "\n"
-				+ tag
+		String a2 = "SELECT count(*) from ad a \n" + " " + anim + b
+				+ " inner join contact c on a.contact_info_id = c.id " + loc
+				+ r + "\n" + tag
 				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
-				+ f
-				+ " and p.price<"
-				+ l
-				+ ") or  ((p.price>="
-				+ costStartD
-				+ " and p.currency='USD' and p.price<="
-				+ costEndD
-				+ ") or  (p.price>="
-				+ costStartTg
-				+ " and p.currency='KZT' and p.price<="
-				+ costEndTg
-				+ "))) "
-				+ " where a.status='active' "
-				+ gender
-				+ quantity
-				+ " and (a.birth_date between "
-				+ startYear
-				+ " and "
-				+ endYear
+				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+				+ " and p.currency='USD' and p.price<=" + costEndD
+				+ ") or  (p.price>=" + costStartTg
+				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+				+ " where a.status='active' " + gender + quantity
+				+ " and (a.birth_date between " + startYear + " and " + endYear
 				+ ") " + pic;
 
-		
 		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
