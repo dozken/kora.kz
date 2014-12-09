@@ -16,6 +16,22 @@
 .tenge{
 	font-family: TENGE;
 }
+a {
+	color:#8f2341;
+}
+.btn-primary{
+	color: #ffffff;
+background-color: #5CB85C;
+background-image: linear-gradient(to bottom, #8fb346, #77953a);
+border-color: #77953a #77953a #77953a;
+}
+
+.btn.btn-primary:hover {
+color: #ffffff;
+background-color: #77953a;
+background-image: linear-gradient(to bottom, #77953a, #77953a);
+border-color: #77953a #77953a #77953a;
+}
 @font-face {
 	font-family: 'icomoon';
 	src:url('fonts/fonts/icomoon.eot?-qh3y5j');
@@ -33,7 +49,7 @@
 }
 .pohojii_list_text{
 		width:140px; 
-        height:35px;  
+        /*height:35px;*/  
         text-align: center;
         font-weight: bold;
         font-size: 13px;
@@ -246,6 +262,10 @@
     src: url('fonts/DINNextW1G/DINNextW1G-Light.otf') format("opentype");
 }
 /**PFBSP Regular**/
+.PFBSPR-11{
+	
+	font-size:12px;
+}
 .PFBSPR-12{
 	
 	font-size:11px;

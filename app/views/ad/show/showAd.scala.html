@@ -204,7 +204,7 @@ $(document ).on("click",".comment_answer",function(){
     });
     }else{
     $ ( "#comment_ad" ).attr ( "forWho", "0") ;
-    $ ( "#comment_head" ).html ( "Добавить комментарий" ) ;
+    $ ( "#comment_head" ).html ( "Написать владельцу" ) ;
         $(this ).html("Ответить");
         $(this ).attr("comment_type","answer");
     $('.comment_answer').not(this).each(function(){
@@ -214,49 +214,49 @@ $(document ).on("click",".comment_answer",function(){
 
 })
 
-$("#error_fields" ).hide();
-$("#error_fields" ).css("visibility","none");
-$(document ).on("click","#comment_ad",function(e){
-$("#error_fields" ).hide();
-e.preventDefault();
-if(validation()) {
-var com_id = $ ( this ).attr ( "forWho" ) ;
-jsRoutes.controllers.Ads.comment ( @ad.id, com_id ).ajax ( {
-data : $ ( "#comment_form" ).serialize ( ),
-success : function ( data ) {
-var res = "" + data ;
-if ( res != "kapcha_error" ) {
-    $ ( "#comment_body" ).html ( data ) ;
-    $ ( "#kapcha_Error" ).addClass("alert alert-success");
-    $ ( "#kapcha_Error" ).removeClass("kipkizil");
-$ ( "#kapcha_Error" ).show();
-    $ ( "#kapcha_Error" ).html ( "Успешно!!!" ).fadeOut( 4000 );
-    if(com_id=="0"){
+$("#error_fields").hide();
+$("#error_fields").css("visibility", "none");
+$(document).on("click", "#comment_ad", function(e) {
+    $("#error_fields").hide();
+    e.preventDefault();
+    if (validation()) {
+        var com_id = $(this).attr("forWho");
+        jsRoutes.controllers.Ads.comment(@ad.id, com_id).ajax({
+            data: $("#comment_form").serialize(),
+            success: function(data) {
+                var res = "" + data;
+                if (res != "kapcha_error") {
+                    $("#comment_body").html(data);
+                    $("#kapcha_Error").addClass("alert alert-success");
+                    $("#kapcha_Error").removeClass("kipkizil");
+                    $("#kapcha_Error").show();
+                    $("#kapcha_Error").html("Успешно!!!").fadeOut(4000);
+                    
+                    if (com_id == "0") {
+                        jsRoutes.controllers.Application.emailing("comment", @ad.id).ajax()
+                    } else {
+                        jsRoutes.controllers.Application.emailing("replayComment", com_id).ajax()
+                    }
+                    location.reload();
+                } else {
+                    $("#kapcha_Error").addClass("kipkizil");
+                    $("#kapcha_Error").removeClass("alert alert-success");
+                    $("#kapcha_Error").html("Введите, пожалуйста, цифры с картинки.");
 
-    jsRoutes.controllers.Application.emailing ( "comment", @ad.id ).ajax ( )
-    }else {
-     jsRoutes.controllers.Application.emailing ( "replayComment", com_id ).ajax ( )
+                    $("#kapcha_Error").show();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.responseText);
+            }
+        });
+    } else {
+        e.preventDefault();
+        $("#error_fields").html("");
+        $("#error_fields").append("Некоторые поля заполнены неправильно");
+
+        $("#error_fields").show();
     }
-   }
-else {
-$ ( "#kapcha_Error" ).addClass("kipkizil");
-$ ( "#kapcha_Error" ).removeClass("alert alert-success");
-$ ( "#kapcha_Error" ).html ( "Введите, пожалуйста, цифры с картинки." );
-
-$ ( "#kapcha_Error" ).show();
-}
-},
-error : function ( jqXHR, textStatus, errorThrown ) {
-console.log ( jqXHR.responseText ) ;
-}
-} ) ;
-}
-else{e.preventDefault();
-$("#error_fields" ).html("");
-$("#error_fields" ).append("Некоторые поля заполнены неправильно");
-
-$("#error_fields" ).show();
-}
 })
     @if(ad.contactInfo.location.lat!=null) {
         url = GMaps.staticMapURL ( {

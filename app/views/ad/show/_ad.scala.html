@@ -142,28 +142,30 @@
         </div>
 @if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
 	<div class="col-lg-12 nopaddingleft formdown topka">
-<b id="comment_head" class="bdau PFBSPI-13">Добавить комментарий</b>
+<b id="comment_head" class="bdau PFBSPI-13">Написать владельцу</b>
         <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
 </div>
 <form id="comment_form" class="form-horizontal">
   <div class="form-group">
     <label for="inputEmail3"  class="col-sm-3 control-label leftalign PFBSPI-13" >Ваше имя или ник</label>
     <div class="col-sm-9">
-      <input type="text" name="comment_author" class="form-control" id="inputEmail3" validation="not_null" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).userName" readonly="readonly" }>
+      <input type="text" name="comment_author" class="form-control ssss" id="inputEmail3" validation="not_null" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).userName" readonly="readonly" }>
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label leftalign PFBSPI-13">Электронная почта</label>
     <div class="col-sm-9">
-      <input type="email" name="comment_email" class="form-control PFBSPI-13" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
-      <span class="help-block"><i>На этот адрес придет уведомление об ответе</i></span>
+      <input type="email" name="comment_email" class="form-control PFBSPI-13 ssss" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
+      <span class="help-block"><i  class="PFBSPLI-11">На этот адрес придет уведомление об ответе</i></span>
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Сообщение</label>
     <div class="col-sm-9">
       <textarea class="form-control" name="comment_message" rows="6"></textarea>
+      @*
       <span class="help-block"><i class="PFBSPLI-11">Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
+      *@
     </div>
   </div>
   <div class="form-group">
@@ -209,14 +211,16 @@
     <div class="footerborder"></div>
     
     @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad)&&likeAd.status.equals("active"))){
-    <div class="pohojii">
+    <div class="pohojii">      
+      <a href="@routes.Ads.get(likeAd.id)">
       <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>
       <div class="pohojii_list">
-          <div class="pohojii_list_price">@Messages(likeAd.priceType.price.toString) @likeAd.priceType.currency</div>
+          <div class="pohojii_list_price">@Messages(likeAd.priceType.price.toString) @utils._currency(likeAd.priceType.currency)</div>
           @if(likeAd.images.size()>0){
           <img style="height:140px;width:140px;" src="@models.ad.AdImage.getFirstPicture(likeAd.id)"/>
-          }else{<img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/cow.png")">}
+          }else{<img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/nophoto.png")">}
       </div>
+      </a>
     </div>
     }
 </div>  
