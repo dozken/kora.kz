@@ -236,6 +236,7 @@
     <select id="selectbasic4" name="coment_display" class="form-control sd">
       <option value="registred">Только зарегистрированным пользователям</option>
       <option value="all" @if(models.ad.Ad.settingByName(ad,"comment").status=="all"){selected}>Всем</option>
+      <option value="nobody" @if(models.ad.Ad.settingByName(ad,"comment").status=="nobody"){selected}>Никому</option>
     </select>
   </div>
 </div>

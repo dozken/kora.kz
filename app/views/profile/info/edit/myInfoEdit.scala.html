@@ -77,6 +77,11 @@ success : function ( data ) {
     $("#error_fields" ).append("Номер уже зарегистрирован");
     $("#error_fields" ).show();
     window.scrollTo(0, 0);
+    }else if(data=="mail_exists"){
+    $("#error_fields" ).html("");
+    $("#error_fields" ).append("Электронная почта уже зарегистрирован");
+    $("#error_fields" ).show();
+    window.scrollTo(0, 0);
     }else{window.location.href = " @routes.Manage.myInfo() ";}
 
 }
@@ -264,6 +269,17 @@ $(this).attr("style","border-color:red");
 $(this).addClass("validation_error_fields");
 }
 }
+
+ if(type=="mail"){
+    	var a=$(this).val();
+    	 var re = /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    	if(!a.match(re)){
+    		r=false;
+    		$(this).attr("style","border-color:red");
+            $(this).addClass("validation_error_fields");
+
+    	}
+    }
 
 if(type=="number"){
 var a=$(this).val();

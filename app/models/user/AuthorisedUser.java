@@ -84,6 +84,20 @@ public class AuthorisedUser extends Model implements Subject {
 	public static AuthorisedUser findByEmail(String email) {
 		return find.where().eq("email", email).findUnique();
 	}
+	
+	public static String checkMail(AuthorisedUser user, String mail){
+		
+		if (user.email.equals(mail)) {
+			return mail;
+		} else {
+			int row = AuthorisedUser.find.where().eq("email", mail).findRowCount();
+
+			if (row > 0) {
+				return "exists";
+			}
+		}
+		return mail;
+	}
 
 	public static List<AuthorisedUser> getUsers() {
 		return find.where().in("roles", SecurityRole.findByName("user"))
