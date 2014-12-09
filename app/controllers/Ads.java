@@ -40,6 +40,7 @@ import views.html.profile.ads.myAds;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+import com.avaje.ebean.SqlUpdate;
 
 public class Ads extends Controller {
 
@@ -222,7 +223,20 @@ public class Ads extends Controller {
 				.eq("contactInfo.email", session("connected"))
 				.order("publishedDate desc").findList()));
 
-	}//
+	}
+	
+	public static Result remove(Long id) {
+		String a = "delete from authorised_user_ad where ad_id="+id; 
+		SqlUpdate  update = Ebean.createSqlUpdate(a);
+		Ebean.execute(update);
+		Ad ad = Ad.find.byId(id);
+		ad.delete();
+		
+		return ok(myAds.render(Ad.find.where()
+				.eq("contactInfo.email", session("connected"))
+				.order("publishedDate desc").findList()));
+
+	}
 
 	public static Result autoPreLong(Long id, String str) {
 		AdSetting set = AdSetting.find.where().eq("name", "autoprelong")
