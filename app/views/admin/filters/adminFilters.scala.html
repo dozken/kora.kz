@@ -171,6 +171,14 @@ $(document).on("change", ".region.select", function(e) {
     });
 });
 
+$(document).on("change", "#region", function() {
+    var id = Number($(this).val());
+    jsRoutes.controllers.Filters.getParentCities(id).ajax({
+        success: function(data) {
+            $("#city_list").html(data);
+        }
+    });
+});
 
 $(document).on("click", ".city.add", function(e) {
     e.preventDefault();

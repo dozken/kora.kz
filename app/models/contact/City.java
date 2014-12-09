@@ -29,6 +29,12 @@ public class City extends Model {
 	@ManyToOne
 	public Region region;
 
+	@ManyToOne
+	public City parentCity;
+
+	@OneToMany(mappedBy = "parentCity")
+	public List<City> subCities;
+
 	public String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -39,5 +45,14 @@ public class City extends Model {
 
 	@OneToMany(mappedBy = "city")
 	public List<ContactInfo> contactInfos;
+
+	public List<City> findSubCitites() {
+		return find.where().eq("parentCity", this).orderBy("name").findList();
+	}
+
+	public boolean isParent() {
+		return (this.subCities != null && this.subCities.size() > 0) ? true
+				: false;
+	}
 
 }
