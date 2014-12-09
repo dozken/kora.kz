@@ -6,7 +6,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner" style="width:240px;height:400px">        
   	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").orderBy("position").findList.zipWithIndex){
-        <div class="item @if(index==0){active}" style="width:240px;height:400px">          
+        <div class='item @if(index.toString==session.get("carousel-top")||(session.get("carousel-top")==null&&index==0)){active}' style="width:240px;height:400px">          
           @advert.fileType match {
 				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
 			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
@@ -31,12 +31,12 @@
   }
   @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").findRowCount>0){
   <li>
-    <div id="carousel-example-generic2" class="carousel slide adslide" data-ride="carousel">
+    <div id="carousel-bottom" class="carousel slide adslide" data-ride="carousel">
     <!-- Indicators -->
     <!-- Wrapper for slides -->
       <div class="carousel-inner" style="width:240px;height:400px">
   	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").orderBy("position").findList.zipWithIndex){	
-        <div class="item @if(index==0){active}" style="width:240px;height:400px">
+        <div class='item @if(index.toString==session.get("carousel-top")||(session.get("carousel-top")==null&&index==0)){active}' style="width:240px;height:400px">
           @advert.fileType match {
 				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
 			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
@@ -50,10 +50,10 @@
         }
       </div>
       <!-- Controls -->
-      <a id="adslideleft" class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
+      <a id="adslideleft" class="left carousel-control" href="#carousel-bottom" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
-      <a id="adslideright" class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
+      <a id="adslideright" class="right carousel-control" href="#carousel-bottom" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>
     </div>

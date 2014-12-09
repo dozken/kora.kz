@@ -2,6 +2,8 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 @import play.i18n._
+
+@carusel(id: String, js: Html)=@{session.put(id, js.toString)}
 <!DOCTYPE html>
 
 <html>
@@ -54,25 +56,23 @@
 
 @restrict(la(as("moderator"),as("admin"))){
 <script>
-//Listen to the 'slid carousel' event
-//to trigger our code after each slide change
+
 $('#carousel-top.carousel').on('slid.bs.carousel', function () {
+	var carouselData = $(this).data('bs.carousel');
+	var currentIndex = carouselData.getItemIndex(carouselData.$element.find('.item.active'));
+	jsRoutes.controllers.Advertisements.sessionAdvert("carousel-top",currentIndex).ajax({
+	    success : function(data) {}
+	});
+	
+	console.log(@session.get("carousel-top"))
+});
 
-// This variable contains all kinds of data and methods related to the carousel
-var carouselData = $(this).data('bs.carousel');
-// EDIT: Doesn't work in Boostrap >= 3.2
-//var currentIndex = carouselData.getActiveIndex();
-var currentIndex = carouselData.getItemIndex(carouselData.$element.find('.item.active'));
-var total = carouselData.$items.length;
-
-// Create the text we want to display.
-// We increment the index because humans don't count like machines
-var text = (currentIndex + 1) + " of " + total;
-
-// You have to create a HTML element <div id="carousel-index"></div>
-// under your carousel to make this work
-//$('#carousel-index').text(text);
-console.log(currentIndex)
+$('#carousel-bottom.carousel').on('slid.bs.carousel', function () {
+	var carouselData = $(this).data('bs.carousel');
+	var currentIndex = carouselData.getItemIndex(carouselData.$element.find('.item.active'));
+	jsRoutes.controllers.Advertisements.sessionAdvert("carousel-bottom",currentIndex).ajax({
+	    success : function(data) {}
+	});
 });
 
 

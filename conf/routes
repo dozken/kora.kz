@@ -9,6 +9,7 @@ GET         /feedback                              controllers.Application.feedb
 POST        /feedback                              controllers.Application.sendFeedback()
 GET         /sitemap                               controllers.Application.sitemap()
 
+GET         /sessionAdvert                         controllers.Advertisements.sessionAdvert(id:String,index:String)
 
 POST        /currency                              controllers.Application.currency(str:String,rate:Double)
 

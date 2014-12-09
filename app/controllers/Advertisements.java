@@ -24,6 +24,11 @@ public class Advertisements extends Controller {
 		return ok(advertisement.file).as(advertisement.fileType);
 	}
 
+	public static Result sessionAdvert(String id, String index) {
+		session(id, index);
+		return ok();
+	}
+
 	// @Restrict(@Group("admin"))
 	public static Result expand(Long id) {
 		DynamicForm advertisementForm = form().bindFromRequest();
