@@ -37,8 +37,6 @@ bootbox.setDefaults({
 });
 
 $(document).ajaxSuccess(function() {
-	console.log( "Triggered ajaxSuccess handler." );
-
 	setTimeout(function() {
 		$(".alert-dismissable").fadeTo(500, 0).slideUp(500, function(){
 			$(this).remove();
