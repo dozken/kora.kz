@@ -368,7 +368,10 @@ public class Ads extends Controller {
 				l = Ad.find.where().eq("status", "active")
 						.in("tags.name", requestData.get("str")).findList();
 			}
-			return ok(adSearch.render(l, Animal.find.byId(1L)));
+			Animal animal = new Animal();
+			animal.id=0L;
+			animal.name="all";
+			return ok(adSearch.render(l, animal));
 		}
 
 		else {
@@ -401,7 +404,10 @@ public class Ads extends Controller {
 
 	public static Result allAd() {
 		List<Ad> l = Ad.find.where().eq("status", "active").findList();
-		Animal animal = Animal.find.where().eq("name", "Лошадь").findUnique();
+		
+		Animal animal = new Animal();
+		animal.id = 0L;
+		animal.name = "all_animal"; 
 		return ok(adSearch.render(l, animal));
 	}
 
@@ -738,7 +744,7 @@ public class Ads extends Controller {
 
 	public static Result searchAd(Integer page, String sort) {
 		DynamicForm requestData = form().bindFromRequest();
-		Long animal_id = Long.parseLong(requestData.get("animal"));
+		String anim = ""; 
 		Double costStartTg = 0.0;
 		Double costEndTg = 99999999.9;
 		Double costStartD = 0.0;
@@ -746,6 +752,10 @@ public class Ads extends Controller {
 		String b = "", loc = "", r = "", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
+		if(!requestData.get("animal").equals("0"))
+			anim = "inner join animal ani on a.animal_id=ani.id and ani.id="
+					+requestData.get("animal");
+		
 		if (!requestData.get("breed").equals("all"))
 			b = "inner join breed b on a.breed_id=b.id and b.id="
 					+ requestData.get("breed");
@@ -810,8 +820,8 @@ public class Ads extends Controller {
 		}
 
 		String a = "SELECT a.id from ad a \n"
-				+ " inner join animal ani on a.animal_id=ani.id and ani.id="
-				+ animal_id
+				+ " "
+				+ anim
 				+ b
 				+ " inner join contact c on a.contact_info_id = c.id "
 				+ loc
@@ -846,8 +856,8 @@ public class Ads extends Controller {
 				+ " limit 30 offset " + (page * 30);
 
 		String a2 = "SELECT count(*) from ad a \n"
-				+ " inner join animal ani on a.animal_id=ani.id and ani.id="
-				+ animal_id
+				+ " "
+				+ anim
 				+ b
 				+ " inner join contact c on a.contact_info_id = c.id "
 				+ loc
@@ -876,8 +886,7 @@ public class Ads extends Controller {
 				+ endYear
 				+ ") " + pic;
 
-		System.out.println(a);
-		System.out.println();
+		
 		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
@@ -894,6 +903,8 @@ public class Ads extends Controller {
 			ads.add(Ad.find.byId(id));
 		}
 
+		System.out.println(list3.size());
+		System.out.println(list3.get(0));
 		Ad tmp = new Ad();
 		tmp.id = 0L;
 		tmp.quantity = list3.get(0).getInteger("count").toString();
