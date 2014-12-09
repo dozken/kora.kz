@@ -1,4 +1,3 @@
-import static play.mvc.Results.internalServerError;
 import static play.mvc.Results.notFound;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import models.user.SocialNetwork;
 import models.user.UserSetting;
 import play.Application;
 import play.GlobalSettings;
-import play.Logger;
 import play.libs.F.Promise;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
@@ -183,25 +181,7 @@ public class Global extends GlobalSettings {
 			Ebean.saveManyToManyAssociations(user, "roles");
 			Ebean.saveManyToManyAssociations(user, "permissions");
 		}
-		/*
-		 * if (Ad.find.findRowCount() == 0) { for(int i=0;i<5;i++){ Ad ad = new
-		 * Ad(); ad.animal = Animal.find.where().eq("name",
-		 * "ЛОШАДЬ").findUnique(); ad.breed = Breed.find.where().eq("name",
-		 * "АХАЛТЕКЕ").findUnique(); ad.birthDate = 2000; ad.contactInfo = new
-		 * ContactInfo(Region.find.where() .eq("name", "Астана").findUnique(),
-		 * "Марат қойшы", "+77773332255", "email@mail.com", "map"); ad.title =
-		 * "Заголовок"; ad.description =
-		 * "Очень много текста. Ну очень много. Слишком много."; ad.quantity =
-		 * "many"; Price price = new Price(); price.price = "100000";
-		 * price.currency = "тг"; price.save(); ad.status = "pending";
-		 * ad.priceType = price;
-		 * 
-		 * 
-		 * // TODO tags ad.save(); AdSetting set = new AdSetting(); set.ad = ad;
-		 * set.name="autoprelong"; set.status="off"; set.save(); }
-		 * 
-		 * }
-		 */
+
 	}
 
 	public Promise<Result> onHandlerNotFound(RequestHeader request) {
@@ -209,9 +189,9 @@ public class Global extends GlobalSettings {
 				.render(request.uri())));
 	}
 
-//	public Promise<Result> onError(RequestHeader request, Throwable t) {
-//		Logger.error("Exception with onError", t);
-//		return Promise.<Result> pure(internalServerError(views.html.errorPage
-//				.render(t)));
-//	}
+	// public Promise<Result> onError(RequestHeader request, Throwable t) {
+	// Logger.error("Exception with onError", t);
+	// return Promise.<Result> pure(internalServerError(views.html.errorPage
+	// .render(t)));
+	// }
 }

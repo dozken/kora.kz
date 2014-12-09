@@ -12,6 +12,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.filters.breed._breed;
 import views.html.admin.filters.city._city;
+import views.html.admin.filters.city._parentCity;
 import views.html.admin.filters.region._region;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
@@ -23,9 +24,19 @@ public class Filters extends Controller {
 		return ok(_city.render(models.contact.Region.find.byId(id)));
 	}
 
+	public static Result getParentCities(Long id) {
+		return ok(_parentCity.render(Region.find.byId(id)));
+	}
+
 	public static Result addCity() {
 		DynamicForm requestData = form().bindFromRequest();
+		System.out.println(requestData);
 		City city = new City();
+		if (requestData.get("parentName") != null
+				&& !requestData.get("parentName").trim().equals("")) {
+			city.parentCity = City.find.byId(Long.parseLong((requestData
+					.get("parentName"))));
+		}
 		city.name = requestData.get("name");
 		city.region = Region.find.ref(Long.parseLong(requestData
 				.get("region.id")));

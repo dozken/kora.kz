@@ -72,6 +72,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Filters.updateRegion(),
 				controllers.routes.javascript.Filters.deleteRegion(),
 				controllers.routes.javascript.Filters.getCities(),
+				controllers.routes.javascript.Filters.getParentCities(),
 				controllers.routes.javascript.Filters.addCity(),
 				controllers.routes.javascript.Filters.updateCity(),
 				controllers.routes.javascript.Filters.deleteCity(),

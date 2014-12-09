@@ -116,12 +116,6 @@ public class Ad extends Model {
 	}
 
 	public static List<Ad> findToModerate() {
-		List<Ad> ads = find
-				.where()
-				.or(com.avaje.ebean.Expr.eq("status", "pending"),
-						com.avaje.ebean.Expr.eq("status", "moderating"))
-				.findList();
-		System.out.println(ads.size());
 		return find
 				.where()
 				.or(com.avaje.ebean.Expr.eq("status", "pending"),

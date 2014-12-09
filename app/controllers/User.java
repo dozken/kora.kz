@@ -16,10 +16,8 @@ import views.html.common.forgotPassword;
 import views.html.common.registerConfirm;
 import views.html.common.restorePassword;
 import views.html.mailBody.recoverPassword;
-import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 
 import com.avaje.ebean.Ebean;
-
 
 public class User extends Controller {
 
