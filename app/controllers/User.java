@@ -20,7 +20,7 @@ import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 
 import com.avaje.ebean.Ebean;
 
-@SubjectNotPresent
+
 public class User extends Controller {
 
 	public static Result register() {
