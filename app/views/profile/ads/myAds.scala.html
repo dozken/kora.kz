@@ -11,6 +11,7 @@
 	  <option value="active">На сайте</option>
 	  <option value="pending">В ожидании</option>
 	  <option value="moderating">На модерции</option>
+	  <option value="rejected">Отклоненные</option>
 	  <option value="archived">В архиве</option>
 	</select>
 	</div>
@@ -71,7 +72,15 @@ var str = $(this).val();
         
     })
     
-     $(document ).on("click",".ad_archive",function(){
+     $(document ).on("click",".ad_delete",function(){
+     
+     if(window.confirm("Вы уверены?")==false){
+     return false;
+     }
+     
+     })
+     
+       $(document ).on("click",".ad_archive",function(){
      
      if(window.confirm("Вы уверены?")==false){
      return false;

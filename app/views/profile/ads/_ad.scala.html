@@ -67,6 +67,7 @@
 		@if(ad.status=="archived" || ad.status=="rejected"){
 		<button  class="btn btn-default btn-sm myb ad_prelong" ad="@ad.id" disabled><span class="icon-time"></span> Продлино</button>
 		 <a href="@routes.Ads.edit(ad.id)" class="btn btn-default btn-sm myb ad_edit" ad="@ad.id"><span class="icon-edit"></span> Редактировать</a>
+		 <a href="@routes.Ads.remove(ad.id)" class="btn btn-default btn-sm myb ad_delete" ad="@ad.id"><span class="glyphicon glyphicon-remove"></span> Удалить</a>
 		}
 		</div>
 	</div>
