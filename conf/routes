@@ -27,12 +27,12 @@ GET         /user/confirmRegistration/:code        controllers.User.confirmRegis
 GET         /user/confirmPage                      controllers.User.confirmPage()
 
 #navbar search
-GET         /ad/nav_search-all                   controllers.Ads.allAd()
-GET         /ad/nav_search-horse                   controllers.Ads.horse()
-GET         /ad/nav_search-camel                   controllers.Ads.camel()
-GET         /ad/nav_search-cow                     controllers.Ads.cow()
-GET         /ad/nav_search-cam                     controllers.Ads.cam()
-GET         /ad/nav_search-other                   controllers.Ads.other()
+GET         /ad/search-all                     controllers.Ads.allAd()
+GET         /ad/search-horse                   controllers.Ads.horse()
+GET         /ad/search-camel                   controllers.Ads.camel()
+GET         /ad/search-cow                     controllers.Ads.cow()
+GET         /ad/search-cam                     controllers.Ads.cam()
+GET         /ad/search-other                   controllers.Ads.other()
 
 
 GET         /ad/show                               controllers.Ads.show()
