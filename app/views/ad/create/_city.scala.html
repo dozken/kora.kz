@@ -2,7 +2,7 @@
 
 <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
     <option selected disabled hidden> Выберите город</option>
-    @for(city<-region.city){
+    @for(city<-region.city if(city.parentCity==null)){
     	@if(city.isParent){
     	<optgroup label="@city.name">    	
     	@for((subcity,index) <- city.findSubCitites.zipWithIndex){
