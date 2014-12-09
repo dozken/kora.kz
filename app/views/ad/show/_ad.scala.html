@@ -140,7 +140,7 @@
 
 @_comment(ad.comments)
         </div>
-@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
+@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || (session.get("connected")!=null && models.ad.Ad.settingByName(ad,"comment").status=="registred" )){ 
 	<div class="col-lg-12 nopaddingleft formdown topka">
 <b id="comment_head" class="bdau PFBSPI-13">Написать владельцу</b>
         <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
