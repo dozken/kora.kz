@@ -57,6 +57,7 @@ POST        /ad/:id/extend                         controllers.Ads.preLong(id: L
 POST        /ad/:id/highlight                      controllers.Ads.highlight(id: Long)
 POST        /ad/:id/autoextend                     controllers.Ads.autoPreLong(id: Long, str:String)
 GET         /ad/:id/archive                        controllers.Ads.archive(id: Long)
+GET         /ad/:id/remove                         controllers.Ads.remove(id: Long)
 POST        /ad/message/:ad_id                     controllers.Ads.sendPrivateMessage(ad_id:Long,author_id:Long)
 POST        /ad/replay_message/                    controllers.Ads.replayPrivateMessage(author_id:Long, ad_id:Long,  recipent_id:Long,message:String)
 GET         /ad/:id/moderate                       controllers.Administer.moderate(id: Long)

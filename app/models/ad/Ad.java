@@ -79,10 +79,10 @@ public class Ad extends Model {
 	public Date expirationDate = new Date(new Date().getTime()
 			+ (1000 * 60 * 60 * 24 * 7));
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<PrivateMessage> messages = new ArrayList<PrivateMessage>();
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<Comment> comments = new ArrayList<Comment>();
 
 	public List<AdImage> sortByPosition(Long id) {
