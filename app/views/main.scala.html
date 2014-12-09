@@ -1,0 +1,265 @@
+@(title: String)(content: Html)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import play.i18n._
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<meta charset="utf-8">
+	@*
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">*@
+        <title>@title</title>
+        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'> 
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("bootstrap-3.3.1/css/bootstrap.css")'>		        
+        <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap3/bootstrap-switch.css"))'>
+        <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/datepicker3.css"))'>
+        
+		<link rel="stylesheet" media="screen" href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'>        
+		<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/fonts/fontawesome/css/font-awesome.css")'>        
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+        
+  		<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+	    @_navbar()
+        @content
+
+		
+	    @_footer()
+	  
+		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))' type="text/javascript"></script>
+		<script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))' type="text/javascript"></script>
+		
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap-switch.min.js"))' type="text/javascript"></script>        
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap-datepicker.js"))' type="text/javascript"></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("js/locales/bootstrap-datepicker.ru.js"))' type="text/javascript"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js' type="text/javascript"></script>
+        <script src='@routes.Assets.at("javascripts/dist/FileAPI.min.js")' type="text/javascript"></script>
+
+  		<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+        <script src='@routes.Assets.at("javascripts/validation.js")' type="text/javascript"></script>
+  		<script src='@routes.Assets.at("javascripts/maskedinput.js")' type="text/javascript"></script>
+  		
+  		@_modalRegistration()
+		@_modalLogin()
+    </body>
+
+
+
+@restrict(la(as("moderator"),as("admin"))){
+<script>
+	function registrate(){
+	console.log("click");		
+	}
+
+	var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
+	var sock = new WS("@routes.Application.socketHandler().webSocketURL(request)")
+	var adModerate = null;
+	$(document).ready(function () {
+		socketing()
+	});
+	
+	$(document).ajaxSuccess(function () {
+		socketing()
+	});
+	
+	$(document).on("click",".toastmoderate",function(){
+		var adId = $(this).attr("ad");
+		console.log("enter");
+		jsRoutes.controllers.Administer.moderate(adId).ajax({
+			success: function(data) {
+				console.log(data);
+				adModerate = "#ad"+adId;
+				mytoast.hide();
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR.responseText);            
+	        }
+		});
+		
+	});
+	var mytoast;
+	function socketing() {
+
+	      sock.onmessage = function (event) {
+	          
+	          var json = JSON.parse(event.data)
+	          //moderate
+	          if (json.hasOwnProperty('moderating')) {
+	        	  toastr.clear();
+	        	  toastr.options = {
+	    	              "closeButton": true,
+	    	              "debug": false,
+	    	              "positionClass": "toast-top-right",
+	    	              "showDuration": "5000",
+	    	              "hideDuration": "5000",
+	    	              "timeOut": "5000",
+	    	              "extendedTimeOut": "5000",
+	    	              "showEasing": "swing",
+	    	              "hideEasing": "linear",
+	    	              "showMethod": "fadeIn",
+	    	              "hideMethod": "fadeOut"
+	    	      }
+	        	  
+	              var ad = json;
+	              notification("service.mp3");
+	              
+	              toastr.success("<b>Объявление модерируется</b>"
+	            		  + "<br>От: <strong>" + ad.company + "</strong>" 
+	            		  + "<br/>Заголовок: <strong>"+ad.title +"</strong>"
+	            		  + "<br/>Модератор: <strong>"+ad.moderatingBy +"</strong>" 
+	            		  );
+	              //$("#ad"+ad.id).remove();
+	              adModerate = "#ad"+ad.id;
+	          }
+	          
+	          
+	          if (json.hasOwnProperty('pending')) {
+	        	  toastr.options = {
+	    	              "closeButton": true,
+	    	              "debug": false,
+	    	              "positionClass": "toast-top-right",
+	    	              "showDuration": "0",
+	    	              "hideDuration": "0",
+	    	              "timeOut": "0",
+	    	              "extendedTimeOut": "0",
+	    	              "showEasing": "swing",
+	    	              "hideEasing": "linear",
+	    	              "showMethod": "fadeIn",
+	    	              "hideMethod": "fadeOut"
+	    	      }
+	        	  var ad = json;
+	              notification("service.mp3");
+	              mytoast = toastr.info("<b>Новое объявление</b>"
+	            		  + "<br/>Oт: <strong>" + ad.company +"</strong>" 
+	            		  + "<br/>Заголовок: <strong>"+ad.title +"</strong>"
+	            		  + '<br/><button type="button" class="btn btn-info btn-sm toastmoderate" ad="'+ad.id+'"><span class="glyphicon glyphicon-pencil"></span> Модерация</button>'
+	            		  );
+	              
+	              //$("#ad"+ad.id).remove();
+	          }
+	      }
+	  }
+	
+	function notification(path) {
+	      var audioElement = document.createElement('audio');
+	      audioElement.setAttribute('src', '@routes.Assets.at("sounds/")' + path);
+	      audioElement.setAttribute('autoplay', 'autoplay');
+	      //audioElement.load()
+	      $.get();
+	      audioElement.addEventListener("load", function () {
+	          audioElement.play();
+	      }, true);
+
+	      audioElement.play();
+	  } 	
+</script>
+}
+<script type="text/javascript">
+
+
+$(document).ready(function(e) {
+
+
+
+    $("#registerErrorAlert").hide();
+    $("#loginErrorAlert").hide();
+    $(document).on('click', '.bs-dropdown-to-select-group .dropdown-menu li', function(event) {
+        var $target = $(event.currentTarget);
+        $target.closest('.bs-dropdown-to-select-group')
+            .find('[data-bind="bs-drp-sel-value"]').val($target.attr('data-value'))
+            .end()
+            .children('.dropdown-toggle').dropdown('toggle');
+        $target.closest('.bs-dropdown-to-select-group')
+            .find('[data-bind="bs-drp-sel-label"]').text($target.attr('data-value')); /*$target.text()*/
+        return false;
+    });
+});
+
+$(document).on("click", "#registrButton", function(e) {
+e.preventDefault();
+
+if(register_validation()) {
+    $("#registrButton" ).prop("disabled",true);
+jsRoutes.controllers.User.register ( ).ajax ( {
+data : $ ( "#registerForm" ).serialize ( ),
+type : 'POST',
+success : function ( data ) {
+var res = "" + data ;
+if ( res == "error" ) {
+$ ( "#registerErrorAlert" ).html ( "Эта почта уже используется!" ) ;
+$ ( "#registerErrorAlert" ).show ( ) ;
+$("#registrButton" ).prop("disabled",false);
+
+} else {
+jsRoutes.controllers.Application.emailing ("register",res ).ajax ()
+    @restrictOr(la(as("admin"))) {
+        window.location.href = " @routes.Administer.moderators() ";
+    } {
+        window.location.href = " @routes.User.confirmPage() ";
+    }
+
+}
+
+},
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
+}
+} ) ;
+}else{
+$("#registerErrorAlert" ).show();
+}
+
+});
+
+$(document).on("click", "#loginButton", function(e) {
+    e.preventDefault();
+if(login_validation()) {
+jsRoutes.controllers.Application.signIn ( ).ajax ( {
+data : $ ( "#loginForm" ).serialize ( ),
+success : function ( data ) {
+var res = "" + data ;
+if ( res == "error" ) {
+$ ( "#loginErrorAlert" ).html ( "Неправильный логин или пароль" ) ;
+$ ( "#loginErrorAlert" ).show ( ) ;
+} else {
+
+window.location.href = " @routes.Manage.myInfo() ";
+}
+
+},
+error : function ( jqXHR, textStatus, errorThrown ) {
+console.log ( jqXHR.responseText ) ;
+}
+} ) ;
+}else{$ ( "#loginErrorAlert" ).show ( ) ;}
+});
+/*
+@if(session.get("USDtoKZT")==null) {
+
+    $.getJSON ( "http://rate-exchange.appspot.com/currency?from=USD&to=KZT&callback=?", function ( result ) {
+
+    console.log ( result.rate ) ;
+    jsRoutes.controllers.Application.currency ( "USDtoKZT", result.rate ).ajax ( ) ;
+    })
+
+}
+
+    @if(session.get("KZTtoUSD")==null) {
+
+        $.getJSON ( "http://rate-exchange.appspot.com/currency?from=KZT&to=USD&callback=?", function ( result ) {
+
+        console.log ( result.rate ) ;
+        jsRoutes.controllers.Application.currency ( "KZTtoUSD", result.rate ).ajax ( ) ;
+        })
+
+    }
+    */
+</script>
+</html>
