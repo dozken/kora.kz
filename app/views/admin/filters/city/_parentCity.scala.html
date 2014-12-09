@@ -2,11 +2,7 @@
 
 <select name="parentName" class="form-control selectdesign">
     <option selected value=""> Выберите город</option>    
-    @for(city<-region.city){
-		@if(city.isParent){
-		<option disabled hidden class=""><b>@city.name</b></option>
-		}else{
-        <option value="@city.id">- @city.name</option>
-		}
+    @for(city<-region.city if(city.parentCity==null)){
+    	<option value="@city.id">@city.name</option>		
     }
 </select>

@@ -186,6 +186,13 @@ $(document).on("click", ".city.add", function(e) {
         data: $("#cityForm").serialize(),
         success: function(data) {
             $("#cityList").html(data);
+            
+            var id = Number($("#region").val());
+            jsRoutes.controllers.Filters.getParentCities(id).ajax({
+                success: function(data) {
+                    $("#city_list").html(data);
+                }
+            });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);
