@@ -1,0 +1,232 @@
+@(ad: models.ad.Ad)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+<ul class="aty">
+	<li><h4><b>@ad.title</b></h4></li>
+	<li class="att">
+  <h4>
+<div style="position: absolute;margin-top: -22px;padding-left: 10px;">  
+  <div class="liniya cenaRight"></div> 
+  <div class="liniya cenaCenter"><span style="padding-left:10px;padding-right:10px;line-height: 28px;color:white;">@Messages(ad.priceType.price.toString) @ad.priceType.currency</span></div> 
+  <div class="liniya cenaLeft"></div> 
+</div>
+ 
+    
+  </h4>
+  </li>
+  <li style="padding-left: 215px;">
+    @if(controllers.Ads.checkFavorite(ad.id)) {
+        <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span>
+            В избранном</a>
+    }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
+        В избранное</a>}
+        &nbsp&nbsp&nbsp
+        
+        <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer">
+        @if(controllers.Ads.favoriteSizeInt>0){ 
+        Выбрано @controllers.Ads.favoriteSizeInt объявления        
+        }
+        </a>
+  </li>
+</ul>
+<div class="col-lg-5 nopaddingleft">
+	<ul class="tiginen nopaddingleft">
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Регион</li>
+				<li class="PFBSPLI-13">@ad.contactInfo.region.name</li>
+			</ul>
+		</li>
+        @if(ad.animal.id!=5){
+        <li>
+			<ul class="koldenen">
+				<li class="birinwi">Порода</li>
+				<li class="PFBSPLI-13">@ad.breed.name</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Возраст</li>
+				<li class="PFBSPLI-13">@ad.birthDate</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Пол</li>
+				<li class="PFBSPLI-13">@Messages(ad.gender)</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Количество</li>
+				<li class="PFBSPLI-13">@Messages(ad.quantity)</li>
+			</ul>
+		</li>}
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Продавец</li>
+				<li class="PFBSPLI-13">@ad.contactInfo.company</li>
+			</ul>
+		</li>
+		<li>
+			<ul class="koldenen">
+				<li class="birinwi">Контакты</li>
+				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@utils._phone(ad.contactInfo.phone)</li></ul></li>
+			</ul>
+		</li>
+	</ul>
+    @subjectPresent() {
+        <a href="#" class="btn btn-default btn-success PFBSPI-13" data-toggle="modal" data-target="#private_message_modal" style="padding-left:45px;padding-right:45px"><span class="icon-message"></span>
+            Отправить сообщение продавцу</a>
+    }
+</div>
+
+<div class="col-lg-7 nopaddingleft nopaddingright">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+      	<div class="carousel-inner">
+			@if(ad.images.size()>0){
+          @for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex){
+            	<div class="item @if(index==0){active}">
+              	<!-- <img src="@img.content" style="width: 380px;heigh:390px; border-radius:8px"> -->
+              	<img src="@img.content" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
+            	</div><!-- End Item -->
+    			}
+      }else{
+        <div class="item active">
+            <img src='@routes.Assets.at("images/home/nophoto.png")' style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
+          </div><!-- End Item -->
+      }
+		</div><!-- End Carousel Inner -->
+	    <ul class="list-group mylistgroup">
+    	@for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex) {
+        	<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
+        	<!-- <img aslan="1234" src="@img.content" style="width: 75px;height: 74px; border-radius:5px;"/> -->
+        	<img src="@img.content" style="width: auto;height: auto; border-radius:5px;max-width:75px;max-height:74px; "/>
+        	</li>
+    	}
+    	</ul>
+		<!-- Controls -->
+    </div>
+</div>
+
+<div class="col-lg-12 ppp nopaddingleft">
+<b class="bdau">Краткое Описание</b>
+	<p class="PFBSPLI-13">@ad.description</p>
+</div>
+<div class="col-lg-12 nopaddingleft nopaddingright">
+	<ul class="pros pros2">
+		<div class="col-lg-6 nopaddingleft"><li class="PFBSPLI-13"><span class="icon-prosmotr"></span> @ad.views просмотров</li>
+		<li class="PFBSPLI-13"><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li></div>
+		<div class="col-lg-6 texal nopaddingright">
+		  <li>
+		  	<span class="fa fa-users"></span> <span id="ya_share1"></span>
+		  </li>
+		<li class="PFBSPLI-13"><a class="owib" href="@routes.Application.feedback"><span class="fa fa-exclamation-triangle"></span> Нашли ошибку в объявлении?</a></li></div>
+	</ul>
+</div>
+@if(ad.status.equals("moderating")){
+@restrictOr(la(as("moderator"),as("admin"))){
+<div class="col-lg-12  formdown topka nopaddingleft">
+<button class="btn btn-success moderate approve" ad="@ad.id"><span class="icon-share"></span> Подтвердить</button>
+<button class="btn btn-danger moderate deny" ad="@ad.id"><span class="icon-warning"></span> Отклонить</button>
+</div>
+}{<a></a>}
+}
+
+    <div id="map"></div>
+
+    <div id="comment_body" class="col-lg-12  formdown topka akwyl">
+
+@_comment(ad.comments)
+        </div>
+@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || session.get("connected")!=null){ 
+	<div class="col-lg-12 nopaddingleft formdown topka">
+<b id="comment_head" class="bdau PFBSPI-13">Написать владельцу</b>
+        <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
+</div>
+<form id="comment_form" class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3"  class="col-sm-3 control-label leftalign PFBSPI-13" >Ваше имя или ник</label>
+    <div class="col-sm-9">
+      <input type="text" name="comment_author" class="form-control ssss" id="inputEmail3" validation="not_null" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).userName" readonly="readonly" }>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-3 control-label leftalign PFBSPI-13">Электронная почта</label>
+    <div class="col-sm-9">
+      <input type="email" name="comment_email" class="form-control PFBSPI-13 ssss" id="inputEmail3" validation="mail" @if(session.get("connected")!=null){value="@models.user.AuthorisedUser.findByEmail(session.get("connected")).email" readonly="readonly" }>
+      <span class="help-block"><i  class="PFBSPLI-11">На этот адрес придет уведомление об ответе</i></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Сообщение</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" name="comment_message" rows="6"></textarea>
+      @*
+      <span class="help-block"><i class="PFBSPLI-11">Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
+      *@
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Введите код</label>
+    <div class="col-sm-9">
+      <table><tr><td>
+        <img src='@routes.Application.captcha' class="imgmargin">
+      </td><td>
+        &nbsp&nbsp>&nbsp&nbsp
+      </td><td>
+        <input type="text" name="kaptcha" class="form-control" id="inputEmail3">
+      </td></tr></table>
+      
+      <span class="help-block PFBSPLI-11"><i>Хотим убедиться, что вы его не забудете</i></span>
+    </div>
+  </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div id="kapcha_Error" class="kipkizil"></div>
+
+        </div>
+    </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9 PFBSPI-13">
+      <button type="submit" id="comment_ad" forWho="0" class="btn btn-success" style="padding-left:60px;padding-right:60px;">Отправить</button>
+     
+    </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9 PFBSPLI-11">
+      <i>Оставляя коментарий вы соглашаетесь с нашими <a href="#">правилами общения</a></i>
+     
+    </div>
+  </div>
+}   
+@if(models.ad.Ad.like(ad).size>0){
+<br>
+<br>
+<br>
+  <div class="contain" style="width: 134%;">
+    <h4>
+      Похожие объявления из категории "@ad.animal.name @ad.breed.name" в @ad.contactInfo.city.name
+    </h4>
+    <div class="footerborder"></div>
+    
+    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad)&&likeAd.status.equals("active"))){
+    <div class="pohojii">      
+      <a href="@routes.Ads.get(likeAd.id)">
+      <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>
+      <div class="pohojii_list">
+          <div class="pohojii_list_price">@Messages(likeAd.priceType.price.toString) @utils._currency(likeAd.priceType.currency)</div>
+          @if(likeAd.images.size()>0){
+          <img style="height:140px;width:140px;" src="@models.ad.AdImage.getFirstPicture(likeAd.id)"/>
+          }else{<img style="height:140px;width:140px;" src="@routes.Assets.at("images/home/nophoto.png")">}
+      </div>
+      </a>
+    </div>
+    }
+</div>  
+}
+</form>
+
+
+

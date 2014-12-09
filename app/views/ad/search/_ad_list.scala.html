@@ -1,0 +1,15 @@
+@(ads:List[models.ad.Ad])
+<div id="search_results" class="col-lg-9 pro3 nopaddingright">
+    @if(ads!=null) {
+
+        @for(ad <- ads if(ad.status.equals("active"))) {
+            @if(ad.id!=0) {
+                <div class="col-lg-12  pro1 @if(models.ad.Ad.settingByName(ad, "highlight") != null) {highlighted }">@_ad(ad)</div>
+            }else {
+                <input type="hidden" id="total_size" value="@ad.quantity"/>
+            }
+        }
+
+    }
+
+</div>
