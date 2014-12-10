@@ -1,0 +1,13 @@
+@for((user,index)<-models.user.AuthorisedUser.getUsers.zipWithIndex ){
+<tr>
+	<td>@{index+1}</td>
+	<td>@user.userName</td>
+	<td>@if(user.profile!=null&&user.profile.address!=null){@user.profile.address}</td>
+	<td>@if(user.profile!=null&&user.profile.region!=null){@user.profile.region.name}</td>
+	<td>@if(user.profile!=null&&user.profile.city!=null){@user.profile.city.name}</td>
+	<td>@if(user.profile!=null&&user.profile.phone!=null){<a href="@user.profile.phone">@user.profile.phone</a>}</td>
+	<td>@user.email</td>
+	<td><a class="delete" user="@user.id"><i class="fa fa-times"></i></span></a></td>
+
+</tr>
+}

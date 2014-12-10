@@ -1,0 +1,8 @@
+@(region:models.contact.Region)
+
+<select name="parentName" class="form-control selectdesign">
+    <option selected value=""> Выберите город</option>    
+    @for(city<-region.city if(city.parentCity==null)){
+    	<option value="@city.id">@city.name</option>		
+    }
+</select>

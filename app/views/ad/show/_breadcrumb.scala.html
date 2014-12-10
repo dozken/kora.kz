@@ -1,0 +1,15 @@
+@(ad: models.ad.Ad)
+@*
+<div class="col-xs-12 nopaddingleft">
+	<a href="#" class="agreen">Главная</a><span> >> </span><a href="#"
+		class="agreen">Корова</a><span> >> </span><a href="#" class="ablack">Абердин-Ангус</a>
+</div>
+*@
+<ol class="breadcrumb dbpath">
+  <li class="PFBSPLI-13"><a href="@routes.Application.index" style="color:#90b346">Главная</a>
+  &nbsp&nbsp&nbsp&nbsp<i class="fa fa-angle-double-right"></i></li>
+  <li class="PFBSPLI-13"><a href="@routes.Ads.searchByType(ad.animal.id)" style="color:#90b346">@ad.animal.name</a>
+  &nbsp&nbsp&nbsp&nbsp<i class="fa fa-angle-double-right"></i></li>
+  </li>
+    @if(ad.animal.id!=5){<li class="active PFBSPLI-13" style="color:#000">@ad.breed.name</li>}
+</ol>
