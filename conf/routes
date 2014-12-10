@@ -22,18 +22,16 @@ GET         /user/forgotPassword                   controllers.User.forgotPasswo
 POST        /user/forgotPassword                   controllers.User.resetPassword()
 GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
 POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
-
 GET         /user/confirmRegistration/:code        controllers.User.confirmRegistration(code :String)
-
 GET         /user/confirmPage                      controllers.User.confirmPage()
 
 #navbar search
-GET         /ad/search-all                     controllers.Ads.allAd()
-GET         /ad/search-horse                   controllers.Ads.horse()
-GET         /ad/search-camel                   controllers.Ads.camel()
-GET         /ad/search-cow                     controllers.Ads.cow()
-GET         /ad/search-cam                     controllers.Ads.cam()
-GET         /ad/search-other                   controllers.Ads.other()
+GET         /ad/search-all                     	   controllers.Ads.allAd()
+GET         /ad/search-horse                       controllers.Ads.horse()
+GET         /ad/search-camel                       controllers.Ads.camel()
+GET         /ad/search-cow                         controllers.Ads.cow()
+GET         /ad/search-cam                     	   controllers.Ads.cam()
+GET         /ad/search-other                       controllers.Ads.other()
 
 
 GET         /ad/show                               controllers.Ads.show()
@@ -46,11 +44,11 @@ POST        /ad/comment/:id                        controllers.Ads.comment(id:Lo
 POST        /ad/favorite/:id                       controllers.Ads.addFavorite(id:Long,type:String)
 POST        /ad/delete_message/:type               controllers.Ads.deleteMessages(ids:String,type:String)
 POST        /ad/readAs/                            controllers.Ads.readAsMessages(ids:String)
-#GET         /ad/search                             controllers.Ads.search()
+#GET         /ad/search                            controllers.Ads.search()
 GET         /ad/quick_search                       controllers.Ads.quick_search()
 GET         /ad/favorite                           controllers.Ads.favorite()
 GET         /ad/favorite/size                      controllers.Ads.favoriteSize()
-GET         /ad/show/:id                                controllers.Ads.get(id: Long)
+GET         /ad/show/:id                           controllers.Ads.get(id: Long)
 GET         /ad/breed/:id                          controllers.Ads.getBreeds(id:Long)
 GET         /ad/city/:id                           controllers.Ads.getCities(id:Long)
 POST        /ad/filter/:str                        controllers.Ads.filterAds(str: String)
@@ -88,6 +86,7 @@ POST        /profile/info/edit/:id                 controllers.Info.update(id:Lo
 
 GET         /admin                                 controllers.Administer.ads()
 GET         /admin/ads                             controllers.Administer.ads()
+GET         /admin/all/ads                         controllers.Administer.allAds()
 GET         /admin/filter                          controllers.Administer.filters()
 GET         /admin/filter/breed/                   controllers.Filters.getBreeds(id:Long)
 GET         /admin/filter/breed/add                controllers.Filters.addBreed()
@@ -103,10 +102,6 @@ GET         /admin/filter/city/add                 controllers.Filters.addCity()
 GET         /admin/filter/city/update              controllers.Filters.updateCity(id: Long,name: String, latlng:String)
 POST        /admin/filter/city/:id/delete          controllers.Filters.deleteCity(id: Long)
 
-
-
-
-
 GET         /admin/advetisements                   controllers.Administer.advetiments()
 POST        /admin/advetisement/add                controllers.Advertisements.add()
 GET         /admin/advetisement/file/:id           controllers.Advertisements.renderAdvetisement(id: Long)
@@ -114,8 +109,9 @@ GET         /admin/advetisement/:id/expand         controllers.Advertisements.ex
 GET         /admin/advetisement/:id/replace        controllers.Advertisements.replace(id: Long,direction: String)
 GET         /admin/advetisement/:id/remove         controllers.Advertisements.remove(id: Long)
 
-
 GET         /admin/users                           controllers.Administer.users()
+GET         /admin/remove/user/:id                 controllers.User.removeUser(id:Long)
+GET         /admin/remove/moderator/:id            controllers.User.removeModerator(id:Long)
 GET         /admin/moderators                      controllers.Administer.moderators()
 
 # Javascript routing
@@ -124,3 +120,4 @@ GET         /assets/javascripts/routes             controllers.Application.javas
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                          controllers.Assets.at(path="/public", file)
 GET         /webjars/*file                         controllers.WebJarAssets.at(file)
+

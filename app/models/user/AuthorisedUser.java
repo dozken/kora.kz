@@ -42,7 +42,7 @@ public class AuthorisedUser extends Model implements Subject {
 	@OneToOne(cascade = CascadeType.ALL)
 	public Profile profile;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<SecurityRole> roles;
 
 	@ManyToMany
@@ -100,8 +100,11 @@ public class AuthorisedUser extends Model implements Subject {
 	}
 
 	public static List<AuthorisedUser> getUsers() {
-		return find.where().in("roles", SecurityRole.findByName("user"))
-				.findList();
+		List<AuthorisedUser> users = find.where().in("roles", SecurityRole.findByName("user")).findList();
+		for(AuthorisedUser user : users){
+			if(user.roles.size()>1)users.remove(user);
+		}
+		return users;
 	}
 
 	public static List<AuthorisedUser> getModerators() {

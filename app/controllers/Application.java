@@ -105,6 +105,9 @@ public class Application extends Controller {
 				controllers.routes.javascript.Manage.paymentReport(),
 				controllers.routes.javascript.Manage.addMoney(),
 				controllers.routes.javascript.Application.emailing(),
+				controllers.routes.javascript.User.removeUser(),
+				controllers.routes.javascript.User.removeModerator(),
+				
 				controllers.routes.javascript.Manage.getMessageType()));
 	}
 
