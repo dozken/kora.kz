@@ -1,12 +1,12 @@
 @(ads:List[models.ad.Ad])
 @main("Мои Объявления") {
 <div class="container">
-  <div class="col-lg-3 menudiv">
+  <div class="col-xs-3 menudiv">
     @profile._menu()
   </div>
-  <div class="col-lg-9 ">
+  <div class="col-xs-9 ">
   	@profile._title("МОИ ОБЪЯВЛЕНИЯ"){
-  	<div class="col-lg-4 tptp"><select id="ad_filter" class="form-control selectdesign">
+  	<div class="col-xs-4 tptp"><select id="ad_filter" class="form-control selectdesign">
       <option selected="selected" value="all">Все</option>
 	  <option value="active">На сайте</option>
 	  <option value="pending">В ожидании</option>

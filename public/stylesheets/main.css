@@ -6,6 +6,9 @@
     font-family: TENGE;
     src: url('fonts/tenge.otf') format("opentype");
 }
+.container { 
+	width: @container-desktop !important; 
+}
 .txtupp{
 	text-transform: uppercase;
 }
@@ -123,7 +126,7 @@ border-color: #77953a #77953a #77953a;
     content: "";
     padding: 3 3px;
 }
-.сontain{
+.сontain12 {
 	padding-left: 87px;
 	padding-right: 26px;
 }
@@ -205,7 +208,7 @@ border-color: #77953a #77953a #77953a;
 	
 }
 .vsenavbar{
-	margin-left:50px;
+	margin-left:-22px;
 }
 .vsenavbarright{
 	margin-right:5px;
@@ -577,7 +580,7 @@ body {
 a.back_image{
 	z-index: -1;
 	position: absolute;	
-	top: 40px;
+	top: 0px;
 	width: 188px;
 	height: 128px;
 }
@@ -945,8 +948,9 @@ hovers in index
 }
 
 .menudiv {
-	border-right: 1px solid #ccc;
-	padding-left: 70px;
+border-right: 1px solid #ccc;
+margin-left: -52px;
+padding-left: 50px;
 }
 
 .floatright {
