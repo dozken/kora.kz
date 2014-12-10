@@ -1,0 +1,28 @@
+@(ad: models.ad.Ad)
+
+<div class="col-lg-4 suret">
+
+    
+    @if(ad.images.size()>0){
+    <div class="newesuret1"><span>@ad.images.size</span></div>
+    <div class="newesuret"></div>
+    <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
+        <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;"> 
+    </div>
+        
+    }else{<img src="@routes.Assets.at("images/home/nophoto.png")">}
+</div>
+<div class="col-lg-8">
+    <ul class="obya">
+        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.title</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
+        <li class="PFBSPLI-13">@if(ad.description.length>100){ @ad.description.take(200)... }else{ @ad.description}</li>
+        <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
+        <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
+    </ul>
+    <ul class="pros">
+        <li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
+        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){Комментариев нет} else{ @ad.comments.size() комментариев}</li>
+        <li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li>
+    </ul>
+</div>
+
