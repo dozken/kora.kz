@@ -7,8 +7,8 @@
             <div id="error_fields" style="visibility: hidden" class="alert alert-danger"  role="alert"></div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput1">Компания</label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label" for="textinput1">Компания</label>
+				<div class="col-xs-6">
 					<input id="company_name" name="company_name" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
 						class="form-control input-md ssss" value="@user.userName" validation="not_null">
@@ -18,8 +18,8 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="filebutton">Фотографии</label>
-				<div class="col-md-4">
+				<label class="col-xs-2 control-label" for="filebutton">Фотографии</label>
+				<div class="col-xs-4">
 					<div class="fileUpload btn btn-default active">
 						<span>Изменить Фото</span> <input type="file" name="image_file" id="filebutton"
 							class="upload" />
@@ -29,8 +29,8 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label"></label>
-				<div class="col-md-10 ava">
+				<label class="col-xs-2 control-label"></label>
+				<div class="col-xs-10 ava">
 					<div id="profile_image" name="image">
                         @if(user.profile.image!=null){
 
@@ -44,8 +44,8 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput1">Адрес</label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label" for="textinput1">Адрес</label>
+				<div class="col-xs-6">
 					<input id="address" name="address" type="text"
 						placeholder="Название компании (ТОО, ИП, АО)"
 						class="form-control input-md" value="@user.profile.address" validation="not_null">
@@ -54,8 +54,8 @@
 			</div>
 
 			<div class="form-group" >
-				<label class="col-md-2 control-label" for="selectbasic2">Регион</label>
-				<div class="col-md-3" style="padding-right: 0px;">
+				<label class="col-xs-2 control-label" for="selectbasic2">Регион</label>
+				<div class="col-xs-3" style="padding-right: 0px;">
 					<select id="region" name="region" class="form-control sd" validation="not_null">
                         <option selected disabled hidden> Выберите регион</option>
                         @for(region<-models.contact.Region.find.all()) {
@@ -68,8 +68,8 @@
 
 
             <div class="form-group">
-                <label class="col-md-2 control-label" for="selectbasic3">Город</label>
-                <div id="city_list" class="col-md-3">
+                <label class="col-xs-2 control-label" for="selectbasic3">Город</label>
+                <div id="city_list" class="col-xs-3">
                   @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
 			          <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
 					    <option selected disabled hidden> Выберите город</option>
@@ -93,8 +93,8 @@
 
 			<!-- Multiple Checkboxes (inline) -->
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="radios">Пол</label>
-				<div class="col-md-4">
+				<label class="col-xs-2 control-label" for="radios">Пол</label>
+				<div class="col-xs-4">
 					<label class="radio-inline" for="mradios-0"> 
 					<input type="radio" name="gender" value="муж" checked="checked" id="mradios-0">муж
 					</label> 
@@ -107,8 +107,8 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textarea">Описание</label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label" for="textarea">Описание</label>
+				<div class="col-xs-6">
 					<textarea class="form-control" rows="6" id="description"
 						name="description">@user.profile.description</textarea>
 				</div>
@@ -116,8 +116,8 @@
 
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2" >Телефон</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2" >Телефон</label>
+				<div class="col-xs-3">
 					<input id="tel1" validation="not_null" name="phone" type="text" value="@user.profile.phone"
 						placeholder="" class="form-control input-md">
 
@@ -125,8 +125,8 @@
 			</div>
 			
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2" >Электронная почта</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2" >Электронная почта</label>
+				<div class="col-xs-3">
 					<input id="email" validation="mail" name="email" type="text" value="@user.email"
 						placeholder="" class="form-control input-md">
 
@@ -134,8 +134,8 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2">Вконтакте</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2">Вконтакте</label>
+				<div class="col-xs-3">
 					<input id="vk" name="vk" type="text" placeholder=""
 						class="form-control input-md" value="@models.user.UserSocials.getSocialByName(user.id,"vk")">
 
@@ -143,24 +143,24 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2">Facebook</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2">Facebook</label>
+				<div class="col-xs-3">
 					<input id="facebook" name="facebook" type="text" placeholder=""
 						class="form-control input-md" value="@models.user.UserSocials.getSocialByName(user.id,"facebook")">
 
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2">Skype</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2">Skype</label>
+				<div class="col-xs-3">
 					<input id="skype" name="skype" type="text" placeholder=""
 						class="form-control input-md" value="@models.user.UserSocials.getSocialByName(user.id,"skype")">
 
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="textinput2">Сайт</label>
-				<div class="col-md-3">
+				<label class="col-xs-2 control-label" for="textinput2">Сайт</label>
+				<div class="col-xs-3">
 					<input id="website" name="website" type="text"
 						placeholder="technovision.kz" class="form-control input-md" value="@models.user.UserSocials.getSocialByName(user.id,"website")">
 
@@ -168,7 +168,7 @@
 			</div>
 <!-- BTSHDJHFJ -->
 <div class="form-group">
-  <div class="col-md-5" style="position: absolute;padding-left: 293px;padding-top: 23px;">
+  <div class="col-xs-5" style="position: absolute;padding-left: 293px;padding-top: 23px;">
     <span>Укажите ваше расположение на карте</span>
     <a href="technovision" class="kizilast" style="cursor: pointer">Удалить метку</a>
   </div>
@@ -176,7 +176,7 @@
 <!-- BTSHDJHFJ -->
 			<div class="form-group">
 
-					<div class="col-md-5" style="margin-left: 137px;">
+					<div class="col-xs-5" style="margin-left: 137px;">
         			<span class="input-group-btn">
         			<a map="yandex" class="mapSelect btn btn-default btn-sm "><b>Яндекс</b></a>
         			<a map="google" class="mapSelect btn btn-default btn-sm active"><b>Google</b></a>
@@ -191,8 +191,8 @@
 
 			<!-- Button -->
 			<div class="form-group">
-				<label class="col-md-2 control-label" for="singlebutton"></label>
-				<div class="col-md-4">
+				<label class="col-xs-2 control-label" for="singlebutton"></label>
+				<div class="col-xs-4">
 					<button id="edit_profile_submit" name="singlebutton"
 						class="btn btn-success">Сохранить</button>
 				</div>
