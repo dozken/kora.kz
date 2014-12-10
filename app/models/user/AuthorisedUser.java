@@ -100,10 +100,12 @@ public class AuthorisedUser extends Model implements Subject {
 	}
 
 	public static List<AuthorisedUser> getUsers() {
-		List<AuthorisedUser> users = find.where().in("roles", SecurityRole.findByName("user")).findList();
-		for(AuthorisedUser user : users){
-			if(user.roles.size()>1)users.remove(user);
-		}
+		List<AuthorisedUser> users = find.where().in("roles", SecurityRole.findByName("user")).ne("id",1L).findList();
+
+		//if(users!=null)
+		//for(AuthorisedUser user : users){
+			//if(user.roles.size()>1)users.remove(user);
+		//}
 		return users;
 	}
 
