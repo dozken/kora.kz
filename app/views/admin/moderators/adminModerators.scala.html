@@ -2,25 +2,69 @@
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 @import play.i18n._
 @main("Модераторы") {
-
+<style>
+.modal-dialog{
+	width: 300px;
+}
+</style>
 <div class="container">
 <div class="col-lg-3 menudiv">@profile._menu()</div>
 <div class="col-lg-9 ">
-  @profile._title("ВСЕ МОДЕРАТОРЫ"){
-  <div class="col-lg-3 onjak nopaddingright PFBSPLI-13">
-	<a href="#" class="btn btn-default btn-success" data-toggle="modal" data-target="#myModal2" style="padding-top: 2px;
-padding-bottom: 2px;
-margin-top: 4px;">
-	  <span class="glyphicon glyphicon-plus"></span> Добавить
+	@profile._title("ВСЕ МОДЕРАТОРЫ"){
+	<div class="col-lg-3 onjak nopaddingright PFBSPLI-13">
+	<a href="#" class="btn btn-default btn-success" data-toggle="modal" data-target="#myModal2" style="padding-top: 2px;padding-bottom: 2px;margin-top: 4px;">
+		<span class="glyphicon glyphicon-plus"></span> Добавить
 	</a>
-  </div> 
-  }
-  @_moderators()
+	</div> 
+	}
+	<table class="table table-hover PFBSPLI-13">
+		<thead>
+			<tr>
+				<td>id</td>
+				<td>Компания</td>
+				<td>Адрес</td>
+				<td>Регион</td>
+				<td>Телефон</td>
+				<td>Почта</td>
+			</tr>
+		</thead>
+		<tbody id="user-list">
+			@_moderators()
+		</tbody>
+		</table>
+  
 </div>
-
 </div>
-
 <div id="moderModal">
-
 </div>
 }
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+$(document).on("click",".delete",function(){
+	var user = $(this).attr("user");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.User.removeModerator(user).ajax({
+            success: function(data) {
+              $("#user-list").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#user-list").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+</script>
