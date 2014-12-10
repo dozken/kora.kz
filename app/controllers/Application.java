@@ -126,7 +126,13 @@ public class Application extends Controller {
 			flash("thank you");
 			changeLang("ru");
 			return redirect(request().getHeader("referer"));
-		} else {
+		}
+			else if (user != null && user.password.equals(requestData.get("password"))
+				&& !user.status.equals("active")) {
+			return ok("inactive");
+			
+		}
+		else {
 			return ok("error");
 
 		}
