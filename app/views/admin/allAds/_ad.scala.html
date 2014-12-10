@@ -1,26 +1,25 @@
-@for((ad,index)<-models.ad.Ad.findToModerate.zipWithIndex){
+@for((ad,index)<-models.ad.Ad.find.all.zipWithIndex){
 <tr id="ad@ad.id">
 	<td>@{index+1}</td>
+	@*<td>@ad.title</td>*@
 	<td>@ad.contactInfo.region.name</td>
+	<td>@ad.contactInfo.city.name</td>
 	<td>@ad.contactInfo.company</td>
+	
 	<td>@ad.animal.name</td>
-    @if(ad.animal.id!=5){<td>@ad.breed.name</td>}
-	@*<td>@ad.gender</td>*@
+    <td>@ad.breed.name</td>
+    @*<td>@Messages(ad.gender)</td>*@
 	<td>@Messages(ad.quantity)</td>
 	<td>@ad.birthDate</td>
-	<td>@Messages(ad.priceType.price.toString) @ad.priceType.currency</td>
-	<td>@Messages(ad.status)</td>
+	<td>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</td>
 	@*
 	<td>@ad.views</td>
 	<td>@ad.shares</td>
-	<td>@ad.publishedDate</td>
-	<td>@ad.updatedDate</td>
-	<td>@ad.expirationDate</td>
+	<td>@ad.publishedDate.format("dd/mm/yyyy")</td>
+	<td>@ad.updatedDate.format("dd/mm/yyyy")</td>
+	<td>@ad.expirationDate.format("dd/mm/yyyy")</td>		
 	*@
-	<td class="ortaga">
-	@*@if(ad.status.equals("pending")){*@
-	<a class="btn btn-success btn-xs moderate" ad="@ad.id"><span class="glyphicon glyphicon-pencil"></span></a>
-	@*}else{В процессе}*@
-	</td>
+	<td>@Messages(ad.status)</td>
+	<td><a class="delete" ad="@ad.id"><i class="fa fa-times"></i></a></td>
 </tr>
 }

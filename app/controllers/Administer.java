@@ -30,6 +30,11 @@ public class Administer extends Controller {
 		return ok(views.html.admin.allAds.adminAds.render());
 	}
 
+	public static Result removeAd(Long id) {
+		Ad.find.byId(id).delete();
+		return ok(views.html.admin.allAds._ad.render());
+	}
+
 	public static Result filters() {
 		return ok(adminFilters.render());
 	}

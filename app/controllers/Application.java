@@ -107,6 +107,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Application.emailing(),
 				controllers.routes.javascript.User.removeUser(),
 				controllers.routes.javascript.User.removeModerator(),
+				controllers.routes.javascript.Administer.removeAd(),				
 				
 				controllers.routes.javascript.Manage.getMessageType()));
 	}

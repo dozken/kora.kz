@@ -1,51 +1,75 @@
 @main("Все объявления") {
+<style>
+.bootbox-confirm .modal-dialog{
+	width: 300px;
+}
+</style>
 <div class="container">
-  <div class="col-xs-3 menudiv">@profile._menu()</div>
-	<div class="col-xs-9">
-	  @profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ }
-	  <div class="col-xs-12 PFBSPLI-13">
-	  @_tableAds()
+	<div class="col-xs-3 menudiv">@profile._menu()</div>
+		<div class="col-xs-9">
+	  	@profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ }
+	  	<div class="col-xs-12 PFBSPLI-13">	  	
+	  	<table class="table table-hover table-condensed table-responsive" style="white-space: nowrap">
+			<thead>
+				<tr>
+					<td>№</td>
+					<td>Регион</td>
+					<td>Город</td>
+					<td>Компания</td>
+					<td>Раздел</td>
+					<td>Категория</td>	
+					@*<td>Пол</td>*@					
+					<td>Количество</td>
+					<td>Возраст</td>
+					<td>Цена</td>
+					<td>Статус</td>
+					@*
+					<td>views</td>
+					<td>shares</td>
+					<td>publishedDate</td>
+					<td>updatedDate</td>
+					<td>expirationDate</td>
+					*@
+					<td></td>
+				</tr>
+			</thead>
+			<tbody id="ad-list">
+				@_ad()
+			</tbody>
+		</table>
 	  </div>
   </div>
 </div>
 }
 
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
 <script>
 
-$(document).ready(function () {
-	adModerate!=null && moderate();
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
 });
 
-$(document).ajaxSuccess(function () {
-	adModerate!=null && moderate();	
-});
-
-function moderate(){
-    var tr = $(adModerate),
-    tds = tr.find('td'),
-    l = tds.length;
-	tds.fadeOut('fast', function(){ 
-	    if (! --l) tr.remove();                    
-	});   
-	
-	adModerate=null;
-	console.log("adModerate:"+adModerate);
-}
-
-$(document).on("click",".moderate",function(){
-	var adId = $(this).attr("ad");
-	
-	jsRoutes.controllers.Administer.moderate(adId).ajax({		
-		data: {status:"moderating"},
-		success: function(data) {
-			window.location.href =  "http://@request.host/ad/show/"+adId;
-			console.log(data);
-			
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("error");            
-        }
-	});
-	
+$(document).on("click",".delete",function(){
+	var ad = $(this).attr("ad");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.Administer.removeAd(ad).ajax({
+            success: function(data) {
+              $("#ad-list").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#ad-list").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
 });
 </script>
