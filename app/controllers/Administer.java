@@ -26,6 +26,10 @@ public class Administer extends Controller {
 		return ok(adminAds.render());
 	}
 
+	public static Result allAds() {
+		return ok(views.html.admin.allAds.adminAds.render());
+	}
+
 	public static Result filters() {
 		return ok(adminFilters.render());
 	}

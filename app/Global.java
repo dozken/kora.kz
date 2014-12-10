@@ -139,7 +139,7 @@ public class Global extends GlobalSettings {
 
 		}
 
-		if (AuthorisedUser.find.findRowCount() == 0) {
+		if (AuthorisedUser.findByEmail("admin@kora.kz")== null) {
 			AuthorisedUser user = new AuthorisedUser();
 			user.userName = "ТОО ҚОРА";
 			user.email = "admin@kora.kz";
