@@ -256,7 +256,12 @@ var res = "" + data ;
 if ( res == "error" ) {
 $ ( "#loginErrorAlert" ).html ( "Неправильный логин или пароль" ) ;
 $ ( "#loginErrorAlert" ).show ( ) ;
-} else {
+}
+else if( res == "inactive" ) {
+	$ ( "#loginErrorAlert" ).html ( "Вы еще не прошли активацию. Пожалуетса проверьте email." ) ;
+	$ ( "#loginErrorAlert" ).show ( ) ;
+	}
+else {
 
 window.location.href = " @routes.Manage.myInfo() ";
 }
