@@ -538,9 +538,14 @@ public class Ads extends Controller {
 
 	public static int favoriteSizeInt() {
 		if (session("connected") != null) {
-
-			return AuthorisedUser.findByEmail(session("connected")).favorites
-					.size();
+			List<Ad> list = AuthorisedUser.findByEmail(session("connected")).favorites;
+			
+			int i = 0;
+			for(Ad ad : list){
+				if(ad.status.equals("active")) i++;
+			}
+			
+			return i;
 
 		} else {
 
@@ -551,7 +556,7 @@ public class Ads extends Controller {
 			List<Ad> list = new ArrayList<Ad>();
 			for (String ad : ads) {
 				if (!ad.equals("") && ad != null)
-					list.add(Ad.find.byId(Long.parseLong(ad)));
+					list.add(Ad.find.where().eq("id",Long.parseLong(ad)).eq("status", "active").findUnique());
 
 			}
 			return list.size();
