@@ -2,7 +2,11 @@
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 @import play.i18n._
 @main("Модераторы") {
-
+<style>
+.bootbox-confirm .modal-dialog{
+	width: 300px;
+}
+</style>
 <div class="container">
 <div class="col-xs-3 menudiv">@profile._menu()</div>
 <div class="col-xs-9 ">
@@ -40,3 +44,34 @@ margin-top: 4px;">
 
 </div>
 }
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+$(document).on("click",".delete",function(){
+	var user = $(this).attr("user");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.User.removeModerator(user).ajax({
+            success: function(data) {
+              $("#user-list").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#user-list").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+</script>

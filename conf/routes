@@ -86,6 +86,7 @@ POST        /profile/info/edit/:id                 controllers.Info.update(id:Lo
 
 GET         /admin                                 controllers.Administer.ads()
 GET         /admin/ads                             controllers.Administer.ads()
+GET         /admin/remove/ad/:id                   controllers.Administer.removeAd(id:Long)
 GET         /admin/all/ads                         controllers.Administer.allAds()
 GET         /admin/filter                          controllers.Administer.filters()
 GET         /admin/filter/breed/                   controllers.Filters.getBreeds(id:Long)
