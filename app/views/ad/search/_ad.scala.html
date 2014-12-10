@@ -1,6 +1,6 @@
 @(ad: models.ad.Ad)
 
-<div class="col-lg-4 suret">
+<div class="col-xs-4 suret">
 
     
     @if(ad.images.size()>0){
@@ -12,7 +12,7 @@
         
     }else{<img src="@routes.Assets.at("images/home/nophoto.png")">}
 </div>
-<div class="col-lg-8">
+<div class="col-xs-8">
     <ul class="obya">
         <li><a href="@routes.Ads.get(ad.id)"><b>@ad.title</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
         <li class="PFBSPLI-13">@if(ad.description.length>100){ @ad.description.take(200)... }else{ @ad.description}</li>

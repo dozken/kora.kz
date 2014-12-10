@@ -13,8 +13,8 @@
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger"  style="visibility: hidden" role="alert"></div>
 <div class="form-group">
-  <label class="col-md-2  textalign" for="selectbasic">Животное</label>
-  <div class="col-md-3">
+  <label class="col-xs-2  textalign" for="selectbasic">Животное</label>
+  <div class="col-xs-3">
     <select id="animal" name="animal" class="form-control sd" validation="not_null">
         <option selected disabled hidden> Выберите животное</option>
       @for(animal <- Animal.find.all()) {
@@ -22,7 +22,7 @@
       }
     </select>
   </div>
-    <div id="breed_list" class="col-md-3">
+    <div id="breed_list" class="col-xs-3">
         @if(ad.animal.id!=5) {
             <select id="breed" name="breed" class="form-control sd" validation="not_null">
                 <option selected disabled hidden> Выберите тип</option>
@@ -37,8 +37,8 @@
 </div>
 
     <div id="genderHide" class="form-group">
-        <label class="col-md-2  textalign" for="radios">Пол</label>
-        <div class="col-md-4">
+        <label class="col-xs-2  textalign" for="radios">Пол</label>
+        <div class="col-xs-4">
             <label class="radio-inline" for="radios-0">
                 <input type="radio" name="animal_gender" id="radios-0" value="male" @if(ad.gender=="male"){ checked="checked"}>
                 Самец
@@ -55,8 +55,8 @@
     </div>
 
 <div id="quanHide" class="form-group">
-  <label class="col-md-2  textalign" for="radios">Количество</label>
-  <div class="col-md-4"> 
+  <label class="col-xs-2  textalign" for="radios">Количество</label>
+  <div class="col-xs-4"> 
     <label class="radio-inline" for="kradios-0">
       <input type="radio" name="quantity" id="kradios-0" value="single" @if(ad.quantity=="single"){ checked="checked"}>
       Один
@@ -70,8 +70,8 @@
 
 <!-- Select Basic -->
 <div id="ageHide" class="form-group">
-  <label class="col-md-2  textalign" for="selectbasic1">Возраст</label>
-  <div class="col-md-2">
+  <label class="col-xs-2  textalign" for="selectbasic1">Возраст</label>
+  <div class="col-xs-2">
     <select id="selectbasic1" name="age" class="form-control sd">
         @for(i<-2000 to 2050) {
             <option value="@i" @if(ad.birthDate == i) {selected}>@i</option>
@@ -82,8 +82,8 @@
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="radios1">Цена</label>
-  <div class="col-md-4">
+  <label class="col-xs-2  textalign" for="radios1">Цена</label>
+  <div class="col-xs-4">
 
   <div class="radio">
     <label for="radios1-0">
@@ -126,8 +126,8 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="textinput">Заголовок</label>  
-  <div class="col-md-6">
+  <label class="col-xs-2  textalign" for="textinput">Заголовок</label>  
+  <div class="col-xs-6">
   <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md ssss" value="@ad.title" validation="not_null">
   <span class="help-block">Максимальная длина 70 символов.</span>  
   </div>
@@ -135,8 +135,8 @@
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-2  textalign"  for="textarea">Описание</label>
-  <div class="col-md-6">                     
+  <label class="col-xs-2  textalign"  for="textarea">Описание</label>
+  <div class="col-xs-6">                     
     <textarea class="form-control" rows="6" id="textarea" name="description">@ad.description</textarea>
   </div>
 </div>
@@ -145,8 +145,8 @@
 
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-2  textalign" for="filebutton">Фотографии</label>
-  <div class="col-md-4">
+  <label class="col-xs-2  textalign" for="filebutton">Фотографии</label>
+  <div class="col-xs-4">
     <div class="fileUpload btn myb">
     <span class="icon-photo"> <span class="PFBSPLI-13">Добавить Фотографии</span></>
     <input type="file" id="choose" class="upload" multiple />
@@ -157,8 +157,8 @@
 </div>
 
 <div class="form-group">
-  <label class="col-md-2 "></label>
-<div class="col-md-10">
+  <label class="col-xs-2 "></label>
+<div class="col-xs-10">
 <ul id="images" class="connectedList ui-sortable">
 @for(img<-ad.sortByPosition(ad.id)){
 
@@ -178,8 +178,8 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="selectbasic2">Регион</label>
-  <div class="col-md-3">
+  <label class="col-xs-2  textalign" for="selectbasic2">Регион</label>
+  <div class="col-xs-3">
     <select id="region" name="region" class="form-control sd" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
       @for(region<-Region.find.all()) {
@@ -191,8 +191,8 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="selectbasic3">Город</label>
-  <div id="city_list" class="col-md-3">
+  <label class="col-xs-2  textalign" for="selectbasic3">Город</label>
+  <div id="city_list" class="col-xs-3">
 
       <select id="city"  name="city" class="form-control sd" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
@@ -207,23 +207,23 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="textinput1">Компания</label>
-  <div class="col-md-6">
+  <label class="col-xs-2  textalign" for="textinput1">Компания</label>
+  <div class="col-xs-6">
   <input id="textinput1" name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md ssss" value="@ad.contactInfo.company"  validation="not_null">
     
   </div>
 </div>
 
     <div class="form-group">
-        <label class="col-md-2  textalign" for="ema" >Email</label>
-        <div class="col-md-3">
+        <label class="col-xs-2  textalign" for="ema" >Email</label>
+        <div class="col-xs-3">
             <input id="ema" name="email" type="text" placeholder="someone@@someone.kz" class="form-control input-md ssss" value="@ad.contactInfo.email" validation="mail">
         </div>
     </div>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="textinput2">Телефон</label>  
-  <div class="col-md-3">
+  <label class="col-xs-2  textalign" for="textinput2">Телефон</label>  
+  <div class="col-xs-3">
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" value="@ad.contactInfo.phone" validation="not_null">
     
   </div>
@@ -231,8 +231,8 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2  textalign" for="selectbasic4">Комментарии</label>
-  <div class="col-md-5">
+  <label class="col-xs-2  textalign" for="selectbasic4">Комментарии</label>
+  <div class="col-xs-5">
     <select id="selectbasic4" name="coment_display" class="form-control sd">
       <option value="registred">Только зарегистрированным пользователям</option>
       <option value="all" @if(models.ad.Ad.settingByName(ad,"comment").status=="all"){selected}>Всем</option>
@@ -254,8 +254,8 @@
 <!-- Button -->
 
 <div class="form-group">
-  <label class="col-md-2 control-label" for="singlebutton"></label>
-  <div class="col-md-4">
+  <label class="col-xs-2 control-label" for="singlebutton"></label>
+  <div class="col-xs-4">
     <button id="ad_form_submit" name="singlebutton" class="btn btn-success"> Редактировать объявление</button>
   </div>
 </div>
