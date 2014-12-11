@@ -211,13 +211,13 @@
 <br>
 <br>
 <br>
-  <div class="contain" style="width: 134%;">
+  <div class="contain">
     <h4>
       Похожие объявления из категории "@ad.animal.name @ad.breed.name" в @ad.contactInfo.city.name
     </h4>
     <div class="footerborder"></div>
     
-    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad)&&likeAd.status.equals("active"))){
+    @for(likeAd <-models.ad.Ad.like(ad)){
     <div class="pohojii">      
       <a href="@routes.Ads.get(likeAd.id)">
       <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>
