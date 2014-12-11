@@ -4,44 +4,44 @@
 	width: 300px;
 }
 </style>
+<link rel="stylesheet" href="@routes.Assets.at("bootstrap-multiselect/css/bootstrap-multiselect.css")" type="text/css"/>
 <div class="container">
 	<div class="col-xs-3 menudiv">@profile._menu()</div>
 		<div class="col-xs-9">
-	  	@profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ }
-	  	<div class="col-xs-12 PFBSPLI-13">	  	
-	  	<table class="table table-hover table-condensed table-responsive" style="white-space: nowrap">
-			<thead>
-				<tr>
-					<td>№</td>
-					<td>Регион</td>
-					<td>Город</td>
-					<td>Компания</td>
-					<td>Раздел</td>
-					<td>Категория</td>	
-					@*<td>Пол</td>*@					
-					<td>Количество</td>
-					<td>Возраст</td>
-					<td>Цена</td>
-					<td>Статус</td>
-					@*
-					<td>views</td>
-					<td>shares</td>
-					<td>publishedDate</td>
-					<td>updatedDate</td>
-					<td>expirationDate</td>
-					*@
-					<td></td>
-				</tr>
-			</thead>
-			<tbody id="ad-list">
-				@_ad()
-			</tbody>
+	  	@profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ 
+		<div class="col-xs-4 tptp">
+		<select id="filter" multiple="multiple">
+		    @*<option value="region">Регион</option>
+		    <option value="city">Город</option>
+		    <option value="company">Компания</option>*@
+		    <option value="name">Название</option>
+		    @*<option value="section">Раздел</option>*@
+		    <option value="category">Категория</option>
+		    <option value="gender">Пол</option>
+		    <option value="age">Возраст</option>
+		    <option value="quantity">Количество</option>		    
+		    <option value="price">Цена</option>
+		    <option value="views">Просмотры</option>
+		    <option value="shares">Поделелись</option>
+		    @*<option value="createDate">Дата добавления</option>*@
+		    <option value="updateDate">Дата редактирования</option>
+		    <option value="expirationDate">Дата истичения</option>		    
+		</select>
+		@*
+		<button class="btn btn-default btn-success " style="padding-top: 2px;padding-bottom: 2px;margin-top: 2px;">Показать</button>
+		*@
+		</div>
+		}
+	  	<table class="table table-hover table-condensed table-responsive" id="ad-list" style="white-space: nowrap">
+	  		@_ad()			
 		</table>
 	  </div>
   </div>
 </div>
 }
 
+
+<script type="text/javascript" src='@routes.Assets.at("bootstrap-multiselect/js/bootstrap-multiselect.js")'></script>
 <script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
 <script>
 
@@ -72,4 +72,38 @@ $(document).on("click",".delete",function(){
     });
     $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
 });
+
+
+$(document).ready(function() {
+		var name;
+		var status;
+        $('#filter').multiselect({
+        	buttonWidth: '361px',
+        	numberDisplayed: 6,
+        	nonSelectedText: 'Выберите фильтр',
+        	buttonClass: 'btn btn-default btn-success btn-sm',
+            onChange: function(option, checked, select) {
+                console.log('Changed option ' + $(option).val() + '.'+ checked);
+                name = $(option).val();
+                status = checked;
+                jsRoutes.controllers.Administer.filterToSession(name,status).ajax({
+		            success: function(data) {		              
+		            }
+		        });
+            },
+            onDropdownHidden: function(event) {
+                console.log('Dropdown closed.');
+                jsRoutes.controllers.Administer.filterAllAds().ajax({
+		            success: function(data) {
+		              $("#ad-list").html(data);
+		            },
+		            error: function(jqXHR, textStatus, errorThrown) {
+		              $("#ad-list").html(data);
+		              //console.log(jqXHR.responseText);
+		            }
+		        });
+            }
+        });
+    });
+
 </script>

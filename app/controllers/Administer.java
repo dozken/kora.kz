@@ -35,6 +35,15 @@ public class Administer extends Controller {
 		return ok(views.html.admin.allAds._ad.render());
 	}
 
+	public static Result filterToSession(String name,String status){
+		session(name,status);		
+		return ok();
+	}
+
+	public static Result filterAllAds() {		
+		return ok(views.html.admin.allAds._ad.render());
+	}
+
 	public static Result filters() {
 		return ok(adminFilters.render());
 	}
