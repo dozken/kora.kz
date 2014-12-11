@@ -88,7 +88,11 @@ GET         /admin                                 controllers.Administer.ads()
 GET         /admin/ads                             controllers.Administer.ads()
 GET         /admin/remove/ad/:id                   controllers.Administer.removeAd(id:Long)
 GET         /admin/all/ads                         controllers.Administer.allAds()
+GET         /admin/all/filter                      controllers.Administer.filterToSession(name:String,status:String)
+GET         /admin/all/ads/_ad                     controllers.Administer.filterAllAds()
+
 GET         /admin/filter                          controllers.Administer.filters()
+
 GET         /admin/filter/breed/                   controllers.Filters.getBreeds(id:Long)
 GET         /admin/filter/breed/add                controllers.Filters.addBreed()
 GET         /admin/filter/breed/update             controllers.Filters.updateBreed(id: Long,name: String)
