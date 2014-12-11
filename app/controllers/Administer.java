@@ -37,7 +37,7 @@ public class Administer extends Controller {
 
 	public static Result filterToSession(String name,String status){
 		session(name,status);		
-		return ok();
+		return ok(views.html.admin.allAds._ad.render());
 	}
 
 	public static Result filterAllAds() {		

@@ -11,21 +11,21 @@
 	  	@profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ 
 		<div class="col-xs-4 tptp">
 		<select id="filter" multiple="multiple">
-		    @*<option value="region">Регион</option>
-		    <option value="city">Город</option>
-		    <option value="company">Компания</option>*@
-		    <option value="name">Название</option>
-		    @*<option value="section">Раздел</option>*@
-		    <option value="category">Категория</option>
-		    <option value="gender">Пол</option>
-		    <option value="age">Возраст</option>
-		    <option value="quantity">Количество</option>		    
-		    <option value="price">Цена</option>
-		    <option value="views">Просмотры</option>
-		    <option value="shares">Поделелись</option>
-		    @*<option value="createDate">Дата добавления</option>*@
-		    <option value="updateDate">Дата редактирования</option>
-		    <option value="expirationDate">Дата истичения</option>		    
+		    @*<option value="ad.filter.region">Регион</option>
+		    <option value="ad.filter.city" selected>Город</option>
+		    <option value="ad.filter.company" selected>Компания</option>*@
+		    <option value="ad.filter.name" @if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){selected}>Название</option>
+		    @*<option value="ad.filter.section">Раздел</option>*@
+		    <option value="ad.filter.category" @if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){selected}>Категория</option>
+		    <option value="ad.filter.gender" @if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){selected}>Пол</option>
+		    <option value="ad.filter.age" @if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){selected}>Возраст</option>
+		    <option value="ad.filter.quantity" @if(session.get("ad.filter.quantity")!=null&&session.get("ad.filter.quantity").equals("true")){selected}>Количество</option>		    
+		    <option value="ad.filter.price" @if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){selected}>Цена</option>
+		    <option value="ad.filter.views" @if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){selected}>Просмотры</option>
+		    <option value="ad.filter.shares" @if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){selected}>Поделелись</option>
+		    @*<option value="ad.filter.createDate">Дата добавления</option>*@
+		    <option value="ad.filter.updateDate" @if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){selected}>Дата редактирования</option>
+		    <option value="ad.filter.expirationDate" @if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){selected}>Дата истичения</option>		   <option value="ad.filter.status" @if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){selected}>Статус</option>		
 		</select>
 		@*
 		<button class="btn btn-default btn-success " style="padding-top: 2px;padding-bottom: 2px;margin-top: 2px;">Показать</button>
@@ -75,11 +75,15 @@ $(document).on("click",".delete",function(){
 
 
 $(document).ready(function() {
+
+
 		var name;
 		var status;
         $('#filter').multiselect({
+        	allSelectedText: "Все выбранно"
+        	nSelectedText : "выбранно",
         	buttonWidth: '361px',
-        	numberDisplayed: 6,
+        	numberDisplayed: 5,
         	nonSelectedText: 'Выберите фильтр',
         	buttonClass: 'btn btn-default btn-success btn-sm',
             onChange: function(option, checked, select) {
@@ -87,10 +91,12 @@ $(document).ready(function() {
                 name = $(option).val();
                 status = checked;
                 jsRoutes.controllers.Administer.filterToSession(name,status).ajax({
-		            success: function(data) {		              
+		            success: function(data) {	
+		             	$("#ad-list").html(data);	              
 		            }
 		        });
             },
+            @*
             onDropdownHidden: function(event) {
                 console.log('Dropdown closed.');
                 jsRoutes.controllers.Administer.filterAllAds().ajax({
@@ -103,6 +109,7 @@ $(document).ready(function() {
 		            }
 		        });
             }
+            *@
         });
     });
 
