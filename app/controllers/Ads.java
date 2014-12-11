@@ -69,7 +69,7 @@ public class Ads extends Controller {
 				.get("city")));
 		contactInfo.region = Region.find.byId(Long.parseLong(requestData
 				.get("region")));
-		contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone"));
+		contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone")) + ContactInfo.splitPhone(requestData.get("additional_phone"));
 		contactInfo.company = requestData.get("company_name");
 		contactInfo.email = requestData.get("email");
 
@@ -265,7 +265,7 @@ public class Ads extends Controller {
 		ad.contactInfo.region = Region.find.byId(Long.parseLong(requestData
 				.get("region")));
 		ad.contactInfo.phone = ContactInfo.phoneCorrect(requestData
-				.get("phone"));
+				.get("phone")) + ContactInfo.splitPhone(requestData.get("additional_phone"));
 		ad.contactInfo.company = requestData.get("company_name");
 		ad.contactInfo.email = requestData.get("email");
 

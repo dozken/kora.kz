@@ -80,4 +80,18 @@ public class ContactInfo extends Model {
 
 		return phone.replaceAll("[-+ )(]", "");
 	}
+
+	public static String splitPhone(String phone) {
+
+		String res="";
+		String[] s = phone.split(",");
+		for(String tel : s){
+			if(tel!=null && !tel.equals("")){
+				tel= tel.replaceAll("[-+ )(]", "");
+				res+=","+tel;
+
+			}
+		}
+		return res;
+	}
 }

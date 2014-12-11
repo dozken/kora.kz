@@ -154,6 +154,17 @@ $(this).parent().remove();
 });
     }
     })
+    $(".mmm").mask("+7(999) 999-9999");
+    $(document).on("click", "#add_phone_additional", function() {
+        $("#additional_phones").append('<div class="input-group"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><button type="button" class="btn btn-primary btn-xs del_phone">Удалить</button></span></div>');
+        $(".mmm").mask("+7(999) 999-9999");
+
+    });
+
+    $(document).on("click", ".del_phone", function() {
+        $(this).parent().parent().remove();
+
+    });
 
 $(document ).on("change","#region",function(){
 
@@ -171,6 +182,15 @@ $("#city_list" ).html(data);
 $(document).on("click", "#ad_form_submit", function(e) {
 
 if(validation()) {
+    var tels = "";
+    $("#additional_phones input").each(function(){
+
+        if($(this).val()!=null && $(this).val()!=""){
+            tels+="," + $(this).val();
+        }
+    })
+
+    $("#tels").val(tels);
 $ ( '#ad_form' ).submit ( function ( e ) {
 var formData = new FormData ( this ) ;
 var image_names = "" ;
