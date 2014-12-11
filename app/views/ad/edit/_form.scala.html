@@ -224,8 +224,19 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="textinput2">Телефон</label>  
   <div class="col-xs-3">
-  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" value="@ad.contactInfo.phone" validation="not_null">
-    
+
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" value="@ad.contactInfo.phone.split(",")(0)" validation="not_null">
+      <div id="additional_phones">
+          @for((tee,index) <- ad.contactInfo.phone.split(",").zipWithIndex ){
+          @if(index!=0){
+          <div class="input-group"><input type="text" value="@tee" class="form-control input-md ssss mmm"><span class="input-group-btn"><button type="button" class="btn btn-primary btn-xs del_phone">Удалить</button></span></div>
+
+          }
+          }
+      </div>
+      <center> <button type="button" id="add_phone_additional" class="btn btn-primary btn-xs">Добавить телефон</button></center>
+      <input type="hidden" id="tels" name="additional_phone" value=""/>
+
   </div>
 </div>
 

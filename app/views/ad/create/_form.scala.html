@@ -232,7 +232,11 @@
   <label class="col-xs-2 textalign" for="textinput2">Телефон</label>
   <div class="col-xs-3">
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
+<div id="additional_phones">
 
+</div>
+     <center> <button type="button" id="add_phone_additional" class="btn btn-primary btn-xs">Добавить телефон</button></center>
+      <input type="hidden" id="tels" name="additional_phone" value=""/>
   </div>
 </div>
 

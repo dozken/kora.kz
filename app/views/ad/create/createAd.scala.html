@@ -107,6 +107,17 @@ clear: both;
         $(this).parent().remove();
     });
 
+    $(document).on("click", "#add_phone_additional", function() {
+        $("#additional_phones").append('<div class="input-group"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><button type="button" class="btn btn-primary btn-xs del_phone">Удалить</button></span></div>');
+        $(".mmm").mask("+7(999) 999-9999");
+
+    });
+
+    $(document).on("click", ".del_phone", function() {
+      $(this).parent().parent().remove();
+
+    });
+
     $(document).on("change", "#animal", function() {
         var id = Number($(this).val());
         $("#quanHide").show();
@@ -133,6 +144,16 @@ clear: both;
     	
     	//e.preventDefault();
         if (validation()) {
+
+            var tels = "";
+            $("#additional_phones input").each(function(){
+
+                if($(this).val()!=null && $(this).val()!=""){
+                    tels+="," + $(this).val();
+                }
+            })
+
+            $("#tels").val(tels);
             $('#ad_form').submit(function(e) {
                 var formData = new FormData(this);
                 var image_names = "";
@@ -142,29 +163,29 @@ clear: both;
                     image_names += $(this).parent().attr("fileName") + "&";
                 });
                 formData.append("image_names", image_names);
-                
-                                
+
+
                 $("#ad_form_submit").attr('disabled','disabled');
             	$("#ad_form_submit").text('Загружается...');
-            	
+
             	var start = +new Date();  // log start timestamp
-            	
+
                 $.ajax({
                     url: '@controllers.routes.Ads.create',
                     type: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(data) {   
-                    	
-                    	
+                    success: function(data) {
+
+
             			var end =  +new Date();  // log end timestamp
             			var diff = end - start;
             			console.log(diff)
                         $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
                         $("#success_message").fadeIn(200);
-                        
-                        
+
+
                         jsRoutes.controllers.Application.emailing("ad_created", $("#ema").val()).ajax()
                         var end2 =  +new Date();  // log end timestamp
             			var diff1 = end2 - end;
