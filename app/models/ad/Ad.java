@@ -111,6 +111,8 @@ public class Ad extends Model {
 
 	public static List<Ad> like(Ad ad) {
 		return find.where().eq("breed", ad.breed)
+				.ne("id",ad.id)
+				.eq("status","active")
 				.eq("contactInfo.city", ad.contactInfo.city).setMaxRows(7)
 				.findList();
 	}
