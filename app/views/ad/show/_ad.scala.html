@@ -2,7 +2,7 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
-	<li><h4><b>@ad.title</b></h4></li>
+	<li><h4><b>@ad.breed.name.toUpperCase</b></h4></li>
 	<li class="att">
   <h4>
 <div style="position: absolute;margin-top: -22px;padding-left: 10px;">  
@@ -37,6 +37,12 @@
 				<li class="PFBSPLI-13">@ad.contactInfo.region.name</li>
 			</ul>
 		</li>
+    <li>
+      <ul class="koldenen">
+        <li class="birinwi">Город</li>
+        <li class="PFBSPLI-13">@ad.contactInfo.city.name</li>
+      </ul>
+    </li>
         @if(ad.animal.id!=5){
         <li>
 			<ul class="koldenen">

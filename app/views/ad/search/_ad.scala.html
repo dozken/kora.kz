@@ -10,11 +10,11 @@
         <img src="@models.ad.AdImage.getFirstPicture(ad.id)" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;"> 
     </div>
         
-    }else{<img src="@routes.Assets.at("images/home/nophoto.png")">}
+    }else{<img src="@routes.Assets.at("images/home/nophoto.png")" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;">}
 </div>
 <div class="col-xs-8">
     <ul class="obya">
-        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.title</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
+        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.breed.name</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
         <li class="PFBSPLI-13">@if(ad.description.length>100){ @ad.description.take(200)... }else{ @ad.description}</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
         <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
