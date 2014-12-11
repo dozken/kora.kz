@@ -90,8 +90,8 @@ clear: both;
                         if ($('[id=item-' + name + ']').length == 0) {
                             $("#images").append("<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>");
                             $("#item-" + name).html(img);
-                            $("#item-" + name).append('<button class="delete" style="position:absolute;top:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;background: lightgray;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341"></i></button>');
-                            $("#item-" + name).append('<button style="position:absolute;bottom:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;background: lightgray;"> <i class="fa fa-check-circle" style="font-size:17px;color:#8db145"></i></button>');
+                            $("#item-" + name).append('<button class="delete" style="position:absolute;top:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;background: transparent;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341"></i></button>');
+                            
                         } else {
                             alert(name + " уже есть");
                         }
