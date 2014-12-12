@@ -9,12 +9,12 @@
 		@city.name
 		}
 	</div>
-	@for(animal<-models.ad.Animal.find.all if(animal.breeds!=null&&animal.breeds.size>0)){
-	<h4>@animal.name</h4>
+	@for(section<-models.ad.Section.find.all if(section.categorys!=null&&section.categorys.size>0)){
+	<h4>@section.name</h4>
 	<div class="col-xs-12 well">
 		@* TODO arifmetitac equcation, calculate columns*@
-		@for(breed<-animal.breeds){
-		@breed.name
+		@for(category<-section.categorys){
+		@category.name
 		}
 	</div>
 	}

@@ -15,7 +15,7 @@
 						class="noradius btn btn-default dropdown-toggle as-is bs-dropdown-to-select"
 						data-toggle="dropdown" tabindex="-1">
 						<span data-bind="bs-drp-sel-label"> ВО ВСЕХ РАЗДЕЛАХ</span> <input
-							type="hidden" name="animal" data-bind="bs-drp-sel-value"
+							type="hidden" name="section" data-bind="bs-drp-sel-value"
 							value="ВО ВСЕХ РАЗДЕЛАХ"> <span class="caret"></span> <span
 							class="sr-only">Toggle Dropdown</span>
 					</button>
@@ -23,8 +23,8 @@
 						style="max-height: 300px; overflow: scroll; overflow-y: scroll; overflow-x: hidden;">
 						<!-- Loop -->
                         <li data-value="ВО ВСЕХ РАЗДЕЛАХ"><a href="#" class="PFBSPR-12 txtupp">ВО ВСЕХ РАЗДЕЛАХ </a></li>
-                        @for(animal<-models.ad.Animal.find.all()) {
-                            <li data-value="@animal.name"><a href="#" class="PFBSPR-12 txtupp">@animal.name </a></li>
+                        @for(section<-models.ad.Section.find.all()) {
+                            <li data-value="@section.name"><a href="#" class="PFBSPR-12 txtupp">@section.name </a></li>
                         }
 						<!-- END Loop -->
 					</ul>

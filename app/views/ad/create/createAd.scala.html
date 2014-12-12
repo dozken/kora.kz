@@ -118,14 +118,14 @@ clear: both;
 
     });
 
-    $(document).on("change", "#animal", function() {
+    $(document).on("change", "#section", function() {
         var id = Number($(this).val());
         $("#quanHide").show();
         $("#genderHide").show();
         $("#ageHide").show();
-        jsRoutes.controllers.Ads.getBreeds(id).ajax({
+        jsRoutes.controllers.Ads.getCategorys(id).ajax({
             success: function(data) {
-                $("#breed_list").html(data);
+                $("#category_list").html(data);
             }
         });
     })

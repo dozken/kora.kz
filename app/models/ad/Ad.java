@@ -31,10 +31,10 @@ public class Ad extends Model {
 	public Long id;
 
 	@ManyToOne
-	public Animal animal;
+	public Section section;
 
 	@ManyToOne
-	public Breed breed;
+	public Category category;
 
 	public String gender = "Другой";
 
@@ -110,7 +110,7 @@ public class Ad extends Model {
 	}
 
 	public static List<Ad> like(Ad ad) {
-		return find.where().eq("breed", ad.breed)
+		return find.where().eq("category", ad.category)
 				.ne("id",ad.id)
 				.eq("status","active")
 				.eq("contactInfo.city", ad.contactInfo.city).setMaxRows(7)

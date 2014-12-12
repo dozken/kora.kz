@@ -28,8 +28,8 @@
 	@*if(session.get("city").equals("true")){*@<td>@ad.contactInfo.city.name</td>
 	@*if(session.get("company").equals("true")){*@<td>@ad.contactInfo.company</td>
 	@if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){<td>@ad.title</td>}
-	@*if(session.get("section").equals("true")){*@<td>@ad.animal.name</td>
-	@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>@ad.breed.name</td>}
+	@*if(session.get("section").equals("true")){*@<td>@ad.section.name</td>
+	@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>@ad.category.name</td>}
 	@if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){<td>@Messages(ad.gender)</td>}
 	@if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){<td>@ad.birthDate</td>}
 	@if(session.get("ad.filter.quantity")!=null&&session.get("ad.filter.quantity").equals("true")){<td>@Messages(ad.quantity)</td>}

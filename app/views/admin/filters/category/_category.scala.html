@@ -1,0 +1,17 @@
+@(section: models.ad.Section)
+
+@utils._flashAlert("error","danger")
+@utils._flashAlert("success","success")
+
+@for((category,index) <- section.getCategorys.zipWithIndex){
+<div class="input-group imgmargin">
+  <span class="input-group-addon">@{index+1}</span>
+  <input type="text" class="form-control" validation="not_null" category="@category.id" before="@category.name" value="@category.name" />
+  <span class="input-group-btn">
+    <button class="btn btn-default nobord category update" category="@category.id" type="button" data-toggle="tooltip" data-placement="top" title="Изменить"><span class="glyphicon glyphicon-ok"></span></button>
+  </span>
+  <span class="input-group-btn">
+    <button class="btn btn-default nobor  category delete" category="@category.id" type="button" data-toggle="tooltip" data-placement="top" title="Удалить"><span class="glyphicon glyphicon-remove"></span></button>
+  </span>
+</div>
+}

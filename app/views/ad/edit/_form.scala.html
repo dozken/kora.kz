@@ -1,7 +1,7 @@
 @(ad:models.ad.Ad)
 @import models.contact.Region
 
-@import models.ad.Animal
+@import models.ad.Section
 
 
 <form id="ad_form" class="form-horizontal">
@@ -15,20 +15,20 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic">Животное</label>
   <div class="col-xs-3">
-    <select id="animal" name="animal" class="form-control sd" validation="not_null">
+    <select id="section" name="section" class="form-control sd" validation="not_null">
         <option selected disabled hidden> Выберите животное</option>
-      @for(animal <- Animal.find.all()) {
-          <option value="@animal.id" @if(animal==ad.animal){selected}>@animal.name</option>
+      @for(section <- Section.find.all()) {
+          <option value="@section.id" @if(section==ad.section){selected}>@section.name</option>
       }
     </select>
   </div>
-    <div id="breed_list" class="col-xs-3">
-        @if(ad.animal.id!=5) {
-            <select id="breed" name="breed" class="form-control sd" validation="not_null">
+    <div id="category_list" class="col-xs-3">
+        @if(ad.section.id!=5) {
+            <select id="category" name="category" class="form-control sd" validation="not_null">
                 <option selected disabled hidden> Выберите тип</option>
-                @for(breed <- ad.animal.getBreeds) {
+                @for(category <- ad.section.getCategorys) {
 
-                    <option value="@breed.id" @if(breed == ad.breed) {selected}>@breed.name </option>
+                    <option value="@category.id" @if(category == ad.category) {selected}>@category.name </option>
 
                 }
             </select>
@@ -40,15 +40,15 @@
         <label class="col-xs-2  textalign" for="radios">Пол</label>
         <div class="col-xs-4">
             <label class="radio-inline" for="radios-0">
-                <input type="radio" name="animal_gender" id="radios-0" value="male" @if(ad.gender=="male"){ checked="checked"}>
+                <input type="radio" name="section_gender" id="radios-0" value="male" @if(ad.gender=="male"){ checked="checked"}>
                 Самец
             </label>
             <label class="radio-inline" for="radios-1">
-                <input type="radio" name="animal_gender" id="radios-1" value="female" @if(ad.gender=="female"){ checked="checked"}>
+                <input type="radio" name="section_gender" id="radios-1" value="female" @if(ad.gender=="female"){ checked="checked"}>
                 Самка
             </label>
             <label class="radio-inline" for="radios-2">
-                <input type="radio" name="animal_gender" id="radios-2" value="both" @if(ad.gender=="both"){ checked="checked"}>
+                <input type="radio" name="section_gender" id="radios-2" value="both" @if(ad.gender=="both"){ checked="checked"}>
                 Оба
             </label>
         </div>

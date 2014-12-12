@@ -1,7 +1,7 @@
-@(animal:models.ad.Animal)
+@(section:models.ad.Section)
 <div class="col-xs-12 nopaddingleft PFBSPLI-13">
 <form id="search_form" class="form-inline">
-    <input id="animal" type="hidden" name="animal" value="@animal.id" showName="@animal.name">
+    <input id="section" type="hidden" name="section" value="@section.id" showName="@section.name">
 <div id="demo2" >
  <div class="form-group frmg">
  <div class="frmbck frmbck3">
@@ -20,11 +20,11 @@
  <div class="form-group frmg">
   <div class="frmbck">
   <label class="control-label" for="selectbasic1">Категория:</label>
-  <div id="breed_div">
-    <select id="breed" name="breed" class="form-control sd" style="width: 170px;">
+  <div id="category_div">
+    <select id="category" name="category" class="form-control sd" style="width: 170px;">
         <option value="all">Все категории</option>
-        @for(breed <-animal.getBreeds) {
-            <option value="@breed.id">@breed.name</option>
+        @for(category <-section.getCategorys) {
+            <option value="@category.id">@category.name</option>
         }
     </select>
   </div>
