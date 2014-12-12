@@ -2,7 +2,7 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
-	<li><h4><b>@ad.breed.name.toUpperCase</b></h4></li>
+	<li><h4><b>@ad.category.name.toUpperCase</b></h4></li>
 	<li class="att">
   <h4>
 <div style="position: absolute;margin-top: -22px;padding-left: 10px;">  
@@ -14,7 +14,7 @@
     
   </h4>
   </li>
-  <li style="padding-left: 215px;">
+  <li style="float: right;">
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span>
             В избранном</a>
@@ -43,11 +43,11 @@
         <li class="PFBSPLI-13">@ad.contactInfo.city.name</li>
       </ul>
     </li>
-        @if(ad.animal.id!=5){
+        @if(ad.section.id!=5){
         <li>
 			<ul class="koldenen">
 				<li class="birinwi">Порода</li>
-				<li class="PFBSPLI-13">@ad.breed.name</li>
+				<li class="PFBSPLI-13">@ad.category.name</li>
 			</ul>
 		</li>
 		<li>
@@ -128,7 +128,7 @@
 
 <div class="col-xs-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p class="PFBSPLI-13">@ad.description</p>
+	<p class="PFBSPLI-13" style="font-style:normal;">@ad.description</p>
 </div>
 <div class="col-xs-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
@@ -211,7 +211,7 @@
     </div>
   </div>
     <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9 PFBSPLI-11">
+    <div class="col-sm-offset-3 col-sm-9 PFBSPLI-13">
       <i>Оставляя коментарий вы соглашаетесь с нашими <a href="#">правилами общения</a></i>
      
     </div>
@@ -221,13 +221,13 @@
 <br>
 <br>
 <br>
-  <div class="contain" style="width: 134%;">
+  <div class="contain">
     <h4>
-      Похожие объявления из категории "@ad.animal.name @ad.breed.name" в @ad.contactInfo.city.name
+      Похожие объявления из категории "@ad.section.name @ad.category.name" в @ad.contactInfo.city.name
     </h4>
     <div class="footerborder"></div>
     
-    @for(likeAd <-models.ad.Ad.like(ad) if(!likeAd.equals(ad)&&likeAd.status.equals("active"))){
+    @for(likeAd <-models.ad.Ad.like(ad)){
     <div class="pohojii">      
       <a href="@routes.Ads.get(likeAd.id)">
       <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>

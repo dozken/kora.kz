@@ -1,5 +1,5 @@
 @(user:models.user.AuthorisedUser)
-@import models.ad.Animal
+@import models.ad.Section
 @import models.contact.Region
 @region_id = {@if(user!=null && user.profile.region!=null){@user.profile.region.id}else{-1}}
 @city_id = {@if(user!=null && user.profile.city!=null){@user.profile.city.id}else{-1}}
@@ -16,14 +16,14 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите раздел которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="selectbasic">Раздел</label>
   <div class="col-xs-3" id="ad-razdel">
-    <select id="animal" name="animal" class="form-control next selectdesign " validation="not_null" >
+    <select id="section" name="section" class="form-control next selectdesign " validation="not_null" >
         <option selected disabled hidden> Выберите раздел</option>
-      @for(animal <- Animal.find.all()) {
-          <option value="@animal.id">@animal.name</option>
+      @for(section <- Section.find.all()) {
+          <option value="@section.id">@section.name</option>
       }
     </select>
   </div>
-    <div id="breed_list" class="col-xs-3">
+    <div id="category_list" class="col-xs-3">
 
   </div>
 </div>
@@ -33,15 +33,15 @@
         <label class="col-xs-2 textalign" for="radios">Пол</label>
         <div class="col-xs-4">
             <label class="radio-inline" for="radios-0">
-                <input type="radio" name="animal_gender" id="radios-0" value="male" checked="checked">
+                <input type="radio" name="section_gender" id="radios-0" value="male" checked="checked">
                 Самец
             </label>
             <label class="radio-inline" for="radios-1">
-                <input type="radio" name="animal_gender" id="radios-1" value="female">
+                <input type="radio" name="section_gender" id="radios-1" value="female">
                 Самка
             </label>
             <label class="radio-inline" for="radios-2">
-                <input type="radio" name="animal_gender" id="radios-2" value="both">
+                <input type="radio" name="section_gender" id="radios-2" value="both">
                 Оба
             </label>
         </div>
@@ -192,7 +192,7 @@
       @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
           <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
 		    <option selected disabled hidden> Выберите город</option>
-		    @for(city<-user.profile.region.city if(city.parentCity==null)){
+		    @for(city<-user.profile.region.cities if(city.parentCity==null)){
 		    	@if(city.isParent){
 		    	<optgroup label="@city.name">    	
 		    	@for((subcity,index) <- city.findSubCitites.zipWithIndex){

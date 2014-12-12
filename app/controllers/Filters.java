@@ -2,15 +2,16 @@ package controllers;
 
 import static play.data.Form.form;
 import models.Location;
-import models.ad.Animal;
-import models.ad.Breed;
+import models.ad.Category;
+import models.ad.Section;
 import models.contact.City;
 import models.contact.Region;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.admin.filters.breed._breed;
+import views.html.admin.filters.category._category;
+import views.html.admin.filters.category._parentCategory;
 import views.html.admin.filters.city._city;
 import views.html.admin.filters.city._parentCity;
 import views.html.admin.filters.region._region;
@@ -93,64 +94,68 @@ public class Filters extends Controller {
 		}
 	}
 
-	public static Result getBreeds(Long id) {
-		return ok(_breed.render(models.ad.Animal.find.byId(id)));
+	public static Result getCategories(Long id) {
+		return ok(_category.render(Section.find.byId(id)));
 	}
 
-	public static Result addBreed() {
-		Form<Breed> breedForm = form(Breed.class).bindFromRequest();
+	public static Result getParentCategories(Long id) {
+		return ok(_parentCategory.render(Section.find.byId(id)));
+	}
+
+	public static Result addCategory() {
+		Form<Category> categoryForm = form(Category.class).bindFromRequest();
 		flash().remove("error");
 
-		if (breedForm.hasErrors()) {
+		if (categoryForm.hasErrors()) {
 			flash("error", "Не могу сохранить!");
 			return badRequest();
 		}
 		/*
-		 * if (Breed.find.where().eq("name",
-		 * breedForm.get().name).findRowCount() > 0) { flash("error",
-		 * "Нельзя сохранить, порода <strong>" + breedForm.get().name +
+		 * if (Category.find.where().eq("name",
+		 * categoryForm.get().name).findRowCount() > 0) { flash("error",
+		 * "Нельзя сохранить, порода <strong>" + categoryForm.get().name +
 		 * "</strong> уже существует!"); return
-		 * ok(_breed.render(breedForm.get().animal)); }
+		 * ok(_category.render(categoryForm.get().section)); }
 		 */else {
-			Breed breed = breedForm.get();
+			Category category = categoryForm.get();
 
-			flash("success", "Порода <strong>" + breed.name
+			flash("success", "Порода <strong>" + category.name
 					+ "</strong> добавлена!");
-			breed.save();
-			return ok(_breed.render(breed.animal));
+			category.save();
+			return ok(_category.render(category.section));
 		}
 	}
 
-	public static Result updateBreed(Long id, String name) {
-		Breed breed = Breed.find.byId(id);
-		// if (Breed.find.where().eq("name", name).findRowCount() > 0
-		// && !breed.equals(Breed.find.where().eq("name", name)
+	public static Result updateCategory(Long id, String name) {
+		Category category = Category.find.byId(id);
+		// if (Category.find.where().eq("name", name).findRowCount() > 0
+		// && !category.equals(Category.find.where().eq("name", name)
 		// .findUnique())) {
 		// flash("error", "Нельзя обновить, порода <strong>" + name
 		// + "</strong> уже существует!");
-		// return ok(_breed.render(breed.animal));
+		// return ok(_category.render(category.section));
 		// } else {
-		flash("success", "Порода <strong>" + breed.name
+		flash("success", "Порода <strong>" + category.name
 				+ "</strong> измененa на <strong>" + name + "</strong>!");
-		breed.name = name;
-		breed.update();
-		return ok(_breed.render(breed.animal));
+		category.name = name;
+		category.update();
+		return ok(_category.render(category.section));
 		// }
 	}
 
-	public static Result deleteBreed(Long id) {
-		Breed breed = Breed.find.byId(id);
-		Animal animal = breed.animal;
-		if (breed.ads != null && breed.ads.size() > 0) {
-			flash("error", "Нельзя удалить, <strong>" + breed.ads.size()
-					+ "</strong> объявления с породой <strong>" + breed.name
+	public static Result deleteCategory(Long id) {
+		Category category = Category.find.byId(id);
+		Section section = category.section;
+		if (category.ads != null && category.ads.size() > 0) {
+			flash("error", "Нельзя удалить, <strong>" + category.ads.size()
+					+ "</strong> объявления с породой <strong>" + category.name
 					+ "</strong>!");
-			return ok(_breed.render(animal));
+			return ok(_category.render(section));
 		} else {
-			flash("success", "Порода <strong>" + breed.name
+			flash("success", "Порода <strong>" + category.name
 					+ "</strong> удаленa!");
-			breed.delete();
-			return ok(_breed.render(animal));
+			category.delete();
+			return ok(_category.render(section));
 		}
 	}
 

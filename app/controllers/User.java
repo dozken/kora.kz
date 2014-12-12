@@ -114,11 +114,12 @@ public class User extends Controller {
 		return redirect(request().getHeader("referer"));
 	}
 
-	public static Result removeUser(Long id){
+	public static Result removeUser(Long id) {
 		AuthorisedUser.find.byId(id).delete();
 		return ok(views.html.admin.users._users.render());
 	}
-	public static Result removeModerator(Long id){
+
+	public static Result removeModerator(Long id) {
 		AuthorisedUser.find.byId(id).delete();
 		return ok(views.html.admin.moderators._moderators.render());
 	}

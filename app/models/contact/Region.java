@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "regions")
 public class Region extends Model {
 
 	/**
@@ -32,6 +34,6 @@ public class Region extends Model {
 	public List<ContactInfo> contactInfos;
 
 	@OneToMany(mappedBy = "region")
-	public List<City> city;
+	public List<City> cities;
 
 }

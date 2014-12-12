@@ -14,7 +14,7 @@ import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
-@Table(name = "contact")
+@Table(name = "contacts")
 public class ContactInfo extends Model {
 
 	/**
@@ -83,12 +83,12 @@ public class ContactInfo extends Model {
 
 	public static String splitPhone(String phone) {
 
-		String res="";
+		String res = "";
 		String[] s = phone.split(",");
-		for(String tel : s){
-			if(tel!=null && !tel.equals("")){
-				tel= tel.replaceAll("[-+ )(]", "");
-				res+=","+tel;
+		for (String tel : s) {
+			if (tel != null && !tel.equals("")) {
+				tel = tel.replaceAll("[-+ )(]", "");
+				res += "," + tel;
 
 			}
 		}

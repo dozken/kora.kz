@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "advertisements")
 public class Advertisement extends Model {
 
 	/**

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import models.ad.Image;
 import models.contact.City;
@@ -12,6 +13,7 @@ import models.contact.Region;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "user_profile")
 public class Profile extends Model {
 
 	/**

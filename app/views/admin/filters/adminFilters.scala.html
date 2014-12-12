@@ -52,24 +52,37 @@ $(document).ajaxSuccess(function() {
 
 
 //City crud
-$(document).on("change", ".animal.select", function(e) {
-    var val = $(this).val();
-    jsRoutes.controllers.Filters.getBreeds(val).ajax({
+$(document).on("change", ".section.select", function(e) {
+    var id = $(this).val();
+    jsRoutes.controllers.Filters.getCategories(id).ajax({
         success: function(data) {
-            $("#breedList").hide();
-            $("#breedList").html(data);
-            $("#breedList").slideDown();
-            $("#breeds").slideDown();
+            $("#categoryList").hide();
+            $("#categoryList").html(data);
+            $("#categoryList").slideDown();
+            $(".categories").slideDown();
         },
+    });
+    
+    jsRoutes.controllers.Filters.getParentCategories(id).ajax({
+        success: function(data) {
+            $("#category-list").html(data);
+        }
     });
 });
 
-$(document).on("click", ".breed.add", function(e) {
+$(document).on("click", ".category.add", function(e) {
     e.preventDefault();
-    jsRoutes.controllers.Filters.addBreed().ajax({
-        data: $("#breedForm").serialize(),
-        success: function(data) {
-            $("#breedList").html(data);
+    jsRoutes.controllers.Filters.addCategory().ajax({
+        data: $("#categoryForm").serialize(),
+        success: function(data) {        	
+            $("#categoryList").html(data);
+            
+            var id = $("#section").val();
+            jsRoutes.controllers.Filters.getParentCategories(id).ajax({
+                success: function(data) {
+                    $("#category-list").html(data);
+                }
+            });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);
@@ -77,31 +90,31 @@ $(document).on("click", ".breed.add", function(e) {
     });
 });
 
-$(document).on("click", ".breed.update", function(e) {
+$(document).on("click", ".category.update", function(e) {
     e.preventDefault();
-    var val = $("input[breed=" + $(this).attr("breed") + "]").val();
-    var before = $("input[breed=" + $(this).attr("breed") + "]").attr("before");    
+    var val = $("input[category=" + $(this).attr("category") + "]").val();
+    var before = $("input[category=" + $(this).attr("category") + "]").attr("before");    
     if(val!=before)
-    jsRoutes.controllers.Filters.updateBreed($(this).attr("breed"), val).ajax({
+    jsRoutes.controllers.Filters.updateCategory($(this).attr("category"), val).ajax({
         success: function(data) {
-            $("#breedList").html(data);
+            $("#categoryList").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);
         }
     });
 });
-$(document).on("click", ".breed.delete", function(e) {
+$(document).on("click", ".category.delete", function(e) {
     e.preventDefault();
-    var breed = $(this).attr("breed");    
+    var category = $(this).attr("category");    
     bootbox.confirm("Вы уверены?", function(confirm) {
     	if(confirm)
-        jsRoutes.controllers.Filters.deleteBreed(breed).ajax({
+        jsRoutes.controllers.Filters.deleteCategory(category).ajax({
             success: function(data) {
-              $("#breedList").html(data);
+              $("#categoryList").html(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              $("#breedList").html(data);
+              $("#categoryList").html(data);
               //console.log(jqXHR.responseText);
             }
         });
