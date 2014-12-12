@@ -26,7 +26,20 @@ float: none; !important
 <script src='@routes.Assets.at("javascripts/gmaps.js")' type="text/javascript"></script>
 <script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<script src='@routes.Assets.at("javascripts/watermark.jquery/watermark.jquery.js")' type="text/javascript"></script>
 <script>
+
+var config = {
+	"path": '@routes.Assets.at("/images/home/watermark.png")',
+	//"className":"watermark",
+	//"position":"top-left"|"top-right"|"bottom-right"|"bottom-left"
+	"opacity":30	
+	};
+$(document).ready(function(){
+	$(document).watermark(config);
+	console.log("watermark");
+});
+
 bootbox.setDefaults({
 
 	  locale: "ru_delete",

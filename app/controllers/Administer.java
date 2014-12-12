@@ -79,7 +79,10 @@ public class Administer extends Controller {
 			ObjectNode event = Json.newObject();
 			event.put("moderating", "active");
 			event.put("id", ad.id);
-			event.put("title", ad.title);
+			if (ad.section.id != 5)
+				event.put("title", ad.category.name);
+			else
+				event.put("title", ad.title);
 			event.put("company", ad.contactInfo.company);
 			event.put("moderatingBy", models.user.AuthorisedUser
 					.findByEmail(session("connected")).userName);
