@@ -1,0 +1,25 @@
+@main("Карта сайта") {
+
+<div class="container сontain">
+	<div class="searchbarmargin">@_searchbar()</div>
+	<div class="PFBSPR-15">
+	<h2>Карта сайта</h2>
+	<div class="col-xs-12 well">
+		@for(city<-models.contact.City.find.all){
+		@city.name
+		}
+	</div>
+	@for(section<-models.ad.Section.find.all if(section.categories!=null&&section.categories.size>0)){
+	<h4>@section.name</h4>
+	<div class="col-xs-12 well">
+		@* TODO arifmetitac equcation, calculate columns*@
+		@for(category<-section.categories){
+		@category.name
+		}
+	</div>
+	}
+	<p>Перед добавлением на сайт каждое объявление проверяется на соответствие правилам Kora.kz. Нарушение правил может привести к блокировке как объявлений, так и учетных записей их владельцев.</p>
+	<p class="PFBSPLI-15" style="color:red">*Торговая площадка оставляет за собой право на дополнение и обновление существующих правил.</p>
+	</div>
+</div>
+}
