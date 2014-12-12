@@ -88,6 +88,13 @@ $(window).load(function() {
 	//$('#myCarousel .list-group-item').outerHeight(triggerheight);
 });
 
+$(".other_phones").hide();
+
+$(document).on("click","#show_all",function(){
+
+    $("#phone_title").hide();
+    $(".other_phones").show();
+})
 $(document).on("click",".moderate.approve", function(){
 	
 	var adId = $(this).attr("ad");

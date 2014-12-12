@@ -15,6 +15,7 @@ import models.ad.Comment;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
+import play.api.libs.Crypto;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -121,17 +122,20 @@ public class Application extends Controller {
 	// }
 
 	public static Result signIn() {
+
 		DynamicForm requestData = form().bindFromRequest();
+		System.out.println(Crypto.encryptAES(requestData.get("password")));
 		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
 				.get("email"));
-		if (user != null && user.password.equals(requestData.get("password"))
+		System.out.println(user.password);
+		if (user != null && user.password.equals(Crypto.encryptAES(requestData.get("password")))
 				&& user.status.equals("active")) {
 			session("connected", user.email);
 			flash("thank you");
 			changeLang("ru");
 			return redirect(request().getHeader("referer"));
 		} else if (user != null
-				&& user.password.equals(requestData.get("password"))
+				&& user.password.equals(Crypto.encryptAES(requestData.get("password")))
 				&& !user.status.equals("active")) {
 			return ok("inactive");
 

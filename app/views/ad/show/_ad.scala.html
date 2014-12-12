@@ -77,7 +77,17 @@
 		<li>
 			<ul class="koldenen">
 				<li class="birinwi">Контакты</li>
-				<li class="PFBSPLI-13"><ul id="ss" class="nopaddingleft"><li>@utils._phone(ad.contactInfo.phone)</li></ul></li>
+				<li class="PFBSPLI-13">
+                    <ul id="ss" class="nopaddingleft">
+                        <li id="phone_title">@utils._phone2(ad.contactInfo.phone.split(",")(0)) <a id="show_all">Показать телефоны</a></li>
+
+                        @for((tel,index)<-ad.contactInfo.phone.split(",").zipWithIndex){
+
+                                <li class="other_phones">@utils._phone(tel)</li>
+
+                        }
+                </ul></li>
+
 			</ul>
 		</li>
 	</ul>
