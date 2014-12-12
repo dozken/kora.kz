@@ -928,4 +928,14 @@ public class Ads extends Controller {
 
 	}
 
+	public static Result sitemapS(Long cid){
+
+			City city = City.find.byId(cid);
+		Section section = new Section();
+		section.id=0L;
+			return ok(adSearch.render(Ad.find.where().eq("contactInfo.region", city.region)
+					.eq("contactInfo.city", city).eq("status", "active").findList(),
+					section, null, city.region, city));
+		}
+
 }

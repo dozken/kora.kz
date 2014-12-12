@@ -9,7 +9,7 @@ GET         /feedback                              controllers.Application.feedb
 POST        /feedback                              controllers.Application.sendFeedback()
 GET         /sitemap                               controllers.Application.sitemap(city:Long)
 GET         /ad/search-map                         controllers.Ads.sitemap(city:Long,section:Long,category:Long)
-
+GET         /ad/search-map/:city                         controllers.Ads.sitemapS(city:Long)
 GET         /sessionAdvert                         controllers.Advertisements.sessionAdvert(id:String,index:String)
 
 POST        /currency                              controllers.Application.currency(str:String,rate:Double)
