@@ -102,16 +102,23 @@ public class AuthorisedUser extends Model implements Subject {
 		return mail;
 	}
 
-	public static List<AuthorisedUser> getUsers() {
+	public static List<AuthorisedUser> getUsers(int page,String sort) {
 		List<AuthorisedUser> users = find.where()
 				.in("roles", SecurityRole.findByName("user")).ne("id", 1L)
-				.findList();
+				.order("userName " + sort)
+				.findPagingList(20)
+				.getPage(page).getList();
 
 		// if(users!=null)
 		// for(AuthorisedUser user : users){
 		// if(user.roles.size()>1)users.remove(user);
 		// }
 		return users;
+	}
+
+	public static int getUsersCount(){
+
+		return find.where().in("roles", SecurityRole.findByName("user")).ne("id", 1L).findRowCount();
 	}
 
 	public static List<AuthorisedUser> getModerators() {
