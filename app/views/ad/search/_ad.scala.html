@@ -1,5 +1,6 @@
 @(ad: models.ad.Ad)
-
+@import java.text.SimpleDateFormat 
+@import java.util.Locale
 <div class="col-xs-4 suret">
 
     
@@ -13,16 +14,20 @@
     }else{<img src="@routes.Assets.at("images/home/nophoto.png")" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;">}
 </div>
 <div class="col-xs-8">
-    <ul class="obya">
-        <li><a href="@routes.Ads.get(ad.id)"><b>@ad.category.name</b></a> <span class="baga">@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
-        <li class="PFBSPLI-13">@if(ad.description.length>100){ @ad.description.take(200)... }else{ @ad.description}</li>
-        <li>@ad.contactInfo.company | @ad.contactInfo.region.name</li>
+    <ul class="obya" >
+        <li>
+        <a href="@routes.Ads.get(ad.id)" style="color:black;"><b>@ad.category.name</b></a>
+
+        <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
+        <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(65)... }else{ @ad.description}</li>
+        <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.region.name</li>
         <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
     </ul>
     <ul class="pros">
         <li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
-        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){Комментариев нет} else{ @ad.comments.size() комментариев}</li>
-        <li><span class="icon-date"></span> @ad.publishedDate.format("dd/MM/yyyy")</li>
+        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){} else{ @ad.comments.size() комментариев}</li>
+        <li><span class="icon-date"></span> @(new SimpleDateFormat("dd MMMM", new Locale("ru", "RU")).format(ad.publishedDate))
+        </li>
     </ul>
 </div>
 
