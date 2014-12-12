@@ -10,20 +10,26 @@ import javax.persistence.OneToMany;
 import play.db.ebean.Model;
 
 @Entity
-public class Breed extends Model {
+public class Category extends Model {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Model.Finder<Long, Breed> find = new Model.Finder<Long, Breed>(
-			Long.class, Breed.class);
+	public static final Model.Finder<Long, Category> find = new Model.Finder<Long, Category>(
+			Long.class, Category.class);
 	@Id
 	public Long id;
 
 	@ManyToOne
-	public Animal animal;
+	public Section section;
+
+	@ManyToOne
+	public Category parentCategory;
+
+	@OneToMany(mappedBy = "parentCategory")
+	public List<Category> subCategories;
 
 	public String name;
 

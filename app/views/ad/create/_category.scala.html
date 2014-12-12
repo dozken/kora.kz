@@ -1,0 +1,10 @@
+@(section:models.ad.Section)
+
+<select id="category" name="category" class="form-control next selectdesign" validation="not_null">
+    <option selected disabled hidden> Выберите категорию</option>
+    @for(category<-section.getCategorys){
+
+        <option value="@category.id">@category.name</option>
+
+    }
+</select>

@@ -9,15 +9,15 @@ import javax.persistence.OneToMany;
 import play.db.ebean.Model;
 
 @Entity
-public class Animal extends Model {
+public class Section extends Model {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final Model.Finder<Long, Animal> find = new Model.Finder<Long, Animal>(
-			Long.class, Animal.class);
+	public static final Model.Finder<Long, Section> find = new Model.Finder<Long, Section>(
+			Long.class, Section.class);
 
 	@Id
 	public Long id;
@@ -28,9 +28,9 @@ public class Animal extends Model {
 	public List<Ad> ads;
 
 	@OneToMany
-	public List<Breed> breeds;
+	public List<Category> categorys;
 
-	public List<Breed> getBreeds() {
-		return Breed.find.where().eq("animal", this).orderBy("name").findList();
+	public List<Category> getCategorys() {
+		return Category.find.where().eq("section", this).orderBy("name").findList();
 	}
 }

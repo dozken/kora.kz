@@ -39,7 +39,7 @@ clear: both;
         var lng = "76.927437" ;
     }
 
-    @if(ad.animal.id==5){
+    @if(ad.section.id==5){
         $("#quanHide" ).hide();
         $("#genderHide" ).hide();
         $("#ageHide" ).hide();
@@ -127,29 +127,29 @@ $ (document ).on("click",".delete",function(){
 
 $(this).parent().remove();
 })
-    $(document ).on("change","#animal",function(){
+    $(document ).on("change","#section",function(){
 
     var id = Number($(this ).val());
 
     if(id == 5){
-    $("#breed_list" ).hide();
+    $("#category_list" ).hide();
     $("#quanHide" ).hide();
     $("#genderHide" ).hide();
     $("#ageHide" ).hide();
-    $('#breed_list').children('select').each(function () {
+    $('#category_list').children('select').each(function () {
 
     $(this ).attr("validation","");
 
     });
     }else {
-    $("#breed_list" ).show();
+    $("#category_list" ).show();
     $("#quanHide" ).show();
     $("#genderHide" ).show();
     $("#ageHide" ).show();
-    jsRoutes.controllers.Ads.getBreeds(id).ajax({
+    jsRoutes.controllers.Ads.getCategorys(id).ajax({
     success: function(data) {
 
-    $("#breed_list" ).html(data);
+    $("#category_list" ).html(data);
 }
 });
     }

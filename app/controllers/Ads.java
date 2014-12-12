@@ -12,8 +12,8 @@ import models.Setting;
 import models.ad.Ad;
 import models.ad.AdImage;
 import models.ad.AdSetting;
-import models.ad.Animal;
-import models.ad.Breed;
+import models.ad.Section;
+import models.ad.Category;
 import models.ad.Comment;
 import models.ad.Price;
 import models.ad.PrivateMessage;
@@ -26,7 +26,7 @@ import models.user.Payment;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.ad.create._breed;
+import views.html.ad.create._category;
 import views.html.ad.create._city;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
@@ -61,8 +61,8 @@ public class Ads extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = new Ad();
-		ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
-		ad.breed = Breed.find.byId(Long.parseLong(requestData.get("breed")));
+		ad.section = Section.find.byId(Long.parseLong(requestData.get("section")));
+		ad.category = Category.find.byId(Long.parseLong(requestData.get("category")));
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
@@ -90,7 +90,7 @@ public class Ads extends Controller {
 		ad.description = requestData.get("description");
 		ad.quantity = requestData.get("quantity");
 		ad.title = requestData.get("title");
-		ad.gender = requestData.get("animal_gender");
+		ad.gender = requestData.get("section_gender");
 		Price price = new Price();
 		if (requestData.get("payment_type").equals("normal")) {
 
@@ -121,8 +121,8 @@ public class Ads extends Controller {
 		if (ad.settings == null) {
 			ad.tags = new ArrayList<Tag>();
 		}
-		ad.tags.add(new Tag(ad.animal.name));
-		ad.tags.add(new Tag(ad.breed.name));
+		ad.tags.add(new Tag(ad.section.name));
+		ad.tags.add(new Tag(ad.category.name));
 		ad.tags.add(new Tag(ad.title));
 		ad.tags.add(new Tag(ad.birthDate.toString()));
 		ad.tags.add(new Tag(ad.gender));
@@ -253,10 +253,10 @@ public class Ads extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = Ad.find.byId(id);
-		ad.animal = Animal.find.byId(Long.parseLong(requestData.get("animal")));
-		if (ad.animal.id != 5) {
-			ad.breed = Breed.find
-					.byId(Long.parseLong(requestData.get("breed")));
+		ad.section = Section.find.byId(Long.parseLong(requestData.get("section")));
+		if (ad.section.id != 5) {
+			ad.category = Category.find
+					.byId(Long.parseLong(requestData.get("category")));
 		}
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
 
@@ -284,7 +284,7 @@ public class Ads extends Controller {
 
 		ad.description = requestData.get("description");
 		ad.quantity = requestData.get("quantity");
-		ad.gender = requestData.get("animal_gender");
+		ad.gender = requestData.get("section_gender");
 		ad.title = requestData.get("title");
 
 		AdSetting set = AdSetting.find.where().eq("name", "comment")
@@ -307,9 +307,9 @@ public class Ads extends Controller {
 
 			ad.tags.get(i).delete();
 		}
-		ad.tags.add(new Tag(ad.animal.name));
-		if (ad.animal.id != 5) {
-			ad.tags.add(new Tag(ad.breed.name));
+		ad.tags.add(new Tag(ad.section.name));
+		if (ad.section.id != 5) {
+			ad.tags.add(new Tag(ad.category.name));
 		}
 		ad.tags.add(new Tag(ad.title));
 		ad.tags.add(new Tag(ad.birthDate.toString()));
@@ -346,8 +346,8 @@ public class Ads extends Controller {
 		return ok();
 	}
 
-	public static Result getBreeds(Long id) {
-		return ok(_breed.render(Animal.find.byId(id)));
+	public static Result getCategorys(Long id) {
+		return ok(_category.render(Section.find.byId(id)));
 	}
 
 	public static Result getCities(Long id) {
@@ -367,7 +367,7 @@ public class Ads extends Controller {
 	}
 
 	// public static Result search() {
-	// return ok(adSearch.render(Ad.find.all(),Animal.find.byId(2L)));
+	// return ok(adSearch.render(Ad.find.all(),Section.find.byId(2L)));
 	// }
 
 	public static Result quick_search() {
@@ -375,7 +375,7 @@ public class Ads extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 
 		List<Ad> l;
-		if (requestData.get("animal").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
+		if (requestData.get("section").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
 			if (requestData.get("str").equals("")
 					|| requestData.get("str") == null) {
 				l = Ad.find.where().eq("status", "active").findList();
@@ -383,10 +383,10 @@ public class Ads extends Controller {
 				l = Ad.find.where().eq("status", "active")
 						.in("tags.name", requestData.get("str")).findList();
 			}
-			Animal animal = new Animal();
-			animal.id = 0L;
-			animal.name = "all";
-			return ok(adSearch.render(l, animal));
+			Section section = new Section();
+			section.id = 0L;
+			section.name = "all";
+			return ok(adSearch.render(l, section));
 		}
 
 		else {
@@ -395,24 +395,24 @@ public class Ads extends Controller {
 				l = Ad.find
 						.where()
 						.eq("status", "active")
-						.eq("animal",
-								Animal.find.where()
-										.eq("name", requestData.get("animal"))
+						.eq("section",
+								Section.find.where()
+										.eq("name", requestData.get("section"))
 										.findUnique()).findList();
 			} else {
 				l = Ad.find
 						.where()
 						.eq("status", "active")
-						.eq("animal",
-								Animal.find.where()
-										.eq("name", requestData.get("animal"))
+						.eq("section",
+								Section.find.where()
+										.eq("name", requestData.get("section"))
 										.findUnique())
 						.in("tags.name", requestData.get("str")).findList();
 			}
 
-			Animal animal = Animal.find.where()
-					.eq("name", requestData.get("animal")).findUnique();
-			return ok(adSearch.render(l, animal));
+			Section section = Section.find.where()
+					.eq("name", requestData.get("section")).findUnique();
+			return ok(adSearch.render(l, section));
 		}
 
 	}
@@ -420,73 +420,73 @@ public class Ads extends Controller {
 	public static Result allAd() {
 		List<Ad> l = Ad.find.where().eq("status", "active").findList();
 
-		Animal animal = new Animal();
-		animal.id = 0L;
-		animal.name = "all_animal";
-		return ok(adSearch.render(l, animal));
+		Section section = new Section();
+		section.id = 0L;
+		section.name = "all_section";
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result horse() {
 		List<Ad> l = Ad.find
 				.where()
 				.eq("status", "active")
-				.eq("animal",
-						Animal.find.where().eq("name", "Лошадь").findUnique())
+				.eq("section",
+						Section.find.where().eq("name", "Лошадь").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "Лошадь").findUnique();
-		return ok(adSearch.render(l, animal));
+		Section section = Section.find.where().eq("name", "Лошадь").findUnique();
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result camel() {
 		List<Ad> l = Ad.find
 				.where()
 				.eq("status", "active")
-				.eq("animal",
-						Animal.find.where().eq("name", "Верблюд").findUnique())
+				.eq("section",
+						Section.find.where().eq("name", "Верблюд").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "Верблюд").findUnique();
-		return ok(adSearch.render(l, animal));
+		Section section = Section.find.where().eq("name", "Верблюд").findUnique();
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result cow() {
 		List<Ad> l = Ad.find
 				.where()
 				.eq("status", "active")
-				.eq("animal",
-						Animal.find.where().eq("name", "Корова").findUnique())
+				.eq("section",
+						Section.find.where().eq("name", "Корова").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "Корова").findUnique();
-		return ok(adSearch.render(l, animal));
+		Section section = Section.find.where().eq("name", "Корова").findUnique();
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result cam() {
 		List<Ad> l = Ad.find
 				.where()
 				.eq("status", "active")
-				.eq("animal",
-						Animal.find.where().eq("name", "Овцы/Козы")
+				.eq("section",
+						Section.find.where().eq("name", "Овцы/Козы")
 								.findUnique()).findList();
-		Animal animal = Animal.find.where().eq("name", "Овцы/Козы")
+		Section section = Section.find.where().eq("name", "Овцы/Козы")
 				.findUnique();
-		return ok(adSearch.render(l, animal));
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result other() {
 		List<Ad> l = Ad.find
 				.where()
 				.eq("status", "active")
-				.eq("animal",
-						Animal.find.where().eq("name", "Другие").findUnique())
+				.eq("section",
+						Section.find.where().eq("name", "Другие").findUnique())
 				.findList();
-		Animal animal = Animal.find.where().eq("name", "Другие").findUnique();
-		return ok(adSearch.render(l, animal));
+		Section section = Section.find.where().eq("name", "Другие").findUnique();
+		return ok(adSearch.render(l, section));
 	}
 
 	public static Result searchByType(Long id) {
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
-						.eq("animal", Animal.find.byId(id)).findList(),
-				Animal.find.byId(id)));
+						.eq("section", Section.find.byId(id)).findList(),
+				Section.find.byId(id)));
 	}
 
 	public static Result favorite() {
@@ -495,12 +495,12 @@ public class Ads extends Controller {
 
 			return ok(adSearch.render(
 					AuthorisedUser.findByEmail(session("connected")).favorites,
-					Animal.find.byId(1L)));
+					Section.find.byId(1L)));
 
 		} else {
 
 			if (request().cookie("userAdsKora") == null)
-				return ok(adSearch.render(null, Animal.find.byId(1L)));
+				return ok(adSearch.render(null, Section.find.byId(1L)));
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 			List<Ad> list = new ArrayList<Ad>();
@@ -509,7 +509,7 @@ public class Ads extends Controller {
 					list.add(Ad.find.byId(Long.parseLong(ad)));
 
 			}
-			return ok(adSearch.render(list, Animal.find.byId(1L)));
+			return ok(adSearch.render(list, Section.find.byId(1L)));
 		}
 	}
 
@@ -772,13 +772,13 @@ public class Ads extends Controller {
 		String b = "", loc = "", r = "", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
-		if (!requestData.get("animal").equals("0"))
-			anim = "inner join animal ani on a.animal_id=ani.id and ani.id="
-					+ requestData.get("animal");
+		if (!requestData.get("section").equals("0"))
+			anim = "inner join section ani on a.section_id=ani.id and ani.id="
+					+ requestData.get("section");
 
-		if (!requestData.get("breed").equals("all"))
-			b = "inner join breed b on a.breed_id=b.id and b.id="
-					+ requestData.get("breed");
+		if (!requestData.get("category").equals("all"))
+			b = "inner join category b on a.category_id=b.id and b.id="
+					+ requestData.get("category");
 		if (!requestData.get("region").equals("all"))
 			r = "inner join region r on r.id = c.region_id and r.id="
 					+ requestData.get("region");
