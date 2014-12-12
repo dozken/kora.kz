@@ -88,7 +88,7 @@ POST        /profile/info/edit/:id                 controllers.Info.update(id:Lo
 GET         /admin                                 controllers.Administer.ads()
 GET         /admin/ads                             controllers.Administer.ads()
 GET         /admin/remove/ad/:id                   controllers.Administer.removeAd(id:Long)
-GET         /admin/all/ads                         controllers.Administer.allAds()
+
 GET         /admin/all/filter                      controllers.Administer.filterToSession(name:String,status:String)
 GET         /admin/all/ads/_ad                     controllers.Administer.filterAllAds()
 
@@ -116,10 +116,13 @@ GET         /admin/advetisement/:id/expand         controllers.Advertisements.ex
 GET         /admin/advetisement/:id/replace        controllers.Advertisements.replace(id: Long,direction: String)
 GET         /admin/advetisement/:id/remove         controllers.Advertisements.remove(id: Long)
 
-GET         /admin/users                           controllers.Administer.users()
-GET         /admin/remove/user/:id                 controllers.User.removeUser(id:Long)
-GET         /admin/remove/moderator/:id            controllers.User.removeModerator(id:Long)
+GET         /admin/users                           controllers.Administer.users(page:Integer,sort:String)
+GET         /admin/all/ads                         controllers.Administer.allAds()
 GET         /admin/moderators                      controllers.Administer.moderators()
+
+GET         /admin/user/del=:id                     controllers.User.removeUser(id:Long,page:Integer,sort:String)
+GET         /admin/remove/moderator/:id            controllers.User.removeModerator(id:Long)
+
 
 # Javascript routing
 GET         /assets/javascripts/routes             controllers.Application.javascriptRoutes()
