@@ -7,7 +7,8 @@ GET         /about                                 controllers.Application.about
 GET         /rules                                 controllers.Application.rules()
 GET         /feedback                              controllers.Application.feedback()
 POST        /feedback                              controllers.Application.sendFeedback()
-GET         /sitemap                               controllers.Application.sitemap()
+GET         /sitemap                               controllers.Application.sitemap(city:Long)
+GET         /ad/search-map                         controllers.Ads.sitemap(city:Long,section:Long,category:Long)
 
 GET         /sessionAdvert                         controllers.Advertisements.sessionAdvert(id:String,index:String)
 

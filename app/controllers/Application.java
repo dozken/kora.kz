@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import models.Emailing;
 import models.ad.Ad;
 import models.ad.Comment;
+import models.contact.City;
 import models.user.AuthorisedUser;
 import play.Play;
 import play.Routes;
@@ -165,8 +166,10 @@ public class Application extends Controller {
 		return ok(about.render());
 	}
 
-	public static Result sitemap() {
-		return ok(sitemap.render());
+	public static Result sitemap(Long id) {
+		if(id==null)
+		return ok(sitemap.render(null));
+		else{return ok(sitemap.render(City.find.byId(id))); }
 	}
 
 	public static Result rules() {
