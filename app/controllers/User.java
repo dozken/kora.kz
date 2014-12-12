@@ -8,6 +8,7 @@ import models.Emailing;
 import models.user.AuthorisedUser;
 import models.user.Profile;
 import models.user.SecurityRole;
+import play.api.libs.Crypto;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -31,6 +32,8 @@ public class User extends Controller {
 				.eq("email", userForm.get().email).findUnique() == null) {
 
 			AuthorisedUser user = userForm.get();
+			user.password = Crypto.encryptAES(userForm.get().password);
+
 			user.roles = new ArrayList<SecurityRole>();
 			user.profile = new Profile();
 
@@ -106,7 +109,7 @@ public class User extends Controller {
 					"Ошибка при подтверждения пароля, попробуйте еще раз.");
 			return ok(restorePassword.render(code));
 		} else {
-			user.password = newPassoword;
+			user.password = Crypto.encryptAES(newPassoword);
 			user.update();
 			flash("success",
 					"Пароль успешно изменен! Хотите <a href='#' data-toggle='modal' data-target='#myModal'>войти</a>? ");
