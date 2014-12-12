@@ -62,16 +62,18 @@ public class Info extends Controller {
 			user.userSocials.add(UserSocials.fillSocilal("skype",
 					requestData.get("skype")));
 
-			user.profile.phone = ContactInfo.phoneCheck(user, requestData.get("phone"));
+			user.profile.phone = ContactInfo.phoneCheck(user,
+					requestData.get("phone"));
 
 			if (user.profile.phone.equals("exists"))
 				return ok("phone_exists");
 
-			user.email =AuthorisedUser.checkMail(user,requestData.get("email"));
-			
+			user.email = AuthorisedUser.checkMail(user,
+					requestData.get("email"));
+
 			if (user.email.equals("exists"))
 				return ok("mail_exists");
-			
+
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {
 				if (user.location != null) {

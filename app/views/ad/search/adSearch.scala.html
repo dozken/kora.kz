@@ -1,14 +1,25 @@
-@(ads:List[models.ad.Ad],animal:models.ad.Animal)
+@(ads:List[models.ad.Ad],section:models.ad.Section)
 
 @main("Поиск") {
 
+<style type="text/css">
+.optionGroup
+{
+    font-weight:bold;
+    font-style:italic;
+}
 
+.optionChild
+{
+    padding-left:15px;
+}
+ </style>
 <div class="container сontain">
 	<div class="searchbarmargin">@_searchbar()</div>
-	@main_filters(animal)
-	<div id="search_by_animal">@_filters(animal)</div>
+	@main_filters(section)
+	<div id="search_by_section">@_filters(section)</div>
 	<div class="col-xs-12 borderbottom">
-		@*<h3 id="zqwe">Казахстан / @animal.name</h3>*@
+		@*<h3 id="zqwe">Казахстан / @section.name</h3>*@
 		<hr class="hrcolor">
 		<ul class="typelist">
 			<li><a id="sortByLowPrice" class="act">Сначала дешевые</a></li>

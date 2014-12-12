@@ -53,6 +53,10 @@ border-color: #77953a #77953a #77953a;
 	margin-right: 10px;
 	margin-bottom: 10px; 
 }
+.pohojii a{
+	color:black;
+	font-size: 12px;
+}
 .pohojii_list_text{
 		width:140px; 
         /*height:35px;*/  
@@ -804,6 +808,7 @@ hovers in index
 }
 
 .aty {
+	width: 90%;
 	padding-left: 0px;
 	padding-top: 10px;
 }

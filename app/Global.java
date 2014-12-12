@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import models.Setting;
-import models.ad.Animal;
-import models.ad.Breed;
+import models.ad.Category;
 import models.ad.Price;
+import models.ad.Section;
 import models.admin.AdminSetting;
 import models.contact.City;
 import models.contact.Region;
@@ -91,23 +91,23 @@ public class Global extends GlobalSettings {
 			}
 		}
 
-		if (Animal.find.findRowCount() == 0) {
+		if (Section.find.findRowCount() == 0) {
 			for (String name : Arrays.asList("Лошадь", "Верблюд", "Корова",
 					"Овцы/Козы", "Другие")) {
-				Animal animal = new Animal();
-				animal.name = name;
-				animal.save();
+				Section section = new Section();
+				section.name = name;
+				section.save();
 			}
 		}
 
-		if (Breed.find.findRowCount() == 0) {
+		if (Category.find.findRowCount() == 0) {
 			for (String name : Arrays.asList("Ахалтеке", "Арабский скакун",
 					"Император")) {
-				Breed breed = new Breed();
-				breed.animal = Animal.find.where().eq("name", "Лошадь")
+				Category category = new Category();
+				category.section = Section.find.where().eq("name", "Лошадь")
 						.findUnique();
-				breed.name = name;
-				breed.save();
+				category.name = name;
+				category.save();
 			}
 		}
 
@@ -139,7 +139,7 @@ public class Global extends GlobalSettings {
 
 		}
 
-		if (AuthorisedUser.findByEmail("admin@kora.kz")== null) {
+		if (AuthorisedUser.findByEmail("admin@kora.kz") == null) {
 			AuthorisedUser user = new AuthorisedUser();
 			user.userName = "ТОО ҚОРА";
 			user.email = "admin@kora.kz";

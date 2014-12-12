@@ -3,6 +3,7 @@ package models.payment;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import models.user.AuthorisedUser;
 import models.user.Payment;
@@ -10,6 +11,7 @@ import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "qiwi_payments")
 public class Qiwi extends Model {
 
 	/**

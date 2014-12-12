@@ -3,12 +3,14 @@ package models.admin;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import models.Setting;
 import models.user.AuthorisedUser;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "admin_settings")
 public class AdminSetting extends Model {
 
 	/**

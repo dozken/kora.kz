@@ -14,7 +14,7 @@ import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
 @Entity
-@Table(name = "socials_user")
+@Table(name = "user_socials")
 public class UserSocials extends Model {
 
 	private static final long serialVersionUID = 1L;
@@ -43,9 +43,9 @@ public class UserSocials extends Model {
 	}
 
 	public static String getSocialByName(Long id, String name) {
-		String sql = "select value from socials_user where user_id="
+		String sql = "select value from user_socials where user_id="
 				+ id.toString()
-				+ " and social_network_id in (select id from social_network where name='"
+				+ " and social_network_id in (select id from socials where name='"
 				+ name + "')";
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();

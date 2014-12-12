@@ -11,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "ads")
 public class Ad extends Model {
 
 	/**
@@ -31,10 +33,10 @@ public class Ad extends Model {
 	public Long id;
 
 	@ManyToOne
-	public Animal animal;
+	public Section section;
 
 	@ManyToOne
-	public Breed breed;
+	public Category category;
 
 	public String gender = "Другой";
 
@@ -110,7 +112,8 @@ public class Ad extends Model {
 	}
 
 	public static List<Ad> like(Ad ad) {
-		return find.where().eq("breed", ad.breed)
+		return find.where().eq("category", ad.category).ne("id", ad.id)
+				.eq("status", "active")
 				.eq("contactInfo.city", ad.contactInfo.city).setMaxRows(7)
 				.findList();
 	}

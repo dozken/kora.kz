@@ -64,10 +64,11 @@ public class Application extends Controller {
 				controllers.routes.javascript.Application.signIn(),
 				controllers.routes.javascript.Application.currency(),
 				controllers.routes.javascript.User.register(),
-				controllers.routes.javascript.Filters.getBreeds(),
-				controllers.routes.javascript.Filters.addBreed(),
-				controllers.routes.javascript.Filters.updateBreed(),
-				controllers.routes.javascript.Filters.deleteBreed(),
+				controllers.routes.javascript.Filters.getCategories(),
+				controllers.routes.javascript.Filters.getParentCategories(),
+				controllers.routes.javascript.Filters.addCategory(),
+				controllers.routes.javascript.Filters.updateCategory(),
+				controllers.routes.javascript.Filters.deleteCategory(),
 				controllers.routes.javascript.Filters.addRegion(),
 				controllers.routes.javascript.Filters.updateRegion(),
 				controllers.routes.javascript.Filters.deleteRegion(),
@@ -85,7 +86,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Advertisements.remove(),
 				controllers.routes.javascript.Advertisements.replace(),
 				controllers.routes.javascript.Administer.moderate(),
-				controllers.routes.javascript.Ads.getBreeds(),
+				controllers.routes.javascript.Ads.getCategories(),
 				controllers.routes.javascript.Ads.getCities(),
 				controllers.routes.javascript.Ads.addFavorite(),
 				controllers.routes.javascript.Ads.sendPrivateMessage(),
@@ -107,12 +108,10 @@ public class Application extends Controller {
 				controllers.routes.javascript.Application.emailing(),
 				controllers.routes.javascript.User.removeUser(),
 				controllers.routes.javascript.User.removeModerator(),
-				controllers.routes.javascript.Administer.removeAd(),	
-				controllers.routes.javascript.Administer.filterAllAds(),	
-				controllers.routes.javascript.Administer.filterToSession(),	
-				
-							
-				
+				controllers.routes.javascript.Administer.removeAd(),
+				controllers.routes.javascript.Administer.filterAllAds(),
+				controllers.routes.javascript.Administer.filterToSession(),
+
 				controllers.routes.javascript.Manage.getMessageType()));
 	}
 
@@ -131,13 +130,12 @@ public class Application extends Controller {
 			flash("thank you");
 			changeLang("ru");
 			return redirect(request().getHeader("referer"));
-		}
-			else if (user != null && user.password.equals(requestData.get("password"))
+		} else if (user != null
+				&& user.password.equals(requestData.get("password"))
 				&& !user.status.equals("active")) {
 			return ok("inactive");
-			
-		}
-		else {
+
+		} else {
 			return ok("error");
 
 		}
