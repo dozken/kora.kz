@@ -1,0 +1,47 @@
+<thead>
+	<tr>
+		<td>№</td>
+		@*if(session.get("ad.filter.region")!=null&&session.get("ad.filter.region").equals("true")){*@<td>Регион</td>
+		@*if(session.get("ad.filter.city").equals("true")){*@<td>Город</td>
+		@*if(session.get("ad.filter.ad.filter.company").equals("true")){*@<td>Компания</td>
+		@if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){<td>Название</td>}
+		@*if(session.get("ad.filter.section").equals("true")){*@<td>Раздел</td>
+		@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>Категория</td>}
+		@if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){<td>Пол</td>}
+		@if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){<td>Возраст</td>}
+		@if(session.get("ad.filter.quantity")!=null&&session.get("ad.filter.quantity").equals("true")){<td>Количество</td>}
+		@if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){<td>Цена</td>}
+		@if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){<td>Просмотры</td>}
+		@if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){<td>Поделелись</td>}
+		@*if(session.get("ad.filter.createDate").equals("ad.filter.true")){*@<td>Дата добавления</td>
+		@if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){<td>Дата редактирования</td>}
+		@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>Дата истичения</td>}
+		@if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){<td>Статус</td>}
+		<td></td>
+	</tr>
+</thead>
+<tbody>
+@for((ad,index)<-models.ad.Ad.find.all.zipWithIndex){
+<tr id="ad@ad.id">
+	<td>@{index+1}</td>
+	@*if(session.get("region").equals("true")){*@<td>@ad.contactInfo.region.name</td>
+	@*if(session.get("city").equals("true")){*@<td>@ad.contactInfo.city.name</td>
+	@*if(session.get("company").equals("true")){*@<td>@ad.contactInfo.company</td>
+	@if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){<td>@ad.title</td>}
+	@*if(session.get("section").equals("true")){*@<td>@ad.animal.name</td>
+	@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>@ad.breed.name</td>}
+	@if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){<td>@Messages(ad.gender)</td>}
+	@if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){<td>@ad.birthDate</td>}
+	@if(session.get("ad.filter.quantity")!=null&&session.get("ad.filter.quantity").equals("true")){<td>@Messages(ad.quantity)</td>}
+	@if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){<td>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</td>}
+	@if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){<td>@ad.views</td>}
+	@if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){<td>@ad.shares</td>}
+	@*if(session.get("createDate").equals("true")){*@<td>@ad.publishedDate.format("dd/mm/yyyy")</td>
+	@if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){<td>@ad.updatedDate.format("dd/mm/yyyy")</td>}
+	@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>@ad.expirationDate.format("dd/mm/yyyy")</td>}
+	@if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){<td>@Messages(ad.status)</td>}
+	
+	<td><a class="delete" ad="@ad.id"><i class="fa fa-times"></i></a></td>
+</tr>
+}
+</tbody>
