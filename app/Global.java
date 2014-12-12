@@ -20,6 +20,7 @@ import models.user.SocialNetwork;
 import models.user.UserSetting;
 import play.Application;
 import play.GlobalSettings;
+import play.api.libs.Crypto;
 import play.libs.F.Promise;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
@@ -143,7 +144,7 @@ public class Global extends GlobalSettings {
 			AuthorisedUser user = new AuthorisedUser();
 			user.userName = "ТОО ҚОРА";
 			user.email = "admin@kora.kz";
-			user.password = "admin1234";
+			user.password = Crypto.encryptAES("admin1234");
 			user.status = "active";
 			user.roles = new ArrayList<SecurityRole>();
 			user.roles.add(SecurityRole.findByName("admin"));
