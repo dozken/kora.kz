@@ -105,12 +105,12 @@
           @for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex){
             	<div class="item @if(index==0){active}">
               	<!-- <img src="@img.content" style="width: 380px;heigh:390px; border-radius:8px"> -->
-              	<img src="@img.content" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
+              	<img src="@img.content" class="watermark" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
             	</div><!-- End Item -->
     			}
       }else{
         <div class="item active">
-            <img src='@routes.Assets.at("images/home/nophoto.png")' style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
+            <img src='@routes.Assets.at("images/home/nophoto.png")' class="watermark" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
           </div><!-- End Item -->
       }
 		</div><!-- End Carousel Inner -->
