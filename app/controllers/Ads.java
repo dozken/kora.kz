@@ -148,6 +148,7 @@ public class Ads extends Controller {
 				img.position = i + 1;
 				img.content = requestData.get(order[i]);
 				new Thread() {
+					@Override
 					public void run() {
 						img.save();
 					}
@@ -370,10 +371,6 @@ public class Ads extends Controller {
 	public static Result edit(Long id) {
 		return ok(editAd.render(Ad.find.byId(id)));
 	}
-
-	// public static Result search() {
-	// return ok(adSearch.render(Ad.find.all(),Section.find.byId(2L)));
-	// }
 
 	public static Result quick_search() {
 
@@ -850,9 +847,14 @@ public class Ads extends Controller {
 					+ " ELSE 1 END desc";
 		}
 
-		String a = "SELECT a.id from ads a \n" + " " + anim + b
-				+ " inner join contacts c on a.contact_info_id = c.id " + loc
-				+ r + "\n" + tag
+		String a = "SELECT a.id from ads a \n" + " "
+				+ anim
+				+ b
+				+ " inner join contacts c on a.contact_info_id = c.id "
+				+ loc
+				+ r
+				+ "\n"
+				+ tag
 				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
 				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
 				+ " and p.currency='USD' and p.price<=" + costEndD
@@ -863,9 +865,14 @@ public class Ads extends Controller {
 				+ ") " + pic + " order by " + sort + " \n"
 				+ " limit 30 offset " + (page * 30);
 
-		String a2 = "SELECT count(*) from ads a \n" + " " + anim + b
-				+ " inner join contacts c on a.contact_info_id = c.id " + loc
-				+ r + "\n" + tag
+		String a2 = "SELECT count(*) from ads a \n" + " "
+				+ anim
+				+ b
+				+ " inner join contacts c on a.contact_info_id = c.id "
+				+ loc
+				+ r
+				+ "\n"
+				+ tag
 				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
 				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
 				+ " and p.currency='USD' and p.price<=" + costEndD

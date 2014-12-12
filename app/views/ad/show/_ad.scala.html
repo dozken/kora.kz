@@ -2,7 +2,7 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
-	<li><h4><b>@ad.category.name.toUpperCase</b></h4></li>
+	<li><h4><b>@utils._adName(ad)</b></h4></li>
 	<li class="att">
   <h4>
 <div style="position: absolute;margin-top: -22px;padding-left: 10px;">  
@@ -79,7 +79,7 @@
 				<li class="birinwi">Контакты</li>
 				<li class="PFBSPLI-13">
                     <ul id="ss" class="nopaddingleft">
-                        <li id="phone_title">@utils._phone2(ad.contactInfo.phone.split(",")(0)) <a id="show_all">Показать телефоны</a></li>
+                        <li id="phone_title">@utils._phone2(ad.contactInfo.phone.split(",")(0)) <a id="show_all" style="cursor:pointer">Показать телефоны</a></li>
 
                         @for((tel,index)<-ad.contactInfo.phone.split(",").zipWithIndex){
 
@@ -230,7 +230,7 @@
     @for(likeAd <-models.ad.Ad.like(ad)){
     <div class="pohojii">      
       <a href="@routes.Ads.get(likeAd.id)">
-      <div class="pohojii_list_text">@likeAd.title, @likeAd.birthDate</div>
+      <div class="pohojii_list_text">@utils._adName(likeAd), @likeAd.birthDate</div>
       <div class="pohojii_list">
           <div class="pohojii_list_price">@Messages(likeAd.priceType.price.toString) @utils._currency(likeAd.priceType.currency)</div>
           @if(likeAd.images.size()>0){
