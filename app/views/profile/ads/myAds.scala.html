@@ -1,0 +1,120 @@
+@(ads:List[models.ad.Ad])
+@main("Мои Объявления") {
+<div class="container">
+  <div class="col-xs-3 menudiv">
+    @profile._menu()
+  </div>
+  <div class="col-xs-9 ">
+  	@profile._title("МОИ ОБЪЯВЛЕНИЯ"){
+  	<div class="col-xs-4 tptp"><select id="ad_filter" class="form-control selectdesign">
+      <option selected="selected" value="all">Все</option>
+	  <option value="active">На сайте</option>
+	  <option value="pending">В ожидании</option>
+	  <option value="moderating">На модерции</option>
+	  <option value="rejected">Отклоненные</option>
+	  <option value="archived">В архиве</option>
+	</select>
+	</div>
+  	}	
+	
+	 <div id="ad_list"> @_ad(ads)</div>
+  </div>
+</div>
+}
+
+<script>
+
+$(document).on("change","#ad_filter",function(){
+var str = $(this).val();
+	jsRoutes.controllers.Ads.filterAds(str).ajax({
+		success: function(data) {
+			$("#ad_list").html(data);
+			$(".switcher").bootstrapSwitch();
+		}
+		})
+})
+
+    $(document ).on("click",".ad_highlight",function(){
+
+
+        var ad_id = $(this ).attr("ad");
+        var that = this;
+         if(window.confirm("Данная операция стоит @models.Setting.find.where.eq("name","highlight").findUnique().price тг. Продолжить?")==true){
+        jsRoutes.controllers.Ads.highlight(ad_id).ajax({
+		success: function(data) {
+		if(data=="fine"){
+		$('div[ad="'+ad_id+'"]' ).addClass("highlighted");
+        $(that ).addClass("active");
+        $(that).prop("disabled",true);
+        $(that).html('<span class="icon-vydelit"></span> Выделено');
+        }else{alert("Недостаточно средств на счете");}
+		}
+		});
+		}
+        
+    })
+    
+    $(document ).on("click",".ad_prelong",function(){
+
+
+        var ad_id = $(this ).attr("ad");
+        var that = this;
+        if(window.confirm("Данная операция стоит @models.Setting.find.where.eq("name","prelong").findUnique().price тг. Продолжить?")==true){
+        jsRoutes.controllers.Ads.preLong(ad_id).ajax({
+		success: function(data) {
+		if(data=="fine"){
+        	$(that).prop("disabled",true);
+        	$(that).html('<span class="icon-time"></span> Продлино');
+        }else{alert("Недостаточно средств на счете");}
+		}
+		});
+		}
+        
+    })
+    
+     $(document ).on("click",".ad_delete",function(){
+     
+     if(window.confirm("Вы уверены?")==false){
+     return false;
+     }
+     
+     })
+     
+       $(document ).on("click",".ad_archive",function(){
+     
+     if(window.confirm("Вы уверены?")==false){
+     return false;
+     }
+     
+     })
+
+$.fn.bootstrapSwitch.Constructor = $.fn.bootstrapSwitch.defaults = {
+	    state: false,
+	    size: null,
+	    animate: true,
+	    disabled: false,
+	    readonly: false,
+	    indeterminate: false,
+	    onColor: "success",
+	    offColor: "danger",
+	    onText: "Вкл",
+	    offText: "Выкл",
+	    labelText: "&nbsp;",
+	    baseClass: "bootstrap-switch",
+	    wrapperClass: "wrapper",
+	    radioAllOff: false,
+	    onInit: function() {},
+	    onSwitchChange: function(e,data) 
+	    {
+	    	var ad_id = $(this).attr("ad");
+	    	var str = (data)?"on":"off";
+	    	
+	    	jsRoutes.controllers.Ads.autoPreLong(ad_id,str).ajax();
+	    }
+};
+
+$(".switcher").bootstrapSwitch();
+
+ 
+
+</script>
