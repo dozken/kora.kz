@@ -850,10 +850,10 @@ public class Ads extends Controller {
 					+ " ELSE 1 END desc";
 		}
 
-		String a = "SELECT a.id from ad a \n" + " " + anim + b
-				+ " inner join contact c on a.contact_info_id = c.id " + loc
+		String a = "SELECT a.id from ads a \n" + " " + anim + b
+				+ " inner join contacts c on a.contact_info_id = c.id " + loc
 				+ r + "\n" + tag
-				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
+				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
 				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
 				+ " and p.currency='USD' and p.price<=" + costEndD
 				+ ") or  (p.price>=" + costStartTg
@@ -863,10 +863,10 @@ public class Ads extends Controller {
 				+ ") " + pic + " order by " + sort + " \n"
 				+ " limit 30 offset " + (page * 30);
 
-		String a2 = "SELECT count(*) from ad a \n" + " " + anim + b
-				+ " inner join contact c on a.contact_info_id = c.id " + loc
+		String a2 = "SELECT count(*) from ads a \n" + " " + anim + b
+				+ " inner join contacts c on a.contact_info_id = c.id " + loc
 				+ r + "\n" + tag
-				+ " inner join price p on p.id=a.price_type_id and ((p.price>="
+				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
 				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
 				+ " and p.currency='USD' and p.price<=" + costEndD
 				+ ") or  (p.price>=" + costStartTg
