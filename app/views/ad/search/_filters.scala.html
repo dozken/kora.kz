@@ -23,14 +23,17 @@
   <div id="category_div">
     <select id="category" name="category" class="form-control sd" style="width: 170px;">
 	    <option selected disabled hidden> Выберите категорию</option>
-	    @for(category<-section.categories if(category.parentCategory==null)){
-	    	@if(category.isParent){
-	    	<optgroup label="@category.name">    	
-	    	@for(subcategory <- category.findSubCategories){
-	    	<option value="@subcategory.id">@subcategory.name</option>}
-	    	</optgroup>
-	    	}else{
-	    	<option value="@category.id">@category.name</option>}		
+	    @if(section.categories!=null){
+		    @for(category<-section.categories if(category.parentCategory==null)){
+		    	@if(category.isParent){
+		    		<option value="@category.id" class="optionGroup">@category.name</option>
+		    		@for(subcategory <- category.findSubCategories){
+		    		<option value="@subcategory.id" class="optionChild">— @subcategory.name</option>
+		    		}		    	
+		    	}else{
+		    	<option value="@category.id">@category.name</option>
+		    	}		
+		    }
 	    }
     </select>
   </div>
