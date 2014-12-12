@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import models.Location;
 import models.ad.Ad;
@@ -20,6 +21,7 @@ import be.objectify.deadbolt.core.models.Role;
 import be.objectify.deadbolt.core.models.Subject;
 
 @Entity
+@Table(name = "users")
 public class AuthorisedUser extends Model implements Subject {
 
 	public static final Model.Finder<Long, AuthorisedUser> find = new Model.Finder<Long, AuthorisedUser>(
@@ -84,13 +86,14 @@ public class AuthorisedUser extends Model implements Subject {
 	public static AuthorisedUser findByEmail(String email) {
 		return find.where().eq("email", email).findUnique();
 	}
-	
-	public static String checkMail(AuthorisedUser user, String mail){
-		
+
+	public static String checkMail(AuthorisedUser user, String mail) {
+
 		if (user.email.equals(mail)) {
 			return mail;
 		} else {
-			int row = AuthorisedUser.find.where().eq("email", mail).findRowCount();
+			int row = AuthorisedUser.find.where().eq("email", mail)
+					.findRowCount();
 
 			if (row > 0) {
 				return "exists";
@@ -100,12 +103,14 @@ public class AuthorisedUser extends Model implements Subject {
 	}
 
 	public static List<AuthorisedUser> getUsers() {
-		List<AuthorisedUser> users = find.where().in("roles", SecurityRole.findByName("user")).ne("id",1L).findList();
+		List<AuthorisedUser> users = find.where()
+				.in("roles", SecurityRole.findByName("user")).ne("id", 1L)
+				.findList();
 
-		//if(users!=null)
-		//for(AuthorisedUser user : users){
-			//if(user.roles.size()>1)users.remove(user);
-		//}
+		// if(users!=null)
+		// for(AuthorisedUser user : users){
+		// if(user.roles.size()>1)users.remove(user);
+		// }
 		return users;
 	}
 

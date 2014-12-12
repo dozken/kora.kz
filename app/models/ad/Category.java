@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "categories")
 public class Category extends Model {
 
 	/**
@@ -36,4 +38,13 @@ public class Category extends Model {
 	@OneToMany
 	public List<Ad> ads;
 
+	public List<Category> findSubCategories() {
+		return find.where().eq("parentCategory", this).orderBy("name")
+				.findList();
+	}
+
+	public boolean isParent() {
+		return (this.subCategories != null && this.subCategories.size() > 0) ? true
+				: false;
+	}
 }

@@ -53,14 +53,20 @@ $(document).ajaxSuccess(function() {
 
 //City crud
 $(document).on("change", ".section.select", function(e) {
-    var val = $(this).val();
-    jsRoutes.controllers.Filters.getCategorys(val).ajax({
+    var id = $(this).val();
+    jsRoutes.controllers.Filters.getCategories(id).ajax({
         success: function(data) {
             $("#categoryList").hide();
             $("#categoryList").html(data);
             $("#categoryList").slideDown();
-            $("#categorys").slideDown();
+            $(".categories").slideDown();
         },
+    });
+    
+    jsRoutes.controllers.Filters.getParentCategories(id).ajax({
+        success: function(data) {
+            $("#category-list").html(data);
+        }
     });
 });
 
@@ -68,8 +74,15 @@ $(document).on("click", ".category.add", function(e) {
     e.preventDefault();
     jsRoutes.controllers.Filters.addCategory().ajax({
         data: $("#categoryForm").serialize(),
-        success: function(data) {
+        success: function(data) {        	
             $("#categoryList").html(data);
+            
+            var id = $("#section").val();
+            jsRoutes.controllers.Filters.getParentCategories(id).ajax({
+                success: function(data) {
+                    $("#category-list").html(data);
+                }
+            });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.responseText);

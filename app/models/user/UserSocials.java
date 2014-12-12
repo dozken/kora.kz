@@ -14,7 +14,7 @@ import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
 @Entity
-@Table(name = "socials_user")
+@Table(name = "user_socials")
 public class UserSocials extends Model {
 
 	private static final long serialVersionUID = 1L;

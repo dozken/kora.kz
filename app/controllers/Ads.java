@@ -12,11 +12,11 @@ import models.Setting;
 import models.ad.Ad;
 import models.ad.AdImage;
 import models.ad.AdSetting;
-import models.ad.Section;
 import models.ad.Category;
 import models.ad.Comment;
 import models.ad.Price;
 import models.ad.PrivateMessage;
+import models.ad.Section;
 import models.ad.Tag;
 import models.contact.City;
 import models.contact.ContactInfo;
@@ -61,15 +61,18 @@ public class Ads extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = new Ad();
-		ad.section = Section.find.byId(Long.parseLong(requestData.get("section")));
-		ad.category = Category.find.byId(Long.parseLong(requestData.get("category")));
+		ad.section = Section.find.byId(Long.parseLong(requestData
+				.get("section")));
+		ad.category = Category.find.byId(Long.parseLong(requestData
+				.get("category")));
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
 				.get("city")));
 		contactInfo.region = Region.find.byId(Long.parseLong(requestData
 				.get("region")));
-		contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone")) + ContactInfo.splitPhone(requestData.get("additional_phone"));
+		contactInfo.phone = ContactInfo.phoneCorrect(requestData.get("phone"))
+				+ ContactInfo.splitPhone(requestData.get("additional_phone"));
 		contactInfo.company = requestData.get("company_name");
 		contactInfo.email = requestData.get("email");
 
@@ -224,14 +227,14 @@ public class Ads extends Controller {
 				.order("publishedDate desc").findList()));
 
 	}
-	
+
 	public static Result remove(Long id) {
-		String a = "delete from authorised_user_ad where ad_id="+id; 
-		SqlUpdate  update = Ebean.createSqlUpdate(a);
+		String a = "delete from authorised_user_ad where ad_id=" + id;
+		SqlUpdate update = Ebean.createSqlUpdate(a);
 		Ebean.execute(update);
 		Ad ad = Ad.find.byId(id);
 		ad.delete();
-		
+
 		return ok(myAds.render(Ad.find.where()
 				.eq("contactInfo.email", session("connected"))
 				.order("publishedDate desc").findList()));
@@ -253,10 +256,11 @@ public class Ads extends Controller {
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = Ad.find.byId(id);
-		ad.section = Section.find.byId(Long.parseLong(requestData.get("section")));
+		ad.section = Section.find.byId(Long.parseLong(requestData
+				.get("section")));
 		if (ad.section.id != 5) {
-			ad.category = Category.find
-					.byId(Long.parseLong(requestData.get("category")));
+			ad.category = Category.find.byId(Long.parseLong(requestData
+					.get("category")));
 		}
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
 
@@ -265,7 +269,8 @@ public class Ads extends Controller {
 		ad.contactInfo.region = Region.find.byId(Long.parseLong(requestData
 				.get("region")));
 		ad.contactInfo.phone = ContactInfo.phoneCorrect(requestData
-				.get("phone")) + ContactInfo.splitPhone(requestData.get("additional_phone"));
+				.get("phone"))
+				+ ContactInfo.splitPhone(requestData.get("additional_phone"));
 		ad.contactInfo.company = requestData.get("company_name");
 		ad.contactInfo.email = requestData.get("email");
 
@@ -346,7 +351,7 @@ public class Ads extends Controller {
 		return ok();
 	}
 
-	public static Result getCategorys(Long id) {
+	public static Result getCategories(Long id) {
 		return ok(_category.render(Section.find.byId(id)));
 	}
 
@@ -433,7 +438,8 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Лошадь").findUnique())
 				.findList();
-		Section section = Section.find.where().eq("name", "Лошадь").findUnique();
+		Section section = Section.find.where().eq("name", "Лошадь")
+				.findUnique();
 		return ok(adSearch.render(l, section));
 	}
 
@@ -444,7 +450,8 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Верблюд").findUnique())
 				.findList();
-		Section section = Section.find.where().eq("name", "Верблюд").findUnique();
+		Section section = Section.find.where().eq("name", "Верблюд")
+				.findUnique();
 		return ok(adSearch.render(l, section));
 	}
 
@@ -455,7 +462,8 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Корова").findUnique())
 				.findList();
-		Section section = Section.find.where().eq("name", "Корова").findUnique();
+		Section section = Section.find.where().eq("name", "Корова")
+				.findUnique();
 		return ok(adSearch.render(l, section));
 	}
 
@@ -478,7 +486,8 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Другие").findUnique())
 				.findList();
-		Section section = Section.find.where().eq("name", "Другие").findUnique();
+		Section section = Section.find.where().eq("name", "Другие")
+				.findUnique();
 		return ok(adSearch.render(l, section));
 	}
 
@@ -539,12 +548,13 @@ public class Ads extends Controller {
 	public static int favoriteSizeInt() {
 		if (session("connected") != null) {
 			List<Ad> list = AuthorisedUser.findByEmail(session("connected")).favorites;
-			
+
 			int i = 0;
-			for(Ad ad : list){
-				if(ad.status.equals("active")) i++;
+			for (Ad ad : list) {
+				if (ad.status.equals("active"))
+					i++;
 			}
-			
+
 			return i;
 
 		} else {
@@ -556,7 +566,8 @@ public class Ads extends Controller {
 			List<Ad> list = new ArrayList<Ad>();
 			for (String ad : ads) {
 				if (!ad.equals("") && ad != null)
-					list.add(Ad.find.where().eq("id",Long.parseLong(ad)).eq("status", "active").findUnique());
+					list.add(Ad.find.where().eq("id", Long.parseLong(ad))
+							.eq("status", "active").findUnique());
 
 			}
 			return list.size();

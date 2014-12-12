@@ -26,7 +26,7 @@
         @if(ad.section.id!=5) {
             <select id="category" name="category" class="form-control sd" validation="not_null">
                 <option selected disabled hidden> Выберите тип</option>
-                @for(category <- ad.section.getCategorys) {
+                @for(category <- ad.section.getCategories) {
 
                     <option value="@category.id" @if(category == ad.category) {selected}>@category.name </option>
 
@@ -196,7 +196,7 @@
 
       <select id="city"  name="city" class="form-control sd" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
-          @for(city<-ad.contactInfo.region.city){
+          @for(city<-ad.contactInfo.region.cities){
 
               <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(ad.contactInfo.city==city){selected="selected" }>@city.name</option>
 

@@ -22,10 +22,16 @@
   <label class="control-label" for="selectbasic1">Категория:</label>
   <div id="category_div">
     <select id="category" name="category" class="form-control sd" style="width: 170px;">
-        <option value="all">Все категории</option>
-        @for(category <-section.getCategorys) {
-            <option value="@category.id">@category.name</option>
-        }
+	    <option selected disabled hidden> Выберите категорию</option>
+	    @for(category<-section.categories if(category.parentCategory==null)){
+	    	@if(category.isParent){
+	    	<optgroup label="@category.name">    	
+	    	@for(subcategory <- category.findSubCategories){
+	    	<option value="@subcategory.id">@subcategory.name</option>}
+	    	</optgroup>
+	    	}else{
+	    	<option value="@category.id">@category.name</option>}		
+	    }
     </select>
   </div>
 </div>

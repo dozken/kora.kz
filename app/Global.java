@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import models.Setting;
-import models.ad.Section;
 import models.ad.Category;
 import models.ad.Price;
+import models.ad.Section;
 import models.admin.AdminSetting;
 import models.contact.City;
 import models.contact.Region;
@@ -139,7 +139,7 @@ public class Global extends GlobalSettings {
 
 		}
 
-		if (AuthorisedUser.findByEmail("admin@kora.kz")== null) {
+		if (AuthorisedUser.findByEmail("admin@kora.kz") == null) {
 			AuthorisedUser user = new AuthorisedUser();
 			user.userName = "ТОО ҚОРА";
 			user.email = "admin@kora.kz";

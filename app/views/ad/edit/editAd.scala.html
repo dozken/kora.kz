@@ -146,7 +146,7 @@ $(this).parent().remove();
     $("#quanHide" ).show();
     $("#genderHide" ).show();
     $("#ageHide" ).show();
-    jsRoutes.controllers.Ads.getCategorys(id).ajax({
+    jsRoutes.controllers.Ads.getCategories(id).ajax({
     success: function(data) {
 
     $("#category_list" ).html(data);

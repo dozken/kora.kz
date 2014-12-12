@@ -2,8 +2,8 @@ package controllers;
 
 import static play.data.Form.form;
 import models.Location;
-import models.ad.Section;
 import models.ad.Category;
+import models.ad.Section;
 import models.contact.City;
 import models.contact.Region;
 import play.data.DynamicForm;
@@ -11,6 +11,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.filters.category._category;
+import views.html.admin.filters.category._parentCategory;
 import views.html.admin.filters.city._city;
 import views.html.admin.filters.city._parentCity;
 import views.html.admin.filters.region._region;
@@ -93,8 +94,12 @@ public class Filters extends Controller {
 		}
 	}
 
-	public static Result getCategorys(Long id) {
-		return ok(_category.render(models.ad.Section.find.byId(id)));
+	public static Result getCategories(Long id) {
+		return ok(_category.render(Section.find.byId(id)));
+	}
+
+	public static Result getParentCategories(Long id) {
+		return ok(_parentCategory.render(Section.find.byId(id)));
 	}
 
 	public static Result addCategory() {

@@ -8,12 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import models.Location;
 import models.user.Profile;
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "cities")
 public class City extends Model {
 
 	/**

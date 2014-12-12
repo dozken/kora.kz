@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import play.db.ebean.Model;
 
 @Entity
+@Table(name = "sections")
 public class Section extends Model {
 
 	/**
@@ -28,9 +30,10 @@ public class Section extends Model {
 	public List<Ad> ads;
 
 	@OneToMany
-	public List<Category> categorys;
+	public List<Category> categories;
 
-	public List<Category> getCategorys() {
-		return Category.find.where().eq("section", this).orderBy("name").findList();
+	public List<Category> getCategories() {
+		return Category.find.where().eq("section", this).orderBy("name")
+				.findList();
 	}
 }
