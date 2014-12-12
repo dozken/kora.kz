@@ -129,15 +129,16 @@ public class Application extends Controller {
 		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
 				.get("email"));
 		System.out.println(user.password);
-		if (user != null && user.password.equals(Crypto.encryptAES(requestData.get("password")))
-				&& user.status.equals("active")) {
+		if (user != null
+				&& user.password.equals(Crypto.encryptAES(requestData
+						.get("password"))) && user.status.equals("active")) {
 			session("connected", user.email);
 			flash("thank you");
 			changeLang("ru");
 			return redirect(request().getHeader("referer"));
 		} else if (user != null
-				&& user.password.equals(Crypto.encryptAES(requestData.get("password")))
-				&& !user.status.equals("active")) {
+				&& user.password.equals(Crypto.encryptAES(requestData
+						.get("password"))) && !user.status.equals("active")) {
 			return ok("inactive");
 
 		} else {
