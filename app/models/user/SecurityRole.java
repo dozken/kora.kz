@@ -41,6 +41,7 @@ public class SecurityRole extends Model implements Role {
 	public static final Model.Finder<Long, SecurityRole> find = new Model.Finder<Long, SecurityRole>(
 			Long.class, SecurityRole.class);
 
+	@Override
 	public String getName() {
 		return name;
 	}

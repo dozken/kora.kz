@@ -7,6 +7,7 @@ public class Emailing {
 
 	public static void send(String subject, String recipients[], String body) {
 		new Thread() {
+			@Override
 			public void run() {
 				MailerAPI mail = play.Play.application()
 						.plugin(MailerPlugin.class).email();
@@ -26,6 +27,7 @@ public class Emailing {
 
 	public static void send(String subject, String recipient, String body) {
 		new Thread() {
+			@Override
 			public void run() {
 				MailerAPI mail = play.Play.application()
 						.plugin(MailerPlugin.class).email();

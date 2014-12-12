@@ -184,6 +184,7 @@ public class Global extends GlobalSettings {
 
 	}
 
+	@Override
 	public Promise<Result> onHandlerNotFound(RequestHeader request) {
 		return Promise.<Result> pure(notFound(views.html.notFoundPage
 				.render(request.uri())));

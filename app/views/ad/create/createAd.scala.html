@@ -46,6 +46,14 @@ clear: both;
 </script>
 
 <script>
+var quan = $("#quanHide").html();
+var gender = $("#genderHide").html();
+var age = $("#ageHide").html();		
+var title = $("#titleHide").html();
+	$(document).ready(function(){
+		
+        $("#titleHide").empty();
+	});
     $(document).on("change", "[name='payment_type']", function() {
         if ($(this).val() == "normal") {
             $("#money_input").attr("validation", "number");
@@ -120,9 +128,20 @@ clear: both;
 
     $(document).on("change", "#section", function() {
         var id = Number($(this).val());
-        $("#quanHide").show();
-        $("#genderHide").show();
-        $("#ageHide").show();
+        console.log(id);
+        
+        if(id==5){
+        	$("#quanHide").empty();
+            $("#genderHide").empty();
+            $("#ageHide").empty();	
+            $("#titleHide").html(title);            
+        }else{
+        	$("#titleHide").empty();
+        	$("#quanHide").html(quan);
+            $("#genderHide").html(gender);
+            $("#ageHide").html(age);
+        }
+        
         jsRoutes.controllers.Ads.getCategories(id).ajax({
             success: function(data) {
                 $("#category_list").html(data);

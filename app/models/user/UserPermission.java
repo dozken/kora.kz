@@ -43,6 +43,7 @@ public class UserPermission extends Model implements Permission {
 	public static final Model.Finder<Long, UserPermission> find = new Model.Finder<Long, UserPermission>(
 			Long.class, UserPermission.class);
 
+	@Override
 	public String getValue() {
 		return value;
 	}

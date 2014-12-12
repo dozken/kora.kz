@@ -17,6 +17,7 @@ public class WS {
 	public static WebSocket<JsonNode> socket = new WebSocket<JsonNode>() {
 
 		// called when the websocket is established
+		@Override
 		public void onReady(WebSocket.In<JsonNode> in,
 				WebSocket.Out<JsonNode> out) {
 
@@ -24,12 +25,14 @@ public class WS {
 
 			// When the message come.
 			in.onMessage(new Callback<JsonNode>() {
+				@Override
 				public void invoke(JsonNode event) {
 				}
 			});
 
 			// When the socket is closed.
 			in.onClose(new Callback0() {
+				@Override
 				public void invoke() {
 					ObjectNode event = Json.newObject();
 					event.put("connection", "disconnected");

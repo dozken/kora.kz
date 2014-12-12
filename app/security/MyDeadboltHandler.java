@@ -27,6 +27,7 @@ import be.objectify.deadbolt.java.AbstractDeadboltHandler;
  * @author Steve Chaloner (steve@objectify.be)
  */
 public class MyDeadboltHandler extends AbstractDeadboltHandler {
+	@Override
 	public F.Promise<Result> beforeAuthCheck(Http.Context context) {
 		// returning null means that everything is OK. Return a real result if
 		// you want a redirect to a login page or
@@ -34,6 +35,7 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler {
 		return F.Promise.pure(null);
 	}
 
+	@Override
 	public Subject getSubject(Http.Context context) {
 		// in a real application, the user name would probably be in the session
 		// following a login process

@@ -29,6 +29,10 @@ clear: both;
 }
 </style>
 <script>
+var quan = $("#quanHide").html();
+var gender = $("#genderHide").html();
+var age = $("#ageHide").html();		
+var title = $("#titleHide").html();
 
     @if(ad.contactInfo.location.lat!=null){
 
@@ -40,9 +44,11 @@ clear: both;
     }
 
     @if(ad.section.id==5){
-        $("#quanHide" ).hide();
-        $("#genderHide" ).hide();
-        $("#ageHide" ).hide();
+        $("#quanHide" ).empty();
+        $("#genderHide" ).empty();
+        $("#ageHide" ).empty();
+    }else{
+    	$("#titleHide").empty();
     }
 
 $("#tel1").mask("+7(999) 999-9999");
@@ -127,33 +133,43 @@ $ (document ).on("click",".delete",function(){
 
 $(this).parent().remove();
 })
-    $(document ).on("change","#section",function(){
+
+$(document ).on("change","#section",function(){
 
     var id = Number($(this ).val());
 
-    if(id == 5){
-    $("#category_list" ).hide();
-    $("#quanHide" ).hide();
-    $("#genderHide" ).hide();
-    $("#ageHide" ).hide();
-    $('#category_list').children('select').each(function () {
-
-    $(this ).attr("validation","");
-
-    });
-    }else {
-    $("#category_list" ).show();
-    $("#quanHide" ).show();
-    $("#genderHide" ).show();
-    $("#ageHide" ).show();
-    jsRoutes.controllers.Ads.getCategories(id).ajax({
-    success: function(data) {
-
-    $("#category_list" ).html(data);
-}
-});
+    if(id==5){
+    	$("#quanHide").empty();
+        $("#genderHide").empty();
+        $("#ageHide").empty();	
+        $("#titleHide").html(title);            
+    }else{
+    	$("#titleHide").empty();
+    	$("#quanHide").html(quan);
+        $("#genderHide").html(gender);
+        $("#ageHide").html(age);
     }
-    })
+    
+    if(id == 5){
+    	$("#category_list" ).hide();
+    	$("#quanHide" ).hide();
+    	$("#genderHide" ).hide();
+    	$("#ageHide" ).hide();
+    	$('#category_list').children('select').each(function () {
+    		$(this ).attr("validation","");
+    	});
+    }else {
+    	$("#category_list" ).show();
+    	$("#quanHide" ).show();
+    	$("#genderHide" ).show();
+    	$("#ageHide" ).show();
+    	jsRoutes.controllers.Ads.getCategories(id).ajax({
+    		success: function(data) {
+			    $("#category_list" ).html(data);
+			}
+		});
+    }
+});
     $(".mmm").mask("+7(999) 999-9999");
     $(document).on("click", "#add_phone_additional", function() {
         $("#additional_phones").append('<div class="input-group"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><button type="button" class="btn btn-primary btn-xs del_phone">Удалить</button></span></div>');

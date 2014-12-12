@@ -33,7 +33,6 @@ public class Image extends Model {
 
 	@SuppressWarnings("static-access")
 	public static String byteToBase64(byte[] data) {
-		Base64 base64 = new Base64();
-		return base64.encodeBase64String(data);
+		return Base64.encodeBase64String(data);
 	}
 }
