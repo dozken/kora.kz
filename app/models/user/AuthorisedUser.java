@@ -102,12 +102,11 @@ public class AuthorisedUser extends Model implements Subject {
 		return mail;
 	}
 
-	public static List<AuthorisedUser> getUsers(int page,String sort) {
+	public static List<AuthorisedUser> getUsers(int page, String sort) {
 		List<AuthorisedUser> users = find.where()
 				.in("roles", SecurityRole.findByName("user")).ne("id", 1L)
-				.order("userName " + sort)
-				.findPagingList(20)
-				.getPage(page).getList();
+				.order("userName " + sort).findPagingList(20).getPage(page)
+				.getList();
 
 		// if(users!=null)
 		// for(AuthorisedUser user : users){
@@ -116,9 +115,10 @@ public class AuthorisedUser extends Model implements Subject {
 		return users;
 	}
 
-	public static int getUsersCount(){
+	public static int getUsersCount() {
 
-		return find.where().in("roles", SecurityRole.findByName("user")).ne("id", 1L).findRowCount();
+		return find.where().in("roles", SecurityRole.findByName("user"))
+				.ne("id", 1L).findRowCount();
 	}
 
 	public static List<AuthorisedUser> getModerators() {

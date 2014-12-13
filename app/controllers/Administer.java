@@ -53,8 +53,9 @@ public class Administer extends Controller {
 		return ok(adminAdvertisements.render());
 	}
 
-	public static Result users(int page,String sort) {
-		return ok(adminUsers.render(AuthorisedUser.getUsers(page,sort),page,sort));
+	public static Result users(int page, String sort) {
+		return ok(adminUsers.render(AuthorisedUser.getUsers(page, sort), page,
+				sort));
 	}
 
 	public static Result moderators() {
