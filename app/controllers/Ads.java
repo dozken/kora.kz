@@ -936,6 +936,9 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
+	public static Result getRC(Long id){
+		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
+	}
 	public static Result sitemap(Long cid, Long sid, Long cat) {
 
 		Section section = Section.find.byId(sid);
