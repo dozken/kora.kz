@@ -1,4 +1,4 @@
-@(section:models.ad.Section)
+@(section:models.ad.Section,cat:models.ad.Category,region:models.contact.Region,city:models.contact.City)
 <div class="col-xs-12 nopaddingleft PFBSPLI-13">
 <form id="search_form" class="form-inline">
     <input id="section" type="hidden" name="section" value="@section.id" showName="@section.name">
@@ -9,8 +9,8 @@
   <div>
     <select id="region" name="region" class="form-control sd" style="width: 170px;">
       <option value="all">Во всех регионах</option>
-      @for(region <-models.contact.Region.find.all()) {
-          <option value="@region.id">@region.name</option>
+      @for(reg <-models.contact.Region.find.all()) {
+          <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
       }
 
     </select>
@@ -28,10 +28,10 @@
 		    	@if(category.isParent){
 		    		<option value="@category.id" class="optionGroup">@category.name</option>
 		    		@for(subcategory <- category.findSubCategories){
-		    		<option value="@subcategory.id" class="optionChild">— @subcategory.name</option>
+		    		<option value="@subcategory.id" class="optionChild" @if(cat==subcategory){selected}>— @subcategory.name</option>
 		    		}		    	
 		    	}else{
-		    	<option value="@category.id">@category.name</option>
+		    	<option value="@category.id" @if(cat==category){selected}>@category.name</option>
 		    	}		
 		    }
 	    }

@@ -1,6 +1,7 @@
-@for((user,index)<-models.user.AuthorisedUser.getUsers.zipWithIndex ){
+@(users:List[models.user.AuthorisedUser])
+@for(user<-users ){
 <tr>
-	<td>@{index+1}</td>
+
 	<td>@user.userName</td>
 	<td>@if(user.profile!=null&&user.profile.address!=null){@user.profile.address}</td>
 	<td>@if(user.profile!=null&&user.profile.region!=null){@user.profile.region.name}</td>
