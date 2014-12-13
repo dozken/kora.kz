@@ -29,7 +29,7 @@ import be.objectify.deadbolt.core.models.Role;
 @Table(name = "roles")
 public class SecurityRole extends Model implements Role {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

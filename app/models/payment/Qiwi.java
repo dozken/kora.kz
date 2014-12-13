@@ -15,7 +15,7 @@ import play.db.ebean.Model;
 public class Qiwi extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -39,10 +39,11 @@ public class Qiwi extends Model {
 		// TODO Auto-generated method stub
 
 		if (Qiwi.find.where().eq("txn_id", txn_id).findRowCount() == 0
-				&& Profile.find.where().eq("phone", account).findRowCount() == 1)
+				&& Profile.find.where().eq("phone", account).findRowCount() == 1) {
 			return 0;
-		else
+		} else {
 			return 1;
+		}
 	}
 
 	public static Integer pay(String remoteIP, Integer txn_id, String txn_date,
@@ -69,7 +70,8 @@ public class Qiwi extends Model {
 			u.update();
 
 			return qiwi.prv_txn;
-		} else
+		} else {
 			return -1;
+		}
 	}
 }

@@ -15,7 +15,7 @@ import play.db.ebean.Model;
 public class Region extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -22,7 +22,7 @@ import play.db.ebean.Model;
 public class Ad extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -78,8 +78,8 @@ public class Ad extends Model {
 	@Version
 	public Date updatedDate = new Date();
 
-	public Date expirationDate = new Date(new Date().getTime()
-			+ (1000 * 60 * 60 * 24 * 7));
+	public Date expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60
+			* 24 * 7);
 
 	@OneToMany(cascade = CascadeType.ALL)
 	public List<PrivateMessage> messages = new ArrayList<PrivateMessage>();
@@ -104,10 +104,12 @@ public class Ad extends Model {
 		Date today = new Date();
 		long res = d.getTime() - today.getTime();
 		Long days = res / (24 * 60 * 60 * 1000) + 1;
-		if (days == 1)
+		if (days == 1) {
 			return days.toString() + " день";
-		if (days <= 0)
+		}
+		if (days <= 0) {
 			return "update expirity day or archive it method";
+		}
 		return days.toString() + " дней";
 	}
 

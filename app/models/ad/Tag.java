@@ -12,7 +12,7 @@ import play.db.ebean.Model;
 public class Tag extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 
 	private static final long serialVersionUID = 1L;

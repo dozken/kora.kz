@@ -14,7 +14,7 @@ import play.db.ebean.Model;
 public class Price extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

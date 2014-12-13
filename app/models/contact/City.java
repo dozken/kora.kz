@@ -19,7 +19,7 @@ import play.db.ebean.Model;
 public class City extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class City extends Model {
 	}
 
 	public boolean isParent() {
-		return (this.subCities != null && this.subCities.size() > 0) ? true
+		return this.subCities != null && this.subCities.size() > 0 ? true
 				: false;
 	}
 

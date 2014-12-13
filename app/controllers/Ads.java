@@ -78,9 +78,10 @@ public class Ads extends Controller {
 
 		String[] loc;
 		String coords = requestData.get("location");
-		if (requestData.get("location").startsWith("("))
+		if (requestData.get("location").startsWith("(")) {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
+		}
 		loc = coords.split(",");
 		Location location = new Location();
 		if (loc.length == 2) {
@@ -185,7 +186,7 @@ public class Ads extends Controller {
 			ad.update();
 			Payment p = new Payment();
 			p.paymentType = "substract";
-			p.amount = (-1) * cost;
+			p.amount = -1 * cost;
 
 			u.payments.add(p);
 			u.profile.myMonney -= cost;
@@ -208,7 +209,7 @@ public class Ads extends Controller {
 			ad.update();
 			Payment p = new Payment();
 			p.paymentType = "substract";
-			p.amount = (-1) * cost;
+			p.amount = -1 * cost;
 
 			u.payments.add(p);
 			u.profile.myMonney -= cost;
@@ -277,9 +278,10 @@ public class Ads extends Controller {
 
 		String[] loc;
 		String coords = requestData.get("location");
-		if (requestData.get("location").startsWith("("))
+		if (requestData.get("location").startsWith("(")) {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
+		}
 		loc = coords.split(",");
 		Location location = new Location();
 		if (loc.length == 2) {
@@ -505,15 +507,17 @@ public class Ads extends Controller {
 
 		} else {
 
-			if (request().cookie("userAdsKora") == null)
+			if (request().cookie("userAdsKora") == null) {
 				return ok(adSearch.render(null, Section.find.byId(1L), null,
 						null, null));
+			}
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 			List<Ad> list = new ArrayList<Ad>();
 			for (String ad : ads) {
-				if (!ad.equals("") && ad != null)
+				if (!ad.equals("") && ad != null) {
 					list.add(Ad.find.byId(Long.parseLong(ad)));
+				}
 
 			}
 			return ok(adSearch.render(list, Section.find.byId(1L), null, null,
@@ -530,14 +534,16 @@ public class Ads extends Controller {
 
 		} else {
 
-			if (request().cookie("userAdsKora") == null)
+			if (request().cookie("userAdsKora") == null) {
 				return ok("");
+			}
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 			List<Ad> list = new ArrayList<Ad>();
 			for (String ad : ads) {
-				if (!ad.equals("") && ad != null)
+				if (!ad.equals("") && ad != null) {
 					list.add(Ad.find.byId(Long.parseLong(ad)));
+				}
 
 			}
 			return ok("" + list.size());
@@ -550,23 +556,26 @@ public class Ads extends Controller {
 
 			int i = 0;
 			for (Ad ad : list) {
-				if (ad.status.equals("active"))
+				if (ad.status.equals("active")) {
 					i++;
+				}
 			}
 
 			return i;
 
 		} else {
 
-			if (request().cookie("userAdsKora") == null)
+			if (request().cookie("userAdsKora") == null) {
 				return 0;
+			}
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 			List<Ad> list = new ArrayList<Ad>();
 			for (String ad : ads) {
-				if (!ad.equals("") && ad != null)
+				if (!ad.equals("") && ad != null) {
 					list.add(Ad.find.where().eq("id", Long.parseLong(ad))
 							.eq("status", "active").findUnique());
+				}
 
 			}
 			return list.size();
@@ -638,24 +647,27 @@ public class Ads extends Controller {
 					if (!message.status.equals("recipent-deleted")) {
 						message.status = "author-deleted";
 						message.update();
-					} else
+					} else {
 						message.delete();
+					}
 				} else {
 					if (!message.status.equals("author-deleted")) {
 						message.status = "recipent-deleted";
 						message.update();
-					} else
+					} else {
 						message.delete();
+					}
 				}
 			}
 
 		}
 		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
-		if (type.equals("send"))
+		if (type.equals("send")) {
 			return ok(views.html.profile.messages._message
 					.render(PrivateMessage.find.where().eq("author_id", u.id)
 							.ne("status", "author-deleted")
 							.order("send_date desc").findList()));
+		}
 
 		return ok(views.html.profile.messages._message
 				.render(PrivateMessage.find.where().eq("recipent_id", u.id)
@@ -713,7 +725,7 @@ public class Ads extends Controller {
 				ids = b;
 			}
 			response().discardCookie("userAdsKora");
-			response().setCookie("userAdsKora", ids, (86400 * 7));
+			response().setCookie("userAdsKora", ids, 86400 * 7);
 
 		}
 
@@ -732,14 +744,16 @@ public class Ads extends Controller {
 			return false;
 		} else {
 
-			if (request().cookie("userAdsKora") == null)
+			if (request().cookie("userAdsKora") == null) {
 				return false;
+			}
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 
 			for (String ad : ads) {
-				if (ad.equals(id.toString()))
+				if (ad.equals(id.toString())) {
 					return true;
+				}
 
 			}
 			return false;
@@ -782,35 +796,47 @@ public class Ads extends Controller {
 		String b = "", loc = "", r = "", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
-		if (!requestData.get("section").equals("0"))
+		if (!requestData.get("section").equals("0")) {
 			anim = "inner join section ani on a.section_id=ani.id and ani.id="
 					+ requestData.get("section");
+		}
 
-		if (!requestData.get("category").equals("all"))
+		if (!requestData.get("category").equals("all")) {
 			b = "inner join category b on a.category_id=b.id and b.id="
 					+ requestData.get("category");
-		if (!requestData.get("region").equals("all"))
+		}
+		if (!requestData.get("region").equals("all")) {
 			r = "inner join region r on r.id = c.region_id and r.id="
 					+ requestData.get("region");
-		if (!requestData.get("searchText").equals(""))
+		}
+		if (!requestData.get("searchText").equals("")) {
 			tag = "inner join tag t on a.id=t.ad_id and t.name='"
 					+ requestData.get("searchText") + "'";
-		if (!requestData.get("gender").equals(""))
+		}
+		if (!requestData.get("gender").equals("")) {
 			gender = "and a.gender='" + requestData.get("gender") + "'";
-		if (requestData.get("quantity") != null)
+		}
+		if (requestData.get("quantity") != null) {
 			quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
-		if (!requestData.get("ageStart").equals(""))
+		}
+		if (!requestData.get("ageStart").equals("")) {
 			startYear = Integer.parseInt(requestData.get("ageStart"));
-		if (!requestData.get("ageEnd").equals(""))
+		}
+		if (!requestData.get("ageEnd").equals("")) {
 			endYear = Integer.parseInt(requestData.get("ageEnd"));
-		if (requestData.get("map") != null)
+		}
+		if (requestData.get("map") != null) {
 			loc = "and c.location_id is not null";
-		if (requestData.get("picture") != null)
+		}
+		if (requestData.get("picture") != null) {
 			pic = "and a.id in (select ad_id from ad_image)";
-		if (requestData.get("change") != null)
+		}
+		if (requestData.get("change") != null) {
 			f = -2;
-		if (requestData.get("negotiable_price") != null)
+		}
+		if (requestData.get("negotiable_price") != null) {
 			l = 0;
+		}
 
 		Double usdK = session("USDtoKZT") != null ? Double
 				.parseDouble(session("USDtoKZT")) : 180.0;
@@ -865,7 +891,7 @@ public class Ads extends Controller {
 				+ " where a.status='active' " + gender + quantity
 				+ " and (a.birth_date between " + startYear + " and " + endYear
 				+ ") " + pic + " order by " + sort + " \n"
-				+ " limit 30 offset " + (page * 30);
+				+ " limit 30 offset " + page * 30;
 
 		String a2 = "SELECT count(*) from ads a \n" + " "
 				+ anim
