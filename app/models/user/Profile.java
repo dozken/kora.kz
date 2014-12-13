@@ -17,7 +17,7 @@ import play.db.ebean.Model;
 public class Profile extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

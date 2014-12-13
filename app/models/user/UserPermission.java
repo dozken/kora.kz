@@ -30,7 +30,7 @@ import be.objectify.deadbolt.core.models.Permission;
 @Table(name = "permissions")
 public class UserPermission extends Model implements Permission {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

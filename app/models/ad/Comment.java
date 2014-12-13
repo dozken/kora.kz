@@ -15,7 +15,7 @@ import play.db.ebean.Model;
 public class Comment extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -14,7 +14,7 @@ public class SocialNetwork extends Model {
 			Long.class, SocialNetwork.class);
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

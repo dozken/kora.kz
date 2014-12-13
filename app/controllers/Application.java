@@ -168,9 +168,9 @@ public class Application extends Controller {
 	}
 
 	public static Result sitemap(Long id) {
-		if (id == null)
+		if (id == null) {
 			return ok(sitemap.render(null));
-		else {
+		} else {
 			return ok(sitemap.render(City.find.byId(id)));
 		}
 	}

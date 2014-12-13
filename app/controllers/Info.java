@@ -22,13 +22,11 @@ import be.objectify.deadbolt.java.actions.SubjectPresent;
 public class Info extends Controller {
 
 	public static Result edit() {
-
 		return ok(myInfoEdit.render(AuthorisedUser
 				.findByEmail(session("connected"))));
 	}
 
 	public static Result update(Long id) {
-
 		play.mvc.Http.MultipartFormData body = request().body()
 				.asMultipartFormData();
 
@@ -65,14 +63,16 @@ public class Info extends Controller {
 			user.profile.phone = ContactInfo.phoneCheck(user,
 					requestData.get("phone"));
 
-			if (user.profile.phone.equals("exists"))
+			if (user.profile.phone.equals("exists")) {
 				return ok("phone_exists");
+			}
 
 			user.email = AuthorisedUser.checkMail(user,
 					requestData.get("email"));
 
-			if (user.email.equals("exists"))
+			if (user.email.equals("exists")) {
 				return ok("mail_exists");
+			}
 
 			if (requestData.get("location") != null
 					&& !requestData.get("location").equals("")) {

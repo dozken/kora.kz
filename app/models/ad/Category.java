@@ -15,7 +15,7 @@ import play.db.ebean.Model;
 public class Category extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class Category extends Model {
 	}
 
 	public boolean isParent() {
-		return (this.subCategories != null && this.subCategories.size() > 0) ? true
+		return this.subCategories != null && this.subCategories.size() > 0 ? true
 				: false;
 	}
 }

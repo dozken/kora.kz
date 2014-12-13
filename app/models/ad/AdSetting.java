@@ -14,7 +14,7 @@ import play.db.ebean.Model;
 public class AdSetting extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 
 	public static final Model.Finder<Long, AdSetting> find = new Model.Finder<Long, AdSetting>(
@@ -35,6 +35,6 @@ public class AdSetting extends Model {
 
 	public String status;
 
-	public Date validDate = new Date(new Date().getTime()
-			+ (1000 * 60 * 60 * 24 * 7));
+	public Date validDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24
+			* 7);
 }

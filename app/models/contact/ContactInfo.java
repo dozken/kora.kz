@@ -18,7 +18,7 @@ import play.db.ebean.Model;
 public class ContactInfo extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	public static final Model.Finder<Long, ContactInfo> find = new Model.Finder<Long, ContactInfo>(
 			Long.class, ContactInfo.class);

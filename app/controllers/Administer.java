@@ -72,19 +72,21 @@ public class Administer extends Controller {
 		/**
 		 * moderating active rejected
 		 */
-		if (ad.status.equals("active") || ad.status.equals("rejected"))
+		if (ad.status.equals("active") || ad.status.equals("rejected")) {
 			Emailing.send("Қора.kz: Ваше объявление",
 					new String[] { ad.contactInfo.company + " <"
 							+ ad.contactInfo.email + ">" },
 					adModerate.render(ad).body());
+		}
 		if (requestData.get("status").equals("moderating")) {
 			ObjectNode event = Json.newObject();
 			event.put("moderating", "active");
 			event.put("id", ad.id);
-			if (ad.section.id != 5)
+			if (ad.section.id != 5) {
 				event.put("title", ad.category.name);
-			else
+			} else {
 				event.put("title", ad.title);
+			}
 			event.put("company", ad.contactInfo.company);
 			event.put("moderatingBy", models.user.AuthorisedUser
 					.findByEmail(session("connected")).userName);

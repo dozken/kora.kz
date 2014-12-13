@@ -39,9 +39,9 @@ public class User extends Controller {
 
 			if (session("connected") != null
 					&& AuthorisedUser.findByEmail(session("connected")).roles
-							.contains(SecurityRole.findByName("admin")))
+							.contains(SecurityRole.findByName("admin"))) {
 				user.roles.add(SecurityRole.findByName("moderator"));
-			else {
+			} else {
 				user.roles.add(SecurityRole.findByName("user"));
 				// session("connected", user.email);
 			}

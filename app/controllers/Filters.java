@@ -35,17 +35,18 @@ public class Filters extends Controller {
 		City city = new City();
 		if (requestData.get("parentName") != null
 				&& !requestData.get("parentName").trim().equals("")) {
-			city.parentCity = City.find.byId(Long.parseLong((requestData
-					.get("parentName"))));
+			city.parentCity = City.find.byId(Long.parseLong(requestData
+					.get("parentName")));
 		}
 		city.name = requestData.get("name");
 		city.region = Region.find.ref(Long.parseLong(requestData
 				.get("region.id")));
 		String[] loc;
 		String coords = requestData.get("location");
-		if (requestData.get("location").startsWith("("))
+		if (requestData.get("location").startsWith("(")) {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
+		}
 		loc = coords.split(",");
 		Location location = new Location();
 		if (loc.length == 2) {
@@ -64,8 +65,9 @@ public class Filters extends Controller {
 		City city = City.find.byId(id);
 		String[] loc;
 		String coords = latlng;
-		if (latlng.startsWith("("))
+		if (latlng.startsWith("(")) {
 			coords = latlng.substring(1, latlng.length() - 1);
+		}
 		loc = coords.split(",");
 		city.location.lat = loc[0].trim();
 		city.location.lng = loc[1].trim();
@@ -160,8 +162,8 @@ public class Filters extends Controller {
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * */
 	public static Result addRegion() {
 		Form<Region> regionForm = form(Region.class).bindFromRequest();

@@ -14,7 +14,7 @@ import play.db.ebean.Model;
 public class Payment extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	public static final Model.Finder<Long, Payment> find = new Model.Finder<Long, Payment>(
 			Long.class, Payment.class);

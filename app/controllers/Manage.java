@@ -46,17 +46,19 @@ public class Manage extends Controller {
 	public static Result getMessageType(String s) {
 		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
 
-		if (s.equals("all"))
+		if (s.equals("all")) {
 			return ok(_message.render(PrivateMessage.find
 					.where()
 					.or(Expr.eq("recipent_id", u.id),
 							Expr.eq("author_id", u.id)).order("send_date desc")
 					.findList()));
+		}
 
-		if (s.equals("send"))
+		if (s.equals("send")) {
 			return ok(_message.render(PrivateMessage.find.where()
 					.eq("author_id", u.id).ne("status", "author-deleted")
 					.order("send_date desc").findList()));
+		}
 
 		return ok(_message.render(PrivateMessage.find.where()
 				.eq("recipent_id", u.id).ne("status", "recipent-deleted")
@@ -98,15 +100,17 @@ public class Manage extends Controller {
 			try {
 				Date s = new SimpleDateFormat("dd/MM/yyyy").parse(start);
 				Date e = new SimpleDateFormat("dd/MM/yyyy").parse(end);
-				if (filter.equals("all"))
+				if (filter.equals("all")) {
 					return ok(_table.render(Payment.find.where().eq("user", u)
 							.between("paymentDate", s, e)
 							.order("paymentDate desc").findList()));
-				if (filter.equals("add"))
+				}
+				if (filter.equals("add")) {
 					return ok(_table.render(Payment.find.where().eq("user", u)
 							.eq("paymentType", "add")
 							.between("paymentDate", s, e)
 							.order("paymentDate desc").findList()));
+				}
 				return ok(_table.render(Payment.find.where().eq("user", u)
 						.eq("paymentType", "substract")
 						.between("paymentDate", s, e).order("paymentDate desc")
@@ -116,13 +120,15 @@ public class Manage extends Controller {
 				e.printStackTrace();
 			}
 		} else {
-			if (filter.equals("all"))
+			if (filter.equals("all")) {
 				return ok(_table.render(Payment.find.where().eq("user", u)
 						.order("paymentDate desc").findList()));
-			if (filter.equals("add"))
+			}
+			if (filter.equals("add")) {
 				return ok(_table.render(Payment.find.where().eq("user", u)
 						.eq("paymentType", "add").order("paymentDate desc")
 						.findList()));
+			}
 			return ok(_table.render(Payment.find.where().eq("user", u)
 					.eq("paymentType", "substract").order("paymentDate desc")
 					.findList()));

@@ -17,7 +17,7 @@ import play.db.ebean.Model;
 public class PrivateMessage extends Model {
 
 	/**
-	 * 
+	 *
 	 */
 	public static final Finder<Long, PrivateMessage> find = new Finder<Long, PrivateMessage>(
 			Long.class, PrivateMessage.class);
