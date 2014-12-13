@@ -104,6 +104,18 @@ $("#poi").click(function() {
   })
 });
 
+
+
+    $(document).on("change", "#region", function() {
+        var id = Number($(this).val());
+        jsRoutes.controllers.Ads.getRC(id).ajax({
+            success: function(data) {
+                console.log("region selected");
+                $("#city_div").html(data);
+            }
+        });
+    });
+
 $(document).on("change",".gender_check",function(){
 
 
