@@ -117,9 +117,9 @@ public class User extends Controller {
 		return redirect(request().getHeader("referer"));
 	}
 
-	public static Result removeUser(Long id) {
+	public static Result removeUser(Long id,Integer page,String sort) {
 		AuthorisedUser.find.byId(id).delete();
-		return ok(views.html.admin.users._users.render());
+		return ok(views.html.admin.users.adminUsers.render(AuthorisedUser.getUsers(page,sort),page,sort));
 	}
 
 	public static Result removeModerator(Long id) {

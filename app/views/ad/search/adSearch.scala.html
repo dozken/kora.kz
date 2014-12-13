@@ -1,4 +1,4 @@
-@(ads:List[models.ad.Ad],section:models.ad.Section)
+@(ads:List[models.ad.Ad],section:models.ad.Section,category:models.ad.Category,region:models.contact.Region,city:models.contact.City)
 
 @main("Поиск") {
 
@@ -17,7 +17,7 @@
 <div class="container сontain">
 	<div class="searchbarmargin">@_searchbar()</div>
 	@main_filters(section)
-	<div id="search_by_section">@_filters(section)</div>
+	<div id="search_by_section">@_filters(section,category,region,city)</div>
 	<div class="col-xs-12 borderbottom">
 		@*<h3 id="zqwe">Казахстан / @section.name</h3>*@
 		<hr class="hrcolor">

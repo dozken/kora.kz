@@ -3,6 +3,7 @@ package controllers;
 import static play.data.Form.form;
 import models.Emailing;
 import models.ad.Ad;
+import models.user.AuthorisedUser;
 import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -52,8 +53,8 @@ public class Administer extends Controller {
 		return ok(adminAdvertisements.render());
 	}
 
-	public static Result users() {
-		return ok(adminUsers.render());
+	public static Result users(int page,String sort) {
+		return ok(adminUsers.render(AuthorisedUser.getUsers(page,sort),page,sort));
 	}
 
 	public static Result moderators() {

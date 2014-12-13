@@ -1,4 +1,4 @@
-
+@(users:List[models.user.AuthorisedUser],page:Integer,sort:String)
 @main("Пользователи") {
 <style>
 .bootbox-confirm .modal-dialog{
@@ -12,8 +12,7 @@
   	<table class="table table-hover">
 		<thead>
 			<tr>
-				<td>id</td>
-				<td>Компания</td>
+				<td><a href="@routes.Administer.users(page,if(sort=="asc"){"desc"}else{"asc"})">Компания <span class="glyphicon glyphicon-sort"></span></a></td>
 				<td>Адрес</td>
 				<td>Регион</td>
 				<td>Город</td>
@@ -23,10 +22,48 @@
 			</tr>
 		</thead>
 		<tbody id="user-list">
-  		@_users()
+		@for(user<-users ){
+		<tr>
+
+			<td>@user.userName</td>
+			<td>@if(user.profile!=null&&user.profile.address!=null){@user.profile.address}</td>
+			<td>@if(user.profile!=null&&user.profile.region!=null){@user.profile.region.name}</td>
+			<td>@if(user.profile!=null&&user.profile.city!=null){@user.profile.city.name}</td>
+			<td>@if(user.profile!=null&&user.profile.phone!=null){<a href="@user.profile.phone">@user.profile.phone</a>}</td>
+			<td>@user.email</td>
+			<td><a onclick='del("@routes.User.removeUser(user.id,page,sort)")'><i class="fa fa-times"></i></a></td>
+
+		</tr>
+		}
   		</tbody>
 	</table>
+	<div id="pagination" class="col-xs-12">
+		<nav>
+			<ul class="pagination pagination-sm">
+				<li class="prev @if(page==0){disabled}">
+					@if(page==0){
+					<a>&larr; предыдущий</a>
+					}else{
+					<a href="@routes.Administer.users((page-1),sort)" disabled>&larr; предыдущий</a>
+				}
+				</li>
+				<li>
+					<a id="total" style="color: #666;">Показывает @if(users.size>20){@(20*page+1)-(@(page+1)*20)}else{@(20*page+1)-@models.user.AuthorisedUser.getUsersCount}/@models.user.AuthorisedUser.getUsersCount </a>
+				</li>
+				<li class="next @if(users.size<=20){ disabled }">
+					@if(models.user.AuthorisedUser.getUsersCount<=20*(page+1)){
+					<a>следующей &rarr;</a>
+					}else{
+					<a href="@routes.Administer.users((page+1),sort)">следующей &rarr;</a>
+					}
+
+				</li>
+
+			</ul>
+		</nav>
+	</div>
 </div>
+
 
 </div>
 }
@@ -44,20 +81,12 @@ bootbox.setDefaults({
 	  //className: "warning"
 });
 
-$(document).on("click",".delete",function(){
-	var user = $(this).attr("user");    
+function del(href){
+
     bootbox.confirm("Вы уверены?", function(confirm) {
     	if(confirm)
-        jsRoutes.controllers.User.removeUser(user).ajax({
-            success: function(data) {
-              $("#user-list").html(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              $("#user-list").html(data);
-              //console.log(jqXHR.responseText);
-            }
-        });
+        window.location=href;
     });
-    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
-});
+
+};
 </script>
