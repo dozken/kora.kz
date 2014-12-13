@@ -244,115 +244,145 @@ var marker;
 var myPlacemark;
 var isMarker=false;
 var curMap="google";
+var myCollection;
+
+$(document).on("click","#remove-map-marker",function(){
+	marker.setMap(null);
+	$("#location").val("");		
+	myMap.geoObjects.remove(myPlacemark);
+	myCollection.removeAll();
+});
+
 $(document ).on("change","#city",function(){
-lat = $('option:selected', this).attr('lat');
-lng = $('option:selected', this).attr('lng');
-isMarker=false;
+	lat = $('option:selected', this).attr('lat');
+	lng = $('option:selected', this).attr('lng');
+	isMarker=false;
 
-    if(curMap=="yandex"){
-        $("#mouse_event_map" ).html("");
-    myMap = new ymaps.Map ( "mouse_event_map", {
-    center :[lat,  lng],
-    zoom : 14,
-    controls: ["zoomControl"]
-    } ) ;
+	if(curMap=="yandex"){
+		$("#mouse_event_map" ).html("");
+		myMap = new ymaps.Map ( "mouse_event_map", {
+			center :[lat,  lng],
+			zoom : 14,
+			controls: ["zoomControl"]
+		} ) ;
 
-    myMap.events.add ( 'click', function ( e ) {
-    lat = e.get ( 'coords' )[0];
-    lng = e.get ( 'coords' )[1];
-    isMarker = true ;
+		myMap.events.add ( 'click', function ( e ) {
+		lat = e.get ( 'coords' )[0];
+		lng = e.get ( 'coords' )[1];
+		isMarker = true ;
 
-    myMap.geoObjects.remove ( myPlacemark ) ;
-
-    var coords = e.get ( 'coords' ) ;
-
-    myPlacemark = new ymaps.Placemark ( coords) ;
-    myMap.geoObjects.add ( myPlacemark ) ;
+		myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+				});
+		
+		myCollection.removeAll();
+		myMap.geoObjects.remove ( myPlacemark ) ;
+		myMap.geoObjects.removeAll();
+		var coords = e.get ( 'coords' ) ;
+		myPlacemark = new ymaps.Placemark ( coords) ;
+		myCollection.removeAll();		
+		myCollection.add(myPlacemark)
+		myMap.geoObjects.add(myCollection);
+		
+		$("#location").val("("+lat+","+lng+")");
+		console.log("yandex:"+$("#location").val())
     } )
     }else {
-    map = new GMaps ( {
-    div : '#mouse_event_map',
-    zoom : 14,
-    lat : lat,
-    lng : lng,
-    width : '700px',
-    height : '400px',
-    click : function ( e ) {
-    $ ( "#location" ).val ( e.latLng ) ;
-    lat = e.latLng.lat ( ) ;
-    lng = e.latLng.lng ( ) ;
-    isMarker = true ;
-    map.removeMarker ( marker ) ;
-    marker = map.addMarker ( {
-    position : e.latLng
-    } ) ;
-    }
-    } ) ;
+    	map = new GMaps ( {
+    		div : '#mouse_event_map',
+    		zoom : 14,
+    		lat : lat,
+    		lng : lng,
+    		width : '700px',
+    		height : '400px',
+    		click : function ( e ) {
+    			$ ( "#location" ).val ( e.latLng ) ;
+    			lat = e.latLng.lat ( ) ;
+    			lng = e.latLng.lng ( ) ;
+    			isMarker = true ;
+    			map.removeMarker ( marker ) ;
+    			marker = map.addMarker ( {
+    				position : e.latLng
+    			} ) ;
+				console.log("google:"+$("#location").val())
+    		}
+    	}) ;
     }
 })
 
 
 $(document).on("click",".mapSelect",function(){
+	if($(this ).attr("map")=="yandex") {
+		curMap="yandex";
+		myMap = new ymaps.Map ( "mouse_event_map", {
+			center :[lat,  lng],
+			zoom : 14,
+			controls: ["zoomControl"]
+		}) ;
 
-if($(this ).attr("map")=="yandex") {
-curMap="yandex";
+		myMap.events.add ( 'click', function ( e ) {
+			lat = e.get ( 'coords' )[0];
+			lng = e.get ( 'coords' )[1];
+			isMarker = true ;
 
+			myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+			});
+				
+			myCollection.removeAll();
+			myMap.geoObjects.remove ( myPlacemark ) ;
+			myMap.geoObjects.removeAll();
+		
+			var coords = e.get ( 'coords' ) ;
+			myPlacemark = new ymaps.Placemark ( coords) ;
+			myCollection.removeAll();		
+			myCollection.add(myPlacemark)
+			myMap.geoObjects.add(myCollection);
+			$("#location").val("("+lat+","+lng+")");
+			console.log("yandex:"+$("#location").val())
+		});
 
-myMap = new ymaps.Map ( "mouse_event_map", {
-center :[lat,  lng],
-zoom : 14,
-controls: ["zoomControl"]
-} ) ;
+		if(isMarker){
+			myPlacemark = new ymaps.GeoObject({
+				geometry: {
+					type: "Point",
+					coordinates: [lat, lng]
+				}});
+			myMap.geoObjects.add ( myPlacemark ) ;
+		}
 
-myMap.events.add ( 'click', function ( e ) {
-
-   lat = e.get ( 'coords' )[0];
-   lng = e.get ( 'coords' )[1];
-isMarker = true ;
-myMap.geoObjects.remove ( myPlacemark ) ;
-
-var coords = e.get ( 'coords' ) ;
-myPlacemark = new ymaps.Placemark ( coords) ;
-myMap.geoObjects.add ( myPlacemark ) ;
-} )
-
-if(isMarker){
-myPlacemark = new ymaps.GeoObject({
-geometry: {
-type: "Point",
-coordinates: [lat, lng]
-}});
-myMap.geoObjects.add ( myPlacemark ) ;
-}
-
-}else{
-curMap="google";
-map = new GMaps({
-div: '#mouse_event_map',
-zoom: 14,
-lat: lat,
-lng:  lng,
-width: '700px',
-height: '400px',
-click: function(e) {
-$("#location" ).val( e.latLng);
-lat= e.latLng.lat();
-lng= e.latLng.lng();
-isMarker=true;
-map.removeMarker(marker);
-marker =  map.addMarker({
-position:e.latLng
-});
-}
-});
-if(isMarker){
-map.removeMarker(marker);
-marker=map.addMarker({
-lat: lat,
-lng: lng,
-});
-}
-}
+		
+	}else{
+		curMap="google";
+		map = new GMaps({
+			div: '#mouse_event_map',
+			zoom: 14,
+			lat: lat,
+			lng:  lng,
+			width: '700px',
+			height: '400px',
+			click: function(e) {
+				$("#location" ).val( e.latLng);
+ 				console.log(String(e.latLng ))
+				lat= e.latLng.lat();
+				lng= e.latLng.lng();
+				isMarker=true;
+				map.removeMarker(marker);
+				marker =  map.addMarker({
+					position:e.latLng
+				});
+			}
+		});
+		if(isMarker){
+			map.removeMarker(marker);
+			marker=map.addMarker({
+			lat: lat,
+			lng: lng,
+			});
+		}
+	}
 })
 
 
@@ -374,6 +404,7 @@ width: '700px',
 height: '400px',
 click: function(e) {
 $("#location" ).val( e.latLng);
+ console.log(String(e.latLng ))
 lat= e.latLng.lat();
 lng= e.latLng.lng();
 isMarker=true;

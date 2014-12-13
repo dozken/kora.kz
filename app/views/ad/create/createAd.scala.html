@@ -50,6 +50,7 @@ var quan = $("#quanHide").html();
 var gender = $("#genderHide").html();
 var age = $("#ageHide").html();		
 var title = $("#titleHide").html();
+
 	$(document).ready(function(){
 		
         $("#titleHide").empty();
@@ -235,6 +236,14 @@ var title = $("#titleHide").html();
     var myPlacemark;
     var isMarker = false;
     var curMap = "google";
+    var myCollection;
+    
+	$(document).on("click","#remove-map-marker",function(){
+		marker.setMap(null);
+		$("#location").val("");		
+		myMap.geoObjects.remove(myPlacemark);
+		myCollection.removeAll();
+	});
     $(document).on("change", "#city", function() {
         lat = $('option:selected', this).attr('lat');
         lng = $('option:selected', this).attr('lng');
@@ -246,17 +255,27 @@ var title = $("#titleHide").html();
                 zoom: 14,
                 controls: ["zoomControl"]
             });
+            
+             new ymaps.GeoObjectCollection({}, {
+			preset: 'twirl#redIcon', //all placemarks are red
+			draggable: true // and can be dragged
+		});
             myMap.events.add('click', function(e) {
                 lat = e.get('coords')[0];
                 lng = e.get('coords')[1];
                 isMarker = true;
-
-                myMap.geoObjects.remove(myPlacemark);
-
-                var coords = e.get('coords');
-
-                myPlacemark = new ymaps.Placemark(coords);
-                myMap.geoObjects.add(myPlacemark);
+ 				myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+				});
+				myCollection.removeAll();
+				myMap.geoObjects.remove ( myPlacemark ) ;
+				myMap.geoObjects.removeAll();
+				var coords = e.get ( 'coords' ) ;
+				myPlacemark = new ymaps.Placemark ( coords) ;		
+				myCollection.add(myPlacemark)
+				myMap.geoObjects.add(myCollection);
+				$ ( "#location" ).val ("("+lat+","+lng+")") ;
             });
         } else {
             map = new GMaps({
@@ -293,11 +312,20 @@ var title = $("#titleHide").html();
                 lat = e.get('coords')[0];
                 lng = e.get('coords')[1];
                 isMarker = true;
-                myMap.geoObjects.remove(myPlacemark);
-
-                var coords = e.get('coords');
-                myPlacemark = new ymaps.Placemark(coords);
-                myMap.geoObjects.add(myPlacemark);
+                
+                myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+				});
+				myCollection.removeAll();
+				myMap.geoObjects.remove ( myPlacemark ) ;
+				myMap.geoObjects.removeAll();
+				myCollection.removeAll();
+				var coords = e.get ( 'coords' ) ;
+				myPlacemark = new ymaps.Placemark ( coords) ;		
+				myCollection.add(myPlacemark)
+				myMap.geoObjects.add(myCollection);
+				$ ( "#location" ).val ("("+lat+","+lng+")") ;
             });
             if (isMarker) {
                 myPlacemark = new ymaps.GeoObject({

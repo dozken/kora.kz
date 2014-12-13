@@ -141,6 +141,7 @@ public class Manage extends Controller {
 	}
 
 	public static Result myInfo() {
+		flash("name","value");
 		return ok(myInfo.render(AuthorisedUser
 				.findByEmail(session("connected"))));
 	}

@@ -29,8 +29,8 @@
         <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
     </ul>
     <ul class="pros">
-        <li><span class="icon-prosmotr"></span> @ad.views просмотров</li>
-        <li><span class="icon-comment"></span> @if(ad.comments.size()==0){} else{ @ad.comments.size() комментариев}</li>
+        <li>@if(ad.views>0){<span class="icon-prosmotr"></span> @ad.views просмотров}</li>
+        <li>@if(ad.comments.size()>0){<span class="icon-comment"></span> @ad.comments.size() комментариев}</li>
         <li><span class="icon-date"></span> @(new SimpleDateFormat("dd MMMM", new Locale("ru", "RU")).format(ad.publishedDate))
         </li>
     </ul>

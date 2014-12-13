@@ -141,7 +141,7 @@
 		<li class="PFBSPLI-13"><a class="owib" href="@routes.Application.feedback"><span class="fa fa-exclamation-triangle"></span> Нашли ошибку в объявлении?</a></li></div>
 	</ul>
 </div>
-@if(ad.status.equals("moderating")){
+@if(ad.status.equals("moderating")||ad.status.equals("pending")){
 @restrictOr(la(as("moderator"),as("admin"))){
 <div class="col-xs-12  formdown topka nopaddingleft">
 <button class="btn btn-success moderate approve" ad="@ad.id"><span class="icon-share"></span> Подтвердить</button>

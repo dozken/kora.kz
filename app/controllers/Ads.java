@@ -231,9 +231,11 @@ public class Ads extends Controller {
 	}
 
 	public static Result remove(Long id) {
+		/*
 		String a = "delete from authorised_user_ad where ad_id=" + id;
 		SqlUpdate update = Ebean.createSqlUpdate(a);
 		Ebean.execute(update);
+		*/
 		Ad ad = Ad.find.byId(id);
 		ad.delete();
 
@@ -281,14 +283,19 @@ public class Ads extends Controller {
 		if (requestData.get("location").startsWith("(")) {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
+			loc = coords.split(",");
+			System.out.println(requestData.get("location"));
+			System.out.println(loc[0]+","+loc[1]);
+			Location location = new Location();
+			if (loc.length == 2) {
+				location.lat = loc[0].trim();
+				location.lng = loc[1].trim();
+				ad.contactInfo.location = location;
+			}
+		}else if(requestData.get("location").equals("")){
+			ad.contactInfo.location = new Location();
 		}
-		loc = coords.split(",");
-		Location location = new Location();
-		if (loc.length == 2) {
-			location.lat = loc[0].trim();
-			location.lng = loc[1].trim();
-			ad.contactInfo.location = location;
-		}
+		
 
 		ad.description = requestData.get("description");
 		ad.quantity = requestData.get("quantity");
@@ -378,51 +385,56 @@ public class Ads extends Controller {
 
 		DynamicForm requestData = form().bindFromRequest();
 
-		List<Ad> l;
+		List<Ad> ads;
 		if (requestData.get("section").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
 			if (requestData.get("str").equals("")
 					|| requestData.get("str") == null) {
-				l = Ad.find.where().eq("status", "active").findList();
+				ads = Ad.find.where().eq("status", "active").orderBy("updatedDate").findList();
 			} else {
-				l = Ad.find.where().eq("status", "active")
-						.in("tags.name", requestData.get("str")).findList();
+				ads = Ad.find.where().eq("status", "active")
+						.in("tags.name", requestData.get("str")).orderBy("updatedDate").findList();
 			}
 			Section section = new Section();
 			section.id = 0L;
 			section.name = "all";
-			return ok(adSearch.render(l, section, null, null, null));
+			return ok(adSearch.render(ads, section, null, null, null));
 		}
 
 		else {
 			if (requestData.get("str").equals("")
 					|| requestData.get("str") == null) {
-				l = Ad.find
-						.where()
-						.eq("status", "active")
-						.eq("section",
-								Section.find.where()
-										.eq("name", requestData.get("section"))
-										.findUnique()).findList();
-			} else {
-				l = Ad.find
+				ads = Ad.find
 						.where()
 						.eq("status", "active")
 						.eq("section",
 								Section.find.where()
 										.eq("name", requestData.get("section"))
 										.findUnique())
-						.in("tags.name", requestData.get("str")).findList();
+						.orderBy("updatedDate")
+						.findList();
+			} else {
+				ads = Ad.find
+						.where()
+						
+						.eq("status", "active")
+						.eq("section",
+								Section.find.where()
+										.eq("name", requestData.get("section"))
+										.findUnique())
+						.in("tags.name", requestData.get("str"))
+						.orderBy("updatedDate")
+						.findList();
 			}
 
 			Section section = Section.find.where()
 					.eq("name", requestData.get("section")).findUnique();
-			return ok(adSearch.render(l, section, null, null, null));
+			return ok(adSearch.render(ads, section, null, null, null));
 		}
 
 	}
 
 	public static Result allAd() {
-		List<Ad> l = Ad.find.where().eq("status", "active").findList();
+		List<Ad> l = Ad.find.where().eq("status", "active").orderBy("updatedDate").findList();
 
 		Section section = new Section();
 		section.id = 0L;
@@ -436,8 +448,10 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Лошадь").findUnique())
+				.orderBy("updatedDate")
 				.findList();
 		Section section = Section.find.where().eq("name", "Лошадь")
+				.orderBy("updatedDate")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
 	}
@@ -448,6 +462,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Верблюд").findUnique())
+						.orderBy("updatedDate")
 				.findList();
 		Section section = Section.find.where().eq("name", "Верблюд")
 				.findUnique();
@@ -460,6 +475,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Корова").findUnique())
+						.orderBy("updatedDate")
 				.findList();
 		Section section = Section.find.where().eq("name", "Корова")
 				.findUnique();
@@ -472,7 +488,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Овцы/Козы")
-								.findUnique()).findList();
+								.findUnique()).orderBy("updatedDate").findList();
 		Section section = Section.find.where().eq("name", "Овцы/Козы")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
@@ -484,6 +500,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Другие").findUnique())
+						.orderBy("updatedDate")
 				.findList();
 		Section section = Section.find.where().eq("name", "Другие")
 				.findUnique();
@@ -493,7 +510,7 @@ public class Ads extends Controller {
 	public static Result searchByType(Long id) {
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
-						.eq("section", Section.find.byId(id)).findList(),
+						.eq("section", Section.find.byId(id)).orderBy("updatedDate").findList(),
 				Section.find.byId(id), null, null, null));
 	}
 
