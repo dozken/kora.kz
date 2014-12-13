@@ -6,6 +6,16 @@
     font-family: TENGE;
     src: url('fonts/tenge.otf') format("opentype");
 }
+.sitemapcolumn{
+float: left;
+width: 250px;
+margin-left: 5px;
+margin-bottom: 1px;
+}
+.sitemapcolumn a{
+	font-size: 12px;
+	color:#5b752c;
+}
 .container { 
 	width: @container-desktop !important; 
 }
@@ -167,6 +177,8 @@ border-color: #77953a #77953a #77953a;
 	background-size: 20px;
 	height: 26px;
 	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 17px;
 }
 
 .selectdesign select {
