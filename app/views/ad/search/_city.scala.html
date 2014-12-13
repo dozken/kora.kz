@@ -1,6 +1,6 @@
 @(region:models.contact.Region)
 
-<select id="city" name="city" class="form-control selectdesign" validation="not_null">
+<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
 	<option selected disabled hidden> Выберите город</option>
 	@for(city<-region.cities if(city.parentCity==null)){
 		@if(city.isParent){
