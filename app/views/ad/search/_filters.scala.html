@@ -84,15 +84,18 @@
 <div class="col-xs-12 nopaddingleft nopaddingright">
 
 <div id="demo"> 
-<div class="form-group frmg">
+<div class="form-group frmg" style="margin-left: -15px;">
   <div class="frmbck">
   <label class="control-label" for="selectbasic1">Город/Ауыл:</label>
   <div id="city_div">
-    
+    <select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
+  <option selected disabled hidden> Выберите город</option>
+
+</select>
   </div>
 </div>
 </div>
-<div class="form-group">
+<div class="form-group" style="padding-left: 25px;">
   <div class="col-xs-8 nopaddingleft">
       <input type="hidden" id="gender" name="gender">
   <div class="checkbox">
@@ -109,7 +112,7 @@
 	</div>
   </div>  
 </div>
-<div class="form-group">
+<div class="form-group" style="margin-left: -13px;">
   <div class="col-xs-8 nopaddingleft">
   <div class="radio">
     <label for="radios-0">
@@ -125,7 +128,7 @@
 	</div>
   </div>
 </div>
-<div class="form-group">
+<div class="form-group" style="margin-left: -3px;">
   <div class="col-xs-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-2">
@@ -141,7 +144,7 @@
 	</div>
   </div>  
 </div>
-<div class="form-group">
+<div class="form-group" style="margin-left: -87px;">
   <div class="col-xs-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-4">
@@ -158,8 +161,8 @@
   </div>  
 </div>
 
-<div class="form-group">
-  <div class="col-xs-12 nopaddingleft">
+<div class="form-group" style="margin-left: -45px;">
+  <div class="col-xs-12 nopaddingleft" >
 
      <input id="textinput" name="searchText" type="text" placeholder="Поиск по тексту" class="form-control input-md ssss">
   </div>  

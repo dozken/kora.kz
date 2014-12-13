@@ -146,6 +146,8 @@ border-color: #77953a #77953a #77953a;
 	height: 26px;
 	padding-top: 1px;
 	z-index: 1;
+	padding-left: 0px;
+	padding-right: 17px;
 }
 .sd select::-ms-expand {
     display: none;
@@ -808,7 +810,7 @@ hovers in index
 }
 
 .aty {
-	width: 90%;
+	width: 100%;
 	padding-left: 0px;
 	padding-top: 10px;
 }
