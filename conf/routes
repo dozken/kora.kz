@@ -1,0 +1,135 @@
+
+# Home page
+GET         /                                      controllers.Application.index()
+GET         /captcha                               controllers.Application.captcha
+GET         /websocket                             controllers.Application.socketHandler()
+GET         /about                                 controllers.Application.about()
+GET         /rules                                 controllers.Application.rules()
+GET         /feedback                              controllers.Application.feedback()
+POST        /feedback                              controllers.Application.sendFeedback()
+GET         /sitemap                               controllers.Application.sitemap(city:Long)
+GET         /ad/search-map                         controllers.Ads.sitemap(city:Long,section:Long,category:Long)
+GET         /ad/search-map/:city                         controllers.Ads.sitemapS(city:Long)
+GET         /sessionAdvert                         controllers.Advertisements.sessionAdvert(id:String,index:String)
+
+POST        /currency                              controllers.Application.currency(str:String,rate:Double)
+
+
+POST        /user/login                            controllers.Application.signIn()
+GET         /user/logout                           controllers.Application.signOut()
+
+POST        /user/register                         controllers.User.register()
+GET         /user/forgotPassword                   controllers.User.forgotPassword()
+POST        /user/forgotPassword                   controllers.User.resetPassword()
+GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
+POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
+GET         /user/confirmRegistration/:code        controllers.User.confirmRegistration(code :String)
+GET         /user/confirmPage                      controllers.User.confirmPage()
+
+#navbar search
+GET         /ad/search-all                     	   controllers.Ads.allAd()
+GET         /ad/search-horse                       controllers.Ads.horse()
+GET         /ad/search-camel                       controllers.Ads.camel()
+GET         /ad/search-cow                         controllers.Ads.cow()
+GET         /ad/search-cam                     	   controllers.Ads.cam()
+GET         /ad/search-other                       controllers.Ads.other()
+
+
+GET         /ad/show                               controllers.Ads.show()
+GET         /ad/search/:id                         controllers.Ads.searchByType(id:Long)
+GET         /ad/edit/:id                           controllers.Ads.edit(id: Long)
+POST        /ad/filter_search                      controllers.Ads.searchAd(page : Integer, sort:String)
+POST        /ad/create                             controllers.Ads.create()
+POST        /ad/update/:id                         controllers.Ads.update(id:Long)
+POST        /ad/comment/:id                        controllers.Ads.comment(id:Long,com_id:Long)
+POST        /ad/favorite/:id                       controllers.Ads.addFavorite(id:Long,type:String)
+POST        /ad/delete_message/:type               controllers.Ads.deleteMessages(ids:String,type:String)
+POST        /ad/readAs/                            controllers.Ads.readAsMessages(ids:String)
+#GET         /ad/search                            controllers.Ads.search()
+GET         /ad/quick_search                       controllers.Ads.quick_search()
+GET         /ad/favorite                           controllers.Ads.favorite()
+GET         /ad/favorite/size                      controllers.Ads.favoriteSize()
+GET         /ad/show/:id                           controllers.Ads.get(id: Long)
+GET         /ad/category/:id                       controllers.Ads.getCategories(id:Long)
+GET         /ad/sc/:id                             controllers.Ads.getRC(id:Long)
+
+GET         /ad/city/:id                           controllers.Ads.getCities(id:Long)
+POST        /ad/filter/:str                        controllers.Ads.filterAds(str: String)
+POST        /ad/:id/extend                         controllers.Ads.preLong(id: Long)
+POST        /ad/:id/highlight                      controllers.Ads.highlight(id: Long)
+POST        /ad/:id/autoextend                     controllers.Ads.autoPreLong(id: Long, str:String)
+GET         /ad/:id/archive                        controllers.Ads.archive(id: Long)
+GET         /ad/:id/remove                         controllers.Ads.remove(id: Long)
+POST        /ad/message/:ad_id                     controllers.Ads.sendPrivateMessage(ad_id:Long,author_id:Long)
+POST        /ad/replay_message/                    controllers.Ads.replayPrivateMessage(author_id:Long, ad_id:Long,  recipent_id:Long,message:String)
+GET         /ad/:id/moderate                       controllers.Administer.moderate(id: Long)
+
+
+GET         /profile/ads                           controllers.Manage.myAds()
+GET         /profile/messages                      controllers.Manage.myMessages()
+GET         /profile/message/:id                   controllers.Manage.read(id: Long)
+GET         /profile/message/type/:s               controllers.Manage.getMessageType(s: String)
+
+#POST    /profile/messages/:id/delete controllers.Message.delete(id: Long)
+
+GET         /profile/payments                      controllers.Manage.myPayments()
+GET         /payments/qiwi                         controllers.Payments.qiwi
+GET         /payments/addMoney                     controllers.Manage.addMoney(type:String,money:Double)
+POST        /profile/payment/filter/:filter        controllers.Manage.paymentReport(filter:String,start:String,end:String)
+GET         /profile/settings                      controllers.Manage.mySettings()
+POST        /profile/settings/password             controllers.Settings.changePassword()
+POST        /profile/settings/admin                controllers.Settings.changeUserSetting(id: Long,status: String)
+POST        /profile/settings/user                 controllers.Settings.changeAdminSetting(id: Long,status: String)
+
+POST        /manage/emailing                       controllers.Application.emailing(type: String,email:String)
+
+GET         /profile/info                          controllers.Manage.myInfo()
+GET         /profile/info/edit                     controllers.Info.edit()
+POST        /profile/info/edit/:id                 controllers.Info.update(id:Long)
+
+GET         /admin                                 controllers.Administer.ads()
+GET         /admin/ads                             controllers.Administer.ads()
+GET         /admin/remove/ad/:id                   controllers.Administer.removeAd(id:Long)
+
+GET         /admin/all/filter                      controllers.Administer.filterToSession(name:String,status:String)
+GET         /admin/all/ads/_ad                     controllers.Administer.filterAllAds()
+
+GET         /admin/filter                          controllers.Administer.filters()
+
+GET         /admin/filter/category/                controllers.Filters.getCategories(id:Long)
+GET         /admin/filter/category/parent/:id      controllers.Filters.getParentCategories(id:Long)
+GET         /admin/filter/category/add             controllers.Filters.addCategory()
+GET         /admin/filter/category/update          controllers.Filters.updateCategory(id: Long,name: String)
+POST        /admin/filter/category/:id/delete      controllers.Filters.deleteCategory(id: Long)
+GET         /admin/filter/region/add               controllers.Filters.addRegion()
+GET         /admin/filter/region/update            controllers.Filters.updateRegion(id: Long,name: String)
+POST        /admin/filter/region/:id/delete        controllers.Filters.deleteRegion(id: Long)
+
+GET         /admin/filter/city/                    controllers.Filters.getCities(id:Long)
+GET         /admin/filter/city/parent/:id          controllers.Filters.getParentCities(id:Long)
+GET         /admin/filter/city/add                 controllers.Filters.addCity()
+GET         /admin/filter/city/update              controllers.Filters.updateCity(id: Long,name: String, latlng:String)
+POST        /admin/filter/city/:id/delete          controllers.Filters.deleteCity(id: Long)
+
+GET         /admin/advetisements                   controllers.Administer.advetiments()
+POST        /admin/advetisement/add                controllers.Advertisements.add()
+GET         /admin/advetisement/file/:id           controllers.Advertisements.renderAdvetisement(id: Long)
+GET         /admin/advetisement/:id/expand         controllers.Advertisements.expand(id: Long)
+GET         /admin/advetisement/:id/replace        controllers.Advertisements.replace(id: Long,direction: String)
+GET         /admin/advetisement/:id/remove         controllers.Advertisements.remove(id: Long)
+
+GET         /admin/users                           controllers.Administer.users(page:Integer,sort:String)
+GET         /admin/all/ads                         controllers.Administer.allAds()
+GET         /admin/moderators                      controllers.Administer.moderators()
+
+GET         /admin/user/del=:id                     controllers.User.removeUser(id:Long,page:Integer,sort:String)
+GET         /admin/remove/moderator/:id            controllers.User.removeModerator(id:Long)
+
+
+# Javascript routing
+GET         /assets/javascripts/routes             controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                          controllers.Assets.at(path="/public", file)
+GET         /webjars/*file                         controllers.WebJarAssets.at(file)
+
