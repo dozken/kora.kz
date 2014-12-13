@@ -232,10 +232,9 @@ public class Ads extends Controller {
 
 	public static Result remove(Long id) {
 		/*
-		String a = "delete from authorised_user_ad where ad_id=" + id;
-		SqlUpdate update = Ebean.createSqlUpdate(a);
-		Ebean.execute(update);
-		*/
+		 * String a = "delete from authorised_user_ad where ad_id=" + id;
+		 * SqlUpdate update = Ebean.createSqlUpdate(a); Ebean.execute(update);
+		 */
 		Ad ad = Ad.find.byId(id);
 		ad.delete();
 
@@ -285,17 +284,16 @@ public class Ads extends Controller {
 					requestData.get("location").length() - 1);
 			loc = coords.split(",");
 			System.out.println(requestData.get("location"));
-			System.out.println(loc[0]+","+loc[1]);
+			System.out.println(loc[0] + "," + loc[1]);
 			Location location = new Location();
 			if (loc.length == 2) {
 				location.lat = loc[0].trim();
 				location.lng = loc[1].trim();
 				ad.contactInfo.location = location;
 			}
-		}else if(requestData.get("location").equals("")){
+		} else if (requestData.get("location").equals("")) {
 			ad.contactInfo.location = new Location();
 		}
-		
 
 		ad.description = requestData.get("description");
 		ad.quantity = requestData.get("quantity");
@@ -389,10 +387,12 @@ public class Ads extends Controller {
 		if (requestData.get("section").equals("ВО ВСЕХ РАЗДЕЛАХ")) {
 			if (requestData.get("str").equals("")
 					|| requestData.get("str") == null) {
-				ads = Ad.find.where().eq("status", "active").orderBy("updatedDate").findList();
+				ads = Ad.find.where().eq("status", "active")
+						.orderBy("updatedDate").findList();
 			} else {
 				ads = Ad.find.where().eq("status", "active")
-						.in("tags.name", requestData.get("str")).orderBy("updatedDate").findList();
+						.in("tags.name", requestData.get("str"))
+						.orderBy("updatedDate").findList();
 			}
 			Section section = new Section();
 			section.id = 0L;
@@ -409,21 +409,19 @@ public class Ads extends Controller {
 						.eq("section",
 								Section.find.where()
 										.eq("name", requestData.get("section"))
-										.findUnique())
-						.orderBy("updatedDate")
+										.findUnique()).orderBy("updatedDate")
 						.findList();
 			} else {
 				ads = Ad.find
 						.where()
-						
+
 						.eq("status", "active")
 						.eq("section",
 								Section.find.where()
 										.eq("name", requestData.get("section"))
 										.findUnique())
 						.in("tags.name", requestData.get("str"))
-						.orderBy("updatedDate")
-						.findList();
+						.orderBy("updatedDate").findList();
 			}
 
 			Section section = Section.find.where()
@@ -434,7 +432,8 @@ public class Ads extends Controller {
 	}
 
 	public static Result allAd() {
-		List<Ad> l = Ad.find.where().eq("status", "active").orderBy("updatedDate").findList();
+		List<Ad> l = Ad.find.where().eq("status", "active")
+				.orderBy("updatedDate").findList();
 
 		Section section = new Section();
 		section.id = 0L;
@@ -448,11 +447,9 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Лошадь").findUnique())
-				.orderBy("updatedDate")
-				.findList();
+				.orderBy("updatedDate").findList();
 		Section section = Section.find.where().eq("name", "Лошадь")
-				.orderBy("updatedDate")
-				.findUnique();
+				.orderBy("updatedDate").findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
 	}
 
@@ -462,8 +459,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Верблюд").findUnique())
-						.orderBy("updatedDate")
-				.findList();
+				.orderBy("updatedDate").findList();
 		Section section = Section.find.where().eq("name", "Верблюд")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
@@ -475,8 +471,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Корова").findUnique())
-						.orderBy("updatedDate")
-				.findList();
+				.orderBy("updatedDate").findList();
 		Section section = Section.find.where().eq("name", "Корова")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
@@ -488,7 +483,8 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Овцы/Козы")
-								.findUnique()).orderBy("updatedDate").findList();
+								.findUnique()).orderBy("updatedDate")
+				.findList();
 		Section section = Section.find.where().eq("name", "Овцы/Козы")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
@@ -500,8 +496,7 @@ public class Ads extends Controller {
 				.eq("status", "active")
 				.eq("section",
 						Section.find.where().eq("name", "Другие").findUnique())
-						.orderBy("updatedDate")
-				.findList();
+				.orderBy("updatedDate").findList();
 		Section section = Section.find.where().eq("name", "Другие")
 				.findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
@@ -510,7 +505,8 @@ public class Ads extends Controller {
 	public static Result searchByType(Long id) {
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
-						.eq("section", Section.find.byId(id)).orderBy("updatedDate").findList(),
+						.eq("section", Section.find.byId(id))
+						.orderBy("updatedDate").findList(),
 				Section.find.byId(id), null, null, null));
 	}
 
@@ -826,6 +822,10 @@ public class Ads extends Controller {
 			r = "inner join region r on r.id = c.region_id and r.id="
 					+ requestData.get("region");
 		}
+		if (!requestData.get("city").equals("all")) {
+			r = "inner join city cc on r.id = c.city_id and cc.id="
+					+ requestData.get("city");
+		}
 		if (!requestData.get("searchText").equals("")) {
 			tag = "inner join tag t on a.id=t.ad_id and t.name='"
 					+ requestData.get("searchText") + "'";
@@ -953,9 +953,10 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
-	public static Result getRC(Long id){
+	public static Result getRC(Long id) {
 		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
 	}
+
 	public static Result sitemap(Long cid, Long sid, Long cat) {
 
 		Section section = Section.find.byId(sid);

@@ -56,7 +56,8 @@ public class Filters extends Controller {
 
 		city.location = location;
 		city.save();
-		flash("success", "Город/Ауыл <strong>" + city.name + "</strong> добавлен!");
+		flash("success", "Город/Ауыл <strong>" + city.name
+				+ "</strong> добавлен!");
 		return ok(_city.render(city.region));
 		// }
 	}
@@ -90,7 +91,8 @@ public class Filters extends Controller {
 							+ city.name + "</strong>!");
 			return ok(_city.render(region));
 		} else {
-			flash("success", "Город/Ауыл <strong>" + city.name + "</strong> удален!");
+			flash("success", "Город/Ауыл <strong>" + city.name
+					+ "</strong> удален!");
 			city.delete();
 			return ok(_city.render(region));
 		}

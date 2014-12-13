@@ -22,7 +22,7 @@
   <label class="control-label" for="selectbasic1">Категория:</label>
   <div id="category_div">
     <select id="category" name="category" class="form-control sd" style="width: 170px;">
-	    <option selected disabled hidden> Выберите категорию</option>
+	    <option value="all">Все категории</option>	    
 	    @if(section.categories!=null){
 		    @for(category<-section.categories if(category.parentCategory==null)){
 		    	@if(category.isParent){
@@ -77,7 +77,7 @@
    <div class="frmbck2">
   <label class="control-label" for="selectbasic1"></label>
 
-        <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;"><span class="btr">Поиск</span></button>
+        <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 12px;"><span class="btr">Поиск</span></button>
 </div>
 </div>
 </div>
@@ -89,13 +89,14 @@
   <label class="control-label" for="selectbasic1">Город/Ауыл:</label>
   <div id="city_div">
     <select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
-  <option selected disabled hidden> Выберите город</option>
+  <option value="all">Все города/ауылы</option>
 
 </select>
   </div>
 </div>
 </div>
-<div class="form-group" style="padding-left: 25px;">
+
+<div id="genderHide"class="form-group" style="padding-left: 25px;">
   <div class="col-xs-8 nopaddingleft">
       <input type="hidden" id="gender" name="gender">
   <div class="checkbox">
@@ -112,7 +113,9 @@
 	</div>
   </div>  
 </div>
-<div class="form-group" style="margin-left: -13px;">
+
+
+<div id="quanHide" class="form-group" style="margin-left: -13px;">
   <div class="col-xs-8 nopaddingleft">
   <div class="radio">
     <label for="radios-0">
@@ -128,7 +131,7 @@
 	</div>
   </div>
 </div>
-<div class="form-group" style="margin-left: -3px;">
+<div class="form-group" style="margin-left:10px;">
   <div class="col-xs-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-2">
@@ -144,7 +147,7 @@
 	</div>
   </div>  
 </div>
-<div class="form-group" style="margin-left: -87px;">
+<div class="form-group" style="margin-left: -87px;"*>
   <div class="col-xs-8 nopaddingleft">
   <div class="checkbox">
     <label for="checkboxes-4">
