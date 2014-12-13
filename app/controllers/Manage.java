@@ -141,9 +141,12 @@ public class Manage extends Controller {
 	}
 
 	public static Result myInfo() {
-		flash("name", "value");
-		return ok(myInfo.render(AuthorisedUser
-				.findByEmail(session("connected"))));
+		
+		AuthorisedUser user=AuthorisedUser.findByEmail(session("connected"));
+		if(user.profile.region==null||user.profile.city==null||user.profile.phone==null){
+			flash("pleasefillci", "Заполнение полей <b>\"Регион\", \"Город/Ауыл\", \"Телефон\"</b> в существенно облегчит подачу объявления");
+		}
+		return ok(myInfo.render(user));
 	}
 
 	public static Result saveProfile() {

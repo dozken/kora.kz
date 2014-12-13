@@ -40,7 +40,6 @@ import views.html.profile.ads.myAds;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
-import com.avaje.ebean.SqlUpdate;
 
 public class Ads extends Controller {
 
