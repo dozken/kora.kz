@@ -388,7 +388,7 @@ public class Ads extends Controller {
 			Section section = new Section();
 			section.id = 0L;
 			section.name = "all";
-			return ok(adSearch.render(l, section,null,null,null));
+			return ok(adSearch.render(l, section, null, null, null));
 		}
 
 		else {
@@ -414,7 +414,7 @@ public class Ads extends Controller {
 
 			Section section = Section.find.where()
 					.eq("name", requestData.get("section")).findUnique();
-			return ok(adSearch.render(l, section,null,null,null));
+			return ok(adSearch.render(l, section, null, null, null));
 		}
 
 	}
@@ -425,7 +425,7 @@ public class Ads extends Controller {
 		Section section = new Section();
 		section.id = 0L;
 		section.name = "all_section";
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result horse() {
@@ -437,7 +437,7 @@ public class Ads extends Controller {
 				.findList();
 		Section section = Section.find.where().eq("name", "Лошадь")
 				.findUnique();
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result camel() {
@@ -449,7 +449,7 @@ public class Ads extends Controller {
 				.findList();
 		Section section = Section.find.where().eq("name", "Верблюд")
 				.findUnique();
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result cow() {
@@ -461,7 +461,7 @@ public class Ads extends Controller {
 				.findList();
 		Section section = Section.find.where().eq("name", "Корова")
 				.findUnique();
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result cam() {
@@ -473,7 +473,7 @@ public class Ads extends Controller {
 								.findUnique()).findList();
 		Section section = Section.find.where().eq("name", "Овцы/Козы")
 				.findUnique();
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result other() {
@@ -485,14 +485,14 @@ public class Ads extends Controller {
 				.findList();
 		Section section = Section.find.where().eq("name", "Другие")
 				.findUnique();
-		return ok(adSearch.render(l, section,null,null,null));
+		return ok(adSearch.render(l, section, null, null, null));
 	}
 
 	public static Result searchByType(Long id) {
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
 						.eq("section", Section.find.byId(id)).findList(),
-				Section.find.byId(id),null,null,null));
+				Section.find.byId(id), null, null, null));
 	}
 
 	public static Result favorite() {
@@ -501,12 +501,13 @@ public class Ads extends Controller {
 
 			return ok(adSearch.render(
 					AuthorisedUser.findByEmail(session("connected")).favorites,
-					Section.find.byId(1L),null,null,null));
+					Section.find.byId(1L), null, null, null));
 
 		} else {
 
 			if (request().cookie("userAdsKora") == null)
-				return ok(adSearch.render(null, Section.find.byId(1L),null,null,null));
+				return ok(adSearch.render(null, Section.find.byId(1L), null,
+						null, null));
 
 			String[] ads = request().cookie("userAdsKora").value().split("_");
 			List<Ad> list = new ArrayList<Ad>();
@@ -515,7 +516,8 @@ public class Ads extends Controller {
 					list.add(Ad.find.byId(Long.parseLong(ad)));
 
 			}
-			return ok(adSearch.render(list, Section.find.byId(1L),null,null,null));
+			return ok(adSearch.render(list, Section.find.byId(1L), null, null,
+					null));
 		}
 	}
 
@@ -908,34 +910,38 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
-	public static Result sitemap(Long cid,Long sid,Long cat){
+	public static Result sitemap(Long cid, Long sid, Long cat) {
 
 		Section section = Section.find.byId(sid);
 		Category category = Category.find.byId(cat);
-		if(cid!=0) {
+		if (cid != 0) {
 			City city = City.find.byId(cid);
-			return ok(adSearch.render(Ad.find.where().eq("section", section)
-					.eq("category", category).eq("contactInfo.region", city.region)
-					.eq("contactInfo.city", city).eq("status", "active").findList(),
-			 section,category,city.region,city));
-		}else{
+			return ok(adSearch.render(
+					Ad.find.where().eq("section", section)
+							.eq("category", category)
+							.eq("contactInfo.region", city.region)
+							.eq("contactInfo.city", city)
+							.eq("status", "active").findList(), section,
+					category, city.region, city));
+		} else {
 
-			return ok(adSearch.render(Ad.find.where().eq("section", section)
-							.eq("category", category).eq("status", "active").findList(),
-							section,category,null,null));
+			return ok(adSearch.render(
+					Ad.find.where().eq("section", section)
+							.eq("category", category).eq("status", "active")
+							.findList(), section, category, null, null));
 		}
-
 
 	}
 
-	public static Result sitemapS(Long cid){
+	public static Result sitemapS(Long cid) {
 
-			City city = City.find.byId(cid);
+		City city = City.find.byId(cid);
 		Section section = new Section();
-		section.id=0L;
-			return ok(adSearch.render(Ad.find.where().eq("contactInfo.region", city.region)
-					.eq("contactInfo.city", city).eq("status", "active").findList(),
-					section, null, city.region, city));
-		}
+		section.id = 0L;
+		return ok(adSearch.render(
+				Ad.find.where().eq("contactInfo.region", city.region)
+						.eq("contactInfo.city", city).eq("status", "active")
+						.findList(), section, null, city.region, city));
+	}
 
 }
