@@ -1,0 +1,9 @@
+@(osmp_txn_id :Integer, prv_txn :Integer, sum :Double, result :Integer, comment:String)
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+<osmp_txn_id>@osmp_txn_id</osmp_txn_id>
+<prv_txn>@prv_txn</prv_txn>
+<sum>@("%.2f".format(sum))</sum>
+<result>@result</result>
+<comment>@comment</comment>
+</response>

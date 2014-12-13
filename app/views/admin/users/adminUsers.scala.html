@@ -1,0 +1,63 @@
+
+@main("Пользователи") {
+<style>
+.bootbox-confirm .modal-dialog{
+	width: 300px;
+}
+</style>
+<div class="container">
+<div class="col-xs-3 menudiv">@profile._menu()</div>
+<div class="col-xs-9 ">
+	@profile._title("ВСЕ ПОЛЬЗОВАТЕЛИ"){ }
+  	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td>id</td>
+				<td>Компания</td>
+				<td>Адрес</td>
+				<td>Регион</td>
+				<td>Город</td>
+				<td>Телефон</td>
+				<td>Почта</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody id="user-list">
+  		@_users()
+  		</tbody>
+	</table>
+</div>
+
+</div>
+}
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+$(document).on("click",".delete",function(){
+	var user = $(this).attr("user");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.User.removeUser(user).ajax({
+            success: function(data) {
+              $("#user-list").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#user-list").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+</script>
