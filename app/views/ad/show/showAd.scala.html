@@ -212,6 +212,26 @@ console.log(jqXHR.responseText);
 })
 }
 
+$(document).on("click","#paging_prev",function() {
+
+    var page = $(this).attr("page");
+    jsRoutes.controllers.Ads.commentPaging(@ad.id,page,"minus").ajax({
+        success: function(data) {
+            $("#comment_body").html(data);
+        }
+    })
+})
+
+$(document).on("click","#paging_next",function() {
+
+    var page = $(this).attr("page");
+    jsRoutes.controllers.Ads.commentPaging(@ad.id, page,"add").ajax({
+        success: function(data) {
+            $("#comment_body").html(data);
+        }
+    })
+})
+
 $(document ).on("click",".comment_answer",function(){
 
     if($(this ).attr("comment_type" ) == "answer") {

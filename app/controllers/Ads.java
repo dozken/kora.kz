@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.avaje.ebean.SqlUpdate;
 import models.Emailing;
 import models.Location;
 import models.Setting;
@@ -230,10 +231,11 @@ public class Ads extends Controller {
 	}
 
 	public static Result remove(Long id) {
-		/*
-		 * String a = "delete from authorised_user_ad where ad_id=" + id;
-		 * SqlUpdate update = Ebean.createSqlUpdate(a); Ebean.execute(update);
-		 */
+
+		String a = "delete from users_ads where ads_id=" + id;
+		SqlUpdate update = Ebean.createSqlUpdate(a);
+		Ebean.execute(update);
+
 		Ad ad = Ad.find.byId(id);
 		ad.delete();
 
@@ -792,10 +794,20 @@ public class Ads extends Controller {
 			}
 			comment.save();
 
-			return ok(_comment.render(Ad.find.byId(id).comments));
+			return ok(_comment.render(Ad.find.byId(id).comments,0,Ad.find.byId(id).comments.size()));
 		} else {
 			return ok("kapcha_error");
 		}
+	}
+
+	public static Result commentPaging(Long id,int page,String s){
+
+		if(s.equals("add")) page++; else page--;
+		return ok(_comment.render(Comment.find.where().eq("ad",Ad.find.byId(id)).order("sendDate")
+				.findPagingList(20).getPage(page).getList()
+				,page
+				,Comment.find.where().eq("ad", Ad.find.byId(id)).findRowCount()));
+
 	}
 
 	public static Result searchAd(Integer page, String sort) {

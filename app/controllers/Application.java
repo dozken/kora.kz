@@ -100,6 +100,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.getRC(),
 
 				controllers.routes.javascript.Ads.archive(),
+				controllers.routes.javascript.Ads.commentPaging(),
 				controllers.routes.javascript.Ads.get(),
 				controllers.routes.javascript.Ads.comment(),
 				controllers.routes.javascript.Ads.deleteMessages(),

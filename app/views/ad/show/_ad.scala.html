@@ -154,7 +154,7 @@
 
     <div id="comment_body" class="col-xs-12  formdown topka akwyl">
 
-@_comment(ad.comments)
+@_comment(ad.comments.reverse.take(20),0,ad.comments.size)
         </div>
 @if(models.ad.Ad.settingByName(ad,"comment").status=="all" || (session.get("connected")!=null && models.ad.Ad.settingByName(ad,"comment").status=="registred" )){ 
 	<div class="col-xs-12 nopaddingleft formdown topka">
