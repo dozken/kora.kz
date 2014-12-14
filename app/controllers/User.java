@@ -120,12 +120,12 @@ public class User extends Controller {
 	public static Result removeUser(Long id, Integer page, String sort) {
 		AuthorisedUser.find.byId(id).delete();
 		return ok(views.html.admin.users.adminUsers.render(
-				AuthorisedUser.getUsers(page, sort), page, sort));
+				AuthorisedUser.getUsers(page, sort), page, sort,AuthorisedUser.getUsersCount()));
 	}
 
-	public static Result removeModerator(Long id) {
+	public static Result removeModerator(Long id,Integer page, String sort) {
 		AuthorisedUser.find.byId(id).delete();
-		return ok(views.html.admin.moderators._moderators.render());
+		return ok(views.html.admin.moderators.adminModerators.render(AuthorisedUser.getModerators(page, sort), page, sort,AuthorisedUser.getModeratorsCount()));
 	}
 
 }

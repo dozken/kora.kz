@@ -1,11 +1,11 @@
+@(ads:List[models.ad.Ad],page:Integer,sort:String)
 <thead>
 	<tr>
-		<td>№</td>
-		@*if(session.get("ad.filter.region")!=null&&session.get("ad.filter.region").equals("true")){*@<td>Регион</td>
-		@*if(session.get("ad.filter.city").equals("true")){*@<td>Город/Ауыл</td>
-		@*if(session.get("ad.filter.ad.filter.company").equals("true")){*@<td>Компания</td>
+		@*if(session.get("ad.filter.region")!=null&&session.get("ad.filter.region").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.region.name asc"){"contactInfo.region.name desc"}else{"contactInfo.region.name asc"})">Регион <span class="glyphicon glyphicon-sort"></span></a></td>
+		@*if(session.get("ad.filter.city").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.city.name asc"){"contactInfo.city.name desc"}else{"contactInfo.city.name asc"})">Город/Ауыл <span class="glyphicon glyphicon-sort"></span></a></td>
+		@*if(session.get("ad.filter.ad.filter.company").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.company asc"){"contactInfo.company desc"}else{"contactInfo.company asc"})">Компания <span class="glyphicon glyphicon-sort"></span></a></td>
 		@if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){<td>Название</td>}
-		@*if(session.get("ad.filter.section").equals("true")){*@<td>Раздел</td>
+		@*if(session.get("ad.filter.section").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="section.name asc"){"section.name desc"}else{"section.name asc"})">Раздел <span class="glyphicon glyphicon-sort"></span></a></td>
 		@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>Категория</td>}
 		@if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){<td>Пол</td>}
 		@if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){<td>Возраст</td>}
@@ -13,7 +13,7 @@
 		@if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){<td>Цена</td>}
 		@if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){<td>Просмотры</td>}
 		@if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){<td>Поделелись</td>}
-		@*if(session.get("ad.filter.createDate").equals("ad.filter.true")){*@<td>Дата добавления</td>
+		@*if(session.get("ad.filter.createDate").equals("ad.filter.true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="publishedDate asc"){"publishedDate desc"}else{"publishedDate asc"})">Дата добавления <span class="glyphicon glyphicon-sort"></span></a></td>
 		@if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){<td>Дата редактирования</td>}
 		@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>Дата истичения</td>}
 		@if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){<td>Статус</td>}
@@ -21,9 +21,8 @@
 	</tr>
 </thead>
 <tbody>
-@for((ad,index)<-models.ad.Ad.find.all.zipWithIndex){
+@for(ad<-ads){
 <tr id="ad@ad.id">
-	<td>@{index+1}</td>
 	@*if(session.get("region").equals("true")){*@<td>@ad.contactInfo.region.name</td>
 	@*if(session.get("city").equals("true")){*@<td>@ad.contactInfo.city.name</td>
 	@*if(session.get("company").equals("true")){*@<td>@ad.contactInfo.company</td>
@@ -41,7 +40,7 @@
 	@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>@ad.expirationDate.format("dd/mm/yyyy")</td>}
 	@if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){<td>@Messages(ad.status)</td>}
 	
-	<td><a class="delete" ad="@ad.id"><i class="fa fa-times"></i></a></td>
+	<td><a onclick='del("@routes.Administer.removeAd(ad.id,page,sort)")'><i class="fa fa-times"></i></a></td>
 </tr>
 }
 </tbody>

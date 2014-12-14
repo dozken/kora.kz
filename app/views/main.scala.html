@@ -223,7 +223,7 @@ $("#registrButton" ).prop("disabled",false);
 } else {
 jsRoutes.controllers.Application.emailing ("register",res ).ajax ()
     @restrictOr(la(as("admin"))) {
-        window.location.href = " @routes.Administer.moderators() ";
+        window.location.href = " @routes.Administer.moderators(0,"asc") ";
     } {
         window.location.href = " @routes.User.confirmPage() ";
     }

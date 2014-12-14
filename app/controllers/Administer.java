@@ -1,6 +1,9 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
 import models.Emailing;
 import models.ad.Ad;
 import models.user.AuthorisedUser;
@@ -27,22 +30,32 @@ public class Administer extends Controller {
 		return ok(adminAds.render());
 	}
 
-	public static Result allAds() {
-		return ok(views.html.admin.allAds.adminAds.render());
+	public static Result allAds(int page, String sort)
+	{
+		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
+				.getList(),page,sort,Ad.find.where().findRowCount()));
 	}
 
-	public static Result removeAd(Long id) {
-		Ad.find.byId(id).delete();
-		return ok(views.html.admin.allAds._ad.render());
+	public static Result removeAd(Long id, int page, String sort) {
+		String a = "delete from users_ads where ads_id=" + id;
+		SqlUpdate update = Ebean.createSqlUpdate(a);
+		Ebean.execute(update);
+
+		Ad ad = Ad.find.byId(id);
+		ad.delete();
+		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
+				.getList(),page,sort,Ad.find.where().findRowCount()));
 	}
 
-	public static Result filterToSession(String name, String status) {
+	public static Result filterToSession(String name, String status,int page, String sort) {
 		session(name, status);
-		return ok(views.html.admin.allAds._ad.render());
+		return ok(views.html.admin.allAds._ad.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
+				.getList(),page,sort));
 	}
 
-	public static Result filterAllAds() {
-		return ok(views.html.admin.allAds._ad.render());
+	public static Result filterAllAds(int page, String sort) {
+		return ok(views.html.admin.allAds._ad.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
+				.getList(),page,sort));
 	}
 
 	public static Result filters() {
@@ -54,12 +67,12 @@ public class Administer extends Controller {
 	}
 
 	public static Result users(int page, String sort) {
-		return ok(adminUsers.render(AuthorisedUser.getUsers(page, sort), page,
-				sort));
+		return ok(adminUsers.render(AuthorisedUser.getUsers(page, sort), page, sort,AuthorisedUser.getUsersCount()));
 	}
 
-	public static Result moderators() {
-		return ok(adminModerators.render());
+	public static Result moderators(int page, String sort) {
+
+		return ok(adminModerators.render(AuthorisedUser.getModerators(page, sort), page, sort,AuthorisedUser.getModeratorsCount()));
 	}
 
 	@Restrict({ @Group("admin"), @Group("moderator") })

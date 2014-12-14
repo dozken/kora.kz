@@ -88,9 +88,20 @@
   <div class="frmbck">
   <label class="control-label" for="selectbasic1">Город/Ауыл:</label>
   <div id="city_div">
-    <select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
-  <option value="all">Все города/ауылы</option>
-
+        <select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
+      <option value="all">Все города/ауылы</option>
+            @if(region!=null){
+            @for(c<-region.cities if(c.parentCity==null)){
+            @if(c.isParent){
+            <option class="optionGroup" @if(city.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id"><span>@c.name</span></option>
+            @for((subcity,index) <- c.findSubCitites.zipWithIndex){
+            <option class="optionChild" @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id" @if(subcity == city){selected}>— @subcity.name</option>
+            }
+            }else{
+            <option class="optionChild" @if(c.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id" @if(c == city){selected}>@c.name</option>
+            }
+            }
+}
 </select>
   </div>
 </div>

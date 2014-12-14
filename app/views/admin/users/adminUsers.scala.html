@@ -1,4 +1,4 @@
-@(users:List[models.user.AuthorisedUser],page:Integer,sort:String)
+@(users:List[models.user.AuthorisedUser],page:Integer,sort:String,total:Integer)
 @main("Пользователи") {
 <style>
 .bootbox-confirm .modal-dialog{
@@ -48,10 +48,10 @@
 				}
 				</li>
 				<li>
-					<a id="total" style="color: #666;">Показывает @if(users.size>20){@(20*page+1)-(@(page+1)*20)}else{@(20*page+1)-@models.user.AuthorisedUser.getUsersCount}/@models.user.AuthorisedUser.getUsersCount </a>
+					<a id="total" style="color: #666;">Показывает @if(total>20*(page+1)){@(20*page+1)-(@(page+1)*20)}else{@(20*page+1)-@total}/@total </a>
 				</li>
-				<li class="next @if(users.size<=20){ disabled }">
-					@if(models.user.AuthorisedUser.getUsersCount<=20*(page+1)){
+				<li class="next @if(total<=20*(page+1)){ disabled }">
+					@if(total<=20*(page+1)){
 					<a>следующей &rarr;</a>
 					}else{
 					<a href="@routes.Administer.users((page+1),sort)">следующей &rarr;</a>

@@ -1,8 +1,8 @@
-@(comments:List[models.ad.Comment])
-<h4 class="PFBSPLI-15">@comments.size комментарии</h4>
+@(comments:List[models.ad.Comment],page:Integer,total:Integer)
+<h4 class="PFBSPLI-15">@total комментарии</h4>
 <hr>
 
-@for(comment<-comments.reverse) {
+@for(comment<-comments) {
     <ul class="ko2 nopaddingleft PFBSPR-11">
         <li>
         <ul class="ko nopaddingleft">
@@ -13,4 +13,22 @@
         </li>
      	<li class="">@comment.text</li>
     </ul>
+}
+@if(total>20){
+<div id="pagination" class="col-xs-12">
+    <nav>
+        <ul class="pagination pagination-sm">
+            <li class="prev @if(page==0){ disabled}">
+                <a @if(page!=0){ id="paging_prev" }  page="@page">&larr; предыдущий</a>
+            </li>
+            <li>
+                <a id="total" style="color: #666;">Показывает @if(comments.size==20){@(page*20+1)-@((page+1)*20)}else{@(page*20+1)-@total}/@total </a>
+            </li>
+            <li class="next @if(total<=20*(page+1)){ disabled }">
+                <a @if(total>20*(page+1)){ id="paging_next" } page="@page" >следующей &rarr;</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
 }

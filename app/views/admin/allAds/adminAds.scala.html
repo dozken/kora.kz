@@ -1,3 +1,4 @@
+@(ads:List[models.ad.Ad],page:Integer,sort:String,total:Integer)
 @main("Все объявления") {
 <style>
 .bootbox-confirm .modal-dialog{
@@ -33,8 +34,33 @@
 		</div>
 		}
 	  	<table class="table table-hover table-condensed table-responsive" id="ad-list" style="white-space: nowrap">
-	  		@_ad()			
+	  		@_ad(ads,page,sort)
 		</table>
+			<div id="pagination" class="col-xs-12">
+				<nav>
+					<ul class="pagination pagination-sm">
+						<li class="prev @if(page==0){disabled}">
+							@if(page==0){
+							<a>&larr; предыдущий</a>
+							}else{
+							<a href="@routes.Administer.allAds((page-1),sort)">&larr; предыдущий</a>
+							}
+						</li>
+						<li>
+							<a id="total" style="color: #666;">Показывает @if(total>20*(page+1)){@(20*page+1)-@((page+1)*1)}else{@(20*page+1)-@total}/@total </a>
+						</li>
+						<li class="next @if(total<=20*(page+1)){ disabled }">
+							@if(total<=20*(page+1)){
+							<a>следующей &rarr;</a>
+							}else{
+							<a href="@routes.Administer.allAds((page+1),sort)">следующей &rarr;</a>
+							}
+
+						</li>
+
+					</ul>
+				</nav>
+			</div>
 	  </div>
   </div>
 </div>
@@ -90,7 +116,7 @@ $(document).ready(function() {
                 console.log('Changed option ' + $(option).val() + '.'+ checked);
                 name = $(option).val();
                 status = checked;
-                jsRoutes.controllers.Administer.filterToSession(name,status).ajax({
+                jsRoutes.controllers.Administer.filterToSession(name,status,@page,"@sort").ajax({
 		            success: function(data) {	
 		             	$("#ad-list").html(data);	              
 		            }
@@ -99,7 +125,7 @@ $(document).ready(function() {
             @*
             onDropdownHidden: function(event) {
                 console.log('Dropdown closed.');
-                jsRoutes.controllers.Administer.filterAllAds().ajax({
+                jsRoutes.controllers.Administer.filterAllAds(@page,"@sort").ajax({
 		            success: function(data) {
 		              $("#ad-list").html(data);
 		            },
@@ -113,4 +139,13 @@ $(document).ready(function() {
         });
     });
 
+
+function del(href){
+
+	bootbox.confirm("Вы уверены?", function(confirm) {
+		if(confirm)
+			window.location=href;
+	});
+
+};
 </script>

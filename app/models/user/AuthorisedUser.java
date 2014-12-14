@@ -121,9 +121,15 @@ public class AuthorisedUser extends Model implements Subject {
 				.ne("id", 1L).findRowCount();
 	}
 
-	public static List<AuthorisedUser> getModerators() {
+	public static List<AuthorisedUser> getModerators(int page, String sort) {
 		return find.where().in("roles", SecurityRole.findByName("moderator"))
-				.findList();
+				.order("userName " + sort).findPagingList(20).getPage(page)
+				.getList();
+	}
+
+	public static int getModeratorsCount() {
+
+		return find.where().in("roles", SecurityRole.findByName("moderator")).findRowCount();
 	}
 
 	public static Integer getUnreadMessageCount(Long id) {
