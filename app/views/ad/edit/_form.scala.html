@@ -1,0 +1,295 @@
+@(ad:models.ad.Ad)
+@import models.contact.Region
+
+@import models.ad.Section
+
+
+<form id="ad_form" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Редактировать объявление</legend>
+<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> После редактиврования объявление обратно отправится к модераторам на проверку и не будет доступно другим польователям!!!</div>
+<!-- Select Basic -->
+    <div id="error_fields" class="alert alert-danger"  style="visibility: hidden" role="alert"></div>
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="selectbasic">Раздел</label>
+  <div class="col-xs-3">
+    <select id="section" name="section" class="form-control sd" validation="not_null">
+        <option selected disabled hidden> Выберите Раздел</option>
+      @for(section <- Section.find.all()) {
+          <option value="@section.id" @if(section==ad.section){selected}>@section.name</option>
+      }
+    </select>
+  </div>
+    <div id="category_list" class="col-xs-3">
+        @if(ad.section.id!=5) {
+            <select id="category" name="category" class="form-control sd" validation="not_null">
+                <option selected disabled hidden> Выберите категорию</option>
+			    @for(category<-ad.section.getCategories if(category.parentCategory==null)){
+			    	@if(category.isParent){
+			    	<optgroup label="@category.name">    	
+			    	@for(subcategory <- category.findSubCategories){
+			    	<option value="@subcategory.id" @if(subcategory.equals(ad.category)) {selected}>@subcategory.name</option>}
+			    	</optgroup>
+			    	}else{
+			    	<option value="@category.id" @if(category.equals(ad.category)) {selected}>@category.name</option>}		
+			    }
+            </select>
+        }
+  </div>
+</div>
+<div  id="genderHide">
+    <div class="form-group">
+        <label class="col-xs-2  textalign" for="radios">Пол</label>
+        <div class="col-xs-4">
+            <label class="radio-inline" for="radios-0">
+                <input type="radio" name="section_gender" id="radios-0" value="male" @if(ad.gender=="male"){ checked="checked"}>
+                Самец
+            </label>
+            <label class="radio-inline" for="radios-1">
+                <input type="radio" name="section_gender" id="radios-1" value="female" @if(ad.gender=="female"){ checked="checked"}>
+                Самка
+            </label>
+            <label class="radio-inline" for="radios-2">
+                <input type="radio" name="section_gender" id="radios-2" value="both" @if(ad.gender=="both"){ checked="checked"}>
+                Оба
+            </label>
+        </div>
+    </div>
+</div>
+<div id="quanHide">
+<div  class="form-group">
+  <label class="col-xs-2  textalign" for="radios">Количество</label>
+  <div class="col-xs-4"> 
+    <label class="radio-inline" for="kradios-0">
+      <input type="radio" name="quantity" id="kradios-0" value="single" @if(ad.quantity=="single"){ checked="checked"}>
+      Один
+    </label> 
+    <label class="radio-inline" for="kradios-1">
+      <input type="radio" name="quantity" id="kradios-1" value="many" @if(ad.quantity=="many"){ checked="checked"}>
+      Косяк
+    </label>
+  </div>
+</div>
+</div>
+
+<!-- Select Basic -->
+<div id="ageHide">
+<div  class="form-group">
+  <label class="col-xs-2  textalign" for="selectbasic1">Возраст</label>
+  <div class="col-xs-2">
+    <select id="selectbasic1" name="age" class="form-control sd">
+        @for(i<-2000 to 2050) {
+            <option value="@i" @if(ad.birthDate == i) {selected}>@i</option>
+        }
+    </select>
+  </div>
+</div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="radios1">Цена</label>
+  <div class="col-xs-4">
+
+  <div class="radio">
+    <label for="radios1-0">
+      <input type="radio" name="payment_type" id="payment_type" value="normal" @if(ad.priceType.price!=(-2.0) && ad.priceType.price!=(-1.0)){ checked="checked"}>
+          
+
+
+            <div class="input-group below24 bias-input-group inpgr">
+
+              <input type="text" id="money_input" @if(ad.priceType.price!=(-2.0) && ad.priceType.price!=(-1.0)){value="@ad.priceType.price" validation="double"} class="form-control ssss" name="money">
+         
+              <div class="input-group-btn bs-dropdown-to-select-group">
+                <select id="currency" name="currency" class="form-control sd tenge" style="width: 66px;border-radius:0px 5px 5px 0px">
+                    <option value="KZT">a</option>
+                    <option value="USD">$</option>
+                  </select>
+
+              </div>
+
+
+            </div>
+    </label>
+
+	</div>
+
+  <div class="radio">
+    <label for="radios1-1">
+      <input type="radio" name="payment_type" id="radios1-1" value="change" @if(ad.priceType.price==(-2.0)){ checked="checked"}>
+      На обмен
+    </label>
+	</div>
+  <div class="radio">
+    <label for="radios1-2">
+      <input type="radio" name="payment_type" id="radios1-2" value="negotiable_price" @if(ad.priceType.price==(-1.0)){ checked="checked"}>
+      Договорная цена
+    </label>
+	</div>
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div id="titleHide">
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="textinput">Заголовок</label>  
+  <div class="col-xs-6">
+  <input id="textinput" name="title" type="text" placeholder="" maxlength="30" class="form-control input-md ssss" value="@ad.title" validation="not_null">
+  <span class="help-block">Максимальная длина 30 символов.</span>  
+  </div>
+</div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-xs-2  textalign"  for="textarea">Описание</label>
+  <div class="col-xs-6">                     
+    <textarea class="form-control" rows="6" id="textarea" name="description">@ad.description</textarea>
+  </div>
+</div>
+
+
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="filebutton">Фотографии</label>
+  <div class="col-xs-4">
+    <div class="fileUpload btn myb">
+    <span class="icon-photo"> <span class="PFBSPLI-13">Добавить Фотографии</span></>
+    <input type="file" id="choose" class="upload" multiple />
+    <input type="hidden" id="image_order" name="image_order">
+</div>
+  </div>
+
+</div>
+
+<div class="form-group">
+  <label class="col-xs-2 "></label>
+<div class="col-xs-10">
+<ul id="images" class="connectedList ui-sortable">
+@for(img<-ad.sortByPosition(ad.id)){
+
+   <li id="item-@img.name.replace(".","")" fileName="@img.name" style=' position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'>
+       <canvas src="@img.content" width = "100" height="100"></canvas>
+       <input type="hidden" value="@img.content">
+       <button class="delete" style="position:absolute;bottom:0;right:0; height: 20%; width: 20%; padding: 0px; border-color: transparent;background-color: white;"> <i class="fa fa-check" style="color: #77953a;"></i></button>
+
+   </li>
+}
+</ul>
+      <div class="clear"></div>
+  </div>
+
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="selectbasic2">Регион</label>
+  <div class="col-xs-3">
+    <select id="region" name="region" class="form-control sd" validation="not_null">
+        <option selected disabled hidden> Выберите регион</option>
+      @for(region<-Region.find.all()) {
+          <option value="@region.id" @if(ad.contactInfo.region==region){selected="selected" }>@region.name</option>
+      }
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="selectbasic3">Город/Ауыл</label>
+  <div id="city_list" class="col-xs-3">
+
+      <select id="city"  name="city" class="form-control sd" validation="not_null">
+          <option selected disabled hidden> Выберите город</option>
+          @for(city<-ad.contactInfo.region.cities){
+
+              <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(ad.contactInfo.city==city){selected="selected" }>@city.name</option>
+
+          }
+      </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="textinput1">Компания</label>
+  <div class="col-xs-6">
+  <input id="textinput1" name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md ssss" value="@ad.contactInfo.company"  validation="not_null">
+    
+  </div>
+</div>
+
+    <div class="form-group">
+        <label class="col-xs-2  textalign" for="ema" >Email</label>
+        <div class="col-xs-3">
+            <input id="ema" name="email" type="text" placeholder="someone@@someone.kz" class="form-control input-md ssss" value="@ad.contactInfo.email" validation="mail">
+        </div>
+    </div>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="textinput2">Телефон</label>  
+  <div class="col-xs-3">
+
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" value="@ad.contactInfo.phone.split(",")(0)" validation="not_null">
+      <div id="additional_phones">
+          @for((tee,index) <- ad.contactInfo.phone.split(",").zipWithIndex ){
+          @if(index!=0){
+          <div class="input-group"><input type="text" value="@tee" class="form-control input-md ssss mmm"><span class="input-group-btn"><button type="button" class="btn btn-primary btn-xs del_phone">Удалить</button></span></div>
+
+          }
+          }
+      </div>
+      <center> <button type="button" id="add_phone_additional" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-phone-alt"></span> Добавить еще номер</button></center>
+      <input type="hidden" id="tels" name="additional_phone" value=""/>
+
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-xs-2  textalign" for="selectbasic4">Комментарии</label>
+  <div class="col-xs-5">
+    <select id="selectbasic4" name="coment_display" class="form-control sd">
+      <option value="registred">Только зарегистрированным пользователям</option>
+      <option value="all" @if(models.ad.Ad.settingByName(ad,"comment").status=="all"){selected}>Всем</option>
+      <option value="nobody" @if(models.ad.Ad.settingByName(ad,"comment").status=="nobody"){selected}>Никому</option>
+    </select>
+  </div>
+</div>
+
+    <div class="form-group">
+  <label class="col-xs-2 textalign" for="selectbasic4"></label>
+  <div class="col-xs-5" style="width:100%;position: absolute;padding-left: 150px;padding-top: 32px;">
+    <span>Укажите ваше расположение на карте</span>
+    <a id="remove-map-marker" class="kizilast" style="cursor: pointer;">Удалить метку</a>
+  </div>
+</div>
+<!-- BHHJAUSHASHFAS -->
+<div class="form-group" style="z-index:0;">
+  <div class="col-xs-2" >
+        <span class="input-group-btn">
+          <a map="yandex" class="mapSelect btn btn-default btn-sm "><b>Яндекс</b></a>
+          <a map="google" class="mapSelect btn btn-default btn-sm active"><b>Google</b></a>
+        </span>
+        <div id="mouse_event_map"></div>
+        <input type="hidden" value="" id="location" name="location">
+  </div>
+</div>
+
+<!-- Button -->
+
+<div class="form-group">
+  <label class="col-xs-2 control-label" for="singlebutton"></label>
+  <div class="col-xs-4">
+    <button id="ad_form_submit" name="singlebutton" class="btn btn-success"> Редактировать объявление</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

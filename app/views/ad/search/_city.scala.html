@@ -1,0 +1,15 @@
+@(region:models.contact.Region)
+
+<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
+	<option value="all">Все города/ауылы</option>
+	@for(city<-region.cities if(city.parentCity==null)){
+		@if(city.isParent){
+			<option class="optionGroup" @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id"><span>@city.name</span></option>
+			@for((subcity,index) <- city.findSubCitites.zipWithIndex){
+				<option class="optionChild" @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id">— @subcity.name</option>
+			}
+		}else{
+			<option class="optionChild" @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id">@city.name</option>
+		}
+	}
+</select>

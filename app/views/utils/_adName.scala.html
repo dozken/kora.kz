@@ -1,0 +1,2 @@
+@(ad : models.ad.Ad)
+@if(ad.section.id!=5){@ad.category.name.toUpperCase}else{@ad.title.toUpperCase}

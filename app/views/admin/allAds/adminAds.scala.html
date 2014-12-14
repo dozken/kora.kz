@@ -1,0 +1,151 @@
+@(ads:List[models.ad.Ad],page:Integer,sort:String,total:Integer)
+@main("Все объявления") {
+<style>
+.bootbox-confirm .modal-dialog{
+	width: 300px;
+}
+</style>
+<link rel="stylesheet" href="@routes.Assets.at("bootstrap-multiselect/css/bootstrap-multiselect.css")" type="text/css"/>
+<div class="container">
+	<div class="col-xs-3 menudiv">@profile._menu()</div>
+		<div class="col-xs-9">
+	  	@profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ 
+		<div class="col-xs-4 tptp">
+		<select id="filter" multiple="multiple">
+		    @*<option value="ad.filter.region">Регион</option>
+		    <option value="ad.filter.city" selected>Город/Ауыл</option>
+		    <option value="ad.filter.company" selected>Компания</option>*@
+		    <option value="ad.filter.name" @if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){selected}>Название</option>
+		    @*<option value="ad.filter.section">Раздел</option>*@
+		    <option value="ad.filter.category" @if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){selected}>Категория</option>
+		    <option value="ad.filter.gender" @if(session.get("ad.filter.gender")!=null&&session.get("ad.filter.gender").equals("true")){selected}>Пол</option>
+		    <option value="ad.filter.age" @if(session.get("ad.filter.age")!=null&&session.get("ad.filter.age").equals("true")){selected}>Возраст</option>
+		    <option value="ad.filter.quantity" @if(session.get("ad.filter.quantity")!=null&&session.get("ad.filter.quantity").equals("true")){selected}>Количество</option>		    
+		    <option value="ad.filter.price" @if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){selected}>Цена</option>
+		    <option value="ad.filter.views" @if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){selected}>Просмотры</option>
+		    <option value="ad.filter.shares" @if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){selected}>Поделелись</option>
+		    @*<option value="ad.filter.createDate">Дата добавления</option>*@
+		    <option value="ad.filter.updateDate" @if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){selected}>Дата редактирования</option>
+		    <option value="ad.filter.expirationDate" @if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){selected}>Дата истичения</option>		   <option value="ad.filter.status" @if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){selected}>Статус</option>		
+		</select>
+		@*
+		<button class="btn btn-default btn-success " style="padding-top: 2px;padding-bottom: 2px;margin-top: 2px;">Показать</button>
+		*@
+		</div>
+		}
+	  	<table class="table table-hover table-condensed table-responsive" id="ad-list" style="white-space: nowrap">
+	  		@_ad(ads,page,sort)
+		</table>
+			<div id="pagination" class="col-xs-12">
+				<nav>
+					<ul class="pagination pagination-sm">
+						<li class="prev @if(page==0){disabled}">
+							@if(page==0){
+							<a>&larr; предыдущий</a>
+							}else{
+							<a href="@routes.Administer.allAds((page-1),sort)">&larr; предыдущий</a>
+							}
+						</li>
+						<li>
+							<a id="total" style="color: #666;">Показывает @if(total>20*(page+1)){@(20*page+1)-@((page+1)*1)}else{@(20*page+1)-@total}/@total </a>
+						</li>
+						<li class="next @if(total<=20*(page+1)){ disabled }">
+							@if(total<=20*(page+1)){
+							<a>следующей &rarr;</a>
+							}else{
+							<a href="@routes.Administer.allAds((page+1),sort)">следующей &rarr;</a>
+							}
+
+						</li>
+
+					</ul>
+				</nav>
+			</div>
+	  </div>
+  </div>
+</div>
+}
+
+
+<script type="text/javascript" src='@routes.Assets.at("bootstrap-multiselect/js/bootstrap-multiselect.js")'></script>
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+$(document).on("click",".delete",function(){
+	var ad = $(this).attr("ad");    
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        jsRoutes.controllers.Administer.removeAd(ad).ajax({
+            success: function(data) {
+              $("#ad-list").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("#ad-list").html(data);
+              //console.log(jqXHR.responseText);
+            }
+        });
+    });
+    $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
+});
+
+
+$(document).ready(function() {
+
+
+		var name;
+		var status;
+        $('#filter').multiselect({
+        	allSelectedText: "Все выбранно",
+        	nSelectedText : "выбранно",
+        	buttonWidth: '361px',
+        	numberDisplayed: 5,
+        	nonSelectedText: 'Выберите фильтр',
+        	buttonClass: 'btn btn-default btn-success btn-sm',
+            onChange: function(option, checked, select) {
+                console.log('Changed option ' + $(option).val() + '.'+ checked);
+                name = $(option).val();
+                status = checked;
+                jsRoutes.controllers.Administer.filterToSession(name,status,@page,"@sort").ajax({
+		            success: function(data) {	
+		             	$("#ad-list").html(data);	              
+		            }
+		        });
+            },
+            @*
+            onDropdownHidden: function(event) {
+                console.log('Dropdown closed.');
+                jsRoutes.controllers.Administer.filterAllAds(@page,"@sort").ajax({
+		            success: function(data) {
+		              $("#ad-list").html(data);
+		            },
+		            error: function(jqXHR, textStatus, errorThrown) {
+		              $("#ad-list").html(data);
+		              //console.log(jqXHR.responseText);
+		            }
+		        });
+            }
+            *@
+        });
+    });
+
+
+function del(href){
+
+	bootbox.confirm("Вы уверены?", function(confirm) {
+		if(confirm)
+			window.location=href;
+	});
+
+};
+</script>
