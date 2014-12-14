@@ -13,10 +13,10 @@
 <!-- Select Basic -->
     <div id="error_fields" class="alert alert-danger"  style="visibility: hidden" role="alert"></div>
 <div class="form-group">
-  <label class="col-xs-2  textalign" for="selectbasic">Животное</label>
+  <label class="col-xs-2  textalign" for="selectbasic">Раздел</label>
   <div class="col-xs-3">
     <select id="section" name="section" class="form-control sd" validation="not_null">
-        <option selected disabled hidden> Выберите животное</option>
+        <option selected disabled hidden> Выберите Раздел</option>
       @for(section <- Section.find.all()) {
           <option value="@section.id" @if(section==ad.section){selected}>@section.name</option>
       }
@@ -25,12 +25,16 @@
     <div id="category_list" class="col-xs-3">
         @if(ad.section.id!=5) {
             <select id="category" name="category" class="form-control sd" validation="not_null">
-                <option selected disabled hidden> Выберите тип</option>
-                @for(category <- ad.section.getCategories) {
-
-                    <option value="@category.id" @if(category == ad.category) {selected}>@category.name </option>
-
-                }
+                <option selected disabled hidden> Выберите категорию</option>
+			    @for(category<-ad.section.getCategories if(category.parentCategory==null)){
+			    	@if(category.isParent){
+			    	<optgroup label="@category.name">    	
+			    	@for(subcategory <- category.findSubCategories){
+			    	<option value="@subcategory.id" @if(subcategory.equals(ad.category)) {selected}>@subcategory.name</option>}
+			    	</optgroup>
+			    	}else{
+			    	<option value="@category.id" @if(category.equals(ad.category)) {selected}>@category.name</option>}		
+			    }
             </select>
         }
   </div>
@@ -241,7 +245,7 @@
           }
           }
       </div>
-      <center> <button type="button" id="add_phone_additional" class="btn btn-primary btn-xs">Добавить телефон</button></center>
+      <center> <button type="button" id="add_phone_additional" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-phone-alt"></span> Добавить еще номер</button></center>
       <input type="hidden" id="tels" name="additional_phone" value=""/>
 
   </div>

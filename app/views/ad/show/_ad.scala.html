@@ -2,7 +2,7 @@
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
-	<li><h4><b>@utils._adName(ad)</b></h4></li>
+	<li><h3><b>@utils._adName(ad)</b></h3></li>
 	<li class="att">
   <h4>
 <div style="position: absolute;margin-top: -22px;padding-left: 10px;">  
@@ -14,17 +14,14 @@
     
   </h4>
   </li>
-  <li style="float: right;padding-top: 29px;">
+  <li style="float: right;padding-top: 40px;padding-right: 80px;">
     @if(controllers.Ads.checkFavorite(ad.id)) {
-        <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span>
-            В избранном</a>
+        <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span> В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
         В избранное</a>}
-        &nbsp&nbsp&nbsp
-        
         <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer">
         @if(controllers.Ads.favoriteSizeInt>0){ 
-        Выбрано @controllers.Ads.favoriteSizeInt объявления        
+        &nbsp&nbsp&nbsp Выбрано @controllers.Ads.favoriteSizeInt объявления        
         }
         </a>
   </li>
