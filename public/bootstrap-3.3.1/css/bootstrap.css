@@ -3837,6 +3837,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
+  min-width: 1140px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -4395,10 +4396,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #337ab7;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  margin-left: -1px;
+  color: #2d2d2d;
+  margin-left: 2px;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
@@ -4415,9 +4414,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #23527c;
-  background-color: #eeeeee;
-  border-color: #dddddd;
+  color: #fff;
+  background-color: #90b346;
+  border-radius: 6px;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4426,9 +4425,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   z-index: 2;
-  color: #ffffff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  color: #fff;
+  background-color: #90b346;
+  border-radius: 6px;
   cursor: default;
 }
 .pagination > .disabled > span,
