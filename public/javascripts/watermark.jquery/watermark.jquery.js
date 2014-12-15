@@ -39,8 +39,7 @@
 		    }
 		},
 		changeClass= function(){
-			
-			setTimeout(function(){
+
 				var els = $('.'+className);
 
 				els.each(function(){
@@ -48,22 +47,21 @@
 					
 					var img = $(this);
 					getBrightness(img.context.currentSrc,function(brightness){
-						img.removeClass('watermark')
+						//img.removeClass('watermark')
 						if(brightness<100){
 							//dark
 							
 							img.addClass('dark');
-							//console.log("dark")
+							img.attr("brightness","dark")
 						}
 						else{
+							img.attr("brightness","bright")
 							img.addClass('bright');
 							//console.log("bright")
 							//bright
 						}
 					});
 				});
-				$(document).watermark();
-			},10);
 		};
 		changeClass();
 	};
@@ -74,7 +72,7 @@
 	$.fn.watermark = function(cfg){
 		var doc = this,
 		gcanvas = {},
-		gctx = {},
+		opacity = {},
 		imgQueue = [],
 		className = "watermark",
 		classSubName = "dark",
@@ -84,17 +82,22 @@
 		opacity = (255/(100/50)), // 50%
 		initCanvas = function(){
 			gcanvas = $('<canvas style="display:none"></canvas>');
+			canvas2d.globalAlpha = 0.5
 			gctx = gcanvas[0].getContext("2d");
 			$('body').append(gcanvas);
 		},
 		initWatermark = function(){
 			//setTimeout(function(){
 				var els = $('.watermark');
-				classSubName='dark';
+				classSubName='watermark';
 				els.each(function(){
 					
 					watermark = $('<img src="http://localhost:9000/assets/images/home/white.png" />');
-					console.log("watermark dark")
+					if($(this).hasClass("dark"))
+						console.log("watermark dark")
+					else if($(this).hasClass("bright"))
+						console.log("watermark bright")
+					//opacity = 50
 					if(opacity != 255){
 						if(!watermark[0].complete)
 							watermark[0].onload = function(){	
@@ -107,24 +110,8 @@
 					}else{
 						applyWatermarks();
 					}
-				});	
-	  		    els = $('.watermark');
-				classSubName='bright';
-				els.each(function(){
-					watermark = $('<img src="http://localhost:9000/assets/images/home/black.png" />');
-					console.log("watermark bright")
-					if(opacity != 255){
-						if(!watermark[0].complete)
-							watermark[0].onload = function(){	
-								applyTransparency();
-							};
-						else
-							applyTransparency();
-					}else{
-						applyWatermarks();
-					}
-				});				
-		},
+				});
+			},
 		// function for applying transparency to the watermark
 		applyTransparency = function(){
 			var w = watermark[0].width || watermark[0].offsetWidth,
@@ -138,7 +125,10 @@
 			length = imageData.length;
 			for(var i=3; i < length; i+=4){  
 				imageData[i] = (imageData[i]<opacity)?imageData[i]:opacity;
+				console.log((imageData[i]<opacity)?imageData[i]:opacity)
+				//imageData[i] = 0;
 			}
+			console.log("")
 			image.data = imageData;
 			gctx.putImageData(image, 0, 0);
 			watermark[0].onload = null;
@@ -221,6 +211,8 @@
 		configure(cfg);
 	};
 })(jQuery);
+
+
 // 87888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 (function($){
 	$.fn.watermark1 = function(cfg){
