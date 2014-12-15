@@ -71,8 +71,10 @@ var config = {
 		"path": '@routes.Assets.at("/images/home/watermark.png")',
 		//"className":"watermark",
 		//"position":"top-left"|"top-right"|"bottom-right"|"bottom-left"
-		"opacity":30
+		//"opacity":30
 	};
+	
+	
 $(document).ready(function(){
 	$(document).watermark1(config);
 	
@@ -205,5 +207,7 @@ $("#total" ).text("Показывает "+(page*30 + 1)+" - "+a+" / "+a );
 }else{ $("#total" ).text("Показывает "+(page*30 + 1)+" - "+((page+1)*30)+" / "+a );}
 enDis();
 }
+
+
 
 </script>

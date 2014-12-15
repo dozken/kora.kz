@@ -7,6 +7,65 @@
  *	license: MIT - feel free to use, modify, redistribute
  *	http://letmein.at/software/how-to-correctly-use-code-you-didnt-write/
  */
+(function($){
+	$.fn.brightness = function(){
+		var doc = this,
+		className = "watermark",
+		getBrightness = function(imageSrc,callback) {
+		    var img = document.createElement("img");
+		    img.src = imageSrc;
+		    img.style.display = "none";
+		    document.body.appendChild(img);
+		    var colorSum = 0;
+		    img.onload = function() {
+		        // create canvas
+		        var canvas = document.createElement("canvas");
+		        canvas.width = this.width;
+		        canvas.height = this.height;
+		        var ctx = canvas.getContext("2d");
+		        ctx.drawImage(this,0,0);
+		        var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+		        var data = imageData.data;
+		        var r,g,b,avg;
+		          for(var x = 0, len = data.length; x < len; x+=4) {
+		            r = data[x];
+		            g = data[x+1];
+		            b = data[x+2];
+		            avg = Math.floor((r+g+b)/3);
+		            colorSum += avg;
+		        }
+		        var brightness = Math.floor(colorSum / (this.width*this.height));		        
+		        callback(brightness);
+		    }
+		},
+		changeClass= function(){
+			
+			setTimeout(function(){
+				var els = $('.'+className);
+
+				els.each(function(){
+					//opacity = 10;
+					
+					var img = $(this);
+					getBrightness(img.context.currentSrc,function(brightness){
+						if(brightness<100){
+							//dark
+							img.addClass('dark');
+							console.log("dark")
+						}
+						else{
+							img.addClass('bright');
+							console.log("bright")
+							//bright
+						}
+					});
+				});
+			},10);
+		};
+		changeClass();
+	};
+	
+})(jQuery);	
 
 (function($){
 	$.fn.watermark = function(cfg){

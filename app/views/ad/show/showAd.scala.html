@@ -29,14 +29,21 @@ float: none; !important
 <script src='@routes.Assets.at("javascripts/watermark.jquery/watermark.jquery.js")' type="text/javascript"></script>
 <script>
 
-var config = {
-	"path": '@routes.Assets.at("/images/home/watermark.png")',
-	//"className":"watermark",
-	//"position":"top-left"|"top-right"|"bottom-right"|"bottom-left"
+var configDark = {
+	"path": '@routes.Assets.at("/images/home/white.png")',
+	"className":"dark",	
 	"opacity":30	
-	};
+};
+
+var configBright= {
+	"path": '@routes.Assets.at("/images/home/black.png")',
+	"className":"bright",	
+	"opacity":30	
+};
 $(document).ready(function(){
-	$(document).watermark(config);
+	$(document).brightness();
+	$(document).watermark(configDark);
+	$(document).watermark(configBright);
 	console.log("watermark");
 });
 
