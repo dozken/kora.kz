@@ -19,11 +19,14 @@
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span> В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
         В избранное</a>}
-        <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer">
+        
         @if(controllers.Ads.favoriteSizeInt>0){ 
-        &nbsp&nbsp&nbsp Выбрано @controllers.Ads.favoriteSizeInt объявления        
+        &nbsp&nbsp&nbsp
+        <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer"> 
+        Выбрано @controllers.Ads.favoriteSizeInt объявления
+        </a>        
         }
-        </a>
+        
   </li>
 </ul>
 <div class="col-xs-5 nopaddingleft">
@@ -125,7 +128,7 @@
 
 <div class="col-xs-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p class="PFBSPLI-13" style="font-style:normal;">@ad.description</p>
+	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;">@ad.description</p>
 </div>
 <div class="col-xs-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
