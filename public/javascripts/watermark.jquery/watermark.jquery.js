@@ -48,18 +48,21 @@
 					
 					var img = $(this);
 					getBrightness(img.context.currentSrc,function(brightness){
+						img.removeClass('watermark')
 						if(brightness<100){
 							//dark
+							
 							img.addClass('dark');
-							console.log("dark")
+							//console.log("dark")
 						}
 						else{
 							img.addClass('bright');
-							console.log("bright")
+							//console.log("bright")
 							//bright
 						}
 					});
 				});
+				$(document).watermark();
 			},10);
 		};
 		changeClass();
@@ -74,6 +77,7 @@
 		gctx = {},
 		imgQueue = [],
 		className = "watermark",
+		classSubName = "dark",
 		watermark = false,
 		watermarkPosition = "bottom-right",
 		watermarkPath = "watermark.png?"+(+(new Date())),
@@ -84,21 +88,42 @@
 			$('body').append(gcanvas);
 		},
 		initWatermark = function(){
-			watermark = $('<img src="'+watermarkPath+'" />');
-
-			if(opacity != 255){
-				if(!watermark[0].complete)
-					watermark[0].onload = function(){	
-						applyTransparency();
-					};
-				else
-					applyTransparency();
-				
-
-			}else{
-				applyWatermarks();
-			}
-			
+			//setTimeout(function(){
+				var els = $('.watermark');
+				classSubName='dark';
+				els.each(function(){
+					
+					watermark = $('<img src="http://localhost:9000/assets/images/home/white.png" />');
+					console.log("watermark dark")
+					if(opacity != 255){
+						if(!watermark[0].complete)
+							watermark[0].onload = function(){	
+								applyTransparency();
+							};
+						else
+							applyTransparency();
+						
+	
+					}else{
+						applyWatermarks();
+					}
+				});	
+	  		    els = $('.watermark');
+				classSubName='bright';
+				els.each(function(){
+					watermark = $('<img src="http://localhost:9000/assets/images/home/black.png" />');
+					console.log("watermark bright")
+					if(opacity != 255){
+						if(!watermark[0].complete)
+							watermark[0].onload = function(){	
+								applyTransparency();
+							};
+						else
+							applyTransparency();
+					}else{
+						applyWatermarks();
+					}
+				});				
 		},
 		// function for applying transparency to the watermark
 		applyTransparency = function(){
@@ -176,17 +201,14 @@
 		},
 		applyWatermarks = function(){
 			setTimeout(function(){
-				var els = $('.'+className);
+				var els = $('.'+classSubName);
 
 				els.each(function(){
 
 					var img = $(this);
 					if(img[0].tagName.toUpperCase() != "IMG")
 						return;
-	
-					
 					if(!img[0].complete){
-
 						img[0].onload = function(){
 							applyWatermark(img);
 						};
