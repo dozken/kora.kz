@@ -1,0 +1,38 @@
+@(ad: models.ad.Ad)
+@import java.text.SimpleDateFormat 
+@import java.util.Locale
+
+<div class="col-xs-4 suret">
+    <a href="@routes.Ads.get(ad.id)">
+    @if(ad.images.size()>0){
+    
+    <div class="newesuret1"><span>@ad.images.size</span></div>
+    <div class="newesuret"></div>
+    <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
+        <img src="@models.ad.AdImage.getFirstPicture(ad.id)" class="watermark1" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;"> 
+    </div>        
+    }else{
+    <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
+    <img src="@routes.Assets.at("images/home/nophoto.png")" class="watermark1" style="width: auto;height: auto; border-radius:5px;max-width:230px;max-height:157px;margin-left: 36px;">
+    </div>
+    }
+    </a>
+	</div>
+<div class="col-xs-8">
+    <ul class="obya" >
+        <li>
+        <a href="@routes.Ads.get(ad.id)" style="color:black;"><b>@utils._adName(ad)</b></a>
+
+        <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
+        <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(65)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
+        <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.city.name</li>
+        <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
+    </ul>
+    <ul class="pros">
+        <li>@if(ad.views>0){<span class="icon-prosmotr"></span> @ad.views просмотров}</li>
+        <li>@if(ad.comments.size()>0){<span class="icon-comment"></span> @ad.comments.size() комментариев}</li>
+        <li><span class="icon-date"></span> @(new SimpleDateFormat("dd MMMM", new Locale("ru", "RU")).format(ad.publishedDate))
+        </li>
+    </ul>
+</div>
+
