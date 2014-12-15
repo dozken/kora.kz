@@ -1,5 +1,5 @@
 @(comments:List[models.ad.Comment],page:Integer,total:Integer)
-<h4 class="PFBSPLI-15">@total комментарии</h4>
+<h4 class="PFBSPLI-15">@if(total>0){@total комментарии}else{Комментариев пока нет}</h4>
 <hr>
 
 @for(comment<-comments) {

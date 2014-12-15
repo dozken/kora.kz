@@ -24,7 +24,7 @@
         <a href="@routes.Ads.get(ad.id)" style="color:black;"><b>@utils._adName(ad)</b></a>
 
         <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
-        <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(65)... }else{ @ad.description}</li>
+        <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(65)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.city.name</li>
         <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
     </ul>
