@@ -238,10 +238,10 @@
   <label class="col-xs-2 textalign" for="textinput2">Телефон</label>
   <div class="col-xs-3">
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
-<div id="additional_phones">
+<div id="additional_phones" style="margin-top:5px;margin-bottom:5px;">
 
 </div>
-     <center> <button type="button" id="add_phone_additional" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-phone-alt"></span> Добавить еще номер</button></center>
+     <center style="margin-left: 91px;margin-top: 5px;"> <button type="button" id="add_phone_additional" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-phone-alt"></span> Добавить еще номер</button></center>
       <input type="hidden" id="tels" name="additional_phone" value=""/>
   </div>
 </div>
