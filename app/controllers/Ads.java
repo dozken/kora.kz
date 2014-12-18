@@ -65,7 +65,9 @@ public class Ads extends Controller {
 				.get("section")));
 		ad.category = Category.find.byId(Long.parseLong(requestData
 				.get("category")));
-		ad.birthDate = Integer.parseInt(requestData.get("age"));
+		if (requestData.get("age") != null) {
+			ad.birthDate = Integer.parseInt(requestData.get("age"));
+		}
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
 				.get("city")));
@@ -92,9 +94,11 @@ public class Ads extends Controller {
 		contactInfo.location = location;
 		ad.contactInfo = contactInfo;
 		ad.description = requestData.get("description");
-		ad.quantity = requestData.get("quantity");
+		if (requestData.get("quantity") != null)
+			ad.quantity = requestData.get("quantity");
 		ad.title = requestData.get("title");
-		ad.gender = requestData.get("section_gender");
+		if (requestData.get("section_gender") != null)
+			ad.gender = requestData.get("section_gender");
 		Price price = new Price();
 		if (requestData.get("payment_type").equals("normal")) {
 
@@ -128,9 +132,12 @@ public class Ads extends Controller {
 		ad.tags.add(new Tag(ad.section.name));
 		ad.tags.add(new Tag(ad.category.name));
 		ad.tags.add(new Tag(ad.title));
-		ad.tags.add(new Tag(ad.birthDate.toString()));
-		ad.tags.add(new Tag(ad.gender));
-		ad.tags.add(new Tag(ad.quantity));
+		if (ad.birthDate != null)
+			ad.tags.add(new Tag(ad.birthDate.toString()));
+		if (ad.gender != null)
+			ad.tags.add(new Tag(ad.gender));
+		if (ad.quantity != null)
+			ad.tags.add(new Tag(ad.quantity));
 		ad.tags.add(new Tag(ad.contactInfo.region.name));
 		ad.tags.add(new Tag(ad.contactInfo.city.name));
 		ad.update();
@@ -794,19 +801,24 @@ public class Ads extends Controller {
 			}
 			comment.save();
 
-			return ok(_comment.render(Ad.find.byId(id).comments,0,Ad.find.byId(id).comments.size()));
+			return ok(_comment.render(Ad.find.byId(id).comments, 0,
+					Ad.find.byId(id).comments.size()));
 		} else {
 			return ok("kapcha_error");
 		}
 	}
 
-	public static Result commentPaging(Long id,int page,String s){
+	public static Result commentPaging(Long id, int page, String s) {
 
-		if(s.equals("add")) page++; else page--;
-		return ok(_comment.render(Comment.find.where().eq("ad",Ad.find.byId(id)).order("sendDate")
-				.findPagingList(20).getPage(page).getList()
-				,page
-				,Comment.find.where().eq("ad", Ad.find.byId(id)).findRowCount()));
+		if (s.equals("add"))
+			page++;
+		else
+			page--;
+		return ok(_comment.render(
+				Comment.find.where().eq("ad", Ad.find.byId(id))
+						.order("sendDate").findPagingList(20).getPage(page)
+						.getList(), page,
+				Comment.find.where().eq("ad", Ad.find.byId(id)).findRowCount()));
 
 	}
 
@@ -867,7 +879,7 @@ public class Ads extends Controller {
 			}
 		}
 		if (!requestData.get("searchText").equals("")) {
-			tag = "inner join tag t on a.id=t.ad_id and t.name='"
+			tag = "inner join ad_tags t on a.id=t.ad_id and t.name='"
 					+ requestData.get("searchText") + "'";
 		}
 
@@ -875,7 +887,7 @@ public class Ads extends Controller {
 			loc = "and c.location_id is not null";
 		}
 		if (requestData.get("picture") != null) {
-			pic = "and a.id in (select ad_id from ad_image)";
+			pic = "and a.id in (select ad_id from ad_images)";
 		}
 		if (requestData.get("change") != null) {
 			f = -2;
