@@ -30,10 +30,10 @@ public class Administer extends Controller {
 		return ok(adminAds.render());
 	}
 
-	public static Result allAds(int page, String sort)
-	{
-		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
-				.getList(),page,sort,Ad.find.where().findRowCount()));
+	public static Result allAds(int page, String sort) {
+		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where()
+				.order(sort).findPagingList(20).getPage(page).getList(), page,
+				sort, Ad.find.where().findRowCount()));
 	}
 
 	public static Result removeAd(Long id, int page, String sort) {
@@ -43,19 +43,23 @@ public class Administer extends Controller {
 
 		Ad ad = Ad.find.byId(id);
 		ad.delete();
-		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
-				.getList(),page,sort,Ad.find.where().findRowCount()));
+		return ok(views.html.admin.allAds.adminAds.render(Ad.find.where()
+				.order(sort).findPagingList(20).getPage(page).getList(), page,
+				sort, Ad.find.where().findRowCount()));
 	}
 
-	public static Result filterToSession(String name, String status,int page, String sort) {
+	public static Result filterToSession(String name, String status, int page,
+			String sort) {
 		session(name, status);
-		return ok(views.html.admin.allAds._ad.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
-				.getList(),page,sort));
+		return ok(views.html.admin.allAds._ad.render(Ad.find.where()
+				.order(sort).findPagingList(20).getPage(page).getList(), page,
+				sort));
 	}
 
 	public static Result filterAllAds(int page, String sort) {
-		return ok(views.html.admin.allAds._ad.render(Ad.find.where().order(sort).findPagingList(20).getPage(page)
-				.getList(),page,sort));
+		return ok(views.html.admin.allAds._ad.render(Ad.find.where()
+				.order(sort).findPagingList(20).getPage(page).getList(), page,
+				sort));
 	}
 
 	public static Result filters() {
@@ -67,12 +71,15 @@ public class Administer extends Controller {
 	}
 
 	public static Result users(int page, String sort) {
-		return ok(adminUsers.render(AuthorisedUser.getUsers(page, sort), page, sort,AuthorisedUser.getUsersCount()));
+		return ok(adminUsers.render(AuthorisedUser.getUsers(page, sort), page,
+				sort, AuthorisedUser.getUsersCount()));
 	}
 
 	public static Result moderators(int page, String sort) {
 
-		return ok(adminModerators.render(AuthorisedUser.getModerators(page, sort), page, sort,AuthorisedUser.getModeratorsCount()));
+		return ok(adminModerators.render(
+				AuthorisedUser.getModerators(page, sort), page, sort,
+				AuthorisedUser.getModeratorsCount()));
 	}
 
 	@Restrict({ @Group("admin"), @Group("moderator") })
