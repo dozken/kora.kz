@@ -129,7 +129,8 @@ public class AuthorisedUser extends Model implements Subject {
 
 	public static int getModeratorsCount() {
 
-		return find.where().in("roles", SecurityRole.findByName("moderator")).findRowCount();
+		return find.where().in("roles", SecurityRole.findByName("moderator"))
+				.findRowCount();
 	}
 
 	public static Integer getUnreadMessageCount(Long id) {
