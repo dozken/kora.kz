@@ -65,9 +65,7 @@ public class Ads extends Controller {
 				.get("section")));
 		ad.category = Category.find.byId(Long.parseLong(requestData
 				.get("category")));
-		if (requestData.get("age") != null) {
-			ad.birthDate = Integer.parseInt(requestData.get("age"));
-		}
+		ad.birthDate = Integer.parseInt(requestData.get("age"));
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
 				.get("city")));
@@ -94,11 +92,9 @@ public class Ads extends Controller {
 		contactInfo.location = location;
 		ad.contactInfo = contactInfo;
 		ad.description = requestData.get("description");
-		if (requestData.get("quantity") != null)
-			ad.quantity = requestData.get("quantity");
+		ad.quantity = requestData.get("quantity");
 		ad.title = requestData.get("title");
-		if (requestData.get("section_gender") != null)
-			ad.gender = requestData.get("section_gender");
+		ad.gender = requestData.get("section_gender");
 		Price price = new Price();
 		if (requestData.get("payment_type").equals("normal")) {
 
@@ -132,12 +128,9 @@ public class Ads extends Controller {
 		ad.tags.add(new Tag(ad.section.name));
 		ad.tags.add(new Tag(ad.category.name));
 		ad.tags.add(new Tag(ad.title));
-		if (ad.birthDate != null)
-			ad.tags.add(new Tag(ad.birthDate.toString()));
-		if (ad.gender != null)
-			ad.tags.add(new Tag(ad.gender));
-		if (ad.quantity != null)
-			ad.tags.add(new Tag(ad.quantity));
+		ad.tags.add(new Tag(ad.birthDate.toString()));
+		ad.tags.add(new Tag(ad.gender));
+		ad.tags.add(new Tag(ad.quantity));
 		ad.tags.add(new Tag(ad.contactInfo.region.name));
 		ad.tags.add(new Tag(ad.contactInfo.city.name));
 		ad.update();
@@ -801,24 +794,19 @@ public class Ads extends Controller {
 			}
 			comment.save();
 
-			return ok(_comment.render(Ad.find.byId(id).comments, 0,
-					Ad.find.byId(id).comments.size()));
+			return ok(_comment.render(Ad.find.byId(id).comments,0,Ad.find.byId(id).comments.size()));
 		} else {
 			return ok("kapcha_error");
 		}
 	}
 
-	public static Result commentPaging(Long id, int page, String s) {
+	public static Result commentPaging(Long id,int page,String s){
 
-		if (s.equals("add"))
-			page++;
-		else
-			page--;
-		return ok(_comment.render(
-				Comment.find.where().eq("ad", Ad.find.byId(id))
-						.order("sendDate").findPagingList(20).getPage(page)
-						.getList(), page,
-				Comment.find.where().eq("ad", Ad.find.byId(id)).findRowCount()));
+		if(s.equals("add")) page++; else page--;
+		return ok(_comment.render(Comment.find.where().eq("ad",Ad.find.byId(id)).order("sendDate")
+				.findPagingList(20).getPage(page).getList()
+				,page
+				,Comment.find.where().eq("ad", Ad.find.byId(id)).findRowCount()));
 
 	}
 
@@ -829,7 +817,7 @@ public class Ads extends Controller {
 		Double costEndTg = 99999999.9;
 		Double costStartD = 0.0;
 		Double costEndD = 99999999.9;
-		String b = "", loc = "", r = "", tag = "", gender = "", quantity = "", pic = "";
+		String b = "", loc = "", r = "",c="", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
 		if (!requestData.get("section").equals("0")) {
@@ -838,49 +826,56 @@ public class Ads extends Controller {
 		}
 
 		if (!requestData.get("category").equals("all")) {
-			b = "inner join categories b on a.category_id=b.id and b.id="
-					+ requestData.get("category");
+
+			Category category = Category.find.byId(Long.parseLong( requestData.get("category")));
+			if(category.isParent()){
+				String ids = "";
+				if(category.subCategories.size()>0) {
+
+					for (int i=0;i<category.subCategories.size();i++) {
+						if(i==category.subCategories.size()-1)ids += category.subCategories.get(i).id.toString();
+						else ids += category.subCategories.get(i).id.toString() + ",";
+					}
+				}
+				r = "inner join categories b on a.category_id=b.id and b.id in ("+ids+")";
+			}else {
+				b = "inner join categories b on a.category_id=b.id and b.id="
+						+ requestData.get("category");
+			}
 		}
+
 		if (!requestData.get("region").equals("all")) {
+
 			r = "inner join regions r on r.id = c.region_id and r.id="
 					+ requestData.get("region");
 		}
 		if (!requestData.get("city").equals("all")) {
-			/**
-			 * TODO asiko
-			 * get ids of subcities
-			 * query: where city.id in (subcity ids)
-			 * same goes to category
-			 */
-			//City.find.where().eq("parentCity", City.find.byId(Long.parseLong(requestData.get("city")))).
-			
-			r = "inner join cities cc on cc.id = c.city_id and cc.id="
-					+ requestData.get("city");
+			City city = City.find.byId(Long.parseLong( requestData.get("city")));
+			if(city.isParent()){
+				String ids = "";
+				if(city.subCities.size()>0) {
+
+					for (int i=0;i<city.subCities.size();i++) {
+						if(i==city.subCities.size()-1)ids += city.subCities.get(i).id.toString();
+						else ids += city.subCities.get(i).id.toString() + ",";
+					}
+				}
+				c = "inner join cities cc on cc.id = c.city_id and cc.id in ("+ids+")";
+			}else {
+				c = "inner join cities cc on cc.id = c.city_id and cc.id="
+						+ requestData.get("city");
+			}
 		}
 		if (!requestData.get("searchText").equals("")) {
-			tag = "inner join ad_tags t on a.id=t.ad_id and t.name='"
+			tag = "inner join tag t on a.id=t.ad_id and t.name='"
 					+ requestData.get("searchText") + "'";
 		}
-		if (requestData.get("gender") != null
-				&& !requestData.get("gender").equals("")) {
-			gender = "and a.gender='" + requestData.get("gender") + "'";
-		}
-		if (requestData.get("quantity") != null) {
-			quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
-		}
-		if (requestData.get("ageStart") != null
-				&& !requestData.get("ageStart").equals("")) {
-			startYear = Integer.parseInt(requestData.get("ageStart"));
-		}
-		if (requestData.get("ageEnd") != null
-				&& !requestData.get("ageEnd").equals("")) {
-			endYear = Integer.parseInt(requestData.get("ageEnd"));
-		}
+
 		if (requestData.get("map") != null) {
 			loc = "and c.location_id is not null";
 		}
 		if (requestData.get("picture") != null) {
-			pic = "and a.id in (select ad_id from ad_images)";
+			pic = "and a.id in (select ad_id from ad_image)";
 		}
 		if (requestData.get("change") != null) {
 			f = -2;
@@ -926,43 +921,91 @@ public class Ads extends Controller {
 					+ " ELSE 1 END desc";
 		}
 
-		String a = "SELECT a.id from ads a \n" + " "
-				+ anim
-				+ b
-				+ " inner join contacts c on a.contact_info_id = c.id "
-				+ loc
-				+ r
-				+ "\n"
-				+ tag
-				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-				+ " and p.currency='USD' and p.price<=" + costEndD
-				+ ") or  (p.price>=" + costStartTg
-				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-				+ " where a.status='active' " + gender + quantity
-				//TODO asiko, remove below query if category drugie
-				+ " and (a.birth_date between " + startYear + " and " + endYear
-				+ ") " + pic + " order by " + sort + " \n"
-				+ " limit 30 offset " + page * 30;
+		String a="",a2="";
+		if (requestData.get("section").equals("5")) {
 
-		String a2 = "SELECT count(*) from ads a \n" + " "
-				+ anim
-				+ b
-				+ " inner join contacts c on a.contact_info_id = c.id "
-				+ loc
-				+ r
-				+ "\n"
-				+ tag
-				+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-				+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-				+ " and p.currency='USD' and p.price<=" + costEndD
-				+ ") or  (p.price>=" + costStartTg
-				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-				+ " where a.status='active' " + gender + quantity
-				//TODO asiko, remove below query if category drugie
-				+ " and (a.birth_date between " + startYear + " and " + endYear
-				+ ") " + pic;
+			a = "SELECT a.id from ads a \n" + " "
+					+ anim
+					+ b
+					+ " inner join contacts c on a.contact_info_id = c.id "
+					+ loc
+					+ r+ " " +c
+					+ "\n"
+					+ tag
+					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + pic + " order by " + sort + " \n"
+					+ " limit 30 offset " + page * 30;
 
+			 a2 = "SELECT count(*) from ads a \n" + " "
+					+ anim
+					+ b
+					+ " inner join contacts c on a.contact_info_id = c.id "
+					+ loc
+					+ r+" " +c
+					+ "\n"
+					+ tag
+					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + pic;
+
+
+		}else {
+
+			if (!requestData.get("gender").equals("")) {
+				gender = "and a.gender='" + requestData.get("gender") + "'";
+			}
+			if (requestData.get("quantity") != null) {
+				quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
+			}
+			if (!requestData.get("ageStart").equals("")) {
+				startYear = Integer.parseInt(requestData.get("ageStart"));
+			}
+			if (!requestData.get("ageEnd").equals("")) {
+				endYear = Integer.parseInt(requestData.get("ageEnd"));
+			}
+
+			a = "SELECT a.id from ads a \n" + " "
+					+ anim
+					+ b
+					+ " inner join contacts c on a.contact_info_id = c.id "
+					+ loc
+					+ r + " " + c
+					+ "\n"
+					+ tag
+					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and " + endYear
+					+ ") " + pic + " order by " + sort + " \n"
+					+ " limit 30 offset " + page * 30;
+
+			a2 = "SELECT count(*) from ads a \n" + " "
+					+ anim
+					+ b
+					+ " inner join contacts c on a.contact_info_id = c.id "
+					+ loc
+					+ r + " " + c
+					+ "\n"
+					+ tag
+					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and " + endYear
+					+ ") " + pic;
+		}
 		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
