@@ -1,0 +1,37 @@
+@(region:models.contact.Region)
+@*
+<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
+	<option value="all">Все города/ауылы</option>
+	@for(city<-region.cities if(city.parentCity==null)){
+		@if(city.isParent){
+			<option class="optionGroup" @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id"><span>@city.name</span></option>
+			@for((subcity,index) <- city.findSubCitites.zipWithIndex){
+				<option class="optionChild" @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id">— @subcity.name</option>
+			}
+		}else{
+			<option class="optionChild" @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id">@city.name</option>
+		}
+	}
+</select>
+
+*@
+		<div class="input-group-btn bs-dropdown-to-select-group">
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span data-bind="bs-drp-sel-label">Все города/ауылы</span>
+				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
+				<input  type="hidden" name="city" value="all" >
+			</button>
+			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">				
+				<li class="li-option cities" city-id="all" data-value="Все города/ауылы"><a href="#"><span>Все города/ауылы</span></a></li>
+				@if(region!=null){
+				@for(c<-region.cities if(c.parentCity==null)){
+				@if(c.isParent){
+				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
+				<li class="li-option cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#"><span class="optionChild">@subcity.name</span></a></li>				
+				}
+				}else{
+				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				}}}
+			</ul>
+		</div> 

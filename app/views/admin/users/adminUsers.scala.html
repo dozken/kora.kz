@@ -1,0 +1,92 @@
+@(users:List[models.user.AuthorisedUser],page:Integer,sort:String,total:Integer)
+@main("Пользователи") {
+<style>
+.bootbox-confirm .modal-dialog{
+	width: 300px;
+}
+</style>
+<div class="container">
+<div class="col-xs-3 menudiv">@profile._menu()</div>
+<div class="col-xs-9 ">
+	@profile._title("ВСЕ ПОЛЬЗОВАТЕЛИ"){ }
+  	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td><a href="@routes.Administer.users(page,if(sort=="asc"){"desc"}else{"asc"})">Компания <span class="glyphicon glyphicon-sort"></span></a></td>
+				<td>Адрес</td>
+				<td>Регион</td>
+				<td>Город/Ауыл</td>
+				<td>Телефон</td>
+				<td>Почта</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody id="user-list">
+		@for(user<-users ){
+		<tr>
+
+			<td>@user.userName</td>
+			<td>@if(user.profile!=null&&user.profile.address!=null){@user.profile.address}</td>
+			<td>@if(user.profile!=null&&user.profile.region!=null){@user.profile.region.name}</td>
+			<td>@if(user.profile!=null&&user.profile.city!=null){@user.profile.city.name}</td>
+			<td>@if(user.profile!=null&&user.profile.phone!=null){<a href="@user.profile.phone">@user.profile.phone</a>}</td>
+			<td>@user.email</td>
+			<td><a onclick='del("@routes.User.removeUser(user.id,page,sort)")'><i class="fa fa-times"></i></a></td>
+
+		</tr>
+		}
+  		</tbody>
+	</table>
+	<div id="pagination" class="col-xs-12">
+		<nav>
+			<ul class="pagination pagination-sm">
+				<li class="prev @if(page==0){disabled}">
+					@if(page==0){
+					<a>&larr; предыдущий</a>
+					}else{
+					<a href="@routes.Administer.users((page-1),sort)" disabled>&larr; предыдущий</a>
+				}
+				</li>
+				<li>
+					<a id="total" style="color: #666;">Показывает @if(total>20*(page+1)){@(20*page+1)-(@(page+1)*20)}else{@(20*page+1)-@total}/@total </a>
+				</li>
+				<li class="next @if(total<=20*(page+1)){ disabled }">
+					@if(total<=20*(page+1)){
+					<a>следующей &rarr;</a>
+					}else{
+					<a href="@routes.Administer.users((page+1),sort)">следующей &rarr;</a>
+					}
+
+				</li>
+
+			</ul>
+		</nav>
+	</div>
+</div>
+
+
+</div>
+}
+<script src='@routes.Assets.at("javascripts/bootbox.js")'></script>
+<script>
+
+bootbox.setDefaults({
+	  
+	  locale: "ru_delete",
+	  show: true,
+	  backdrop: true,
+	  closeButton: false,
+	  animate: true,
+	  className: "my-modal"
+	  //className: "warning"
+});
+
+function del(href){
+
+    bootbox.confirm("Вы уверены?", function(confirm) {
+    	if(confirm)
+        window.location=href;
+    });
+
+};
+</script>
