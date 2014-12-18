@@ -70,6 +70,10 @@
 </div>
 
 }
+<div id="watermarks" style="display:none">
+	<img src="@routes.Assets.at("images/home/white.png")" id="white_watermark" />
+	<img src="@routes.Assets.at("images/home/black.png")" id="black_watermark" />
+</div>
     <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script src='@routes.Assets.at("javascripts/watermark.jquery/watermark.jquery.js")' type="text/javascript"></script>
 <script>
@@ -77,16 +81,21 @@ var quan = $("#quanHide").html();
 var gender = $("#genderHide").html();
 var age = $("#ageHide").html()
 
-var config = {
-		"path": '@routes.Assets.at("/images/home/watermark.png")',
-		//"className":"watermark",
-		//"position":"top-left"|"top-right"|"bottom-right"|"bottom-left"
-		//"opacity":30
+	var watermark = {
+		"brightWatermark":"white_watermark",
+		"darkWatermark":"black_watermark",
+		"className":"watermark",
+		"opacity": 30,		
 	};
+
+
+
 	
 	
 $(document).ready(function(){
-	$(document).watermark1(config);
+	$(document).ready(function(){
+		$(document).watermark(watermark);
+	});
 	
 	@if(section.id==5){
 		 $("#genderHide").empty();
