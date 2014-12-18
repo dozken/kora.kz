@@ -65,7 +65,9 @@ public class Ads extends Controller {
 				.get("section")));
 		ad.category = Category.find.byId(Long.parseLong(requestData
 				.get("category")));
+		if (requestData.get("age")!=null) {
 		ad.birthDate = Integer.parseInt(requestData.get("age"));
+		}
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.city = City.find.byId(Long.parseLong(requestData
 				.get("city")));
@@ -92,8 +94,10 @@ public class Ads extends Controller {
 		contactInfo.location = location;
 		ad.contactInfo = contactInfo;
 		ad.description = requestData.get("description");
+		if(requestData.get("quantity")!=null)
 		ad.quantity = requestData.get("quantity");
 		ad.title = requestData.get("title");
+		if(requestData.get("section_gender")!=null)
 		ad.gender = requestData.get("section_gender");
 		Price price = new Price();
 		if (requestData.get("payment_type").equals("normal")) {
@@ -128,8 +132,11 @@ public class Ads extends Controller {
 		ad.tags.add(new Tag(ad.section.name));
 		ad.tags.add(new Tag(ad.category.name));
 		ad.tags.add(new Tag(ad.title));
+		if(ad.birthDate!=null)
 		ad.tags.add(new Tag(ad.birthDate.toString()));
+		if(ad.gender!=null)
 		ad.tags.add(new Tag(ad.gender));
+		if(ad.quantity!=null)
 		ad.tags.add(new Tag(ad.quantity));
 		ad.tags.add(new Tag(ad.contactInfo.region.name));
 		ad.tags.add(new Tag(ad.contactInfo.city.name));
@@ -821,43 +828,43 @@ public class Ads extends Controller {
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
 		if (!requestData.get("section").equals("0")) {
-			anim = "inner join section ani on a.section_id=ani.id and ani.id="
+			anim = "inner join sections ani on a.section_id=ani.id and ani.id="
 					+ requestData.get("section");
 		}
 
 		if (!requestData.get("category").equals("all")) {
-			b = "inner join category b on a.category_id=b.id and b.id="
+			b = "inner join categories b on a.category_id=b.id and b.id="
 					+ requestData.get("category");
 		}
 		if (!requestData.get("region").equals("all")) {
-			r = "inner join region r on r.id = c.region_id and r.id="
+			r = "inner join regions r on r.id = c.region_id and r.id="
 					+ requestData.get("region");
 		}
 		if (!requestData.get("city").equals("all")) {
-			r = "inner join city cc on r.id = c.city_id and cc.id="
+			r = "inner join cities cc on cc.id = c.city_id and cc.id="
 					+ requestData.get("city");
 		}
 		if (!requestData.get("searchText").equals("")) {
-			tag = "inner join tag t on a.id=t.ad_id and t.name='"
+			tag = "inner join ad_tags t on a.id=t.ad_id and t.name='"
 					+ requestData.get("searchText") + "'";
 		}
-		if (!requestData.get("gender").equals("")) {
+		if (requestData.get("gender")!=null&&!requestData.get("gender").equals("")) {
 			gender = "and a.gender='" + requestData.get("gender") + "'";
 		}
 		if (requestData.get("quantity") != null) {
 			quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
 		}
-		if (!requestData.get("ageStart").equals("")) {
+		if (requestData.get("ageStart")!=null&&!requestData.get("ageStart").equals("")) {
 			startYear = Integer.parseInt(requestData.get("ageStart"));
 		}
-		if (!requestData.get("ageEnd").equals("")) {
+		if (requestData.get("ageEnd")!=null&&!requestData.get("ageEnd").equals("")) {
 			endYear = Integer.parseInt(requestData.get("ageEnd"));
 		}
 		if (requestData.get("map") != null) {
 			loc = "and c.location_id is not null";
 		}
 		if (requestData.get("picture") != null) {
-			pic = "and a.id in (select ad_id from ad_image)";
+			pic = "and a.id in (select ad_id from ad_images)";
 		}
 		if (requestData.get("change") != null) {
 			f = -2;

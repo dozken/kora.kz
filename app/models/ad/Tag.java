@@ -26,7 +26,7 @@ public class Tag extends Model {
 	public Ad ad;
 
 	public Tag(String tag) {
-
+		if(tag!=null)
 		name = tag;
 	}
 }
