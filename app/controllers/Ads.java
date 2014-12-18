@@ -846,6 +846,14 @@ public class Ads extends Controller {
 					+ requestData.get("region");
 		}
 		if (!requestData.get("city").equals("all")) {
+			/**
+			 * TODO asiko
+			 * get ids of subcities
+			 * query: where city.id in (subcity ids)
+			 * same goes to category
+			 */
+			//City.find.where().eq("parentCity", City.find.byId(Long.parseLong(requestData.get("city")))).
+			
 			r = "inner join cities cc on cc.id = c.city_id and cc.id="
 					+ requestData.get("city");
 		}
@@ -932,6 +940,7 @@ public class Ads extends Controller {
 				+ ") or  (p.price>=" + costStartTg
 				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
 				+ " where a.status='active' " + gender + quantity
+				//TODO asiko, remove below query if category drugie
 				+ " and (a.birth_date between " + startYear + " and " + endYear
 				+ ") " + pic + " order by " + sort + " \n"
 				+ " limit 30 offset " + page * 30;
@@ -950,6 +959,7 @@ public class Ads extends Controller {
 				+ ") or  (p.price>=" + costStartTg
 				+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
 				+ " where a.status='active' " + gender + quantity
+				//TODO asiko, remove below query if category drugie
 				+ " and (a.birth_date between " + startYear + " and " + endYear
 				+ ") " + pic;
 
