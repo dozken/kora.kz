@@ -7,6 +7,10 @@
     font-family: TENGE;
     src: url('fonts/tenge.otf') format("opentype");
 }
+
+.li-option{
+	margin:-10px;
+}
 .sitemapcolumn{
 float: left;
 width: 250px;

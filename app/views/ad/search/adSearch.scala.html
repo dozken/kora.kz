@@ -111,6 +111,17 @@ $(document).ready(function(){
 
 });
 
+	
+		$( document ).on( 'click', 'li.cities', function( event ) {
+			var $target = $( event.currentTarget );
+			$("input[name=city]").val($target.attr("city-id"));
+		});
+		
+		$( document ).on( 'click', 'li.categories', function( event ) {
+			var $target = $( event.currentTarget );
+			$("input[name=category]").val($target.attr("category-id"));
+		});
+		
 
     $("#sortByLowPrice" ).click(function(){
 
@@ -147,7 +158,6 @@ $("#poi").click(function() {
         
         jsRoutes.controllers.Ads.getRC(id).ajax({
             success: function(data) {
-                console.log("region selected");
                 $("#city_div").html(data);
             }
         });
