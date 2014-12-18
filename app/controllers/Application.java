@@ -14,6 +14,7 @@ import models.ad.Ad;
 import models.ad.Comment;
 import models.contact.City;
 import models.user.AuthorisedUser;
+import play.Logger;
 import play.Play;
 import play.Routes;
 import play.api.libs.Crypto;
@@ -49,6 +50,7 @@ public class Application extends Controller {
 			ImageIO.write(img, "jpg", baos);
 			baos.flush();
 		} catch (IOException e) {
+			Logger.error("Exception with captcha", e);
 			// Logger.debug(e.getMessage());
 		}
 		return ok(baos.toByteArray()).as("image/jpg");
@@ -128,10 +130,8 @@ public class Application extends Controller {
 	public static Result signIn() {
 
 		DynamicForm requestData = form().bindFromRequest();
-		System.out.println(Crypto.encryptAES(requestData.get("password")));
 		AuthorisedUser user = AuthorisedUser.findByEmail(requestData
 				.get("email"));
-		System.out.println(user.password);
 		if (user != null
 				&& user.password.equals(Crypto.encryptAES(requestData
 						.get("password"))) && user.status.equals("active")) {
@@ -161,7 +161,7 @@ public class Application extends Controller {
 		return redirect(request().getHeader("referer"));
 	}
 
-	public static Result index() throws IOException {
+	public static Result index() {
 
 		return ok(views.html.common.index.render());
 	}

@@ -129,8 +129,7 @@ var title = $("#titleHide").html();
 
     $(document).on("change", "#section", function() {
         var id = Number($(this).val());
-        console.log(id);
-        
+                
         if(id==5){
         	$("#quanHide").empty();
             $("#genderHide").empty();
@@ -201,7 +200,6 @@ var title = $("#titleHide").html();
 
             			var end =  +new Date();  // log end timestamp
             			var diff = end - start;
-            			console.log(diff)
                         $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
                         $("#success_message").fadeIn(200);
 
@@ -209,7 +207,6 @@ var title = $("#titleHide").html();
                         jsRoutes.controllers.Application.emailing("ad_created", $("#ema").val()).ajax()
                         var end2 =  +new Date();  // log end timestamp
             			var diff1 = end2 - end;
-						console.log(diff1)
 						setTimeout(function() {
                             @if(session.get("connected") != null){
                                 window.location.href = "@routes.Manage.myAds()";

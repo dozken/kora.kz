@@ -31,7 +31,6 @@ public class Filters extends Controller {
 
 	public static Result addCity() {
 		DynamicForm requestData = form().bindFromRequest();
-		System.out.println(requestData);
 		City city = new City();
 		if (requestData.get("parentName") != null
 				&& !requestData.get("parentName").trim().equals("")) {

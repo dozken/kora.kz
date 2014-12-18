@@ -46,7 +46,6 @@ $("#message_body").html(data);
 $("#message_select" ).val(val);
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -63,7 +62,6 @@ success: function(data) {
 $("#message_body").html(data);
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -85,7 +83,6 @@ $("#message_body").html(data);
 $("#message_select" ).val(val);
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -100,7 +97,6 @@ success: function(data) {
 $("#message_body").html(data);
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -116,7 +112,6 @@ jsRoutes.controllers.Application.emailing ("replay_message", recipent).ajax ()
 window.location.href="@routes.Manage.myMessages()"
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })

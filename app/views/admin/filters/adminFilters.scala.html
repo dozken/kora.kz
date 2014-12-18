@@ -85,7 +85,6 @@ $(document).on("click", ".category.add", function(e) {
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -100,7 +99,6 @@ $(document).on("click", ".category.update", function(e) {
             $("#categoryList").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -115,7 +113,6 @@ $(document).on("click", ".category.delete", function(e) {
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#categoryList").html(data);
-              //console.log(jqXHR.responseText);
             }
         });
     });
@@ -131,7 +128,6 @@ $(document).on("click", ".region.add", function(e) {
             $("#regionList").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -146,7 +142,6 @@ $(document).on("click", ".region.update", function(e) {
             $("#regionList").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -161,7 +156,6 @@ $(document).on("click", ".region.delete", function(e) {
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#regionList").html(data);
-              //console.log(jqXHR.responseText);
             }
         });
     });
@@ -206,7 +200,6 @@ $(document).on("click", ".city.add", function(e) {
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -222,7 +215,6 @@ $(document).on("click", ".city.update", function(e) {
             $("#cityList").html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.responseText);
         }
     });
 });
@@ -237,7 +229,6 @@ $(document).on("click", ".city.delete", function(e) {
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#cityList").html(data);
-              //console.log(jqXHR.responseText);
             }
         });
     });
@@ -309,9 +300,6 @@ $(document).on("click", ".city.map", function(e) {
     var latVal = $(this).attr("lat");
     var lngVal = $(this).attr("lng");
     var that =  $("input[city=" + $(this).attr("city") + "]");
-    console.log(that)
-    console.log(latVal)
-    console.log(lngVal)
     
     var map;
     var myGmap = new GMaps({

@@ -92,7 +92,6 @@ $(document).on("click",".delete",function(){
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#ad-list").html(data);
-              //console.log(jqXHR.responseText);
             }
         });
     });
@@ -113,7 +112,6 @@ $(document).ready(function() {
         	nonSelectedText: 'Выберите фильтр',
         	buttonClass: 'btn btn-default btn-success btn-sm',
             onChange: function(option, checked, select) {
-                console.log('Changed option ' + $(option).val() + '.'+ checked);
                 name = $(option).val();
                 status = checked;
                 jsRoutes.controllers.Administer.filterToSession(name,status,@page,"@sort").ajax({
@@ -122,20 +120,6 @@ $(document).ready(function() {
 		            }
 		        });
             },
-            @*
-            onDropdownHidden: function(event) {
-                console.log('Dropdown closed.');
-                jsRoutes.controllers.Administer.filterAllAds(@page,"@sort").ajax({
-		            success: function(data) {
-		              $("#ad-list").html(data);
-		            },
-		            error: function(jqXHR, textStatus, errorThrown) {
-		              $("#ad-list").html(data);
-		              //console.log(jqXHR.responseText);
-		            }
-		        });
-            }
-            *@
         });
     });
 

@@ -11,6 +11,7 @@ import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.UserSocials;
+import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -108,7 +109,7 @@ public class Info extends Controller {
 			session("connected", user.email);
 			return ok("success");// renderImage(icon.id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.error("Exception with updating info", e);
 		}
 		return ok("baaaaa");
 	}

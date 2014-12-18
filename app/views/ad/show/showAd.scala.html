@@ -128,11 +128,8 @@ $(document).on("click",".moderate.approve", function(){
 					success: function(data) {
 						alert("Подтверждено");
 						window.location.href =  "http://@request.host/admin";
-						console.log(data);
-						
 			        },
 			        error: function(jqXHR, textStatus, errorThrown) {
-			            console.log(jqXHR.responseText);            
 			        }
 				});
 			}
@@ -152,11 +149,9 @@ $(document).on("click",".moderate.deny",function(){
 			success: function(data) {
 				alert("Отклонено");
 				window.location.href =  "http://@request.host/admin";
-				console.log(data);
 				
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
-	            console.log(jqXHR.responseText);            
 	        }
 		});
 		}
@@ -186,7 +181,6 @@ success: function() {
     });
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -211,7 +205,6 @@ $("#private_message_modal" ).modal("hide");
 
 },
 error: function(jqXHR, textStatus, errorThrown) {
-console.log(jqXHR.responseText);
 }
 });
 })
@@ -292,7 +285,6 @@ $(document).on("click", "#comment_ad", function(e) {
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR.responseText);
             }
         });
     } else {

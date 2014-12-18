@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.avaje.ebean.SqlUpdate;
 import models.Emailing;
 import models.Location;
 import models.Setting;
@@ -24,6 +23,7 @@ import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Payment;
+import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -41,6 +41,7 @@ import views.html.profile.ads.myAds;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+import com.avaje.ebean.SqlUpdate;
 
 public class Ads extends Controller {
 
@@ -50,14 +51,12 @@ public class Ads extends Controller {
 		try {
 			ad.update();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.error("Exception with updating status of ad", e);
 		}
 		return ok(showAd.render(ad));
 	}
 
 	public static Result create() {
-		long startTime = System.currentTimeMillis();
-
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = new Ad();
@@ -144,8 +143,6 @@ public class Ads extends Controller {
 
 		Ebean.saveManyToManyAssociations(ad, "tags");
 		String[] order = requestData.get("image_names").split("&");
-		long image = System.currentTimeMillis() - startTime;
-		System.out.println("image:" + image);
 		for (int i = 0; i < order.length; i++) {
 
 			if (!order[i].equals("") && order[i] != null) {
@@ -164,8 +161,6 @@ public class Ads extends Controller {
 			}
 		}
 		// ... do something ...
-		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println("estimatedTime:" + estimatedTime);
 		return ok();
 	}
 
@@ -291,8 +286,6 @@ public class Ads extends Controller {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
 			loc = coords.split(",");
-			System.out.println(requestData.get("location"));
-			System.out.println(loc[0] + "," + loc[1]);
 			Location location = new Location();
 			if (loc.length == 2) {
 				location.lat = loc[0].trim();
@@ -829,7 +822,7 @@ public class Ads extends Controller {
 		Double costEndTg = 99999999.9;
 		Double costStartD = 0.0;
 		Double costEndD = 99999999.9;
-		String b = "", loc = "", r = "",c="", tag = "", gender = "", quantity = "", pic = "";
+		String b = "", loc = "", r = "", c = "", tag = "", gender = "", quantity = "", pic = "";
 		int endYear = 20000, startYear = 0, f = -1, l = -1;
 
 		if (!requestData.get("section").equals("0")) {
@@ -839,18 +832,23 @@ public class Ads extends Controller {
 
 		if (!requestData.get("category").equals("all")) {
 
-			Category category = Category.find.byId(Long.parseLong( requestData.get("category")));
-			if(category.isParent()){
+			Category category = Category.find.byId(Long.parseLong(requestData
+					.get("category")));
+			if (category.isParent()) {
 				String ids = "";
-				if(category.subCategories.size()>0) {
+				if (category.subCategories.size() > 0) {
 
-					for (int i=0;i<category.subCategories.size();i++) {
-						if(i==category.subCategories.size()-1)ids += category.subCategories.get(i).id.toString();
-						else ids += category.subCategories.get(i).id.toString() + ",";
+					for (int i = 0; i < category.subCategories.size(); i++) {
+						if (i == category.subCategories.size() - 1)
+							ids += category.subCategories.get(i).id.toString();
+						else
+							ids += category.subCategories.get(i).id.toString()
+									+ ",";
 					}
 				}
-				r = "inner join categories b on a.category_id=b.id and b.id in ("+ids+")";
-			}else {
+				r = "inner join categories b on a.category_id=b.id and b.id in ("
+						+ ids + ")";
+			} else {
 				b = "inner join categories b on a.category_id=b.id and b.id="
 						+ requestData.get("category");
 			}
@@ -862,18 +860,21 @@ public class Ads extends Controller {
 					+ requestData.get("region");
 		}
 		if (!requestData.get("city").equals("all")) {
-			City city = City.find.byId(Long.parseLong( requestData.get("city")));
-			if(city.isParent()){
+			City city = City.find.byId(Long.parseLong(requestData.get("city")));
+			if (city.isParent()) {
 				String ids = "";
-				if(city.subCities.size()>0) {
+				if (city.subCities.size() > 0) {
 
-					for (int i=0;i<city.subCities.size();i++) {
-						if(i==city.subCities.size()-1)ids += city.subCities.get(i).id.toString();
-						else ids += city.subCities.get(i).id.toString() + ",";
+					for (int i = 0; i < city.subCities.size(); i++) {
+						if (i == city.subCities.size() - 1)
+							ids += city.subCities.get(i).id.toString();
+						else
+							ids += city.subCities.get(i).id.toString() + ",";
 					}
 				}
-				c = "inner join cities cc on cc.id = c.city_id and cc.id in ("+ids+")";
-			}else {
+				c = "inner join cities cc on cc.id = c.city_id and cc.id in ("
+						+ ids + ")";
+			} else {
 				c = "inner join cities cc on cc.id = c.city_id and cc.id="
 						+ requestData.get("city");
 			}
@@ -933,7 +934,7 @@ public class Ads extends Controller {
 					+ " ELSE 1 END desc";
 		}
 
-		String a="",a2="";
+		String a = "", a2 = "";
 		if (requestData.get("section").equals("5")) {
 
 			a = "SELECT a.id from ads a \n" + " "
@@ -941,40 +942,44 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r+ " " +c
+					+ r
+					+ " "
+					+ c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-					+ " and p.currency='USD' and p.price<=" + costEndD
-					+ ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-					+ " where a.status='active' " + pic + " order by " + sort + " \n"
-					+ " limit 30 offset " + page * 30;
+					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ costStartD + " and p.currency='USD' and p.price<="
+					+ costEndD + ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg
+					+ "))) " + " where a.status='active' " + pic + " order by "
+					+ sort + " \n" + " limit 30 offset " + page * 30;
 
-			 a2 = "SELECT count(*) from ads a \n" + " "
+			a2 = "SELECT count(*) from ads a \n" + " "
 					+ anim
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r+" " +c
+					+ r
+					+ " "
+					+ c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-					+ " and p.currency='USD' and p.price<=" + costEndD
-					+ ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-					+ " where a.status='active' " + pic;
+					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ costStartD + " and p.currency='USD' and p.price<="
+					+ costEndD + ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg
+					+ "))) " + " where a.status='active' " + pic;
 
-
-		}else {
+		} else {
 
 			if (!requestData.get("gender").equals("")) {
 				gender = "and a.gender='" + requestData.get("gender") + "'";
 			}
 			if (requestData.get("quantity") != null) {
-				quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
+				quantity = " and a.quantity ='" + requestData.get("quantity")
+						+ "'";
 			}
 			if (!requestData.get("ageStart").equals("")) {
 				startYear = Integer.parseInt(requestData.get("ageStart"));
@@ -988,17 +993,19 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r + " " + c
+					+ r
+					+ " "
+					+ c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-					+ " and p.currency='USD' and p.price<=" + costEndD
-					+ ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-					+ " where a.status='active' " + gender + quantity
-					+ " and (a.birth_date between " + startYear + " and " + endYear
-					+ ") " + pic + " order by " + sort + " \n"
+					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ costStartD + " and p.currency='USD' and p.price<="
+					+ costEndD + ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg
+					+ "))) " + " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and "
+					+ endYear + ") " + pic + " order by " + sort + " \n"
 					+ " limit 30 offset " + page * 30;
 
 			a2 = "SELECT count(*) from ads a \n" + " "
@@ -1006,19 +1013,20 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r + " " + c
+					+ r
+					+ " "
+					+ c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
-					+ " and p.currency='USD' and p.price<=" + costEndD
-					+ ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
-					+ " where a.status='active' " + gender + quantity
-					+ " and (a.birth_date between " + startYear + " and " + endYear
-					+ ") " + pic;
+					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ costStartD + " and p.currency='USD' and p.price<="
+					+ costEndD + ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg
+					+ "))) " + " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and "
+					+ endYear + ") " + pic;
 		}
-		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
 
@@ -1034,8 +1042,6 @@ public class Ads extends Controller {
 			ads.add(Ad.find.byId(id));
 		}
 
-		System.out.println(list3.size());
-		System.out.println(list3.get(0));
 		Ad tmp = new Ad();
 
 		tmp.id = 0L;
