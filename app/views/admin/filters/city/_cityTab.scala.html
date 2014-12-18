@@ -1,0 +1,33 @@
+<form class="form-horizontal" id="cityForm" method="post" style="">
+   <fieldset>
+      <!-- Form Name -->
+      <div class="form-group">
+         <div class="col-xs-3">
+            <select name="region.id" id="region" class="form-control region select selectdesign" validation="not_null">
+               <option selected disabled hidden> Выберите регион</option>
+               @for(region<-models.contact.Region.find.where.orderBy("name").findList){	
+               <option value="@region.id">@region.name</option>               
+               }
+            </select>                       
+         </div>
+         <div id="city_list" class="col-xs-3">
+         </div>
+         <div class="col-xs-6" id="cities" style="display:none">
+            <div class="input-group">
+               <input type="text" class="form-control ssss " name="name" id="city" placeholder="Например: Алматы" validation="not_null"> 
+               <span class="input-group-btn">
+                 <a map="yandex" class="mapSelect btn btn-default" style="padding-top: 2px;padding-bottom: 2px;margin-top: 0px;">Яндекс</a>
+                 <a map="google" class="mapSelect btn btn-default" style="padding-top: 2px;padding-bottom: 2px;margin-top: 0px;">Google</a>
+                 <button class="btn btn-success @*nobor*@ city add" type="submit" form="#cityForm" style="padding-top: 2px;padding-bottom: 0px;margin-top: -3px;">Добавить</button>
+               </span>                 
+            </div>
+            <br>
+	      	<div id="mapDiv" style="height: 400px; width:400px; position:absolute"></div>
+		    <input type="hidden" value="" id="location" name="location">
+		 </div>		
+      </div>
+</fieldset>
+</form>
+<div id="cityList" class="col-xs-6" style="padding-top: 20px;">
+</div>
+

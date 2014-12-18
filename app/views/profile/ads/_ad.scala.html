@@ -1,0 +1,75 @@
+@(ads:List[models.ad.Ad])
+@import models.ad.AdImage
+
+@for(ad<-ads){
+
+<div class="col-xs-12 nopaddingleft nopaddingright borbot highlight @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }" ad="@ad.id">
+	<div class="col-xs-12 toptop">
+		<h4 class="DINNW1GR-18"><a href="@routes.Ads.get(ad.id)">@utils._adName(ad)</a></h4>
+	</div>
+	<div class="col-xs-2 mysuret">
+        @if(ad.images.size()>0){
+
+            <img src="@AdImage.getFirstPicture(ad.id)" style="height:130px;width:120px;">
+        }else{
+		<img src="http://placehold.it/85x92/dddddd/333333">
+        }
+	</div>
+	<div class="col-xs-10 nopaddingleft">
+		<div class="col-xs-3">
+			<ul class="adsul nopaddingleft">
+				<li class="DINNW1GL-14">Цена: @Messages(ad.priceType.price.toString) @ad.priceType.currency</li>
+				<li class="DINNW1GL-14">Регион: @ad.contactInfo.region.name</li>
+			</ul>
+		</div>
+		<div class="col-xs-6 nopaddingleft">
+			<ul class="adsul nopaddingleft">
+				<li class="DINNW1GL-14">Добавлено: @ad.publishedDate.format("dd/MM/yyyy")</li>
+				@if(ad.status=="active"){
+				<li class="jasyl DINNW1GR-14">Будет продлено через @models.ad.Ad.dateDifference(ad.expirationDate)</li>
+				<li class="DINNW1GL-14">Автопродление <input type="checkbox" class="switcher"
+					name="my-checkbox" ad="@ad.id" @if(models.ad.Ad.settingByName(ad,"autoprelong").status=="on"){checked }></li>
+			}else{
+				<li class="jasyl">Статус : @Messages(ad.status)</li>
+			}
+			</ul>
+		</div>
+		@if(ad.status=="active"){
+		<div class="col-xs-3 nopaddingleft nopaddingright">
+			<ul class="adsul nopaddingleft">
+				<li class="DINNW1GL-14"><span class="icon-prosmotr"></span> @ad.views
+					просмотров</li>
+				<li class="DINNW1GL-14"><span class="icon-message"></span>
+					Сообщений @ad.messages.size()</li>
+				<li class="DINNW1GL-14"><span class="icon-comment"></span>
+					Комментариев @ad.comments.size()</li>
+			</ul>
+		</div>
+		}
+		<div class="col-xs-12 nopaddingright toptoptop PFBSPR-13">
+		@if(ad.status=="active"){
+		
+		@if(models.ad.Ad.settingByName(ad,"prelong")!=null){
+			<button  class="btn btn-default btn-sm myb ad_prelong" ad="@ad.id" disabled><span class="icon-time"></span> Продлино</button>
+			 }else{
+           <button  class="btn btn-default btn-sm myb ad_prelong" ad="@ad.id"><span class="icon-time"></span> Продлить (Бесплатно)</button>
+           }
+			@if(models.ad.Ad.settingByName(ad,"highlight")!=null){
+            <button class="btn btn-default btn-sm myb ad_highlight highlighted" ad="@ad.id" disabled><span class="icon-vydelit"></span>Выделено</button>
+            }else{
+            <button class="btn btn-default btn-sm myb ad_highlight" ad="@ad.id"><span class="icon-vydelit"></span> Выделить объявление</button>
+            }
+            }
+            @if(ad.status=="active" || ad.status=="pending"){
+            <a href="@routes.Ads.edit(ad.id)" class="btn btn-default btn-sm myb ad_edit" ad="@ad.id"><span class="icon-edit"></span> Редактировать</a>
+            <a href="@routes.Ads.archive(ad.id)" class="btn btn-default btn-sm myb ad_archive" ad="@ad.id"><span class="icon-delete"></span> В Архив</a>
+		}
+		@if(ad.status=="archived" || ad.status=="rejected"){
+		 @*<button  class="btn btn-default btn-sm myb ad_prelong" ad="@ad.id" disabled><span class="icon-time"></span> Продлино</button>*@
+		 <a href="@routes.Ads.edit(ad.id)" class="btn btn-default btn-sm myb ad_edit" ad="@ad.id"><span class="icon-edit"></span> Редактировать</a>
+		 <a href="@routes.Ads.remove(ad.id)" class="btn btn-default btn-sm myb ad_delete" ad="@ad.id"><span class="glyphicon glyphicon-remove"></span> Удалить</a>
+		}
+		</div>
+	</div>
+</div>
+}
