@@ -14,7 +14,7 @@
     
   </h4>
   </li>
-  <li style="float: right;padding-top: 53px;padding-right: 80px;font-size:12px;">
+  <li style="float: right;padding-top: 54px;padding-right: 83px;font-size: 12px;">
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span> В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
@@ -127,7 +127,7 @@
 
 <div class="col-xs-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;">@ad.description</p>
+	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;word-break: break-all;">@ad.description</p>
 </div>
 <div class="col-xs-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
