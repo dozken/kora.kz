@@ -40,6 +40,26 @@
 	<div id="pagination" class="col-xs-12">
 		<nav>
 			<ul class="pagination pagination-sm">
+						<li class="prev @if(page==0){disabled}">
+						@if(page==0){
+							<a>&larr; Предыдущая</a>
+						}else{
+							<a href="@routes.Administer.users((page-1),sort)">&larr; Предыдущая</a>
+						}				
+						</li>
+						@for(index <-0 to total/20){
+						<li><a href="@routes.Administer.users((page),sort)">@{index+1}</a></li>
+						}
+						<li class="next @if(total<=20*(page+1)){ disabled }">
+						@if(total<=20*(page+1)){
+							<a>Следущая &rarr;</a>
+						}else{
+							<a href="@routes.Administer.users((page+1),sort)">Следущая &rarr;</a>
+						}				
+						</li>
+			</ul>		
+			@*	
+			<ul class="pagination pagination-sm">
 				<li class="prev @if(page==0){disabled}">
 					@if(page==0){
 					<a>&larr; предыдущий</a>
@@ -60,6 +80,7 @@
 				</li>
 
 			</ul>
+			*@
 		</nav>
 	</div>
 </div>
