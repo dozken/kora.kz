@@ -9,7 +9,18 @@
 }
 
 .li-option{
-	margin:-10px;
+/*	margin:-10px;
+	height: 16px;
+	*/
+	list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   display: inline;
+   /*width: 65px;
+   height: 40px;*/
+}
+.filtergorodauyl a:hover{
+	background-color: red;
 }
 .sitemapcolumn{
 float: left;
