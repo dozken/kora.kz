@@ -1,0 +1,243 @@
+@(section:models.ad.Section,cat:models.ad.Category,region:models.contact.Region,city:models.contact.City)
+<div class="col-xs-12 nopaddingleft PFBSPLI-13">
+<form id="search_form" class="form-inline">
+    <input id="section" type="hidden" name="section" value="@section.id" showName="@section.name">
+<div id="demo2" >
+ <div class="form-group frmg">
+ <div class="frmbck frmbck3">
+  <label class="control-label" for="selectbasic1">Регион:</label>
+  <div>
+    <select id="region" name="region" class="form-control sd" style="width: 170px;">
+      <option value="all">Во всех регионах</option>
+      @for(reg <-models.contact.Region.find.all()) {
+          <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
+      }
+
+    </select>
+  </div>
+  </div>
+</div>
+
+<div class="form-group frmg">
+	<div class="frmbck frmbck3">
+	<label class="control-label" for="selectbasic1">Город/Ауыл:</label>
+	@*
+	<div id="city_div">
+		<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
+			<option value="all">Все города/ауылы</option>
+			@if(region!=null){
+			@for(c<-region.cities if(c.parentCity==null)){
+			@if(c.isParent){
+			<option class="optionGroup" @if(city.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id"><span>@c.name</span></option>
+			@for((subcity,index) <- c.findSubCitites.zipWithIndex){
+			<option class="optionChild" @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id" @if(subcity == city){selected}>— @subcity.name</option>
+			}
+			}else{
+			<option class="optionChild" @if(c.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id" @if(c == city){selected}>@c.name</option>
+			}
+			}
+			}
+		</select>
+	</div>
+	*@
+	<div id="city_div" style="width: 170px;">
+		<div class="input-group-btn bs-dropdown-to-select-group">
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span data-bind="bs-drp-sel-label" style="height: 16px;">Все города/ауылы</span>
+				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
+				<input  type="hidden" name="city" value="all" >
+			</button>
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+				@if(region!=null){
+				@for(c<-region.cities if(c.parentCity==null)){
+				@if(c.isParent){
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name" ><a href="#">1<span class="optionGroup">@c.name</span></a></li>
+				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
+				<li class="dropdown-header cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#">2<span class="optionChild">@subcity.name</span></a></li>				
+				}
+				}else{
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name"><a href="#">3<span class="">@c.name</span></a></li>
+				}}}
+			</ul>
+		</div>  
+	</div>
+</div>
+</div>
+
+ <div class="form-group frmg">
+  <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Категория:</label>
+  <div id="category_div" style="width: 170px;">
+  	@*
+    <select id="category" name="category" class="form-control sd" style="width: 170px;">
+	    <option value="all">Все категории</option>	    
+	    @if(section.categories!=null){
+		    @for(category<-section.categories if(category.parentCategory==null)){
+		    	@if(category.isParent){
+		    		<option value="@category.id" class="optionGroup">@category.name</option>
+		    		@for(subcategory <- category.findSubCategories){
+		    		<option value="@subcategory.id" class="optionChild" @if(cat==subcategory){selected}>— @subcategory.name</option>
+		    		}		    	
+		    	}else{
+		    	<option value="@category.id" @if(cat==category){selected}>@category.name</option>
+		    	}		
+		    }
+	    }
+    </select>
+    *@
+    		<div class="input-group-btn bs-dropdown-to-select-group">
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span data-bind="bs-drp-sel-label">Все категории</span>
+				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
+				<input  type="hidden" name="category" value="all" >
+			</button>
+			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
+				<li class="li-option cities" category-id="all" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>	
+				@if(section.categories!=null){
+				@for(c<-section.categories if(c.parentCategory==null)){
+				@if(c.isParent){
+				<li class="li-option categories" category-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				@for(subc <- c.findSubCategories){
+				<li class="li-option categories" category-id="@subc.id" data-value="@subc.name"><a href="#"><span class="optionChild">@subc.name</span></a></li>
+				}}else{
+				<li class="li-option categories" category-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				}}}
+			</ul>
+		</div> 
+  </div>
+</div>
+</div>
+
+
+ <div class="form-group frmg">
+   <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Цена:</label>
+  <div>
+     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
+      <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
+          
+      <select id="currency" name="currency" class="form-control sd tenge" style="width: 66px;">
+        <option value="KZT">a</option>
+        <option value="USD">$</option>
+      </select>
+  </div>
+  </div>
+</div>
+<div class="form-group">
+   <div class="frmbck2">
+  <label class="control-label" for="selectbasic1"></label>
+
+        <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 12px;"><span class="btr">Поиск</span></button>
+</div>
+</div>
+</div>
+<div class="col-xs-12 nopaddingleft nopaddingright">
+
+<div id="demo"> 
+
+
+ <div id="ageHide" class="form-group frmg">
+   <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Возраст:</label>
+  <div>
+    <select id="ageStart" name="ageStart" class="form-control sd" style="width: 80px;">
+        <option value="0"></option>
+	    @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
+        <option value="@i">@i</option>
+    	}
+    </select>
+        <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
+            <option value="2050"></option>
+        @for(i<-2000 to 2050) {
+            <option value="@i">@i</option>
+        }
+    </select>
+  </div>
+</div>
+</div>
+
+<div id="genderHide" class="form-group" style="padding-left: 25px;">
+  <div class="col-xs-8 nopaddingleft">
+      <input type="hidden" id="gender" name="gender">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input type="checkbox"  id="checkboxes-0"  class="gender_check" value="male" notVal="female">
+      Самец
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-1">
+      <input type="checkbox"  class="gender_check" id="checkboxes-1" value="female" notVal="male">
+      Самка
+    </label>
+	</div>
+  </div>  
+</div>
+
+
+<div id="quanHide" class="form-group" style="margin-left: -13px;">
+  <div class="col-xs-8 nopaddingleft">
+  <div class="radio">
+    <label for="radios-0">
+      <input type="radio" name="quantity" id="radios-0" value="single">
+      Один
+    </label>
+	</div>
+  <div class="radio">
+    <label for="radios-1">
+      <input type="radio" name="quantity" id="radios-1" value="many">
+      Косяк
+    </label>
+	</div>
+  </div>
+</div>
+
+<div class="form-group" style="margin-left:4px;">
+  <div class="col-xs-8 nopaddingleft">
+  <div class="checkbox">
+    <label for="checkboxes-2">
+      <input type="checkbox" name="picture" id="checkboxes-2" value="1">
+      Только с фото
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-3">
+      <input type="checkbox" name="map" id="checkboxes-3" value="1">
+      Отмеченные на карте
+    </label>
+	</div>
+  </div>  
+</div>
+<div class="form-group" style="margin-left: -87px;"*>
+  <div class="col-xs-8 nopaddingleft">
+  <div class="checkbox">
+    <label for="checkboxes-4">
+      <input type="checkbox" class="price_type" name="change" id="checkboxes-4" value="1">
+      На обмен
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-5">
+      <input type="checkbox" class="price_type" name="negotiable_price" id="checkboxes-5" value="1">
+      Договорная цена
+    </label>
+	</div>
+  </div>  
+</div>
+
+<div class="form-group" style="margin-left: -45px;margin-top: 10px;float: right;">
+  <div class="col-xs-12 nopaddingleft" >
+
+     <input id="textinput" name="searchText" type="text" placeholder="Поиск по тексту" class="form-control input-md ssss">
+  </div>  
+</div>
+</div>
+
+
+<p class="text-center curs" id="poi">
+  <span>Расширенный поиск</span>
+</p>
+
+</div>
+</form>
+</div>
