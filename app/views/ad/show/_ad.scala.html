@@ -18,7 +18,7 @@
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span> В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
-        В избранное</a>}
+        В избранное</a><a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer;padding-left: 10px;"></a>}
         @if(controllers.Ads.favoriteSizeInt>0){ 
         &nbsp&nbsp&nbsp
         <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer"> 

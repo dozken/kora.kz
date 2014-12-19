@@ -172,7 +172,9 @@ success: function() {
     }
     jsRoutes.controllers.Ads.favoriteSize().ajax({
         	success: function(data) {
-        		data *=1; 
+        		
+        		data *=1;
+        		console.log(data) 
         		if(data>0)
         		$ ( "#sumfavorites" ).html ( 'Выбрано '+data+' объявления' );
         		else
