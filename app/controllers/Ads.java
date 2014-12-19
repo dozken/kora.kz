@@ -449,8 +449,7 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Лошадь").findUnique())
 				.orderBy("updatedDate").findList();
-		Section section = Section.find.where().eq("name", "Лошадь")
-				.orderBy("updatedDate").findUnique();
+		Section section = Section.find.where().eq("name", "Лошадь").findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
 	}
 

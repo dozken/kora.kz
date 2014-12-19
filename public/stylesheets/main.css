@@ -8,6 +8,12 @@
     src: url('fonts/tenge.otf') format("opentype");
 }
 
+#add_phone_additional{
+	margin-top: 5px;
+}
+.additional-phone{
+	padding-top: 5px;
+}
 .li-option{
 /*	margin:-10px;
 	height: 16px;
@@ -1175,7 +1181,7 @@ thead {
 	color: #8f2341;
 	font-size: 18px;
 	font-style: italic;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 .frmbck {
