@@ -159,69 +159,67 @@ var title = $("#titleHide").html();
         });
     });
 
+$(document).on("click", "#imageUploadBtn", function(e) {
+    var start =  +new Date();
+
+    e.preventDefault();
+            var formData = new FormData();
+            var image_names = "";
+    if($("#images li canvas").length>0) {
+        $("#images li canvas").each(function () {
+            var a = imageMap[$(this).parent().attr("fileName")];
+            formData.append($(this).parent().attr("fileName"), a);
+            image_names += $(this).parent().attr("fileName") + "&";
+        });
+        formData.append("image_names", image_names);
+        $.ajax({
+            url: '@controllers.routes.Ads.imageUpload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#imageUploadBtn").prop("disabled", true);
+                var end =  +new Date();  // log end timestamp
+                var diff = end - start;
+                console.log(diff);
+            }
+        })
+        $("#imageUploadBtn").prop("disabled", false);
+    }
+
+});
+
     $(document).on("click", "#ad_form_submit", function(e) {
-    	//var $btn = $("#ad_form_submit").button('loading');
-    	
-    	//e.preventDefault();
+        var start =  +new Date();
         if (validation()) {
-
             var tels = "";
-            $("#additional_phones input").each(function(){
-
-                if($(this).val()!=null && $(this).val()!=""){
-                    tels+="," + $(this).val();
+            $("#additional_phones input").each(function () {
+                if ($(this).val() != null && $(this).val() != "") {
+                    tels += "," + $(this).val();
                 }
-            })
-
-            $("#tels").val(tels);
-            $('#ad_form').submit(function(e) {
-                var formData = new FormData(this);
-                var image_names = "";
-                $("#images li canvas").each(function() {
-                    var a = imageMap[$(this).parent().attr("fileName")];
-                    formData.append($(this).parent().attr("fileName"), a);
-                    image_names += $(this).parent().attr("fileName") + "&";
-                });
-                formData.append("image_names", image_names);
-
-
-                $("#ad_form_submit").attr('disabled','disabled');
-            	$("#ad_form_submit").text('Загружается...');
-
-            	var start = +new Date();  // log start timestamp
-
-                $.ajax({
-                    url: '@controllers.routes.Ads.create',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-
-
-            			var end =  +new Date();  // log end timestamp
-            			var diff = end - start;
-            			console.log(diff)
-                        $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
-                        $("#success_message").fadeIn(200);
-
-
-                        jsRoutes.controllers.Application.emailing("ad_created", $("#ema").val()).ajax()
-                        var end2 =  +new Date();  // log end timestamp
-            			var diff1 = end2 - end;
-						console.log(diff1)
-						setTimeout(function() {
-                            @if(session.get("connected") != null){
-                                window.location.href = "@routes.Manage.myAds()";
-                            }else{
-                                window.location.href = "@routes.Application.index()";
-                            }
-                        }, 1000);
-                    }
-                });
-                e.preventDefault();
             });
-        } else {
+            $("#tels").val(tels);
+            $("#ad_form_submit").attr('disabled', 'disabled');
+            $("#ad_form_submit").text('Загружается...');
+
+            jsRoutes.controllers.Ads.create().ajax({
+                data: $("#ad_form").serialize(),
+                success: function (data) {
+                    $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
+                    $("#success_message").fadeIn(200);
+                    var end =  +new Date();  // log end timestamp
+                    var diff = end - start;
+                    console.log(diff);
+                    @if(session.get("connected") != null) {
+                        window.location.href = "@routes.Manage.myAds()";
+                    }else{
+                        window.location.href = "@routes.Application.index()";
+                    }
+                }
+            });
+            e.preventDefault();
+        }else{
             e.preventDefault();
             $("#error_fields").html("");
             $("#error_fields").append("Некоторые поля заполнены неправильно");

@@ -244,6 +244,7 @@ $("#registerErrorAlert" ).show();
 $(document).on("click", "#loginButton", function(e) {
     e.preventDefault();
 if(login_validation()) {
+	$("#loginButton").prop("disabled",true);
 jsRoutes.controllers.Application.signIn ( ).ajax ( {
 data : $ ( "#loginForm" ).serialize ( ),
 success : function ( data ) {
@@ -251,10 +252,12 @@ var res = "" + data ;
 if ( res == "error" ) {
 $ ( "#loginErrorAlert" ).html ( "Неправильный логин или пароль" ) ;
 $ ( "#loginErrorAlert" ).show ( ) ;
+	$("#loginButton").prop("disabled",false);
 }
 else if( res == "inactive" ) {
 	$ ( "#loginErrorAlert" ).html ( "Вы еще не прошли активацию. Пожалуетса проверьте email." ) ;
 	$ ( "#loginErrorAlert" ).show ( ) ;
+	$("#loginButton").prop("disabled",false);
 	}
 else {
 

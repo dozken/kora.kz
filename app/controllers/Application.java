@@ -98,7 +98,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.autoPreLong(),
 				controllers.routes.javascript.Ads.searchAd(),
 				controllers.routes.javascript.Ads.getRC(),
-
+				controllers.routes.javascript.Ads.create(),
 				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.commentPaging(),
 				controllers.routes.javascript.Ads.get(),
@@ -106,6 +106,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.deleteMessages(),
 				controllers.routes.javascript.Ads.readAsMessages(),
 				controllers.routes.javascript.Ads.filterAds(),
+				controllers.routes.javascript.Ads.imageUpload(),
 				controllers.routes.javascript.Ads.favoriteSize(),
 				controllers.routes.javascript.Manage.read(),
 				controllers.routes.javascript.Manage.paymentReport(),
