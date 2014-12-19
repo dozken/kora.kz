@@ -51,7 +51,6 @@ $(function () {
 });
   
 $(document).ajaxSuccess(function() {
-	console.log( "Triggered ajaxSuccess handler." );
 
 	setTimeout(function() {
 		$(".alert-dismissable").fadeTo(500, 0).slideUp(500, function(){
@@ -68,7 +67,6 @@ $(document).on("click",".change.pasword",function(e){
 	
 	if(newPassword!=repeatPassword){
 		
-		console.log("doesnot match")
 	}
 		
 	jsRoutes.controllers.Settings.changePassword().ajax({
@@ -90,7 +88,6 @@ $(document).on("switchChange.bootstrapSwitch", '.change.userSettings',function(e
 });
 
 $(document).on("switchChange.bootstrapSwitch", '.change.adminSettings',function(event, state){
-	console.log(state)
 	var id = $(this).attr("setting");
 	var status = (state) ? "on" : "off";
 	if(state){
@@ -107,9 +104,7 @@ $(document).on("switchChange.bootstrapSwitch", '.change.adminSettings',function(
 			value : "super val",
 			callback: function(result) {                
 				if (result === null) {                                             
-					console.log("Prompt dismissed");                              
 				} else {
-					console.log("Hi "+result);
 					jsRoutes.controllers.Settings.changeAdminSetting(id,status).ajax();
 				}
 			}

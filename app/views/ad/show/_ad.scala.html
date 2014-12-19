@@ -14,11 +14,11 @@
     
   </h4>
   </li>
-  <li style="float: right;padding-top: 40px;padding-right: 80px;">
+  <li style="float: right;padding-top: 54px;padding-right: 83px;font-size: 12px;">
     @if(controllers.Ads.checkFavorite(ad.id)) {
         <a id="favorite" type="remove" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star"></span> В избранном</a>
     }else{<a id="favorite" type="add" ad="@ad.id" style="text-decoration : none ;cursor:pointer"><span class="glyphicon glyphicon-star-empty"></span>
-        В избранное</a>}
+        В избранное</a><a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer;padding-left: 10px;"></a>}
         @if(controllers.Ads.favoriteSizeInt>0){ 
         &nbsp&nbsp&nbsp
         <a id="sumfavorites" type="add" ad="@ad.id" href="@routes.Ads.favorite" style="text-decoration : underline;cursor:pointer"> 
@@ -127,7 +127,7 @@
 
 <div class="col-xs-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;">@ad.description</p>
+	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;word-break: break-all;">@ad.description</p>
 </div>
 <div class="col-xs-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
@@ -174,10 +174,10 @@
       <span class="help-block"><i  class="PFBSPLI-11">На этот адрес придет уведомление об ответе</i></span>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" style="margin-top: -3%;">
     <label for="inputPassword3"  class="col-sm-3 control-label leftalign PFBSPI-13">Сообщение</label>
     <div class="col-sm-9">
-      <textarea class="form-control" name="comment_message" rows="6"></textarea>
+      <textarea class="form-control" name="comment_message" rows="6" style="max-width:589px"></textarea>
       @*
       <span class="help-block"><i class="PFBSPLI-11">Ваш IP-адрес 2.566.14.99 будет сохранен вместе с комментарием</i></span>
       *@
@@ -205,11 +205,13 @@
     </div>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9 PFBSPI-13">
-      <button type="submit" id="comment_ad" forWho="0" class="btn btn-success" style="padding-left:60px;padding-right:60px;">Отправить</button>
+      <button type="submit" id="comment_ad" forWho="0" class="btn btn-success" style="padding-left:60px;padding-right:60px;padding-top: 2px;
+padding-bottom: 2px;
+margin-top: -46px;">Отправить</button>
      
     </div>
   </div>
-    <div class="form-group">
+    <div class="form-group" style="margin-top: -3%;">
     <div class="col-sm-offset-3 col-sm-9 PFBSPLI-13">
       <i>Оставляя коментарий вы соглашаетесь с нашими <a href="#">правилами общения</a></i>
      

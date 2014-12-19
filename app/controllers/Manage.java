@@ -9,6 +9,7 @@ import models.ad.Ad;
 import models.ad.PrivateMessage;
 import models.user.AuthorisedUser;
 import models.user.Payment;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.profile.ads.myAds;
@@ -116,8 +117,8 @@ public class Manage extends Controller {
 						.between("paymentDate", s, e).order("paymentDate desc")
 						.findList()));
 			} catch (ParseException e) {
+				Logger.error("Exception with parsing date", e);
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		} else {
 			if (filter.equals("all")) {

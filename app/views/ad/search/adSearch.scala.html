@@ -53,16 +53,15 @@
                     </li>
 
                 </ul> -->
-                <nav><ul class="pagination pagination-sm">
-                    <li class="disabled"><a href="#"><span aria-hidden="true">&laquo;Ctrl</span><span class="sr-only">Previous</span></a></li>
-                    <li><a href="#">Предыдущая</a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">Следущая</a></li>
-                    <li><a href="#"><span aria-hidden="true">Ctrl&raquo;</span><span class="sr-only">Previous</span></a></li>
-                </ul></nav>
+                <nav>
+                <ul class="pagination pagination-sm">
+                    <li class="disabled"><a href="#" id="paging_prev">&larr; Предыдущая</a></li>
+                    @for(index <-0 to ads.size/30){
+                    	<li><a href="#" onClick="searchByPage(@{index})">@{index+1}</a></li>
+                    }
+                    <li class="next @if(ads.size<=30){ disabled }"><a href="#" id="paging_next">Следущая &rarr;</a></li>
+                </ul>
+                </nav>
             </nav>
         </div>
 
@@ -81,17 +80,13 @@ var quan = $("#quanHide").html();
 var gender = $("#genderHide").html();
 var age = $("#ageHide").html()
 
-	var watermark = {
-		"brightWatermark":"white_watermark",
-		"darkWatermark":"black_watermark",
-		"className":"watermark",
-		"opacity": 30,		
-	};
+var watermark = {
+    "brightWatermark": "white_watermark",
+    "darkWatermark": "black_watermark",
+    "className": "watermark",
+    "opacity": 30,
+};
 
-
-
-	
-	
 $(document).ready(function(){
 	$(document).ready(function(){
 		$(document).watermark(watermark);
@@ -111,132 +106,162 @@ $(document).ready(function(){
 
 });
 
-	
-		$( document ).on( 'click', 'li.cities', function( event ) {
-			var $target = $( event.currentTarget );
-			$("input[name=city]").val($target.attr("city-id"));
-		});
-		
-		$( document ).on( 'click', 'li.categories', function( event ) {
-			var $target = $( event.currentTarget );
-			$("input[name=category]").val($target.attr("category-id"));
-		});
-		
+	$(document).on('click', 'li.cities', function(event) {
+	    var $target = $(event.currentTarget);
+	    $("input[name=city]").val($target.attr("city-id"));
+	});
 
-    $("#sortByLowPrice" ).click(function(){
+	$(document).on('click', 'li.categories', function(event) {
+	    var $target = $(event.currentTarget);
+	    $("input[name=category]").val($target.attr("category-id"));
+	});
 
-    sort="price";
-        page=0;
-    myFunc();
-    })
 
-    $("#sortByHighPrice" ).click(function(){
+	$("#sortByLowPrice").click(function() {
 
-    sort="price_desc";
-        page=0;
-    myFunc();
-    })
+	    sort = "price";
+	    page = 0;
+	    myFunc();
+	})
 
-    $("#sortByDate" ).click(function(){
+	$("#sortByHighPrice").click(function() {
 
-    sort="a.published_date desc";
-        page=0;
-    myFunc();
-    })
+	    sort = "price_desc";
+	    page = 0;
+	    myFunc();
+	})
 
-$("#poi").click(function() {
-  $("#demo").slideToggle("slow");
-  $("#poi span").text(function(i, v) {
-	return v === 'Обычный поиск' ? 'Расширенный поиск' : 'Обычный поиск'
-  })
+	$("#sortByDate").click(function() {
+
+	    sort = "a.published_date desc";
+	    page = 0;
+	    myFunc();
+	})
+
+	$("#poi").click(function() {
+	    $("#demo").slideToggle("slow");
+	    $("#poi span").text(function(i, v) {
+	        return v === 'Обычный поиск' ? 'Расширенный поиск' : 'Обычный поиск'
+	    })
+	});
+
+
+
+	$(document).on("change", "#region", function() {
+	    var id = Number($(this).val());
+
+	    jsRoutes.controllers.Ads.getRC(id).ajax({
+	        success: function(data) {
+	            $("#city_div").html(data);
+	        }
+	    });
+	});
+
+	$(document).on("change", ".gender_check", function() {
+
+
+	    if ($('.gender_check:checked').length != 1) {
+
+
+	        $("#gender").val("");
+	    } else {
+	        if (this.checked) {
+	            $("#gender").val($(this).val());
+	        } else {
+	            $("#gender").val($(this).attr("notVal"));
+	        }
+
+	    }
+	})
+
+	var current = 1000;
+	var page = 0;
+	var sort = "a.published_date desc";
+
+
+	$(document).on("click", "#search_filter", function(e) {
+	    e.preventDefault();
+	    page = 0;
+	    myFunc();
+	})
+
+function myFunc() {
+
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $(this).attr("disabled", true);
+    jsRoutes.controllers.Ads.searchAd(page, sort).ajax({
+        data: $("#search_form").serialize(),
+        success: function(data) {
+            $("#main_div").html(data);
+            $("#search_filter").attr("disabled", false);
+            total($("#total_size").val());
+        }
+    });
+}
+
+function searchByPage(p) {
+
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $(this).attr("disabled", true);
+    jsRoutes.controllers.Ads.searchAd(p, sort).ajax({
+        data: $("#search_form").serialize(),
+        success: function(data) {
+            $("#main_div").html(data);
+            $("#search_filter").attr("disabled", false);
+            total($("#total_size").val());
+        }
+    });
+}
+
+$(document).keydown(function(e) {
+	console.log(e)
+  if(e.ctrlKey) {
+  
+    //You do your stuff here.
+  }
 });
 
 
+$(document).on("click", "#paging_next", function() {
 
-    $(document).on("change", "#region", function() {
-        var id = Number($(this).val());
-        
-        jsRoutes.controllers.Ads.getRC(id).ajax({
-            success: function(data) {
-                $("#city_div").html(data);
-            }
-        });
-    });
+    if (current > (page + 1) * 30) {
+        page = page + 1;
+        myFunc();
 
-$(document).on("change",".gender_check",function(){
-
-
-if ($('.gender_check:checked').length != 1) {
-
-
-   $("#gender" ).val("");
-}
-   else {
-        if ( this.checked ) {
-        $ ( "#gender" ).val ( $ ( this ).val ( ) ) ;
-        }else{ $ ( "#gender" ).val ( $ ( this ).attr ("notVal") ) ;}
-
-}
-})
-
-var current = 1000;
-var page=0;
-var sort="a.published_date desc";
-
-
-$(document ).on("click","#search_filter",function(e){
-e.preventDefault();
-    page=0;
-myFunc();
-})
-
-function myFunc(){
-
-$("#search_results" ).html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
-    $(this ).attr("disabled",true);
-    jsRoutes.controllers.Ads.searchAd(page,sort).ajax({
-    data : $ ( "#search_form" ).serialize ( ),
-    success: function(data) {
-    $("#main_div" ).html(data);
-    $("#search_filter" ).attr("disabled",false);
-    total($("#total_size" ).val());
     }
-    });
-}
-
-$(document ).on("click","#paging_next",function(){
-
-if(current>(page+1)*30) {
-page = page + 1 ;
-myFunc ( ) ;
-
-}
 })
 
-$(document ).on("click","#paging_prev",function(){
-if(page!=0) {
-page = page - 1 ;
+$(document).on("click", "#paging_prev", function() {
+    if (page != 0) {
+        page = page - 1;
 
-myFunc() ;
+        myFunc();
 
-}
+    }
 })
 
-function enDis(){
+function enDis() {
 
-if(page==0) {$("#paging_prev" ).parent( ).addClass("disabled");}else{$("#paging_prev" ).parent( ).removeClass("disabled");}
-if(current<=(page+1)*30) {$("#paging_next" ).parent( ).addClass("disabled");}else{$("#paging_next" ).parent( ).removeClass("disabled");}
+    if (page == 0) {
+        $("#paging_prev").parent().addClass("disabled");
+    } else {
+        $("#paging_prev").parent().removeClass("disabled");
+    }
+    if (current <= (page + 1) * 30) {
+        $("#paging_next").parent().addClass("disabled");
+    } else {
+        $("#paging_next").parent().removeClass("disabled");
+    }
 }
 
-function total(a){
+function total(a) {
 
-current = parseInt(a);
-if(current-((page+1)*10)<0){
-$("#total" ).text("Показывает "+(page*30 + 1)+" - "+a+" / "+a );
-}else{ $("#total" ).text("Показывает "+(page*30 + 1)+" - "+((page+1)*30)+" / "+a );}
-enDis();
+    current = parseInt(a);
+    if (current - ((page + 1) * 10) < 0) {
+        $("#total").text("Показывает " + (page * 30 + 1) + " - " + a + " / " + a);
+    } else {
+        $("#total").text("Показывает " + (page * 30 + 1) + " - " + ((page + 1) * 30) + " / " + a);
+    }
+    enDis();
 }
-
-
-
 </script>

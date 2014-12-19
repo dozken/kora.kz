@@ -4,6 +4,10 @@
 .bootbox-confirm .modal-dialog{
 	width: 300px;
 }
+.multibutton {
+	margin-left: -106px !important;
+	margin-top: -4px;
+}
 </style>
 <link rel="stylesheet" href="@routes.Assets.at("bootstrap-multiselect/css/bootstrap-multiselect.css")" type="text/css"/>
 <div class="container">
@@ -40,24 +44,22 @@
 				<nav>
 					<ul class="pagination pagination-sm">
 						<li class="prev @if(page==0){disabled}">
-							@if(page==0){
-							<a>&larr; предыдущий</a>
-							}else{
-							<a href="@routes.Administer.allAds((page-1),sort)">&larr; предыдущий</a>
-							}
+						@if(page==0){
+							<a>&larr; Предыдущая</a>
+						}else{
+							<a href="@routes.Administer.allAds((page-1),sort)">&larr; Предыдущая</a>
+						}				
 						</li>
-						<li>
-							<a id="total" style="color: #666;">Показывает @if(total>20*(page+1)){@(20*page+1)-@((page+1)*1)}else{@(20*page+1)-@total}/@total </a>
-						</li>
+						@for(index <-0 to total/20){
+						<li><a href="@routes.Administer.allAds((page),sort)">@{index+1}</a></li>
+						}
 						<li class="next @if(total<=20*(page+1)){ disabled }">
-							@if(total<=20*(page+1)){
-							<a>следующей &rarr;</a>
-							}else{
-							<a href="@routes.Administer.allAds((page+1),sort)">следующей &rarr;</a>
-							}
-
+						@if(total<=20*(page+1)){
+							<a>Следущая &rarr;</a>
+						}else{
+							<a href="@routes.Administer.allAds((page+1),sort)">Следущая &rarr;</a>
+						}				
 						</li>
-
 					</ul>
 				</nav>
 			</div>
@@ -92,7 +94,6 @@ $(document).on("click",".delete",function(){
             },
             error: function(jqXHR, textStatus, errorThrown) {
               $("#ad-list").html(data);
-              //console.log(jqXHR.responseText);
             }
         });
     });
@@ -109,11 +110,10 @@ $(document).ready(function() {
         	allSelectedText: "Все выбранно",
         	nSelectedText : "выбранно",
         	buttonWidth: '361px',
-        	numberDisplayed: 5,
+        	numberDisplayed: 4,
         	nonSelectedText: 'Выберите фильтр',
-        	buttonClass: 'btn btn-default btn-success btn-sm',
+        	buttonClass: 'multibutton btn btn-default btn-success btn-sm',
             onChange: function(option, checked, select) {
-                console.log('Changed option ' + $(option).val() + '.'+ checked);
                 name = $(option).val();
                 status = checked;
                 jsRoutes.controllers.Administer.filterToSession(name,status,@page,"@sort").ajax({
@@ -122,20 +122,6 @@ $(document).ready(function() {
 		            }
 		        });
             },
-            @*
-            onDropdownHidden: function(event) {
-                console.log('Dropdown closed.');
-                jsRoutes.controllers.Administer.filterAllAds(@page,"@sort").ajax({
-		            success: function(data) {
-		              $("#ad-list").html(data);
-		            },
-		            error: function(jqXHR, textStatus, errorThrown) {
-		              $("#ad-list").html(data);
-		              //console.log(jqXHR.responseText);
-		            }
-		        });
-            }
-            *@
         });
     });
 

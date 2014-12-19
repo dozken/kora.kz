@@ -31,7 +31,6 @@ public class Image extends Model {
 
 	// TODO
 
-	@SuppressWarnings("static-access")
 	public static String byteToBase64(byte[] data) {
 		return Base64.encodeBase64String(data);
 	}
