@@ -43,20 +43,20 @@
 	<div id="city_div" style="width: 170px;">
 		<div class="input-group-btn bs-dropdown-to-select-group">
 			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
-				<span data-bind="bs-drp-sel-label">Все города/ауылы</span>
+				<span data-bind="bs-drp-sel-label" style="height: 16px;">Все города/ауылы</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="city" value="all" >
 			</button>
-			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
 				@if(region!=null){
 				@for(c<-region.cities if(c.parentCity==null)){
 				@if(c.isParent){
-				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name" ><a href="#">1<span class="optionGroup">@c.name</span></a></li>
 				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
-				<li class="li-option cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#"><span class="optionChild">@subcity.name</span></a></li>				
+				<li class="dropdown-header cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#">2<span class="optionChild">@subcity.name</span></a></li>				
 				}
 				}else{
-				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name"><a href="#">3<span class="">@c.name</span></a></li>
 				}}}
 			</ul>
 		</div>  
