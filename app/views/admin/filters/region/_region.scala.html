@@ -1,0 +1,16 @@
+@utils._flashAlert("error","danger")
+@utils._flashAlert("success","success")
+
+@for((region,index)<-models.contact.Region.find.where().orderBy("name").findList.zipWithIndex){
+
+<div class="input-group imgmargin">
+  <span class="input-group-addon">@{index+1}</span>
+  <input type="text" class="form-control" value="@region.name" region="@region.id" before="@region.name" name="@region.name" /> 
+  <span class="input-group-btn">
+    <button class="btn btn-default nobord region update" type="button" region="@region.id" data-toggle="tooltip" data-placement="top" title="Изменить"><span class="glyphicon glyphicon-ok"></span></button>
+  </span>
+  <span class="input-group-btn">
+	<button class="btn btn-default nobor  region delete" type="button" region="@region.id" data-toggle="tooltip" data-placement="top" title="Удалить"><span class="glyphicon glyphicon-remove"></span></button>
+  </span>
+</div>
+}
