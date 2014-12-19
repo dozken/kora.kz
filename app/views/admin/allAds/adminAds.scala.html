@@ -4,6 +4,10 @@
 .bootbox-confirm .modal-dialog{
 	width: 300px;
 }
+.multibutton {
+	margin-left: -106px !important;
+	margin-top: -4px;
+}
 </style>
 <link rel="stylesheet" href="@routes.Assets.at("bootstrap-multiselect/css/bootstrap-multiselect.css")" type="text/css"/>
 <div class="container">
@@ -106,9 +110,9 @@ $(document).ready(function() {
         	allSelectedText: "Все выбранно",
         	nSelectedText : "выбранно",
         	buttonWidth: '361px',
-        	numberDisplayed: 5,
+        	numberDisplayed: 4,
         	nonSelectedText: 'Выберите фильтр',
-        	buttonClass: 'btn btn-default btn-success btn-sm',
+        	buttonClass: 'multibutton btn btn-default btn-success btn-sm',
             onChange: function(option, checked, select) {
                 name = $(option).val();
                 status = checked;
