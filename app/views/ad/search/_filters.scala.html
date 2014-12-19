@@ -7,7 +7,7 @@
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
   <div>
-    <select id="region" name="region" class="form-control sd" style="width: 170px;">
+    <select id="region" name="region" class="form-control sd" style="width: 172px;">
       <option value="all">Во всех регионах</option>
       @for(reg <-models.contact.Region.find.all()) {
           <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
@@ -124,7 +124,7 @@
   </div>
 </div>
 <div class="form-group">
-   <div class="frmbck2">
+   <div class="" style="padding: 29px 15px 11px 10px;background-color: #E0E0E0;border-top-right-radius: 4px;">
   <label class="control-label" for="selectbasic1"></label>
 
         <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 12px;"><span class="btr">Поиск</span></button>
@@ -136,7 +136,7 @@
 <div id="demo"> 
 
 
- <div id="ageHide" class="form-group frmg">
+ <div id="ageHide" class="form-group frmg" style="margin-left: -15px;">
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Возраст:</label>
   <div>
@@ -146,7 +146,8 @@
         <option value="@i">@i</option>
     	}
     </select>
-        <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
+    <span class="age-divider">-</span>
+    <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
             <option value="2050"></option>
         @for(i<-2000 to 2050) {
             <option value="@i">@i</option>
