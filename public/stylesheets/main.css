@@ -1042,6 +1042,7 @@ thead {
 
 .boto {
 	margin-top: 20px;
+	width: 108%;
 }
 
 .lin {
@@ -1277,7 +1278,8 @@ thead {
 }
 
 .tptp {
-	margin-top: 3px;
+margin-top: 6px;
+float: right;
 }
 
 .noradius {

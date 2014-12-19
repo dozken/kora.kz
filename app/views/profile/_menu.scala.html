@@ -3,19 +3,20 @@
 
 <ul class="proful nopaddingleft">
     <li>    @if(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image!=null){
-        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @models.ad.Image.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="height:100px;width:100px;">
+        <img src="data:@models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.contentType;base64, @models.ad.Image.byteToBase64(models.user.AuthorisedUser.findByEmail(session().get("connected")).profile.image.content)" style="width: 187px;margin-left: 9px;max-height: 200px;">
 
     }else{
   <img src="@routes.Assets.at("images/home/huge.png")" style="height:100px;width:100px;" class="imgprofile">
 }</li>
-<li>
+@*<li style="margin-top: -4%;
+margin-left: -6%;
+margin-bottom: -15%;">
 <div class="popover-example"> <!-- NEW -->
   <div class="popover right" style="z-index:-1060;">
-    <div class="arrow"></div>
     <h3 class="popover-title PFBSPLI-13"> @models.user.AuthorisedUser.findByEmail(session().get("connected")).userName</h3>
   </div>
 </div>
-</li>
+</li>*@
 </ul>
 <ul class="profmenu nopaddingleft">
 	
