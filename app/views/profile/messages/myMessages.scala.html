@@ -1,0 +1,123 @@
+@(ms:List[models.ad.PrivateMessage])
+@main("Личные сообщения") {
+
+<div class="container">
+<div class="col-xs-3 menudiv">
+	@profile._menu()
+</div>
+<div id="message_body" class="col-xs-9 ">
+
+	@_message(ms)
+</div>
+
+</div>
+}
+<style>
+    .message{cursor:pointer;}
+</style>
+<script type="text/javascript">
+
+var countChecked = function() {
+var n = $( "input:checked" ).length;
+
+if(n>0){
+
+$("#message_delete" ).prop("disabled",false);
+$("#message_asRead" ).prop("disabled",false);
+}else{
+
+$("#message_delete" ).prop("disabled",true);
+$("#message_asRead" ).prop("disabled",true);
+}
+};
+
+
+$(document ).on("click","#message_delete",function(){
+var val = $("#message_select" ).val();
+var ids = "" ;
+$('input:checkbox:checked' ).each(function() {
+
+
+ids += $ ( this ).attr ( "mess" ) + "_" ;
+})
+jsRoutes.controllers.Ads.deleteMessages(ids,val).ajax({
+success: function(data) {
+$("#message_body").html(data);
+$("#message_select" ).val(val);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
+$(document ).on("click","#message_asRead",function(){
+var ids = "" ;
+$('input:checkbox:checked' ).each(function() {
+
+
+ids += $ ( this ).attr ( "mess" ) + "_" ;
+})
+jsRoutes.controllers.Ads.readAsMessages(ids).ajax({
+success: function(data) {
+$("#message_body").html(data);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
+
+$( document ).on( "click","input[type=checkbox]", countChecked );
+
+$(document ).on("click","#back",function(){
+$("#message_body").html(body);
+$("#message_select" ).val(val);
+})
+
+$(document ).on("change","#message_select",function(){
+    var val = $(this ).val();
+jsRoutes.controllers.Manage.getMessageType(val).ajax({
+success: function(data) {
+$("#message_body").html(data);
+    if(val=="send"){$("#message_asRead" ).hide();}
+$("#message_select" ).val(val);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+
+$(document ).on("click",".message",function(){
+body=$("#message_body").html();
+val=$("#message_select" ).val();
+   var id = $(this ).attr("message");
+
+jsRoutes.controllers.Manage.read(id).ajax({
+success: function(data) {
+$("#message_body").html(data);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+$(document ).on("click","#replay_message",function(){
+
+var author = $(this ).attr("author");
+var recipent = $(this ).attr("recipent");
+var ad = $(this ).attr("ad");
+var mm = $("#replay").val();
+jsRoutes.controllers.Ads.replayPrivateMessage(author,ad,recipent,mm).ajax({
+success: function(data) {
+jsRoutes.controllers.Application.emailing ("replay_message", recipent).ajax ()
+window.location.href="@routes.Manage.myMessages()"
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(jqXHR.responseText);
+}
+});
+})
+</script>
