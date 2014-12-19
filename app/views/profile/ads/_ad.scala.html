@@ -3,7 +3,7 @@
 
 @for(ad<-ads){
 
-<div class="col-xs-12 nopaddingleft nopaddingright borbot highlight @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }" ad="@ad.id">
+<div class="col-xs-12 nopaddingleft nopaddingright boto highlight @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }" ad="@ad.id">
 	<div class="col-xs-12 toptop">
 		<h4 class="DINNW1GR-18"><a href="@routes.Ads.get(ad.id)">@utils._adName(ad)</a></h4>
 	</div>
@@ -16,13 +16,13 @@
         }
 	</div>
 	<div class="col-xs-10 nopaddingleft">
-		<div class="col-xs-3">
+		<div class="col-xs-3" style="width:44%">
 			<ul class="adsul nopaddingleft">
 				<li class="DINNW1GL-14">Цена: @Messages(ad.priceType.price.toString) @ad.priceType.currency</li>
 				<li class="DINNW1GL-14">Регион: @ad.contactInfo.region.name</li>
 			</ul>
 		</div>
-		<div class="col-xs-6 nopaddingleft">
+		<div class="col-xs-6 nopaddingleft" style="width:35%">
 			<ul class="adsul nopaddingleft">
 				<li class="DINNW1GL-14">Добавлено: @ad.publishedDate.format("dd/MM/yyyy")</li>
 				@if(ad.status=="active"){
@@ -35,7 +35,7 @@
 			</ul>
 		</div>
 		@if(ad.status=="active"){
-		<div class="col-xs-3 nopaddingleft nopaddingright">
+		<div class="col-xs-3 nopaddingleft nopaddingright" style="width:21%">
 			<ul class="adsul nopaddingleft">
 				<li class="DINNW1GL-14"><span class="icon-prosmotr"></span> @ad.views
 					просмотров</li>
