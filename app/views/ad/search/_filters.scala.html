@@ -7,7 +7,7 @@
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
   <div>
-    <select id="region" name="region" class="form-control sd" style="width: 170px;">
+    <select id="region" name="region" class="form-control sd" style="width: 172px;">
       <option value="all">Во всех регионах</option>
       @for(reg <-models.contact.Region.find.all()) {
           <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
@@ -43,20 +43,20 @@
 	<div id="city_div" style="width: 170px;">
 		<div class="input-group-btn bs-dropdown-to-select-group">
 			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
-				<span data-bind="bs-drp-sel-label">Все города/ауылы</span>
+				<span data-bind="bs-drp-sel-label" style="height: 16px;">Все города/ауылы</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="city" value="all" >
 			</button>
-			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
 				@if(region!=null){
 				@for(c<-region.cities if(c.parentCity==null)){
 				@if(c.isParent){
-				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name" ><a href="#">1<span class="optionGroup">@c.name</span></a></li>
 				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
-				<li class="li-option cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#"><span class="optionChild">@subcity.name</span></a></li>				
+				<li class="dropdown-header cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#">2<span class="optionChild">@subcity.name</span></a></li>				
 				}
 				}else{
-				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name"><a href="#">3<span class="">@c.name</span></a></li>
 				}}}
 			</ul>
 		</div>  
@@ -124,7 +124,7 @@
   </div>
 </div>
 <div class="form-group">
-   <div class="frmbck2">
+   <div class="" style="padding: 29px 15px 11px 10px;background-color: #E0E0E0;border-top-right-radius: 4px;">
   <label class="control-label" for="selectbasic1"></label>
 
         <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 12px;"><span class="btr">Поиск</span></button>
@@ -136,7 +136,7 @@
 <div id="demo"> 
 
 
- <div id="ageHide" class="form-group frmg">
+ <div id="ageHide" class="form-group frmg" style="margin-left: -15px;">
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Возраст:</label>
   <div>
@@ -146,7 +146,8 @@
         <option value="@i">@i</option>
     	}
     </select>
-        <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
+    <span class="age-divider">-</span>
+    <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
             <option value="2050"></option>
         @for(i<-2000 to 2050) {
             <option value="@i">@i</option>

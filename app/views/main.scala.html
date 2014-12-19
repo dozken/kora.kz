@@ -65,7 +65,6 @@ $('#carousel-top.carousel').on('slid.bs.carousel', function () {
 	    success : function(data) {}
 	});
 	
-	console.log(@session.get("carousel-top"))
 });
 
 $('#carousel-bottom.carousel').on('slid.bs.carousel', function () {
@@ -78,7 +77,6 @@ $('#carousel-bottom.carousel').on('slid.bs.carousel', function () {
 
 
 	function registrate(){
-	console.log("click");		
 	}
 
 	var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
@@ -94,15 +92,12 @@ $('#carousel-bottom.carousel').on('slid.bs.carousel', function () {
 	
 	$(document).on("click",".toastmoderate",function(){
 		var adId = $(this).attr("ad");
-		console.log("enter");
 		jsRoutes.controllers.Administer.moderate(adId).ajax({
 			success: function(data) {
-				console.log(data);
 				adModerate = "#ad"+adId;
 				mytoast.hide();
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
-	            console.log(jqXHR.responseText);            
 	        }
 		});
 		
@@ -232,7 +227,6 @@ jsRoutes.controllers.Application.emailing ("register",res ).ajax ()
 
 },
 error : function ( jqXHR, textStatus, errorThrown ) {
-console.log ( jqXHR.responseText ) ;
 }
 } ) ;
 }else{
@@ -266,7 +260,6 @@ window.location.href = " @routes.Manage.myInfo() ";
 
 },
 error : function ( jqXHR, textStatus, errorThrown ) {
-console.log ( jqXHR.responseText ) ;
 }
 } ) ;
 }else{$ ( "#loginErrorAlert" ).show ( ) ;}
@@ -276,7 +269,6 @@ console.log ( jqXHR.responseText ) ;
 
     $.getJSON ( "http://rate-exchange.appspot.com/currency?from=USD&to=KZT&callback=?", function ( result ) {
 
-    console.log ( result.rate ) ;
     jsRoutes.controllers.Application.currency ( "USDtoKZT", result.rate ).ajax ( ) ;
     })
 
@@ -286,7 +278,6 @@ console.log ( jqXHR.responseText ) ;
 
         $.getJSON ( "http://rate-exchange.appspot.com/currency?from=KZT&to=USD&callback=?", function ( result ) {
 
-        console.log ( result.rate ) ;
         jsRoutes.controllers.Application.currency ( "KZTtoUSD", result.rate ).ajax ( ) ;
         })
 

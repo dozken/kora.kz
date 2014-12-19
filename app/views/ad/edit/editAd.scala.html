@@ -172,9 +172,10 @@ $(document ).on("change","#section",function(){
 });
     $(".mmm").mask("+7(999) 999-9999");
     $(document).on("click", "#add_phone_additional", function() {
-        $("#additional_phones").append('<div class="input-group"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
+    if($('.additional-phone').length<3){
+        $("#additional_phones").append('<div class="input-group additional-phone"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
         $(".mmm").mask("+7(999) 999-9999");
-
+    }
     });
 
     $(document).on("click", ".del_phone", function() {
@@ -286,7 +287,6 @@ $(document ).on("change","#city",function(){
 		myMap.geoObjects.add(myCollection);
 		
 		$("#location").val("("+lat+","+lng+")");
-		console.log("yandex:"+$("#location").val())
     } )
     }else {
     	map = new GMaps ( {
@@ -305,7 +305,6 @@ $(document ).on("change","#city",function(){
     			marker = map.addMarker ( {
     				position : e.latLng
     			} ) ;
-				console.log("google:"+$("#location").val())
     		}
     	}) ;
     }
@@ -341,7 +340,6 @@ $(document).on("click",".mapSelect",function(){
 			myCollection.add(myPlacemark)
 			myMap.geoObjects.add(myCollection);
 			$("#location").val("("+lat+","+lng+")");
-			console.log("yandex:"+$("#location").val())
 		});
 
 		if(isMarker){
@@ -365,7 +363,6 @@ $(document).on("click",".mapSelect",function(){
 			height: '400px',
 			click: function(e) {
 				$("#location" ).val( e.latLng);
- 				console.log(String(e.latLng ))
 				lat= e.latLng.lat();
 				lng= e.latLng.lng();
 				isMarker=true;
@@ -404,7 +401,6 @@ width: '700px',
 height: '400px',
 click: function(e) {
 $("#location" ).val( e.latLng);
- console.log(String(e.latLng ))
 lat= e.latLng.lat();
 lng= e.latLng.lng();
 isMarker=true;

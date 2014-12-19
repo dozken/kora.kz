@@ -29,7 +29,6 @@ function moderate(){
 	});   
 	
 	adModerate=null;
-	console.log("adModerate:"+adModerate);
 }
 
 $(document).on("click",".moderate",function(){
@@ -39,11 +38,9 @@ $(document).on("click",".moderate",function(){
 		data: {status:"moderating"},
 		success: function(data) {
 			window.location.href =  "http://@request.host/ad/show/"+adId;
-			console.log(data);
 			
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log("error");            
         }
 	});
 	

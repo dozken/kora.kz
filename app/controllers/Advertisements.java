@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import models.admin.Advertisement;
+import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
@@ -39,8 +40,8 @@ public class Advertisements extends Controller {
 			advertisement.tillToDate = new SimpleDateFormat("dd/MM/yyyy")
 					.parse(advertisementForm.get("tillToDate"));
 		} catch (ParseException e) {
+			Logger.error("Exception with parsing advert date", e);
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		advertisement.update();
 		return ok(_advertisement.render());
@@ -59,8 +60,8 @@ public class Advertisements extends Controller {
 					.parse(advertisementForm.get("publishDate"));
 			advertisement.tillToDate = new SimpleDateFormat("dd/MM/yyyy")
 					.parse(advertisementForm.get("tillToDate"));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
+		} catch (ParseException e) {
+			Logger.error("Exception with parsing advert date", e);
 		}
 
 		FilePart picture = body.getFile("embeddedObject");
@@ -71,8 +72,8 @@ public class Advertisements extends Controller {
 				advertisement.file = image;
 				advertisement.fileType = picture.getContentType();
 			} catch (IOException e) {
+				Logger.error("Exception with convertign image to bytes", e);
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			Advertisement.addPosition();

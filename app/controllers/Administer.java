@@ -1,9 +1,6 @@
 package controllers;
 
 import static play.data.Form.form;
-
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlUpdate;
 import models.Emailing;
 import models.ad.Ad;
 import models.user.AuthorisedUser;
@@ -20,6 +17,8 @@ import views.html.mailBody.adModerate;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Restrict(@Group("admin"))

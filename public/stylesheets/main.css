@@ -8,8 +8,25 @@
     src: url('fonts/tenge.otf') format("opentype");
 }
 
+#add_phone_additional{
+	margin-top: 5px;
+}
+.additional-phone{
+	padding-top: 5px;
+}
 .li-option{
-	margin:-10px;
+/*	margin:-10px;
+	height: 16px;
+	*/
+	list-style-type: none;
+   padding: 0px;
+   margin: 0px;
+   display: inline;
+   /*width: 65px;
+   height: 40px;*/
+}
+.filtergorodauyl a:hover{
+	background-color: red;
 }
 .sitemapcolumn{
 float: left;
@@ -1031,6 +1048,7 @@ thead {
 
 .boto {
 	margin-top: 20px;
+	width: 108%;
 }
 
 .lin {
@@ -1163,7 +1181,7 @@ thead {
 	color: #8f2341;
 	font-size: 18px;
 	font-style: italic;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 .frmbck {
@@ -1266,7 +1284,8 @@ thead {
 }
 
 .tptp {
-	margin-top: 3px;
+margin-top: 6px;
+float: right;
 }
 
 .noradius {

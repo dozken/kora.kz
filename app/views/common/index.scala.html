@@ -1,4 +1,4 @@
-@import com.github.nscala_time.time.Imports._
+
 @main("Главная") {
 
 
@@ -38,7 +38,7 @@
 			</p>
 			<p class="jum PFBSPR-13">
 					<b>
-					Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",DateTime.now.hour(0).minute(0).second(0) ).findRowCount() объявлений подано
+					Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",Date.from(java.time.LocalDateTime.now.withHour(0).withMinute(0).withSecond(0).atZone(java.time.ZoneId.systemDefault()).toInstant()) ).findRowCount() объявлений подано
 					сегодня
 					</b>
 			</p>
