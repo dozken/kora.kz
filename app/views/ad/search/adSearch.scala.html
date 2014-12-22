@@ -1,0 +1,267 @@
+@(ads:List[models.ad.Ad],section:models.ad.Section,category:models.ad.Category,region:models.contact.Region,city:models.contact.City)
+
+@main("Поиск") {
+
+<style type="text/css">
+.optionGroup
+{
+    font-weight:bold;
+    font-style:italic;
+}
+
+.optionChild
+{
+    padding-left:15px;
+}
+ </style>
+<div class="container сontain">
+	<div class="searchbarmargin">@_searchbar()</div>
+	@main_filters(section)
+	<div id="search_by_section">@_filters(section,category,region,city)</div>
+	<div class="col-xs-12 borderbottom">
+		@*<h3 id="zqwe">Казахстан / @section.name</h3>*@
+		<hr class="hrcolor">
+		<ul class="typelist">
+			<li><a id="sortByLowPrice" class="act">Сначала дешевые</a></li>
+			<li><a id="sortByHighPrice" class="act">Сначала дорогие</a></li>
+			<li><a id="sortByDate" class="act">По свежести объявления</a></li>
+		</ul>
+	</div>
+	<div id="main_div">
+    <div id="search_results" class="col-xs-9 pro3 nopaddingright">
+
+    @if(ads!=null) {
+        @for(ad <- ads if(ad.status.equals("active"))) {
+            <div class="col-xs-12  pro1 @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }">@_ad(ad)</div>
+        }
+    }
+	</div>
+    </div>
+	<div class="col-xs-3 pro2 paddingleft30px nopaddingright"><div class="">@_advertisements()</div></div>
+        
+        <div id="pagination" class="col-xs-12" style="margin-left: -18px;">
+            <!-- <nav>
+                <ul class="pagination pagination-sm">
+                    <li class="prev disabled">
+                        <a id="paging_prev">&larr; предыдущий</a>
+                    </li>
+                    <li>
+                        <a id="total" style="color: #666;">Показывает @if(ads.size>30){1-30}else{1-@ads.size}/@ads.size </a>
+                    </li>
+                    <li class="next @if(ads.size<=30){ disabled }">
+                        <a id="paging_next">следующей &rarr;</a>
+                    </li>
+
+                </ul> -->
+                <nav>
+                <ul class="pagination pagination-sm">
+                    <li class="disabled"><a href="#" id="paging_prev">&larr; Предыдущая</a></li>
+                    @for(index <-0 to ads.size/30){
+                    	<li><a href="#" onClick="searchByPage(@{index})">@{index+1}</a></li>
+                    }
+                    <li class="next @if(ads.size<=30){ disabled }"><a href="#" id="paging_next">Следущая &rarr;</a></li>
+                </ul>
+                </nav>
+            </nav>
+        </div>
+
+    </div>
+</div>
+
+}
+<div id="watermarks" style="display:none">
+	<img src="@routes.Assets.at("images/home/white.png")" id="white_watermark" />
+	<img src="@routes.Assets.at("images/home/black.png")" id="black_watermark" />
+</div>
+    <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<script src='@routes.Assets.at("javascripts/watermark.jquery/watermark.jquery.js")' type="text/javascript"></script>
+<script>
+var quan = $("#quanHide").html();
+var gender = $("#genderHide").html();
+var age = $("#ageHide").html()
+
+var watermark = {
+    "brightWatermark": "white_watermark",
+    "darkWatermark": "black_watermark",
+    "className": "watermark",
+    "opacity": 30,
+};
+
+$(document).ready(function(){
+	$(document).ready(function(){
+		$(document).watermark(watermark);
+	});
+	
+	@if(section.id==5){
+		 $("#genderHide").empty();
+         $("#quanHide").empty();
+         $("#ageHide").empty();
+         
+	}else{
+		$("#genderHide").html(gender);
+        $("#quanHide").html(quan);
+        $("#ageHide").html(age);
+	}
+
+
+});
+
+	$(document).on('click', 'li.cities', function(event) {
+	    var $target = $(event.currentTarget);
+	    $("input[name=city]").val($target.attr("city-id"));
+	});
+
+	$(document).on('click', 'li.categories', function(event) {
+	    var $target = $(event.currentTarget);
+	    $("input[name=category]").val($target.attr("category-id"));
+	});
+
+
+	$("#sortByLowPrice").click(function() {
+
+	    sort = "price";
+	    page = 0;
+	    myFunc();
+	})
+
+	$("#sortByHighPrice").click(function() {
+
+	    sort = "price_desc";
+	    page = 0;
+	    myFunc();
+	})
+
+	$("#sortByDate").click(function() {
+
+	    sort = "a.published_date desc";
+	    page = 0;
+	    myFunc();
+	})
+
+	$("#poi").click(function() {
+	    $("#demo").slideToggle("slow");
+	    $("#poi span").text(function(i, v) {
+	        return v === 'Обычный поиск' ? 'Расширенный поиск' : 'Обычный поиск'
+	    })
+	});
+
+
+
+	$(document).on("change", "#region", function() {
+	    var id = Number($(this).val());
+
+	    jsRoutes.controllers.Ads.getRC(id).ajax({
+	        success: function(data) {
+	            $("#city_div").html(data);
+	        }
+	    });
+	});
+
+	$(document).on("change", ".gender_check", function() {
+
+
+	    if ($('.gender_check:checked').length != 1) {
+
+
+	        $("#gender").val("");
+	    } else {
+	        if (this.checked) {
+	            $("#gender").val($(this).val());
+	        } else {
+	            $("#gender").val($(this).attr("notVal"));
+	        }
+
+	    }
+	})
+
+	var current = 1000;
+	var page = 0;
+	var sort = "a.published_date desc";
+
+
+	$(document).on("click", "#search_filter", function(e) {
+	    e.preventDefault();
+	    page = 0;
+	    myFunc();
+	})
+
+function myFunc() {
+
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $(this).attr("disabled", true);
+    jsRoutes.controllers.Ads.searchAd(page, sort).ajax({
+        data: $("#search_form").serialize(),
+        success: function(data) {
+            $("#main_div").html(data);
+            $("#search_filter").attr("disabled", false);
+            total($("#total_size").val());
+        }
+    });
+}
+
+function searchByPage(p) {
+
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $(this).attr("disabled", true);
+    jsRoutes.controllers.Ads.searchAd(p, sort).ajax({
+        data: $("#search_form").serialize(),
+        success: function(data) {
+            $("#main_div").html(data);
+            $("#search_filter").attr("disabled", false);
+            total($("#total_size").val());
+        }
+    });
+}
+
+$(document).keydown(function(e) {
+	console.log(e)
+  if(e.ctrlKey) {
+  
+    //You do your stuff here.
+  }
+});
+
+
+$(document).on("click", "#paging_next", function() {
+
+    if (current > (page + 1) * 30) {
+        page = page + 1;
+        myFunc();
+
+    }
+})
+
+$(document).on("click", "#paging_prev", function() {
+    if (page != 0) {
+        page = page - 1;
+
+        myFunc();
+
+    }
+})
+
+function enDis() {
+
+    if (page == 0) {
+        $("#paging_prev").parent().addClass("disabled");
+    } else {
+        $("#paging_prev").parent().removeClass("disabled");
+    }
+    if (current <= (page + 1) * 30) {
+        $("#paging_next").parent().addClass("disabled");
+    } else {
+        $("#paging_next").parent().removeClass("disabled");
+    }
+}
+
+function total(a) {
+
+    current = parseInt(a);
+    if (current - ((page + 1) * 10) < 0) {
+        $("#total").text("Показывает " + (page * 30 + 1) + " - " + a + " / " + a);
+    } else {
+        $("#total").text("Показывает " + (page * 30 + 1) + " - " + ((page + 1) * 30) + " / " + a);
+    }
+    enDis();
+}
+</script>
