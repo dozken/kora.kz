@@ -1,0 +1,39 @@
+@(ms:List[models.ad.PrivateMessage])
+@profile._title("ЛИЧНЫЕ СООБЩЕНИЯ"){ }
+<div class="col-xs-12 nopaddingleft boto PFBSPLI-13">
+<table class="table table-hover table-responsive">
+	<thead>
+		<tr>
+			<td></td>
+			<td>Дата</td>
+			<td>Пользователь</td>
+			<td>Сообщения</td>
+		</tr>
+	</thead>
+	<tbody>
+        @for(m<-ms){
+		<tr>
+			<td><input type="checkbox" mess="@m.id"></td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.sendDate.format("dd.MM.yyyy")</td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.author.userName</td>
+			<td class="message @if(m.status=="unread"){bold}" message="@m.id">@m.title</td>
+		</tr>
+        }
+	</tbody>
+</table>
+</div>
+<div class="col-xs-3">
+<select id="message_select" class="form-control PFBSPLI-13 sd" style="padding-top:3px;">
+  <option value="inbox">Все входящие</option>
+  <option value="send">Все исходящие</option>
+
+  </select>
+</div>
+<div class="col-xs-2">
+<button class="btn btn-danger PFBSPLI-13" id="message_delete" style="padding-top: 4px;padding-bottom: 2px;" disabled>
+<span class="glyphicon glyphicon-trash"></span> Удалить</button>
+</div>
+<div class="col-xs-4">
+<button class="btn btn-default PFBSPLI-13" id="message_asRead" style="padding-top: 4px;padding-bottom: 2px;" disabled>
+<span class="glyphicon glyphicon-ok"></span> Kак прочитанные</button>
+</div>

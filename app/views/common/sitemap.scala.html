@@ -1,0 +1,72 @@
+@(select_city:models.contact.City)
+
+@main("Карта сайта") {
+
+<div class="container сontain">
+	<div class="searchbarmargin">@_searchbar()</div>
+	<div class="PFBSPR-15">
+	<h2>Карта сайта</h2>
+	<div class="col-xs-12 well">
+
+		@for(city<-models.contact.City.find.all if(city.parentCity==null)){
+		<div class="sitemapcolumn">
+			
+		@if(city.isParent){
+		<b>@city.name -> </b>
+			@for((subcity,index) <- city.findSubCitites.zipWithIndex){
+				@if(subcity!=select_city){
+				 <a href="@routes.Application.sitemap(subcity.id)" >@subcity.name</a>
+		}else{<b><red>@subcity.name</red></b> }
+		}
+			}else{
+				@if(city!=select_city){
+				<b><a  href="@routes.Application.sitemap(city.id)">@city.name</a></b>
+		}else{<br><b><red>@city.name</red></b>}
+		}
+		</div>
+			}
+	</div>
+@for(section<-models.ad.Section.find.all if(section.categories!=null&&section.categories.size>0)){
+	
+	<h4>@section.name</h4>
+	<div class="col-xs-12 well">
+		@* TODO arifmetitac equcation, calculate columns*@
+		@for(category<-section.categories if(category.parentCategory==null)){
+		<div class="sitemapcolumn"> 
+			
+			@if(category.isParent){
+				<a href="@routes.Ads.sitemap(if(select_city!=null){select_city.id}else{0},section.id,category.id)"  >@category.name</a> ->
+					@for(subcategory <- category.findSubCategories){
+						<a href="@routes.Ads.sitemap(if(select_city!=null){select_city.id}else{0},section.id,subcategory.id)" >@subcategory.name</a>
+					}
+			}else{
+				<a href="@routes.Ads.sitemap(if(select_city!=null){select_city.id}else{0},section.id,category.id)" >@category.name</a>
+			}
+		</div>
+		}
+	</div>
+
+}
+
+		<h4>Город</h4>
+		<div class="col-xs-12 well">
+
+			@for(city<-models.contact.City.find.all if(city.parentCity==null)){
+			<div class="sitemapcolumn">
+				
+			@if(city.isParent){
+			<a href="@routes.Ads.sitemapS(city.id)">@city.name</a> ->
+			@for((subcity,index) <- city.findSubCitites.zipWithIndex){
+			<a href="@routes.Ads.sitemapS(subcity.id)">@subcity.name</a>
+			}
+			}else{
+			<a href="@routes.Ads.sitemapS(city.id)">@city.name</a> ->
+			}
+			</div>
+			}
+		</div>
+	<p>Перед добавлением на сайт каждое объявление проверяется на соответствие правилам Kora.kz. Нарушение правил может привести к блокировке как объявлений, так и учетных записей их владельцев.</p>
+	<p class="PFBSPLI-15" style="color:red">*Торговая площадка оставляет за собой право на дополнение и обновление существующих правил.</p>
+	</div>
+</div>
+}
