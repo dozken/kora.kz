@@ -6,8 +6,8 @@
  <div class="form-group frmg">
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
-  <div>
-    <select id="region" name="region" class="form-control sd" style="width: 172px;">
+  <div class="fire-div" style="width: 170px;">
+    <select id="region" name="region" class="form-control fire-select" >
       <option value="all">Во всех регионах</option>
       @for(reg <-models.contact.Region.find.all()) {
           <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
@@ -15,6 +15,7 @@
 
     </select>
   </div>
+
   </div>
 </div>
 
@@ -115,11 +116,13 @@
   <div>
      <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
       <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
-          
-      <select id="currency" name="currency" class="form-control sd tenge" style="width: 66px;">
+      <div class="fire-div"  style="width: 66px;float:right;">
+        
+      <select id="currency" name="currency" class="form-control fire-select tenge" >
         <option value="KZT">a</option>
         <option value="USD">$</option>
       </select>
+      </div>    
   </div>
   </div>
 </div>
@@ -136,23 +139,29 @@
 <div id="demo"> 
 
 
- <div id="ageHide" class="form-group frmg" style="margin-left: -15px;">
+<div id="ageHide" class="form-group frmg" style="margin-left: -16px;">
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Возраст:</label>
   <div>
-    <select id="ageStart" name="ageStart" class="form-control sd" style="width: 80px;">
+  <div class="fire-div" style="width: 80px;float:right">
+    
+    <select id="ageStart" name="ageStart" class="form-control fire-select" >
         <option value="0"></option>
-	    @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
+      @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
-    	}
+      }
     </select>
-    <span class="age-divider">-</span>
-    <select id="ageEnd" name="ageEnd" class="form-control sd" style="width: 80px;">
+  </div>
+    &nbsp-&nbsp
+    <div class="fire-div" style="width: 80px;float:left">
+      
+        <select id="ageEnd" name="ageEnd" class="form-control fire-select" >
             <option value="2050"></option>
         @for(i<-2000 to 2050) {
             <option value="@i">@i</option>
         }
     </select>
+    </div>
   </div>
 </div>
 </div>
