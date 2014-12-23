@@ -15,28 +15,32 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic">Раздел</label>
   <div class="col-xs-3">
-    <select id="section" name="section" class="form-control sd" validation="not_null">
+  <div class="fire-div">
+    <select id="section" name="section" class="form-control fire-select" validation="not_null">
         <option selected disabled hidden> Выберите Раздел</option>
       @for(section <- Section.find.all()) {
           <option value="@section.id" @if(section==ad.section){selected}>@section.name</option>
       }
     </select>
   </div>
+  </div>
     <div id="category_list" class="col-xs-3">
+      <div class="fire-div" style="width:99%">
         @if(ad.section.id!=5) {
-            <select id="category" name="category" class="form-control sd" validation="not_null">
+            <select id="category" name="category" class="form-control fire-select" validation="not_null">
                 <option selected disabled hidden> Выберите категорию</option>
-			    @for(category<-ad.section.getCategories if(category.parentCategory==null)){
-			    	@if(category.isParent){
-			    	<optgroup label="@category.name">    	
-			    	@for(subcategory <- category.findSubCategories){
-			    	<option value="@subcategory.id" @if(subcategory.equals(ad.category)) {selected}>@subcategory.name</option>}
-			    	</optgroup>
-			    	}else{
-			    	<option value="@category.id" @if(category.equals(ad.category)) {selected}>@category.name</option>}		
-			    }
+          @for(category<-ad.section.getCategories if(category.parentCategory==null)){
+            @if(category.isParent){
+            <optgroup label="@category.name">     
+            @for(subcategory <- category.findSubCategories){
+            <option value="@subcategory.id" @if(subcategory.equals(ad.category)) {selected}>@subcategory.name</option>}
+            </optgroup>
+            }else{
+            <option value="@category.id" @if(category.equals(ad.category)) {selected}>@category.name</option>}    
+          }
             </select>
         }
+  </div>
   </div>
 </div>
 <div  id="genderHide">
@@ -79,11 +83,13 @@
 <div  class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic1">Возраст</label>
   <div class="col-xs-2">
-    <select id="selectbasic1" name="age" class="form-control sd">
+      <div class="fire-div">
+  <select id="selectbasic1" name="age" class="form-control fire-select">
         @for(i<-2000 to 2050) {
             <option value="@i" @if(ad.birthDate == i) {selected}>@i</option>
         }
     </select>
+  </div>
   </div>
 </div>
 </div>
@@ -104,10 +110,12 @@
               <input type="text" id="money_input" @if(ad.priceType.price!=(-2.0) && ad.priceType.price!=(-1.0)){value="@ad.priceType.price" validation="double"} class="form-control ssss" name="money">
          
               <div class="input-group-btn bs-dropdown-to-select-group">
-                <select id="currency" name="currency" class="form-control sd tenge" style="width: 66px;border-radius:0px 5px 5px 0px">
+                <div class="fire-div" style="width:66px;">
+                <select id="currency" name="currency" class="form-control fire-select tenge" style="background-position: 77% 60%, 0px 0px !important;width: 125% !important;">
                     <option value="KZT">a</option>
                     <option value="USD">$</option>
                   </select>
+  </div>
 
               </div>
 
@@ -159,7 +167,7 @@
   <label class="col-xs-2  textalign" for="filebutton">Фотографии</label>
   <div class="col-xs-4">
     <div class="fileUpload btn myb">
-    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
+    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
     <input type="file" id="choose" class="upload" multiple />
     <input type="hidden" id="image_order" name="image_order">
 </div>
@@ -191,12 +199,14 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic2">Регион</label>
   <div class="col-xs-3">
-    <select id="region" name="region" class="form-control sd" validation="not_null">
+    <div class="fire-div">
+    <select id="region" name="region" class="form-control fire-select" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
       @for(region<-Region.find.all()) {
           <option value="@region.id" @if(ad.contactInfo.region==region){selected="selected" }>@region.name</option>
       }
     </select>
+  </div>
   </div>
 </div>
 
@@ -204,8 +214,8 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic3">Город/Ауыл</label>
   <div id="city_list" class="col-xs-3">
-
-      <select id="city"  name="city" class="form-control sd" validation="not_null">
+  <div class="fire-div">
+      <select id="city"  name="city" class="form-control fire-select" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
           @for(city<-ad.contactInfo.region.cities){
 
@@ -213,6 +223,7 @@
 
           }
       </select>
+  </div>
   </div>
 </div>
 
@@ -255,11 +266,13 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic4">Комментарии</label>
   <div class="col-xs-5">
-    <select id="selectbasic4" name="coment_display" class="form-control sd">
+    <div class="fire-div" style="width: 81%;">
+    <select id="selectbasic4" name="coment_display" class="form-control fire-select" style="width: 111% !important;">
       <option value="registred">Только зарегистрированным пользователям</option>
       <option value="all" @if(models.ad.Ad.settingByName(ad,"comment").status=="all"){selected}>Всем</option>
       <option value="nobody" @if(models.ad.Ad.settingByName(ad,"comment").status=="nobody"){selected}>Никому</option>
     </select>
+  </div>
   </div>
 </div>
 

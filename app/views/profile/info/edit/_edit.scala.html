@@ -56,7 +56,9 @@
 			<div class="form-group" >
 				<label class="col-xs-2 control-label" for="selectbasic2">Регион</label>
 				<div class="col-xs-3" style="padding-right: 0px;">
-					<select id="region" name="region" class="form-control sd" validation="not_null">
+				<div class="fire-div">
+					
+					<select id="region" name="region" class="form-control fire-select" validation="not_null">
                         <option selected disabled hidden> Выберите регион</option>
                         @for(region<-models.contact.Region.find.all()) {
                             <option value="@region.id" @if(user.profile.region == region){selected="selected"}>@region.name</option>
@@ -64,14 +66,17 @@
 
 					</select>
 				</div>
+				</div>
 			</div>
 
 
             <div class="form-group">
                 <label class="col-xs-2 control-label" for="selectbasic3">Город/Ауыл</label>
                 <div id="city_list" class="col-xs-3">
+                <div class="fire-div">
+                	
                   @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
-			          <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
+			          <select id="city"  name="city" class="form-control fire-select" validation="not_null">
 					    <option selected disabled hidden> Выберите город</option>
 					    @for(city<-user.profile.region.cities if(city.parentCity==null)){
 					    	@if(city.isParent){
@@ -86,6 +91,7 @@
 					    }
 					</select>
 			      }
+                </div>
                 </div>
             </div>
 

@@ -16,12 +16,15 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите раздел которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="selectbasic">Раздел</label>
   <div class="col-xs-3" id="ad-razdel">
-    <select id="section" name="section" class="form-control next selectdesign " validation="not_null" >
+    <div class="fire-div">
+    <select id="section" name="section" class="form-control next fire-select " validation="not_null" >
         <option selected disabled hidden> Выберите раздел</option>
       @for(section <- Section.find.all()) {
           <option value="@section.id">@section.name</option>
       }
     </select>
+
+    </div>
   </div>
     <div id="category_list" class="col-xs-3">
 
@@ -68,11 +71,13 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Возраст которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="selectbasic1">Возраст</label>
   <div class="col-xs-2">
-    <select id="selectbasic1" name="age" class="form-control selectdesign">
+    <div class="fire-div">
+    <select id="selectbasic1" name="age" class="form-control fire-select">
     @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
     }
     </select>
+    </div>
   </div>
 </div>
 </div>
@@ -93,11 +98,12 @@
               <input type="text" id="money_input" value="" class="form-control next ssss" name="money" validation="double" style="height: 26px;">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
-             
-                <select id="currency" name="currency" class="form-control sd tenge" style="width: 66px;border-radius:0px 5px 5px 0px">
+             <div class="fire-div" style="width:66px;">
+                <select id="currency" name="currency" class="form-control fire-select tenge" style="background-position: 77% 60%, 0px 0px !important;width: 125% !important;">
                     <option value="KZT">a</option>
                     <option value="USD">$</option>
                   </select>
+             </div>
 
               </div>
 
@@ -148,7 +154,7 @@
   <label class="col-xs-2 textalign" for="filebutton">Фотографии</label>
   <div class="col-xs-4">
     <div class="fileUpload btn myb">
-    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
+    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
     <input type="file" id="choose" name="image_file" class="upload btn" multiple/>
     <input type="hidden" id="image_order" name="image_order">
 </div>
@@ -187,30 +193,35 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите свой регион и город из списка.">
   <label class="col-xs-2 textalign" for="selectbasic2">Регион</label>
   <div class="col-xs-3">
-    <select id="region" name="region" class="form-control selectdesign" validation="not_null">
+  <div class="fire-div">
+    <select id="region" name="region" class="form-control fire-select" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
         @for(region <- Region.find.all()) {
         <option value="@region.id" @if(user!=null&&region.equals(user.profile.region)){selected}>@region.name</option>
         }
     </select>
   </div>
+  </div>
   <div id="city_list" class="col-xs-3">
+  <div class="fire-div">
+    
       @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
-          <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
-		    <option selected disabled hidden> Выберите город</option>
-		    @for(city<-user.profile.region.cities if(city.parentCity==null)){
-		    	@if(city.isParent){
-		    	<optgroup label="@city.name">    	
-		    	@for((subcity,index) <- city.findSubCitites.zipWithIndex){
-		    	<option @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id" @if(user!=null&&subcity.equals(user.profile.city)){selected}>— @subcity.name</option>
-		    	}
-		    	</optgroup>
-		    	}else{
-		    	<option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>— @city.name</option>
-		    	}		
-		    }
-		</select>
+          <select id="city"  name="city" class="form-control fire-select" validation="not_null">
+        <option selected disabled hidden> Выберите город</option>
+        @for(city<-user.profile.region.cities if(city.parentCity==null)){
+          @if(city.isParent){
+          <optgroup label="@city.name">     
+          @for((subcity,index) <- city.findSubCitites.zipWithIndex){
+          <option @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id" @if(user!=null&&subcity.equals(user.profile.city)){selected}>— @subcity.name</option>
+          }
+          </optgroup>
+          }else{
+          <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>— @city.name</option>
+          }   
+        }
+    </select>
       }
+  </div>
   </div>
 </div>
 
@@ -251,11 +262,14 @@
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Разрешить комментарий или нет.">
   <label class="col-xs-2 textalign" for="selectbasic4">Комментарии</label>
   <div class="col-xs-5">
-    <select id="selectbasic4" name="coment_display" class="form-control selectdesign">
+  <div class="fire-div"  style="width: 81%;">
+    
+    <select id="selectbasic4" name="coment_display" class="form-control fire-select" style="width: 111% !important;">
       <option value="registred">Только зарегистрированным пользователям</option>
       <option value="all">Всем</option>
       <option value="nobody">Никому</option>
     </select>
+  </div>
   </div>
 </div>
 <!-- BHHJAUSHASHFAS -->
