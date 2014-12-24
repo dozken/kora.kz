@@ -26,7 +26,17 @@
         <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
         <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(65)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.city.name</li>
-        <li>Тел: @utils._phone(ad.contactInfo.phone)</li>
+        <li>
+        Тел:  <ul id="ss" class="nopaddingleft">
+                        <li id="phone_title">@utils._phone2(ad.contactInfo.phone.split(",")(0)) <a id="show_all" style="cursor:pointer">Показать телефоны</a></li>
+
+                        @for((tel,index)<-ad.contactInfo.phone.split(",").zipWithIndex){
+
+                                <li class="other_phones">@utils._phone(tel)</li>
+
+                        }
+                </ul>
+        </li>
     </ul>
     <ul class="pros">
         <li>@if(ad.views>0){<span class="icon-prosmotr"></span> @ad.views просмотров}</li>

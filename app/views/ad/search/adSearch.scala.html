@@ -173,7 +173,13 @@ $(document).ready(function(){
 
 	    }
 	})
+$(".other_phones").hide();
 
+$(document).on("click","#show_all",function(){
+
+    $("#phone_title").hide();
+    $(".other_phones").show();
+})
 	var current = 1000;
 	var page = 0;
 	var sort = "a.published_date desc";
