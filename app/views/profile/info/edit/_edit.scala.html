@@ -7,10 +7,10 @@
             <div id="error_fields" style="visibility: hidden" class="alert alert-danger"  role="alert"></div>
 
 			<div class="form-group">
-				<label class="col-xs-2 control-label" for="textinput1">Компания</label>
+				<label class="col-xs-2 control-label" for="textinput1">Продовец</label>
 				<div class="col-xs-6">
 					<input id="company_name" name="company_name" type="text"
-						placeholder="Название компании (ТОО, ИП, АО)"
+						placeholder="Наименование продовца"
 						class="form-control input-md ssss" value="@user.userName" validation="not_null">
 
 				</div>
@@ -47,7 +47,7 @@
 				<label class="col-xs-2 control-label" for="textinput1">Адрес</label>
 				<div class="col-xs-6">
 					<input id="address" name="address" type="text"
-						placeholder="Название компании (ТОО, ИП, АО)"
+						placeholder="ул. А. Наурызбая 64"
 						class="form-control input-md ssss" value="@user.profile.address" validation="not_null">
 
 				</div>
@@ -86,7 +86,7 @@
 					    	}
 					    	</optgroup>
 					    	}else{
-					    	<option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>— @city.name</option>
+					    	<option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>@city.name</option>
 					    	}		
 					    }
 					</select>
@@ -168,7 +168,7 @@
 				<label class="col-xs-2 control-label" for="textinput2">Сайт</label>
 				<div class="col-xs-3">
 					<input id="website" name="website" type="text"
-						placeholder="technovision.kz" class="form-control input-md ssss" value="@models.user.UserSocials.getSocialByName(user.id,"website")">
+						placeholder="" class="form-control input-md ssss" value="@models.user.UserSocials.getSocialByName(user.id,"website")">
 
 				</div>
 			</div>

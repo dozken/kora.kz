@@ -1,6 +1,6 @@
 @(section:models.ad.Section)
 <div class="fire-div" style="width:99%">    
-<select id="category" name="category" class="form-control next fire-select" validation="not_null">
+<select id="category" name="category" class="form-control next fire-select reg2" validation="not_null">
     <option selected disabled hidden> Выберите категорию</option>
     @for(category<-section.categories if(category.parentCategory==null)){
         @if(category.isParent){

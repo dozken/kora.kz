@@ -17,7 +17,9 @@ clear: both;
 <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.min.css"))'>
 <div class="container сontain">
 	<div class="searchbarmargin">@_searchbar()</div>
+	<div id="create-form">
 	@_form(user)
+	</div>
 </div>
 }
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -163,7 +165,7 @@ var title = $("#titleHide").html();
     	//var $btn = $("#ad_form_submit").button('loading');
     	
     	//e.preventDefault();
-        if (validation()) {
+        if (validation("reg2")) {
 
             var tels = "";
             $("#additional_phones input").each(function(){
@@ -201,13 +203,20 @@ var title = $("#titleHide").html();
 
             			var end =  +new Date();  // log end timestamp
             			var diff = end - start;
+            			/*
                         $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
                         $("#success_message").fadeIn(200);
+                        */
+                        $("#create-form").html(data);
 
-
+						/*
                         jsRoutes.controllers.Application.emailing("ad_created", $("#ema").val()).ajax()
+                        */
                         var end2 =  +new Date();  // log end timestamp
             			var diff1 = end2 - end;
+            			
+            			
+            			@*
 						setTimeout(function() {
                             @if(session.get("connected") != null){
                                 window.location.href = "@routes.Manage.myAds()";
@@ -215,6 +224,9 @@ var title = $("#titleHide").html();
                                 window.location.href = "@routes.Application.index()";
                             }
                         }, 1000);
+                        
+                        */
+                        *@
                     }
                 });
                 e.preventDefault();
