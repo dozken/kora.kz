@@ -1,7 +1,7 @@
 @utils._flashAlert("error","danger")
 @utils._flashAlert("success","success")
 
-@for((region,index)<-models.contact.Region.find.where().orderBy("name").findList.zipWithIndex){
+@for((region,index)<-models.contact.Region.find.where().orderBy("id").findList.zipWithIndex){
 
 <div class="input-group imgmargin">
   <span class="input-group-addon">@{index+1}</span>

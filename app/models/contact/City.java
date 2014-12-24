@@ -49,7 +49,7 @@ public class City extends Model {
 	public List<ContactInfo> contactInfos;
 
 	public List<City> findSubCitites() {
-		return find.where().eq("parentCity", this).orderBy("name").findList();
+		return find.where().eq("parentCity", this).orderBy("id").findList();
 	}
 
 	public boolean isParent() {

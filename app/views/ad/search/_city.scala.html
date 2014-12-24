@@ -2,7 +2,7 @@
 @*
 <select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
 	<option value="all">Все города/ауылы</option>
-	@for(city<-region.cities if(city.parentCity==null)){
+	@for(city<-region.findCities if(city.parentCity==null)){
 		@if(city.isParent){
 			<option class="optionGroup" @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id"><span>@city.name</span></option>
 			@for((subcity,index) <- city.findSubCitites.zipWithIndex){
@@ -24,7 +24,7 @@
 			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; overflow-y: auto !important; max-height: 310px;margin: 0px;border-radius: 0px;overflow-y: hidden;padding-top: 2px;">				
 				<li class="li-option cities" city-id="all" data-value="Все города/ауылы"><a href="#"><span>Все города/ауылы</span></a></li>
 				@if(region!=null){
-				@for(c<-region.cities if(c.parentCity==null)){
+				@for(c<-region.findCities if(c.parentCity==null)){
 				@if(c.isParent){
 				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
 				@for((subcity,index) <- c.findSubCitites.zipWithIndex){

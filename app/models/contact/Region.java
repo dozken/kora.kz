@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import models.ad.Category;
 import models.user.Profile;
 import play.db.ebean.Model;
 
@@ -36,4 +37,8 @@ public class Region extends Model {
 	@OneToMany(mappedBy = "region")
 	public List<City> cities;
 
+	public List<City> findCities() {
+		return City.find.where().eq("region", this).orderBy("id")
+				.findList();
+	}
 }
