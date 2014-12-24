@@ -16,6 +16,7 @@ import javax.persistence.Version;
 
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
+import play.mvc.Controller;
 
 @Entity
 @Table(name = "ads")
@@ -127,5 +128,10 @@ public class Ad extends Model {
 						com.avaje.ebean.Expr.eq("status", "moderating"))
 				.findList();
 
+	}
+	
+	
+	public static void sessionRegion(Long id){
+		Controller.session("region",id.toString());
 	}
 }

@@ -108,7 +108,13 @@ $(document).ready(function(){
 
 	$(document).on('click', 'li.cities', function(event) {
 	    var $target = $(event.currentTarget);
-	    $("input[name=city]").val($target.attr("city-id"));
+	    var id = $target.attr("city-id");
+	    $("input[name=city]").val(id);
+	    
+	     jsRoutes.controllers.Ads.getCityS(id).ajax({
+	        success: function(data) {	            
+	        }
+	    });
 	});
 
 	$(document).on('click', 'li.categories', function(event) {

@@ -45,6 +45,8 @@ import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
 public class Ads extends Controller {
+	
+	
 
 	public static Result get(Long id) {
 		Ad ad = Ad.find.byId(id);
@@ -1052,8 +1054,17 @@ public class Ads extends Controller {
 	}
 
 	public static Result getRC(Long id) {
+		session("region",id.toString());
 		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
 	}
+	
+	public static Result getCityS(Long id) {
+		session("cityName",City.find.byId(id).name);
+		session("city",id.toString());
+		System.out.println("ok");
+		return ok("");
+	}
+	
 
 	public static Result sitemap(Long cid, Long sid, Long cat) {
 
