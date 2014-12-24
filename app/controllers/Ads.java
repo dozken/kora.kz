@@ -29,6 +29,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.ad.create._category;
 import views.html.ad.create._city;
+import views.html.ad.create._success;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
 import views.html.ad.search._ad_list;
@@ -62,6 +63,7 @@ public class Ads extends Controller {
 		Ad ad = new Ad();
 		ad.section = Section.find.byId(Long.parseLong(requestData
 				.get("section")));
+		System.out.println(ad.section.name);
 		ad.category = Category.find.byId(Long.parseLong(requestData
 				.get("category")));
 		if (requestData.get("age") != null) {
@@ -161,7 +163,7 @@ public class Ads extends Controller {
 			}
 		}
 		// ... do something ...
-		return ok();
+		return ok(_success.render());
 	}
 
 	public static Result filterAds(String str) {

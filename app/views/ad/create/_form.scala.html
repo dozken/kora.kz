@@ -216,7 +216,7 @@
           }
           </optgroup>
           }else{
-          <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>— @city.name</option>
+          <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(user!=null&&city.equals(user.profile.city)){selected}>@city.name</option>
           }   
         }
     </select>
@@ -231,9 +231,9 @@
 
 <!-- Text input-->
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Название компаний или Ваше имя.">
-  <label class="col-xs-2 textalign" for="textinput1">Компания</label>
+  <label class="col-xs-2 textalign" for="textinput1">Продовец</label>
   <div class="col-xs-6">
-  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md ssss" validation="not_null">
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Наименование продовца" class="form-control input-md ssss reg2" validation="not_null">
 
   </div>
 </div>
@@ -242,13 +242,13 @@
     <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
         <label class="col-xs-2 textalign" for="ema">Email</label>
         <div class="col-xs-3">
-            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null){value="@user.email"} validation="mail">
+            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md ssss reg2" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
 <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящий номер телефона.">
   <label class="col-xs-2 textalign" for="textinput2">Телефон</label>
   <div class="col-xs-3">
-  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss reg2" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 <div id="additional_phones" style="margin-top:5px;margin-bottom:5px;">
 
 </div>

@@ -21,25 +21,7 @@
 <div class="form-group frmg">
 	<div class="frmbck frmbck3">
 	<label class="control-label" for="selectbasic1">Город/Ауыл:</label>
-	@*
-	<div id="city_div">
-		<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
-			<option value="all">Все города/ауылы</option>
-			@if(region!=null){
-			@for(c<-region.findCities if(c.parentCity==null)){
-			@if(c.isParent){
-			<option class="optionGroup" @if(city.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id"><span>@c.name</span></option>
-			@for((subcity,index) <- c.findSubCitites.zipWithIndex){
-			<option class="optionChild" @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id" @if(subcity == city){selected}>— @subcity.name</option>
-			}
-			}else{
-			<option class="optionChild" @if(c.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id" @if(c == city){selected}>@c.name</option>
-			}
-			}
-			}
-		</select>
-	</div>
-	*@
+
 	<div id="city_div" style="width: 170px;">
 		<div class="input-group-btn bs-dropdown-to-select-group">
 			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
