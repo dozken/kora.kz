@@ -1,4 +1,5 @@
 @(section:models.ad.Section,cat:models.ad.Category,region:models.contact.Region,city:models.contact.City)
+
 <div class="col-xs-12 nopaddingleft PFBSPLI-13">
 <form id="search_form" class="form-inline">
     <input id="section" type="hidden" name="section" value="@section.id" showName="@section.name">
@@ -7,13 +8,14 @@
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
   <div class="fire-div" style="width: 170px;">
-    <select id="region" name="region" class="form-control fire-select" >
+    <select id="region" name="region" class="form-control fire-select" style="overflow-y: scroll;line-height: 5;" >
       <option value="all">Во всех регионах</option>
       @for(reg <-models.contact.Region.find.all()) {
           <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
       }
 
     </select>
+
   </div>
 
   </div>
@@ -48,7 +50,7 @@
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="city" value="all" >
 			</button>
-			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">
 				@if(region!=null){
 				@for(c<-region.cities if(c.parentCity==null)){
 				@if(c.isParent){
@@ -92,7 +94,7 @@
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="category" value="all" >
 			</button>
-			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
+			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
 				<li class="li-option cities" category-id="all" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>	
 				@if(section.categories!=null){
 				@for(c<-section.categories if(c.parentCategory==null)){
@@ -118,7 +120,8 @@
       <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
       <div class="fire-div"  style="width: 66px;float:right;">
         
-      <select id="currency" name="currency" class="form-control fire-select tenge" >
+      <select id="currency" name="currency" class="form-control fire-select tenge" style="width: 122% !important;
+background-position: 76% 60%, 0px 0px !important;">
         <option value="KZT">a</option>
         <option value="USD">$</option>
       </select>
@@ -145,7 +148,7 @@
   <div>
   <div class="fire-div" style="width: 80px;float:right">
     
-    <select id="ageStart" name="ageStart" class="form-control fire-select" >
+    <select id="ageStart" name="ageStart" class="form-control fire-select" style="width: 118% !important;background-position: 82% 60%, 0px 0px !important;">
         <option value="0"></option>
       @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
@@ -155,7 +158,8 @@
     &nbsp-&nbsp
     <div class="fire-div" style="width: 80px;float:left">
       
-        <select id="ageEnd" name="ageEnd" class="form-control fire-select" >
+        <select id="ageEnd" name="ageEnd" class="form-control fire-select" style="width: 118% !important;
+background-position: 82% 60%, 0px 0px !important;">
             <option value="2050"></option>
         @for(i<-2000 to 2050) {
             <option value="@i">@i</option>
