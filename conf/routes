@@ -53,6 +53,8 @@ GET         /ad/favorite/size                      controllers.Ads.favoriteSize(
 GET         /ad/show/:id                           controllers.Ads.get(id: Long)
 GET         /ad/category/:id                       controllers.Ads.getCategories(id:Long)
 GET         /ad/sc/:id                             controllers.Ads.getRC(id:Long)
+GET         /ad/cs/:id                             controllers.Ads.getCityS(id:Long)
+
 
 GET         /ad/city/:id                           controllers.Ads.getCities(id:Long)
 POST        /ad/filter/:str                        controllers.Ads.filterAds(str: String)
