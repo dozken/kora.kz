@@ -32,8 +32,8 @@ public class Section extends Model {
 	@OneToMany
 	public List<Category> categories;
 
-	public List<Category> getCategories() {
-		return Category.find.where().eq("section", this).orderBy("name")
+	public List<Category> findCategories() {
+		return Category.find.where().eq("section", this).orderBy("id")
 				.findList();
 	}
 }

@@ -78,7 +78,7 @@
                   @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
 			          <select id="city"  name="city" class="form-control fire-select" validation="not_null">
 					    <option selected disabled hidden> Выберите город</option>
-					    @for(city<-user.profile.region.cities if(city.parentCity==null)){
+					    @for(city<-user.profile.region.findCities if(city.parentCity==null)){
 					    	@if(city.isParent){
 					    	<optgroup label="@city.name">    	
 					    	@for((subcity,index) <- city.findSubCitites.zipWithIndex){

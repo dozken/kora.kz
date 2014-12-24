@@ -2,7 +2,7 @@
 
 @utils._flashAlert("error","danger")
 @utils._flashAlert("success","success")
-@for((city,index) <- models.contact.City.find.where.eq("region",region).eq("parentCity",null).orderBy("name").findList.zipWithIndex){
+@for((city,index) <- models.contact.City.find.where.eq("region",region).eq("parentCity",null).orderBy("id").findList.zipWithIndex){
 <div class="input-group imgmargin">
   <span class="input-group-addon">@{index+1}</span>
   <input type="text" class="form-control" validation="not_null" city="@city.id" before="@city.name" latlng="@if(city.location!=null){@city.location.lat, @city.location.lng}" value="@city.name" />

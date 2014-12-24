@@ -29,7 +29,7 @@
         @if(ad.section.id!=5) {
             <select id="category" name="category" class="form-control fire-select" validation="not_null">
                 <option selected disabled hidden> Выберите категорию</option>
-          @for(category<-ad.section.getCategories if(category.parentCategory==null)){
+          @for(category<-ad.section.findCategories if(category.parentCategory==null)){
             @if(category.isParent){
             <optgroup label="@category.name">     
             @for(subcategory <- category.findSubCategories){
@@ -217,7 +217,7 @@
   <div class="fire-div">
       <select id="city"  name="city" class="form-control fire-select" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
-          @for(city<-ad.contactInfo.region.cities){
+          @for(city<-ad.contactInfo.region.findCities){
 
               <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id" @if(ad.contactInfo.city==city){selected="selected" }>@city.name</option>
 

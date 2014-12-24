@@ -3,7 +3,7 @@
 @utils._flashAlert("error","danger")
 @utils._flashAlert("success","success")
 
-@for((category,index) <- models.ad.Category.find.where.eq("section", section).eq("parentCategory",null).orderBy("name").findList.zipWithIndex){
+@for((category,index) <- models.ad.Category.find.where.eq("section", section).eq("parentCategory",null).orderBy("id").findList.zipWithIndex){
 <div class="input-group imgmargin">
   <span class="input-group-addon">@{index+1}</span>
   <input type="text" class="form-control" validation="not_null" category="@category.id" before="@category.name" value="@category.name" />

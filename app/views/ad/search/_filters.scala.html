@@ -10,7 +10,7 @@
   <div class="fire-div" style="width: 170px;">
     <select id="region" name="region" class="form-control fire-select" style="overflow-y: scroll;line-height: 5;" >
       <option value="all">Во всех регионах</option>
-      @for(reg <-models.contact.Region.find.all()) {
+      @for(reg <-models.contact.Region.find.where.orderBy("id").findList) {
           <option value="@reg.id" @if(reg==region){selected}>@reg.name</option>
       }
 
@@ -29,7 +29,7 @@
 		<select id="city" name="city" class="form-control sd" validation="not_null" style="width:170px;">
 			<option value="all">Все города/ауылы</option>
 			@if(region!=null){
-			@for(c<-region.cities if(c.parentCity==null)){
+			@for(c<-region.findCities if(c.parentCity==null)){
 			@if(c.isParent){
 			<option class="optionGroup" @if(city.location!=null){lat="@c.location.lat" lng="@c.location.lng"} value="@c.id"><span>@c.name</span></option>
 			@for((subcity,index) <- c.findSubCitites.zipWithIndex){
@@ -52,7 +52,7 @@
 			</button>
 			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">
 				@if(region!=null){
-				@for(c<-region.cities if(c.parentCity==null)){
+				@for(c<-region.findCities if(c.parentCity==null)){
 				@if(c.isParent){
 				<li class="dropdown-header cities" city-id="@c.id" data-value="@c.name" ><a href="#">1<span class="optionGroup">@c.name</span></a></li>
 				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
@@ -71,23 +71,6 @@
   <div class="frmbck">
   <label class="control-label" for="selectbasic1">Категория:</label>
   <div id="category_div" style="width: 170px;">
-  	@*
-    <select id="category" name="category" class="form-control sd" style="width: 170px;">
-	    <option value="all">Все категории</option>	    
-	    @if(section.categories!=null){
-		    @for(category<-section.categories if(category.parentCategory==null)){
-		    	@if(category.isParent){
-		    		<option value="@category.id" class="optionGroup">@category.name</option>
-		    		@for(subcategory <- category.findSubCategories){
-		    		<option value="@subcategory.id" class="optionChild" @if(cat==subcategory){selected}>— @subcategory.name</option>
-		    		}		    	
-		    	}else{
-		    	<option value="@category.id" @if(cat==category){selected}>@category.name</option>
-		    	}		
-		    }
-	    }
-    </select>
-    *@
     		<div class="input-group-btn bs-dropdown-to-select-group">
 			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
 				<span data-bind="bs-drp-sel-label">Все категории</span>
@@ -97,7 +80,7 @@
 			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
 				<li class="li-option cities" category-id="all" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>	
 				@if(section.categories!=null){
-				@for(c<-section.categories if(c.parentCategory==null)){
+				@for(c<-section.findCategories if(c.parentCategory==null)){
 				@if(c.isParent){
 				<li class="li-option categories" category-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
 				@for(subc <- c.findSubCategories){
