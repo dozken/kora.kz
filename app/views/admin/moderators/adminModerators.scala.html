@@ -24,6 +24,7 @@ float:right">
   	<table class="table table-hover">
 		<thead>
 			<tr>
+				<td>#</td>
 				<td><a href="@routes.Administer.moderators(page,if(sort=="asc"){"desc"}else{"asc"})">Имя <span class="glyphicon glyphicon-sort"></span></a></td>
 				<td>Адрес</td>
 				<td>Регион</td>
@@ -34,8 +35,9 @@ float:right">
 			</tr>
 		</thead>
 		<tbody id="user-list">
-		@for(user<-users ){
+		@for((user,index)<-users.zipWithIndex ){
 		<tr>
+			<td>@{index+1}</td>
 			<td>@user.userName</td>
 			<td>@if(user.profile!=null&&user.profile.address!=null){@user.profile.address}</td>
 			<td>@if(user.profile!=null&&user.profile.region!=null){@user.profile.region.name}</td>
