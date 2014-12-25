@@ -10,6 +10,8 @@ syntax: regexp
 syntax: regexp
 ^\.classpath$
 syntax: regexp
+^\.cache$
+syntax: regexp
 ^\.classpath$
 syntax: regexp
 ^\.gitignore$
