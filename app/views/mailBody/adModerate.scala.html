@@ -1,10 +1,16 @@
 @(ad : models.ad.Ad)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
+<head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Kora.kz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>	  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+  a{
+  text-decoration: none;
+  }
+  </style>
+</head>
 <body style="font-family: Helvetica,san serif;">
 <table border="0" style="width:700px">
 	<tr>
@@ -25,12 +31,12 @@
 				<td style="width: 60px;height: 70px;"><img src="@routes.Assets.at("images/home/2.png").absoluteURL(request())" style="width:60px" /></td>
 				@if(ad.status.equals("active")){
 				<td>
-					<p>Ваша объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad)</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/mm/yyyy").</p>
+					<p>Ваша объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/yyyy").</p>
 					<p>Объявление будет автомотически удалено через две недели, если Вы его не продлите.</p>
 				</td>
 				}
 				@if(ad.status.equals("rejected")){
-		            <p>Ваше объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad)</a>" не соотвествует правилам сайта, пожалуется убедитесь в правельности вашего объявления</p>
+		            <p>Ваше объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" не соотвествует правилам сайта, пожалуется убедитесь в правельности вашего объявления</p>
 		            <p><a href="@routes.Application.rules.absoluteURL(request())">Правила сайта</a></p>
 		       }
 			</tr>
@@ -60,5 +66,4 @@
 	</tr>
 </table>
 </body>
-</head>
 </html>
