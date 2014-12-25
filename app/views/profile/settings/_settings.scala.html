@@ -1,0 +1,23 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+<div class="col-xs-12 boto nopaddingleft PFBSPLI-13">
+<ul class="nav nav-tabs motomoto cv" role="tablist" id="settingsTab">
+  <li><a href="#passwordTab" role="tab" data-toggle="tab"  @restrictOr(la(as("admin"))){ }{data-toggle="pill"}>Изменить пароль</a></li>
+  <li><a href="#newsletterTab" role="tab" data-toggle="tab">Настройки рассылки</a></li>
+  <li><a href="#siteSettingsTab" role="tab" data-toggle="tab" @restrict(la(as("admin"))){data-toggle="pill"}>Настройки сайта</a></li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="passwordTab">
+    @_passwordTab()
+  </div>
+  <div class="tab-pane" id="newsletterTab">
+  	@_newsletterTab()
+  </div>
+  <div class="tab-pane" id="siteSettingsTab">
+  	@_siteSettingsTab()
+  </div>
+</div>
+</div>

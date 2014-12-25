@@ -1,0 +1,220 @@
+@(section:models.ad.Section,cat:models.ad.Category,region:models.contact.Region,city:models.contact.City)
+
+<div class="col-xs-12 nopaddingleft PFBSPLI-13">
+<form id="search_form" class="form-inline">
+    <input id="section" type="hidden" name="section" value="@section.id" showName="@section.name">
+<div id="demo2" >
+ <div class="form-group frmg">
+ <div class="frmbck frmbck3">
+  <label class="control-label" for="selectbasic1">Регион:</label>
+  <div class="fire-div" style="width: 170px;">
+    <select id="region" name="region" class="form-control fire-select" style="overflow-y: scroll;line-height: 5;" >
+      <option value="all">Во всех регионах</option>
+      @for(reg <-models.contact.Region.find.where.orderBy("id").findList) {
+          <option value="@reg.id" @if(reg==region||reg.id.toString==session.get("region")){selected}>@reg.name</option>
+      }
+    </select>
+  </div>
+ </div>
+ </div>
+
+<div class="form-group frmg">
+	<div class="frmbck frmbck3">
+	<label class="control-label" for="selectbasic1">Город/Ауыл:</label>
+
+	<div id="city_div" style="width: 170px;">
+		<div class="input-group-btn bs-dropdown-to-select-group">
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span data-bind="bs-drp-sel-label" style="height: 16px;">@if(session.get("cityName")!=null){@session.get("cityName")}else{Все города/ауылы}</span>
+				<input  type="hidden" data-bind="bs-drp-sel-value" value="@if(session.get("cityName")!=null){@session.get("cityName")}else{all}" >
+				<input  type="hidden" name="city" value="@if(session.get("city")!=null){@session.get("city")}else{all}" >
+			</button>
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+				@if(session.get("region")!=null&&models.contact.Region.find.byId(Long.valueOf(session.get("region")))!=null){
+				
+				@for(c<-models.contact.Region.find.byId(Long.valueOf(session.get("region"))).findCities if(c.parentCity==null)){
+				@if(c.isParent){
+				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				@for((subcity,index) <- c.findSubCitites.zipWithIndex){
+				<li class="li-option cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#"><span class="optionChild">@subcity.name</span></a></li>				
+				}
+				}else{
+				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				}}}
+			</ul>
+		</div>  
+	</div>
+</div>
+</div>
+
+ <div class="form-group frmg">
+  <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Категория:</label>
+  <div id="category_div" style="width: 170px;">
+    		<div class="input-group-btn bs-dropdown-to-select-group">
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span data-bind="bs-drp-sel-label">Все категории</span>
+				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
+				<input  type="hidden" name="category" value="all" >
+			</button>
+			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
+				<li class="li-option cities" category-id="all" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>	
+				@if(section.categories!=null){
+				@for(c<-section.findCategories if(c.parentCategory==null)){
+				@if(c.isParent){
+				<li class="li-option categories" category-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
+				@for(subc <- c.findSubCategories){
+				<li class="li-option categories" category-id="@subc.id" data-value="@subc.name"><a href="#"><span class="optionChild">@subc.name</span></a></li>
+				}}else{
+				<li class="li-option categories" category-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
+				}}}
+			</ul>
+		</div> 
+  </div>
+</div>
+</div>
+
+
+ <div class="form-group frmg">
+   <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Цена:</label>
+  <div>
+     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
+      <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
+      <div class="fire-div"  style="width: 66px;float:right;">
+        
+      <select id="currency" name="currency" class="form-control fire-select tenge" style="width: 122% !important;
+background-position: 76% 60%, 0px 0px !important;">
+        <option value="KZT">a</option>
+        <option value="USD">$</option>
+      </select>
+      </div>    
+  </div>
+  </div>
+</div>
+<div class="form-group">
+   <div class="" style="padding: 29px 15px 11px 10px;background-color: #E0E0E0;border-top-right-radius: 4px;">
+  <label class="control-label" for="selectbasic1"></label>
+
+        <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 16px;"><span class="btr">Поиск</span></button>
+</div>
+</div>
+</div>
+<div class="col-xs-12 nopaddingleft nopaddingright">
+
+<div id="demo"> 
+
+
+<div id="ageHide" class="form-group frmg" style="margin-left: -16px;margin-top: -10px;">
+   <div class="frmbck">
+  <label class="control-label" for="selectbasic1">Возраст:</label>
+  <div>
+  <div class="fire-div" style="width: 80px;float:right">
+    
+    <select id="ageStart" name="ageStart" class="form-control fire-select" style="width: 118% !important;background-position: 82% 60%, 0px 0px !important;">
+        <option value="0"></option>
+      @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
+        <option value="@i">@i</option>
+      }
+    </select>
+  </div>
+    &nbsp-&nbsp
+    <div class="fire-div" style="width: 80px;float:left">
+      
+        <select id="ageEnd" name="ageEnd" class="form-control fire-select" style="width: 118% !important;
+background-position: 82% 60%, 0px 0px !important;">
+            <option value="2050"></option>
+        @for(i<-2000 to 2050) {
+            <option value="@i">@i</option>
+        }
+    </select>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="genderHide" class="form-group" style="padding-left: 25px;">
+  <div class="col-xs-8 nopaddingleft">
+      <input type="hidden" id="gender" name="gender">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input type="checkbox"  id="checkboxes-0"  class="gender_check" value="male" notVal="female">
+      Самец
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-1">
+      <input type="checkbox"  class="gender_check" id="checkboxes-1" value="female" notVal="male">
+      Самка
+    </label>
+	</div>
+  </div>  
+</div>
+
+
+<div id="quanHide" class="form-group" style="margin-left: -13px;">
+  <div class="col-xs-8 nopaddingleft">
+  <div class="radio">
+    <label for="radios-0">
+      <input type="radio" name="quantity" id="radios-0" value="single">
+      Один
+    </label>
+	</div>
+  <div class="radio">
+    <label for="radios-1">
+      <input type="radio" name="quantity" id="radios-1" value="many">
+      Косяк
+    </label>
+	</div>
+  </div>
+</div>
+
+<div class="form-group" style="margin-left:4px;">
+  <div class="col-xs-8 nopaddingleft">
+  <div class="checkbox">
+    <label for="checkboxes-2">
+      <input type="checkbox" name="picture" id="checkboxes-2" value="1">
+      Только с фото
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-3">
+      <input type="checkbox" name="map" id="checkboxes-3" value="1">
+      Отмеченные на карте
+    </label>
+	</div>
+  </div>  
+</div>
+<div class="form-group" style="margin-left: -87px;"*>
+  <div class="col-xs-8 nopaddingleft">
+  <div class="checkbox">
+    <label for="checkboxes-4">
+      <input type="checkbox" class="price_type" name="change" id="checkboxes-4" value="1">
+      На обмен
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="checkboxes-5">
+      <input type="checkbox" class="price_type" name="negotiable_price" id="checkboxes-5" value="1">
+      Договорная цена
+    </label>
+	</div>
+  </div>  
+</div>
+
+<div class="form-group" style="margin-left: -45px;margin-top: 10px;float: right;">
+  <div class="col-xs-12 nopaddingleft" >
+
+     <input id="textinput" name="searchText" type="text" placeholder="Поиск по тексту" class="form-control input-md ssss">
+  </div>  
+</div>
+</div>
+
+
+<p class="text-center curs" id="poi">
+  <span>Расширенный поиск</span>
+</p>
+
+</div>
+</form>
+</div>
