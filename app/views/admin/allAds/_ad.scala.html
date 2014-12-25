@@ -3,7 +3,7 @@
 	<tr>
 		@*if(session.get("ad.filter.region")!=null&&session.get("ad.filter.region").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.region.name asc"){"contactInfo.region.name desc"}else{"contactInfo.region.name asc"})">Регион <span class="glyphicon glyphicon-sort"></span></a></td>
 		@*if(session.get("ad.filter.city").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.city.name asc"){"contactInfo.city.name desc"}else{"contactInfo.city.name asc"})">Город/Ауыл <span class="glyphicon glyphicon-sort"></span></a></td>
-		@*if(session.get("ad.filter.ad.filter.company").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.company asc"){"contactInfo.company desc"}else{"contactInfo.company asc"})">Продовец <span class="glyphicon glyphicon-sort"></span></a></td>
+		@*if(session.get("ad.filter.ad.filter.company").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="contactInfo.company asc"){"contactInfo.company desc"}else{"contactInfo.company asc"})">Продавец <span class="glyphicon glyphicon-sort"></span></a></td>
 		@if(session.get("ad.filter.name")!=null&&session.get("ad.filter.name").equals("true")){<td>Название</td>}
 		@*if(session.get("ad.filter.section").equals("true")){*@<td><a href="@routes.Administer.allAds(page,if(sort=="section.name asc"){"section.name desc"}else{"section.name asc"})">Раздел <span class="glyphicon glyphicon-sort"></span></a></td>
 		@if(session.get("ad.filter.category")!=null&&session.get("ad.filter.category").equals("true")){<td>Категория</td>}
