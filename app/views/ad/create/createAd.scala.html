@@ -120,7 +120,7 @@ var title = $("#titleHide").html();
 
     $(document).on("click", "#add_phone_additional", function() {
     	if($('.additional-phone').length<3){
-        	$("#additional_phones").append('<div class="input-group additional-phone"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
+        	$("#additional_phones").append('<div class="input-group additional-phone"><input type="text" validation="not_null" placeholder="" class="form-control input-md ssss mmm reg2"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
         	$(".mmm").mask("+7(999) 999-9999");
     	}
     });
