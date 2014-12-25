@@ -1,8 +1,8 @@
 @(region:models.contact.Region)
 
 		<div class="input-group-btn bs-dropdown-to-select-group">
-			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
-				<span data-bind="bs-drp-sel-label">Все города/ауылы</span>
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='width: 210px;background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span  id="city-span" data-bind="bs-drp-sel-label">Все города/ауылы</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="city" value="all" >
 			</button>

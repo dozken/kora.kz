@@ -507,6 +507,7 @@ public class Ads extends Controller {
 	}
 
 	public static Result searchByType(Long id) {
+	
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
 						.eq("section", Section.find.byId(id))
@@ -1053,15 +1054,30 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
-	public static Result getRC(Long id) {
-		session("region",id.toString());
-		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
+	public static Result getRC(String id) {
+		System.out.println("id:"+id);
+		session().remove("city");
+		session().remove("cityName");
+		if(id.equals("all")){
+			session().remove("region");
+//			return ok("");
+			return ok(views.html.ad.search._city.render(Region.find.byId(-1L)));
+		}else{
+			session("region",id.toString());
+			return ok(views.html.ad.search._city.render(Region.find.byId(Long.valueOf(id))));
+		}
+		
 	}
 	
-	public static Result getCityS(Long id) {
-		session("cityName",City.find.byId(id).name);
-		session("city",id.toString());
-		System.out.println("ok");
+	public static Result getCityS(String id) {
+		if(id.equals("all")){
+			session().remove("city");
+			session().remove("cityName");			
+		}else{
+			
+			session("cityName",City.find.byId((Long.valueOf(id))).name);
+			session("city",id.toString());			
+		}
 		return ok("");
 	}
 	

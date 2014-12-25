@@ -11,7 +11,6 @@ GET         /sitemap                               controllers.Application.sitem
 GET         /ad/search-map                         controllers.Ads.sitemap(city:Long,section:Long,category:Long)
 GET         /ad/search-map/:city                         controllers.Ads.sitemapS(city:Long)
 GET         /sessionAdvert                         controllers.Advertisements.sessionAdvert(id:String,index:String)
-
 POST        /currency                              controllers.Application.currency(str:String,rate:Double)
 
 
@@ -52,8 +51,8 @@ GET         /ad/favorite                           controllers.Ads.favorite()
 GET         /ad/favorite/size                      controllers.Ads.favoriteSize()
 GET         /ad/show/:id                           controllers.Ads.get(id: Long)
 GET         /ad/category/:id                       controllers.Ads.getCategories(id:Long)
-GET         /ad/sc/:id                             controllers.Ads.getRC(id:Long)
-GET         /ad/cs/:id                             controllers.Ads.getCityS(id:Long)
+GET         /ad/sc/:id                             controllers.Ads.getRC(id:String)
+GET         /ad/cs/:id                             controllers.Ads.getCityS(id:String)
 
 
 GET         /ad/city/:id                           controllers.Ads.getCities(id:Long)
