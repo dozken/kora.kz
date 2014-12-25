@@ -8,19 +8,10 @@
 <body style="font-family: Helvetica,san serif;">
 <table border="0" style="width:700px">
 	<tr>
-		<td><b>Здравствуйте! @ad.contactInfo.company</b></td>
+		<td><b>Здравствуйте, @ad.contactInfo.company!</b></td>
 	</tr>
 	<tr>
-		<td><p>
-		            @if(ad.status.equals("active")){
-		            <p>Ваше объявление <a href="@routes.Ads.get(ad.id).absoluteURL(request())">"@utils._adName(ad)"</a> успешно опубликовано на сайте</p>
-		            }
-		            
-		            @if(ad.status.equals("rejected")){
-		            <p>Ваше объявление <a href="@routes.Ads.edit(ad.id).absoluteURL(request())">"@utils._adName(ad)"</a> не соотвествует правилам сайта, пожалуется убедитесь в правельности вашего объявления</p>
-		            <p><a href="@routes.Application.rules.absoluteURL(request())">Правила сайта</a></p>
-		            }
-		</p></td>
+		<td><b>Ваш адрес электронный почты был указан при подаче объвления на сайте <a href="kora.kz">"Kora.kz"</a> </b></td>
 	</tr>
 	<tr>
 		<td>
@@ -30,7 +21,18 @@
 	<tr>
 		<td>
 			<table border="0" style="width:100%">
-			<tr>				
+			<tr>
+				<td style="width: 60px;height: 70px;"><img src="@routes.Assets.at("images/home/2.png").absoluteURL(request())" style="width:60px" /></td>
+				@if(ad.status.equals("active")){
+				<td>
+					<p>Ваша объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad)</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/mm/yyyy").</p>
+					<p>Объявление будет автомотически удалено через две недели, если Вы его не продлите.</p>
+				</td>
+				}
+				@if(ad.status.equals("rejected")){
+		            <p>Ваше объявление "<a href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad)</a>" не соотвествует правилам сайта, пожалуется убедитесь в правельности вашего объявления</p>
+		            <p><a href="@routes.Application.rules.absoluteURL(request())">Правила сайта</a></p>
+		       }
 			</tr>
 			</table>	
 		</td>
@@ -42,7 +44,7 @@
 	</tr>
 	<tr style="background-color: #ecfee2;">
 		<td>
-			<i>Если вы не зарегистрированы на сайте <a href="kora.kz">"Kora.kz"</a> можете создать свой <a href="kora.kz">личный кабинет.</a>
+			<i>Если вы не зарегистрированы на сайте <a href="#">"Kora.kz"</a> можете создать свой <a href="#">личный кабинет.</a>
 			Это займет немного времени. Преимущество личного кабинетав том,что вы сможете управлять вашими объявлениями (добавит фото, изменит текст, продлит срок объявленияи и т.п.п)</i>
 		</td>
 	</tr>
@@ -50,7 +52,7 @@
 		<td>
 			<table border="0" style="width:100%">
 				<tr>
-					<td>Возникли вопросы?<br><br><a href="@routes.Application.feedback.absoluteURL(request())">Напишите</a> в службу поддержки</td>
+					<td>Возникли вопросы?<br><br><a href="#">Напишите</a> в службу поддержки</td>
 					<td style="width: 120px;"><img src="@routes.Assets.at("images/home/black_small_logo.png").absoluteURL(request())"/></td>
 				</tr>
 			</table>
