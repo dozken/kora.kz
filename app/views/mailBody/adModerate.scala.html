@@ -29,7 +29,7 @@
 				<td style="width: 60px;height: 70px;"><img src="@routes.Assets.at("images/home/2.png").absoluteURL(request())" style="width:60px" /></td>
 				@if(ad.status.equals("active")){
 				<td>
-					<p>Ваша объявление "<a style="text-decoration: none;" href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/yyyy").</p>
+					<p>Ваша объявление "<a style="text-decoration: none;" href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/YYYY HH:mm ").</p>
 					<p>Объявление будет автомотически удалено через две недели, если Вы его не продлите.</p>
 				</td>
 				}
@@ -52,12 +52,15 @@
 			Это займет немного времени. Преимущество личного кабинетав том,что вы сможете управлять вашими объявлениями (добавит фото, изменит текст, продлит срок объявленияи и т.п.п)</i>
 		</td>
 	</tr>
+	<br>
+	<br>
+	<br>
 	<tr style="background-color: #f7f7f7;">
-		<td style="padding: 10px;">
+		<td>
 			<table border="0" style="width:100%">
 				<tr>
 					<td style="padding: 10px;">Возникли вопросы?<br><a style="text-decoration: none;" href="@routes.Application.feedback.absoluteURL(request())">Напишите</a> в службу поддержки</td>
-					<td style="padding: 10px;width: 120px;"><img src="@routes.Assets.at("images/home/black_small_logo.png").absoluteURL(request())"/></td>
+					<td style="padding: 10px;width: 116px;height: 23px;"><img src="@routes.Assets.at("images/home/black_small_logo.png").absoluteURL(request())" style="width: 75%;height: 75%;"/></td>
 				</tr>
 			</table>
 		</td>

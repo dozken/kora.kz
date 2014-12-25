@@ -88,6 +88,8 @@ var watermark = {
 };
 
 $(document).ready(function(){
+	setTimeout(function(){$("#city-span").text($("#city-span").text().substr(0,22)); }, 0);
+	setTimeout(function(){$("#category-span").text($("#category-span").text().substr(0,18)); }, 0);
 	$(document).ready(function(){
 		$(document).watermark(watermark);
 	});
@@ -106,11 +108,12 @@ $(document).ready(function(){
 
 });
 
+
 	$(document).on('click', 'li.cities', function(event) {
 	    var $target = $(event.currentTarget);
 	    var id = $target.attr("city-id");
 	    $("input[name=city]").val(id);
-	    
+	    setTimeout(function(){$("#city-span").text($("#city-span").text().substr(0,22)); }, 0);
 	     jsRoutes.controllers.Ads.getCityS(id).ajax({
 	        success: function(data) {	            
 	        }
@@ -118,8 +121,12 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click', 'li.categories', function(event) {
+		event.preventDefault();
 	    var $target = $(event.currentTarget);
 	    $("input[name=category]").val($target.attr("category-id"));
+	    
+	    setTimeout(function(){$("#category-span").text($("#category-span").text().substr(0,18)); }, 0);
+	    return false;
 	});
 
 
@@ -154,7 +161,8 @@ $(document).ready(function(){
 
 
 	$(document).on("change", "#region", function() {
-	    var id = Number($(this).val());
+	    var id = $(this).val();
+	    console.log("region:"+id)
 
 	    jsRoutes.controllers.Ads.getRC(id).ajax({
 	        success: function(data) {
