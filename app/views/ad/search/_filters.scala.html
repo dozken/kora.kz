@@ -7,11 +7,11 @@
  <div class="form-group frmg">
  <div class="frmbck frmbck3">
   <label class="control-label" for="selectbasic1">Регион:</label>
-  <div class="fire-div" style="width: 170px;">
+  <div class="fire-div" style="width: 207px;">  	
     <select id="region" name="region" class="form-control fire-select" style="overflow-y: scroll;line-height: 5;" >
       <option value="all">Во всех регионах</option>
       @for(reg <-models.contact.Region.find.where.orderBy("id").findList) {
-          <option value="@reg.id" @if(reg==region||reg.id.toString==session.get("region")){selected}>@reg.name</option>
+          <option value="@reg.id" @if(reg.id.toString.equals(session.get("region"))){selected}>@reg.name</option>
       }
     </select>
   </div>
@@ -22,14 +22,15 @@
 	<div class="frmbck frmbck3">
 	<label class="control-label" for="selectbasic1">Город/Ауыл:</label>
 
-	<div id="city_div" style="width: 170px;">
+	<div id="city_div" style="width: 210px;">
 		<div class="input-group-btn bs-dropdown-to-select-group">
-			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
-				<span data-bind="bs-drp-sel-label" style="height: 16px;">@if(session.get("cityName")!=null){@session.get("cityName")}else{Все города/ауылы}</span>
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='width: 210px;background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span  id="city-span" data-bind="bs-drp-sel-label" style="height: 16px;">@if(session.get("cityName")!=null){@session.get("cityName")}else{Все города/ауылы}</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="@if(session.get("cityName")!=null){@session.get("cityName")}else{all}" >
 				<input  type="hidden" name="city" value="@if(session.get("city")!=null){@session.get("city")}else{all}" >
 			</button>
-			<ul class="dropdown-menu filtergorodauyl" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+			<ul class="dropdown-menu filtergorodauyl" role="menu" style="min-width: 208px;overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">
+				<li class="li-option cities" city-id="all" data-value="Все города/ауылы"><a href="#"><span>Все города/ауылы</span></a></li>
 				@if(session.get("region")!=null&&models.contact.Region.find.byId(Long.valueOf(session.get("region")))!=null){
 				
 				@for(c<-models.contact.Region.find.byId(Long.valueOf(session.get("region"))).findCities if(c.parentCity==null)){
@@ -52,8 +53,8 @@
   <label class="control-label" for="selectbasic1">Категория:</label>
   <div id="category_div" style="width: 170px;">
     		<div class="input-group-btn bs-dropdown-to-select-group">
-			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;width: 100%;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
-				<span data-bind="bs-drp-sel-label">Все категории</span>
+			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='width: 170px;background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
+				<span id="category-span" data-bind="bs-drp-sel-label">Все категории</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="category" value="all" >
 			</button>
@@ -79,12 +80,12 @@
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Цена:</label>
   <div>
-     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss"> -
-      <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss">
-      <div class="fire-div"  style="width: 66px;float:right;">
+     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss" style="width: 90px !important;"> -
+      <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss" style="width: 90px !important;">
+      <div class="fire-div"  style="width: 52px;float:right;">
         
-      <select id="currency" name="currency" class="form-control fire-select tenge" style="width: 122% !important;
-background-position: 76% 60%, 0px 0px !important;">
+      <select id="currency" name="currency" class="form-control fire-select tenge" style="width: 63px !important;
+      background-position: 69% 60%, 0px 0px !important; padding-left: 5px;padding-bottom: 3px;">
         <option value="KZT">a</option>
         <option value="USD">$</option>
       </select>
@@ -92,8 +93,8 @@ background-position: 76% 60%, 0px 0px !important;">
   </div>
   </div>
 </div>
-<div class="form-group">
-   <div class="" style="padding: 29px 15px 11px 10px;background-color: #E0E0E0;border-top-right-radius: 4px;">
+<div class="form-group" style="float:right">
+   <div class="" style="padding: 27px 15px 8px 0px;background-color: #E0E0E0;border-top-right-radius: 4px;">
   <label class="control-label" for="selectbasic1"></label>
 
         <button id="search_filter" class="btn buttongray" style="margin-bottom: 8px;margin-left: 16px;"><span class="btr">Поиск</span></button>

@@ -16,7 +16,7 @@
   <label class="col-xs-2  textalign" for="selectbasic">Раздел</label>
   <div class="col-xs-3">
   <div class="fire-div">
-    <select id="section" name="section" class="form-control fire-select" validation="not_null">
+    <select id="section" name="section" class="form-control fire-select reg" validation="not_null">
         <option selected disabled hidden> Выберите Раздел</option>
       @for(section <- Section.find.all()) {
           <option value="@section.id" @if(section==ad.section){selected}>@section.name</option>
@@ -27,7 +27,7 @@
     <div id="category_list" class="col-xs-3">
       <div class="fire-div" style="width:99%">
         @if(ad.section.id!=5) {
-            <select id="category" name="category" class="form-control fire-select" validation="not_null">
+            <select id="category" name="category" class="form-control fire-select reg" validation="not_null">
                 <option selected disabled hidden> Выберите категорию</option>
           @for(category<-ad.section.findCategories if(category.parentCategory==null)){
             @if(category.isParent){
@@ -84,7 +84,7 @@
   <label class="col-xs-2  textalign" for="selectbasic1">Возраст</label>
   <div class="col-xs-2">
       <div class="fire-div">
-  <select id="selectbasic1" name="age" class="form-control fire-select">
+  <select id="selectbasic1" name="age" class="form-control fire-select reg">
         @for(i<-2000 to 2050) {
             <option value="@i" @if(ad.birthDate == i) {selected}>@i</option>
         }
@@ -146,7 +146,7 @@
 <div class="form-group">
   <label class="col-xs-2  textalign" for="textinput">Заголовок</label>  
   <div class="col-xs-6">
-  <input id="textinput" name="title" type="text" placeholder="" maxlength="30" class="form-control input-md ssss" value="@ad.title" validation="not_null">
+  <input id="textinput" name="title" type="text" placeholder="" maxlength="30" class="form-control input-md ssss reg" value="@ad.title" validation="not_null">
   <span class="help-block">Максимальная длина 30 символов.</span>  
   </div>
 </div>
@@ -156,7 +156,7 @@
 <div class="form-group">
   <label class="col-xs-2  textalign"  for="textarea">Описание</label>
   <div class="col-xs-6">                     
-    <textarea class="form-control" rows="6" id="textarea" name="description">@ad.description</textarea>
+    <textarea class="form-control" rows="6" id="textarea" name="description" class="reg">@ad.description</textarea>
   </div>
 </div>
 
@@ -200,7 +200,7 @@
   <label class="col-xs-2  textalign" for="selectbasic2">Регион</label>
   <div class="col-xs-3">
     <div class="fire-div">
-    <select id="region" name="region" class="form-control fire-select" validation="not_null">
+    <select id="region" name="region" class="form-control fire-select reg" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
       @for(region<-Region.find.all()) {
           <option value="@region.id" @if(ad.contactInfo.region==region){selected="selected" }>@region.name</option>
@@ -215,7 +215,7 @@
   <label class="col-xs-2  textalign" for="selectbasic3">Город/Ауыл</label>
   <div id="city_list" class="col-xs-3">
   <div class="fire-div">
-      <select id="city"  name="city" class="form-control fire-select" validation="not_null">
+      <select id="city"  name="city" class="form-control fire-select reg" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
           @for(city<-ad.contactInfo.region.findCities){
 
@@ -229,9 +229,9 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-xs-2  textalign" for="textinput1">Продовец</label>
+  <label class="col-xs-2  textalign" for="textinput1">Продавец</label>
   <div class="col-xs-6">
-  <input id="textinput1" name="company_name" type="text" placeholder="Наименование продовца" class="form-control input-md ssss" value="@ad.contactInfo.company"  validation="not_null">
+  <input id="textinput1" name="company_name" type="text" placeholder="Наименование продaвца" class="form-control input-md ssss reg" value="@ad.contactInfo.company"  validation="not_null">
     
   </div>
 </div>
@@ -239,7 +239,7 @@
     <div class="form-group">
         <label class="col-xs-2  textalign" for="ema" >Email</label>
         <div class="col-xs-3">
-            <input id="ema" name="email" type="text" placeholder="someone@@someone.kz" class="form-control input-md ssss" value="@ad.contactInfo.email" validation="mail">
+            <input id="ema" name="email" type="text" placeholder="email@@kora.kz" class="form-control input-md ssss reg" value="@ad.contactInfo.email" validation="mail">
         </div>
     </div>
 <!-- Text input-->
@@ -247,7 +247,7 @@
   <label class="col-xs-2  textalign" for="textinput2">Телефон</label>  
   <div class="col-xs-3">
 
-  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" value="@ad.contactInfo.phone.split(",")(0)" validation="not_null">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss reg" value="@ad.contactInfo.phone.split(",")(0)" validation="not_null">
       <div id="additional_phones">
           @for((tee,index) <- ad.contactInfo.phone.split(",").zipWithIndex ){
           @if(index!=0){

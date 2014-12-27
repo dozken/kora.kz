@@ -5,21 +5,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Kora.kz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>	  
-	<body>
-		<table cellpadding="0" cellspacing="0" width="100%">
-		  <tr>
-		    <td valign="top" width="260">
-		      <table cellpadding="0" cellspacing="0" width="100%">
-		        <tr>
-		          <td align="center" style='padding: 40px 0 30px 0'>
-		           <img src='http://95.57.119.96:9000/assets/images/home/logo.png' style='display: block;' >
-		          </td>
-		        </tr>
-		
-		        <tr>
-		          <td style="padding-left: 40px;">
-		            <p>Здравствуйте, @name</p>
-                      @if(str=="comment"){
+<body style="font-family: Helvetica,san serif;">
+<table border="0" style="width:700px">
+	<tr>
+		<td><b>Здравствуйте! @name</b></td>
+	</tr>
+	<tr>
+		<td><p>
+@if(str=="comment"){
 		            <p>Ваше объявление прокомментировали, для просмотра пройдите по ссылке </p>
                       }else{
                           <p>На Ваш комментарий ответили, для просмотра пройдите по ссылке</p>
@@ -28,23 +21,43 @@
                             @routes.Ads.get(ad.id).absoluteURL(request())
 						</a>
 					</p>
-		          </td>
-		        </tr>
-		      </table>
-		    </td>
-		</tr>
-		<tr>
-		    <td valign="top" width="260">
-		      <table cellpadding="0" cellspacing="0" width="100%">
-		        <tr>
-		          <td style="padding-left: 40px;">
-		            <p>© 2014 "Қора.kz"</p>
-		          </td>
-		        </tr>
-		      </table>
-		    </td>
-		  </tr>
-		</table>
-	</body>
+		</p></td>
+	</tr>
+	<tr>
+		<td>
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table border="0" style="width:100%">
+			<tr>				
+			</tr>
+			</table>	
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br><br>
+		</td>
+	</tr>
+	<tr style="background-color: #ecfee2;">
+		<td>
+			<i>Если вы не зарегистрированы на сайте <a href="kora.kz">"Kora.kz"</a> можете создать свой <a href="kora.kz">личный кабинет.</a>
+			Это займет немного времени. Преимущество личного кабинетав том,что вы сможете управлять вашими объявлениями (добавит фото, изменит текст, продлит срок объявленияи и т.п.п)</i>
+		</td>
+	</tr>
+	<tr style="background-color: #f7f7f7;">
+		<td>
+			<table border="0" style="width:100%">
+				<tr>
+					<td>Возникли вопросы?<br><br><a href="@routes.Application.feedback">Напишите</a> в службу поддержки</td>
+					<td style="width: 120px;"><img src="@routes.Assets.at("images/home/black_small_logo.png").absoluteURL(request())"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
 </head>
 </html>
