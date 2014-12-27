@@ -18,15 +18,15 @@
     }
     </a>
 	</div>
-<div class="col-xs-8">
+<div class="col-xs-8" style="height:168px;margin-top: -8px;">
     <ul class="obya" >
         <li>
         <a href="@routes.Ads.get(ad.id)" style="color:black;font-size: 18px;"><b>@utils._adNameSearch(ad)</b></a>
 
         <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
-        <li class="PFBSPLI-13">@if(ad.description.length>70){ @ad.description.take(50)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
+        <li class="PFBSPLI-13">@if(ad.description.length>170){ @ad.description.take(170)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
         <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.city.name</li>
-        <li>
+       <!--  <li>
         Тел:  <ul id="ss" class="nopaddingleft">
                         <li id="phone_title">@utils._phone2(ad.contactInfo.phone.split(",")(0)) <a id="show_all" style="cursor:pointer">Показать телефоны</a></li>
 
@@ -36,7 +36,7 @@
 
                         }
                 </ul>
-        </li>
+        </li> -->
     </ul>
     <ul class="pros">
         <li>@if(ad.views>0){<span class="icon-prosmotr"></span> @ad.views просмотров}</li>
