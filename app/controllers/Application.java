@@ -215,8 +215,8 @@ public class Application extends Controller {
 
 		if (type.equals("ad_created")) {
 
-			Emailing.send("Объявление принято", new String[] { "" + " <"
-					+ email + ">" }, ad_successfully.render().body());
+//			Emailing.send("Объявление принято", new String[] { "" + " <"
+//					+ email + ">" }, ad_successfully.render().body());
 
 		} else if (type.equals("register")) {
 			AuthorisedUser user = AuthorisedUser.findByEmail(email);
