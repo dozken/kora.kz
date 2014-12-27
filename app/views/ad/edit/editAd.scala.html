@@ -1,0 +1,424 @@
+@(ad:models.ad.Ad)
+
+@main("Редактировать объявление") {
+<link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.min.css"))'>
+<div class="container сontain">
+	<div class="searchbarmargin">@_searchbar()</div>
+	@_form(ad)
+</div>
+
+}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src='@routes.Assets.at("javascripts/gmaps.js")' type="text/javascript"></script>
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))' type="text/javascript"></script>
+<script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<style>
+.ui-state-highlight {
+display: inline-block;
+height: 100px;
+width: 100px;
+margin-right: 10px;
+margin-bottom: 10px;
+position:relative;
+}
+
+
+.clear {
+clear: both;
+}
+</style>
+<script>
+var quan = $("#quanHide").html();
+var gender = $("#genderHide").html();
+var age = $("#ageHide").html();		
+var title = $("#titleHide").html();
+
+    @if(ad.contactInfo.location.lat!=null){
+
+        var lat ="@ad.contactInfo.location.lat";
+        var lng ="@ad.contactInfo.location.lng";
+    }else {
+        var lat = "43.237887" ;
+        var lng = "76.927437" ;
+    }
+
+    @if(ad.section.id==5){
+        $("#quanHide" ).empty();
+        $("#genderHide" ).empty();
+        $("#ageHide" ).empty();
+    }else{
+    	$("#titleHide").empty();
+    }
+
+$("#tel1").mask("+7(999) 999-9999");
+var imageMap = {};
+$(document ).on("change","[name='payment_type']",function(){
+
+if($(this ).val()=="normal"){
+
+$("#money_input" ).attr("validation","number");
+}else{
+
+$("#money_input" ).attr("validation","");
+}
+})
+
+$("#images li canvas" ).each(function(){
+var that=this;
+var context=this.getContext('2d');
+    var imageObj = new Image();
+imageObj.onload = function() {
+
+context.drawImage(imageObj,0,0,imageObj.width, imageObj.height,0,0,that.width,that.height);
+};
+imageObj.src = $(this ).attr("src");
+})
+
+$("#images" ).sortable({
+placeholder: 'ui-state-highlight'
+});
+
+var choose = document.getElementById('choose');
+FileAPI.event.on(choose, 'change', function (evt){
+var files = FileAPI.getFiles(evt); // Retrieve file list
+
+
+FileAPI.filterFiles(files, function (file, info/**Object*/){
+if( /^image/.test(file.type) ){
+
+if(info.width >= 320 && info.height >= 240) return true; else{alert("Размер фото слишком маленький");}
+
+}else{
+alert("Можно загрузить только фото");
+return  false;
+}
+}, function (files/**Array*/, rejected/**Array*/){
+if( files.length+$("#images li" ).length<=5 ){
+
+    FileAPI.each ( files, function ( file ) {
+
+    FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
+
+    var imgName = file.name.replace(/ /g, '');
+    imageMap[imgName] = img.toDataURL("image/jpeg");
+
+
+
+    })
+
+    FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
+
+        var name = file.name.replace(/\./g, '');
+        name=name.replace(/ /g, '');
+    if($('[id=item-'+ name+']').length==0) {
+    $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
+    $ ( "#item-" + name ).html ( img ) ;
+    $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name.replace(/ /g, '')]+'">' ) ;
+    $ ( "#item-" + name ).append ( '<a class="delete" style="position: absolute;top: 4px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;position: absolute;top: -3px;right: -1px;"></i></a>' ) ;
+	
+
+    }else{
+        alert(name + " уже есть");
+    }
+    } ) ;
+    } ) ;
+    }else{alert("Максимальное количество фото 5");}
+
+});
+});
+$("#error_fields" ).hide();
+$("#error_fields" ).css( "visibility","none" );
+$ (document ).on("click",".delete",function(){
+
+$(this).parent().remove();
+})
+
+$(document ).on("change","#section",function(){
+
+    var id = Number($(this ).val());
+
+    if(id==5){
+    	$("#quanHide").empty();
+        $("#genderHide").empty();
+        $("#ageHide").empty();	
+        $("#titleHide").html(title);            
+    }else{
+    	$("#titleHide").empty();
+    	$("#quanHide").html(quan);
+        $("#genderHide").html(gender);
+        $("#ageHide").html(age);
+    }
+    
+    if(id == 5){
+    	$("#category_list" ).hide();
+    	$("#quanHide" ).hide();
+    	$("#genderHide" ).hide();
+    	$("#ageHide" ).hide();
+    	$('#category_list').children('select').each(function () {
+    		$(this ).attr("validation","");
+    	});
+    }else {
+    	$("#category_list" ).show();
+    	$("#quanHide" ).show();
+    	$("#genderHide" ).show();
+    	$("#ageHide" ).show();
+    	jsRoutes.controllers.Ads.getCategories(id).ajax({
+    		success: function(data) {
+			    $("#category_list" ).html(data);
+			}
+		});
+    }
+});
+    $(".mmm").mask("+7(999) 999-9999");
+    $(document).on("click", "#add_phone_additional", function() {
+    if($('.additional-phone').length<3){
+        $("#additional_phones").append('<div class="input-group additional-phone"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
+        $(".mmm").mask("+7(999) 999-9999");
+    }
+    });
+
+    $(document).on("click", ".del_phone", function() {
+        $(this).parent().parent().remove();
+
+    });
+
+$(document ).on("change","#region",function(){
+
+var id = Number($(this ).val());
+
+jsRoutes.controllers.Ads.getCities(id).ajax({
+success: function(data) {
+
+$("#city_list" ).html(data);
+
+}
+});
+})
+
+$(document).on("click", "#ad_form_submit", function(e) {
+
+if(validation()) {
+    var tels = "";
+    $("#additional_phones input").each(function(){
+
+        if($(this).val()!=null && $(this).val()!=""){
+            tels+="," + $(this).val();
+        }
+    })
+
+    $("#tels").val(tels);
+$ ( '#ad_form' ).submit ( function ( e ) {
+var formData = new FormData ( this ) ;
+var image_names = "" ;
+$ ( "#images li input[type=hidden]" ).each ( function ( ) {
+formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), $(this).val() ) ;
+image_names += $ ( this ).parent ( ).attr ( "fileName" ) + "&" ;
+} )
+formData.append ( "image_names", image_names ) ;
+$.ajax ( {
+url : ' @controllers.routes.Ads.update(ad.id) ',
+type : 'POST',
+data : formData,
+processData : false,
+contentType : false,
+success : function ( data ) {
+window.location.href = " @routes.Manage.myAds() ";
+}
+} ) ;
+e.preventDefault ( ) ;
+} ) ;
+}else{
+e.preventDefault();
+$("#error_fields" ).html("");
+$("#error_fields" ).append("Некоторые поля заполнены неправильно");
+
+$("#error_fields" ).show();
+window.scrollTo(0, 0);
+
+}
+});
+
+
+
+var marker;
+var myPlacemark;
+var isMarker=false;
+var curMap="google";
+var myCollection;
+
+$(document).on("click","#remove-map-marker",function(){
+	marker.setMap(null);
+	$("#location").val("");		
+	myMap.geoObjects.remove(myPlacemark);
+	myCollection.removeAll();
+});
+
+$(document ).on("change","#city",function(){
+	lat = $('option:selected', this).attr('lat');
+	lng = $('option:selected', this).attr('lng');
+	isMarker=false;
+
+	if(curMap=="yandex"){
+		$("#mouse_event_map" ).html("");
+		myMap = new ymaps.Map ( "mouse_event_map", {
+			center :[lat,  lng],
+			zoom : 14,
+			controls: ["zoomControl"]
+		} ) ;
+
+		myMap.events.add ( 'click', function ( e ) {
+		lat = e.get ( 'coords' )[0];
+		lng = e.get ( 'coords' )[1];
+		isMarker = true ;
+
+		myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+				});
+		
+		myCollection.removeAll();
+		myMap.geoObjects.remove ( myPlacemark ) ;
+		myMap.geoObjects.removeAll();
+		var coords = e.get ( 'coords' ) ;
+		myPlacemark = new ymaps.Placemark ( coords) ;
+		myCollection.removeAll();		
+		myCollection.add(myPlacemark)
+		myMap.geoObjects.add(myCollection);
+		
+		$("#location").val("("+lat+","+lng+")");
+    } )
+    }else {
+    	map = new GMaps ( {
+    		div : '#mouse_event_map',
+    		zoom : 14,
+    		lat : lat,
+    		lng : lng,
+    		width : '700px',
+    		height : '400px',
+    		click : function ( e ) {
+    			$ ( "#location" ).val ( e.latLng ) ;
+    			lat = e.latLng.lat ( ) ;
+    			lng = e.latLng.lng ( ) ;
+    			isMarker = true ;
+    			map.removeMarker ( marker ) ;
+    			marker = map.addMarker ( {
+    				position : e.latLng
+    			} ) ;
+    		}
+    	}) ;
+    }
+})
+
+
+$(document).on("click",".mapSelect",function(){
+	if($(this ).attr("map")=="yandex") {
+		curMap="yandex";
+		myMap = new ymaps.Map ( "mouse_event_map", {
+			center :[lat,  lng],
+			zoom : 14,
+			controls: ["zoomControl"]
+		}) ;
+
+		myMap.events.add ( 'click', function ( e ) {
+			lat = e.get ( 'coords' )[0];
+			lng = e.get ( 'coords' )[1];
+			isMarker = true ;
+
+			myCollection = new ymaps.GeoObjectCollection({}, {
+					preset: 'twirl#redIcon', //all placemarks are red
+					draggable: true // and can be dragged
+			});
+				
+			myCollection.removeAll();
+			myMap.geoObjects.remove ( myPlacemark ) ;
+			myMap.geoObjects.removeAll();
+		
+			var coords = e.get ( 'coords' ) ;
+			myPlacemark = new ymaps.Placemark ( coords) ;
+			myCollection.removeAll();		
+			myCollection.add(myPlacemark)
+			myMap.geoObjects.add(myCollection);
+			$("#location").val("("+lat+","+lng+")");
+		});
+
+		if(isMarker){
+			myPlacemark = new ymaps.GeoObject({
+				geometry: {
+					type: "Point",
+					coordinates: [lat, lng]
+				}});
+			myMap.geoObjects.add ( myPlacemark ) ;
+		}
+
+		
+	}else{
+		curMap="google";
+		map = new GMaps({
+			div: '#mouse_event_map',
+			zoom: 14,
+			lat: lat,
+			lng:  lng,
+			width: '700px',
+			height: '400px',
+			click: function(e) {
+				$("#location" ).val( e.latLng);
+				lat= e.latLng.lat();
+				lng= e.latLng.lng();
+				isMarker=true;
+				map.removeMarker(marker);
+				marker =  map.addMarker({
+					position:e.latLng
+				});
+			}
+		});
+		if(isMarker){
+			map.removeMarker(marker);
+			marker=map.addMarker({
+			lat: lat,
+			lng: lng,
+			});
+		}
+	}
+})
+
+
+</script>
+
+<script type="text/javascript">
+/**
+* Mouse Events on Maps
+*/
+
+$(document).ready(function(){
+
+map = new GMaps({
+div: '#mouse_event_map',
+zoom: 14,
+lat: lat,
+lng:  lng,
+width: '700px',
+height: '400px',
+click: function(e) {
+$("#location" ).val( e.latLng);
+lat= e.latLng.lat();
+lng= e.latLng.lng();
+isMarker=true;
+map.removeMarker(marker);
+marker =  map.addMarker({
+position:e.latLng
+});
+}
+
+});
+@if(ad.contactInfo.location.lat!=null){
+marker=map.addMarker({
+lat: @ad.contactInfo.location.lat,
+lng: @ad.contactInfo.location.lng,
+});
+}
+
+});
+
+
+</script>

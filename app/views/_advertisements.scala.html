@@ -1,0 +1,62 @@
+<ul class="pro4">
+  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").findRowCount>0){
+  <li>
+    <div id="carousel-top" class="carousel slide adslide" data-ride="carousel">
+      <!-- Indicators -->
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" style="width:240px;height:400px">        
+  	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").orderBy("position").findList.zipWithIndex){
+        <div class='item @if(index.toString==session.get("carousel-top")||(session.get("carousel-top")==null&&index==0)){active}' style="width:240px;height:400px">          
+          @advert.fileType match {
+				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
+			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+			    case default => {-@advert.fileType- еще не поддеживается}			    
+	      }          
+        </div>
+        }
+      </div>
+      <!-- Controls -->
+      <a id="adslideleft" class="left carousel-control" href="#carousel-top" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a id="adslideright" class="right carousel-control" href="#carousel-top" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </li>
+  }
+  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").findRowCount>0){
+  <li>
+    <div id="carousel-bottom" class="carousel slide adslide" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- Wrapper for slides -->
+      <div class="carousel-inner" style="width:240px;height:400px">
+  	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").orderBy("position").findList.zipWithIndex){	
+        <div class='item @if(index.toString==session.get("carousel-bottom")||(session.get("carousel-bottom")==null&&index==0)){active}' style="width:240px;height:400px">
+          @advert.fileType match {
+				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
+			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+			    case default => { @advert.fileType еще не поддеживается}			    
+	      }          
+        </div>
+        }
+      </div>
+      <!-- Controls -->
+      <a id="adslideleft" class="left carousel-control" href="#carousel-bottom" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a id="adslideright" class="right carousel-control" href="#carousel-bottom" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </li>
+  }
+</ul>
