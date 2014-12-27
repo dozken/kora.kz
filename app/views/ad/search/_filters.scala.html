@@ -79,17 +79,33 @@
  <div class="form-group frmg">
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Цена:</label>
-  <div>
-     <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss" style="width: 90px !important;"> -
+ 
+  <div style="height: 26px;">
+<table>
+  <tr>
+    <td>
+      <input id="costStart" name="costStart" type="text" placeholder="" class="form-control input-md inputsmall ssss" style="width: 90px !important;">
+    </td>
+    <td>
+      -
+    </td>
+    <td>
       <input id="costEnd" name="costEnd" type="text" placeholder="" class="form-control input-md inputsmall ssss" style="width: 90px !important;">
-      <div class="fire-div"  style="width: 52px;float:right;">
-        
+    </td>
+    <td>
+      <div class="fire-div"  style="width: 52px;">        
       <select id="currency" name="currency" class="form-control fire-select tenge" style="width: 63px !important;
       background-position: 69% 60%, 0px 0px !important; padding-left: 5px;padding-bottom: 3px;">
         <option value="KZT">a</option>
         <option value="USD">$</option>
       </select>
-      </div>    
+      </div>   
+    </td>
+  </tr>
+</table>
+      
+
+ 
   </div>
   </div>
 </div>
@@ -110,17 +126,24 @@
    <div class="frmbck">
   <label class="control-label" for="selectbasic1">Возраст:</label>
   <div>
-  <div class="fire-div" style="width: 80px;float:right">
-    
-    <select id="ageStart" name="ageStart" class="form-control fire-select" style="width: 118% !important;background-position: 82% 60%, 0px 0px !important;">
+  
+    <table>
+      <tr>
+        <td>
+        <div class="fire-div" style="width: 80px;float:right">
+          <select id="ageStart" name="ageStart" class="form-control fire-select" style="width: 118% !important;background-position: 82% 60%, 0px 0px !important;">
         <option value="0"></option>
       @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
       }
     </select>
   </div>
-    &nbsp-&nbsp
-    <div class="fire-div" style="width: 80px;float:left">
+        </td>
+        <td>
+          &nbsp-&nbsp
+        </td>
+        <td>
+           <div class="fire-div" style="width: 80px;float:left">
       
         <select id="ageEnd" name="ageEnd" class="form-control fire-select" style="width: 118% !important;
 background-position: 82% 60%, 0px 0px !important;">
@@ -130,6 +153,12 @@ background-position: 82% 60%, 0px 0px !important;">
         }
     </select>
     </div>
+        </td>
+      </tr>
+    </table>
+    
+    
+   
   </div>
 </div>
 </div>

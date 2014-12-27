@@ -256,7 +256,7 @@
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss reg2" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 <div id="additional_phones" style="margin-top:5px;margin-bottom:5px;">
 
-</div>
+</div data-toggle="tooltip" data-placement="top" title="Следует указать ваш дополнительный номер телефона.">
      <center style="margin-left: 91px;margin-top: 5px;"> <button type="button" id="add_phone_additional" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-phone-alt"></span> Добавить еще номер</button></center>
       <input type="hidden" id="tels" name="additional_phone" value=""/>
   </div>
