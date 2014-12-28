@@ -29,7 +29,7 @@
 				<td style="width: 60px;height: 70px;"><img src="@routes.Assets.at("images/home/2.png").absoluteURL(request())" style="width:35px" /></td>
 				@if(ad.status.equals("active")){
 				<td>
-					<p>Ваша объявление "<a style="text-decoration: none;" href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/YYYY HH:mm ").</p>
+					<p>Ваше объявление "<a style="text-decoration: none;" href="@routes.Ads.get(ad.id).absoluteURL(request())">@utils._adName(ad).toString.trim</a>" прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/YYYY HH:mm ").</p>
 					<p>Объявление будет автомотически удалено через две недели, если Вы его не продлите.</p>
 				</td>
 				}
