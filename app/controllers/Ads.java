@@ -2,10 +2,13 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.avaje.ebean.SqlUpdate;
 import models.Emailing;
 import models.Location;
 import models.Setting;
@@ -23,13 +26,11 @@ import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Payment;
-import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.ad.create._category;
 import views.html.ad.create._city;
-import views.html.ad.create._success;
 import views.html.ad.create.createAd;
 import views.html.ad.edit.editAd;
 import views.html.ad.search._ad_list;
@@ -42,11 +43,8 @@ import views.html.profile.ads.myAds;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
-import com.avaje.ebean.SqlUpdate;
 
 public class Ads extends Controller {
-	
-	
 
 	public static Result get(Long id) {
 		Ad ad = Ad.find.byId(id);
@@ -54,18 +52,20 @@ public class Ads extends Controller {
 		try {
 			ad.update();
 		} catch (Exception e) {
-			Logger.error("Exception with updating status of ad", e);
+			e.printStackTrace();
 		}
 		return ok(showAd.render(ad));
 	}
 
 	public static Result create() {
+		long startTime = System.currentTimeMillis();
+
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = new Ad();
 		ad.section = Section.find.byId(Long.parseLong(requestData
 				.get("section")));
-		System.out.println(ad.section.name);
+
 		ad.category = Category.find.byId(Long.parseLong(requestData
 				.get("category")));
 		if (requestData.get("age") != null) {
@@ -87,6 +87,7 @@ public class Ads extends Controller {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
 		}
+
 		loc = coords.split(",");
 		Location location = new Location();
 		if (loc.length == 2) {
@@ -113,6 +114,7 @@ public class Ads extends Controller {
 			price.price = -1;
 		}
 		price.save();
+
 		ad.priceType = price;
 
 		AdSetting ad_set = new AdSetting();
@@ -129,12 +131,17 @@ public class Ads extends Controller {
 		ad.settings.add(ad_set2);
 		ad.save();
 
-		if (ad.settings == null) {
+		if (ad.tags == null) {
 			ad.tags = new ArrayList<Tag>();
 		}
+
+
 		ad.tags.add(new Tag(ad.section.name));
+
 		ad.tags.add(new Tag(ad.category.name));
+
 		ad.tags.add(new Tag(ad.title));
+
 		if (ad.birthDate != null)
 			ad.tags.add(new Tag(ad.birthDate.toString()));
 		if (ad.gender != null)
@@ -143,29 +150,41 @@ public class Ads extends Controller {
 			ad.tags.add(new Tag(ad.quantity));
 		ad.tags.add(new Tag(ad.contactInfo.region.name));
 		ad.tags.add(new Tag(ad.contactInfo.city.name));
+
 		ad.update();
 
-		Ebean.saveManyToManyAssociations(ad, "tags");
-		String[] order = requestData.get("image_names").split("&");
-		for (int i = 0; i < order.length; i++) {
-
-			if (!order[i].equals("") && order[i] != null) {
-
-				AdImage img = new AdImage();
-				img.ad = ad;
-				img.name = order[i];
-				img.position = i + 1;
-				img.content = requestData.get(order[i]);
-				new Thread() {
-					@Override
-					public void run() {
-						img.save();
-					}
-				}.start();
-			}
+		System.out.println("1");
+		//Ebean.saveManyToManyAssociations(ad, "tags");
+		System.out.println("2");
+		if(session(request().remoteAddress())!=null && !session(request().remoteAddress()).equals("")) {
+			String sql = "update ad_images set ad_id=" + ad.id.toString() + " where ad_id is null and id in (" + session(request().remoteAddress()) + ")";
+			SqlUpdate s = Ebean.createSqlUpdate(sql);
+			s.execute();
 		}
-		// ... do something ...
-		return ok(_success.render());
+//		String[] order = requestData.get("image_names").split("&");
+//		long image = System.currentTimeMillis() - startTime;
+//		System.out.println("image:" + image);
+//		for (int i = 0; i < order.length; i++) {
+//
+//			if (!order[i].equals("") && order[i] != null) {
+//
+//				AdImage img = new AdImage();
+//				img.ad = ad;
+//				img.name = order[i];
+//				img.position = i + 1;
+//				img.content = requestData.get(order[i]);
+//				new Thread() {
+//					@Override
+//					public void run() {
+//						img.save();
+//					}
+//				}.start();
+//			}
+//		}
+//		// ... do something ...
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("estimatedTime:create ad  " + estimatedTime);
+		return ok();
 	}
 
 	public static Result filterAds(String str) {
@@ -290,6 +309,8 @@ public class Ads extends Controller {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
 			loc = coords.split(",");
+			System.out.println(requestData.get("location"));
+			System.out.println(loc[0] + "," + loc[1]);
 			Location location = new Location();
 			if (loc.length == 2) {
 				location.lat = loc[0].trim();
@@ -403,9 +424,7 @@ public class Ads extends Controller {
 			section.id = 0L;
 			section.name = "all";
 			return ok(adSearch.render(ads, section, null, null, null));
-		}
-
-		else {
+		} else {
 			if (requestData.get("str").equals("")
 					|| requestData.get("str") == null) {
 				ads = Ad.find
@@ -453,7 +472,8 @@ public class Ads extends Controller {
 				.eq("section",
 						Section.find.where().eq("name", "Лошадь").findUnique())
 				.orderBy("updatedDate").findList();
-		Section section = Section.find.where().eq("name", "Лошадь").findUnique();
+		Section section = Section.find.where().eq("name", "Лошадь")
+				.orderBy("updatedDate").findUnique();
 		return ok(adSearch.render(l, section, null, null, null));
 	}
 
@@ -507,7 +527,6 @@ public class Ads extends Controller {
 	}
 
 	public static Result searchByType(Long id) {
-	
 		return ok(adSearch.render(
 				Ad.find.where().eq("status", "active")
 						.eq("section", Section.find.byId(id))
@@ -548,7 +567,7 @@ public class Ads extends Controller {
 
 			return ok(""
 					+ AuthorisedUser.findByEmail(session("connected")).favorites
-							.size());
+					.size());
 
 		} else {
 
@@ -631,8 +650,8 @@ public class Ads extends Controller {
 
 			message += "от " + AuthorisedUser.find.byId(author_id).userName
 					+ " <" + AuthorisedUser.find.byId(author_id).email + ">";
-			Emailing.send("Қора.kz", new String[] { " <"
-					+ Ad.find.byId(ad_id).contactInfo.email + ">" },
+			Emailing.send("Қора.kz", new String[]{" <"
+							+ Ad.find.byId(ad_id).contactInfo.email + ">"},
 					private_message.render(message, "not_registred").body());
 			return ok("not_registred");
 		}
@@ -640,7 +659,7 @@ public class Ads extends Controller {
 	}
 
 	public static Result replayPrivateMessage(Long author_id, Long ad_id,
-			Long recipent_id, String m) {
+											  Long recipent_id, String m) {
 
 		PrivateMessage message = new PrivateMessage();
 		message.ad = Ad.find.byId(ad_id);
@@ -836,22 +855,17 @@ public class Ads extends Controller {
 
 		if (!requestData.get("category").equals("all")) {
 
-			Category category = Category.find.byId(Long.parseLong(requestData
-					.get("category")));
+			Category category = Category.find.byId(Long.parseLong(requestData.get("category")));
 			if (category.isParent()) {
 				String ids = "";
 				if (category.subCategories.size() > 0) {
 
 					for (int i = 0; i < category.subCategories.size(); i++) {
-						if (i == category.subCategories.size() - 1)
-							ids += category.subCategories.get(i).id.toString();
-						else
-							ids += category.subCategories.get(i).id.toString()
-									+ ",";
+						if (i == category.subCategories.size() - 1) ids += category.subCategories.get(i).id.toString();
+						else ids += category.subCategories.get(i).id.toString() + ",";
 					}
 				}
-				r = "inner join categories b on a.category_id=b.id and b.id in ("
-						+ ids + ")";
+				r = "inner join categories b on a.category_id=b.id and b.id in (" + ids + ")";
 			} else {
 				b = "inner join categories b on a.category_id=b.id and b.id="
 						+ requestData.get("category");
@@ -870,14 +884,11 @@ public class Ads extends Controller {
 				if (city.subCities.size() > 0) {
 
 					for (int i = 0; i < city.subCities.size(); i++) {
-						if (i == city.subCities.size() - 1)
-							ids += city.subCities.get(i).id.toString();
-						else
-							ids += city.subCities.get(i).id.toString() + ",";
+						if (i == city.subCities.size() - 1) ids += city.subCities.get(i).id.toString();
+						else ids += city.subCities.get(i).id.toString() + ",";
 					}
 				}
-				c = "inner join cities cc on cc.id = c.city_id and cc.id in ("
-						+ ids + ")";
+				c = "inner join cities cc on cc.id = c.city_id and cc.id in (" + ids + ")";
 			} else {
 				c = "inner join cities cc on cc.id = c.city_id and cc.id="
 						+ requestData.get("city");
@@ -946,35 +957,32 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r
-					+ " "
-					+ c
+					+ r + " " + c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
-					+ costStartD + " and p.currency='USD' and p.price<="
-					+ costEndD + ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg
-					+ "))) " + " where a.status='active' " + pic + " order by "
-					+ sort + " \n" + " limit 30 offset " + page * 30;
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + pic + " order by " + sort + " \n"
+					+ " limit 30 offset " + page * 30;
 
 			a2 = "SELECT count(*) from ads a \n" + " "
 					+ anim
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r
-					+ " "
-					+ c
+					+ r + " " + c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
-					+ costStartD + " and p.currency='USD' and p.price<="
-					+ costEndD + ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg
-					+ "))) " + " where a.status='active' " + pic;
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + pic;
+
 
 		} else {
 
@@ -982,8 +990,7 @@ public class Ads extends Controller {
 				gender = "and a.gender='" + requestData.get("gender") + "'";
 			}
 			if (requestData.get("quantity") != null) {
-				quantity = " and a.quantity ='" + requestData.get("quantity")
-						+ "'";
+				quantity = " and a.quantity ='" + requestData.get("quantity") + "'";
 			}
 			if (!requestData.get("ageStart").equals("")) {
 				startYear = Integer.parseInt(requestData.get("ageStart"));
@@ -997,19 +1004,17 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r
-					+ " "
-					+ c
+					+ r + " " + c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
-					+ costStartD + " and p.currency='USD' and p.price<="
-					+ costEndD + ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg
-					+ "))) " + " where a.status='active' " + gender + quantity
-					+ " and (a.birth_date between " + startYear + " and "
-					+ endYear + ") " + pic + " order by " + sort + " \n"
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and " + endYear
+					+ ") " + pic + " order by " + sort + " \n"
 					+ " limit 30 offset " + page * 30;
 
 			a2 = "SELECT count(*) from ads a \n" + " "
@@ -1017,20 +1022,19 @@ public class Ads extends Controller {
 					+ b
 					+ " inner join contacts c on a.contact_info_id = c.id "
 					+ loc
-					+ r
-					+ " "
-					+ c
+					+ r + " " + c
 					+ "\n"
 					+ tag
 					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
-					+ costStartD + " and p.currency='USD' and p.price<="
-					+ costEndD + ") or  (p.price>=" + costStartTg
-					+ " and p.currency='KZT' and p.price<=" + costEndTg
-					+ "))) " + " where a.status='active' " + gender + quantity
-					+ " and (a.birth_date between " + startYear + " and "
-					+ endYear + ") " + pic;
+					+ f + " and p.price<" + l + ") or  ((p.price>=" + costStartD
+					+ " and p.currency='USD' and p.price<=" + costEndD
+					+ ") or  (p.price>=" + costStartTg
+					+ " and p.currency='KZT' and p.price<=" + costEndTg + "))) "
+					+ " where a.status='active' " + gender + quantity
+					+ " and (a.birth_date between " + startYear + " and " + endYear
+					+ ") " + pic;
 		}
+		System.out.println(a2);
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
 
@@ -1046,6 +1050,8 @@ public class Ads extends Controller {
 			ads.add(Ad.find.byId(id));
 		}
 
+		System.out.println(list3.size());
+		System.out.println(list3.get(0));
 		Ad tmp = new Ad();
 
 		tmp.id = 0L;
@@ -1054,33 +1060,9 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
-	public static Result getRC(String id) {
-		System.out.println("id:"+id);
-		session().remove("city");
-		session().remove("cityName");
-		if(id.equals("all")){
-			session().remove("region");
-//			return ok("");
-			return ok(views.html.ad.search._city.render(Region.find.byId(-1L)));
-		}else{
-			session("region",id.toString());
-			return ok(views.html.ad.search._city.render(Region.find.byId(Long.valueOf(id))));
-		}
-		
+	public static Result getRC(Long id) {
+		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
 	}
-	
-	public static Result getCityS(String id) {
-		if(id.equals("all")){
-			session().remove("city");
-			session().remove("cityName");			
-		}else{
-			
-			session("cityName",City.find.byId((Long.valueOf(id))).name);
-			session("city",id.toString());			
-		}
-		return ok("");
-	}
-	
 
 	public static Result sitemap(Long cid, Long sid, Long cat) {
 
@@ -1116,4 +1098,41 @@ public class Ads extends Controller {
 						.findList(), section, null, city.region, city));
 	}
 
+	public static Result imageUpload() throws IOException {
+
+		long startTime = System.currentTimeMillis();
+		DynamicForm requestData = form().bindFromRequest();
+
+		System.out.println(requestData);
+
+		System.out.println("request as multy part - " + request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
+
+		File f = request().body().asMultipartFormData().getFiles().get(0).getFile();
+
+f.createNewFile();
+
+//		String[] order = requestData.get("image_names").split("&");
+//		System.out.println(request().remoteAddress());
+//		String fl = "";
+//		for (int i = 0; i < order.length; i++) {
+//
+//			if (!order[i].equals("") && order[i] != null) {
+//
+//				AdImage img = new AdImage();
+//				img.name = order[i];
+//				img.position = i + 1;
+//				img.content = requestData.get(order[i]);
+//				//System.out.println("ccccc "+ img.content);
+//				img.save();
+//				if(i==order.length-1) fl+=img.id.toString();
+//				else fl+=img.id.toString()+",";
+//			}
+//		}
+//
+//
+//		session(request().remoteAddress(), fl);
+//		long estimatedTime = System.currentTimeMillis() - startTime;
+//		System.out.println("estimatedTime image load: " + estimatedTime);
+		return ok();
+	}
 }
