@@ -1115,8 +1115,20 @@ public class Ads extends Controller {
 		return ok("");
 	}
 	
-	public static Result getRC(Long id) {
-		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
+
+	public static Result getRC(String id) {
+		System.out.println("id:"+id);
+		session().remove("city");
+		session().remove("cityName");
+		if(id.equals("all")){
+			session().remove("region");
+//			return ok("");
+			return ok(views.html.ad.search._city.render(Region.find.byId(-1L)));
+		}else{
+			session("region",id.toString());
+			return ok(views.html.ad.search._city.render(Region.find.byId(Long.valueOf(id))));
+		}
+		
 	}
 
 	public static Result sitemap(Long cid, Long sid, Long cat) {
