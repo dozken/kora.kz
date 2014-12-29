@@ -114,6 +114,7 @@ $(document).ready(function(){
 	    var id = $target.attr("city-id");
 	    $("input[name=city]").val(id);
 	    setTimeout(function(){$("#city-span").text($("#city-span").text().substr(0,22)); }, 0);
+	    
 	     jsRoutes.controllers.Ads.getCityS(id).ajax({
 	        success: function(data) {	            
 	        }

@@ -100,7 +100,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.autoPreLong(),
 				controllers.routes.javascript.Ads.searchAd(),
 				controllers.routes.javascript.Ads.getRC(),
-				// controllers.routes.javascript.Ads.getCityS(),
+				controllers.routes.javascript.Ads.getCityS(),
 
 				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.commentPaging(),
