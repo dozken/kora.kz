@@ -25,15 +25,17 @@
 
         <span class="baga" style="font-style:normal;color:green"> <span style="color:gray">@if(ad.priceType.price>0){ за &nbsp}</span>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</span></li>
         <li class="PFBSPLI-13">@if(ad.description.length>170){ @ad.description.take(170)... <a href="@routes.Ads.get(ad.id)" >Подробнее »</a>}else{ @ad.description}</li>
-        <li>@ad.contactInfo.company | @ad.contactInfo.region.name | @ad.contactInfo.city.name</li>
-        <!--<li id="phone_title">-->
-            <!--Тел: @for((tel,index)<-ad.contactInfo.phone.split(",").zipWithIndex){-->
-            <!--@if(index<=2){-->
-            <!--@if(index+1==ad.contactInfo.phone.split(",").size || index==2){-->
-            <!--@utils._phone(tel) }else{ @utils._phone(tel), }-->
-<!--}-->
-            <!--}-->
-        <!--</li>-->
+        <li>@ad.contactInfo.company</li>
+        <li @*id="phone_title"*@>
+        	@ad.contactInfo.region.name | @ad.contactInfo.city.name
+        	@*
+            Тел: @for((tel,index)<-ad.contactInfo.phone.split(",").zipWithIndex){
+            @if(index<=2){
+            @if(index+1==ad.contactInfo.phone.split(",").size || index==2){
+            @utils._phone(tel) }else{ @utils._phone(tel), }
+			}
+            }*@
+        </li>
     </ul>
     <ul class="pros">
         <li>@if(ad.views>0){<span class="icon-prosmotr"></span> @ad.views просмотров}</li>

@@ -50,7 +50,7 @@ public class User extends Controller {
 
 			return ok(user.email);
 		} else {
-			flash("error", "Эта почта уже используется!, попробуйте другую.");
+			flash("error", "Пользователь с таким email'ом уже существует!");
 			return ok("error");
 		}
 

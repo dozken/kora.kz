@@ -211,7 +211,7 @@ type : 'POST',
 success : function ( data ) {
 var res = "" + data ;
 if ( res == "error" ) {
-$ ( "#registerErrorAlert" ).html ( "Эта почта уже используется!" ) ;
+$ ( "#registerErrorAlert" ).html ( "Пользователь с таким email'ом уже существует!" ) ;
 $ ( "#registerErrorAlert" ).show ( ) ;
 $("#registrButton" ).prop("disabled",false);
 
