@@ -55,9 +55,13 @@ clear: both;
 </style>
 
 <script>
+$(document).ajaxComplete(function() {
+$('.custom-tooltip').tooltip()
+});
+
     $(document).ready(function () {
         //$('[data-toggle="tooltip"]').tooltip()
-        $('.custom-tooltip').tooltip()
+        
     });
 
 var quan = $("#quanHide").html();
