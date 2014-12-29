@@ -1,0 +1,18 @@
+@(region:models.contact.Region)
+<div class="fire-div custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите свой город из списка.">
+    
+<select id="city"  name="city" class="form-control fire-select reg2" validation="not_null">
+    <option selected disabled hidden> Выберите город</option>
+    @for(city<-region.findCities if(city.parentCity==null)){
+        @if(city.isParent){
+        <optgroup label="@city.name">       
+        @for((subcity,index) <- city.findSubCitites.zipWithIndex){
+        <option @if(subcity.location!=null){lat="@subcity.location.lat" lng="@subcity.location.lng"} value="@subcity.id">— @subcity.name</option>
+        }
+        </optgroup>
+        }else{
+        <option @if(city.location!=null){lat="@city.location.lat" lng="@city.location.lng"} value="@city.id">@city.name</option>
+        }       
+    }
+</select>
+</div>
