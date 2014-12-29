@@ -26,7 +26,6 @@ import views.html.common.about;
 import views.html.common.feedback;
 import views.html.common.rules;
 import views.html.common.sitemap;
-import views.html.mailBody.ad_successfully;
 import views.html.mailBody.comment_users_ad;
 import views.html.mailBody.feedbackMessage;
 import views.html.mailBody.private_message;
@@ -63,7 +62,8 @@ public class Application extends Controller {
 	public static Result javascriptRoutes() {
 		response().setContentType("text/javascript");
 
-		return ok(Routes.javascriptRouter("jsRoutes",
+		return ok(Routes.javascriptRouter(
+				"jsRoutes",
 				controllers.routes.javascript.Application.index(),
 				controllers.routes.javascript.Application.signIn(),
 				controllers.routes.javascript.Application.currency(),
@@ -100,7 +100,7 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.autoPreLong(),
 				controllers.routes.javascript.Ads.searchAd(),
 				controllers.routes.javascript.Ads.getRC(),
-				//controllers.routes.javascript.Ads.getCityS(),
+				// controllers.routes.javascript.Ads.getCityS(),
 
 				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.commentPaging(),
@@ -215,8 +215,8 @@ public class Application extends Controller {
 
 		if (type.equals("ad_created")) {
 
-//			Emailing.send("Объявление принято", new String[] { "" + " <"
-//					+ email + ">" }, ad_successfully.render().body());
+			// Emailing.send("Объявление принято", new String[] { "" + " <"
+			// + email + ">" }, ad_successfully.render().body());
 
 		} else if (type.equals("register")) {
 			AuthorisedUser user = AuthorisedUser.findByEmail(email);

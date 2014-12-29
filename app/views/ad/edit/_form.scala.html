@@ -11,10 +11,10 @@
 <legend>Редактировать объявление</legend>
 <div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> После редактиврования объявление обратно отправится к модераторам на проверку и не будет доступно другим польователям!!!</div>
 <!-- Select Basic -->
-    <div id="error_fields" class="alert alert-danger"  style="visibility: hidden" role="alert"></div>
+    <div id="error_fields" class="alert alert-danger"  style="display:none" role="alert"></div>
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic">Раздел</label>
-  <div class="col-xs-3" data-toggle="tooltip" data-placement="top" title="Выберите раздел которая наиболее подходят вашему объявлению">
+  <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите раздел наиболее подходящий вашему объявлению">
   <div class="fire-div">
     <select id="section" name="section" class="form-control fire-select reg" validation="not_null">
         <option selected disabled hidden> Выберите Раздел</option>
@@ -24,7 +24,7 @@
     </select>
   </div>
   </div>
-    <div id="category_list" class="col-xs-3">
+    <div id="category_list" class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите категорию наиболее подходящий вашему объявлению">
       <div class="fire-div" style="width:99%" data-toggle="tooltip" data-placement="top" title="Выберите категорию из списка.">
         @if(ad.section.id!=5) {
             <select id="category" name="category" class="form-control fire-select reg" validation="not_null">
@@ -46,7 +46,7 @@
 <div  id="genderHide">
     <div class="form-group">
         <label class="col-xs-2  textalign" for="radios">Пол</label>
-        <div class="col-xs-4" data-toggle="tooltip" data-placement="top" title="Выберите Пол которая наиболее подходят вашему объявлению" style="width: 230px;">
+        <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите пол наиболее подходящий вашему объявлению">
             <label class="radio-inline" for="radios-0">
                 <input type="radio" name="section_gender" id="radios-0" value="male" @if(ad.gender=="male"){ checked="checked"}>
                 Самец
@@ -65,9 +65,7 @@
 <div id="quanHide">
 <div  class="form-group">
   <label class="col-xs-2  textalign" for="radios">Количество</label>
-  <div class="col-xs-4" data-toggle="tooltip" data-placement="top" title="Выберите Количество которая наиболее подходят вашему объявлению" style="
-    width: 158px;
-"> 
+  <div class="col-xs-2 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите количество наиболее подходящий вашему объявлению">
     <label class="radio-inline" for="kradios-0">
       <input type="radio" name="quantity" id="kradios-0" value="single" @if(ad.quantity=="single"){ checked="checked"}>
       Один
@@ -84,7 +82,7 @@
 <div id="ageHide">
 <div  class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic1">Возраст</label>
-  <div class="col-xs-2" data-toggle="tooltip" data-placement="top" title="Выберите Возраст которая наиболее подходят вашему объявлению">
+  <div class="col-xs-2 custom-tooltip" data-toggle="tooltip" data-placement="top"  title="Выберите возраст наиболее подходящий вашему объявлению">
       <div class="fire-div">
   <select id="selectbasic1" name="age" class="form-control fire-select reg">
         @for(i<-2000 to 2050) {
@@ -99,7 +97,7 @@
 <!-- Multiple Radios -->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="radios1">Цена</label>
-  <div class="col-xs-4" data-toggle="tooltip" data-placement="top" title="Выберите Цену которая наиболее подходят вашему объявлению">
+  <div class="col-xs-4 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите цену наиболее подходящий вашему объявлению">
 
   <div class="radio">
     <label for="radios1-0">
@@ -147,7 +145,7 @@
 <div id="titleHide">
 <div class="form-group">
   <label class="col-xs-2  textalign" for="textinput">Заголовок</label>  
-  <div class="col-xs-6" data-toggle="tooltip" data-placement="top" title="Заголовок должен отражать суть объявления и быть уникален.">
+  <div class="col-xs-6 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Заголовок должен отражать суть объявления и быть уникален.">
   <input id="textinput" name="title" type="text" placeholder="" maxlength="30" class="form-control input-md ssss reg" value="@ad.title" validation="not_null">
   <span class="help-block">Максимальная длина 30 символов.</span>  
   </div>
@@ -155,7 +153,7 @@
 </div>
 
 <!-- Textarea -->
-<div class="form-group">
+<div class="form-group custom-tooltip" data-toggle="tooltip" data-placement="top" title="В описании расскажите подробнее о своем товаре или услуге. Это увеличит количество просмотров!">
   <label class="col-xs-2  textalign"  for="textarea">Описание</label>
   <div class="col-xs-6" data-toggle="tooltip" data-placement="top" title="В описании расскажите подробнее о своем товаре или услуге. Это увеличит количество просмотров!">                     
     <textarea class="form-control" rows="6" id="textarea" name="description" class="reg">@ad.description</textarea>
@@ -167,12 +165,8 @@
 <!-- File Button --> 
 <div class="form-group">
   <label class="col-xs-2  textalign" for="filebutton">Фотографии</label>
-  <div class="col-xs-4" data-toggle="tooltip" data-placement="top" title="Можно добавить несколько фотографий сразу.
-Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px.
-Можно изменить порядок фото, перетаскивая их." style="
-    width: 230px;
-">
-    <div class="fileUpload btn myb">
+  <div class="col-xs-4" style="width: 230px;">
+    <div class="fileUpload btn myb custom-tooltip" data-toggle="tooltip" data-placement="top" title="Можно добавить несколько фотографий сразу. Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px. Можно изменить порядок фото, перетаскивая их.">
     <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
     <input type="file" id="choose" class="upload" multiple />
     <input type="hidden" id="image_order" name="image_order">
@@ -204,7 +198,7 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic2">Регион</label>
-  <div class="col-xs-3" data-toggle="tooltip" data-placement="top" title="Выберите свой регион из списка.">
+  <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите свой регион из списка.">
     <div class="fire-div">
     <select id="region" name="region" class="form-control fire-select reg" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
@@ -219,7 +213,7 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic3">Город/Ауыл</label>
-  <div id="city_list" class="col-xs-3" data-toggle="tooltip" data-placement="top" title="Выберите свой город из списка.">
+  <div id="city_list" class="col-xs-3 custom-tooltip"  data-toggle="tooltip" data-placement="top" title="Выберите свой город из списка.">
   <div class="fire-div">
       <select id="city"  name="city" class="form-control fire-select reg" validation="not_null">
           <option selected disabled hidden> Выберите город</option>
@@ -236,7 +230,7 @@
 <!-- Text input-->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="textinput1">Продавец</label>
-  <div class="col-xs-6" data-toggle="tooltip" data-placement="top" title="Название компаний или Ваше имя.">
+  <div class="col-xs-6 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Название компаний или ваше имя.">
   <input id="textinput1" name="company_name" type="text" placeholder="Наименование продaвца" class="form-control input-md ssss reg" value="@ad.contactInfo.company"  validation="not_null">
     
   </div>
@@ -244,14 +238,14 @@
 
     <div class="form-group">
         <label class="col-xs-2  textalign" for="ema" >Email</label>
-        <div class="col-xs-3" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
+        <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
             <input id="ema" name="email" type="text" placeholder="email@@kora.kz" class="form-control input-md ssss reg" value="@ad.contactInfo.email" validation="mail">
         </div>
     </div>
 <!-- Text input-->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="textinput2">Телефон</label>  
-  <div class="col-xs-3" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящий номер телефона.">
+  <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящий номер телефона.">
 
   <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss reg" value="@ad.contactInfo.phone.split(",")(0)" validation="not_null">
       <div id="additional_phones">
@@ -271,7 +265,7 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-xs-2  textalign" for="selectbasic4">Комментарии</label>
-  <div class="col-xs-5" data-toggle="tooltip" data-placement="top" title="Разрешить комментарий или нет.">
+  <div class="col-xs-5 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Разрешить комментарий или нет.">
     <div class="fire-div" style="width: 81%;">
     <select id="selectbasic4" name="coment_display" class="form-control fire-select" style="width: 111% !important;">
       <option value="registred">Только зарегистрированным пользователям</option>

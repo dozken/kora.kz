@@ -13,7 +13,7 @@ public class Emailing {
 						.plugin(MailerPlugin.class).email();
 				mail.setSubject(subject);
 				mail.setRecipient(recipients);
-				mail.setFrom("Қора <noreply@kora.kz>");
+				mail.setFrom("noreply@kora.kz");
 				// sends html
 
 				mail.sendHtml(body);
@@ -33,7 +33,7 @@ public class Emailing {
 						.plugin(MailerPlugin.class).email();
 				mail.setSubject(subject);
 				mail.setRecipient(recipient);
-				mail.setFrom("Қора <noreply@kora.kz>");
+				mail.setFrom("noreply@kora.kz");
 				// sends html
 
 				mail.sendHtml(body);

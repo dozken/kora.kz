@@ -20,8 +20,11 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrapvalidator" % "0.5.0",  
   "org.webjars" % "jquery-ui" % "1.11.1",
   "org.webjars" % "font-awesome" % "4.2.0",
-  "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.0",
+  "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.1",
+  //"com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.6-SNAPSHOT",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
 
 resolvers += Resolver.url("Objectify Play Repository", url("http://schaloner.github.com/releases/"))(Resolver.ivyStylePatterns)
+
+//resolvers += Resolver.file("LocalIvy", file(Path.userHome + File.separator + ".ivy2" + File.separator + "local"))(Resolver.ivyStylePatterns)

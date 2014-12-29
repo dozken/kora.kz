@@ -20,11 +20,12 @@
         clear: both;
     }
     .custom-tooltip + .tooltip > .tooltip-inner {
-        background-color: #E0E0E0;
+        background-color: #404041;
         max-width: 100%; width: 100%;
-        color:black;
     }
-    .custom-tooltip + .tooltip > .tooltip-arrow {border-top-color:#E0E0E0	; }
+    .custom-tooltip + .tooltip > .tooltip-arrow {
+    	border-top-color:#404041; 
+    }
 </style>
 <link rel="stylesheet" media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.min.css"))'>
 <div class="container сontain">
@@ -43,7 +44,8 @@
 <script>
 
     $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        //$('[data-toggle="tooltip"]').tooltip()
+        $('.custom-tooltip').tooltip()
     });
 
     $("#next").click(function() {
@@ -216,32 +218,7 @@
                     processData: false,
                     contentType: false,
                     success: function(data) {
-
-
-                        var end =  +new Date();  // log end timestamp
-                        var diff = end - start;
-
-                         $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
-                         $("#success_message").fadeIn(2000);
-
                         $("#create-form").html(data);
-
-
-                         jsRoutes.controllers.Application.emailing("ad_created", $("#ema").val()).ajax()
-
-                        var end2 =  +new Date();  // log end timestamp
-                        var diff1 = end2 - end;
-
-                        setTimeout(function() {
-                            @if(session.get("connected") != null){
-                                window.location.href = "@routes.Manage.myAds()";
-                            }else{
-                                window.location.href = "@routes.Application.index()";
-                            }
-                        }, 1000);
-
-
-
                     }
                 });
                 e.preventDefault();
