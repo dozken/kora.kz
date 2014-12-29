@@ -182,22 +182,19 @@ $(document).on("click", "#imageUploadBtn", function(e) {
     if($("#images li canvas").length>0) {
         $("#images li canvas").each(function () {
             var a = imageMap[$(this).parent().attr("fileName")];
-            if(a!=null){
+            if (a != null) {
                 formData.append($(this).parent().attr("fileName"), a);
                 image_names += $(this).parent().attr("fileName") + "&";
             }
         });
         formData.append("image_names", image_names);
-
+    }
         FileAPI.upload({
             url: '@controllers.routes.Ads.imageUpload',
             files: { images: files },
             progress: function (evt){ /* ... */ },
             complete: function (err, xhr){ /* ... */ }
         });
-
-    }
-
 });
 
     $(document).on("click", "#ad_form_submit", function(e) {
@@ -213,21 +210,21 @@ $(document).on("click", "#imageUploadBtn", function(e) {
             $("#ad_form_submit").attr('disabled', 'disabled');
             $("#ad_form_submit").text('Загружается...');
 
-            jsRoutes.controllers.Ads.create().ajax({
-                data: $("#ad_form").serialize(),
-                success: function (data) {
-                    $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
-                    $("#success_message").fadeIn(200);
-                    var end =  +new Date();  // log end timestamp
-                    var diff = end - start;
-                    console.log(diff);
-                    @if(session.get("connected") != null) {
-                        window.location.href = "@routes.Manage.myAds()";
-                    }else{
-                        window.location.href = "@routes.Application.index()";
-                    }
-                }
-            });
+//            jsRoutes.controllers.Ads.create().ajax({
+//                data: $("#ad_form").serialize(),
+//                success: function (data) {
+//                    $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
+//                    $("#success_message").fadeIn(200);
+//                    var end =  +new Date();  // log end timestamp
+//                    var diff = end - start;
+//                    console.log(diff);
+//                    @if(session.get("connected") != null) {
+//                        window.location.href = "@routes.Manage.myAds()";
+//                    }else{
+//                        window.location.href = "@routes.Application.index()";
+//                    }
+//                }
+//            });
             e.preventDefault();
         }else{
             e.preventDefault();
