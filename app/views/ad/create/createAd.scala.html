@@ -42,6 +42,10 @@
 
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script>
+$(document).ajaxComplete(function() {
+	$('.custom-tooltip').tooltip()
+	});
+
 
     $(document).ready(function () {
         //$('[data-toggle="tooltip"]').tooltip()
