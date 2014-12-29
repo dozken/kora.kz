@@ -26,6 +26,7 @@ import models.contact.ContactInfo;
 import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Payment;
+import models.user.SecurityRole;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -39,6 +40,7 @@ import views.html.ad.show._comment;
 import views.html.ad.show.showAd;
 import views.html.mailBody.private_message;
 import views.html.profile.ads.myAds;
+import views.html.notFoundPage;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
@@ -201,73 +203,92 @@ public class Ads extends Controller {
 	}
 
 	public static Result preLong(Long id) {
-		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
-		Double myAmount = u.profile.myMonney;
-		Double cost = Setting.find.where().eq("name", "prelong").findUnique().price;
-		if (myAmount >= cost) {
-			Ad ad = Ad.find.byId(id);
-			ad.expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60
-					* 24 * 7);
-			ad.update();
-			Payment p = new Payment();
-			p.paymentType = "substract";
-			p.amount = -1 * cost;
 
-			u.payments.add(p);
-			u.profile.myMonney -= cost;
-			u.update();
-			return ok("fine");
+		if(checkUserAndAd(id)) {
+			AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+			Double myAmount = u.profile.myMonney;
+			Double cost = Setting.find.where().eq("name", "prelong").findUnique().price;
+			if (myAmount >= cost) {
+				Ad ad = Ad.find.byId(id);
+				ad.expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60
+						* 24 * 7);
+				ad.update();
+				Payment p = new Payment();
+				p.paymentType = "substract";
+				p.amount = -1 * cost;
+
+				u.payments.add(p);
+				u.profile.myMonney -= cost;
+				u.update();
+				return ok("fine");
+			}
+			return ok("notEnough");
 		}
-		return ok("notEnough");
-
+		return ok(notFoundPage.render("Not Found"));
 	}
 
 	public static Result highlight(Long id) {
-		AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
-		Double myAmount = u.profile.myMonney;
-		Double cost = Setting.find.where().eq("name", "highlight").findUnique().price;
-		if (myAmount >= cost) {
-			Ad ad = Ad.find.byId(id);
-			AdSetting set = new AdSetting();
-			set.name = "highlight";
-			ad.settings.add(set);
-			ad.update();
-			Payment p = new Payment();
-			p.paymentType = "substract";
-			p.amount = -1 * cost;
+		if(checkUserAndAd(id)) {
+			AuthorisedUser u = AuthorisedUser.findByEmail(session("connected"));
+			Double myAmount = u.profile.myMonney;
+			Double cost = Setting.find.where().eq("name", "highlight").findUnique().price;
+			if (myAmount >= cost) {
+				Ad ad = Ad.find.byId(id);
+				AdSetting set = new AdSetting();
+				set.name = "highlight";
+				ad.settings.add(set);
+				ad.update();
+				Payment p = new Payment();
+				p.paymentType = "substract";
+				p.amount = -1 * cost;
 
-			u.payments.add(p);
-			u.profile.myMonney -= cost;
-			u.update();
-			return ok("fine");
+				u.payments.add(p);
+				u.profile.myMonney -= cost;
+				u.update();
+				return ok("fine");
+			}
+			return ok("notEnough");
 		}
-		return ok("notEnough");
-
+		return ok(notFoundPage.render("Not Found"));
 	}
 
 	public static Result archive(Long id) {
-		Ad ad = Ad.find.byId(id);
-		ad.status = "archived";
-		ad.update();
-		return ok(myAds.render(Ad.find.where()
-				.eq("contactInfo.email", session("connected"))
-				.order("publishedDate desc").findList()));
 
+		if(checkUserAndAd(id)) {
+			Ad ad = Ad.find.byId(id);
+			ad.status = "archived";
+			ad.update();
+			return ok(myAds.render(Ad.find.where()
+					.eq("contactInfo.email", session("connected"))
+					.order("publishedDate desc").findList()));
+		}
+		return ok(notFoundPage.render("Not Found"));
+	}
+
+	public static boolean checkUserAndAd(Long id){
+
+		if(Ad.find.byId(id).contactInfo.email.equals(session("connected"))
+				|| AuthorisedUser.findByEmail(session("connected")).getRoles().contains(SecurityRole.findByName("admin"))){
+			return true;
+		}
+		return false;
 	}
 
 	public static Result remove(Long id) {
 
-		String a = "delete from users_ads where ads_id=" + id;
-		SqlUpdate update = Ebean.createSqlUpdate(a);
-		Ebean.execute(update);
+		if(checkUserAndAd(id)) {
+			String a = "delete from users_ads where ads_id=" + id;
+			SqlUpdate update = Ebean.createSqlUpdate(a);
+			Ebean.execute(update);
 
-		Ad ad = Ad.find.byId(id);
-		ad.delete();
+			Ad ad = Ad.find.byId(id);
+			ad.delete();
 
-		return ok(myAds.render(Ad.find.where()
-				.eq("contactInfo.email", session("connected"))
-				.order("publishedDate desc").findList()));
-
+			return ok(myAds.render(Ad.find.where()
+					.eq("contactInfo.email", session("connected"))
+					.order("publishedDate desc").findList()));
+		}
+		return ok(notFoundPage.render("Not Found"));
 	}
 
 	public static Result autoPreLong(Long id, String str) {
@@ -402,7 +423,9 @@ public class Ads extends Controller {
 	}
 
 	public static Result edit(Long id) {
+		if (checkUserAndAd(id))
 		return ok(editAd.render(Ad.find.byId(id)));
+		return ok(notFoundPage.render("Not Found"));
 	}
 
 	public static Result quick_search() {
@@ -1098,18 +1121,17 @@ public class Ads extends Controller {
 						.findList(), section, null, city.region, city));
 	}
 
-	public static Result imageUpload() throws IOException {
+	public static Result imageUpload() {
 
 		long startTime = System.currentTimeMillis();
 		DynamicForm requestData = form().bindFromRequest();
 
-		System.out.println(requestData);
+		System.out.println(request().getHeader(""));
 
-		System.out.println("request as multy part - " + request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
+		//System.out.println("request as multy part - " + request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
 
-		File f = request().body().asMultipartFormData().getFiles().get(0).getFile();
 
-f.createNewFile();
+
 
 //		String[] order = requestData.get("image_names").split("&");
 //		System.out.println(request().remoteAddress());

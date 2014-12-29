@@ -51,9 +51,11 @@ GET         /ad/favorite                           controllers.Ads.favorite()
 GET         /ad/favorite/size                      controllers.Ads.favoriteSize()
 GET         /ad/show/:id                           controllers.Ads.get(id: Long)
 GET         /ad/category/:id                       controllers.Ads.getCategories(id:Long)
-GET         /ad/sc/:id                             controllers.Ads.getRC(id:String)
-GET         /ad/cs/:id                             controllers.Ads.getCityS(id:String)
+GET         /ad/sc/:id                             controllers.Ads.getRC(id:Long)
+#GET         /ad/cs/:id                             controllers.Ads.getCityS(id:String)
 
+
+POST         /image_upload                           controllers.Ads.imageUpload()
 
 GET         /ad/city/:id                           controllers.Ads.getCities(id:Long)
 POST        /ad/filter/:str                        controllers.Ads.filterAds(str: String)
