@@ -997,8 +997,9 @@ public class Ads extends Controller {
 					+ c
 					+ "\n"
 					+ tag
-					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ " inner join ad_prices p on p.id=a.price_type_id and "
+					+ "("
+					+ "(p.currency='' and (p.price>="	+ f + " and p.price<" + l + ")) or  ((p.price>="
 					+ costStartD + " and p.currency='USD' and p.price<="
 					+ costEndD + ") or  (p.price>=" + costStartTg
 					+ " and p.currency='KZT' and p.price<=" + costEndTg
@@ -1015,8 +1016,8 @@ public class Ads extends Controller {
 					+ c
 					+ "\n"
 					+ tag
-					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ " inner join ad_prices p on p.id=a.price_type_id and ("
+					+ "(p.currency='' and (p.price>="	+ f + " or p.price<" + l + ")) or  ((p.price>="
 					+ costStartD + " and p.currency='USD' and p.price<="
 					+ costEndD + ") or  (p.price>=" + costStartTg
 					+ " and p.currency='KZT' and p.price<=" + costEndTg
@@ -1048,8 +1049,8 @@ public class Ads extends Controller {
 					+ c
 					+ "\n"
 					+ tag
-					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ " inner join ad_prices p on p.id=a.price_type_id and ("
+					+ "(p.currency='' and (p.price>="	+ f + " or p.price<" + l + ")) or  ((p.price>="
 					+ costStartD + " and p.currency='USD' and p.price<="
 					+ costEndD + ") or  (p.price>=" + costStartTg
 					+ " and p.currency='KZT' and p.price<=" + costEndTg
@@ -1068,8 +1069,8 @@ public class Ads extends Controller {
 					+ c
 					+ "\n"
 					+ tag
-					+ " inner join ad_prices p on p.id=a.price_type_id and ((p.price>="
-					+ f + " and p.price<" + l + ") or  ((p.price>="
+					+ " inner join ad_prices p on p.id=a.price_type_id and ("
+					+ "(p.currency='' and (p.price>="	+ f + " or p.price<" + l + ")) or  ((p.price>="
 					+ costStartD + " and p.currency='USD' and p.price<="
 					+ costEndD + ") or  (p.price>=" + costStartTg
 					+ " and p.currency='KZT' and p.price<=" + costEndTg
