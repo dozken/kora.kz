@@ -1103,6 +1103,18 @@ public class Ads extends Controller {
 		return ok(_ad_list.render(ads));
 	}
 
+	public static Result getCityS(String id) {
+		if(id.equals("all")){
+			session().remove("city");
+			session().remove("cityName");			
+		}else{
+			
+			session("cityName",City.find.byId((Long.valueOf(id))).name);
+			session("city",id.toString());			
+		}
+		return ok("");
+	}
+	
 	public static Result getRC(Long id) {
 		return ok(views.html.ad.search._city.render(Region.find.byId(id)));
 	}

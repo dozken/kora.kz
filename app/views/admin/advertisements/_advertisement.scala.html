@@ -34,7 +34,20 @@
   <td>@org.joda.time.Days.daysBetween( new DateTime(), new DateTime(advert.tillToDate)).getDays
   </td>
   <td>
-    <a class="btn btn-default btn-xs myb advertisementFile" data-content='<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400">'>
+    <a class="btn btn-default btn-xs myb advertisementFile" data-content='
+          @advert.fileType match {
+				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
+			    case "image/png"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/gif"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+			    case "image/jpeg"  => {<img src="@routes.Advertisements.renderAdvetisement(advert.id)" width="240" height="400" />}
+  			    case "application/vnd.adobe.flash.movie" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+  			    case "application/x-shockwave-flash" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+  			    case "application/x-shockwave-flash2-preview" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+  			    case "application/futuresplash" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+  			    case "image/vnd.rn-realflash" => {<object type="application/x-shockwave-flash" width="240" height="400" data="@routes.Advertisements.renderAdvetisement(advert.id)"></object>}
+			    case default => {-@advert.fileType- еще не поддеживается}			    
+	      }      '>
       <span class="glyphicon glyphicon-eye-open"></span>
     </a>
     <a class="btn btn-default btn-xs myb extend" advert="@advert.id" tillToDate="@DateTimeFormat.forPattern("dd/MM/yyyy").print( new DateTime(advert.tillToDate))"><span class="glyphicon glyphicon-time "></span></a>
