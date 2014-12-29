@@ -36,7 +36,7 @@
 				<a class="btn btn-lg btn-danger PFBSPLI-13 obevleniebutton" href="@routes.Ads.show" role="button">
 				Подать объявление</a>
 			</p>
-			<p class="jum PFBSPR-13">
+			<p class="PFBSPR-13" style="text-align: center;">
 					<b>
 					Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",Date.from(java.time.LocalDateTime.now.withHour(0).withMinute(0).withSecond(0).atZone(java.time.ZoneId.systemDefault()).toInstant()) ).findRowCount() объявлений подано
 					сегодня
