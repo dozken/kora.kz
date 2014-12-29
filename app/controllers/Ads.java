@@ -163,27 +163,27 @@ public class Ads extends Controller {
 			SqlUpdate s = Ebean.createSqlUpdate(sql);
 			s.execute();
 		}
-//		String[] order = requestData.get("image_names").split("&");
-//		long image = System.currentTimeMillis() - startTime;
-//		System.out.println("image:" + image);
-//		for (int i = 0; i < order.length; i++) {
-//
-//			if (!order[i].equals("") && order[i] != null) {
-//
-//				AdImage img = new AdImage();
-//				img.ad = ad;
-//				img.name = order[i];
-//				img.position = i + 1;
-//				img.content = requestData.get(order[i]);
-//				new Thread() {
-//					@Override
-//					public void run() {
-//						img.save();
-//					}
-//				}.start();
-//			}
-//		}
-//		// ... do something ...
+		String[] order = requestData.get("image_names").split("&");
+		long image = System.currentTimeMillis() - startTime;
+		System.out.println("image:" + image);
+		for (int i = 0; i < order.length; i++) {
+
+			if (!order[i].equals("") && order[i] != null) {
+
+				AdImage img = new AdImage();
+				img.ad = ad;
+				img.name = order[i];
+				img.position = i + 1;
+				img.content = requestData.get(order[i]);
+				new Thread() {
+					@Override
+					public void run() {
+						img.save();
+					}
+				}.start();
+			}
+		}
+		// ... do something ...
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println("estimatedTime:create ad  " + estimatedTime);
 		return ok();
