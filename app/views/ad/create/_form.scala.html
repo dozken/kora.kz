@@ -146,23 +146,12 @@
 Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px.
 Можно изменить порядок фото, перетаскивая их." >
   <label class="col-xs-2 textalign" for="filebutton">Фотографии</label>
-  <div class="col-xs-4">
+  <div  id="uploader" class="col-xs-8">
     <div class="fileUpload btn myb">
     <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
-    <input type="file" id="choose" name="image_file" class="upload btn" multiple/>
+    <input type="file" id="pickfiles" name="image_file" class="upload btn" multiple/>
     <input type="hidden" id="image_order" name="image_order">
 </div>
-  </div>
-
-</div>
-
-<div class="form-group">
-  <label class="col-xs-2 textalign"></label>
-  <div class="col-xs-10">
-    <ul id="images" class="connectedList ui-sortable"></ul>
-    
-    <div class="clear"></div>
-      <!--<button id="imageUploadBtn" class="btn btn-default">Сохранить</button>-->
   </div>
 
 </div>
