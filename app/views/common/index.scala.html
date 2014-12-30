@@ -1,0 +1,57 @@
+
+@main("Главная") {
+
+
+<div class="container сontain">
+	@_searchbar()
+	<div class="row">
+		<div class="col-xs-12">
+			<ul id="menuler">
+				<li class="jylky">
+					<a class="front_image" href="@routes.Ads.searchByType(1)"></a>
+					<a class="back_image"></a>
+				</li>
+				<li class="tuye">
+					<a class="front_image" href="@routes.Ads.searchByType(2)"></a>
+					<a class="back_image"></a>
+				</li>
+				<li class="siyr">
+					<a class="front_image" href="@routes.Ads.searchByType(3)"></a>
+					<a class="back_image"></a>
+				</li>
+				<li class="koi">
+					<a class="front_image" href="@routes.Ads.searchByType(4)"></a>
+					<a class="back_image"></a>
+				</li>
+				<li class="baska">
+					<a class="front_image" href="@routes.Ads.searchByType(5)"></a>
+					<a class="back_image"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<p class="jum ">
+				<a class="btn btn-lg btn-danger PFBSPLI-13 obevleniebutton" href="@routes.Ads.show" role="button">
+				Подать объявление</a>
+			</p>
+			<p class="jum PFBSPR-13">
+					<b>
+					Всего на сайте @models.ad.Ad.find.where().eq("status","active").findRowCount() объявлений, из них @models.ad.Ad.find.where().eq("status","active").ge("publishedDate",Date.from(java.time.LocalDateTime.now.withHour(0).withMinute(0).withSecond(0).atZone(java.time.ZoneId.systemDefault()).toInstant()) ).findRowCount() объявлений подано
+					сегодня
+					</b>
+			</p>
+			<p class="jum2 PFBSPR-13">
+				Покупка и продажа сельскохозяйственных животных. Покупай, продавай и меняй сельхозпродукты и животных на сайте <a href="@routes.Application.index" class="reda">Қора.kz</a>
+			</p>
+			@*
+			<p class="jum2 PFBSPR-13">
+				На сайте <a href="@routes.Application.index" class="reda">www.kora.kz</a>
+				легко и быстро можно купить или продать сельхоз животных.
+			</p>
+			*@
+		</div>
+	</div>
+</div>
+}

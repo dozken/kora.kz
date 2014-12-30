@@ -1,0 +1,48 @@
+@main("Все объявления") {
+<div class="container">
+  <div class="col-xs-3 menudiv">@profile._menu()</div>
+	<div class="col-xs-9">
+	  @profile._title("ВСЕ ОБЪЯВЛЕНИЯ"){ }
+	  <div class="col-xs-12 PFBSPLI-13">
+	  @_tableAds()
+	  </div>
+  </div>
+</div>
+}
+
+<script>
+
+$(document).ready(function () {
+	adModerate!=null && moderate();
+});
+
+$(document).ajaxSuccess(function () {
+	adModerate!=null && moderate();	
+});
+
+function moderate(){
+    var tr = $(adModerate),
+    tds = tr.find('td'),
+    l = tds.length;
+	tds.fadeOut('fast', function(){ 
+	    if (! --l) tr.remove();                    
+	});   
+	
+	adModerate=null;
+}
+
+$(document).on("click",".moderate",function(){
+	var adId = $(this).attr("ad");
+	
+	jsRoutes.controllers.Administer.moderate(adId).ajax({		
+		data: {status:"moderating"},
+		success: function(data) {
+			window.location.href =  "http://@request.host/ad/show/"+adId;
+			
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+        }
+	});
+	
+});
+</script>

@@ -1,0 +1,7 @@
+@(section:models.ad.Section)
+
+<select name="parentCategory.id" class="form-control selectdesign">
+    <option selected value=""> Выберите категорию</option>    
+    @for(category<-section.categories if(category.parentCategory==null)){
+    <option value="@category.id">@category.name</option>}
+</select>
