@@ -298,17 +298,24 @@ $(document).on("click", "#comment_ad", function(e) {
     }
 })
     @if(ad.contactInfo.location.lat!=null) {
-        url = GMaps.staticMapURL ( {
-        size :[ 610, 300 ],
-        zoom : 14,
-        lat : @ad.contactInfo.location.lat,
-        lng : @ad.contactInfo.location.lng,
-        markers :[ {
-        lat :@ad.contactInfo.location.lat,
-        lng :@ad.contactInfo.location.lng
-        }]
-        }) ;
-
-        $ ( '<img/>' ).attr ( 'src', url ).appendTo ( '#map' ) ;
+    	var myGmap = new GMaps({
+    	    div: '#map',
+    	    zoom: 14,
+    	    lat : @ad.contactInfo.location.lat,
+        	lng : @ad.contactInfo.location.lng,
+    	    markers :[ {
+	        lat :@ad.contactInfo.location.lat,
+	        lng :@ad.contactInfo.location.lng
+	        }]
+    	});
+    	myGmap.addMarker({
+		  lat :@ad.contactInfo.location.lat,
+	      lng :@ad.contactInfo.location.lng,
+		  title: "@utils._adName(ad).toString.trim",
+		  click: function(e) {
+		    
+		  }
+		});
+    	
     }
 </script>
