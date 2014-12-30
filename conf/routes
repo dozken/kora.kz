@@ -69,6 +69,7 @@ POST        /ad/replay_message/                    controllers.Ads.replayPrivate
 GET         /ad/:id/moderate                       controllers.Administer.moderate(id: Long)
 
 
+GET         /image_test                           controllers.Ads.testImage()
 GET         /profile/ads                           controllers.Manage.myAds()
 GET         /profile/messages                      controllers.Manage.myMessages()
 GET         /profile/message/:id                   controllers.Manage.read(id: Long)

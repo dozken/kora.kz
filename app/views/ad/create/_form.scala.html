@@ -12,10 +12,10 @@
 <legend class="PFBSPRB-17">Подать объявление</legend>
 
 <!-- Select Basic -->
-<div id="error_fields" class="alert alert-danger" style="display: none;" role="alert"></div>
-<div class="form-group" >
+    <div id="error_fields" class="alert alert-danger" style="visibility: hidden;" role="alert"></div>
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите раздел которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="selectbasic">Раздел</label>
- 	<div id="ad-razdel" class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите раздел наиболее подходящий вашему объявлению">
+  <div class="col-xs-3" id="ad-razdel">
     <select id="section" name="section" class="form-control next selectdesign " validation="not_null" >
         <option selected disabled hidden> Выберите раздел</option>
       @for(section <- Section.find.all()) {
@@ -23,15 +23,15 @@
       }
     </select>
   </div>
-    <div id="category_list" class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите категорию наиболее подходящий вашему объявлению">
+    <div id="category_list" class="col-xs-3">
 
   </div>
 </div>
 
 <div id="genderHide" >
-    <div class="form-group " >
+    <div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Пол которая наиболее подходят вашему объявлению">
         <label class="col-xs-2 textalign" for="radios">Пол</label>
-        <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите пол наиболее подходящий вашему объявлению">
+        <div class="col-xs-4">
             <label class="radio-inline" for="radios-0">
                 <input type="radio" name="section_gender" id="radios-0" value="male" checked="checked">
                 Самец
@@ -48,9 +48,9 @@
     </div>
 </div>
 <div id="quanHide">
-<div class="form-group" >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Количество которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="radios">Количество</label>
-  <div class="col-xs-2 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите количество наиболее подходящий вашему объявлению">
+  <div class="col-xs-4">
     <label class="radio-inline" for="radios-012">
       <input type="radio" name="quantity" id="radios-012" value="single" checked="checked">
       Один
@@ -65,9 +65,9 @@
 
 <!-- Select Basic -->
 <div id="ageHide">
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Возраст которая наиболее подходят вашему объявлению">
   <label class="col-xs-2 textalign" for="selectbasic1">Возраст</label>
-  <div class="col-xs-2 custom-tooltip" data-toggle="tooltip" data-placement="top"  title="Выберите возраст наиболее подходящий вашему объявлению">
+  <div class="col-xs-2">
     <select id="selectbasic1" name="age" class="form-control selectdesign">
     @for(i<-java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)-15 to java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
         <option value="@i">@i</option>
@@ -78,16 +78,19 @@
 </div>
 
 <!-- Multiple Radios -->
-<div class="form-group" >
-<label class="col-xs-2 textalign" for="radios1">Цена</label>
-<div class="col-xs-4 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите цену наиболее подходящий вашему объявлению">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите Цену которая наиболее подходят вашему объявлению">
+  <label class="col-xs-2 textalign" for="radios1">Цена</label>
+  <div class="col-xs-4">
 
-<div class="radio">
-	<label for="radios1-0">
-	<input type="radio" name="payment_type" id="payment_type" value="normal" checked="checked">
-	<div class="input-group below24 bias-input-group inpgr">
+  <div class="radio">
+    <label for="radios1-0">
+      <input type="radio" name="payment_type" id="payment_type" value="normal" checked="checked">
 
-	<input type="text" id="money_input" value="" class="form-control next ssss" name="money" validation="double" style="height: 26px;">
+
+
+            <div class="input-group below24 bias-input-group inpgr">
+
+              <input type="text" id="money_input" value="" class="form-control next ssss" name="money" validation="double" style="height: 26px;">
 
               <div class="input-group-btn bs-dropdown-to-select-group">
              
@@ -121,9 +124,9 @@
 
 <!-- Text input-->
 <div id="titleHide">
-<div class="form-group" >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Заголовок должен отражать суть объявления и быть уникален.">
   <label class="col-xs-2 textalign" for="textinput">Заголовок</label>
-  <div class="col-xs-6 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Заголовок должен отражать суть объявления и быть уникален.">
+  <div class="col-xs-6">
   <input id="textinput" name="title" type="text" placeholder="" maxlength="30" class="form-control input-md next ssss" validation="not_null">
   <span class="help-block">Максимальная длина 30 символов.</span>
   </div>
@@ -131,7 +134,7 @@
 </div>
 
 <!-- Textarea -->
-<div class="form-group custom-tooltip" data-toggle="tooltip" data-placement="top" title="В описании расскажите подробнее о своем товаре или услуге. Это увеличит количество просмотров!">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="В описании расскажите подробнее о своем товаре или услуге. Это увеличит количество просмотров!">
   <label class="col-xs-2 textalign" for="textarea">Описание</label>
   <div class="col-xs-6">
     <textarea class="form-control next" validation="not_null" rows="6" id="textarea" name="description"></textarea>
@@ -139,25 +142,16 @@
 </div>
 
 <!-- File Button -->
-<div class="form-group"  >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Можно добавить несколько фотографий сразу.
+Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px.
+Можно изменить порядок фото, перетаскивая их." >
   <label class="col-xs-2 textalign" for="filebutton">Фотографии</label>
-  <div class="col-xs-4">
-    <div class="fileUpload btn myb custom-tooltip" data-toggle="tooltip" data-placement="top" title="Можно добавить несколько фотографий сразу. Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px. Можно изменить порядок фото, перетаскивая их.">
-    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
-    <input type="file" id="choose" name="image_file" class="upload btn" multiple/>
+  <div  id="uploader" class="col-xs-8">
+    <div class="fileUpload btn myb">
+    <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
+    <input type="file" id="pickfiles" name="image_file" class="upload btn" multiple/>
     <input type="hidden" id="image_order" name="image_order">
 </div>
-  </div>
-
-</div>
-
-<div class="form-group">
-  <label class="col-xs-2 textalign"></label>
-  <div class="col-xs-10">
-    <ul id="images" class="connectedList ui-sortable"></ul>
-    
-    <div class="clear"></div>
-      <!--<button id="imageUploadBtn" class="btn btn-default">Сохранить</button>-->
   </div>
 
 </div>
@@ -180,19 +174,19 @@
 <legend class="PFBSPRB-17">Контактная информация</legend>
 
 <!-- Select Basic -->
-<div class="form-group">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Выберите свой регион и город из списка.">
   <label class="col-xs-2 textalign" for="selectbasic2">Регион</label>
-  <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите свой регион из списка.">
-    <select id="region" name="region" class="form-control selectdesign reg2" validation="not_null">
+  <div class="col-xs-3">
+    <select id="region" name="region" class="form-control selectdesign" validation="not_null">
         <option selected disabled hidden> Выберите регион</option>
         @for(region <- Region.find.all()) {
         <option value="@region.id" @if(user!=null&&region.equals(user.profile.region)){selected}>@region.name</option>
         }
     </select>
   </div>
-  <div id="city_list" class="col-xs-3 custom-tooltip"  data-toggle="tooltip" data-placement="top" title="Выберите свой город из списка.">
+  <div id="city_list" class="col-xs-3">
       @if(user!=null && user.profile.city!=null && user.profile.region!=null) {
-          <select id="city"  name="city" class="form-control selectdesign reg2" validation="not_null">
+          <select id="city"  name="city" class="form-control selectdesign" validation="not_null">
 		    <option selected disabled hidden> Выберите город</option>
 		    @for(city<-user.profile.region.cities if(city.parentCity==null)){
 		    	@if(city.isParent){
@@ -215,25 +209,25 @@
 
 
 <!-- Text input-->
-<div class="form-group" >
-  <label class="col-xs-2 textalign" for="textinput1">Продавец</label>
-  <div class="col-xs-6 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Название компаний или ваше имя.">
-  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Наименование продaвца" class="form-control input-md ssss reg2" validation="not_null">
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Название компаний или Ваше имя.">
+  <label class="col-xs-2 textalign" for="textinput1">Компания</label>
+  <div class="col-xs-6">
+  <input id="textinput1" @if(user!=null){ value="@user.userName"} name="company_name" type="text" placeholder="Название компании (ТОО, ИП, АО)" class="form-control input-md ssss" validation="not_null">
 
   </div>
 </div>
 
 <!-- Text input-->
-    <div class="form-group" >
+    <div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
         <label class="col-xs-2 textalign" for="ema">Email</label>
-        <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящую электронную почту, она позволит вам управлять вашим объявлением и не будет опубликована на сайте.">
-            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md ssss reg2" @if(user!=null){value="@user.email"} validation="mail">
+        <div class="col-xs-3">
+            <input id="ema"  name="email" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null){value="@user.email"} validation="mail">
         </div>
     </div>
-<div class="form-group" >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Следует указать вашу настоящий номер телефона.">
   <label class="col-xs-2 textalign" for="textinput2">Телефон</label>
-  <div class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Следует указать вашу настоящий номер телефона.">
-  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss reg2" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
+  <div class="col-xs-3">
+  <input id="tel1" name="phone" type="text" placeholder="" class="form-control input-md ssss" @if(user!=null && user.profile.phone!=null){value="@user.profile.phone"} validation="not_null">
 <div id="additional_phones" style="margin-top:5px;margin-bottom:5px;">
 
 </div>
@@ -244,9 +238,9 @@
 
 
 <!-- Select Basic -->
-<div class="form-group" >
+<div class="form-group" data-toggle="tooltip" data-placement="right" title="Разрешить комментарий или нет.">
   <label class="col-xs-2 textalign" for="selectbasic4">Комментарии</label>
-  <div class="col-xs-5 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Разрешить комментарий или нет.">
+  <div class="col-xs-5">
     <select id="selectbasic4" name="coment_display" class="form-control selectdesign">
       <option value="registred">Только зарегистрированным пользователям</option>
       <option value="all">Всем</option>
