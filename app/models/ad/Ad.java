@@ -129,9 +129,8 @@ public class Ad extends Model {
 				.findList();
 
 	}
-	
-	
-	public static void sessionRegion(Long id){
-		Controller.session("region",id.toString());
+
+	public static void sessionRegion(Long id) {
+		Controller.session("region", id.toString());
 	}
 }

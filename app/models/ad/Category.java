@@ -39,8 +39,7 @@ public class Category extends Model {
 	public List<Ad> ads;
 
 	public List<Category> findSubCategories() {
-		return find.where().eq("parentCategory", this).orderBy("id")
-				.findList();
+		return find.where().eq("parentCategory", this).orderBy("id").findList();
 	}
 
 	public boolean isParent() {
