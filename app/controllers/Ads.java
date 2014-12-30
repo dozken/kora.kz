@@ -2,8 +2,7 @@ package controllers;
 
 import static play.data.Form.form;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,12 +26,16 @@ import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Payment;
 import models.user.SecurityRole;
+import org.apache.commons.io.FileUtils;
+import org.apache.xerces.impl.dv.util.Base64;
 import play.data.DynamicForm;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import views.html.ad.create._category;
 import views.html.ad.create._city;
 import views.html.ad.create.createAd;
+import views.html.ad.create.testImage;
 import views.html.ad.edit.editAd;
 import views.html.ad.search._ad_list;
 import views.html.ad.search.adSearch;
@@ -1123,11 +1126,29 @@ public class Ads extends Controller {
 
 	public static Result imageUpload() {
 
-		long startTime = System.currentTimeMillis();
-		DynamicForm requestData = form().bindFromRequest();
 
-		System.out.println(request().getHeader(""));
+		Http.MultipartFormData body = request().body().asMultipartFormData();
+		Http.MultipartFormData.FilePart picture = body.getFiles().get(0);
+			if (picture != null) {
 
+			String fileName = picture.getFilename();
+			File file = picture.getFile();
+			try {
+				//FileUtils.moveFile(file, new File("public/images/products", fileName));
+				String content =  Base64.encode(FileUtils.readFileToByteArray(file));
+				AdImage adImage = new AdImage();
+				adImage.content = content;
+				adImage.name = fileName;
+				adImage.save();
+			} catch (IOException ioe) {
+				System.out.println("Problem operating on filesystem");
+			}
+			return ok("File uploaded");
+		} else {
+			System.out.println("kadal");
+		//	flash("error", "Missing file");
+			return ok("sdf");
+		}
 		//System.out.println("request as multy part - " + request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
 
 
@@ -1155,6 +1176,8 @@ public class Ads extends Controller {
 //		session(request().remoteAddress(), fl);
 //		long estimatedTime = System.currentTimeMillis() - startTime;
 //		System.out.println("estimatedTime image load: " + estimatedTime);
-		return ok();
+
 	}
+
+	public  static Result testImage(){return ok(testImage.render());}
 }

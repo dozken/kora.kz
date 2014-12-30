@@ -25,6 +25,14 @@ clear: both;
 <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))' type="text/javascript"></script>
 <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
+<link rel="stylesheet" href='@routes.Assets.at("javascripts/jquery.ui.plupload/css/jquery.ui.plupload.css")' type="text/css" media="screen" />
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" type="text/css" />
+<script src='@routes.Assets.at("javascripts/plupload.full.min.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/jquery.ui.plupload/jquery.ui.plupload.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/jquery.ui.plupload/ru.js")' type="text/javascript"></script>
+
+
+
 <script>
     $("#next").click(function() {
         if (validation("next")) {
@@ -50,7 +58,6 @@ var quan = $("#quanHide").html();
 var gender = $("#genderHide").html();
 var age = $("#ageHide").html();		
 var title = $("#titleHide").html();
-$("#imageUploadBtn").hide();
 	$(document).ready(function(){
 		
         $("#titleHide").empty();
@@ -63,71 +70,6 @@ $("#imageUploadBtn").hide();
         }
     });
 
-    var imageMap = {};
-    // add a item
-    //map[key1] = value1;
-    // or remove it
-    //delete map[key1];
-    // or determine whether a key exists
-    //key1 in map;
-    $("#images").sortable({
-        placeholder: 'ui-state-highlight'
-    });
-var files;
-    var choose = document.getElementById('choose');
-    FileAPI.event.on(choose, 'change', function(evt) {
-          files = FileAPI.getFiles(evt);
-          // Retrieve file list
-        alert(files.length)
-        FileAPI.filterFiles(files, function(file, info /**Object*/ ) {
-            if (/^image/.test(file.type)) {
-                if (info.width >= 320 && info.height >= 240) return true;
-                else alert("Размер фото слишком маленький");
-            } else {
-                alert("Можно загрузить только фото");
-                return false;
-            }
-        }, function(files /**Array*/ , rejected /**Array*/ ) {
-
-            if (files.length + $("#images li").length <= 5) {
-                FileAPI.each(files, function(file) {
-
-                    FileAPI.Image(file).preview(100).get(function(err, img) {
-                        var name = file.name.replace(/\./g, '');
-                        name = name.replace(/ /g, '');
-
-                        if ($('[id=item-' + name + ']').length == 0) {
-                            $("#images").append("<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>");
-                            $("#item-" + name).html(img);
-                            $("#item-" + name).append('<a class="delete" style="position: absolute;top: 4px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;position: absolute;top: -3px;right: -1px;"></i></a>');
-                            
-                        } else {
-                            alert(name + " уже есть");
-                        }
-                    });
-
-                    FileAPI.Image(file).overlay([
-                        { x: 20, y: 20, w:100,h:50, src: '@routes.Assets.at("images/home/watermark.png")', opacity:10, rel: FileAPI.Image.RIGHT_BOTTOM }
-                    ]).preview(400).get(function(err, img) {
-
-                        var name = file.name.replace(/\./g, '');
-                        name = name.replace(/ /g, '');
-                        var imgName = file.name.replace(/ /g, '');
-                        imageMap[imgName] = img.toDataURL("image/jpeg");
-                        $("#imageUploadBtn").show();
-
-
-                    });
-                });
-            } else {
-                alert("Максимальное количество фото 5");
-            }
-        });
-    });
-
-    $(document).on("click", ".delete", function() {
-        $(this).parent().remove();
-    });
 
     $(document).on("click", "#add_phone_additional", function() {
         $("#additional_phones").append('<div class="input-group"><input type="text" placeholder="" class="form-control input-md ssss mmm"><span class="input-group-btn"><a class="del_phone" style="padding-left: 5px;"><i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;"></i></a></span></div>');
@@ -172,30 +114,6 @@ var files;
         });
     });
 
-$(document).on("click", "#imageUploadBtn", function(e) {
-    var start =  +new Date();
-    $("#imageUploadBtn").prop("disabled", true);
-    $("#imageUploadBtn").text('Загружается...');
-    e.preventDefault();
-            var formData = new FormData();
-            var image_names = "";
-    if($("#images li canvas").length>0) {
-        $("#images li canvas").each(function () {
-            var a = imageMap[$(this).parent().attr("fileName")];
-            if (a != null) {
-                formData.append($(this).parent().attr("fileName"), a);
-                image_names += $(this).parent().attr("fileName") + "&";
-            }
-        });
-        formData.append("image_names", image_names);
-    }
-        FileAPI.upload({
-            url: '@controllers.routes.Ads.imageUpload',
-            files: { images: files },
-            progress: function (evt){ /* ... */ },
-            complete: function (err, xhr){ /* ... */ }
-        });
-});
 
     $(document).on("click", "#ad_form_submit", function(e) {
         var start =  +new Date();
@@ -210,21 +128,21 @@ $(document).on("click", "#imageUploadBtn", function(e) {
             $("#ad_form_submit").attr('disabled', 'disabled');
             $("#ad_form_submit").text('Загружается...');
 
-//            jsRoutes.controllers.Ads.create().ajax({
-//                data: $("#ad_form").serialize(),
-//                success: function (data) {
-//                    $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
-//                    $("#success_message").fadeIn(200);
-//                    var end =  +new Date();  // log end timestamp
-//                    var diff = end - start;
-//                    console.log(diff);
-//                    @if(session.get("connected") != null) {
-//                        window.location.href = "@routes.Manage.myAds()";
-//                    }else{
-//                        window.location.href = "@routes.Application.index()";
-//                    }
-//                }
-//            });
+            jsRoutes.controllers.Ads.create().ajax({
+                data: $("#ad_form").serialize(),
+                success: function (data) {
+                    $("#success_message").html("Вы успешно подали объявление. Дополнительная информация выслана на ваш email!!!");
+                    $("#success_message").fadeIn(200);
+                    var end =  +new Date();  // log end timestamp
+                    var diff = end - start;
+                    console.log(diff);
+                    @if(session.get("connected") != null) {
+                        window.location.href = "@routes.Manage.myAds()";
+                    }else{
+                        window.location.href = "@routes.Application.index()";
+                    }
+                }
+            });
             e.preventDefault();
         }else{
             e.preventDefault();
@@ -400,4 +318,54 @@ $(document).on("click", "#imageUploadBtn", function(e) {
             isMarker = true;
         }
     });
+
+
+    $(function() {
+        $("#uploader").plupload({
+            // General settings
+            runtimes : 'html5,flash,silverlight,html4',
+            url : '@controllers.routes.Ads.imageUpload',
+
+            // User can upload no more then 5 files in one go (sets multiple_queues to false)
+            max_file_count: 5,
+
+            chunk_size: '1mb',
+
+            // Resize images on clientside if we can
+
+            filters : {
+                // Maximum file size
+                max_file_size : '5mb',
+                // Specify what files to browse for
+                mime_types: [
+                    {title : "Image files", extensions : "jpg,gif,png"}
+                ]
+            },
+
+            // Rename files by clicking on their titles
+            rename: true,
+
+            // Sort files
+            sortable: true,
+
+            // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+            dragdrop: false,
+
+            // Views to activate
+            views: {
+                list: true,
+                thumbs: true, // Show thumbs
+                active: 'thumbs'
+            },
+
+            // Flash settings
+            flash_swf_url : '../../js/Moxie.swf',
+
+            // Silverlight settings
+            silverlight_xap_url : '../../js/Moxie.xap'
+        });
+
+        // Handle the case when form was submitted before uploading has finished
+    });
+
 </script>
