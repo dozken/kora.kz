@@ -9,7 +9,7 @@
 		@if(ad.status.equals("active")){
 			Ваше объявление <a style="text-decoration: none;" href="@routes.Ads.get(ad.id).absoluteURL(request())">"@utils._adName(ad).toString.trim"</a> прошло проверку и размещено на сайте @ad.updatedDate.format("dd/MM/YYYY HH:mm ").
 			<br><br>
-			Объявление будет автомотически удалено через две недели, если Вы его не продлите.
+			Объявление будет автоматически удалено через две недели, если Вы его не продлите.
 		}
 		@if(ad.status.equals("rejected")){
 			<p>Ваше объявление <a style="text-decoration: none;" href="@routes.Ads.edit(ad.id).absoluteURL(request())">"@utils._adName(ad).toString.trim"</a> не соотвествует правилам сайта и не прошло проверку, пожалуйста убедитесь правильности вашего объявления.</p>			
