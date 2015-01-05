@@ -78,4 +78,14 @@ public class Advertisement extends Model {
 		}
 	}
 
+	
+	public static List<Advertisement> findAdvetisements(String position){
+		Date today =  new Date();
+		return find.where().eq("placeOnPage",position).le("updateDate", today).ge("tillToDate", today).orderBy("position").findList();
+	}
+	
+	public static int findAdvetisementsCount(String position){
+		Date today =  new Date();
+		return find.where().eq("placeOnPage",position).le("updateDate", today).ge("tillToDate", today).orderBy("position").findRowCount();
+	}
 }
