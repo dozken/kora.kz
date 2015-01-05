@@ -1,0 +1,39 @@
+@(username : String)(content : Html)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Kora.kz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>	  
+<body style="font-family: Helvetica,san serif;">
+<table border="0" style="width:700px">
+	<thead>
+		<tr>
+			<td style=" padding-bottom: 20px;font-size: 15px; "><img src="@routes.Assets.at("images/home/email_header.png").absoluteURL(request())"/></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			
+			<td style=" padding-left: 30px;font-size: 15px; "><b>Здравствуйте, @username!</b></td>
+		</tr>
+		<tr>
+			<td style=" padding-left: 27px;font-size: 15px; ">@content</td>
+		
+		</tr>	
+		<tr>
+			<td style=" padding-left: 30px; font-size: 15px;">
+				<p>Возникли вопросы,<br>
+				<a style="text-decoration: none;" href="@routes.Application.feedback.absoluteURL(request())">Напишите</a> в службу поддержки</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="color: gray;padding-left: 30px;font-size: 15px;">Это письмо было отправлено автоматический. Пожалуйста, не отвечайте на него.</td>
+		</tr>
+	</tbody>
+	
+
+</table>
+</body>
+</head>
+</html>

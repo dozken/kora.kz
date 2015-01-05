@@ -672,14 +672,18 @@ public class Ads extends Controller {
 			}
 		} else {
 
+			String username = user.userName;
+			String author = AuthorisedUser.find.byId(author_id).userName;
+			
 			String message = "Заголовок: " + Ad.find.byId(ad_id).title + "::";
 			message += requestData.get("message") + "::";
-
+			
 			message += "от " + AuthorisedUser.find.byId(author_id).userName
 					+ " <" + AuthorisedUser.find.byId(author_id).email + ">";
+			message = requestData.get("message");
 			Emailing.send("Қора.kz", new String[] { " <"
 					+ Ad.find.byId(ad_id).contactInfo.email + ">" },
-					private_message.render(message, "not_registred").body());
+					private_message.render(username,author,message, "not_registred").body());
 			return ok("not_registred");
 		}
 		return ok();
