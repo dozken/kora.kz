@@ -1,11 +1,11 @@
 <ul class="pro4">
-  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").findRowCount>0){
+  @if(models.admin.Advertisement.findAdvetisementsCount("Правый верхний блок")>0){
   <li>
     <div id="carousel-top" class="carousel slide adslide" data-ride="carousel">
       <!-- Indicators -->
       <!-- Wrapper for slides -->
       <div class="carousel-inner" style="width:240px;height:400px">        
-  	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый верхний блок").orderBy("position").findList.zipWithIndex){
+  	    @for((advert,index)<-models.admin.Advertisement.findAdvetisements("Правый верхний блок").zipWithIndex){
         <div class='item @if(index.toString==session.get("carousel-top")||(session.get("carousel-top")==null&&index==0)){active}' style="width:240px;height:400px">          
           @advert.fileType match {
 				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
@@ -33,13 +33,13 @@
     </div>
   </li>
   }
-  @if(models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").findRowCount>0){
+  @if(models.admin.Advertisement.findAdvetisementsCount("Правый нижний блок")>0){
   <li>
     <div id="carousel-bottom" class="carousel slide adslide" data-ride="carousel">
     <!-- Indicators -->
     <!-- Wrapper for slides -->
       <div class="carousel-inner" style="width:240px;height:400px">
-  	    @for((advert,index)<-models.admin.Advertisement.find.where.eq("placeOnPage","Правый нижний блок").orderBy("position").findList.zipWithIndex){	
+  	    @for((advert,index)<-models.admin.Advertisement.findAdvetisements("Правый нижний блок").zipWithIndex){	
         <div class='item @if(index.toString==session.get("carousel-bottom")||(session.get("carousel-bottom")==null&&index==0)){active}' style="width:240px;height:400px">
           @advert.fileType match {
 				case "video/mp4" => { <video><source src="@routes.Advertisements.renderAdvetisement(advert.id)" type=video/mp4></video> }			    
