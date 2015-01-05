@@ -1,70 +1,37 @@
-@(message_text:String, messge_type:String)
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Kora.kz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>	  
-<body style="font-family: Helvetica,san serif;">
-<table border="0" style="width:700px">
-	<tr>
-		<td><b>Здравствуйте!</b></td>
-	</tr>
-	<tr>
-		<td><p>
-@if(messge_type=="replay") {
-                          <p>На ваше сообщение ответили</p>
-                          <p>Вы можете увидеть сообщение в личном кабинете в kora.kz!!!</p>
-                          <p></p>
-                      }
-                      @if(messge_type=="registred"){
-                          <p>Вам отправили личное сообщение</p>
-                          <p>Вы можете увидеть сообщение в личном кабинете в <a href="http://95.57.119.96:9000/profile/messages">kora.kz/profile/messages</a></p>
-                          <p></p>
-                      }
-                      @if(messge_type=="not_registred"){
-                          <p>Вам отправили личное сообщение</p>
-                          <p> @message_text.split("::")(0);</p>
-                          <p> @message_text.split("::")(1);</p>
-                          <p> @message_text.split("::")(2);</p>
-                      }
-		</p></td>
-	</tr>
-	<tr>
-		<td>
+@(username:String,author:String,message_text:String, messge_type:String)
+@_main(username:String){
+<table>
+	@if(messge_type=="replay") {
+		<tr>
+			<td>
+				На ваше сообщение ответили, Вы можете увидеть сообщение в личном кабинете в <a style="text-decoration: none;" href="kora.kz">«Kora.kz»</a>.
+			</td>
+		</tr>
+	}
+	@if(messge_type=="registred"){
+		<tr>
+			<td>
+				Вам отправили личное сообщение, Вы можете увидеть сообщение в личном кабинете по <a href="@routes.Manage.myMessages().absoluteURL(request())">ссылке</a>
+			</td>
+		</tr>
+	}
+	@if(messge_type=="not_registred"){
+		<tr>
+			<td style="padding-bottom:20px;">Вам отправили личное сообщение:</td>
+		</tr>
+		<tr>
+		<td style=" border-top-style: dashed; border-bottom-style: dashed; border-width: 1px; padding: 5px 0 5px 0;">
+			<b>@author</b>
 			<br>
+				<span style="padding-left:40px;">@message_text</span>
 		</td>
-	</tr>
+		</tr>
+	}
 	<tr>
-		<td>
-			<table border="0" style="width:100%">
-			<tr>				
-			</tr>
-			</table>	
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br><br>
-		</td>
-	</tr>
-	<tr style="background-color: #ecfee2;">
-		<td>
-			<i>Если вы не зарегистрированы на сайте <a href="kora.kz">"Kora.kz"</a> можете создать свой <a href="kora.kz">личный кабинет.</a>
-			Это займет немного времени. Преимущество личного кабинетав том,что вы сможете управлять вашими объявлениями (добавит фото, изменит текст, продлит срок объявленияи и т.п.п)</i>
-		</td>
-	</tr>
-	<tr style="background-color: #f7f7f7;">
-		<td>
-			<table border="0" style="width:100%">
-				<tr>
-					<td>Возникли вопросы?<br><br><a href="@routes.Application.feedback">Напишите</a> в службу поддержки</td>
-					<td style="width: 120px;"><img src="@routes.Assets.at("images/home/black_small_logo.png").absoluteURL(request())"/></td>
-				</tr>
-			</table>
-		</td>
+		<td style="padding-top:20px">Если вы еще не зарегистрированы на нашем сайте, можете создать свой <a href="kora.kz" style="text-decoration: none;">личный кабинет</a>. Преимущество личного кабинета в том, что вы сможете управлять вашими объявлениями (добавить фото, изменить текст, продлит срок объявление и т.п.).</td>
 	</tr>
 </table>
-</body>
-</head>
-</html>
+}
+
+
+

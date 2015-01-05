@@ -37,6 +37,9 @@ import com.google.code.kaptcha.util.Config;
 
 public class Application extends Controller {
 
+	public static Result haha(){
+		return ok(views.html.mailBody.private_message.render("user","author","text","not_registred"));
+	}
 	public static Result captcha() {
 		DefaultKaptcha captchaPro = new DefaultKaptcha();
 		captchaPro.setConfig(new Config(new Properties()));
@@ -228,7 +231,7 @@ public class Application extends Controller {
 			AuthorisedUser user = AuthorisedUser.find.byId(Long
 					.parseLong(email));
 			Emailing.send("Қора.kz", new String[] { user.userName + " <"
-					+ user.email + ">" }, private_message.render("", "replay")
+					+ user.email + ">" }, private_message.render(user.userName,"","", "replay")
 					.body());
 		} else if (type.equals("private")) {
 			Ad ad = Ad.find.byId(Long.parseLong(email));
@@ -237,21 +240,21 @@ public class Application extends Controller {
 					.findByEmail(ad.contactInfo.email);
 			Emailing.send("Қора.kz", new String[] { user.userName + " <"
 					+ user.email + ">" },
-					private_message.render("", "registred").body());
+					private_message.render(user.userName,"","", "registred").body());
 		} else if (type.equals("comment")) {
 			Ad ad = Ad.find.byId(Long.parseLong(email));
-
+			Comment comment = ad.comments.get(ad.comments.size()-1);
+			
 			Emailing.send("Қора.kz", new String[] { ad.contactInfo.company
 					+ " <" + ad.contactInfo.email + ">" }, comment_users_ad
-					.render(ad.contactInfo.company, ad, "comment").body());
+					.render(comment, "comment").body());
 		} else if (type.equals("replayComment")) {
 			Comment comment = Comment.find.byId(Long.parseLong(email));
 
 			Emailing.send(
 					"Қора.kz",
 					new String[] { comment.name + " <" + comment.email + ">" },
-					comment_users_ad.render(comment.name, comment.ad,
-							"replayComment").body());
+					comment_users_ad.render(comment,"replayComment").body());
 		}
 
 		return ok();
