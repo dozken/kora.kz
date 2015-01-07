@@ -266,6 +266,7 @@ public class Ads extends Controller {
 
 	public static boolean checkUserAndAd(Long id) {
 
+		if(session("connected")==null) return false;
 		if (Ad.find.byId(id).contactInfo.email.equals(session("connected"))
 				|| AuthorisedUser.findByEmail(session("connected")).getRoles()
 						.contains(SecurityRole.findByName("admin"))) {
