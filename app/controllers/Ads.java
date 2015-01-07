@@ -2,6 +2,10 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +28,11 @@ import models.contact.Region;
 import models.user.AuthorisedUser;
 import models.user.Payment;
 import models.user.SecurityRole;
+
+import org.apache.commons.io.FileUtils;
+
+import org.apache.xerces.impl.dv.util.Base64;
+import play.Play;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -167,26 +176,30 @@ public class Ads extends Controller {
 		String[] order = requestData.get("image_names").split("&");
 		long image = System.currentTimeMillis() - startTime;
 		System.out.println("image:" + image);
+		String[] order = requestData.get("image_names").split(",");
 		for (int i = 0; i < order.length; i++) {
 
 			if (!order[i].equals("") && order[i] != null) {
 
-				AdImage img = new AdImage();
-				img.ad = ad;
-				img.name = order[i];
-				img.position = i + 1;
-				img.content = requestData.get(order[i]);
-				new Thread() {
-					@Override
-					public void run() {
-						img.save();
-					}
-				}.start();
+				AdImage adImage = AdImage.find.byId(Long.parseLong(order[i]));
+				adImage.ad = ad;
+				adImage.position=i+1;
+				adImage.update();
+
 			}
 		}
 		// ... do something ...
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println("estimatedTime:create ad  " + estimatedTime);
+		return ok(_success.render());
+		String ses = session(request().remoteAddress());
+		session().remove(request().remoteAddress());
+
+		try {
+			cleanImages(ses);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return ok(_success.render());
 	}
 
@@ -307,6 +320,7 @@ public class Ads extends Controller {
 
 	public static Result update(Long id) {
 
+
 		DynamicForm requestData = form().bindFromRequest();
 
 		Ad ad = Ad.find.byId(id);
@@ -385,27 +399,38 @@ public class Ads extends Controller {
 		ad.status = "pending";
 
 		ad.update();
-		String[] order = requestData.get("image_names").split("&");
 
-		for (int i = 0; i < ad.images.size(); i++) {
+		for(int i=0;i<ad.images.size();i++){
 
-			ad.images.get(i).delete();
+			AdImage adImage = ad.images.get(i);
+			adImage.ad=null;
+			adImage.position=-1;
+			adImage.update();
 		}
+		String[] order = requestData.get("image_names").split(",");
+
 
 		for (int i = 0; i < order.length; i++) {
 
 			if (!order[i].equals("") && order[i] != null) {
 
-				AdImage img = new AdImage();
-				img.ad = ad;
-				img.name = order[i];
-				img.position = i + 1;
-				img.content = requestData.get(order[i]);
-				img.save();
+				AdImage adImage = AdImage.find.byId(Long.parseLong(order[i]));
+				adImage.ad = ad;
+				adImage.position=i+1;
+				adImage.update();
+
 			}
 		}
 
-		// saveImages(ad,body.getFiles(),requestData.get("image_order"));
+
+		String ses = session(request().remoteAddress());
+		session().remove(request().remoteAddress());
+
+		try {
+			if(ses!=null) cleanImages(ses);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return ok();
 	}
@@ -1174,12 +1199,63 @@ public class Ads extends Controller {
 
 //		long startTime = System.currentTimeMillis();
 //		DynamicForm requestData = form().bindFromRequest();
-
 //		System.out.println(request().getHeader(""));
+		Http.MultipartFormData body = request().body().asMultipartFormData();
+		Http.MultipartFormData.FilePart picture = body.getFiles().get(0);
 
 		// System.out.println("request as multy part - " +
 		// request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
+		System.out.println(body.getFiles().size());
+		String path = Play.application().path().getPath();
+		if (picture != null) {
 
+			AdImage adImage = new AdImage();
+			adImage.content = picture.getContentType();
+			adImage.name = picture.getFilename();
+			String types[] = picture.getFilename().split("\\.");
+			int last = types.length-1;
+			adImage.save();
+
+
+			if(session(request().remoteAddress())==null){
+				session(request().remoteAddress(),adImage.id.toString());
+			}else{
+				String tmp = session(request().remoteAddress()) + "_" + adImage.id.toString();
+				session(request().remoteAddress(),tmp);
+			}
+			File file = picture.getFile();
+			try {
+
+				//FileUtils.moveFile(file, new File(path + "/public/images/ad_images", adImage.id.toString() + "." + types[last]));
+				String content =  Base64.encode(FileUtils.readFileToByteArray(file));
+
+				adImage.content = "data:"+picture.getContentType()+";base64," +content;
+				adImage.update();
+
+			} catch (IOException ioe) {
+				System.out.println("Problem operating on filesystem");
+			}
+
+			return ok(picture.getFilename()+"#"+adImage.id);
+		}
+			return ok("sdf");
+	}
+	public static void cleanImages(String str) throws IOException {
+
+		String path = Play.application().path().getPath();
+		for( String s : str.split("_")) {
+			AdImage t = AdImage.find.byId(Long.parseLong(s));
+			if (t != null && t.ad == null) {
+				File f = new File(path + "/public/images/ad_images/" + t.name);
+				if (f.exists()) {
+					f.delete();
+					t.delete();
+				}
+			}
+		}
+			List<AdImage> list = AdImage.find.where().eq("position",-1).findList();
+
+			for(int i=0;i<list.size();i++){
 		// String[] order = requestData.get("image_names").split("&");
 		// System.out.println(request().remoteAddress());
 		// String fl = "";
@@ -1203,5 +1279,12 @@ public class Ads extends Controller {
 		// long estimatedTime = System.currentTimeMillis() - startTime;
 		// System.out.println("estimatedTime image load: " + estimatedTime);
 		return ok();
+
+				File f = new File(path + "/public/images/ad_images/"+list.get(i).name);
+				if(f.exists()) {
+					f.delete();
+					list.get(i).delete();
+				}
+			}
 	}
 }
