@@ -27,7 +27,7 @@ import models.user.AuthorisedUser;
 import models.user.Payment;
 import models.user.SecurityRole;
 import org.apache.commons.io.FileUtils;
-import org.apache.xerces.impl.dv.util.Base64;
+import play.Play;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -35,7 +35,6 @@ import play.mvc.Result;
 import views.html.ad.create._category;
 import views.html.ad.create._city;
 import views.html.ad.create.createAd;
-import views.html.ad.create.testImage;
 import views.html.ad.edit.editAd;
 import views.html.ad.search._ad_list;
 import views.html.ad.search.adSearch;
@@ -1129,24 +1128,29 @@ public class Ads extends Controller {
 
 		Http.MultipartFormData body = request().body().asMultipartFormData();
 		Http.MultipartFormData.FilePart picture = body.getFiles().get(0);
-			if (picture != null) {
+		String path =  Play.application().path().getPath();
+		if (picture != null) {
 
-			String fileName = picture.getFilename();
+			AdImage adImage = new AdImage();
+			adImage.content = picture.getContentType();
+			adImage.name = picture.getFilename();
+			String types[] = picture.getFilename().split("\\.");
+			System.out.println(picture.getFilename());
+			int last = types.length-1;
+			adImage.save();
+
 			File file = picture.getFile();
 			try {
-				//FileUtils.moveFile(file, new File("public/images/products", fileName));
-				String content =  Base64.encode(FileUtils.readFileToByteArray(file));
-				AdImage adImage = new AdImage();
-				adImage.content = content;
-				adImage.name = fileName;
-				adImage.save();
+
+				FileUtils.moveFile(file, new File(path + "/public/images/ad_images", adImage.id.toString()+"."+types[last]));
+
 			} catch (IOException ioe) {
 				System.out.println("Problem operating on filesystem");
 			}
 			return ok("File uploaded");
 		} else {
 			System.out.println("kadal");
-		//	flash("error", "Missing file");
+			//	flash("error", "Missing file");
 			return ok("sdf");
 		}
 		//System.out.println("request as multy part - " + request().body().asMultipartFormData().getFiles().get(0).getFile().getName());
@@ -1179,5 +1183,5 @@ public class Ads extends Controller {
 
 	}
 
-	public  static Result testImage(){return ok(testImage.render());}
+	//public  static Result testImage(){return ok(testImage.render());}
 }
