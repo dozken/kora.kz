@@ -6,7 +6,7 @@
 
 <form id="ad_form" class="form-horizontal">
 <fieldset class="PFBSPLI-13">
-
+    <input type="hidden" id="myHidden" name="image_names"/>
 <div id="ad_info" class="adinfos">
 <!-- Form Name -->
 <legend class="PFBSPRB-17">Подать объявление</legend>
@@ -145,8 +145,10 @@
     <div class="fileUpload btn myb custom-tooltip" data-toggle="tooltip" data-placement="top" title="Можно добавить несколько фотографий сразу. Формат — JPEG или PNG, вес — не более 5 Мб, минимальные размеры — 400x300 px. Можно изменить порядок фото, перетаскивая их.">
     <span class="icon-photo"> <span class="PFBSPLI-13" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">Добавить Фотографии</span></>
     <input type="file" id="choose" name="image_file" class="upload btn" multiple/>
+
     <input type="hidden" id="image_order" name="image_order">
 </div>
+      <button id="imageUploadBtn" class="btn btn-default">Сохранить</button>
   </div>
 
 </div>
@@ -157,7 +159,7 @@
     <ul id="images" class="connectedList ui-sortable"></ul>
     
     <div class="clear"></div>
-      <!--<button id="imageUploadBtn" class="btn btn-default">Сохранить</button>-->
+
   </div>
 
 </div>

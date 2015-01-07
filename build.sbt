@@ -22,6 +22,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "font-awesome" % "4.2.0",
   "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.1",
   //"com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.6-SNAPSHOT",
+  "commons-io" % "commons-io" % "2.3",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
 
