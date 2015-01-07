@@ -114,6 +114,42 @@ $("#images" ).sortable({
 placeholder: 'ui-state-highlight'
 });
 
+var toUpload= new Array();
+$("#imageUploadBtn").attr("disabled","disabled");
+$(document).on("click","#imageUploadBtn",function(){
+
+	FileAPI.upload({
+		url: '@controllers.routes.Ads.imageUpload',
+		files: toUpload,
+		imageTransform: {
+			maxWidth: 800,
+			maxHeight: 600,
+			// Add watermark
+			overlay: [{ x: 5, y: 5, src: '@routes.Assets.at("images/home/watermark.png")', rel: FileAPI.Image.RIGHT_BOTTOM }]
+		},
+
+		progress: function (evt){
+			$("#imageUploadBtn").attr("disabled","disabled");
+			$("#imageUploadBtn").text("Загружается...");
+		},
+		filecomplete: function (err/**String*/, xhr/**Object*/, file/**Object/, options/**Object*/) {
+			if (!err) {
+				// File successfully uploaded
+				var result = xhr.responseText.split("#")[0].replace(/\./g, '');
+				result = result.replace(/ /g, '');
+				$("#item-"+result).attr("imid",xhr.responseText.split("#")[1]);
+				$("#item-"+result).append('<a class="delete" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>');
+			}
+		},
+		complete: function (err, xhr){
+			$("#imageUploadBtn").text("Сохранить");
+
+			toUpload=[];
+		}
+	});
+	return false;
+})
+
 var choose = document.getElementById('choose');
 FileAPI.event.on(choose, 'change', function (evt){
 var files = FileAPI.getFiles(evt); // Retrieve file list
@@ -129,36 +165,26 @@ alert("Можно загрузить только фото");
 return  false;
 }
 }, function (files/**Array*/, rejected/**Array*/){
-if( files.length+$("#images li" ).length<=5 ){
+	if (files.length + $("#images li").length <= 5) {
+		FileAPI.each(files, function(file) {
+			FileAPI.Image(file).get(function(err, img) {
+				toUpload[toUpload.length] = file;
+				$("#imageUploadBtn").removeAttr('disabled');
+			});
+			FileAPI.Image(file).preview(100).get(function(err, img) {
+				var name = file.name.replace(/\./g, '');
+				name = name.replace(/ /g, '');
+				if ($('[id=item-' + name + ']').length == 0) {
+					$("#images").append("<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>");
+					$("#item-" + name).html(img);
+					$("#item-" + name).append('<a class="delete" style="position: absolute;top: 4px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;position: absolute;top: -3px;right: -1px;"></i></a>');
 
-    FileAPI.each ( files, function ( file ) {
-
-    FileAPI.Image ( file ).preview ( 400 ).get ( function ( err, img ) {
-
-    var imgName = file.name.replace(/ /g, '');
-    imageMap[imgName] = img.toDataURL("image/jpeg");
-
-
-
-    })
-
-    FileAPI.Image ( file ).preview ( 100 ).get ( function ( err, img ) {
-
-        var name = file.name.replace(/\./g, '');
-        name=name.replace(/ /g, '');
-    if($('[id=item-'+ name+']').length==0) {
-    $ ( "#images" ).append ( "<li id=item-" + name + " fileName='" + file.name.replace(/ /g, '') + "' style='position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'></li>" ) ;
-    $ ( "#item-" + name ).html ( img ) ;
-    $ ( "#item-" + name ).append ( '<input type="hidden" value="'+imageMap[file.name.replace(/ /g, '')]+'">' ) ;
-    $ ( "#item-" + name ).append ( '<a class="delete" style="position: absolute;top: 4px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;position: absolute;top: -3px;right: -1px;"></i></a>' ) ;
-	
-
-    }else{
-        alert(name + " уже есть");
-    }
-    } ) ;
-    } ) ;
-    }else{alert("Максимальное количество фото 5");}
+				} else {
+					alert(name + " уже есть");
+				}
+			});
+		});
+	} else { alert("Максимальное количество фото 5");}
 
 });
 });
@@ -232,46 +258,38 @@ $("#city_list" ).html(data);
 })
 
 $(document).on("click", "#ad_form_submit", function(e) {
+	if(validation("reg")) {
+		var tels = "";
+		$("#additional_phones input").each(function(){
 
-if(validation("reg")) {
-    var tels = "";
-    $("#additional_phones input").each(function(){
+			if($(this).val()!=null && $(this).val()!=""){
+				tels+="," + $(this).val();
+			}
+		})
+		$("#tels").val(tels);
+		$("#ad_form_submit").attr('disabled','disabled');
+		$("#ad_form_submit").text('Загружается...');
 
-        if($(this).val()!=null && $(this).val()!=""){
-            tels+="," + $(this).val();
-        }
-    })
+		var image_names = "" ;
+		$("#images li canvas").each(function() {
+			image_names += $(this).parent().attr("imid") + ",";
+		});
+		$("#myHidden").val(image_names);
+		jsRoutes.controllers.Ads.update(@ad.id).ajax({
+			data:$("#ad_form").serialize(),
+			success: function() {
+				window.location.href = " @routes.Manage.myAds() ";
+			}
+		});
+		e.preventDefault ( ) ;
+	}else {
+		e.preventDefault();
+		$("#error_fields").html("");
+		$("#error_fields").append("Некоторые поля заполнены неправильно");
 
-    $("#tels").val(tels);
-$ ( '#ad_form' ).submit ( function ( e ) {
-var formData = new FormData ( this ) ;
-var image_names = "" ;
-$ ( "#images li input[type=hidden]" ).each ( function ( ) {
-formData.append ( $ ( this ).parent ( ).attr ( "fileName" ), $(this).val() ) ;
-image_names += $ ( this ).parent ( ).attr ( "fileName" ) + "&" ;
-} )
-formData.append ( "image_names", image_names ) ;
-$.ajax ( {
-url : ' @controllers.routes.Ads.update(ad.id) ',
-type : 'POST',
-data : formData,
-processData : false,
-contentType : false,
-success : function ( data ) {
-window.location.href = " @routes.Manage.myAds() ";
-}
-} ) ;
-e.preventDefault ( ) ;
-} ) ;
-}else{
-e.preventDefault();
-$("#error_fields" ).html("");
-$("#error_fields" ).append("Некоторые поля заполнены неправильно");
-
-$("#error_fields" ).show();
-window.scrollTo(0, 0);
-
-}
+		$("#error_fields").show();
+		window.scrollTo(0, 0);
+	}
 });
 
 
