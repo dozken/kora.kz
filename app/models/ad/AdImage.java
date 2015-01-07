@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import play.Play;
 import play.db.ebean.Model;
 
 @Entity
@@ -37,8 +38,8 @@ public class AdImage extends Model {
 
 	public static String getFirstPicture(Long id) {
 
-		return AdImage.find.where().eq("ad_id", id).eq("position", 1)
-				.findUnique().content;
+		AdImage adImage = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
+		return adImage.content;
 
 	}
 
