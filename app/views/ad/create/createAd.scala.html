@@ -90,6 +90,9 @@ $(document).ajaxComplete(function() {
     });
 
     var imageMap = {};
+    var files;
+    var toUpload= new Array();
+    $("#imageUploadBtn").attr("disabled","disabled");
     // add a item
     //map[key1] = value1;
     // or remove it
@@ -100,9 +103,43 @@ $(document).ajaxComplete(function() {
         placeholder: 'ui-state-highlight'
     });
 
+    $(document).on("click","#imageUploadBtn",function(){
+
+        FileAPI.upload({
+            url: '@controllers.routes.Ads.imageUpload',
+            files: toUpload,
+            imageTransform: {
+                maxWidth: 800,
+                maxHeight: 600,
+                // Add watermark
+                overlay: [{ x: 5, y: 5, src: '@routes.Assets.at("images/home/watermark.png")', rel: FileAPI.Image.RIGHT_BOTTOM }]
+                },
+
+            progress: function (evt){
+                $("#imageUploadBtn").attr("disabled","disabled");
+                $("#imageUploadBtn").text("Загружается...");
+            },
+            filecomplete: function (err/**String*/, xhr/**Object*/, file/**Object/, options/**Object*/) {
+                if (!err) {
+                    // File successfully uploaded
+                    var result = xhr.responseText.split("#")[0].replace(/\./g, '');
+                    result = result.replace(/ /g, '');
+                    $("#item-"+result).attr("imid",xhr.responseText.split("#")[1]);
+                    $("#item-"+result).append('<a class="delete" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>');
+                }
+            },
+            complete: function (err, xhr){
+                $("#imageUploadBtn").text("Сохранить");
+
+                toUpload=[];
+             }
+        });
+        return false;
+    })
+
     var choose = document.getElementById('choose');
     FileAPI.event.on(choose, 'change', function(evt) {
-        var files = FileAPI.getFiles(evt); // Retrieve file list
+         files = FileAPI.getFiles(evt); // Retrieve file list
 
         FileAPI.filterFiles(files, function(file, info /**Object*/ ) {
             if (/^image/.test(file.type)) {
@@ -115,9 +152,9 @@ $(document).ajaxComplete(function() {
         }, function(files /**Array*/ , rejected /**Array*/ ) {
             if (files.length + $("#images li").length <= 5) {
                 FileAPI.each(files, function(file) {
-                    FileAPI.Image(file).preview(400).get(function(err, img) {
-                        var imgName = file.name.replace(/ /g, '');
-                        imageMap[imgName] = img.toDataURL("image/jpeg");
+                    FileAPI.Image(file).get(function(err, img) {
+                        toUpload[toUpload.length] = file;
+                        $("#imageUploadBtn").removeAttr('disabled');
                     });
                     FileAPI.Image(file).preview(100).get(function(err, img) {
                         var name = file.name.replace(/\./g, '');
@@ -203,29 +240,23 @@ $(document).ajaxComplete(function() {
                 var formData = new FormData(this);
                 var image_names = "";
                 $("#images li canvas").each(function() {
-                    var a = imageMap[$(this).parent().attr("fileName")];
-                    formData.append($(this).parent().attr("fileName"), a);
-                    image_names += $(this).parent().attr("fileName") + "&";
+                    image_names += $(this).parent().attr("imid") + ",";
                 });
-                formData.append("image_names", image_names);
 
+                $("#myHidden").val(image_names);
 
                 $("#ad_form_submit").attr('disabled','disabled');
                 $("#ad_form_submit").text('Загружается...');
 
                 var start = +new Date();  // log start timestamp
-
-                $.ajax({
-                    url: '@controllers.routes.Ads.create',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                jsRoutes.controllers.Ads.create().ajax({
+                    data:$("#ad_form").serialize(),
                     success: function(data) {
                         $("#create-form").html(data);
                     }
                 });
-                e.preventDefault();
+
+               return false;
             });
         } else {
             e.preventDefault();
