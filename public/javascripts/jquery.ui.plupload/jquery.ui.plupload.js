@@ -573,7 +573,8 @@ $.widget("ui.plupload", {
 			self._handleFileStatus(file);
 		});
 		
-		uploader.bind('FileUploaded', function(up, file) {
+		uploader.bind('FileUploaded', function(up, file,info) {
+
 			self._handleFileStatus(file);
 			self._trigger('uploaded', null, { up: up, file: file } );
 		});

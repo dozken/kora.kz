@@ -115,6 +115,14 @@ var title = $("#titleHide").html();
     });
 
 
+$(document).on("click",".plupload_action_icon",function(){
+    if($(this).hasClass("ui-icon-circle-check")){
+        alert("delete");
+    }else{
+        alert("do nothing");
+    }
+})
+
     $(document).on("click", "#ad_form_submit", function(e) {
         var start =  +new Date();
         if (validation()) {
@@ -329,7 +337,8 @@ var title = $("#titleHide").html();
             // User can upload no more then 5 files in one go (sets multiple_queues to false)
             max_file_count: 5,
 
-            chunk_size: '1mb',
+            chunk_size: '5mb',
+
 
             // Resize images on clientside if we can
 
@@ -365,7 +374,14 @@ var title = $("#titleHide").html();
             silverlight_xap_url : '../../js/Moxie.xap'
         });
 
+        var myUp =  $("#uploader").plupload();
+
+        myUp.bind('FileUploaded', function(up, file, res)
+        {
+           alert("adf");
+        });
         // Handle the case when form was submitted before uploading has finished
+
     });
 
 </script>
