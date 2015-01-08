@@ -116,6 +116,8 @@
                 $("#imageUploadBtn").text("Загружается...");
                 $("#progBar").show();
                 $("#choose").prop("disabled",true);
+                $("#next").removeAttr('disabled');
+                $("#next").text('Дальше');
             },
             progress: function (evt){
 
@@ -129,6 +131,7 @@
                     var result = xhr.responseText.split("#")[0].replace(/\./g, '');
                     result = result.replace(/ /g, '');
                     $("#item-"+result).attr("imid",xhr.responseText.split("#")[1]);
+                    $("#item-"+result).addClass("uploaded_file");
                     $("#item-"+result).append('<a class="delete" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>');
                 }
             },
@@ -160,7 +163,6 @@
                 FileAPI.each(files, function(file) {
                     FileAPI.Image(file).get(function(err, img) {
                         toUpload[toUpload.length] = file;
-                        $("#imageUploadBtn").removeAttr('disabled');
                     });
                     FileAPI.Image(file).preview(100).get(function(err, img) {
                         var name = file.name.replace(/\./g, '');
@@ -172,17 +174,50 @@
 
                         } else {
                             alert(name + " уже есть");
+                            for(var i=0;i<toUpload.length;i++){
+                                if(toUpload[i].name == file.name){
+                                    toUpload[i] = toUpload[toUpload.length-1];
+                                    toUpload.splice(-1,1);
+                                    break;
+                                }
+                            }
                         }
+                        checkFiles();
                     });
                 });
             } else {
                 alert("Максимальное количество фото 5");
             }
+
         });
     });
 
+    function checkFiles(){
+        if(toUpload.length>0){
+            $("#imageUploadBtn").removeAttr('disabled');
+            $("#next").attr('disabled','disabled');
+            $("#next").text('Сперва сохраните фотографию');
+        }
+    }
+
     $(document).on("click", ".delete", function() {
+        if(!$(this).parent().hasClass("uploaded_file")){
+            var file_name = $(this).parent().attr("filename");
+         for(var i=0;i<toUpload.length;i++){
+               if(toUpload[i].name == file_name){
+                   toUpload[i] = toUpload[toUpload.length-1];
+                   toUpload.splice(-1,1);
+                   break;
+               }
+            }
+            if(toUpload.length==0){
+                $("#next").removeAttr('disabled');
+                $("#next").text('Дальше');
+                $("#imageUploadBtn").attr("disabled","disabled");
+            }
+        }
         $(this).parent().remove();
+
     });
 
     $(document).on("click", "#add_phone_additional", function() {
