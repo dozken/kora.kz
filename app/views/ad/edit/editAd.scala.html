@@ -115,6 +115,7 @@ placeholder: 'ui-state-highlight'
 });
 
 var toUpload= new Array();
+$("#progBar").hide();
 $("#imageUploadBtn").attr("disabled","disabled");
 $(document).on("click","#imageUploadBtn",function(){
 
@@ -125,12 +126,18 @@ $(document).on("click","#imageUploadBtn",function(){
 			maxWidth: 800,
 			maxHeight: 600,
 			// Add watermark
-			overlay: [{ x: 5, y: 5, src: '@routes.Assets.at("images/home/watermark.png")', rel: FileAPI.Image.RIGHT_BOTTOM }]
+			overlay: [{ x: 10, y: 10, src: '@routes.Assets.at("images/home/white.png")', opacity: 0.3, rel: FileAPI.Image.RIGHT_BOTTOM }]
 		},
 
-		progress: function (evt){
+		fileupload: function (file/**Object*/, xhr/**Object*/, options/**Object*/){
 			$("#imageUploadBtn").attr("disabled","disabled");
 			$("#imageUploadBtn").text("Загружается...");
+			$("#progBar").show();
+			$("#choose").prop("disabled",true);
+		},
+		progress: function (evt){
+			var pr = evt.loaded/evt.total * 100;
+			$("#progRun").css("width",pr+"%");
 		},
 		filecomplete: function (err/**String*/, xhr/**Object*/, file/**Object/, options/**Object*/) {
 			if (!err) {
@@ -143,8 +150,10 @@ $(document).on("click","#imageUploadBtn",function(){
 		},
 		complete: function (err, xhr){
 			$("#imageUploadBtn").text("Сохранить");
-
 			toUpload=[];
+			$("#progBar").hide();
+			$("#progRun").css("width","0%");
+			$("#choose").prop("disabled",false);
 		}
 	});
 	return false;
