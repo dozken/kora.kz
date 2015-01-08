@@ -117,7 +117,7 @@
     	@for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex) {
         	<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
         	<!-- <img aslan="1234" src="@img.content" style="width: 75px;height: 74px; border-radius:5px;"/> -->
-        	<img src='@img.content' style="width: auto;height: auto; border-radius:5px;max-width:75px;max-height:74px; "/>
+        	<img src='@img.content'  style="width: auto;height: auto; border-radius:5px;max-width:75px;max-height:74px; "/>
         	</li>
     	}
     	</ul>
@@ -150,13 +150,13 @@
 }
 
     <div id="map" style="height: 350px;
-width: 795px;">asd</div>
-
-    <div id="comment_body" class="col-xs-12  formdown topka akwyl">
+width: 795px;"></div>
+@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || (session.get("connected")!=null && models.ad.Ad.settingByName(ad,"comment").status=="registred" )){
+<div id="comment_body" class="col-xs-12  formdown topka akwyl">
 
 @_comment(ad.comments.reverse.take(20),0,ad.comments.size)
         </div>
-@if(models.ad.Ad.settingByName(ad,"comment").status=="all" || (session.get("connected")!=null && models.ad.Ad.settingByName(ad,"comment").status=="registred" )){ 
+
 	<div class="col-xs-12 nopaddingleft formdown topka">
 <b id="comment_head" class="bdau PFBSPI-13">Написать владельцу</b>
         <div id="error_fields" class="alert alert-danger" style="visibility: hidden" role="alert"></div>
@@ -223,7 +223,8 @@ margin-top: -46px;">Отправить</button>
 <br>
 <br>
 <br>
-  <div class="contain">
+
+    <div class="contain">
     <h4>
       Похожие объявления из категории "@ad.section.name @ad.category.name" в @ad.contactInfo.city.name
     </h4>
