@@ -36,10 +36,28 @@ public class AdImage extends Model {
 
 	public Integer position;
 
+	public String additional;
+
+	public Integer h;
+
+	public Integer w;
+
 	public static String getFirstPicture(Long id) {
 
 		AdImage adImage = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
 		return adImage.content;
+
+	}
+
+	public static String getFirstPictureS(Long id) {
+
+		AdImage adImage = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
+		if(adImage.additional!=null){
+			if(adImage.additional.split("_").length==2){
+				return adImage.additional.split("_")[1];
+			}
+		}
+		return "";
 
 	}
 

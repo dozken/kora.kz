@@ -2,6 +2,7 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.File;
@@ -54,6 +55,8 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
+
+import javax.imageio.ImageIO;
 
 public class Ads extends Controller {
 
@@ -1200,6 +1203,33 @@ public class Ads extends Controller {
 				session(request().remoteAddress(),tmp);
 			}
 			File file = picture.getFile();
+			try {
+				BufferedImage bufferedImage = ImageIO.read(file);
+				adImage.h = bufferedImage.getHeight();
+				adImage.w = bufferedImage.getWidth();
+
+				int h = bufferedImage.getHeight();
+				int w = bufferedImage.getWidth();
+				if(w>h){
+					double p =380.0/w;
+					double nh = h*p;
+					String pad = (375-nh)/2.0 +"px";
+					adImage.additional = "padding-top:"+pad;
+				}else{
+					double p =375.0/h;
+					double nh = w*p;
+					String pad = (380-nh)/2.0 +"px";
+					adImage.additional ="padding-left:" +pad;
+				}
+				double s =157.0/h;
+				double ns = w*s;
+				double pad = (230-ns)/2.0;
+				if(pad<0) adImage.additional +="_"+"padding-left:0px";
+				else adImage.additional +="_"+"padding-left:" +pad+"px";
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			try {
 				String content =  Base64.encode(FileUtils.readFileToByteArray(file));
 				adImage.content = "data:"+picture.getContentType()+";base64," +content;
