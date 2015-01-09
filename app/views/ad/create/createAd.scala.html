@@ -152,7 +152,7 @@
 
         FileAPI.filterFiles(files, function(file, info /**Object*/ ) {
             if (/^image/.test(file.type)) {
-                if (info.width >= 320 && info.height >= 240) return true;
+                if (info.width >= 400 && info.height >= 300) return true;
                 else alert("Размер фото слишком маленький");
             } else {
                 alert("Можно загрузить только фото");

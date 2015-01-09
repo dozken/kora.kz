@@ -12,6 +12,7 @@ font-style: italic;
 float: none; !important
 }
 </style>
+
 <div class="container сontain">
 	<div class="searchbarmargin">@_searchbar()</div>
 @_breadcrumb(ad)
@@ -37,12 +38,14 @@ float: none; !important
 		"brightWatermark":"white_watermark",
 		"darkWatermark":"black_watermark",
 		"className":"watermark",
-		"opacity": 30,		
+		"opacity": 30
 	};
 
 	$(document).ready(function(){
 		//$(document).watermark(dark);
-		$(document).watermark(watermark);
+		//$(document).watermark(watermark);
+
+
 	});
 
 bootbox.setDefaults({
@@ -72,7 +75,6 @@ new Ya.share({
         },
 });
 
-
 $(document).ready(function(){
 	//$('.carousel').carousel();
 	
@@ -96,6 +98,7 @@ $(document).ready(function(){
 			}
 		}
 		clickEvent = false;
+
 	});
 })
  

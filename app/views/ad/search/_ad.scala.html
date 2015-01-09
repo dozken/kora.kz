@@ -9,7 +9,7 @@
     <div class="newesuret1"><span>@ad.images.size</span></div>
     <div class="newesuret"></div>
     <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">
-        <img src='@models.ad.AdImage.getFirstPicture(ad.id)'  style="border-radius:5px;max-width:158px;height:157px;margin-left: 36px;">
+        <img src='@models.ad.AdImage.getFirstPicture(ad.id)'  style="width:auto; border-radius:5px;max-width:230px; height: 157px; @models.ad.AdImage.getFirstPictureS(ad.id)">
     </div>        
     }else{
     <div style="background-color:rgb(190, 190, 190);width: 230px;height:157px;position:absolute;float:center;border-radius:5px;">

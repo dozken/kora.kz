@@ -104,8 +104,10 @@
           @for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex){
             	<div class="item @if(index==0){active}">
               	<!-- <img src="@img.content" style="width: 380px;heigh:390px; border-radius:8px"> -->
-              	<img src='@img.content'  style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
+                    <div id="img_conteiner" style="width:380px;height:375px; border-radius:8px; background-color: rgb(190, 190, 190);">
+              	<img  src='@img.content'    style="width: auto;height: auto; max-width:380px;max-height:375px; border-radius:8px; @if(img.additional!=null){@img.additional.split('_')(0)}">
             	</div><!-- End Item -->
+                    </div>
     			}
       }else{
         <div class="item active">
@@ -117,7 +119,7 @@
     	@for((img,index)<-models.ad.AdImage.getPictureByPosition(ad.id).zipWithIndex) {
         	<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
         	<!-- <img aslan="1234" src="@img.content" style="width: 75px;height: 74px; border-radius:5px;"/> -->
-        	<img src='@img.content'  style="width: auto;height: auto; border-radius:5px;max-width:75px;max-height:74px; "/>
+        	<img src='@img.content'  style="border-radius:5px;width:75px;height:74px; "/>
         	</li>
     	}
     	</ul>
