@@ -1,4 +1,4 @@
-@(ad: models.ad.Ad)
+@(ad: models.ad.Ad, images:List[models.ad.AdImage])
 @main("Объявление") {
 <style>
 .b-share__text{
@@ -17,7 +17,7 @@ float: none; !important
 	<div class="searchbarmargin">@_searchbar()</div>
 @_breadcrumb(ad)
 @_modalMessage()
-<div class="col-xs-9 nopaddingleft nopaddingright">@_ad(ad)</div>
+<div class="col-xs-9 nopaddingleft nopaddingright">@_ad(ad,images)</div>
 <div class="col-xs-3 pro2 paddingleft30px nopaddingright"><div class="rek">@_advertisements()</div></div>
 </div>
 }
