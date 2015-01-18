@@ -105,7 +105,10 @@
             	<div class="item @if(index==0){active}">
 
                     <div id="img_conteiner" style="width:380px;height:375px; border-radius:8px;border:1px solid #dddddd">
-              	<img  src='@img.content'    style="width: auto;height: auto; max-width:380px;max-height:375px; @if(img.h!=null ){ @if(img.h>=img.w){ margin-left: @((380.0-((img.w)*(375.0/img.h)))/2)px;}else {margin-top: @((375.0-((img.h)*(380.0/img.w)))/2)px;}} border-radius:8px;">
+                        <a class="fancybox" href="@img.content" data-fancybox-group="gallery">
+<img  src='@img.content' style="width: auto;height: auto; max-width:380px;max-height:375px; @if(img.h!=null ){ @if(img.h>=img.w){ margin-left: @((380.0-((img.w)*(375.0/img.h)))/2)px;}else {margin-top: @((375.0-((img.h)*(380.0/img.w)))/2)px;}} border-radius:8px;">
+                        </a>
+
             	</div>
                     </div>
     			}
@@ -119,7 +122,7 @@
     	@for((img,index)<-images.zipWithIndex) {
         	<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
 
-        	<img src='@img.content'  style="width: auto;height: auto; max-width:75px;max-height:74px; @if(img.h!=null ){ @if(img.h>=img.w){ margin-left: @((75.0-((img.w)*(74.0/img.h)))/2)px;}else {margin-top: @((74.0-((img.h)*(75.0/img.w)))/2)px;}} border-radius:8px;">
+        	<img src='@img.additional'  style="width:75px;height:74px;">
         	</li>
     	}
     	</ul>

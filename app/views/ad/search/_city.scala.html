@@ -6,7 +6,7 @@
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
 				<input  type="hidden" name="city" value="all" >
 			</button>
-			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; overflow-y: auto !important; max-height: 310px;margin: 0px;border-radius: 0px;overflow-y: hidden;padding-top: 2px;">				
+			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; overflow-y: auto !important; max-height: 310px; min-width: 210px;margin: 0px;border-radius: 0px;overflow-y: hidden;padding-top: 2px;">
 				<li class="li-option cities" city-id="all" data-value="Все города/ауылы"><a href="#"><span>Все города/ауылы</span></a></li>
 				@if(region!=null){
 				@for(c<-region.findCities if(c.parentCity==null)){

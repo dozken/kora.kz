@@ -106,6 +106,7 @@ function validation(inputclass){
 	
 	$("textarea[validation]."+inputclass).each(function(){
 		$(this).removeAttr("style");
+
     $(this).removeClass("validation_error_fields");
     var type = $(this).attr("validation");
 		if(type=="not_null"){
@@ -171,14 +172,14 @@ function validation(inputclass){
 
     $("select[validation]."+inputclass).each(function(){
 
-        $(this).removeAttr("style");
+        $(this).parent().removeAttr("style");
         $(this).removeClass("validation_error_fields");
         var type = $(this).attr("validation");
         if(type=="name"){
             var a=$(this).val();
             if(!a.match(/^[a-zA-Z]+$/)){
                 r=false;
-                $(this).attr("style","border-color:red");
+                $(this).parent().attr("style","border-color:red");
                 $(this).addClass("validation_error_fields");
             }
         }
@@ -186,7 +187,7 @@ function validation(inputclass){
             var a=$(this).val();
             if(!a.match(/^\d+$/)){
                 r=false;
-                $(this).attr("style","border-color:red");
+                $(this).parent().attr("style","border-color:red");
                 $(this).addClass("validation_error_fields");
             }
         }
@@ -195,7 +196,7 @@ function validation(inputclass){
             var a=$(this).val();
             if(a==null || a==""){
                 r=false;
-                $(this).attr("style","border-color:red");
+                $(this).parent().attr("style","border-color:red");
                 $(this).addClass("validation_error_fields");
             }
         }
@@ -205,7 +206,7 @@ function validation(inputclass){
             var re = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
             if(!a.match(re)){
                 r=false;
-                $(this).attr("style","border-color:red");
+                $(this).parent().attr("style","border-color:red");
                 $(this).addClass("validation_error_fields");
             }
         }

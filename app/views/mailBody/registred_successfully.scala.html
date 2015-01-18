@@ -6,15 +6,15 @@
 	</tr>
 	<tr>
 		<td style=" border-top-style: dashed; border-bottom-style: dashed; border-width: 1px; padding: 5px 0 5px 0;">
-		Чтобы активировать ваш личный кабинет, пожалуйста, подтвердите вашу регистрацию по <a style="text-decoration: none;" target="_blank" href="@routes.User.restorePassword(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
+		Чтобы активировать ваш личный кабинет, пожалуйста, подтвердите вашу регистрацию по <a style="text-decoration: none;" target="_blank" href="@routes.User.confirmRegistration(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
 		ссылкe
 		</a>.
 		<br>
 		
 		<br>
 		<br>
-		Или скопируйте <a style="text-decoration: none;" target="_blank" href="@routes.User.restorePassword(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
-		@routes.User.restorePassword(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())
+		Или скопируйте <a style="text-decoration: none;" target="_blank" href="@routes.User.confirmRegistration(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())">
+		@routes.User.confirmRegistration(play.libs.Crypto.encryptAES(user.email)).absoluteURL(request())
 		</a> на адресную строку браузера.
 		<br>
 		После этого вы сможете пользоваться личным кабинетом для управления Вашими объявлениями

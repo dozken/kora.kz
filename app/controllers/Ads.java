@@ -2,9 +2,9 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,6 +48,7 @@ import views.html.ad.search._ad_list;
 import views.html.ad.search.adSearch;
 import views.html.ad.show._comment;
 import views.html.ad.show.showAd;
+import views.html.ad.show._imageView;
 import views.html.mailBody.private_message;
 import views.html.profile.ads.myAds;
 
@@ -1213,28 +1214,24 @@ public class Ads extends Controller {
 
 				int h = bufferedImage.getHeight();
 				int w = bufferedImage.getWidth();
-				if(w>h){
-					double p =380.0/w;
-					double nh = h*p;
-					String pad = (375-nh)/2.0 +"px";
-					adImage.additional = "padding-top:"+pad;
-				}else{
-					double p =375.0/h;
-					double nh = w*p;
-					String pad = (380-nh)/2.0 +"px";
-					adImage.additional ="padding-left:" +pad;
-				}
-				double s =157.0/h;
-				double ns = w*s;
-				double pad = (230-ns)/2.0;
-				if(pad<0) adImage.additional +="_"+"padding-left:0px";
-				else adImage.additional +="_"+"padding-left:" +pad+"px";
 
+				BufferedImage crop = createResizedCopy(bufferedImage,130,130,true);
+
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write( crop, "jpg", baos );
+				baos.flush();
+				byte[] imageInByte = baos.toByteArray();
+				baos.close();
+				System.out.println(imageInByte.length);
+				String cropped = Base64.encode(imageInByte);
+
+				adImage.additional = "data:image/jpeg;base64,"+cropped;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			try {
 				String content =  Base64.encode(FileUtils.readFileToByteArray(file));
+				//String croped =  Base64.encode(FileUtils.readFileToByteArray(file));
 				adImage.content = "data:"+picture.getContentType()+";base64," +content;
 				adImage.update();
 
@@ -1262,5 +1259,24 @@ public class Ads extends Controller {
 			list.get(i).delete();
 
 		}
+	}
+
+	public static Result getImageWithId(Long id){
+
+		return ok(_imageView.render(AdImage.find.byId(id)));
+	}
+
+	public static BufferedImage createResizedCopy(Image originalImage, int scaledWidth, int scaledHeight, boolean preserveAlpha)
+	{
+		System.out.println("resizing...");
+		int imageType = preserveAlpha ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+		BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+		Graphics2D g = scaledBI.createGraphics();
+		if (preserveAlpha) {
+			g.setComposite(AlphaComposite.Src);
+		}
+		g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
+		g.dispose();
+		return scaledBI;
 	}
 }
