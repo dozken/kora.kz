@@ -18,7 +18,7 @@
  	<div id="ad-razdel" class="col-xs-3 custom-tooltip" data-toggle="tooltip" data-placement="top" title="Выберите раздел наиболее подходящий вашему объявлению">
     <div class="fire-div">
         <select id="section" name="section" class="form-control next selectdesign fire-select " validation="not_null" >
-        <option selected disabled hidden> Выберите раздел</option>
+        <option selected disabled hidden value=""> Выберите раздел</option>
       @for(section <- Section.find.all()) {
           <option value="@section.id">@section.name</option>
       }

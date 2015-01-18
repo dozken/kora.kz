@@ -37,6 +37,7 @@ GET         /ad/search-other                       controllers.Ads.other()
 
 
 GET         /ad/create                             controllers.Ads.show()
+GET         /ad/show/image/:id                     controllers.Ads.getImageWithId(id:Long)
 GET         /ad/search/:id                         controllers.Ads.searchByType(id:Long)
 GET         /ad/edit/:id                           controllers.Ads.edit(id: Long)
 POST        /ad/filter_search                      controllers.Ads.searchAd(page : Integer, sort:String)

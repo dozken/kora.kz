@@ -184,7 +184,7 @@
 @for(img<-ad.sortByPosition(ad.id)){
 
    <li imid="@img.id" id="item-@img.name.replace(".","")" fileName="@img.name" style=' position:relative; display: inline-block;margin-right: 10px; margin-bottom: 10px;width: 100px; height: 100px;'>
-       <canvas src='@img.content' width = "100" height="100"></canvas>
+       <canvas src='@img.additional' width = "100" height="100"></canvas>
 
        <a class="delete" style="position: absolute;top: 4px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-times-circle" style="font-size:17px;color:#ab2341;position: absolute;top: -3px;right: -1px;"></i></a>
     <a class="" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>
