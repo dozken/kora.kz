@@ -9,8 +9,7 @@
 	</div>
 	<div class="col-xs-2 mysuret">
         @if(ad.images.size()>0){
-
-            <img src='@AdImage.getFirstPicture(ad.id)' style="height:130px;width:120px;">
+            <img src='@AdImage.getFirstPicture(ad.id)' style="width:auto;height:auto; max-height:130px;max-width:120px;">
         }else{
 		<img src="http://placehold.it/85x92/dddddd/333333">
         }

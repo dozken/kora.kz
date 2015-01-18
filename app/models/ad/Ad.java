@@ -130,6 +130,10 @@ public class Ad extends Model {
 
 	}
 
+	public static AdImage getfirstPic(Long id){
+		return AdImage.find.where().eq("ad_id",id).eq("possition",1).findUnique();
+	}
+
 	public static void sessionRegion(Long id) {
 		Controller.session("region", id.toString());
 	}

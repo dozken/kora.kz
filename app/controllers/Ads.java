@@ -68,7 +68,7 @@ public class Ads extends Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ok(showAd.render(ad));
+		return ok(showAd.render(ad,AdImage.getPictureByPosition(ad.id)));
 	}
 
 	public static Result create() {
@@ -178,13 +178,16 @@ public class Ads extends Controller {
 
 			}
 		}
-		String ses = session(request().remoteAddress());
-		session().remove(request().remoteAddress());
+		if(session(request().remoteAddress())!=null) {
+			String ses = session(request().remoteAddress());
+			session().remove(request().remoteAddress());
 
-		try {
-			cleanImages(ses);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				cleanImages(ses);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return ok(_success.render());
 	}
