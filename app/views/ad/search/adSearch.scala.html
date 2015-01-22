@@ -34,6 +34,16 @@
         @for(ad <- ads if(ad.status.equals("active"))) {
             <div class="col-xs-12  pro1 @if(models.ad.Ad.settingByName(ad,"highlight")!=null){highlighted }">@_ad(ad)</div>
         }
+		@if(ads.size()==0){
+		<div>
+			<br>
+			<p class="text-center" style="color: green; font-size: 18px;">По вашему запросу ничего не найдено</p>
+			<p class="text-center">Попробуйте:</p>
+			<p class="text-center">Установить более мягкие ограничения на значения параметров</p>
+			<p class="text-center">Поискать интересующие вас объявления в другом городе</p>
+			<p class="text-center">Посмотреть все объявления о продаже</p>
+		</div>
+		}
     }
 	</div>
     </div>
@@ -213,6 +223,7 @@ function myFunc() {
     jsRoutes.controllers.Ads.searchAd(page, sort).ajax({
         data: $("#search_form").serialize(),
         success: function(data) {
+			console.log(data);
             $("#main_div").html(data);
             $("#search_filter").attr("disabled", false);
             total($("#total_size").val());

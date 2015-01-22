@@ -1,0 +1,7 @@
+@(images: List[models.ad.AdImage])
+@for((img,index)<-images.zipWithIndex) {
+<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
+
+  <img src='@img.additional'  style="width:75px;height:74px;">
+</li>
+}

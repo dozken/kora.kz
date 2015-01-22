@@ -1,4 +1,4 @@
-@(ad: models.ad.Ad,images:List[models.ad.AdImage])
+@(ad: models.ad.Ad)
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
 <ul class="aty">
@@ -99,32 +99,17 @@
 <div class="col-xs-7 nopaddingleft nopaddingright">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
-      	<div class="carousel-inner">
-			@if(ad.images.size()>0){
-          @for((img,index)<-images.zipWithIndex){
-            	<div class="item @if(index==0){active}">
+      	<div id="big_one" class="carousel-inner">
+            @for((img,index)<-ad.images.zipWithIndex){
 
-                    <div id="img_conteiner" style="width:380px;height:375px; border-radius:8px;border:1px solid #dddddd">
-                        <a class="fancybox" href="@img.content" data-fancybox-group="gallery">
-<img  src='@img.content' style="width: auto;height: auto; max-width:380px;max-height:375px; @if(img.h!=null ){ @if(img.h>=img.w){ margin-left: @((380.0-((img.w)*(375.0/img.h)))/2)px;}else {margin-top: @((375.0-((img.h)*(380.0/img.w)))/2)px;}} border-radius:8px;">
-                        </a>
+            <div id="im-@img.id" class="item @if(index==0){ active }">
+                <img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 0px;padding: 180px;">
+            </div>
+            }
 
-            	</div>
-                    </div>
-    			}
-      }else{
-        <div class="item active">
-            <img src='@routes.Assets.at("images/home/nophoto.png")' class="watermark" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">
-          </div><!-- End Item -->
-      }
-		</div><!-- End Carousel Inner -->
-	    <ul class="list-group mylistgroup">
-    	@for((img,index)<-images.zipWithIndex) {
-        	<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
+        </div>
+	    <ul id="small_one" class="list-group mylistgroup">
 
-        	<img src='@img.additional'  style="width:75px;height:74px;">
-        	</li>
-    	}
     	</ul>
 		<!-- Controls -->
     </div>

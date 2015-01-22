@@ -118,6 +118,7 @@
                 $("#choose").prop("disabled",true);
                 $("#next").removeAttr('disabled');
                 $("#next").text('Дальше');
+                $("#tool_t").tooltip("destroy");
             },
             progress: function (evt){
 
@@ -196,13 +197,15 @@
         if(toUpload.length>0){
             $("#imageUploadBtn").removeAttr('disabled');
             $("#next").attr('disabled','disabled');
-            $("#next").text('Сперва сохраните фотографию');
+            $("#tool_t").tooltip();
+
         }
     }
 
     $(document).on("click", ".delete", function() {
         if(!$(this).parent().hasClass("uploaded_file")){
             var file_name = $(this).parent().attr("filename");
+
          for(var i=0;i<toUpload.length;i++){
                if(toUpload[i].name == file_name){
                    toUpload[i] = toUpload[toUpload.length-1];
@@ -213,6 +216,7 @@
             if(toUpload.length==0){
                 $("#next").removeAttr('disabled');
                 $("#next").text('Дальше');
+                $("#tool_t").tooltip("destroy");
                 $("#imageUploadBtn").attr("disabled","disabled");
             }
         }
