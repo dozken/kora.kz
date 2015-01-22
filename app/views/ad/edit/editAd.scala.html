@@ -509,6 +509,7 @@ position:e.latLng
 
 });
 @if(ad.contactInfo.location.lat!=null){
+$("#location").val("@ad.contactInfo.location.lat ,@ad.contactInfo.location.lng");
 marker=map.addMarker({
 lat: @ad.contactInfo.location.lat,
 lng: @ad.contactInfo.location.lng,
