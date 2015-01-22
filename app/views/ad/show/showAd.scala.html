@@ -1,4 +1,4 @@
-@(ad: models.ad.Ad, images:List[models.ad.AdImage])
+@(ad: models.ad.Ad)
 @main("Объявление") {
 <style>
 .b-share__text{
@@ -17,7 +17,7 @@ float: none; !important
 	<div class="searchbarmargin">@_searchbar()</div>
 @_breadcrumb(ad)
 @_modalMessage()
-<div class="col-xs-9 nopaddingleft nopaddingright">@_ad(ad,images)</div>
+<div class="col-xs-9 nopaddingleft nopaddingright">@_ad(ad)</div>
 <div class="col-xs-3 pro2 paddingleft30px nopaddingright"><div class="rek">@_advertisements()</div></div>
 </div>
 }
@@ -96,17 +96,26 @@ new Ya.share({
 });
 
 $(document).ready(function(){
-	//$('.carousel').carousel();
-	
+
+	@for((img,index)<-ad.images.zipWithIndex){
+
+			jsRoutes.controllers.Ads.bigPic(@img.id).ajax({
+				success: function(data) {
+					$("#im-@img.id").html(data);
+
+				}
+			});
+	}
+
 	$('#carousel-top.carousel').carousel('cycle')
 	$('#myCarousel.carousel').carousel('cycle')
 	var clickEvent = false;
 	$('#myCarousel').carousel({
-		interval:   4000	
+		interval:   4000
 	}).on('click', '#myCarousel .list-group li', function() {
-			clickEvent = true;
-			$('#myCarousel .list-group li').removeClass('active');
-			$(this).addClass('active');		
+		clickEvent = true;
+		$('#myCarousel .list-group li').removeClass('active');
+		$(this).addClass('active');
 	}).on('slid.bs.carousel', function(e) {
 		if(!clickEvent) {
 			var count = $('#myCarousel .list-group').children().length -1;
@@ -114,14 +123,28 @@ $(document).ready(function(){
 			current.removeClass('active').next().addClass('active');
 			var id = parseInt(current.data('slide-to'));
 			if(count == id) {
-				$('#myCarousel .list-group li').first().addClass('active');	
+				$('#myCarousel .list-group li').first().addClass('active');
 			}
 		}
 		clickEvent = false;
 
 	});
+
+@if(ad.images.size==0){
+		$("#big_one").append('<div class="item active">');
+		var ss = '@routes.Assets.at("images/home/nophoto.png")';
+		$("#big_one").append('<img src='+ss+' class="watermark" style="width: auto;height: auto; border-radius:5px;max-width:380px;max-height:390px; border-radius:8px">');
+		$("#big_one").append('</div>');
+	}
+	jsRoutes.controllers.Ads.smallPic(@ad.id).ajax({
+		success: function(data) {
+			$("#small_one").html(data);
+		}
+	});
+
+
 })
- 
+
 $(window).load(function() {
     var boxheight = $('#myCarousel .carousel-inner').innerHeight();
     var itemlength = $('#myCarousel .item').length;

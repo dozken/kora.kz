@@ -108,6 +108,8 @@ public class Application extends Controller {
 				controllers.routes.javascript.Ads.archive(),
 				controllers.routes.javascript.Ads.create(),
 				controllers.routes.javascript.Ads.update(),
+				controllers.routes.javascript.Ads.bigPic(),
+				controllers.routes.javascript.Ads.smallPic(),
 				controllers.routes.javascript.Ads.commentPaging(),
 				controllers.routes.javascript.Ads.get(),
 				controllers.routes.javascript.Ads.comment(),

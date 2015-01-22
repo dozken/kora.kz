@@ -1,0 +1,6 @@
+@(img: models.ad.AdImage)
+  <div style="width:380px;height:375px; border-radius:8px;border:1px solid #dddddd">
+    <a class="fancybox" href="@img.content" data-fancybox-group="gallery">
+      <img  src='@img.content' style="width: auto;height: auto; max-width:380px;max-height:375px; @if(img.h!=null ){ @if(img.h>=img.w){ margin-left: @((380.0-((img.w)*(375.0/img.h)))/2)px;}else {margin-top: @((375.0-((img.h)*(380.0/img.w)))/2)px;}} border-radius:8px;">
+    </a>
+  </div>

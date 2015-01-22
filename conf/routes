@@ -43,6 +43,8 @@ GET         /ad/edit/:id                           controllers.Ads.edit(id: Long
 POST        /ad/filter_search                      controllers.Ads.searchAd(page : Integer, sort:String)
 POST        /ad/create                             controllers.Ads.create()
 POST        /ad/update/:id                         controllers.Ads.update(id:Long)
+POST        /ad/big_one/:id                         controllers.Ads.bigPic(id:Long)
+POST        /ad/small_one/:id                         controllers.Ads.smallPic(id:Long)
 POST        /ad/comment/:id                        controllers.Ads.comment(id:Long,com_id:Long)
 POST        /ad/comment_page/:id                   controllers.Ads.commentPaging(id:Long,page:Integer,s:String)
 POST        /ad/favorite/:id                       controllers.Ads.addFavorite(id:Long,type:String)

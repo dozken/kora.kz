@@ -3,6 +3,7 @@ package controllers;
 import static play.data.Form.form;
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.File;
@@ -49,6 +50,8 @@ import views.html.ad.search.adSearch;
 import views.html.ad.show._comment;
 import views.html.ad.show.showAd;
 import views.html.ad.show._imageView;
+import views.html.ad.show._big;
+import views.html.ad.show._small;
 import views.html.mailBody.private_message;
 import views.html.profile.ads.myAds;
 
@@ -69,7 +72,7 @@ public class Ads extends Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ok(showAd.render(ad,AdImage.getPictureByPosition(ad.id)));
+		return ok(showAd.render(ad));
 	}
 
 	public static Result create() {
@@ -1215,17 +1218,26 @@ public class Ads extends Controller {
 				int h = bufferedImage.getHeight();
 				int w = bufferedImage.getWidth();
 
+				Double d=(157.0/h)*w;
+				System.out.println(d);
 				BufferedImage crop = createResizedCopy(bufferedImage,130,130,true);
-
+				BufferedImage im157 = createResizedCopy(bufferedImage, d.intValue(), 157, true);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
 				ImageIO.write( crop, "jpg", baos );
+				ImageIO.write( im157, "jpg", baos2 );
 				baos.flush();
+				baos2.flush();
 				byte[] imageInByte = baos.toByteArray();
+				byte[] imageInByte2 = baos2.toByteArray();
 				baos.close();
+				baos2.close();
 				System.out.println(imageInByte.length);
 				String cropped = Base64.encode(imageInByte);
+				String cropped2 = Base64.encode(imageInByte2);
 
 				adImage.additional = "data:image/jpeg;base64,"+cropped;
+				adImage.small = "data:image/jpeg;base64,"+cropped2;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1278,5 +1290,16 @@ public class Ads extends Controller {
 		g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
 		g.dispose();
 		return scaledBI;
+	}
+
+	public static Result bigPic(Long id){
+
+
+		return ok(_big.render(AdImage.find.byId(id)));
+	}
+
+	public static Result smallPic(Long id){
+
+		return ok(_small.render(Ad.find.byId(id).images));
 	}
 }

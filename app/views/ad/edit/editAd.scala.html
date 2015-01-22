@@ -135,7 +135,7 @@ $(document).on("click","#imageUploadBtn",function(){
 			$("#progBar").show();
 			$("#choose").prop("disabled",true);
 			$("#ad_form_submit").removeAttr('disabled');
-			$("#ad_form_submit").text(' Редактировать объявление');
+			$("#tool_t").tooltip("destroy");
 		},
 		progress: function (evt){
 			var pr = evt.loaded/evt.total * 100;
@@ -214,8 +214,9 @@ function checkFiles(){
 	if(toUpload.length>0){
 		$("#imageUploadBtn").removeAttr('disabled');
 		$("#ad_form_submit").attr('disabled','disabled');
-		$("#ad_form_submit").text('Сперва сохраните фотографию');
+		$("#tool_t").tooltip();
 	}
+
 }
 
 $(document).on("click", ".delete", function() {
@@ -230,7 +231,7 @@ $(document).on("click", ".delete", function() {
 		}
 		if(toUpload.length==0){
 			$("#ad_form_submit").removeAttr('disabled');
-			$("#ad_form_submit").text(' Редактировать объявление');
+			$("#tool_t").tooltip("destroy");
 			$("#imageUploadBtn").attr("disabled","disabled");
 		}
 	}

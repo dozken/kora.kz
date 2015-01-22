@@ -39,6 +39,9 @@ public class AdImage extends Model {
 	@Column(columnDefinition = "TEXT")
 	public String additional;
 
+	@Column(columnDefinition = "TEXT")
+	public String small;
+
 	public Integer h;
 
 	public Integer w;
@@ -56,13 +59,21 @@ public class AdImage extends Model {
 		return adImage.additional;
 
 	}
+	public static String getFirstPictureSmall(Long id) {
+
+		AdImage adImage = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
+		return adImage.small;
+
+	}
 
 	public static String getFirstPictureS(Long id) {
 
 		AdImage img = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
 
 		double a = ((230.0 - ((img.w) * (157.0 / img.h))) / 2);
-		return "padding-left:" + a + "px;";
+		if(a>0)
+		return "margin-left:" + a + "px;";
+		return "";
 	}
 
 	public static List<AdImage> getPictureByPosition(Long id) {
