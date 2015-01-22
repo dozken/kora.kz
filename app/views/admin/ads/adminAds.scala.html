@@ -31,18 +31,18 @@ function moderate(){
 	adModerate=null;
 }
 
-$(document).on("click",".moderate",function(){
-	var adId = $(this).attr("ad");
-	
-	jsRoutes.controllers.Administer.moderate(adId).ajax({		
-		data: {status:"moderating"},
-		success: function(data) {
-			window.location.href =  "http://@request.host/ad/show/"+adId;
-			
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-        }
-	});
-	
-});
+//$(document).on("click",".moderate",function(){
+//	var adId = $(this).attr("ad");
+//
+//	jsRoutes.controllers.Administer.moderate(adId).ajax({
+//		data: {status:"moderating"},
+//		success: function(data) {
+//			window.location.href =  "http://@request.host/ad/show/"+adId;
+//
+//        },
+//        error: function(jqXHR, textStatus, errorThrown) {
+//        }
+//	});
+//
+//});
 </script>
