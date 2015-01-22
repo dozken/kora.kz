@@ -19,7 +19,7 @@
 	*@
 	<td class="ortaga">
 	@*@if(ad.status.equals("pending")){*@
-	<a class="btn btn-success btn-xs moderate" ad="@ad.id"><span class="glyphicon glyphicon-pencil"></span></a>
+	<a class="btn btn-success btn-xs" href="@routes.Ads.get(ad.id)"><span class="glyphicon glyphicon-pencil"></span></a>
 	@*}else{В процессе}*@
 	</td>
 </tr>
