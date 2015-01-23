@@ -14,11 +14,18 @@
 @if(ads.size()==1){
 <div>
     <br>
-    <p class="text-center" style="color: green; font-size: 18px;">По вашему запросу ничего не найдено</p>
-    <p class="text-center">Попробуйте:</p>
-    <p class="text-center">Установить более мягкие ограничения на значения параметров</p>
-    <p class="text-center">Поискать интересующие вас объявления в другом городе</p>
-    <p class="text-center">Посмотреть все объявления о продаже</p>
+    <div class="row">
+        <div class="col-xs-2">
+            <img src="@routes.Assets.at("images/lep.png")" style="height:135px; width:auto; margin-left:60%">
+        </div>
+        <div class="col-xs-8" style="margin-top: 20px;">
+            <ul>
+    <li style="font-size: 12px; font-weight:bold;  list-style-type: none;">По вашему запросу ничего не найдено</li><br>
+
+    <li style="font-size: 12px; list-style-type: none;">Попробуйте:</li>
+    <li style="font-size: 12px; list-style-type: none;">- Установить более мягкие ограничения на значения параметров</li>
+    <li style="font-size: 12px; list-style-type: none;">- Поискать интересующие вас объявления в другом городе</li>
+            </ul></div></div>
 </div>
 }
 
