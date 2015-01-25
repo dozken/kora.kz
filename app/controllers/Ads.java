@@ -342,8 +342,7 @@ public class Ads extends Controller {
 			coords = requestData.get("location").substring(1,
 					requestData.get("location").length() - 1);
 			loc = coords.split(",");
-			System.out.println(requestData.get("location"));
-			System.out.println(loc[0] + "," + loc[1]);
+
 			Location location = new Location();
 			if (loc.length == 2) {
 				location.lat = loc[0].trim();
@@ -903,7 +902,10 @@ public class Ads extends Controller {
 					+ requestData.get("section");
 		}
 
-		if (!requestData.get("category").equals("all")) {
+
+
+
+		if (!requestData.get("category").equals("0")) {
 
 			Category category = Category.find.byId(Long.parseLong(requestData
 					.get("category")));
@@ -1101,7 +1103,7 @@ public class Ads extends Controller {
 					+ " and (a.birth_date between " + startYear + " and "
 					+ endYear + ") " + pic;
 		}
-		System.out.println(a2);
+
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(a);
 
@@ -1117,8 +1119,6 @@ public class Ads extends Controller {
 			ads.add(Ad.find.byId(id));
 		}
 
-		System.out.println(list3.size());
-		System.out.println(list3.get(0));
 		Ad tmp = new Ad();
 
 		tmp.id = 0L;
@@ -1141,7 +1141,7 @@ public class Ads extends Controller {
 	
 
 	public static Result getRC(String id) {
-		System.out.println("id:"+id);
+
 		session().remove("city");
 		session().remove("cityName");
 		if(id.equals("all")){
@@ -1219,7 +1219,7 @@ public class Ads extends Controller {
 				int w = bufferedImage.getWidth();
 
 				Double d=(157.0/h)*w;
-				System.out.println(d);
+
 				BufferedImage crop = createResizedCopy(bufferedImage,130,130,true);
 				BufferedImage im157 = createResizedCopy(bufferedImage, d.intValue(), 157, true);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -1232,7 +1232,7 @@ public class Ads extends Controller {
 				byte[] imageInByte2 = baos2.toByteArray();
 				baos.close();
 				baos2.close();
-				System.out.println(imageInByte.length);
+
 				String cropped = Base64.encode(imageInByte);
 				String cropped2 = Base64.encode(imageInByte2);
 
@@ -1280,7 +1280,7 @@ public class Ads extends Controller {
 
 	public static BufferedImage createResizedCopy(Image originalImage, int scaledWidth, int scaledHeight, boolean preserveAlpha)
 	{
-		System.out.println("resizing...");
+
 		int imageType = preserveAlpha ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
 		BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
 		Graphics2D g = scaledBI.createGraphics();
