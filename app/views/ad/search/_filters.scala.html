@@ -56,10 +56,10 @@
 			<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown" tabindex="-1" style='width: 170px;background: url(@routes.Assets.at("images/home/arrow.png")) no-repeat right #fff;padding-top: 2px;  padding-bottom: 2px;    border-radius: 4px;text-align: left;padding-left: 4px;background-size: 20px;'>
 				<span id="category-span" data-bind="bs-drp-sel-label">Все категории</span>
 				<input  type="hidden" data-bind="bs-drp-sel-value" value="all" >
-				<input  type="hidden" name="category" value="all" >
+				<input  type="hidden" name="category" value="0" >
 			</button>
 			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden;overflow-y: auto !important; max-height: 310px; margin: 0px;border-radius: 0px;overflow-y: hidden;">	
-				<li class="li-option cities" category-id="all" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>	
+				<li class="li-option categories" category-id="0" data-value="Все категории"><a href="#"><span>Все категории</span></a></li>
 				@if(section.categories!=null){
 				@for(c<-section.findCategories if(c.parentCategory==null)){
 				@if(c.isParent){

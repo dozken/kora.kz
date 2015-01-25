@@ -131,7 +131,7 @@ $(document).ready(function(){
 	    var id = $target.attr("city-id");
 	    $("input[name=city]").val(id);
 	    setTimeout(function(){$("#city-span").text($("#city-span").text().substr(0,22)); }, 0);
-	    
+
 	     jsRoutes.controllers.Ads.getCityS(id).ajax({
 	        success: function(data) {	            
 	        }
@@ -225,13 +225,13 @@ $(document).on("click","#show_all",function(){
 
 function myFunc() {
 
-    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="width:120px;height:auto; margin-left: 55%;padding: 20px;">');
     $(this).attr("disabled", true);
     jsRoutes.controllers.Ads.searchAd(page, sort).ajax({
         data: $("#search_form").serialize(),
         success: function(data) {
 			console.log(data);
-            $("#main_div").html(data);
+           // $("#main_div").html(data);
             $("#search_filter").attr("disabled", false);
             total($("#total_size").val());
         }
@@ -240,7 +240,7 @@ function myFunc() {
 
 function searchByPage(p) {
 
-    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="margin-left: 58%;padding: 20px;">');
+    $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="width:120px;height:auto; margin-left: 55%;padding: 20px;">');
     $(this).attr("disabled", true);
     jsRoutes.controllers.Ads.searchAd(p, sort).ajax({
         data: $("#search_form").serialize(),
