@@ -231,7 +231,7 @@ function myFunc() {
         data: $("#search_form").serialize(),
         success: function(data) {
 			console.log(data);
-           // $("#main_div").html(data);
+            $("#main_div").html(data);
             $("#search_filter").attr("disabled", false);
             total($("#total_size").val());
         }
