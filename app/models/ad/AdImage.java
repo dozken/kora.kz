@@ -76,6 +76,23 @@ public class AdImage extends Model {
 		return "";
 	}
 
+	public static String getFirstPictureSame(Long id) {
+
+		AdImage img = AdImage.find.where().eq("ad_id", id).eq("position", 1).findUnique();
+		double a;
+		String str="";
+		if(img.h!=null ){
+			if(img.h>=img.w){
+				 a = ((140.0-((img.w)*(140.0/img.h)))/2);
+				 str = "margin-left:"+a+"px";
+			}else {
+				a = ((140.0-((img.h)*(140.0/img.w)))/2);
+				str = "margin-top:"+a+"px";
+			}
+		}
+		return str;
+	}
+
 	public static List<AdImage> getPictureByPosition(Long id) {
 
 		return AdImage.find.where().eq("ad_id", id).order("position")

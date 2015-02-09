@@ -238,11 +238,59 @@ $(document).on("click", ".city.delete", function(e) {
     $('[data-bb-handler="confirm"]').toggleClass("btn-primary btn-success")
 });
 
+var mapType;
 var myMap;
+$("#mapSearchDiv").hide();
+
+
+$(document).on("click", "#findMap", function(e) {
+    e.preventDefault();
+    if(mapType==1){
+        var myPlacemark;
+        $("#mapDiv").html("");
+        myMap = new ymaps.Map("mapDiv", {
+            center: [$("#latMap").val(), $("#lngMap").val()],
+            zoom: 14,
+            controls: ["zoomControl"]
+        });
+
+
+        myMap.events.add('click', function(e) {
+
+            myMap.geoObjects.remove ( myPlacemark ) ;
+            myMap.geoObjects.removeAll();
+            var coords = e.get('coords');
+            $("#location").val(coords);
+            myPlacemark = new ymaps.Placemark(coords, {
+                content: '<p>' + $("#city").val() + '</p>',
+                balloonContent: '<p>' + $("#city").val() + '</p>'
+            });
+            myMap.geoObjects.add(myPlacemark);
+        });
+    }else{
+        var myGmap = new GMaps({
+            div: '#mapDiv',
+            zoom: 14,
+            lat: $("#latMap").val(),
+            lng: $("#lngMap").val(),
+            click: function(e) {
+                $("#location").val(e.latLng);
+                myGmap.removeMarker(myMap);
+                myMap = myGmap.addMarker({
+                    position: e.latLng,
+                    infoWindow: {
+                        content: '<p>' + $("#city").val() + '</p>'
+                    }
+                });
+            },
+        });
+    }
+})
 $(document).on("click", ".mapSelect", function() {
+    $("#mapSearchDiv").show();
     if ($(this).attr("map") == "yandex") {
     	ymaps.ready(init);
-    	
+        mapType=1;
     	var myPlacemark;
 
     	function init() {
@@ -274,6 +322,7 @@ $(document).on("click", ".mapSelect", function() {
     }
     if ($(this).attr("map") == "google"){
     	//gmap
+        mapType=0;
     	var myGmap = new GMaps({
     	    div: '#mapDiv',
     	    zoom: 14,

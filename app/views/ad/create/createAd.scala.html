@@ -57,6 +57,12 @@
         if (validation("next")) {
             $("#ad_info").slideUp();
             $("#contact_info").slideDown();
+            setTimeout(
+                    function()
+                    {
+                        drawMap();
+                    }, 1000);
+
         }
     });
 
@@ -117,9 +123,7 @@
                 $("#imageUploadBtn").text("Загружается...");
                 $("#progBar").show();
                 $("#choose").prop("disabled",true);
-                $("#next").removeAttr('disabled');
-                $("#next").text('Дальше');
-                $("#tool_t").tooltip("destroy");
+
             },
             progress: function (evt){
 
@@ -135,7 +139,9 @@
                     $("#item-"+result).attr("imid",xhr.responseText.split("#")[1]);
                     $("#item-"+result).addClass("uploaded_file");
                     $("#item-"+result).append('<a class="delete" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>');
+
                 }
+
             },
             complete: function (err, xhr){
                 $("#imageUploadBtn").text("Сохранить");
@@ -143,6 +149,9 @@
                 $("#progBar").hide();
                 $("#progRun").css("width","0%");
                 $("#choose").prop("disabled",false);
+                $("#next").removeAttr('disabled');
+                $("#next").text('Дальше');
+                $("#tool_t").tooltip("destroy");
             }
         });
         return false;
@@ -448,34 +457,26 @@
             }
         }
     });
-</script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        map = new GMaps({
-            div: '#mouse_event_map',
-            zoom: 14,
-            lat: lat,
-            lng: lng,
-            width: '650px',
-            height: '400px',
-            click: function(e) {
-                $("#location").val(e.latLng);
-                lat = e.latLng.lat();
-                lng = e.latLng.lng();
-                isMarker = true;
-                map.removeMarker(marker);
-                marker = map.addMarker({
-                    position: e.latLng
-                });
-            }
-        });
-        @if(user != null && user.location != null){
-            marker = map.addMarker({
+    function drawMap() {
+            map = new GMaps({
+                div: '#mouse_event_map',
+                zoom: 14,
                 lat: lat,
-                lng: lng
+                lng: lng,
+                width: '650px',
+                height: '400px',
+                click: function (e) {
+                    $("#location").val(e.latLng);
+                    lat = e.latLng.lat();
+                    lng = e.latLng.lng();
+                    isMarker = true;
+                    map.removeMarker(marker);
+                    marker = map.addMarker({
+                        position: e.latLng
+                    });
+                }
             });
-            isMarker = true;
-        }
-    });
+
+    }
 </script>

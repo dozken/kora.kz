@@ -22,7 +22,19 @@
                </span>                 
             </div>
             <br>
-	      	<div id="mapDiv" style="height: 400px; width:400px; position:absolute"></div>
+            <div id="mapSearchDiv" class="row">
+               <div class="col-xs-4">
+                  <input type="text" id="latMap" class="form-control" placeholder="lat"/>
+               </div>
+               <div class="col-xs-4">
+                  <input type="text" id="lngMap" class="form-control" placeholder="lng"/>
+               </div>
+               <div class="col-xs-4">
+               <button id="findMap" class="btn btn-default">Найти</button>
+                  </div>
+               </div>
+            <br>
+	      	<div id="mapDiv" style="height: 350px; width:400px; position:absolute"></div>
 		    <input type="hidden" value="" id="location" name="location">
 		 </div>		
       </div>

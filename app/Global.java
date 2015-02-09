@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 import models.Setting;
+import models.ad.Ad;
 import models.ad.Category;
 import models.ad.Price;
 import models.ad.Section;
@@ -18,19 +20,57 @@ import models.user.Profile;
 import models.user.SecurityRole;
 import models.user.SocialNetwork;
 import models.user.UserSetting;
+import org.joda.time.DateTime;
+import org.joda.time.Seconds;
 import play.Application;
 import play.GlobalSettings;
 import play.api.libs.Crypto;
+import play.libs.Akka;
 import play.libs.F.Promise;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
 
 import com.avaje.ebean.Ebean;
+import scala.concurrent.duration.Duration;
 
 public class Global extends GlobalSettings {
 
+	public static int nextExecutionInSeconds(int hour, int minute){
+		return Seconds.secondsBetween(
+				new DateTime(),
+				nextExecution(hour, minute)
+		).getSeconds();
+	}
+
+	public static DateTime nextExecution(int hour, int minute){
+		DateTime next = new DateTime()
+				.withHourOfDay(hour)
+				.withMinuteOfHour(minute)
+				.withSecondOfMinute(0)
+				.withMillisOfSecond(0);
+
+		return (next.isBeforeNow())
+				? next.plusHours(24)
+				: next;
+	}
+
 	@Override
 	public void onStart(Application application) {
+
+		Akka.system().scheduler().schedule(
+				Duration.create(nextExecutionInSeconds(23,55 ), TimeUnit.SECONDS),
+				Duration.create(1, TimeUnit.DAYS),
+				new Runnable() {
+					@Override
+					public void run() {
+						controllers.Application.emailArchive();
+						Ad.archiveAd();
+						controllers.Application.guestToday=0;
+
+					}
+				},
+				Akka.system().dispatcher()
+		);
 
 		if (Setting.find.findRowCount() == 0) {
 			Map<Integer, String> userSettings = new TreeMap<Integer, String>();

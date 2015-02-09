@@ -134,8 +134,7 @@ $(document).on("click","#imageUploadBtn",function(){
 			$("#imageUploadBtn").text("Загружается...");
 			$("#progBar").show();
 			$("#choose").prop("disabled",true);
-			$("#ad_form_submit").removeAttr('disabled');
-			$("#tool_t").tooltip("destroy");
+
 		},
 		progress: function (evt){
 			var pr = evt.loaded/evt.total * 100;
@@ -149,6 +148,7 @@ $(document).on("click","#imageUploadBtn",function(){
 				$("#item-"+result).attr("imid",xhr.responseText.split("#")[1]);
 				$("#item-"+result).addClass("uploaded_file");
 				$("#item-"+result).append('<a class="delete" style="position: absolute;top: 85px;right: 3px;height: 12px;width: 12px;border-radius: 50px;background: white;"> <i class="fa fa-check-circle" style="font-size:17px;color:limegreen;position: absolute;top: -3px;right: -1px;"></i></a>');
+
 			}
 		},
 		complete: function (err, xhr){
@@ -157,6 +157,8 @@ $(document).on("click","#imageUploadBtn",function(){
 			$("#progBar").hide();
 			$("#progRun").css("width","0%");
 			$("#choose").prop("disabled",false);
+			$("#ad_form_submit").removeAttr('disabled');
+			$("#tool_t").tooltip("destroy");
 		}
 	});
 	return false;
