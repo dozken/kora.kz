@@ -5,13 +5,19 @@ import static play.data.Form.form;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 import models.Emailing;
 import models.ad.Ad;
 import models.ad.Comment;
+import models.ad.Section;
 import models.contact.City;
 import models.user.AuthorisedUser;
 import play.Logger;
@@ -29,7 +35,7 @@ import views.html.common.sitemap;
 import views.html.mailBody.comment_users_ad;
 import views.html.mailBody.feedbackMessage;
 import views.html.mailBody.private_message;
-import views.html.mailBody.registred_successfully;
+import views.html.mailBody.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -37,6 +43,8 @@ import com.google.code.kaptcha.util.Config;
 
 public class Application extends Controller {
 
+	public static int guestAll=0;
+	public static int guestToday=0;
 	public static Result haha(){
 		return ok(views.html.mailBody.private_message.render("user","author","text","not_registred"));
 	}
@@ -169,7 +177,8 @@ public class Application extends Controller {
 	}
 
 	public static Result index() {
-
+		guestAll++;
+		guestToday++;
 		return ok(views.html.common.index.render());
 	}
 
@@ -271,5 +280,93 @@ public class Application extends Controller {
 
 		return ok();
 
+	}
+	public static void emailArchive(){
+
+		String s = "select id from ads where expiration_date between timestamp 'tomorrow' and timestamp 'tomorrow'+interval '1 day'";
+
+		SqlQuery sqlQuery2 = Ebean.createSqlQuery(s);
+
+		List<SqlRow> list2 = sqlQuery2.findList();
+
+		for (int i = 0; i < list2.size(); i++) {
+			long id = list2.get(i).getLong("id");
+			Ad ad = Ad.find.byId(id);
+			String userName = "";
+			String categoryName=ad.category.name;
+			String exdate = new SimpleDateFormat("dd/MM/yyyy").format(ad.expirationDate);
+			if(ad.section== Section.find.byId(5L)){
+				categoryName = ad.title;
+			}
+			if(AuthorisedUser.findByEmail(ad.contactInfo.email)!=null){
+				userName=AuthorisedUser.findByEmail(ad.contactInfo.email).userName;
+			}
+			Emailing.send("Қора.kz", new String[]{userName + " <"
+					+ ad.contactInfo.email + ">"}, emailBodyForExpirationDate(userName,categoryName,exdate));
+		}
+
+	}
+
+	public static String emailBodyForExpirationDate(String userName,String categoryName,String exdate){
+
+		String emailBody="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+				"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+				" <head>\n" +
+				"  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
+				"  <title>Kora.kz</title>\n" +
+				"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\t  \n" +
+				"<body style=\"font-family: Helvetica,san serif;\">\n" +
+				"<table border=\"0\" style=\"width:700px\">\n" +
+				"\t<thead>\n" +
+				"\t\t<tr>\n" +
+				"\t\t\t<td style=\" padding-bottom: 20px;font-size: 15px; \"><img src=\"http://kora.kz/assets/images/home/email_header.png\"/></td>\n" +
+				"\t\t</tr>\n" +
+				"\t</thead>\n" +
+				"\t<tbody>\n" +
+				"\t\t<tr>\n" +
+				"\t\t\t\n" +
+				"\t\t\t<td style=\" padding-left: 30px;font-size: 15px; \"><b>Здравствуйте, "+userName+"</b></td>\n" +
+				"\t\t</tr>\n" +
+				"\t\t<tr>\n" +
+				"\t\t\t<td style=\" padding-left: 27px;font-size: 15px; \">" +
+				"<table>\n" +
+				"\t<tr>\n" +
+				"\t\t<td style=\"padding-bottom:20px;\">Срок публикации Вашего объявления на сайте  <a style=\"text-decoration: none;\" href=\"kora.kz\">«Kora.kz»</a> скоро закончится.</td>\n" +
+				"\t</tr>\n" +
+				"\t<tr>\n" +
+				"\t\t<td style=\" border-top-style: dashed; border-bottom-style: dashed; border-width: 1px; padding: 5px 0 5px 0;\">\n" +
+				"\t\t\tОбъявления "+categoryName+" будет автоматический удалено "+exdate+" в 23:59\n" +
+				"\t\t<br>\n" +
+				"\t\t\n" +
+				"\t\t<br>\n" +
+				"\t\t<br>\n" +
+				"\t\t\tЕсли Ваше объявление еще актуально, продлите срок размещения объявления еще на 7 дней. Также Вы можете удалить объявление в любой момент.\n" +
+				"\t\t</td>\n" +
+				"\t</tr>\n" +
+				"\t<tr>\n" +
+				"\t\t<td style=\"padding-top:20px\">Если вы еще не зарегистрированы на нашем сайте, можете создать свой <a href=\"kora.kz\" style=\"text-decoration: none;\">личный кабинет</a>. Преимущество личного кабинета в том, что вы сможете управлять вашими объявлениями (добавить фото, изменить текст, продлит срок объявление и т.п.).</td>\n" +
+				"\t</tr>\n" +
+				"\t\n" +
+				"</table>" +
+				"</td>\n" +
+				"\t\t\n" +
+				"\t\t</tr>\t\n" +
+				"\t\t<tr>\n" +
+				"\t\t\t<td style=\" padding-left: 30px; font-size: 15px;\">\n" +
+				"\t\t\t\t<p>Возникли вопросы,<br>\n" +
+				"\t\t\t\t<a style=\"text-decoration: none;\" href=\"http://kora.kz/feedback\">Напишите</a> в службу поддержки</p>\n" +
+				"\t\t\t</td>\n" +
+				"\t\t</tr>\n" +
+				"\t\t<tr>\n" +
+				"\t\t\t<td style=\"color: gray;padding-left: 30px;font-size: 15px;\">Это письмо было отправлено автоматический. Пожалуйста, не отвечайте на него.</td>\n" +
+				"\t\t</tr>\n" +
+				"\t</tbody>\n" +
+				"\t\n" +
+				"\n" +
+				"</table>\n" +
+				"</body>\n" +
+				"</head>\n" +
+				"</html>";
+return emailBody;
 	}
 }

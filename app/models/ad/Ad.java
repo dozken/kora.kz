@@ -1,9 +1,14 @@
 package models.ad;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
+import models.user.AuthorisedUser;
+import views.html.mailBody.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +19,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
+import models.Emailing;
 import models.contact.ContactInfo;
 import play.db.ebean.Model;
 import play.mvc.Controller;
@@ -137,4 +145,13 @@ public class Ad extends Model {
 	public static void sessionRegion(Long id) {
 		Controller.session("region", id.toString());
 	}
+
+	public static void archiveAd(){
+
+		String s = "update ads set status='archived' where expiration_date between timestamp 'today' and timestamp 'tomorrow'";
+		SqlUpdate update = Ebean.createSqlUpdate(s);
+		Ebean.execute(update);
+	}
+
+
 }

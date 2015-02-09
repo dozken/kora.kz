@@ -1,7 +1,7 @@
 @(images: List[models.ad.AdImage])
 @for((img,index)<-images.zipWithIndex) {
-<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 76px;">
+<li data-target="#myCarousel" data-slide-to="@index" class="list-group-item" style="height: 75px;">
 
-  <img src='@img.additional'  style="width:75px;height:74px;">
+  <img src='@img.small'  style="width: auto;height: auto; max-width:75px;max-height:74px; @if(img.h!=null){ @if(img.h>=img.w){ margin-left: @((75.0-((img.w)*(74.0/img.h)))/2)px;}else {margin-top: @((74.0-((img.h)*(75.0/img.w)))/2)px;}}" >
 </li>
 }
