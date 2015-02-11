@@ -283,7 +283,7 @@ public class Application extends Controller {
 	}
 	public static void emailArchive(){
 
-		String s = "select id from ads where expiration_date between timestamp 'tomorrow' and timestamp 'tomorrow'+interval '1 day'";
+		String s = "select id from ads where status='active' and expiration_date between timestamp 'tomorrow' and timestamp 'tomorrow'+interval '1 day'";
 
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(s);
 
@@ -293,10 +293,12 @@ public class Application extends Controller {
 			long id = list2.get(i).getLong("id");
 			Ad ad = Ad.find.byId(id);
 			String userName = "";
-			String categoryName=ad.category.name;
+			String url = controllers.routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString())).absoluteURL(request());
+			System.out.println(url);
+			String categoryName="<a style=\"text-decoration: none;\" href=\""+url+"\">"+ad.category.name+"</a>";;
 			String exdate = new SimpleDateFormat("dd/MM/yyyy").format(ad.expirationDate);
 			if(ad.section== Section.find.byId(5L)){
-				categoryName = ad.title;
+				categoryName = "<a style=\"text-decoration: none;\" href=\"@routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString)).absoluteURL(request())\">"+ad.title+"</a>";
 			}
 			if(AuthorisedUser.findByEmail(ad.contactInfo.email)!=null){
 				userName=AuthorisedUser.findByEmail(ad.contactInfo.email).userName;
@@ -331,7 +333,7 @@ public class Application extends Controller {
 				"\t\t\t<td style=\" padding-left: 27px;font-size: 15px; \">" +
 				"<table>\n" +
 				"\t<tr>\n" +
-				"\t\t<td style=\"padding-bottom:20px;\">Срок публикации Вашего объявления на сайте  <a style=\"text-decoration: none;\" href=\"kora.kz\">«Kora.kz»</a> скоро закончится.</td>\n" +
+				"\t\t<td style=\"padding-bottom:20px;\">Срок публикации Вашего объявления на сайте  <a style=\"text-decoration: none;\" href=\"http://kora.kz/\">«Kora.kz»</a> скоро закончится.</td>\n" +
 				"\t</tr>\n" +
 				"\t<tr>\n" +
 				"\t\t<td style=\" border-top-style: dashed; border-bottom-style: dashed; border-width: 1px; padding: 5px 0 5px 0;\">\n" +
@@ -344,7 +346,7 @@ public class Application extends Controller {
 				"\t\t</td>\n" +
 				"\t</tr>\n" +
 				"\t<tr>\n" +
-				"\t\t<td style=\"padding-top:20px\">Если вы еще не зарегистрированы на нашем сайте, можете создать свой <a href=\"kora.kz\" style=\"text-decoration: none;\">личный кабинет</a>. Преимущество личного кабинета в том, что вы сможете управлять вашими объявлениями (добавить фото, изменить текст, продлит срок объявление и т.п.).</td>\n" +
+				"\t\t<td style=\"padding-top:20px\">Если вы еще не зарегистрированы на нашем сайте, можете создать свой <a href=\"http://kora.kz/\" style=\"text-decoration: none;\">личный кабинет</a>. Преимущество личного кабинета в том, что вы сможете управлять вашими объявлениями (добавить фото, изменить текст, продлит срок объявление и т.п.).</td>\n" +
 				"\t</tr>\n" +
 				"\t\n" +
 				"</table>" +

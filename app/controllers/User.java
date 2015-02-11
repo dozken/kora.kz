@@ -3,8 +3,10 @@ package controllers;
 import static play.data.Form.form;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import models.Emailing;
+import models.ad.Ad;
 import models.user.AuthorisedUser;
 import models.user.Profile;
 import models.user.SecurityRole;
@@ -16,6 +18,7 @@ import play.mvc.Result;
 import views.html.common.forgotPassword;
 import views.html.common.registerConfirm;
 import views.html.common.restorePassword;
+import views.html.common.pre_long_email;
 import views.html.mailBody.recoverPassword;
 
 import com.avaje.ebean.Ebean;
@@ -96,6 +99,14 @@ public class User extends Controller {
 		user.update();
 		session("connected", user.email);
 		return redirect(routes.Manage.myInfo());
+	}
+
+	public static Result preLongEmail(String code) {
+
+		Ad ad = Ad.find.byId(Long.parseLong((play.libs.Crypto.decryptAES(code))));
+		ad.expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7);
+		ad.update();
+		return ok(pre_long_email.render());
 	}
 
 	public static Result changePassword(String code) {

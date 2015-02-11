@@ -25,6 +25,7 @@ POST        /user/forgotPassword                   controllers.User.resetPasswor
 GET         /user/restorePassword/:code            controllers.User.restorePassword(code :String)
 POST        /user/restorePassword/:code            controllers.User.changePassword(code :String)
 GET         /user/confirmRegistration/:code        controllers.User.confirmRegistration(code :String)
+GET         /user/preLongEmail/:code                controllers.User.preLongEmail(code :String)
 GET         /user/confirmPage                      controllers.User.confirmPage()
 
 #navbar search
