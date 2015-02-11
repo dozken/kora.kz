@@ -1,0 +1,22 @@
+@(userName:String, ad:models.ad.Ad)
+@_main(userName){
+<table>
+	<tr>
+		<td style="padding-bottom:20px;">Срок публикации Вашего объявления на сайте  <a style="text-decoration: none;" href="http://kora.kz/">«Kora.kz»</a> скоро закончится.</td>
+	</tr>
+	<tr>
+		<td style=" border-top-style: dashed; border-bottom-style: dashed; border-width: 1px; padding: 5px 0 5px 0;">
+			Объявления <a style="text-decoration: none;" href="@routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString)).absoluteURL(request())">@ad.category.name</a> будет автоматический удалено @ad.expirationDate.format("dd/MM/yyyy") в 23:59
+		<br>
+		
+		<br>
+		<br>
+			Если Ваше объявление еще актуально, продлите срок размещения объявления еще на 7 дней. Также Вы можете удалить объявление в любой момент.
+		</td>
+	</tr>
+	<tr>
+		<td style="padding-top:20px">Если вы еще не зарегистрированы на нашем сайте, можете создать свой <a href="http://kora.kz/" style="text-decoration: none;">личный кабинет</a>. Преимущество личного кабинета в том, что вы сможете управлять вашими объявлениями (добавить фото, изменить текст, продлит срок объявление и т.п.).</td>
+	</tr>
+	
+</table>
+}

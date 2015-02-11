@@ -9,6 +9,9 @@
 			<ul class="dropdown-menu" role="menu" style="overflow-x: hidden; overflow-y: auto !important; max-height: 310px; min-width: 210px;margin: 0px;border-radius: 0px;overflow-y: hidden;padding-top: 2px;">
 				<li class="li-option cities" city-id="all" data-value="Все города/ауылы"><a href="#"><span>Все города/ауылы</span></a></li>
 				@if(region!=null){
+				@if(region.findCities.contains(models.contact.City.find.byId(1330))){
+				<li class="li-option cities" city-id="@models.contact.City.find.byId(1330).id" data-value="@models.contact.City.find.byId(1330).name"><a href="#"><span class="">@models.contact.City.find.byId(1330).name</span></a></li>
+				}
 				@for(c<-region.findCities if(c.parentCity==null)){
 				@if(c.isParent){
 				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="optionGroup">@c.name</span></a></li>
@@ -16,7 +19,8 @@
 				<li class="li-option cities" city-id="@subcity.id" data-value="@subcity.name"><a href="#"><span class="optionChild">@subcity.name</span></a></li>				
 				}
 				}else{
+				@if(c.id!=1330){
 				<li class="li-option cities" city-id="@c.id" data-value="@c.name"><a href="#"><span class="">@c.name</span></a></li>
-				}}}
+				}}}}
 			</ul>
 		</div> 
