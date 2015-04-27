@@ -1,4 +1,4 @@
-@(ads:List[models.ad.Ad],section:models.ad.Section,category:models.ad.Category,region:models.contact.Region,city:models.contact.City)
+@(ads:List[models.ad.Ad],section:models.ad.Section,category:models.ad.Category,region:models.contact.Region,city:models.contact.City, size:Integer,str:String)
 
 @main("Поиск") {
 
@@ -71,12 +71,12 @@
 
                 </ul> -->
                 <nav>
-                <ul class="pagination pagination-sm">
+                <ul id="refrsh_pagination" class="pagination pagination-sm">
                     <li class="disabled"><a href="#" id="paging_prev">&larr; Предыдущая</a></li>
-                    @for(index <-0 to ads.size/30){
+					@for(index <-0 to size/15){
                     	<li><a href="#" onClick="searchByPage(@{index})">@{index+1}</a></li>
                     }
-                    <li class="next @if(ads.size<=30){ disabled }"><a href="#" id="paging_next">Следущая &rarr;</a></li>
+                    <li class="next @if(size<=15){ disabled }"><a href="#" id="paging_next">Следущая &rarr;</a></li>
                 </ul>
                 </nav>
             </nav>
@@ -93,6 +93,20 @@
     <script type="text/javascript" src="@routes.Application.javascriptRoutes"></script>
 <script src='@routes.Assets.at("javascripts/watermark.jquery/watermark.jquery.js")' type="text/javascript"></script>
 <script>
+
+	var searchStr = "@str";
+	var searchSection = searchStr.split(":")[0];
+	var searchWord = searchStr.split(":")[1];
+
+	if(searchWord!="" && searchWord!=null){
+		$("#quick_search_text").val(searchWord);
+	}
+	if(searchSection!="" && searchSection!=null && searchSection!="all"){
+		$("#searchBarSpan").text(searchSection);
+		$("#searchBarVal").val(searchSection);
+
+	}
+
 var quan = $("#quanHide").html();
 var gender = $("#genderHide").html();
 var age = $("#ageHide").html()
@@ -230,7 +244,7 @@ function myFunc() {
     jsRoutes.controllers.Ads.searchAd(page, sort).ajax({
         data: $("#search_form").serialize(),
         success: function(data) {
-			console.log(data);
+			//console.log(data);
             $("#main_div").html(data);
             $("#search_filter").attr("disabled", false);
             total($("#total_size").val());
@@ -239,7 +253,7 @@ function myFunc() {
 }
 
 function searchByPage(p) {
-
+	page = p;
     $("#search_results").html('<img src="@routes.Assets.at("images/home/loading.gif")" style="width:120px;height:auto; margin-left: 55%;padding: 20px;">');
     $(this).attr("disabled", true);
     jsRoutes.controllers.Ads.searchAd(p, sort).ajax({
@@ -263,7 +277,7 @@ $(document).keydown(function(e) {
 
 $(document).on("click", "#paging_next", function() {
 
-    if (current > (page + 1) * 30) {
+    if (current > (page + 1) * 15) {
         page = page + 1;
         myFunc();
 
@@ -281,25 +295,31 @@ $(document).on("click", "#paging_prev", function() {
 
 function enDis() {
 
-    if (page == 0) {
-        $("#paging_prev").parent().addClass("disabled");
+	$("#refrsh_pagination").html("");
+
+	if (page == 0) {
+		$("#refrsh_pagination").append('<li class="disabled"><a href="#" id="paging_prev">&larr; Предыдущая</a></li>');
+	} else {
+		$("#refrsh_pagination").append('<li><a href="#" id="paging_prev">&larr; Предыдущая</a></li>');
+	}
+	for(index = 0; index<current/15; index++){
+		$("#refrsh_pagination").append('<li><a href="#" onClick="searchByPage('+index+')">'+(index+1)+'</a></li>');
+	}
+
+    if (current <= (page + 1) * 15) {
+		$("#refrsh_pagination").append('<li class="disabled"><a href="#" id="paging_next">Следущая &rarr;</a></li>');
     } else {
-        $("#paging_prev").parent().removeClass("disabled");
-    }
-    if (current <= (page + 1) * 30) {
-        $("#paging_next").parent().addClass("disabled");
-    } else {
-        $("#paging_next").parent().removeClass("disabled");
-    }
+		$("#refrsh_pagination").append('<li class=""><a href="#" id="paging_next">Следущая &rarr;</a></li>');
+	}
 }
 
 function total(a) {
 
     current = parseInt(a);
-    if (current - ((page + 1) * 10) < 0) {
-        $("#total").text("Показывает " + (page * 30 + 1) + " - " + a + " / " + a);
+    if (current - ((page + 1) * 15) < 0) {
+        $("#total").text("Показывает " + (page * 15 + 1) + " - " + a + " / " + a);
     } else {
-        $("#total").text("Показывает " + (page * 30 + 1) + " - " + ((page + 1) * 30) + " / " + a);
+        $("#total").text("Показывает " + (page * 15 + 1) + " - " + ((page + 1) * 15) + " / " + a);
     }
     enDis();
 }

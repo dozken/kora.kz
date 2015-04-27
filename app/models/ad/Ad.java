@@ -7,7 +7,9 @@ import java.util.List;
 
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+import models.Setting;
 import models.user.AuthorisedUser;
+import models.user.Payment;
 import views.html.mailBody.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -117,7 +119,7 @@ public class Ad extends Model {
 			return days.toString() + " день";
 		}
 		if (days <= 0) {
-			return "update expirity day or archive it method";
+			return "0 день";
 		}
 		return days.toString() + " дней";
 	}
@@ -148,10 +150,44 @@ public class Ad extends Model {
 
 	public static void archiveAd(){
 
-		String s = "update ads set status='archived' where expiration_date between timestamp 'today' and timestamp 'tomorrow'";
-		SqlUpdate update = Ebean.createSqlUpdate(s);
-		Ebean.execute(update);
+		String s = "select id from ads where expiration_date between timestamp 'today' and timestamp 'tomorrow'";
+
+		SqlQuery sqlQuery2 = Ebean.createSqlQuery(s);
+		List<SqlRow> list2 = sqlQuery2.findList();
+		System.out.println("Ad archive size "+list2.size());
+		for (int i = 0; i < list2.size(); i++) {
+			long id = list2.get(i).getLong("id");
+
+			Ad ad = Ad.find.byId(id);
+			AdSetting set = AdSetting.find.where().eq("name", "autoprelong")
+					.eq("ad", ad).findUnique();
+			if(set.status.equals("on")) {
+				set.status = "off";
+				set.update();
+				AuthorisedUser user = AuthorisedUser.findByEmail(ad.contactInfo.email);
+				if(user!=null){
+					Double myAmount = user.profile.myMonney;
+					Double cost = Setting.find.where().eq("name", "prelong")
+							.findUnique().price;
+					if (myAmount >= cost) {
+						ad.expirationDate = new Date(new Date().getTime() + 1000 * 60
+								* 60 * 24 * 7);
+						Payment p = new Payment();
+						p.paymentType = "substract";
+						p.amount = -1 * cost;
+						user.payments.add(p);
+						user.profile.myMonney -= cost;
+						user.update();
+
+					}
+					ad.status="archived";
+				}
+			}else {
+				ad.status="archived";
+			}
+
+			ad.update();
+		}
+
 	}
-
-
 }

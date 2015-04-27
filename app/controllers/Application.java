@@ -288,21 +288,22 @@ public class Application extends Controller {
 		SqlQuery sqlQuery2 = Ebean.createSqlQuery(s);
 
 		List<SqlRow> list2 = sqlQuery2.findList();
-
+		System.out.println(list2.size());
 		for (int i = 0; i < list2.size(); i++) {
 			long id = list2.get(i).getLong("id");
 			Ad ad = Ad.find.byId(id);
 			String userName = "";
-			String url = controllers.routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString())).absoluteURL(request());
-			System.out.println(url);
-			String categoryName="<a style=\"text-decoration: none;\" href=\""+url+"\">"+ad.category.name+"</a>";;
+			//String url = controllers.routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString())).absoluteURL(request());
+			//System.out.println(url);
+			String categoryName="<a style=\"text-decoration: none;\">"+ad.category.name+"</a>";;
 			String exdate = new SimpleDateFormat("dd/MM/yyyy").format(ad.expirationDate);
 			if(ad.section== Section.find.byId(5L)){
-				categoryName = "<a style=\"text-decoration: none;\" href=\"@routes.User.preLongEmail(play.libs.Crypto.encryptAES(ad.id.toString)).absoluteURL(request())\">"+ad.title+"</a>";
+				categoryName = "<a style=\"text-decoration: none;\">"+ad.title+"</a>";
 			}
 			if(AuthorisedUser.findByEmail(ad.contactInfo.email)!=null){
 				userName=AuthorisedUser.findByEmail(ad.contactInfo.email).userName;
 			}
+			//System.out.println(ad.contactInfo.email);
 			Emailing.send("Қора.kz", new String[]{userName + " <"
 					+ ad.contactInfo.email + ">"}, emailBodyForExpirationDate(userName,categoryName,exdate));
 		}

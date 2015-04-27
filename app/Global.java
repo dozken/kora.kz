@@ -58,7 +58,7 @@ public class Global extends GlobalSettings {
 	public void onStart(Application application) {
 
 		Akka.system().scheduler().schedule(
-				Duration.create(nextExecutionInSeconds(23,55 ), TimeUnit.SECONDS),
+				Duration.create(nextExecutionInSeconds(23,55), TimeUnit.SECONDS),
 				Duration.create(1, TimeUnit.DAYS),
 				new Runnable() {
 					@Override
@@ -66,7 +66,6 @@ public class Global extends GlobalSettings {
 						controllers.Application.emailArchive();
 						Ad.archiveAd();
 						controllers.Application.guestToday=0;
-
 					}
 				},
 				Akka.system().dispatcher()
