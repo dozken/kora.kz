@@ -117,7 +117,7 @@
 
 <div class="col-xs-12 ppp nopaddingleft">
 <b class="bdau">Краткое Описание</b>
-	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;word-break: break-all;">@ad.description</p>
+	<p class="PFBSPLI-13" style="font-style:normal;text-align: justify;display: inline-block;word-break: break-word;">@ad.description</p>
 </div>
 <div class="col-xs-12 nopaddingleft nopaddingright">
 	<ul class="pros pros2">
@@ -208,13 +208,12 @@ margin-top: -46px;">Отправить</button>
      
     </div>
   </div>
-}   
-@if(models.ad.Ad.like(ad).size>0){
-<br>
-<br>
-<br>
 
-    <div class="contain">
+    }
+@if(models.ad.Ad.like(ad).size>0){
+
+
+    <div class="contain" style="padding-top:150px">
     <h4>
       Похожие объявления из категории "@ad.section.name @ad.category.name" в @ad.contactInfo.city.name
     </h4>

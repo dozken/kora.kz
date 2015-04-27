@@ -4,6 +4,7 @@ import static play.data.Form.form;
 import models.admin.AdminSetting;
 import models.user.AuthorisedUser;
 import models.user.UserSetting;
+import play.api.libs.Crypto;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -24,17 +25,16 @@ public class Settings extends Controller {
 		String newPassoword = requestData.get("new");
 		String repeatPassoword = requestData.get("repeat");
 
-		currentPassoword = AuthorisedUser.md5(currentPassoword);
-		newPassoword = AuthorisedUser.md5(newPassoword);
+		currentPassoword =  Crypto.encryptAES(currentPassoword);
 		if (!newPassoword.equals(repeatPassoword)) {
 			flash("error",
 					"Ошибка при подтверждения пароля, попробуйте еще раз.");
 			return ok(_passwordTab.render());
 		}
-		if (AuthorisedUser.find.where().eq("password", currentPassoword)
-				.findRowCount() == 1) {
+
+		if (user.password.equals(currentPassoword)) {
 			flash("success", "Пароль успешно изменен!");
-			user.password = newPassoword;
+			user.password = Crypto.encryptAES(newPassoword);;
 			user.update();
 			return ok(_passwordTab.render());
 		} else {

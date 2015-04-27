@@ -37,9 +37,9 @@
 	@if(session.get("ad.filter.price")!=null&&session.get("ad.filter.price").equals("true")){<td>@Messages(ad.priceType.price.toString) @utils._currency(ad.priceType.currency)</td>}
 	@if(session.get("ad.filter.views")!=null&&session.get("ad.filter.views").equals("true")){<td>@ad.views</td>}
 	@if(session.get("ad.filter.shares")!=null&&session.get("ad.filter.shares").equals("true")){<td>@ad.shares</td>}
-	@*if(session.get("createDate").equals("true")){*@<td>@ad.publishedDate.format("dd/mm/yyyy")</td>
-	@if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){<td>@ad.updatedDate.format("dd/mm/yyyy")</td>}
-	@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>@ad.expirationDate.format("dd/mm/yyyy")</td>}
+	@*if(session.get("createDate").equals("true")){*@<td>@ad.publishedDate.format("dd/MM/yyyy")</td>
+	@if(session.get("ad.filter.updateDate")!=null&&session.get("ad.filter.updateDate").equals("true")){<td>@ad.updatedDate.format("dd/MM/yyyy")</td>}
+	@if(session.get("ad.filter.expirationDate")!=null&&session.get("ad.filter.expirationDate").equals("true")){<td>@ad.expirationDate.format("dd/MM/yyyy")</td>}
 	@if(session.get("ad.filter.status")!=null&&session.get("ad.filter.status").equals("true")){<td>@Messages(ad.status)</td>}
 	
 	<td><a onclick='del("@routes.Administer.removeAd(ad.id,page,sort)")'><i class="fa fa-times"></i></a></td>
